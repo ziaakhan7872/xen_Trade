@@ -22,10 +22,10 @@ const splashScreen = ({navigation}) => {
   
     useEffect(() => {
     
-      navigation.replace(Routes.loginMainScreen);
+      navigation.replace(Routes.IntroductMainScreem);
       setTimeout(() => {
         BootSplash.hide();
-      }, 1000);
+      }, 5000);
 
     
 

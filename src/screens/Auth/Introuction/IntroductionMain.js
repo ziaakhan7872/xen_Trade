@@ -6,6 +6,7 @@ import { style } from './Style';
 import { useNavigation } from '@react-navigation/native';
 import { colors, Routes } from '../../../constants';
 import Spacer from '../../../components/Spacer';
+import LinearGradient from 'react-native-linear-gradient';
 
 const LoginMainScreen = () => {
   const navigation = useNavigation();
@@ -23,24 +24,32 @@ const LoginMainScreen = () => {
         </View>
 
         <View style={style.buttonContainer}>
-          <SimpleButton 
-            textColor={colors.black} 
-            fontSize={14} 
-            fontWeight={500} 
-            onPress={() => { navigation.navigate(Routes.AppNavigator); }} 
-            backgroundColor="#05BADA" 
-            text="Login" 
-          
+          <SimpleButton
+            textColor={colors.black}
+            fontSize={14}
+            fontWeight={500}
+            onPress={() => { navigation.navigate(Routes.LoginScreen); }}
+            backgroundColor="#05BADA"
+            text="Login"
+
           />
-          <Spacer/>
-            <SimpleButton 
-            textColor={colors.black} 
-            fontSize={14} 
-            fontWeight={500} 
-            onPress={() => { navigation.navigate(Routes.AppNavigator); }} 
-            backgroundColor={colors.transparent}
-            text="Login" 
-          />
+          <Spacer />
+          <LinearGradient
+            colors={['#FFFFFF12', '#FFFFFF12']} 
+            start={{ x: 0, y: 0 }} 
+            end={{ x: 1, y: 0 }} 
+            style={style.gradientContainer}
+          >
+            <SimpleButton
+              textColor={colors.white}
+              fontSize={14}
+              fontWeight={500}
+              onPress={() => { navigation.navigate(Routes.AppNavigator); }}
+              backgroundColor={colors.transparent}
+              text="Sign Up"
+            />
+          </LinearGradient>
+
         </View>
       </ImageBackground>
     </View>

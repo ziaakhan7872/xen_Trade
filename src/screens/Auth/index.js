@@ -1,6 +1,11 @@
 import splashScreen from "./Splash/splashScreen";
-import loginMainScreen from "./Login/loginMainScreen";
+import IntroductionMain from "./Introuction/IntroductionMain";
+import LoginScreen from "./Login/LoginScreen";
+import SignupScreen from "./Signup/SignupScreen";
+
+
+
 
 export {
-     splashScreen, loginMainScreen
+     splashScreen, IntroductionMain,LoginScreen,SignupScreen
 }
