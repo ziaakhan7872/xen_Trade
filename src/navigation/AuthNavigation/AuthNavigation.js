@@ -9,7 +9,6 @@ const AuthNavigation = () => {
         <Navigator screenOptions={{ headerShown: false }}>
             <Screen name={Routes.splashScreen} component={Auth.splashScreen} />
             <Screen name={Routes.loginMainScreen} component={Auth.loginMainScreen} />
-            <Screen name={Routes.welcome} component={Auth.Welcome} />
         </Navigator>
     );
 };

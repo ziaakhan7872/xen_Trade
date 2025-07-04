@@ -2,7 +2,7 @@ import { ImageBackground, Platform, StatusBar, StyleSheet, View, } from 'react-n
 import React from 'react';
 import images from '../images';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { wp, hp } from '../screens/Auth/Welcome/Components/ResponsiveComponent';
+import { wp, hp } from './ResponsiveComponent';
 
 export const AuthMainContainer = ({
   style,

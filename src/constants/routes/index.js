@@ -1,6 +1,9 @@
 
 export const Routes = {
-    welcome: "welcome",
+    AuthNavigator :"AuthNavigator",
+    AppNavigator:"AppNavigator",
     splashScreen: "splashScreen",
     loginMainScreen: "loginMainScreen",
+    Home: "Home",
+
 }

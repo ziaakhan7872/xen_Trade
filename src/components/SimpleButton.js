@@ -1,8 +1,8 @@
 import { TouchableOpacity, ActivityIndicator, View } from "react-native";
-import { ResponsiveText } from "../screens/Auth/Welcome/Components/ResponsiveText";
-import { wp } from "../screens/Auth/Welcome/Components/ResponsiveComponent";
 import { appStyles } from "../utilities";
 import { colors, fontFamily } from "../constants";
+import { hp, wp } from "./ResponsiveComponent";
+import { ResponsiveText } from "./ResponsiveText";
 
 export const SimpleButton = ({
     onPress,
@@ -31,10 +31,9 @@ export const SimpleButton = ({
                     alignItems: 'center',
                     justifyContent: 'center',
                     alignSelf: alignSelf,
-                    paddingVertical: 8,
-                    borderRadius: borderRadius ?? 8,
-                    width: buttonWidth ? buttonWidth : wp(43),
-                    height: wp(11),
+                    borderRadius: borderRadius ?? wp(16.5),
+                    width: buttonWidth ? buttonWidth : wp(90),
+                    height: hp(7),
                     backgroundColor: backgroundColor,
                     borderWidth: borderWidth,
                     borderColor: borderColor

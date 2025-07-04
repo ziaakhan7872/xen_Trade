@@ -1,9 +1,9 @@
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import images from '../../../images';
-import { hp, wp } from '../Welcome/Components/ResponsiveComponent';
 import BootSplash from "react-native-bootsplash";
 import { Routes } from '../../../constants';
+import { hp, wp } from '../../../components/ResponsiveComponent';
 
 
 const splashScreen = ({navigation}) => {

@@ -1,6 +1,6 @@
 import { StyleSheet, Text } from 'react-native'
 import React from 'react'
-import { colors, fontFamily } from '../../../../constants'
+import { colors, fontFamily } from '../constants'
 // import { appStyles } from '../utilities'
 
 
