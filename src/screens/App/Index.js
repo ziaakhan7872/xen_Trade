@@ -1,8 +1,6 @@
-import WalletHome from "./Deposit/WalletHome";
-import DepositHistory from "./DepositHistory/DepositHistory";
+import HomeScreen from "./Home/Index";
+import settingMain from "./Settings/settingMain";
+
 export {
-
-    WalletHome,
-    DepositHistory,
-
-} ;
+     HomeScreen, settingMain
+}

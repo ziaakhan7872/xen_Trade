@@ -7,7 +7,7 @@ import AppNavigation from "./AppNavigation/AppNavigation";
 const Navigation = () => {
   const Stack = createNativeStackNavigator()
     return (
-       <NavigationContainer >
+    <NavigationContainer >
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name={Routes.AuthNavigator} component={AuthNavigation} />
         <Stack.Screen name={Routes.AppNavigator} component={AppNavigation} />

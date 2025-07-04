@@ -7,8 +7,9 @@ const { Navigator, Screen } = createNativeStackNavigator();
 
 const AppNavigation = () => {
     return (
-        <Navigator screenOptions={{ headerShown: false }}>
+        <Navigator  screenOptions={{ headerShown: false }}>
             <Screen name={Routes.WalletHome} component={App.WalletHome} />
+            <Screen name={Routes.settingMain} component={App.settingMain} />
 
         </Navigator>
     );
