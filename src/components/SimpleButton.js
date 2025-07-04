@@ -3,7 +3,6 @@ import { appStyles } from "../utilities";
 import { colors, fontFamily } from "../constants";
 import { hp, wp } from "./ResponsiveComponent";
 import { ResponsiveText } from "./ResponsiveText";
-
 export const SimpleButton = ({
     onPress,
     text,
@@ -20,8 +19,7 @@ export const SimpleButton = ({
     alignSelf,
     borderRadius,
     btnImage,
-    plus,
-    textFontSize
+    plus
 }) => {
     return (
         <TouchableOpacity
@@ -34,7 +32,7 @@ export const SimpleButton = ({
                     alignSelf: alignSelf,
                     borderRadius: borderRadius ?? wp(16.5),
                     width: buttonWidth ? buttonWidth : wp(90),
-                    height: hp(6.5),
+                    height: hp(7),
                     backgroundColor: backgroundColor,
                     borderWidth: borderWidth,
                     borderColor: borderColor,
@@ -44,7 +42,6 @@ export const SimpleButton = ({
             }
             onPress={onPress}>
             {loading ?
-
                 <ActivityIndicator size={'large'} color={colors.darkBlue} /> :
                 <View style={{ ...appStyles.rowBasic, alignSelf: 'center' }}>
                     {btnImage ?
@@ -52,11 +49,7 @@ export const SimpleButton = ({
                         : null}
                     <ResponsiveText
                         style={{
-<<<<<<< HEAD
-                            fontSize: textFontSize?textFontSize:20,
-=======
                             fontSize: 14,
->>>>>>> 43c6c8bc375dff14e8d8df4f6f88ab58af3cea72
                             fontFamily: fontFamily.appTextMedium,
                             color: textColor ? textColor : colors.white,
                             textAlign: 'center'
@@ -64,7 +57,6 @@ export const SimpleButton = ({
                         {text}
                     </ResponsiveText>
                 </View>
-
             }
         </TouchableOpacity>
     );
