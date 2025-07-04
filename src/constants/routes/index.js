@@ -5,5 +5,6 @@ export const Routes = {
     splashScreen: "splashScreen",
     loginMainScreen: "loginMainScreen",
     Home: "Home",
+    settingMain: "settingMain",
 
 }

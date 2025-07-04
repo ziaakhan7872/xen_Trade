@@ -36,7 +36,9 @@ export const SimpleButton = ({
                     height: hp(7),
                     backgroundColor: backgroundColor,
                     borderWidth: borderWidth,
-                    borderColor: borderColor
+                    borderColor: borderColor,
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
                 }
             }
             onPress={onPress}>
@@ -49,7 +51,7 @@ export const SimpleButton = ({
                         : null}
                     <ResponsiveText
                         style={{
-                            fontSize: 20,
+                            fontSize: 14,
                             fontFamily: fontFamily.appTextMedium,
                             color: textColor ? textColor : colors.white,
                             textAlign: 'center'
