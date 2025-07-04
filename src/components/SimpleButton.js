@@ -1,3 +1,9 @@
+import { TouchableOpacity, ActivityIndicator, View } from "react-native";
+import { ResponsiveText } from "../screens/Auth/Welcome/Components/ResponsiveText";
+import { wp } from "../screens/Auth/Welcome/Components/ResponsiveComponent";
+import { appStyles } from "../utilities";
+import { colors, fontFamily } from "../constants";
+
 export const SimpleButton = ({
     onPress,
     text,

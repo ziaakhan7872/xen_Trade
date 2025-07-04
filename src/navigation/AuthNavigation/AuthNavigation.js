@@ -15,9 +15,3 @@ const AuthNavigation = () => {
 };
 
 export default AuthNavigation;
-
-
-
-
-
-

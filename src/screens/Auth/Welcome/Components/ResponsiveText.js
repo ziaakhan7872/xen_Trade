@@ -1,7 +1,8 @@
 import { StyleSheet, Text } from 'react-native'
 import React from 'react'
+import { colors, fontFamily } from '../../../../constants'
 // import { appStyles } from '../utilities'
-import { colors, fontFamily, fontSize } from '../constants'
+
 
 export const ResponsiveText = ({ children, style, animation, duration, delay, onPress, numberOfLines }) => {
     return (
@@ -14,6 +15,6 @@ const styles = StyleSheet.create({
     textStyle: {
         fontSize: 16,
         fontFamily: fontFamily?.appTextMedium,
-        color: colors?.appTextColor1
+        color: colors.white
     }
 })
