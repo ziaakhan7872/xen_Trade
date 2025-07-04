@@ -1,6 +1,4 @@
-
-export const Routes = {
-    welcome: "welcome",
-    splashScreen: "splashScreen",
-    loginMainScreen: "loginMainScreen",
-}
+export * from './colors'
+export * from './fonts'
+export * from './routes'
+export * from './size'

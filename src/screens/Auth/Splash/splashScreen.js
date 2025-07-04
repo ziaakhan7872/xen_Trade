@@ -2,20 +2,35 @@ import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import images from '../../../images';
 import { hp, wp } from '../Welcome/Components/ResponsiveComponent';
- 
+import BootSplash from "react-native-bootsplash";
+import { Routes } from '../../../constants';
 
 
-const splashScreen = () => {
+const splashScreen = ({navigation}) => {
+  console.log('In splash screen')
+  //   useEffect(() => {
+  //   const init = async () => {
+  //     // …do multiple sync or async tasks
+  //   };
+
+  //   init().finally(async () => {
+  //     await BootSplash.hide({ fade: true });
+  //     console.log("BootSplash has been hidden successfully");
+  //     navigation.replace(Routes.loginMainScreen)
+  //   }, 4000);
+  // }, []);
+  
     useEffect(() => {
-    const init = async () => {
-      // …do multiple sync or async tasks
-    };
+    
+      navigation.replace(Routes.loginMainScreen);
+      setTimeout(() => {
+        BootSplash.hide();
+      }, 1000);
 
-    init().finally(async () => {
-      await BootSplash.hide({ fade: true });
-      console.log("BootSplash has been hidden successfully");
-    });
-  }, []);
+    
+
+  }, [])
+
   return (
     <View style={styles.mainContainer}>
         <ImageBackground style={styles.splashBgContainer} source={images.splashScreenBg}>
