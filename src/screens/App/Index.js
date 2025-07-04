@@ -1,5 +1,8 @@
-import HomeScreen from "./Home/Index";
-
+import WalletHome from "./Deposit/WalletHome";
+import DepositHistory from "./DepositHistory/DepositHistory";
 export {
-     HomeScreen
-}
+
+    WalletHome,
+    DepositHistory,
+
+} ;

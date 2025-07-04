@@ -1,3 +1,4 @@
+import { Wallet } from "ethers";
 
 export const Routes = {
     AuthNavigator :"AuthNavigator",
@@ -5,5 +6,6 @@ export const Routes = {
     splashScreen: "splashScreen",
     loginMainScreen: "loginMainScreen",
     Home: "Home",
+    WalletHome: "WalletHome",
 
 }
