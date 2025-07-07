@@ -1,30 +1,29 @@
 
-import WalletHome from "../WalletHome";
-// import images from '../../../images';
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { View, StyleSheet, FlatList, Image } from 'react-native';
 import { ResponsiveText } from "../../../../components/ResponsiveText";
 import { coinData } from "../../../../utilities/dummyData";
 import Spacer from "../../../../components/Spacer";
 import images from "../../../../images";
+import { colors, Routes } from "../../../../constants"
+import { useNavigation } from "@react-navigation/native"
+import { hp } from '../../../../components/ResponsiveComponent';
 
-export {
-     WalletHome
-}
-
-const DepositWalletShowDetails = () => {
+export const DepositWalletShowDetails = () => {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
-        <Text style={styles.label}>Total value (BTC)</Text>
-        <Text style={styles.btcValue}>0.2702145</Text>
-        <Text style={styles.usdValue}>= $19,458.89</Text>
-        <Text style={styles.pnl}>Today's PNL <Text style={styles.pnlPositive}>+3.33%</Text></Text>
+        <ResponsiveText style={styles.label}>Total value (BTC)</ResponsiveText>
+        <ResponsiveText style={styles.btcValue}>0.2702145</ResponsiveText>
+        <ResponsiveText style={styles.usdValue}>= $19,458.89</ResponsiveText>
+        <ResponsiveText style={styles.pnl}>Today's PNL <ResponsiveText style={styles.pnlPositive}>+3.33%</ResponsiveText></ResponsiveText>
       </View>
-      <Image
-        source={images.DepositLogo}
-        style={styles.icon}
-        resizeMode="contain"
-      />
+      <View style={styles.chartContainer}>
+        <Image
+          source={images.DepositLogo}
+          style={styles.chartIcon}
+          resizeMode="contain"
+        />
+      </View>
     </View>
   );
 };
@@ -49,9 +48,14 @@ const DepositWalletShowDetails = () => {
 export const TokenList = ({}) => {
     return (
         <FlatList 
-          data={coinData}
+          data={[...coinData, ...coinData]}
           showsVerticalScrollIndicator={false}
-          itemContainerStyle={() => <Spacer/>}
+          contentContainerStyle={{ 
+            paddingBottom: hp(20),  
+            flexGrow: 1
+          }}
+          keyExtractor={(item) => item.id}
+          ItemSeparatorComponent={() => <View style={{ height: 1, width: '100%', backgroundColor: colors.buttonSigninColor }} />}
           removeClippedSubviews={false}
           renderItem={({item,index}) => {
             return (
@@ -73,6 +77,15 @@ export const TokenList = ({}) => {
 }
 
 
+export const useDepositNavigation = () => {
+  const navigation = useNavigation();
+  
+  const handleDepositPress = () => {
+    navigation.navigate(Routes.DepositHistory);
+  };
+  
+  return { handleDepositPress };
+};
 
 
 export const styles = StyleSheet.create({
@@ -81,54 +94,55 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#021C24', 
+    backgroundColor: colors.InputTextCOlor, 
     padding: 20,
     borderRadius: 12,
-    margin: 10,
   },
   textContainer: {
     flex: 1,
   },
   label: {
-    color: '#85A8AE',
+    color: colors.iconColor,
     fontSize: 12,
     marginBottom: 4,
   },
   btcValue: {
-    color: '#ffffff',
+    color: colors.white,
     fontSize: 30,
     fontWeight: 'bold',
   },
   usdValue: {
-    color: '#85A8AE',
+    color: colors.iconColor,
     fontSize: 14,
     marginTop: 4,
   },
   pnl: {
     marginTop: 4,
     fontSize: 14,
-    color: '#85A8AE',
+    color: colors.iconColor,
   },
   pnlPositive: {
-    color: '#05BADA', 
+    color: colors.mainColor, 
     fontWeight: 'bold',
   },
-  iconPercent: {
-    width: 50,
-    height: 50,
+  chartContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
     marginLeft: 10,
   },
+  chartIcon: {
+    width: 60,
+    height: 60,
+  
+  },
   // TokenList
-  container: {
-    backgroundColor: '#0e1a22',
+  tokenListContainer: {
     padding: 10,
   },
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 12,
-    borderBottomColor: '#1c2b34',
-    borderBottomWidth: 1,
   },
   icon: {
     width: 32,
@@ -139,24 +153,24 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   symbol: {
-    color: '#ffffff',
+    color: colors.white,
     fontSize: 14,
     fontWeight: '600',
   },
   name: {
-    color: '#a0a0a0',
+    color: colors.iconColor,
     fontSize: 12,
   },
   amountContainer: {
     alignItems: 'flex-end',
   },
   amount: {
-    color: '#ffffff',
+    color: colors.white,
     fontSize: 14,
     fontWeight: '600',
   },
   value: {
-    color: '#a0a0a0',
+    color: colors.iconColor,
     fontSize: 12,
   }
 

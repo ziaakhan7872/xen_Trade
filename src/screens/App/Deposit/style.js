@@ -1,23 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native'
+import { hp, wp } from '../../../components/ResponsiveComponent'
+import { colors, fontFamily } from '../../../constants'
 
 
-const styles = StyleSheet.create({
-
-    depositButton:{
-        text: "Deposit",
-        backgroundColor: "#021C24",
-        textColor: "#05BADA",
-        buttonWidth: wp(42),
-        borderWidth: 1,
-        borderColor: "#05BADA",
-        onPress: () => {}
+export const styles = StyleSheet.create({
+    tokenListContainer: {
+      flex: 1,
+      marginBottom: hp(20), 
     },
-    withdrawButton:{
-        text: "Withdraw",
-        backgroundColor: "#021C24",
-        textColor: "#FFFFFF",
-        buttonWidth: wp(42),
-        onPress: () => {}
+    checkBox:{
+height: wp(4.5),
+width: wp(4.5),
+marginRight: wp(1.5),
     },
     header: {
     flexDirection: 'row',
@@ -28,7 +22,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#FFFFFF',
+    color: colors.white,
   },
   headerIcons: {
     flexDirection: 'row',
@@ -36,52 +30,55 @@ const styles = StyleSheet.create({
   },
   headerIcon: {
     fontSize: 20,
-    color: '#FFFFFF',
+    color: colors.white,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // alignItems: 'center',
+    width: '100%',
   },
   portfolioHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // alignItems: 'center',
   },
   portfolioTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#85A8AE',
+    color: colors.white,
   },
   portfolioActions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: wp(3),
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // gap: wp(3),
   },
   hideBalances: {
     fontSize: 12,
-    color: '#05BADA',
+    color: colors.white,
+    marginRight: wp(1.5),
   },
   historyIcon: {
     fontSize: 16,
-    color: '#85A8AE',
+    color: colors.iconColor,
   },
   searchContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#021C24',
+    backgroundColor: colors.InputTextCOlor,
     paddingHorizontal: wp(4),
     paddingVertical: hp(1.5),
     borderRadius: 8,
   },
   searchText: {
     fontSize: 14,
-    color: '#85A8AE',
+    color: colors.iconColor,
   },
   searchIcon: {
-    fontSize: 16,
-    color: '#85A8AE',
+   height: wp(4.5),
+    width: wp(4.5),
+   
   },
   cryptoItem: {
     flexDirection: 'row',
@@ -89,7 +86,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: hp(1.5),
     borderBottomWidth: 1,
-    borderBottomColor: '#1A3D47',
+    borderBottomColor: colors.buttonSigninColor,
   },
   cryptoLeft: {
     flexDirection: 'row',
@@ -105,19 +102,19 @@ const styles = StyleSheet.create({
   },
   cryptoIconText: {
     fontSize: 18,
-    color: '#FFFFFF',
+    color: colors.white,
   },
   cryptoInfo: {
     justifyContent: 'center',
   },
   cryptoName: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
+    fontFamily: fontFamily.appTextBold,
+    color: colors.white
   },
   cryptoFullName: {
     fontSize: 12,
-    color: '#85A8AE',
+    color: colors.lightGray,
   },
   cryptoRight: {
     alignItems: 'flex-end',
@@ -125,11 +122,30 @@ const styles = StyleSheet.create({
   cryptoAmount: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#FFFFFF',
+    color: colors.white,
   },
   cryptoValue: {
     fontSize: 12,
-    color: '#85A8AE',
-  }
-}
-)
+    color: colors.iconColor,
+  },
+ depositButton: {
+    text: "Deposit",
+    textColor: colors.white,
+    backgroundColor: colors.InputTextCOlor,
+    buttonWidth: wp(48),
+    borderWidth: 1,
+    borderColor: colors.mainColor,
+    textFontSize: 16,
+    height: hp(6),
+    borderRadius: 25,
+  },
+  withdrawButton: {
+    text: "Withdraw",
+    textColor: colors.white,
+    backgroundColor: colors.mainColor,
+    buttonWidth: wp(48),
+    textFontSize: 16,
+    height: hp(6),
+    borderRadius: 25,
+  },
+});

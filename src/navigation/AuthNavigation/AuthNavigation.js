@@ -11,7 +11,6 @@ const AuthNavigation = () => {
             <Screen name={Routes.IntroductMainScreem} component={Auth.IntroductionMain} />
             <Screen name={Routes.LoginScreen} component={Auth.LoginScreen} />
             <Screen name={Routes.SignupScreen} component={Auth.SignupScreen} />
-
         </Navigator>
     );
 };

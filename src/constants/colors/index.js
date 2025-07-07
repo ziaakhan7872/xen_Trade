@@ -1,3 +1,5 @@
+import { SearchBar } from "react-native-screens";
+
 export const colors = {
     mainBgColor: '#011316',
     white: "#FFFFFF",
@@ -11,5 +13,9 @@ export const colors = {
     buttonSigninColor:"#204147",
     boxColor:"rgba(1, 26, 31, 1)",
     logOutBtn: "#FF3235",
-
+    depositBtn: "#85A8AE",
+    withdrawBtn: "#05BADA",
+    searchBar:"#021C24",
+    cryptofilter:"#1C383F"
+    
 }

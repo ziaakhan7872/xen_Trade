@@ -10,6 +10,6 @@ export const Routes = {
     Home: "Home",
     WalletHome: "WalletHome",
     settingMain: "settingMain",
-
+    DepositHistory: "DepositHistory",
 
 }
