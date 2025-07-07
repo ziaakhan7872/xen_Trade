@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native"
+import { Platform, StyleSheet } from "react-native"
 import { hp, wp } from "../../../components/ResponsiveComponent"
 import { colors, fontFamily } from "../../../constants"
 
@@ -68,7 +68,8 @@ export const styles = StyleSheet.create({
         marginTop: hp(0.5),
     },
     btnView: {
-        paddingHorizontal: wp(4)
+        paddingHorizontal: wp(4),
+        paddingBottom: Platform.OS === 'android' ? hp(4) : hp(2), // More space on Android
     },
     btnContainer: {
         width: wp(88),
