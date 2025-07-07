@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
     filterButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: colors.InputTextCOlor,
+        backgroundColor: colors.depositBtn,
         paddingHorizontal: wp(2.5),
         paddingVertical: hp(0.8),
         borderRadius: 6,
@@ -75,8 +75,8 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.appTextRegular
     },
     filterArrow: {
-        color: colors.iconColor,
-        fontSize: 8
+        width: wp(4),
+        height: wp(4),
     },
     emptyStateContainer: {
         flex: 1,

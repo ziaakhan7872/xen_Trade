@@ -83,7 +83,7 @@ export const CryptoFilterModal = ({ visible, onClose, onSelectCrypto, selectedCr
           <View style={styles.filterBar}>
             <TouchableOpacity style={[styles.filterButton]}>
               <ResponsiveText style={styles.activeFilterText}>All crypto</ResponsiveText>
-              <Image
+              <Image style={styles.filterArrow}
           source={images.activeFilter}
           resizeMode="contain"
         />
@@ -91,7 +91,7 @@ export const CryptoFilterModal = ({ visible, onClose, onSelectCrypto, selectedCr
             
             <TouchableOpacity style={styles.filterButton}>
               <ResponsiveText style={styles.filterButtonText}>Date</ResponsiveText>
-              <Image 
+              <Image   style={styles.filterArrow}
                 source={images.depositFilter}
                 resizeMode="contain"
               />
@@ -99,7 +99,7 @@ export const CryptoFilterModal = ({ visible, onClose, onSelectCrypto, selectedCr
             
             <TouchableOpacity style={styles.filterButton}>
               <ResponsiveText style={styles.filterButtonText}>Status</ResponsiveText>
-              <Image 
+              <Image  style={styles.filterArrow}
                 source={images.depositFilter}
              
                 resizeMode="contain"
@@ -203,8 +203,8 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.appTextRegular,
   },
   filterArrow: {
-    color: colors.iconColor,
-    fontSize: 8,
+   width: wp(4),
+    height: wp(4),
   },
   activeFilterArrow: {
     color: colors.white,

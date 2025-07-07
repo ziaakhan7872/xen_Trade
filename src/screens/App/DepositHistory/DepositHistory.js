@@ -40,7 +40,7 @@ const DepositHistory = () => {
       <View style={styles.filterContainer}>
         <TouchableOpacity style={styles.filterButton} onPress={() => setShowCryptoModal(true)}>
           <ResponsiveText style={styles.filterButtonText}>{selectedCrypto}</ResponsiveText>
-       <Image 
+       <Image  style={styles.filterArrow}
           source={images.depositFilter}
        
           resizeMode="contain"
@@ -49,7 +49,7 @@ const DepositHistory = () => {
         
         <TouchableOpacity style={styles.filterButton}>
           <ResponsiveText style={styles.filterButtonText}>Date</ResponsiveText>
-          <Image 
+          <Image  style={styles.filterArrow}
           source={images.depositFilter}
        
           resizeMode="contain"
@@ -58,7 +58,7 @@ const DepositHistory = () => {
         
         <TouchableOpacity style={styles.filterButton}>
           <ResponsiveText style={styles.filterButtonText}>Status</ResponsiveText>
-          <Image 
+          <Image  style={styles.filterArrow}
           source={images.depositFilter}
         
           resizeMode="contain"
