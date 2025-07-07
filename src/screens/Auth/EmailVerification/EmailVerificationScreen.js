@@ -19,7 +19,6 @@ const EmailVerificationScreen = () => {
                     <Spacer/>
                     <EmailVerificationForm />
                 </View>
-
             </View>
 
         </AuthMainContainer>
