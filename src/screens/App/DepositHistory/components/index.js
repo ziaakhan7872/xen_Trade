@@ -7,6 +7,14 @@ import { StyleSheet } from 'react-native';
 import { fontFamily } from '../../../../constants/fonts';
 import images from '../../../../images'
 
+// Status data for the filter
+const statusData = [
+  { id: '1', name: 'All statuses' },
+  { id: '2', name: 'In progress' },
+  { id: '3', name: 'Received' },
+  { id: '4', name: 'Others' },
+];
+
 // Cryptocurrency data for the filter
 const cryptoData = [
   { id: '1', name: 'All crypto', symbol: 'ALL' },
@@ -22,7 +30,13 @@ const cryptoData = [
   { id: '11', name: 'LTC', symbol: 'LTC' },
 ];
 
-export const CryptoFilterModal = ({ visible, onClose, onSelectCrypto, selectedCrypto = 'All crypto' }) => {
+export const CryptoFilterModal = ({ 
+  visible, 
+  onClose, 
+  onSelectCrypto, 
+  selectedCrypto = 'All crypto',
+  onSwitchToStatus 
+}) => {
   const [searchText, setSearchText] = useState('');
   const [filteredData, setFilteredData] = useState(cryptoData);
 
@@ -55,7 +69,11 @@ export const CryptoFilterModal = ({ visible, onClose, onSelectCrypto, selectedCr
         <ResponsiveText style={styles.cryptoItemText}>{item.name}</ResponsiveText>
         {isSelected && (
           <View style={styles.checkmarkContainer}>
-            <ResponsiveText style={styles.checkmark}>✓</ResponsiveText>
+            <Image 
+              source={images.tickBoxes}
+              style={styles.filterIcon}
+              resizeMode="contain"
+            />
           </View>
         )}
       </TouchableOpacity>
@@ -84,24 +102,34 @@ export const CryptoFilterModal = ({ visible, onClose, onSelectCrypto, selectedCr
             <TouchableOpacity style={[styles.filterButton]}>
               <ResponsiveText style={styles.activeFilterText}>All crypto</ResponsiveText>
               <Image
-          source={images.activeFilter}
-          resizeMode="contain"
-        />
+                source={images.activeFilter}
+                style={styles.activeFilterIcon}
+                resizeMode="contain"
+              />
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.filterButton}>
               <ResponsiveText style={styles.filterButtonText}>Date</ResponsiveText>
               <Image 
                 source={images.depositFilter}
+                style={styles.activeFilterIcon}
                 resizeMode="contain"
               />
             </TouchableOpacity>
-            
-            <TouchableOpacity style={styles.filterButton}>
+
+            <TouchableOpacity 
+              style={styles.filterButton}
+              onPress={() => {
+                onClose();
+                if (onSwitchToStatus) {
+                  onSwitchToStatus();
+                }
+              }}
+            >
               <ResponsiveText style={styles.filterButtonText}>Status</ResponsiveText>
               <Image 
                 source={images.depositFilter}
-             
+                style={styles.activeFilterIcon}
                 resizeMode="contain"
               />
             </TouchableOpacity>
@@ -117,9 +145,9 @@ export const CryptoFilterModal = ({ visible, onClose, onSelectCrypto, selectedCr
               onChangeText={handleSearch}
             />
             <TouchableOpacity style={styles.searchIconButton}>
-           <Image  style={styles.searchIcon}
+           <Image 
           source={images.searchSign}
-       
+          style={styles.searchIcon}
           resizeMode="contain"
         />
             </TouchableOpacity>
@@ -131,6 +159,144 @@ export const CryptoFilterModal = ({ visible, onClose, onSelectCrypto, selectedCr
             renderItem={renderItem}
             keyExtractor={item => item.id}
             style={styles.listContainer}
+            ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
+          />
+        </View>
+      </View>
+    </Modal>
+  );
+};
+
+// Status Filter Modal Component
+export const StatusFilterModal = ({ 
+  visible, 
+  onClose, 
+  onSelectStatus, 
+  selectedStatus = 'All statuses',
+  onSwitchToCrypto 
+}) => {
+  const [searchText, setSearchText] = useState('');
+  const [filteredData, setFilteredData] = useState(statusData);
+
+  // Handle search input
+  const handleSearch = (text) => {
+    setSearchText(text);
+    if (text) {
+      const filtered = statusData.filter(
+        item => item.name.toLowerCase().includes(text.toLowerCase())
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(statusData);
+    }
+  };
+
+  // Render each status item
+  const renderItem = ({ item }) => {
+    const isSelected = selectedStatus === item.name;
+    
+    return (
+      <TouchableOpacity 
+        style={styles.cryptoItem} 
+        onPress={() => {
+          onSelectStatus(item.name);
+          onClose();
+        }}
+      >
+        <ResponsiveText style={styles.cryptoItemText}>{item.name}</ResponsiveText>
+        {isSelected && (
+          <View style={styles.checkmarkContainer}>
+           <Image 
+              source={images.tickBoxes}
+              style={styles.filterIcon}
+              resizeMode="contain"
+            />
+          </View>
+        )}
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <Modal
+      visible={visible}
+      transparent={true}
+      animationType="slide"
+      onRequestClose={onClose}
+    >
+      <View style={styles.modalOverlay}>
+        <View style={styles.modalContainerStatus}>
+          {/* Header */}
+          <View style={styles.modalHeader}>
+            <ResponsiveText style={styles.modalTitle}>STATUS</ResponsiveText>
+            <TouchableOpacity onPress={onClose} style={styles.closeButton}>
+              <ResponsiveText style={styles.closeButtonText}>✕</ResponsiveText>
+            </TouchableOpacity>
+          </View>
+          
+          {/* Filter bar */}
+          <View style={styles.filterBar}>
+            <TouchableOpacity 
+              style={styles.filterButton}
+              onPress={() => {
+                onClose();
+                if (onSwitchToCrypto) {
+                  onSwitchToCrypto();
+                }
+              }}
+            >
+              <ResponsiveText style={styles.filterButtonText}>All crypto</ResponsiveText>
+              <Image 
+                source={images.depositFilter}
+                  style={styles.activeFilterIcon}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+            
+            <TouchableOpacity style={styles.filterButton}>
+              <ResponsiveText style={styles.filterButtonText}>Date</ResponsiveText>
+              <Image 
+                source={images.depositFilter}
+                  style={styles.activeFilterIcon}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+            
+            <TouchableOpacity style={[styles.filterButton]}>
+              <ResponsiveText style={styles.activeFilterText}>Status</ResponsiveText>
+              <Image
+                source={images.activeFilter}
+                style={styles.activeFilterIcon}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          </View>
+          
+          {/* Search box */}
+          <View style={styles.searchContainer}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Search..."
+              placeholderTextColor={colors.iconColor}
+              value={searchText}
+              onChangeText={handleSearch}
+            />
+            <TouchableOpacity style={styles.searchIconButton}>
+              <Image 
+                source={images.searchSign}
+                style={styles.searchIconImage}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          </View>
+          
+          {/* Status list */}
+          <FlatList
+            data={filteredData}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            style={styles.listContainer}
+            ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
           />
         </View>
       </View>
@@ -142,11 +308,28 @@ const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+
     justifyContent: 'flex-end',
   },
+  modalOverlaystatus: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+ 
+  },
+  filterIcon:{
+    width: wp(4),
+    height: hp(4),  
+  },
   modalContainer: {
+  
     backgroundColor: colors.cryptofilter,
     height: '80%',
+    width: '100%',
+  },
+   modalContainerStatus: {
+    backgroundColor: colors.cryptofilter,
+    height: '50%',
     width: '100%',
   },
   modalHeader: {
@@ -231,9 +414,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp(3),
   },
   searchIcon: {
-   height: wp(4.5),
-    width: wp(4.5),
-  
+   width: wp(4),
+    height: hp(4),
   },
   listContainer: {
     flex: 1,
@@ -244,8 +426,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: wp(4),
     paddingVertical: hp(1.8),
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'rgba(5, 30, 35, 0.8)',
+  },
+  itemSeparator: {
+  height: hp(0.1),
+    backgroundColor: colors.depositBtn, 
+  
   },
   cryptoItemText: {
     color: colors.white,
@@ -261,8 +446,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   checkmark: {
-    color: colors.white,
+    color: colors.black,
     fontSize: 12,
     fontFamily: fontFamily.appTextBold,
   },
+  activeFilterIcon:{
+    width: wp(4),
+    height: hp(4),
+  },
+  searchIconImage:{
+    width: wp(4),
+    height: hp(4),  
+  },
+  infoLimit:{
+        width: wp(4.5),
+        height: hp(4.5),
+  }
 });

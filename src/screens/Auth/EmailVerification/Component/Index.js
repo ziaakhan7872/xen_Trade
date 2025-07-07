@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import React from 'react'
 import images from '../../../../images'
 import Spacer from '../../../../components/Spacer'
@@ -11,7 +11,7 @@ import BottomSheet from '../../../../components/BottomSheet'
 import Line from '../../../../components/Liner'
 
 
-const EmailVerificationForm = ({ submit }) => {
+export const EmailVerificationForm = ({ submit }) => {
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode="contain" style={styles.logoImage} />
@@ -39,11 +39,10 @@ const EmailVerificationForm = ({ submit }) => {
     )
 }
 
-export default EmailVerificationForm
 
 export const EmailVerificationBottomSheet = ({ bottomSheetRef, closeBottomSheet}) => {
     return (
-        <BottomSheet  ref={bottomSheetRef} height={600}>
+        <BottomSheet ref={bottomSheetRef} height={600}>
             <Spacer />
             <View style={styles.BottomSheetView}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 18,
         borderWidth: 1,
-        borderColor: colors.BorderColor
+        borderColor: colors.borderColor
     },
     pinStyle: {
         color: colors.mainColor
