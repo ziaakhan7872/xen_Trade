@@ -12,5 +12,6 @@ export const Routes = {
     settingMain: "settingMain",
     settingProfile: "settingProfile",
     DepositHistory: "DepositHistory",
-
+    settingSecurity: "settingSecurity",
+    twoFactorAuth: "twoFactorAuth",
 }

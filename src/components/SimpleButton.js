@@ -20,7 +20,8 @@ export const SimpleButton = ({
     borderRadius,
     btnImage,
     height,
-    plus
+    plus,
+    btnStyles
 }) => {
     return (
         <TouchableOpacity
@@ -33,7 +34,7 @@ export const SimpleButton = ({
                     alignSelf: alignSelf,
                     borderRadius: borderRadius ?? wp(16.5),
                     width: buttonWidth ? buttonWidth : wp(90),
-                    height: height??hp(7),
+                    height: height ?? hp(7),
                     backgroundColor: backgroundColor ?? (styleView && styleView.backgroundColor) ?? colors.mainColor,
                     borderWidth: borderWidth,
                     borderColor: borderColor,
@@ -49,12 +50,12 @@ export const SimpleButton = ({
                         <Image source={btnImage} resizeMode="contain" style={styles.btnImage} />
                         : null}
                     <ResponsiveText
-                        style={{
+                        style={[{
                             fontSize: 14,
                             fontFamily: fontFamily.appTextMedium,
                             color: textColor ? textColor : colors.white,
                             textAlign: 'center'
-                        }}>
+                        }, btnStyles]}>
                         {text}
                     </ResponsiveText>
                 </View>

@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 17,
-    fontWeight: '500',
     letterSpacing: 0.1,
     fontFamily: fontFamily.appTextMedium,
     color: colors.white,

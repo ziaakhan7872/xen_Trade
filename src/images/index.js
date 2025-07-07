@@ -27,5 +27,8 @@ const images = {
     clockIcon: require('../images/clockIcon.png'),
     infoIcon: require('../images/infoIcon.png'),
     checkBox: require('../images/checkBox.png'),
+    toggleSwitchOn: require('../images/toggleSwitchOn.png'),
+    toggleSwitchOff: require('../images/toggleSwitchOff.png'),
+    testQrImg: require('../images/testQrImg.png'),
 }
 export default images
