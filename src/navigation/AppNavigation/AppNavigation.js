@@ -11,10 +11,11 @@ const { Navigator, Screen } = createNativeStackNavigator();
 
 const AppNavigation = () => {
     return (
-        <Navigator  screenOptions={{ headerShown: false }}>
+        <Navigator screenOptions={{ headerShown: false }}>
+            <Screen name={Routes.settingMain} component={App.settingMain} />
+            <Screen name={Routes.settingProfile} component={App.settingProfile} />
             <Screen name={Routes.WalletHome} component={WalletHome} />
             <Screen name={Routes.DepositHistory} component={DepositHistory} />
-          
         </Navigator>
     );
 };
