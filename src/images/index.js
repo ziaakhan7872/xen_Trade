@@ -17,7 +17,6 @@ const images = {
     addressSettingIcon: require('../images/addressSettingIcon.png'),
     emailNotificationSettingIcon: require('../images/emailNotificationSettingIcon.png'),
     placeholderProfileImg: require('../images/placeholderProfileImg.png'),
-
     AccountVerify: require("../images/AccountVerify.png"),
     depositFilter: require('../images/filterarrow.png'),
     union: require('../images/Union.png'),
@@ -28,5 +27,11 @@ const images = {
     infoIcon: require('../images/infoIcon.png'),
     checkBox: require('../images/checkBox.png'),
     tickBoxes: require('../images/tickBoxes.png'),
+    home:require("../images/home.png"),
+    market:require("../images/Market.png"),
+    Exchange:require("../images/Exchange.png"),
+    Wallet:require("../images/Wallet.png"),
+    Setting:require("../images/Setting.png"),
+
 }
 export default images

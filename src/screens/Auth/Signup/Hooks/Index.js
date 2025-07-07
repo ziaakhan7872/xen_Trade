@@ -1,19 +1,17 @@
-import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react'
 import { Routes } from '../../../../constants';
 
-const UseSignUp = () => {
-    const navigation = useNavigation()
+const UseSignUp = (props) => {
         const [isChecked, setIsChecked] = useState(false);
 
          const handleCheckboxToggle = () => {
                 setIsChecked(prevState => !prevState); 
             };
         const handleSignIn = ()=>{
-            navigation.navigate(Routes.LoginScreen)
+           props?.navigation.navigate(Routes.LoginScreen)
         }
          const handleEmailVerification = ()=>{
-            navigation.navigate(Routes.EmailVerificationScreen)
+            props?.navigation.navigate(Routes.EmailVerificationScreen)
         }
         
 
