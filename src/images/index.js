@@ -10,6 +10,7 @@ const images = {
     systemSettingIcon: require('../images/systemSettingIcon.png'),
     addressSettingIcon: require('../images/addressSettingIcon.png'),
     emailNotificationSettingIcon: require('../images/emailNotificationSettingIcon.png'),
+    placeholderProfileImg: require('../images/placeholderProfileImg.png'),
 
 }
 export default images

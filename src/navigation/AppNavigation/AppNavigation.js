@@ -9,7 +9,7 @@ const AppNavigation = () => {
     return (
         <Navigator screenOptions={{ headerShown: false }}>
             <Screen name={Routes.settingMain} component={App.settingMain} />
-
+            <Screen name={Routes.settingProfile} component={App.settingProfile} />
         </Navigator>
     );
 };
