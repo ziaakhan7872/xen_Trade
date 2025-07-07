@@ -44,7 +44,7 @@ const LoginMainScreen = () => {
               textColor={colors.white}
               fontSize={14}
               fontWeight={500}
-              onPress={() => { navigation.navigate(Routes.AppNavigator); }}
+              onPress={() => { navigation.navigate(Routes.SignupScreen); }}
               backgroundColor={colors.transparent}
               text="Sign Up"
             />

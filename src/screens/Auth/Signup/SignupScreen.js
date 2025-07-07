@@ -10,7 +10,7 @@ const SignupScreen = () => {
   return (
     <AuthMainContainer>
       <View style={style.container}>
-        <SignUpForm handleEmailVerification={handleEmailVerification} Login={handleSignIn} isChecked={isChecked} handleCheckboxToggle={handleCheckboxToggle} />
+        <SignUpForm  handleEmailVerification={handleEmailVerification} Login={handleSignIn} isChecked={isChecked} handleCheckboxToggle={handleCheckboxToggle} />
       </View>
 
     </AuthMainContainer>
