@@ -1,11 +1,12 @@
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import images from '../../../images';
+// import images from '../../../images';
 import { SimpleButton } from '../../../components/SimpleButton';
 import { style } from './Style';
 import { useNavigation } from '@react-navigation/native';
 import { colors, Routes } from '../../../constants';
 import Spacer from '../../../components/Spacer';
+import images from '../../../images';
 import LinearGradient from 'react-native-linear-gradient';
 
 const LoginMainScreen = () => {
