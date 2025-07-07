@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 18,
         borderWidth: 1,
-        borderColor: colors.BorderColor
+        borderColor: colors.borderColor
     },
     pinStyle: {
         color: colors.mainColor

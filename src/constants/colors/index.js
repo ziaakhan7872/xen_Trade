@@ -27,7 +27,8 @@ export const colors = {
     searchBar: "#021C24",
     cryptofilter: "#1C383F",
     backGroundCOlor:"rgba(1, 19, 22, 1)",
-    bottomTabColor:"rgba(1, 26, 31, 1)"
+    bottomTabColor:"rgba(1, 26, 31, 1)",
+    AccountInfoBorderColor:"#10272C"
 
 
 
