@@ -16,6 +16,7 @@ const images = {
     systemSettingIcon: require('../images/systemSettingIcon.png'),
     addressSettingIcon: require('../images/addressSettingIcon.png'),
     emailNotificationSettingIcon: require('../images/emailNotificationSettingIcon.png'),
+    AccountVerify:require("../images/AccountVerify.png"),
     depositFilter: require('../images/filterarrow.png'),
     union: require('../images/Union.png'),
     activeFilter: require('../images/arrowAbove.png'),

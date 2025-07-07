@@ -2,12 +2,14 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { style } from './Style'
-import EmailVerificationForm from './Component/Index'
+import EmailVerificationForm, { EmailVerificationBottomSheet } from './Component/Index'
 import images from '../../../images'
 import { wp } from '../../../components/ResponsiveComponent'
 import Spacer from '../../../components/Spacer'
+import useEmalVerification from './Hooks/Index'
 
 const EmailVerificationScreen = () => {
+    const {emailVerificationBottomSheetRef,handleOpenVerification,handleCloseVerification} = useEmalVerification()
     return (
         <AuthMainContainer>
             <View style={style.container}>
@@ -17,8 +19,9 @@ const EmailVerificationScreen = () => {
                         <Image style={style.leftImage} resizeMode='contain' source={images.backArrow} />
                     </TouchableOpacity>
                     <Spacer/>
-                    <EmailVerificationForm />
+                    <EmailVerificationForm submit={handleOpenVerification} />
                 </View>
+                <EmailVerificationBottomSheet closeBottomSheet={handleCloseVerification} bottomSheetRef={emailVerificationBottomSheetRef} />
             </View>
 
         </AuthMainContainer>
