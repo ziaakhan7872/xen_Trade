@@ -1,5 +1,5 @@
 import HomeScreen from "./Home/Index";
-import settingMain from "./Settings/settingMain";
+import settingMain from "./Settings/SettingMain";
 
 export {
      HomeScreen, settingMain
