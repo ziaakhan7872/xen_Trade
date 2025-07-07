@@ -11,5 +11,6 @@ export const colors = {
     buttonSigninColor:"#204147",
     boxColor:"rgba(1, 26, 31, 1)",
     logOutBtn: "#FF3235",
+    BorderColor:"#0A2228"
 
 }
