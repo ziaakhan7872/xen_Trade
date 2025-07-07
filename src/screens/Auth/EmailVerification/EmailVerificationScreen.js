@@ -9,13 +9,13 @@ import Spacer from '../../../components/Spacer'
 import useEmalVerification from './Hooks/Index'
 
 const EmailVerificationScreen = () => {
-    const {emailVerificationBottomSheetRef,handleOpenVerification,handleCloseVerification} = useEmalVerification()
+    const {emailVerificationBottomSheetRef,handleOpenVerification,handleCloseVerification,handeGoBack} = useEmalVerification()
     return (
         <AuthMainContainer>
             <View style={style.container}>
                 <Spacer/>
                 <View style={style.outerMainBox}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handeGoBack}>
                         <Image style={style.leftImage} resizeMode='contain' source={images.backArrow} />
                     </TouchableOpacity>
                     <Spacer/>

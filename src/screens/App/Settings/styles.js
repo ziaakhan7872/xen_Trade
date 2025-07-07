@@ -10,11 +10,8 @@ export const styles = StyleSheet.create({
     bgImage: {
         flex: 1,
         width: wp(100),
-        // height: hp(100),
     },
     backArrowContainer: {
-        // position: 'absolute',
-        // top: hp(8.5),
         left: wp(6),
         zIndex: 2,
     },
@@ -41,13 +38,11 @@ export const styles = StyleSheet.create({
     },
 
     profileCard: {
-        // flexDirection: 'row',
-        // alignItems: 'center',
-        backgroundColor: '#011A1F',
+        backgroundColor: colors.settingCardsBgColor,
         padding: wp(4),
         borderRadius: wp(3),
         marginBottom: hp(2),
-        borderColor: '#0A2228',
+        borderColor: colors.borderColor,
         borderWidth: 1,
     },
     profileImage: {
@@ -60,7 +55,7 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '700',
         letterSpacing: 1,
-        color: '#fff',
+        color: colors.white,
     },
     profileEmail: {
         fontSize: 14,
@@ -74,7 +69,7 @@ export const styles = StyleSheet.create({
     btnContainer: {
         width: wp(88),
         alignSelf: 'center',
-        padding: wp(4),
+        padding: wp(5),
         borderRadius: 66,
         backgroundColor: colors.logOutBtn,
     }

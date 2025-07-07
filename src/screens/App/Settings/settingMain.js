@@ -10,8 +10,12 @@ import { SimpleButton } from '../../../components/SimpleButton'
 import { hp, wp } from '../../../components/ResponsiveComponent'
 import { MainHeader } from '../../../components/MainHeader'
 import { appStyles } from '../../../utilities'
+import { useNavigation } from '@react-navigation/native';
+import { Routes } from '../../../constants'
+
 
 const settingMain = () => {
+    const navigation = useNavigation();
     return (
         <AuthMainContainer>
             {/* <Spacer height={hp(1)} /> */}
@@ -28,15 +32,15 @@ const settingMain = () => {
                     </View>
                 </View>
 
-                <SettingOption icon={images.profileSettingIcon} label='Profile' onPress={() => { }} />
+                <SettingOption icon={images.profileSettingIcon} label='Profile' onPress={() => { navigation.navigate(Routes.settingProfile) }} />
                 <Spacer height={hp(1)} />
-                <SettingOption icon={images.securitySettingIcon} label='Security' onPress={() => { }} />
+                <SettingOption icon={images.securitySettingIcon} label='Security' onPress={() => { navigation.navigate(Routes.settingProfile) }} />
                 <Spacer height={hp(1)} />
-                <SettingOption icon={images.systemSettingIcon} label='System Settings' onPress={() => { }} />
+                <SettingOption icon={images.systemSettingIcon} label='System Settings' onPress={() => { navigation.navigate(Routes.settingProfile) }} />
                 <Spacer height={hp(1)} />
-                <SettingOption icon={images.addressSettingIcon} label='Address Book' onPress={() => { }} />
+                <SettingOption icon={images.addressSettingIcon} label='Address Book' onPress={() => { navigation.navigate(Routes.settingProfile) }} />
                 <Spacer height={hp(1)} />
-                <SettingOption icon={images.emailNotificationSettingIcon} label='Email Notifications' onPress={() => { }} />
+                <SettingOption icon={images.emailNotificationSettingIcon} label='Email Notifications' onPress={() => { navigation.navigate(Routes.settingProfile) }} />
             </View>
 
             <View style={styles.btnView}>

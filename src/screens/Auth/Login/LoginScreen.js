@@ -11,7 +11,7 @@ const LoginScreen = () => {
   return (
     <AuthMainContainer>
       <View style={style.container}>
-        <LoginForm signUp={()=>navigation.navigate(Routes.SignupScreen)}/>
+        <LoginForm Login={()=>navigation.navigate(Routes.AppNavigator)} signUp={()=>navigation.navigate(Routes.SignupScreen)}/>
       </View>
 
     </AuthMainContainer>

@@ -9,8 +9,9 @@ const Navigation = () => {
     return (
     <NavigationContainer >
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+                <Stack.Screen name={Routes.AuthNavigator} component={AuthNavigation} />
+
         <Stack.Screen name={Routes.AppNavigator} component={AppNavigation} />
-        <Stack.Screen name={Routes.AuthNavigator} component={AuthNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
     );

@@ -8,7 +8,7 @@ import InputText from '../../../../components/InputText'
 import { SimpleButton } from '../../../../components/SimpleButton'
 import RowButton from '../../../../components/RowButton'
 
-const LoginForm = ({signUp}) => {
+const LoginForm = ({signUp,Login}) => {
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode='contain' style={styles.logoImage} />
@@ -22,7 +22,7 @@ const LoginForm = ({signUp}) => {
                 <Spacer height={hp(1)} />
                 <Text style={[styles.forgetPasswordStyling, { textDecorationLine: 'underline' }]}> Forgot Password?</Text>
                 <Spacer />
-                <SimpleButton textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={colors.authButtonColor} buttonWidth={wp(80)} />
+                <SimpleButton onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={colors.authButtonColor} buttonWidth={wp(80)} />
                 <Spacer />
                 <Text style={styles.signInWithStyle}>Or sign in with</Text>
                 <Spacer />
