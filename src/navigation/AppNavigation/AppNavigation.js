@@ -4,6 +4,8 @@ import { Routes } from '../../constants';
 import WalletHome from '../../screens/App/Deposit/WalletHome';
 import { settingMain } from '../../screens/App/Index';
 import DepositHistory from '../../screens/App/DepositHistory/DepositHistory';
+import * as App from '../../screens/Auth'
+
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
