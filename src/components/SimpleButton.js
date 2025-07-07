@@ -19,6 +19,7 @@ export const SimpleButton = ({
     alignSelf,
     borderRadius,
     btnImage,
+    height,
     plus
 }) => {
     return (
@@ -32,8 +33,8 @@ export const SimpleButton = ({
                     alignSelf: alignSelf,
                     borderRadius: borderRadius ?? wp(16.5),
                     width: buttonWidth ? buttonWidth : wp(90),
-                    height: hp(7),
-                    backgroundColor: backgroundColor ?? styleView.backgroundColor ?? colors.mainColor,
+                    height: height??hp(7),
+                    backgroundColor: backgroundColor ?? (styleView && styleView.backgroundColor) ?? colors.mainColor,
                     borderWidth: borderWidth,
                     borderColor: borderColor,
                     fontSize: fontSize,

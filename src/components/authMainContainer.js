@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   imageBackground: {
     flex: 1,
     width: wp(100),
-    height: hp(100),
+    height: hp(120),
   },
   safeArea: {
     flex: 1,

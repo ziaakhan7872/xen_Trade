@@ -2,6 +2,12 @@ const images = {
     authBgImage: require('../images/authBgImage.png'),
     splashLogoImage: require('../images/splashLogoImage.png'),
     splashScreenBg: require('../images/splashScreenBg.png'),
+    DepositLogo: require('../images/DepositLogo.png'),
+    UsdtLogo: require('../images/UsdtLogo.png'),
+    BtcLogo: require('../images/BtcLogo.png'),
+    SolLogo: require('../images/SolLogo.png'),
+    EthLogo: require('../images/Eth.png'),
+    AvaxLogo: require('../images/AvaxLogo.png'),
     backArrow: require('../images/backArrow.png'),
     rightArrow: require('../images/rightArrow.png'),
     userProfileImg: require('../images/userProfileImg.png'),
@@ -12,5 +18,14 @@ const images = {
     emailNotificationSettingIcon: require('../images/emailNotificationSettingIcon.png'),
     placeholderProfileImg: require('../images/placeholderProfileImg.png'),
 
+    AccountVerify: require("../images/AccountVerify.png"),
+    depositFilter: require('../images/filterarrow.png'),
+    union: require('../images/Union.png'),
+    activeFilter: require('../images/arrowAbove.png'),
+    searchSign: require('../images/searchSign.png'),
+    tickIcon: require('../images/tickIcon.png'),
+    clockIcon: require('../images/clockIcon.png'),
+    infoIcon: require('../images/infoIcon.png'),
+    checkBox: require('../images/checkBox.png'),
 }
 export default images

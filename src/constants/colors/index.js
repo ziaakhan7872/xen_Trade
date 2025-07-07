@@ -1,3 +1,5 @@
+import { SearchBar } from "react-native-screens";
+
 export const colors = {
     mainBgColor: '#011316',
     white: "#FFFFFF",
@@ -17,4 +19,14 @@ export const colors = {
     transparentBtn: 'rgba(255, 255, 255, 0.07)',
     lightTextColor: '#85A8AE',
     disableTextColor: '#01272E',
+    bottomSheetBackgroundColor: "rgba(2, 36, 43, 1)",
+    lineColor: "#1C383F",
+    bottomSheetImageViewColor: " rgba(5, 186, 218, 0.18)",
+    depositBtn: "#85A8AE",
+    withdrawBtn: "#05BADA",
+    searchBar: "#021C24",
+    cryptofilter: "#1C383F",
+
+
+
 }

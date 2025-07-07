@@ -1,14 +1,46 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { forwardRef } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import { wp } from './ResponsiveComponent';
+import { colors } from '../constants';
 
-const BottomSheet = () => {
+const BottomSheet = forwardRef(({ children, height }, ref) => {
   return (
-    <View>
-      <Text>BottomSheet</Text>
-    </View>
-  )
-}
+    <RBSheet
+      ref={ref} 
+      closeOnDragDown={true}
+      closeOnPressMask={true}
+      height={height}
+      customStyles={{
+        wrapper: {
+          backgroundColor: 'rgba(52, 52, 52, 0.3)',
+        },
+        draggableIcon: {
+          backgroundColor: "#E4E4E4",
+          width: wp('30%'),
+        },
+        container: {
+          backgroundColor: colors.bottomSheetBackgroundColor,
+          alignItems:"center"        
+        },
+      }}
+    >
+      {children} 
+    </RBSheet>
+  );
+});
 
-export default BottomSheet
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sheetText: {
+    fontSize: 18,
+    padding: 20,
+    textAlign: 'center',
+  },
+});
 
-const styles = StyleSheet.create({})
+export default BottomSheet;
