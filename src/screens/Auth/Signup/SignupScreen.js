@@ -3,12 +3,14 @@ import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import SignUpForm from './Component/Index'
 import { style } from './Style'
+import UseSignUp from './Hooks/Index'
 
 const SignupScreen = () => {
+    const {isChecked,setIsChecked,handleCheckboxToggle,handleSignIn,handleEmailVerification} = UseSignUp()
   return (
     <AuthMainContainer>
       <View style={style.container}>
-        <SignUpForm />
+        <SignUpForm handleEmailVerification={handleEmailVerification} Login={handleSignIn} isChecked={isChecked} handleCheckboxToggle={handleCheckboxToggle} />
       </View>
 
     </AuthMainContainer>

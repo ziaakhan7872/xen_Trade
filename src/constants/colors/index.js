@@ -16,6 +16,8 @@ export const colors = {
     depositBtn: "#85A8AE",
     withdrawBtn: "#05BADA",
     searchBar:"#021C24",
-    cryptofilter:"#1C383F"
+    cryptofilter:"#1C383F",
     
+    BorderColor:"#0A2228"
+
 }

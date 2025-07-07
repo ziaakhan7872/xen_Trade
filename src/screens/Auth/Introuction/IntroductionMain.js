@@ -29,16 +29,16 @@ const LoginMainScreen = () => {
             textColor={colors.black}
             fontSize={14}
             fontWeight={500}
-            onPress={() => { navigation.navigate(Routes.LoginScreen); }}
+            onPress={() => { navigation.navigate(Routes.AppNavigator); }}
             backgroundColor="#05BADA"
             text="Login"
 
           />
           <Spacer />
           <LinearGradient
-            colors={['#FFFFFF12', '#FFFFFF12']} 
-            start={{ x: 0, y: 0 }} 
-            end={{ x: 1, y: 0 }} 
+            colors={['#FFFFFF12', '#FFFFFF12']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
             style={style.gradientContainer}
           >
             <SimpleButton
