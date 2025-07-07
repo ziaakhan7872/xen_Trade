@@ -46,9 +46,8 @@ export const styles = StyleSheet.create({
         alignItems: 'center'
     },
     infoIcon: {
-        width: wp(5.5),
-        height: wp(5.5),
-       
+        width: wp(5),
+        height: wp(5),
     },
     filterContainer: {
         flexDirection: 'row',
@@ -60,7 +59,7 @@ export const styles = StyleSheet.create({
     filterButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: colors.depositBtn,
+      
         paddingHorizontal: wp(2.5),
         paddingVertical: hp(0.8),
         borderRadius: 6,
@@ -75,8 +74,13 @@ export const styles = StyleSheet.create({
         fontFamily: fontFamily.appTextRegular
     },
     filterArrow: {
-        width: wp(4),
-        height: wp(4),
+        color: colors.iconColor,
+        fontSize: 8
+    },
+    filterIcon: {
+        width: wp(3),
+        height: hp(1.5),
+        tintColor: colors.iconColor
     },
     emptyStateContainer: {
         flex: 1,

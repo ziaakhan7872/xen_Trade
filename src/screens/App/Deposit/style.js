@@ -148,4 +148,15 @@ marginRight: wp(1.5),
     height: hp(6),
     borderRadius: 25,
   },
+  searchIconButton:{
+    paddingHorizontal: wp(3),
+  },
+  searchInput: {
+    flex: 1,
+    color: colors.white,
+    paddingHorizontal: wp(3),
+    paddingVertical: hp(1.2),
+    fontFamily: fontFamily.appTextRegular,
+    fontSize: 14,
+  },
 });

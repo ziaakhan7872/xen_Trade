@@ -7,12 +7,14 @@ import { AuthMainContainer } from '../../../components/authMainContainer'
 import { hp, wp } from "../../../components/ResponsiveComponent"
 import { useNavigation } from '@react-navigation/native'
 import images from '../../../images'
-import { CryptoFilterModal } from './components'
+import { CryptoFilterModal, StatusFilterModal } from './components'
 
 const DepositHistory = () => {
   const navigation = useNavigation();
   const [showCryptoModal, setShowCryptoModal] = useState(false);
+  const [showStatusModal, setShowStatusModal] = useState(false);
   const [selectedCrypto, setSelectedCrypto] = useState('All crypto');
+  const [selectedStatus, setSelectedStatus] = useState('All statuses');
 
   const handleBackPress = () => {
     navigation.goBack();
@@ -40,29 +42,29 @@ const DepositHistory = () => {
       <View style={styles.filterContainer}>
         <TouchableOpacity style={styles.filterButton} onPress={() => setShowCryptoModal(true)}>
           <ResponsiveText style={styles.filterButtonText}>{selectedCrypto}</ResponsiveText>
-       <Image  style={styles.filterArrow}
-          source={images.depositFilter}
-       
-          resizeMode="contain"
-        />
+          <Image 
+            source={images.depositFilter}
+            style={styles.filterIcon}
+            resizeMode="contain"
+          />
         </TouchableOpacity>
         
         <TouchableOpacity style={styles.filterButton}>
           <ResponsiveText style={styles.filterButtonText}>Date</ResponsiveText>
-          <Image  style={styles.filterArrow}
-          source={images.depositFilter}
-       
-          resizeMode="contain"
-        />
+          <Image 
+            source={images.depositFilter}
+            style={styles.filterIcon}
+            resizeMode="contain"
+          />
         </TouchableOpacity>
         
-        <TouchableOpacity style={styles.filterButton}>
-          <ResponsiveText style={styles.filterButtonText}>Status</ResponsiveText>
-          <Image  style={styles.filterArrow}
-          source={images.depositFilter}
-        
-          resizeMode="contain"
-        />
+        <TouchableOpacity style={styles.filterButton} onPress={() => setShowStatusModal(true)}>
+          <ResponsiveText style={styles.filterButtonText}>{selectedStatus}</ResponsiveText>
+          <Image 
+            source={images.depositFilter}
+            style={styles.filterIcon}
+            resizeMode="contain"
+          />
         </TouchableOpacity>
       </View>
       
@@ -72,6 +74,22 @@ const DepositHistory = () => {
         onClose={() => setShowCryptoModal(false)}
         onSelectCrypto={(crypto) => setSelectedCrypto(crypto)}
         selectedCrypto={selectedCrypto}
+        onSwitchToStatus={() => {
+          setShowCryptoModal(false);
+          setTimeout(() => setShowStatusModal(true), 300);
+        }}
+      />
+      
+      {/* Status Filter Modal */}
+      <StatusFilterModal
+        visible={showStatusModal}
+        onClose={() => setShowStatusModal(false)}
+        onSelectStatus={(status) => setSelectedStatus(status)}
+        selectedStatus={selectedStatus}
+        onSwitchToCrypto={() => {
+          setShowStatusModal(false);
+          setTimeout(() => setShowCryptoModal(true), 300);
+        }}
       />
 
       {/* Empty state */}

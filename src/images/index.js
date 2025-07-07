@@ -27,5 +27,6 @@ const images = {
     clockIcon: require('../images/clockIcon.png'),
     infoIcon: require('../images/infoIcon.png'),
     checkBox: require('../images/checkBox.png'),
+    tickBoxes: require('../images/tickBoxes.png'),
 }
 export default images
