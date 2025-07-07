@@ -3,6 +3,7 @@ import React from 'react';
 import images from '../images';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { wp, hp } from './ResponsiveComponent';
+import { colors } from '../constants';
 export const AuthMainContainer = ({
   style,
   containerStyle,
@@ -12,11 +13,12 @@ export const AuthMainContainer = ({
   return (
     <>
       <StatusBar translucent backgroundColor="transparent" barStyle="light-content" />
-      <ImageBackground
+      {/* <ImageBackground
         source={images.authBgImage}
         resizeMode="cover"
         style={styles.imageBackground}
-      >
+      > */}
+      
         <SafeAreaView style={[styles.safeArea, style]}>
           <View
             style={[
@@ -30,7 +32,6 @@ export const AuthMainContainer = ({
             {children}
           </View>
         </SafeAreaView>
-      </ImageBackground>
     </>
   );
 };
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
+    backgroundColor:colors.backGroundCOlor
   },
   container: {
     flex: 1,
