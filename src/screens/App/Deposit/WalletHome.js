@@ -1,8 +1,8 @@
-import React from "react"
-import { View ,Image} from "react-native"
+import React, { useState, useRef } from "react"
+import { View, Image, TouchableOpacity } from "react-native"
 import { AuthMainContainer } from "../../../components/authMainContainer"
 import { hp, wp } from "../../../components/ResponsiveComponent"
-import { DepositWalletShowDetails, TokenList, useDepositNavigation } from "./components"
+import { DepositWalletShowDetails, TokenList, useDepositNavigation, SelectCrypto } from "./components"
 import Spacer from "../../../components/Spacer"
 import { styles } from "./style"
 import { SimpleButton } from "../../../components/SimpleButton"
@@ -14,7 +14,8 @@ import { appStyles } from "../../../utilities"
 
 
 const WalletHome = () => {
- 
+  const [selectedCrypto, setSelectedCrypto] = useState(null);
+  const cryptoSheetRef = useRef();
   const { handleDepositPress } = useDepositNavigation();
   
   return (
@@ -70,18 +71,26 @@ const WalletHome = () => {
       <Spacer  />
 
       {/* Search Bar */}
-      <View style={styles.searchContainer}>
+      <TouchableOpacity 
+        style={styles.searchContainer}
+        onPress={() => cryptoSheetRef.current?.open()}
+      >
         <ResponsiveText style={styles.searchText}>Search...</ResponsiveText>
-        <Image style={styles.searchIcon}
+        <Image style ={styles.searchIcon}
           source={images.searchSign}
           resizeMode="contain"
         />
-      </View>
+      </TouchableOpacity>
       <Spacer height={hp(2)} />
 
       {/* Crypto List */}
-    
         <TokenList/>
+        
+        {/* Select Crypto Bottom Sheet */}
+        <SelectCrypto 
+          ref={cryptoSheetRef}
+          onSelectCrypto={setSelectedCrypto}
+        />
     
     </AuthMainContainer>
   );

@@ -15,7 +15,7 @@ const AppNavigation = () => {
             <Screen name={Routes.DepositHistory} component={App.DepositHistory} />
             <Screen name={Routes.settingMain} component={App.settingMain} />
             <Screen name={Routes.settingProfile} component={App.settingProfile} />
-            
+        
         </Navigator>
     );
 };
