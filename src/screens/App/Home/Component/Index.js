@@ -8,6 +8,7 @@ import images from '../../../../images';
 import Line from '../../../../components/Liner';
 import { SimpleButton } from '../../../../components/SimpleButton';
 import { AccountActivity } from '../../../../utilities/dummyData';
+import AntDesign from "react-native-vector-icons/AntDesign"
 
 export const AccountInfo = () => {
     return (
@@ -109,8 +110,24 @@ export const AccountOverView = ({ data = AccountActivity }) => {
                         data={data}
                         keyExtractor={(item, index) => item.id.toString() || index.toString()}
                         renderItem={({ item }) => (
-                            <View>
-                                <Text>{item.type}</Text> 
+                            <View style={style.flatListDataView}>
+                                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                    <View style={[style.circle, { backgroundColor: item.type == "Buy" ? colors.greenColor : colors.redColor }]}>
+                                        <Image
+                                            style={{ width: wp(6), height: wp(6), resizeMode: "contain" }}
+                                            source={item.type == "Buy" ? images.arrowUp : images.arrowDown}
+                                        />
+                                    </View>
+                                    <HorizontalSpacer />
+                                    <View>
+                                        <ResponsiveText style={[style.text2, { fontSize: 13 }]}>{item.type} Order</ResponsiveText>
+                                        <ResponsiveText style={[style.text4]}>{item.date} {item.time}</ResponsiveText>
+                                    </View>
+                                </View>
+                                <View style={{alignItems:"flex-end"}}>
+                                    <ResponsiveText style={[style.text1]}>{item.marketOrder} market order</ResponsiveText>
+                                    <ResponsiveText style={[style.text1]}>completed for {item.amount}</ResponsiveText>
+                                </View>
                             </View>
                         )}
                     />
@@ -154,8 +171,10 @@ const style = StyleSheet.create({
         borderColor: colors.AccountInfoBorderColor,
         height: hp(33),
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        paddingHorizontal: wp(0), // ✅ Add horizontal padding
     },
+
     mainBoxInnerView: {
         width: wp(82),
         flexDirection: "row",
@@ -165,6 +184,11 @@ const style = StyleSheet.create({
     text1: {
         fontSize: 12,
         fontWeight: "500",
+        color: colors.iconColor,
+    },
+     text4: {
+        fontSize: 12,
+        fontWeight: "400",
         color: colors.iconColor,
     },
     text2: {
@@ -227,9 +251,23 @@ const style = StyleSheet.create({
         width: wp(6.41),
         height: wp(6.41),
     },
-    flatListDataView:{
-        width:wp(80),
-        borderWidth:1,
-        // borderColor:colors
+    flatListDataView: {
+        width: wp(90), // ✅ Take full width minus parent padding
+        borderBottomWidth: 1,
+        borderBottomColor: colors.settingCardBorderColor,
+        paddingHorizontal: wp(2),
+        paddingVertical: wp(3),
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems:"center"
+    },
+    circle: {
+        width: wp(9.5),
+        height: wp(9.5),
+        borderRadius: wp(5),
+        justifyContent: "center",
+        alignItems: "center"
+
     }
+
 });

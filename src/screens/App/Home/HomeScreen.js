@@ -22,12 +22,14 @@ const HomeScreen = () => {
         {threeRowTabButtonPress === "portfolio" && (
           <PortfilioOverView buttonPress={portfolioButton} setButtonPress={setPortfolioButton} />
         )}
-         {threeRowTabButtonPress === "balance" && (
-          <BalanceOverView  />
+        {threeRowTabButtonPress === "balance" && (
+          <BalanceOverView />
         )}
-         {threeRowTabButtonPress === "account" && (
-          <AccountOverView  />
+        {threeRowTabButtonPress === "account" && (
+          <AccountOverView />
         )}
+        <Spacer height={hp(1)} />
+
 
       </View>
     </AuthMainContainer>

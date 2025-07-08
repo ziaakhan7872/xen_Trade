@@ -2,23 +2,21 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { wp } from './ResponsiveComponent';
 import { colors } from '../constants';
-import AntDesign from "react-native-vector-icons/AntDesign"; // Import AntDesign icons
+import { HorizontalSpacer } from './Spacer';
 
-const RowButton = ({ iconShow = true }) => {
+const RowButton = ({ iconShow = true, image1, label1, image2, label2,borderRadius,onPressFirstButton,onPressSecondButton }) => {
   return (
     <View style={styles.buttonRow}>
-      <TouchableOpacity style={[styles.buttonStyling]}>
-        {iconShow && (
-          <AntDesign name="apple1" size={15} color={colors.white} />  
-        )}
-        <Text style={styles.buttonText}>Apple</Text>
+      <TouchableOpacity onPress={onPressFirstButton} style={[styles.buttonStyling,{borderRadius:borderRadius}]}>
+        {iconShow && image1}
+        <HorizontalSpacer width={wp(3)} />
+        {label1}
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.buttonStyling}>
-        {iconShow && (
-          <AntDesign name="google" size={15} color={colors.white} />  
-        )}
-        <Text style={styles.buttonText}>Google</Text>
+      <TouchableOpacity onPress={onPressSecondButton} style={[styles.buttonStyling,{borderRadius:borderRadius}]}>
+        {iconShow && image2}
+        <HorizontalSpacer width={wp(3)} />
+        {label2}
       </TouchableOpacity>
     </View>
   );
@@ -29,27 +27,22 @@ export default RowButton;
 const styles = StyleSheet.create({
   buttonRow: {
     width: wp(80),
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   buttonStyling: {
     width: wp(38),
     paddingVertical: wp(4),
-    flexDirection: "row",
-    justifyContent: "center",  
-    alignItems: "center",  
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: colors.authButtonColor,
     borderRadius: wp(16.5),
   },
-  buttonText: {
-    color: colors.white,  
-    fontSize: 16,
-    fontWeight: '500',
+  labelText: {
+    fontSize: 14,
+    fontWeight: '400',
+    color: colors.white,
+    marginLeft: wp(3),
   },
-  buttonText:{
-    fontSize:14,
-    fontWeight:"400",
-    color:colors.white,
-    marginLeft:wp(3)
-  }
 });

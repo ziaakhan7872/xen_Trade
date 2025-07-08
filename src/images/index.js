@@ -37,6 +37,9 @@ const images = {
     Setting: require("../images/Setting.png"),
     dashboardGraph: require("../images/DummyImage/DashboardDummyGraph.png"),
     doughnutChart: require("../images/DummyImage/Doughnut.png"),
+    arrowUp: require("../images/arrowUp.png"),
+    arrowDown: require("../images/arrowDown.png"),
+
 
 
 }

@@ -7,8 +7,10 @@ import { colors } from '../../../../constants'
 import InputText from '../../../../components/InputText'
 import { SimpleButton } from '../../../../components/SimpleButton'
 import RowButton from '../../../../components/RowButton'
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { ResponsiveText } from '../../../../components/ResponsiveText';
 
-const LoginForm = ({signUp,Login}) => {
+const LoginForm = ({ signUp, Login }) => {
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode='contain' style={styles.logoImage} />
@@ -26,7 +28,13 @@ const LoginForm = ({signUp,Login}) => {
                 <Spacer />
                 <Text style={styles.signInWithStyle}>Or sign in with</Text>
                 <Spacer />
-                <RowButton />
+                <RowButton
+                    borderRadius={wp(16.5)}
+                    image1={<AntDesign name="apple1" size={16} color="white" />}
+                    label1={<ResponsiveText style={styles.labelText}>Apple</ResponsiveText>}
+                    image2={<AntDesign name="google" size={16} color="white" />}
+                    label2={<ResponsiveText style={styles.labelText}>Google</ResponsiveText>}
+                />
                 <Spacer />
                 <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                     <Text style={[styles.signInWithStyle, { fontSize: 14 }]}>Don't have an account?</Text>
@@ -70,6 +78,11 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         textAlign: "center",
         color: colors.iconColor
+    },
+      labelText: {
+        fontSize: 14,
+        fontWeight: '400',
+        color: colors.white,
     },
 
 

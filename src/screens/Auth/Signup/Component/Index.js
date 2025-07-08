@@ -9,9 +9,11 @@ import { SimpleButton } from '../../../../components/SimpleButton';
 import RowButton from '../../../../components/RowButton';
 import Icon from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/Ionicons';
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { ResponsiveText } from '../../../../components/ResponsiveText';
 
 
-const SignUpForm = ({ Login, isChecked, handleCheckboxToggle,handleEmailVerification }) => {
+const SignUpForm = ({ Login, isChecked, handleCheckboxToggle, handleEmailVerification }) => {
 
 
     return (
@@ -47,7 +49,14 @@ const SignUpForm = ({ Login, isChecked, handleCheckboxToggle,handleEmailVerifica
                 <Spacer />
                 <Text style={styles.signInWithStyle}>Or sign up with</Text>
                 <Spacer />
-                <RowButton />
+                <RowButton
+                    borderRadius={wp(16.5)}
+                    image1={<AntDesign name="apple1" size={16} color="white" />}
+                    label1={<ResponsiveText style={styles.labelText}>Apple</ResponsiveText>}
+                    image2={<AntDesign name="google" size={16} color="white" />}
+                    label2={<ResponsiveText style={styles.labelText}>Google</ResponsiveText>}
+                />
+
                 <Spacer />
                 <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                     <Text style={[styles.signInWithStyle, { fontSize: 14 }]}>Already have an account?</Text>
@@ -99,6 +108,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         marginBottom: hp(2),
+    },
+    labelText: {
+        fontSize: 14,
+        fontWeight: '400',
+        color: colors.white,
     },
 
 });
