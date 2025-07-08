@@ -43,3 +43,47 @@ export const coinData = [
   },
  
 ];
+
+export const AccountActivity =[
+  {
+    id:1,
+    type:"Buy",
+    date:"04/07/25",
+    time:"11:40 am",
+    marketOrder:"BTC/EUR",
+    amount:"0.001"
+  },
+    {
+    id:2,
+    type:"Sell",
+    date:"04/07/25",
+    time:"11:40 am",
+    marketOrder:"BTC/EUR",
+    amount:"0.001"
+  },
+   {
+    id:3,
+    type:"Buy",
+    date:"04/07/25",
+    time:"11:40 am",
+    marketOrder:"BTC/EUR",
+    amount:"0.001"
+  },
+    {
+    id:4,
+    type:"Sell",
+    date:"04/07/25",
+    time:"11:40 am",
+    marketOrder:"BTC/EUR",
+    amount:"0.001"
+  },
+    {
+    id:5,
+    type:"Buy",
+    date:"04/07/25",
+    time:"11:40 am",
+    marketOrder:"BTC/EUR",
+    amount:"0.001"
+  },
+
+]

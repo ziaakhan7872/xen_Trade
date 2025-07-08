@@ -26,12 +26,18 @@ const images = {
     clockIcon: require('../images/clockIcon.png'),
     infoIcon: require('../images/infoIcon.png'),
     checkBox: require('../images/checkBox.png'),
+    toggleSwitchOn: require('../images/toggleSwitchOn.png'),
+    toggleSwitchOff: require('../images/toggleSwitchOff.png'),
+    testQrImg: require('../images/testQrImg.png'),
     tickBoxes: require('../images/tickBoxes.png'),
-    home:require("../images/home.png"),
-    market:require("../images/Market.png"),
-    Exchange:require("../images/Exchange.png"),
-    Wallet:require("../images/Wallet.png"),
-    Setting:require("../images/Setting.png"),
+    home: require("../images/home.png"),
+    market: require("../images/Market.png"),
+    Exchange: require("../images/Exchange.png"),
+    Wallet: require("../images/Wallet.png"),
+    Setting: require("../images/Setting.png"),
+    dashboardGraph: require("../images/DummyImage/DashboardDummyGraph.png"),
+    doughnutChart: require("../images/DummyImage/Doughnut.png"),
+
 
 }
 export default images

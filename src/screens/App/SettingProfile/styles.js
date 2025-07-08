@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { wp, hp } from '../../../components/ResponsiveComponent'
 import { colors } from '../../../constants'
 
@@ -28,11 +28,13 @@ export const styles = StyleSheet.create({
         paddingLeft: wp(2),
     },
     imageProfileDescription: {
-        fontSize: 12,
-        letterSpacing: 0.5,
+        fontSize: Platform.OS === 'ios' ? 10.5 : 13,
+        letterSpacing: 0.2,
         color: colors.lightTextColor,
         marginTop: hp(1),
         paddingLeft: wp(2),
+        // lineHeight: hp(2.5),
+        textAlign: 'left',
     },
     inputLabel: {
         fontSize: 14,
@@ -47,7 +49,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: wp(5),
         padding: wp(3),
         borderColor: colors.borderColor,
-        borderWidth: 1,
+        borderWidth: 1.5,
         height: hp(6),
         color: colors.white,
         fontSize: 14,

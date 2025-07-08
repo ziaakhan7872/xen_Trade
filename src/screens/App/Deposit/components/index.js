@@ -205,7 +205,7 @@ export const useDepositNavigation = () => {
   const navigation = useNavigation();
   
   const handleDepositPress = () => {
-    navigation.navigate(Routes.AppNavigator, {screen: Routes.DepositHistory });
+    navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory });
   };
   
   return { handleDepositPress };

@@ -3,9 +3,10 @@ import './globals';
 import 'react-native-get-random-values';
 import 'whatwg-fetch';
 import React, { useEffect } from 'react'
-import Navigation from './src/navigation'
+// import Navigation from './src/navigation'
 import BootSplash from "react-native-bootsplash";
 import { LogBox, View } from 'react-native';
+import Navigation from './src/navigation';
 // import { Provider } from 'react-redux';
 // import { store } from './src/redux/store';
 

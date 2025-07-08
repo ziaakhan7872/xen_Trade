@@ -7,15 +7,13 @@ import Spacer from '../../../components/Spacer'
 import SettingOption from './Components'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { SimpleButton } from '../../../components/SimpleButton'
-import { hp, wp } from '../../../components/ResponsiveComponent'
+import { hp } from '../../../components/ResponsiveComponent'
 import { MainHeader } from '../../../components/MainHeader'
 import { appStyles } from '../../../utilities'
-import { useNavigation } from '@react-navigation/native';
 import { Routes } from '../../../constants'
 
 
-const settingMain = () => {
-    const navigation = useNavigation();
+const Settings = (props) => {
     return (
         <AuthMainContainer>
             {/* <Spacer height={hp(1)} /> */}
@@ -32,15 +30,15 @@ const settingMain = () => {
                     </View>
                 </View>
 
-                <SettingOption icon={images.profileSettingIcon} label='Profile' onPress={() => { navigation.navigate(Routes.settingProfile) }} />
+                <SettingOption icon={images.profileSettingIcon} label='Profile' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
                 <Spacer height={hp(1)} />
-                <SettingOption icon={images.securitySettingIcon} label='Security' onPress={() => { navigation.navigate(Routes.settingProfile) }} />
+                <SettingOption icon={images.securitySettingIcon} label='Security' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingSecurity }) }} />
                 <Spacer height={hp(1)} />
-                <SettingOption icon={images.systemSettingIcon} label='System Settings' onPress={() => { navigation.navigate(Routes.settingProfile) }} />
+                <SettingOption icon={images.systemSettingIcon} label='System Settings' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
                 <Spacer height={hp(1)} />
-                <SettingOption icon={images.addressSettingIcon} label='Address Book' onPress={() => { navigation.navigate(Routes.settingProfile) }} />
+                <SettingOption icon={images.addressSettingIcon} label='Address Book' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
                 <Spacer height={hp(1)} />
-                <SettingOption icon={images.emailNotificationSettingIcon} label='Email Notifications' onPress={() => { navigation.navigate(Routes.settingProfile) }} />
+                <SettingOption icon={images.emailNotificationSettingIcon} label='Email Notifications' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
             </View>
 
             <View style={styles.btnView}>
@@ -50,4 +48,4 @@ const settingMain = () => {
     )
 }
 
-export default settingMain
+export default Settings

@@ -2,13 +2,17 @@ import HomeScreen from "./Home/HomeScreen";
 import MarketScreen from "./Market/MarketScreen";
 import Exchangescreen from "./Exchange/Exchangescreen";
 import WalletScreen from "./Wallet/WalletScreen";
-import settingMain from "./Settings/settingMain";
-import settingProfile from "./SettingProfile/SettingProfile";
 import WalletHome from "./Deposit/WalletHome";
 import DepositHistory from "./DepositHistory/DepositHistory";
+import settingSecurity from "./SettingSecurity/SettingSecurity";
+import twoFactorAuth from "./TwoFactorAuth/TwoFactorAuth";
+import Settings from "./Settings/Settings";
+import changePassword from "./ChangePassword/ChangePassword";
+import antiPhishingCode from "./AntiPhishingCode/AntiPhishingCode";
+import SettingProfile from "./SettingProfile/SettingProfile";
 
 export {
-     HomeScreen, settingMain, settingProfile, WalletHome, DepositHistory,MarketScreen,Exchangescreen,WalletScreen
+     HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen, Exchangescreen, WalletScreen, changePassword, antiPhishingCode,
 }
 
 
