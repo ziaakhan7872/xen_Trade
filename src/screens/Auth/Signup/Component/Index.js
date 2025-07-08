@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/Ionicons';
 
 
-const SignUpForm = ({ Login, isChecked, handleCheckboxToggle,handleEmailVerification }) => {
+const SignUpForm = ({ Login, isChecked, handleCheckboxToggle, handleEmailVerification }) => {
 
 
     return (

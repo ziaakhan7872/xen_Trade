@@ -19,4 +19,5 @@ export const Routes = {
     twoFactorAuth: "twoFactorAuth",
     changePassword: "changePassword",
     antiPhishingCode: "antiPhishingCode",
+    settingSystem: "settingSystem",
 }
