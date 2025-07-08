@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Routes } from '../../constants';
-import * as App from '../../screens/App/Index'; // Import all screens from App folder
+import App from '../../../App';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -18,8 +18,6 @@ const AppNavigation = () => {
             <Screen name={Routes.antiPhishingCode} component={App.antiPhishingCode} />
             {/* <Stack.Screen name={Routes.BottomNavigator} component={BottomNavigation} /> */}
 
-            {/* <Screen name={Routes.WalletHome} component={WalletHome} />
-            <Screen name={Routes.DepositHistory} component={DepositHistory} /> */}
 
         </Navigator>
     );

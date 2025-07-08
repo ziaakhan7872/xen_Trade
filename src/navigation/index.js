@@ -13,7 +13,7 @@ const Navigation = () => {
         <Stack.Screen name={Routes.AuthNavigator} component={AuthNavigation} />
         <Stack.Screen name={Routes.AppNavigator} component={AppNavigation} />
         <Stack.Screen name={Routes.BottomNavigator} component={BottomNavigation} />
-                <Stack.Screen name={Routes.AppNavigator} component={AppNavigation} />
+        {/* <Stack.Screen name={Routes.AppNavigator} component={AppNavigation} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
