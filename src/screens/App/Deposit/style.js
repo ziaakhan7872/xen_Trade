@@ -76,9 +76,9 @@ marginRight: wp(1.5),
     color: colors.iconColor,
   },
   searchIcon: {
-   height: wp(4.5),
-    width: wp(4.5),
-   
+ width: wp(4),
+    height: wp(4),
+    
   },
   cryptoItem: {
     flexDirection: 'row',
@@ -147,16 +147,5 @@ marginRight: wp(1.5),
     textFontSize: 16,
     height: hp(6),
     borderRadius: 25,
-  },
-  searchIconButton:{
-    paddingHorizontal: wp(3),
-  },
-  searchInput: {
-    flex: 1,
-    color: colors.white,
-    paddingHorizontal: wp(3),
-    paddingVertical: hp(1.2),
-    fontFamily: fontFamily.appTextRegular,
-    fontSize: 14,
   },
 });

@@ -5,6 +5,7 @@ import { Routes } from "../constants";
 import BottomNavigation from "./BottomNavigation/BottomNavigation";
 import AppNavigation from "./AppNavigation/AppNavigation";
 
+
 const Navigation = () => {
   const Stack = createNativeStackNavigator()
   return (
@@ -13,7 +14,7 @@ const Navigation = () => {
         <Stack.Screen name={Routes.AuthNavigator} component={AuthNavigation} />
         <Stack.Screen name={Routes.AppNavigator} component={AppNavigation} />
         <Stack.Screen name={Routes.BottomNavigator} component={BottomNavigation} />
-        {/* <Stack.Screen name={Routes.AppNavigator} component={AppNavigation} /> */}
+     
       </Stack.Navigator>
     </NavigationContainer>
   );

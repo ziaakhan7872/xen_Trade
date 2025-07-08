@@ -38,6 +38,12 @@ const images = {
     dashboardGraph: require("../images/DummyImage/DashboardDummyGraph.png"),
     doughnutChart: require("../images/DummyImage/Doughnut.png"),
     checkMark: require("../images/checkMark.png"),
+    arrowUp: require("../images/arrowUp.png"),
+    arrowDown: require("../images/arrowDown.png"),
+    Refeeral: require("../images/Referral.png"),
+    Deposit: require("../images/Deposit.png"),
+
+
 
 }
 export default images

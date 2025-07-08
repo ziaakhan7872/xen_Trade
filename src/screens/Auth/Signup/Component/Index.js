@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import images from '../../../../images';
@@ -9,6 +9,8 @@ import { SimpleButton } from '../../../../components/SimpleButton';
 import RowButton from '../../../../components/RowButton';
 import Icon from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/Ionicons';
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { ResponsiveText } from '../../../../components/ResponsiveText';
 
 
 const SignUpForm = ({ Login, isChecked, handleCheckboxToggle, handleEmailVerification }) => {
@@ -18,7 +20,7 @@ const SignUpForm = ({ Login, isChecked, handleCheckboxToggle, handleEmailVerific
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode="contain" style={styles.logoImage} />
             <Spacer />
-            <Text style={styles.titleText}>LOG INTO XEN TRADE</Text>
+            <ResponsiveText style={styles.titleText}>WELCOME TO XEN TRADE</ResponsiveText>
             <Spacer />
             <View>
                 <InputText label={"Email Address"} placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
@@ -37,21 +39,30 @@ const SignUpForm = ({ Login, isChecked, handleCheckboxToggle, handleEmailVerific
                         )}
                     </TouchableOpacity>
                     <HorizontalSpacer width={wp(3)} />
-                    <Text style={styles.PrivacyPolicyText}>
+                    <ResponsiveText style={styles.PrivacyPolicyText}>
                         By creating an account, I agree to Xen Trade's Terms of Service and Privacy Policy.
-                    </Text>
+                    </ResponsiveText>
                 </View>
 
                 <Spacer />
                 <SimpleButton onPress={handleEmailVerification} textFontSize={14} text={"Sign Up"} textColor={colors.buttonSigninColor} backgroundColor={colors.authButtonColor} buttonWidth={wp(80)} />
                 <Spacer />
-                <Text style={styles.signInWithStyle}>Or sign up with</Text>
+                <ResponsiveText style={styles.signInWithStyle}>Or sign up with</ResponsiveText>
                 <Spacer />
-                <RowButton />
+                <RowButton
+                    buttonWidth={wp(38)}
+                    buttonBackGroundColor={colors.authButtonColor}
+                    borderRadius={wp(16.5)}
+                    image1={<AntDesign name="apple1" size={16} color="white" />}
+                    label1={<ResponsiveText style={styles.labelText}>Apple</ResponsiveText>}
+                    image2={<AntDesign name="google" size={16} color="white" />}
+                    label2={<ResponsiveText style={styles.labelText}>Google</ResponsiveText>}
+                />
+
                 <Spacer />
                 <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                    <Text style={[styles.signInWithStyle, { fontSize: 14 }]}>Already have an account?</Text>
-                    <Text onPress={Login} style={[styles.forgetPasswordStyling, { fontSize: 14 }]}>Sign In</Text>
+                    <ResponsiveText style={[styles.signInWithStyle, { fontSize: 14 }]}>Already have an account?</ResponsiveText>
+                    <ResponsiveText onPress={Login} style={[styles.forgetPasswordStyling, { fontSize: 14 }]}>Sign In</ResponsiveText>
                 </View>
             </View>
         </View>
@@ -93,12 +104,17 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: "400",
         color: colors.white,
-        width: wp(80)
+        width: wp(70)
     },
     checkboxContainer: {
         flexDirection: "row",
         alignItems: "center",
         marginBottom: hp(2),
+    },
+    labelText: {
+        fontSize: 14,
+        fontWeight: '400',
+        color: colors.white,
     },
 
 });
