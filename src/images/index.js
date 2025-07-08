@@ -35,6 +35,9 @@ const images = {
     Exchange: require("../images/Exchange.png"),
     Wallet: require("../images/Wallet.png"),
     Setting: require("../images/Setting.png"),
+    dashboardGraph: require("../images/DummyImage/DashboardDummyGraph.png"),
+    doughnutChart: require("../images/DummyImage/Doughnut.png"),
+
 
 }
 export default images

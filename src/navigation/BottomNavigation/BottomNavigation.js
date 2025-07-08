@@ -118,8 +118,8 @@ const BottomNavigation = () => {
                 }}
             />
              <Screen
-                name={Routes.WalletScreen}
-                component={App.WalletScreen}
+                name={Routes.WalletHome}
+                component={App.WalletHome}
                 options={{
                      tabBarButton: (props) => (
                         <TouchableOpacity
