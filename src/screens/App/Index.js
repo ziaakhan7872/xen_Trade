@@ -7,7 +7,7 @@ import WalletHome from "./Deposit/WalletHome";
 import DepositHistory from "./DepositHistory/DepositHistory";
 import settingSecurity from "./SettingSecurity/SettingSecurity";
 import twoFactorAuth from "./TwoFactorAuth/TwoFactorAuth";
-import settingMain from "./Settings/SettingMain";
+import settingMain from "./Settings/settingMain";
 
 export {
      HomeScreen, settingMain, twoFactorAuth, settingSecurity, settingProfile, WalletHome, DepositHistory, MarketScreen, Exchangescreen, WalletScreen

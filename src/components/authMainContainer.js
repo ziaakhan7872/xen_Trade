@@ -1,51 +1,54 @@
-import { ImageBackground, Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import React from 'react';
-import images from '../images';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { wp, hp } from './ResponsiveComponent';
-import { colors } from '../constants';
+import LinearGradient from 'react-native-linear-gradient';
+
 export const AuthMainContainer = ({
   style,
   containerStyle,
   children,
-  paddingHorizontal
+  paddingHorizontal = 0
 }) => {
   return (
     <>
       <StatusBar translucent backgroundColor="transparent" barStyle="light-content" />
-      {/* <ImageBackground
-        source={images.authBgImage}
-        resizeMode="cover"
-        style={styles.imageBackground}
-      > */}
-      
+
+      {/* Gradient Background */}
+      <LinearGradient
+        colors={['#0a2a2f', '#010f10']} // Top: dark teal, Bottom: blackish
+        locations={[0, 0.5]}            // Move blackish color up slightly (was 0.9 before)
+        start={{ x: 0.5, y: 0 }}
+        end={{ x: 0.5, y: 1 }}
+        style={styles.linearGradient}
+      >
+
         <SafeAreaView style={[styles.safeArea, style]}>
           <View
             style={[
               styles.container,
-              {
-                paddingHorizontal: paddingHorizontal ?? wp(0),
-              },
+              { paddingHorizontal: wp(paddingHorizontal) },
               containerStyle,
             ]}
           >
             {children}
           </View>
         </SafeAreaView>
+      </LinearGradient>
     </>
   );
 };
+
 const styles = StyleSheet.create({
-  imageBackground: {
+  linearGradient: {
     flex: 1,
     width: wp(100),
-    height: hp(120),
+    height: hp(100),
   },
   safeArea: {
     flex: 1,
-    backgroundColor:colors.backGroundCOlor
   },
   container: {
     flex: 1,
   },
-})
+});
