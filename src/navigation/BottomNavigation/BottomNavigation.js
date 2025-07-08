@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors, Routes } from '../../constants';
-import * as App from '../../screens/App/Index';
+import * as App from '../../screens/App';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // Import Ionicons or another icon set
 import AntDesign from 'react-native-vector-icons/AntDesign'; // Import Ionicons or another icon set
 import { Image, StyleSheet, TouchableOpacity, View, Text } from 'react-native';

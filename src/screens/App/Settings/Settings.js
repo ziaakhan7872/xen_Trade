@@ -31,15 +31,14 @@ const Settings = (props) => {
                 </View>
 
                 <SettingOption icon={images.profileSettingIcon} label='Profile' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
-                {/* <SettingOption icon={images.profileSettingIcon} label='Profile' onPress={() => { props.navigation.navigate(Routes.settingProfile) }} /> */}
                 <Spacer height={hp(1)} />
-                {/* <SettingOption icon={images.securitySettingIcon} label='Security' onPress={() => { navigation.navigate(Routes.AppNavigator, { screen: Routes.settingSecurity }) }} /> */}
-
-                {/* <SettingOption icon={images.systemSettingIcon} label='System Settings' onPress={() => { navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} /> */}
+                <SettingOption icon={images.securitySettingIcon} label='Security' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingSecurity }) }} />
                 <Spacer height={hp(1)} />
-                {/* <SettingOption icon={images.addressSettingIcon} label='Address Book' onPress={() => { navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} /> */}
+                <SettingOption icon={images.systemSettingIcon} label='System Settings' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
                 <Spacer height={hp(1)} />
-                {/* <SettingOption icon={images.emailNotificationSettingIcon} label='Email Notifications' onPress={() => { navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} /> */}
+                <SettingOption icon={images.addressSettingIcon} label='Address Book' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
+                <Spacer height={hp(1)} />
+                <SettingOption icon={images.emailNotificationSettingIcon} label='Email Notifications' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
             </View>
 
             <View style={styles.btnView}>
