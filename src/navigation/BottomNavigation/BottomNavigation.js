@@ -18,7 +18,7 @@ const BottomNavigation = () => {
                 headerShown: false,
                 tabBarStyle: {
                     paddingTop: hp(0.9),
-                    backgroundColor: colors.bottomTabColor, 
+                    backgroundColor: colors.bottomTabColor,
                     borderTopWidth: 0,
                 },
                 tabBarActiveTintColor: colors.mainColor,
@@ -48,7 +48,7 @@ const BottomNavigation = () => {
                                 style={[styles.iconSize, { tintColor: focused ? colors.mainColor : colors.iconColor }]}
                                 resizeMode={'contain'}
                             />
-                            <Spacer height={hp(0.7)}/>
+                            <Spacer height={hp(0.7)} />
                             {/* <Text style={{ color: focused ? colors.mainColor : colors.iconColor, fontSize: 10 }} numberOfLines={1}>
                                 Home
                             </Text> */}
@@ -61,7 +61,7 @@ const BottomNavigation = () => {
                 name={Routes.MarketScreen}
                 component={App.MarketScreen}
                 options={{
-                     tabBarButton: (props) => (
+                    tabBarButton: (props) => (
                         <TouchableOpacity
                             {...props}
                             activeOpacity={1}
@@ -80,18 +80,18 @@ const BottomNavigation = () => {
                                 style={[styles.iconSize, { tintColor: focused ? colors.mainColor : colors.iconColor }]}
                                 resizeMode={'contain'}
                             />
-                            <Spacer height={hp(0.7)}/>
-                            
+                            <Spacer height={hp(0.7)} />
+
                         </View>
                     ),
-                     tabBarLabel: 'Markets',// Remove the default label for this tab
+                    tabBarLabel: 'Markets',// Remove the default label for this tab
                 }}
             />
             <Screen
                 name={Routes.ExchangeScreen}
                 component={App.Exchangescreen}
                 options={{
-                     tabBarButton: (props) => (
+                    tabBarButton: (props) => (
                         <TouchableOpacity
                             {...props}
                             activeOpacity={1}
@@ -110,18 +110,18 @@ const BottomNavigation = () => {
                                 style={[styles.iconSize, { tintColor: focused ? colors.mainColor : colors.iconColor }]}
                                 resizeMode={'contain'}
                             />
-                            <Spacer height={hp(0.7)}/>
-                            
+                            <Spacer height={hp(0.7)} />
+
                         </View>
                     ),
-                     tabBarLabel: 'Exchange',// Remove the default label for this tab
+                    tabBarLabel: 'Exchange',// Remove the default label for this tab
                 }}
             />
-             <Screen
+            <Screen
                 name={Routes.WalletHome}
                 component={App.WalletHome}
                 options={{
-                     tabBarButton: (props) => (
+                    tabBarButton: (props) => (
                         <TouchableOpacity
                             {...props}
                             activeOpacity={1}
@@ -140,18 +140,18 @@ const BottomNavigation = () => {
                                 style={[styles.iconSize, { tintColor: focused ? colors.mainColor : colors.iconColor }]}
                                 resizeMode={'contain'}
                             />
-                            <Spacer height={hp(0.7)}/>
-                            
+                            <Spacer height={hp(0.7)} />
+
                         </View>
                     ),
-                     tabBarLabel: 'Wallets',// Remove the default label for this tab
+                    tabBarLabel: 'Wallets',// Remove the default label for this tab
                 }}
             />
-                         <Screen
-                name={Routes.settingMain}
-                component={App.settingMain}
+            <Screen
+                name={Routes.settings}
+                component={App.Settings}
                 options={{
-                     tabBarButton: (props) => (
+                    tabBarButton: (props) => (
                         <TouchableOpacity
                             {...props}
                             activeOpacity={1}
@@ -170,11 +170,11 @@ const BottomNavigation = () => {
                                 style={[styles.iconSize, { tintColor: focused ? colors.mainColor : colors.iconColor }]}
                                 resizeMode={'contain'}
                             />
-                            <Spacer height={hp(0.7)}/>
-                            
+                            <Spacer height={hp(0.7)} />
+
                         </View>
                     ),
-                     tabBarLabel: 'Settings',// Remove the default label for this tab
+                    tabBarLabel: 'Settings',// Remove the default label for this tab
                 }}
             />
         </Navigator>

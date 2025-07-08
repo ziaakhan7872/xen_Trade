@@ -12,7 +12,7 @@ export const Routes = {
     ExchangeScreen: "ExchangeScreen",
     WalletScreen: "WalletScreen",
     WalletHome: "WalletHome",
-    settingMain: "settingMain",
+    settings: "settings",
     settingProfile: "settingProfile",
     DepositHistory: "DepositHistory",
     settingSecurity: "settingSecurity",

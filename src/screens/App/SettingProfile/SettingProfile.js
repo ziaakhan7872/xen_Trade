@@ -11,13 +11,11 @@ import { SimpleButton } from '../../../components/SimpleButton'
 import { hp, wp } from '../../../components/ResponsiveComponent'
 import DropDown from './Components/dropDown'
 import { colors, Routes } from '../../../constants'
-import { useNavigation } from '@react-navigation/native'
 import TextInputField from '../../../components/TextInputField'
-import useSettingProfile from './Hooks'
 
-const settingProfile = () => {
-    //const { openGallery } = useSettingProfile()
-    const navigation = useNavigation()
+const SettingProfile = (props) => {
+    // const { openGallery } = useSettingProfile()
+    // const navigation = useNavigation()
     const [currency, setCurrency] = useState('usd')
     const currencyItems = [
         { label: 'USD', value: 'usd' },
@@ -29,7 +27,7 @@ const settingProfile = () => {
     return (
         <AuthMainContainer>
             <View style={styles.containerMain}>
-                <MainHeader leftImage={images.backArrow} title='PROFILE' onBackPress={() => { navigation.goBack() }} />
+                <MainHeader leftImage={images.backArrow} title='PROFILE' onBackPress={() => props.navigation.goBack()} />
                 <Spacer />
 
                 <View style={styles.profileCard}>
@@ -42,7 +40,7 @@ const settingProfile = () => {
                                 We recommend to upload images in{'\n'}500x500 resolution. Max 5 MB in JPEG{'\n'}or PNG format
                             </ResponsiveText>
                             <Spacer />
-                            <SimpleButton text="Upload Image" styleView={styles.btnUploadImg} onPress={() => { openGallery() }} />
+                            <SimpleButton text="Upload Image" styleView={styles.btnUploadImg} onPress={() => { }} />
                         </View>
                     </View>
                 </View>
@@ -79,4 +77,4 @@ const settingProfile = () => {
     )
 }
 
-export default settingProfile
+export default SettingProfile

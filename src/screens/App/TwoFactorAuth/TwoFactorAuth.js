@@ -1,11 +1,11 @@
-import { View, Image, TextInput } from 'react-native';
+import { View, Image } from 'react-native';
 import React from 'react';
 import { AuthMainContainer } from '../../../components/authMainContainer';
 import { MainHeader } from '../../../components/MainHeader';
 import { styles } from './styles';
 import images from '../../../images';
 import { useNavigation } from '@react-navigation/native';
-import { colors, Routes } from '../../../constants';
+import { colors } from '../../../constants';
 import { ResponsiveText } from '../../../components/ResponsiveText';
 import Spacer from '../../../components/Spacer';
 import { hp } from '../../../components/ResponsiveComponent';
