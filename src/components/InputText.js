@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "300",
         backgroundColor: colors.InputTextCOlor,
-        width: wp(80)
+        width: wp(80),
+        color:colors.white
     },
     iconContainer: {
         position: "absolute",

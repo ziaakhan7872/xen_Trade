@@ -39,6 +39,8 @@ const images = {
     doughnutChart: require("../images/DummyImage/Doughnut.png"),
     arrowUp: require("../images/arrowUp.png"),
     arrowDown: require("../images/arrowDown.png"),
+    Refeeral: require("../images/Referral.png"),
+    Deposit: require("../images/Deposit.png"),
 
 
 
