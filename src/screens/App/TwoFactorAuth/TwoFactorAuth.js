@@ -11,6 +11,7 @@ import Spacer from '../../../components/Spacer';
 import { hp } from '../../../components/ResponsiveComponent';
 import { SimpleButton } from '../../../components/SimpleButton';
 import { appStyles } from '../../../utilities';
+import TextInputField from '../../../components/TextInputField';
 
 const TwoFactorAuth = () => {
     const navigation = useNavigation();
@@ -18,7 +19,7 @@ const TwoFactorAuth = () => {
     return (
         <AuthMainContainer>
             <View style={styles.containerMain}>
-                <MainHeader leftImage={images.backArrow} title='2-FACTOR AUTHENTICATION' onBackPress={() => navigation.navigate(Routes.settingMain)} />
+                <MainHeader leftImage={images.backArrow} title='2-FACTOR AUTHENTICATION' onBackPress={() => navigation.goBack()} />
 
                 <Spacer height={hp(3)} />
 
@@ -38,12 +39,7 @@ const TwoFactorAuth = () => {
                 <Spacer height={hp(3)} />
 
                 <ResponsiveText style={styles.inputLabel}>Enter code from 2-FA app</ResponsiveText>
-                <TextInput
-                    placeholder="Enter code"
-                    placeholderTextColor={colors.placeHolderTextColor}
-                    style={styles.inputField}
-                    keyboardType="numeric"
-                />
+                <TextInputField placeholder={'Enter Code'} />
 
                 <Spacer height={hp(20)} />
 

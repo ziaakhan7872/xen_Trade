@@ -39,17 +39,6 @@ export const styles = StyleSheet.create({
         marginBottom: hp(0.7),
         color: colors.white,
     },
-    inputField: {
-        backgroundColor: colors.inputBgColor,
-        borderRadius: wp(3),
-        paddingVertical: hp(1.5),
-        paddingHorizontal: wp(5),
-        padding: wp(3),
-        borderColor: colors.borderColor,
-        borderWidth: 1.5,
-        height: hp(6),
-        fontSize: 14,
-    },
     buttonRow: {
         paddingHorizontal: wp(3),
     },

@@ -32,9 +32,9 @@ const settingMain = () => {
                     </View>
                 </View>
 
-                <SettingOption icon={images.profileSettingIcon} label='Profile' onPress={() => { navigation.navigate(Routes.settingProfile) }} />
+                <SettingOption icon={images.profileSettingIcon} label='Profile' onPress={() => { navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
                 <Spacer height={hp(1)} />
-                <SettingOption icon={images.securitySettingIcon} label='Security' onPress={() => { navigation.navigate(Routes.settingSecurity) }} />
+                <SettingOption icon={images.securitySettingIcon} label='Security' onPress={() => { navigation.navigate(Routes.AppNavigator, { screen: Routes.settingSecurity }) }} />
                 <Spacer height={hp(1)} />
                 <SettingOption icon={images.systemSettingIcon} label='System Settings' onPress={() => { navigation.navigate(Routes.settingProfile) }} />
                 <Spacer height={hp(1)} />

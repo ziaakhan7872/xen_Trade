@@ -1,4 +1,3 @@
-
 export const Routes = {
     AuthNavigator: "AuthNavigator",
     AppNavigator: "AppNavigator",
@@ -18,4 +17,6 @@ export const Routes = {
     DepositHistory: "DepositHistory",
     settingSecurity: "settingSecurity",
     twoFactorAuth: "twoFactorAuth",
+    changePassword: "changePassword",
+    antiPhishingCode: "antiPhishingCode",
 }

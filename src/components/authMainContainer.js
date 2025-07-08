@@ -18,20 +18,20 @@ export const AuthMainContainer = ({
         resizeMode="cover"
         style={styles.imageBackground}
       > */}
-      
-        <SafeAreaView style={[styles.safeArea, style]}>
-          <View
-            style={[
-              styles.container,
-              {
-                paddingHorizontal: paddingHorizontal ?? wp(0),
-              },
-              containerStyle,
-            ]}
-          >
-            {children}
-          </View>
-        </SafeAreaView>
+
+      <SafeAreaView style={[styles.safeArea, style]}>
+        <View
+          style={[
+            styles.container,
+            {
+              paddingHorizontal: paddingHorizontal ?? wp(0),
+            },
+            containerStyle,
+          ]}
+        >
+          {children}
+        </View>
+      </SafeAreaView>
     </>
   );
 };
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
-    backgroundColor:colors.backGroundCOlor
+    backgroundColor: colors.backGroundCOlor
   },
   container: {
     flex: 1,

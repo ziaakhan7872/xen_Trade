@@ -8,9 +8,11 @@ import DepositHistory from "./DepositHistory/DepositHistory";
 import settingSecurity from "./SettingSecurity/SettingSecurity";
 import twoFactorAuth from "./TwoFactorAuth/TwoFactorAuth";
 import settingMain from "./Settings/SettingMain";
+import changePassword from "./ChangePassword/ChangePassword";
+import antiPhishingCode from "./AntiPhishingCode/AntiPhishingCode";
 
 export {
-     HomeScreen, settingMain, twoFactorAuth, settingSecurity, settingProfile, WalletHome, DepositHistory, MarketScreen, Exchangescreen, WalletScreen
+     HomeScreen, settingMain, twoFactorAuth, settingSecurity, settingProfile, WalletHome, DepositHistory, MarketScreen, Exchangescreen, WalletScreen, changePassword, antiPhishingCode,
 }
 
 

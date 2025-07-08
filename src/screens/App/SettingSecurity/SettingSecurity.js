@@ -20,14 +20,14 @@ const settingSecurity = (props) => {
     return (
         <AuthMainContainer>
             <View style={styles.containerMain}>
-                <MainHeader leftImage={images.backArrow} title='SECURITY' onBackPress={() => { props?.navigation.navigate(Routes.settingMain) }} />
+                <MainHeader leftImage={images.backArrow} title='SECURITY' onBackPress={() => { props?.navigation.goBack() }} />
 
                 <Spacer height={hp(4)} />
                 <SecurityOptions label='2-Factor Authentication' rightArrow={images.rightArrow} onPress={() => { props?.navigation.navigate(Routes.twoFactorAuth) }} />
                 <Spacer height={hp(1)} />
-                <SecurityOptions label='Change Password' rightArrow={images.rightArrow} onPress={() => { }} />
+                <SecurityOptions label='Change Password' rightArrow={images.rightArrow} onPress={() => { props?.navigation.navigate(Routes.changePassword) }} />
                 <Spacer height={hp(1)} />
-                <SecurityOptions label='Anti-Phishing Code' rightArrow={images.rightArrow} onPress={() => { }} />
+                <SecurityOptions label='Anti-Phishing Code' rightArrow={images.rightArrow} onPress={() => { props?.navigation.navigate(Routes.antiPhishingCode) }} />
                 <Spacer height={hp(1)} />
                 <SecurityOptions toggleText='Unlock Biometric' isEnabled={isBiometricEnabled} setIsEnabled={setIsBiometricEnabled} />
                 <Spacer height={hp(1)} />
