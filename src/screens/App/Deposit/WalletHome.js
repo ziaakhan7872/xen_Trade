@@ -10,12 +10,14 @@ import { ResponsiveText } from "../../../components/ResponsiveText"
 import { colors } from "../../../constants"
 import images from "../../../images"
 import { appStyles } from "../../../utilities"
+import useHomeScreen from "./Hooks"
 
 
 
 const WalletHome = () => {
-  const [selectedCrypto, setSelectedCrypto] = useState(null);
-  const cryptoSheetRef = useRef();
+ const{selectedCrypto,
+    setSelectedCrypto,
+    cryptoSheetRef} = useHomeScreen();
   const { handleDepositPress } = useDepositNavigation();
   
   return (
