@@ -1,3 +1,5 @@
+import { DepositHistory } from "../../screens/App/Index";
+
 export const Routes = {
     AuthNavigator: "AuthNavigator",
     AppNavigator: "AppNavigator",
@@ -19,4 +21,7 @@ export const Routes = {
     twoFactorAuth: "twoFactorAuth",
     changePassword: "changePassword",
     antiPhishingCode: "antiPhishingCode",
+    SelectNetwork: "SelectNetwork",
+    Barcode: "Barcode",
+    Deposit: "Deposit",
 }

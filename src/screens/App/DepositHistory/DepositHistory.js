@@ -21,7 +21,7 @@ const DepositHistory = () => {
   };
 
   return (
-    <AuthMainContainer  paddingHorizontal={wp(3)}>
+    <AuthMainContainer  >
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>

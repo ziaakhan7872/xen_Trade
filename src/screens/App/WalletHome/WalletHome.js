@@ -19,13 +19,12 @@ const WalletHome = () => {
     setSelectedCrypto,
     cryptoSheetRef} = useHomeScreen();
   const { handleDepositPress } = useDepositNavigation();
-  
+
   return (
-    <AuthMainContainer 
-      paddingHorizontal={wp(4)}>
-      <Spacer height={hp(3)} />
+    <AuthMainContainer paddingHorizontal={wp(1)}>
+      <Spacer height={hp(2)} />
       <DepositWalletShowDetails />
-      <Spacer height={hp(3)} />
+      <Spacer height={hp(2.5)} />
 
       {/* Action Buttons */}
       <View style={appStyles.row}>
@@ -36,22 +35,23 @@ const WalletHome = () => {
           buttonWidth={wp(44)}
           borderWidth={1}
           borderColor={colors.mainColor}
-          fontSize={16}
-          height={hp(6)}
-          borderRadius={25}
+          fontSize={15}
+          height={hp(5.5)}
+          borderRadius={30}
           onPress={handleDepositPress}
+      
         />
         <SimpleButton 
           text="Withdraw"
           textColor={colors.white}
           backgroundColor={colors.mainColor}
           buttonWidth={wp(44)}
-          fontSize={16}
-          height={hp(6)}
-          borderRadius={25} 
+          fontSize={15}
+          height={hp(5.5)}
+          borderRadius={30}
         />
       </View>
-      <Spacer height={hp(3)} />
+      <Spacer height={hp(3.5)} />
 
       {/* Portfolio Section */}
       <View style={appStyles.row}>
@@ -61,16 +61,17 @@ const WalletHome = () => {
           source={images.checkBox}
           resizeMode="contain"
           style={styles.checkBox}
-
         />
-          <ResponsiveText style={styles.hideBalances}> Hide 0 Balances</ResponsiveText>
-           <Image
+          <ResponsiveText style={styles.hideBalances}>Hide 0 Balances</ResponsiveText>
+          <Spacer width={wp(2)} />
+          <Image
           source={images.clockIcon}
+          style={{width: wp(4), height: wp(4)}}
           resizeMode="contain"
         />
         </View>
       </View>
-      <Spacer  />
+      <Spacer height={hp(1.5)} />
 
       {/* Search Bar */}
       <TouchableOpacity 

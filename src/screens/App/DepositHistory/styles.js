@@ -13,7 +13,8 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: hp(2)
+        marginBottom: hp(2),
+        
     },
     headerTitle: {
         color: colors.white,

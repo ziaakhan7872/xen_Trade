@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Routes } from '../../constants';
-import * as App from '../../screens/App';
+import * as App from '../../screens/App/Index';
 const { Navigator, Screen } = createNativeStackNavigator();
 
 const AppNavigation = () => {
@@ -14,6 +14,8 @@ const AppNavigation = () => {
             <Screen name={Routes.twoFactorAuth} component={App.twoFactorAuth} />
             <Screen name={Routes.changePassword} component={App.changePassword} />
             <Screen name={Routes.antiPhishingCode} component={App.antiPhishingCode} />
+            <Screen name={Routes.SelectNetwork} component={App.SelectNetwork} />
+            <Screen name={Routes.Barcode} component={App.Barcode} />
             <Screen name={Routes.Home} component={App.HomeScreen} />
         </Navigator>
     );
