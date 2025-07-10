@@ -42,8 +42,7 @@ const images = {
     arrowDown: require("../images/arrowDown.png"),
     Refeeral: require("../images/Referral.png"),
     Deposit: require("../images/Deposit.png"),
-
-
-
+    copyIcon: require("../images/copyIcon.png"),
+    ethIcon: require("../images/ethIcon.png"),
 }
 export default images

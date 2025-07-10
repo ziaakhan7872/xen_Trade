@@ -36,7 +36,7 @@ const Settings = (props) => {
                 <Spacer height={hp(1)} />
                 <SettingOption icon={images.systemSettingIcon} label='System Settings' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingSystem }) }} />
                 <Spacer height={hp(1)} />
-                <SettingOption icon={images.addressSettingIcon} label='Address Book' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
+                <SettingOption icon={images.addressSettingIcon} label='Address Book' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.addressBook }) }} />
                 <Spacer height={hp(1)} />
                 <SettingOption icon={images.emailNotificationSettingIcon} label='Email Notifications' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
             </View>

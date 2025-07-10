@@ -3,6 +3,8 @@ import { useState } from 'react'
 export const useSettingSystem = () => {
     const [language, setLanguage] = useState('ENG (US)')
     const [timezone, setTimezone] = useState('New York (EST)')
+    const [isLanguageOpen, setIsLanguageOpen] = useState(false)
+    const [isTimezoneOpen, setIsTimezoneOpen] = useState(false)
 
     const languageItems = [
         { label: 'ENG (US)', value: 'ENG (US)' },
@@ -18,6 +20,8 @@ export const useSettingSystem = () => {
 
     return {
         language, setLanguage, languageItems,
-        timezone, setTimezone, timezoneItems
+        timezone, setTimezone, timezoneItems,
+        isLanguageOpen, setIsLanguageOpen,
+        isTimezoneOpen, setIsTimezoneOpen
     }
 }

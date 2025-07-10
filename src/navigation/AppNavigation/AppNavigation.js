@@ -15,6 +15,8 @@ const AppNavigation = () => {
             <Screen name={Routes.changePassword} component={App.changePassword} />
             <Screen name={Routes.antiPhishingCode} component={App.antiPhishingCode} />
             <Screen name={Routes.settingSystem} component={App.SettingSystem} />
+            <Screen name={Routes.addressBook} component={App.AddressBook} />
+            <Screen name={Routes.addressDetailsExpanded} component={App.AddressDetailsExpanded} />
             <Screen name={Routes.Home} component={App.HomeScreen} />
         </Navigator>
     );

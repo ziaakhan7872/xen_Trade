@@ -11,10 +11,12 @@ import changePassword from "./ChangePassword/ChangePassword";
 import antiPhishingCode from "./AntiPhishingCode/AntiPhishingCode";
 import SettingProfile from "./SettingProfile/SettingProfile";
 import SettingSystem from "./SettingSystem/SettingSystem";
+import AddressBook from "./AddressBook/AddressBook";
+import AddressDetailsExpanded from "./AddressDetailsExpanded/AddressDetailsExpanded";
 
 export {
-     HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory,
-     MarketScreen, Exchangescreen, WalletScreen, changePassword, antiPhishingCode, SettingSystem,
+     HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,
+     Exchangescreen, WalletScreen, changePassword, antiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
 }
 
 

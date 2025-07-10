@@ -48,12 +48,12 @@ const SettingProfile = (props) => {
                 <Spacer height={hp(4)} />
 
                 <ResponsiveText style={styles.inputLabel}>Email</ResponsiveText>
-                <TextInputField placeholder={"Enter your email address"} />
+                <TextInputField placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
 
                 <Spacer height={hp(2)} />
 
                 <ResponsiveText style={styles.inputLabel}>Phone number</ResponsiveText>
-                <TextInputField placeholder={"Enter your phone number"} />
+                <TextInputField placeholder={"Enter your phone number"} placeholderTextColor={colors.placeHolderTextColor} />
 
                 <Spacer height={hp(2)} />
 

@@ -26,7 +26,7 @@ const antiPhishingCode = (props) => {
                 </View>
                 <Spacer height={hp(1.5)} />
                 <ResponsiveText style={styles.inputLabel}>Anti-Phishing Code</ResponsiveText>
-                <TextInputField placeholder={'Enter Anti-phishing code here'} />
+                <TextInputField placeholder={'Enter Anti-phishing code here'} placeholderTextColor={colors.placeHolderTextColor} />
 
             </View>
             <View style={styles.btnSaveChangesView}>

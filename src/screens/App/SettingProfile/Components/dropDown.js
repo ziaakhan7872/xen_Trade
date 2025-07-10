@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import { colors } from '../../../../constants'
 
-const DropDown = ({ items, value, setValue, placeholder }) => {
+const DropDown = ({ items, value, setValue, placeholder, zIndex, setIsOpen }) => {
     const [open, setOpen] = useState(false)
 
     return (
@@ -12,11 +12,14 @@ const DropDown = ({ items, value, setValue, placeholder }) => {
             open={open}
             value={value}
             items={items}
-            setOpen={setOpen}
+            setOpen={(openState) => {
+                setOpen(openState)
+                setIsOpen(openState) // Track the dropdown open state
+            }}
             setValue={setValue}
             // setItems={() => { }} //For future use if we want to manage items dynamically
-            style={styles.dropdown}
-            dropDownContainerStyle={styles.dropdownContainer}
+            style={[styles.dropdown, { zIndex: zIndex }]}  // dynamic zIndex 
+            dropDownContainerStyle={[styles.dropdownContainer, { zIndex: zIndex }]}
             textStyle={styles.dropdownText}
             placeholder={placeholder}
             // placeholderStyle={{ color: '#7C9CA1' }}
@@ -32,14 +35,14 @@ const styles = StyleSheet.create({
     dropdown: {
         backgroundColor: colors.inputBgColor,
         borderColor: colors.borderColor,
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: wp(3),
         paddingVertical: hp(2)
     },
     dropdownContainer: {
         backgroundColor: colors.inputBgColor,
         borderColor: colors.borderColor,
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: wp(3),
         zIndex: 1000
     },

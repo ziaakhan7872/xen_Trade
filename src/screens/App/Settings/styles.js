@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
     },
 
     profileCard: {
-        backgroundColor: colors.settingCardsBgColor,
+        backgroundColor: colors.cardsBgColor,
         padding: wp(4),
         borderRadius: wp(3),
         marginBottom: hp(2),
@@ -71,6 +71,6 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         padding: wp(5),
         borderRadius: 66,
-        backgroundColor: colors.logOutBtn,
+        backgroundColor: colors.redColorBtn,
     }
 })

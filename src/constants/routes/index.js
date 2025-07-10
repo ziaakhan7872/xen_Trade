@@ -20,4 +20,6 @@ export const Routes = {
     changePassword: "changePassword",
     antiPhishingCode: "antiPhishingCode",
     settingSystem: "settingSystem",
+    addressBook: "addressBook",
+    addressDetailsExpanded: "addressDetailsExpanded"
 }

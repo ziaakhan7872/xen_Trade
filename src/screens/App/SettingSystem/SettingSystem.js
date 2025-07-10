@@ -1,5 +1,5 @@
-import { View, Text, Image } from 'react-native'
-import React, { useState } from 'react'
+import { View, Image } from 'react-native'
+import React from 'react'
 import Spacer from '../../../components/Spacer'
 import { hp, wp } from '../../../components/ResponsiveComponent'
 import images from '../../../images'
@@ -14,7 +14,9 @@ import { useSettingSystem } from './Hooks'
 const SettingSystem = (props) => {
     const {
         language, setLanguage, languageItems,
-        timezone, setTimezone, timezoneItems
+        timezone, setTimezone, timezoneItems,
+        isLanguageOpen, setIsLanguageOpen,
+        isTimezoneOpen, setIsTimezoneOpen,
     } = useSettingSystem()
 
     return (
@@ -58,7 +60,7 @@ const SettingSystem = (props) => {
                 <View style={appStyles.row}>
                     <ResponsiveText style={styles.leftLabels}>Language</ResponsiveText>
                     <View style={styles.dropDownRight}>
-                        <DropDown items={languageItems} value={language} setValue={setLanguage} placeholder="Select Language" />
+                        <DropDown items={languageItems} value={language} setValue={setLanguage} zIndex={isLanguageOpen ? 1001 : 999} setIsOpen={setIsLanguageOpen} placeholder="Select Language" />
                     </View>
                 </View>
 
@@ -67,12 +69,9 @@ const SettingSystem = (props) => {
                 <View style={appStyles.row}>
                     <ResponsiveText style={styles.leftLabels}>Time zone</ResponsiveText>
                     <View style={styles.dropDownRight}>
-                        <DropDown items={timezoneItems} value={timezone} setValue={setTimezone} placeholder="Select Time Zone" />
+                        <DropDown items={timezoneItems} value={timezone} setValue={setTimezone} zIndex={isTimezoneOpen ? 1001 : 999} setIsOpen={setIsTimezoneOpen} placeholder="Select Time Zone" />
                     </View>
                 </View>
-
-
-
                 <Spacer height={hp(5)} />
             </View>
         </AuthMainContainer>
