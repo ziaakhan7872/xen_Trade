@@ -28,10 +28,9 @@ const changePassword = (props) => {
                 <ResponsiveText style={styles.inputLabel}>Confirm new Password</ResponsiveText>
                 <TextInputField placeholder={'Confirm your new password'} />
 
-                <Spacer height={hp(45)} />
-                <View style={styles.btnSaveChangesView}>
-                    <SimpleButton text="Save Changes" textColor={colors.disableTextColor} disabled={true} styleView={styles.btnSaveChanges} />
-                </View>
+            </View>
+            <View style={styles.btnSaveChangesView}>
+                <SimpleButton text="Save Changes" textColor={colors.disableTextColor} disabled={true} styleView={styles.btnSaveChanges} />
             </View>
         </AuthMainContainer>
     )

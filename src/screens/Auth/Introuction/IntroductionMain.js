@@ -1,4 +1,4 @@
-import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Image, ImageBackground, StyleSheet, View } from 'react-native';
 import React from 'react';
 // import images from '../../../images';
 import { SimpleButton } from '../../../components/SimpleButton';
@@ -8,6 +8,7 @@ import { colors, Routes } from '../../../constants';
 import Spacer from '../../../components/Spacer';
 import images from '../../../images';
 import LinearGradient from 'react-native-linear-gradient';
+import { ResponsiveText } from '../../../components/ResponsiveText';
 
 const LoginMainScreen = () => {
   const navigation = useNavigation();
@@ -19,9 +20,9 @@ const LoginMainScreen = () => {
         <View style={style.centeredContent}>
           <Image source={images.splashLogoImage} resizeMode="contain" style={style.logoImage} />
           <Spacer />
-          <Text style={style.titleText}>
+          <ResponsiveText style={style.titleText}>
             Aut quia quia eos sunt dolores aut voluptate nobis aut error omnis eum adipisci dolores quo minus velit.
-          </Text>
+          </ResponsiveText>
         </View>
 
         <View style={style.buttonContainer}>

@@ -1,8 +1,6 @@
 import { Platform, StyleSheet, } from 'react-native'
 import { hp, wp } from '../../../components/ResponsiveComponent'
-import { colors } from '../../../constants'
-
-
+import { colors, fontFamily } from '../../../constants'
 
 export const styles = StyleSheet.create({
     containerMain: {
@@ -16,13 +14,29 @@ export const styles = StyleSheet.create({
     },
     btnSaveChangesView: {
         paddingHorizontal: wp(4),
-        paddingBottom: Platform.OS === 'android' ? hp(4) : hp(3), // More space on Android
+        paddingBottom: Platform.OS === 'android' ? hp(2) : hp(1), // More space on Android
     },
     btnSaveChanges: {
         width: wp(88),
         alignSelf: 'center',
         padding: wp(5),
         borderRadius: 66,
-        backgroundColor: colors.transparentBtn,
-    }
+        backgroundColor: colors.withdrawBtn,
+    },
+    description: {
+        fontSize: 14,
+        color: colors.lightTextColor,
+        textAlign: 'center',
+    },
+    warningContainer: {
+        backgroundColor: colors.warningBgColor,
+        padding: wp(3),
+        borderRadius: 12,
+        marginBottom: hp(2),
+    },
+    warningText: {
+        fontSize: 14,
+        color: colors.warningTextColor,
+        fontFamily: fontFamily.Regular,
+    },
 })

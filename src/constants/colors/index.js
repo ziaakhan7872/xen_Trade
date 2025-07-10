@@ -31,6 +31,9 @@ export const colors = {
     bottomTabColor: "rgba(1, 26, 31, 1)",
     AccountInfoBorderColor: "#10272C",
     warningTextColor: "#E88F35",
-
+    warningBgColor: "rgba(232, 143, 53, 0.2)",
+    lineStroke: "#10272C",
+    greenColor: "rgba(22, 168, 83, 0.18)",
+    redColor: " rgba(255, 50, 53, 0.18);"
 
 }

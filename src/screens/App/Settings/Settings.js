@@ -34,13 +34,13 @@ const Settings = (props) => {
                 <Spacer height={hp(1)} />
                 <SettingOption icon={images.securitySettingIcon} label='Security' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingSecurity }) }} />
                 <Spacer height={hp(1)} />
-                <SettingOption icon={images.systemSettingIcon} label='System Settings' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
+                <SettingOption icon={images.systemSettingIcon} label='System Settings' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingSystem }) }} />
                 <Spacer height={hp(1)} />
                 <SettingOption icon={images.addressSettingIcon} label='Address Book' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
                 <Spacer height={hp(1)} />
                 <SettingOption icon={images.emailNotificationSettingIcon} label='Email Notifications' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
             </View>
-
+            {/* <Spacer height={hp(6)} /> */}
             <View style={styles.btnView}>
                 <SimpleButton text={'Log Out'} styleView={styles.btnContainer} onPress={() => { }} />
             </View>

@@ -24,4 +24,5 @@ export const Routes = {
     SelectNetwork: "SelectNetwork",
     Barcode: "Barcode",
     Deposit: "Deposit",
+    settingSystem: "settingSystem",
 }

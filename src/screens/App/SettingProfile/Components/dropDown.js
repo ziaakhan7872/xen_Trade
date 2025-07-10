@@ -19,9 +19,9 @@ const DropDown = ({ items, value, setValue, placeholder }) => {
             dropDownContainerStyle={styles.dropdownContainer}
             textStyle={styles.dropdownText}
             placeholder={placeholder}
-            placeholderStyle={{ color: '#7C9CA1' }}
+            // placeholderStyle={{ color: '#7C9CA1' }}
             listMode="SCROLLVIEW"
-            arrowIconStyle={{ tintColor: '#fff' }}
+            arrowIconStyle={{ tintColor: '#fff', marginRight: wp(2) }}
         />
     )
 }
@@ -31,15 +31,15 @@ export default DropDown
 const styles = StyleSheet.create({
     dropdown: {
         backgroundColor: colors.inputBgColor,
-        borderColor: 'transparent',
+        borderColor: colors.borderColor,
+        borderWidth: 2,
         borderRadius: wp(3),
-        minHeight: hp(6.5),
-        paddingHorizontal: wp(2),
-        zIndex: 10
+        paddingVertical: hp(2)
     },
     dropdownContainer: {
         backgroundColor: colors.inputBgColor,
-        borderColor: 'transparent',
+        borderColor: colors.borderColor,
+        borderWidth: 2,
         borderRadius: wp(3),
         zIndex: 1000
     },

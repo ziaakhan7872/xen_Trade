@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { AccountInfo, AccountOverView, BalanceOverView, PortfilioOverView, RowButtonTab } from './Component/Index'
@@ -6,7 +6,9 @@ import HomeHeader from '../../../components/HomeHeader'
 import { style } from './Style'
 import Spacer from '../../../components/Spacer'
 import useHome from './Hooks/Index'
-import { hp } from '../../../components/ResponsiveComponent'
+import { hp, wp } from '../../../components/ResponsiveComponent'
+import RowButton from '../../../components/RowButton'
+import { colors } from '../../../constants'
 
 const HomeScreen = () => {
   const { threeRowTabButtonPress, setThreeRowTabButtonPress, portfolioButton, setPortfolioButton } = useHome()
@@ -22,12 +24,20 @@ const HomeScreen = () => {
         {threeRowTabButtonPress === "portfolio" && (
           <PortfilioOverView buttonPress={portfolioButton} setButtonPress={setPortfolioButton} />
         )}
-         {threeRowTabButtonPress === "balance" && (
-          <BalanceOverView  />
+        {threeRowTabButtonPress === "balance" && (
+          <BalanceOverView />
         )}
-         {threeRowTabButtonPress === "account" && (
-          <AccountOverView  />
+        {threeRowTabButtonPress === "account" && (
+          <AccountOverView />
         )}
+        <Spacer height={hp(1)} />
+        <RowButton
+        buttonRowWidth={wp(90)}
+        buttonBackGroundColor={colors.searchBar}
+        buttonWidth={wp(42)}
+        borderRadius={wp(3)}
+        image1={<Image/>}
+        />
 
       </View>
     </AuthMainContainer>

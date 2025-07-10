@@ -52,6 +52,13 @@ rightArrow: require('../images/rightArrow.png'),
     backArrow: require('../images/backArrow.png'),
     rightsign: require('../images/rightsign.png'),
     doughtnut:require('../images/Doughnut.png'),
+    checkMark: require("../images/checkMark.png"),
+    arrowUp: require("../images/arrowUp.png"),
+    arrowDown: require("../images/arrowDown.png"),
+    Refeeral: require("../images/Referral.png"),
+    Deposit: require("../images/Deposit.png"),
+
+
 
 }
 export default images

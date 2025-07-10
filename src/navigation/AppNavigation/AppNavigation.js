@@ -16,6 +16,7 @@ const AppNavigation = () => {
             <Screen name={Routes.antiPhishingCode} component={App.antiPhishingCode} />
             <Screen name={Routes.SelectNetwork} component={App.SelectNetwork} />
             <Screen name={Routes.Barcode} component={App.Barcode} />
+            <Screen name={Routes.settingSystem} component={App.SettingSystem} />
             <Screen name={Routes.Home} component={App.HomeScreen} />
         </Navigator>
     );

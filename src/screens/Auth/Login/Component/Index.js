@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import images from '../../../../images'
@@ -7,30 +7,40 @@ import { colors } from '../../../../constants'
 import InputText from '../../../../components/InputText'
 import { SimpleButton } from '../../../../components/SimpleButton'
 import RowButton from '../../../../components/RowButton'
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { ResponsiveText } from '../../../../components/ResponsiveText';
 
-const LoginForm = ({signUp,Login}) => {
+const LoginForm = ({ signUp, Login }) => {
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode='contain' style={styles.logoImage} />
             <Spacer />
-            <Text style={styles.titleText}>LOG INTO XEN TRADE</Text>
+            <ResponsiveText style={styles.titleText}>LOG INTO XEN TRADE</ResponsiveText>
             <Spacer />
             <View>
                 <InputText label={"Email Address"} placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
                 <InputText icon={true} label={"Password"} placeholder={"Enter your email password"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
-                <Text style={[styles.forgetPasswordStyling, { textDecorationLine: 'underline' }]}> Forgot Password?</Text>
+                <ResponsiveText style={[styles.forgetPasswordStyling, { textDecorationLine: 'underline' }]}> Forgot Password?</ResponsiveText>
                 <Spacer />
                 <SimpleButton onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={colors.authButtonColor} buttonWidth={wp(80)} />
                 <Spacer />
-                <Text style={styles.signInWithStyle}>Or sign in with</Text>
+                <ResponsiveText style={styles.signInWithStyle}>Or sign in with</ResponsiveText>
                 <Spacer />
-                <RowButton />
+                <RowButton
+                    buttonWidth={wp(38)}
+                    buttonBackGroundColor={colors.authButtonColor}
+                    borderRadius={wp(16.5)}
+                    image1={<AntDesign name="apple1" size={16} color="white" />}
+                    label1={<ResponsiveText style={styles.labelText}>Apple</ResponsiveText>}
+                    image2={<AntDesign name="google" size={16} color="white" />}
+                    label2={<ResponsiveText style={styles.labelText}>Google</ResponsiveText>}
+                />
                 <Spacer />
                 <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                    <Text style={[styles.signInWithStyle, { fontSize: 14 }]}>Don't have an account?</Text>
-                    <Text onPress={signUp} style={[styles.forgetPasswordStyling, { fontSize: 14 }]}>Sign Up</Text>
+                    <ResponsiveText style={[styles.signInWithStyle, { fontSize: 14 }]}>Don't have an account?</ResponsiveText>
+                    <ResponsiveText onPress={signUp} style={[styles.forgetPasswordStyling, { fontSize: 14 }]}>Sign Up</ResponsiveText>
 
                 </View>
             </View>
@@ -70,6 +80,11 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         textAlign: "center",
         color: colors.iconColor
+    },
+    labelText: {
+        fontSize: 14,
+        fontWeight: '400',
+        color: colors.white,
     },
 
 
