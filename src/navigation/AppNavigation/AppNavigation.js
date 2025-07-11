@@ -20,6 +20,7 @@ const AppNavigation = () => {
             <Screen name={Routes.addressBook} component={App.AddressBook} />
             <Screen name={Routes.addressDetailsExpanded} component={App.AddressDetailsExpanded} />
             <Screen name={Routes.Home} component={App.HomeScreen} />
+            <Screen name={Routes.SelectCrypto} component={App.SelectCrypto} />
         </Navigator>
     );
 };

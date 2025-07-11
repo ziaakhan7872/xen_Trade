@@ -15,9 +15,7 @@ import useHomeScreen from "./Hooks"
 
 
 const WalletHome = () => {
- const{selectedCrypto,
-    setSelectedCrypto,
-    cryptoSheetRef} = useHomeScreen();
+
   const { handleDepositPress } = useDepositNavigation();
 
   return (
@@ -76,7 +74,7 @@ const WalletHome = () => {
       {/* Search Bar */}
       <TouchableOpacity 
         style={styles.searchContainer}
-        onPress={() => cryptoSheetRef.current?.open()}
+     
       >
         <ResponsiveText style={styles.searchText}>Search...</ResponsiveText>
         <Image style ={styles.searchIcon}
@@ -89,11 +87,8 @@ const WalletHome = () => {
       {/* Crypto List */}
         <TokenList/>
         
-        {/* Select Crypto Bottom Sheet */}
-        <SelectCrypto 
-          ref={cryptoSheetRef}
-          onSelectCrypto={setSelectedCrypto}
-        />
+       
+        
     
     </AuthMainContainer>
   );

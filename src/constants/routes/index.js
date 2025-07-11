@@ -1,4 +1,4 @@
-import { DepositHistory } from "../../screens/App/Index";
+import { DepositHistory, SelectNetwork } from "../../screens/App/Index";
 
 export const Routes = {
     AuthNavigator: "AuthNavigator",
@@ -26,5 +26,6 @@ export const Routes = {
     Deposit: "Deposit",
     settingSystem: "settingSystem",
     addressBook: "addressBook",
-    addressDetailsExpanded: "addressDetailsExpanded"
+    addressDetailsExpanded: "addressDetailsExpanded",
+    SelectCrypto: "SelectCrypto",
 }

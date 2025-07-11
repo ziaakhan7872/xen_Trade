@@ -14,26 +14,81 @@ import { fontFamily } from '../../../../constants/fonts';
 import { Screen } from 'react-native-screens';
 import BottomSheet from '../../../../components/BottomSheet';
 export const DepositWalletShowDetails = () => {
+  const [showAssetSheet, setShowAssetSheet] = useState(false);
+  const assetSheetRef = useRef(null);
+
+  const handleAssetOpen = () => {
+    setShowAssetSheet(true);
+    setTimeout(() => {
+      assetSheetRef.current?.open();
+    }, 100);
+  };
+
+  const handleAssetClose = () => {
+    setShowAssetSheet(false);
+    assetSheetRef.current?.close();
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.textContainer}>
-        <ResponsiveText style={styles.label}>Total value (BTC)</ResponsiveText>
-        <ResponsiveText style={styles.btcValue}>0.2702145</ResponsiveText>
-        <ResponsiveText style={styles.usdValue}>= $19,458.89</ResponsiveText>
-        <ResponsiveText style={styles.pnl}>Today's PNL <ResponsiveText style={styles.pnlPositive}>+3.33%</ResponsiveText></ResponsiveText>
+    <>
+      <View style={styles.container}>
+        <View style={styles.textContainer}>
+          <ResponsiveText style={styles.label}>Total value (BTC)</ResponsiveText>
+          <ResponsiveText style={styles.btcValue}>0.2702145</ResponsiveText>
+          <ResponsiveText style={styles.usdValue}>= $19,458.89</ResponsiveText>
+          <ResponsiveText style={styles.pnl}>Today's PNL <ResponsiveText style={styles.pnlPositive}>+3.33%</ResponsiveText></ResponsiveText>
+        </View>
+        <View style={styles.chartContainer}>
+          <TouchableOpacity onPress={handleAssetOpen}>
+            <Image
+              source={images.DepositLogo}
+              style={styles.chartIcon}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={styles.chartContainer}>
-        <TouchableOpacity onPress={() => assetAllocation(true)}>
-          <Image
-            source={images.DepositLogo}
-            style={styles.chartIcon}
-            resizeMode="contain"
-          />
+      <BottomSheet ref={assetSheetRef} height={hp(45)}>
+        <AssetAllocation onClose={handleAssetClose} />
+      </BottomSheet>
+    </>
+  );
+};
+// Asset Allocation BottomSheet Component
+const AssetAllocation = ({ onClose }) => {
+  return (
+    <View style={styles.sheetContainer}>
+      <View style={styles.headerRow}>
+        <ResponsiveText style={styles.sheetTitle}>ASSETS ALLOCATION</ResponsiveText>
+        <TouchableOpacity onPress={onClose} style={styles.closeBtn}>
+          <ResponsiveText style={styles.closeText}>×</ResponsiveText>
         </TouchableOpacity>
       </View>
+      <View style={styles.doughnutContainer}>
+        <Image source={images.doughnutChart} style={styles.doughnutImg} resizeMode="contain" />
+        <View style={styles.apyCenter}>
+          <ResponsiveText style={styles.apyLabel}>APY</ResponsiveText>
+          <ResponsiveText style={styles.apyValue}>127%</ResponsiveText>
+        </View>
+      </View>
+      <View style={styles.legendRow}>
+        <View style={styles.legendDot} />
+        <ResponsiveText style={styles.legendText}>BTC</ResponsiveText>
+        <View style={styles.legendDot} />
+        <ResponsiveText style={styles.legendText}>ETH</ResponsiveText>
+        <View style={styles.legendDot} />
+        <ResponsiveText style={styles.legendText}>BTC</ResponsiveText>
+        <View style={styles.legendDot} />
+        <ResponsiveText style={styles.legendText}>RTH</ResponsiveText>
+      </View>
+      <TouchableOpacity style={styles.okBtn} onPress={onClose}>
+        <ResponsiveText style={styles.okText}>Ok</ResponsiveText>
+      </TouchableOpacity>
     </View>
   );
 };
+
+
 
 
 
@@ -61,141 +116,6 @@ export const DepositWalletShowDetails = () => {
 //     </View>
 //   </View>
 // );
-export const SelectCrypto = forwardRef(({ onSelectCrypto }, ref) => {
- 
-  const [searchText, setSearchText] = useState('');
-  
-  // Initialize sections only once and filter on demand
-  const initialSections = [
-    { header: 'Popular', data: coinData.slice(0, 5) },
-    { header: 'All Crypto', data: coinData }
-  ];
-  
-  const [filteredData, setFilteredData] = useState(initialSections);
-
-  // Handle search input - optimized
-  const handleSearch = (text) => {
-    setSearchText(text);
-    if (!text.trim()) {
-      setFilteredData(initialSections);
-      return;
-    }
-    
-    const searchTermLower = text.toLowerCase();
-    const filtered = coinData.filter(
-      item => item.name.toLowerCase().includes(searchTermLower) || 
-             item.symbol.toLowerCase().includes(searchTermLower)
-    );
-    
-    setFilteredData([{ header: 'All Crypto', data: filtered }]);
-  };
-
-  const renderSectionHeader = ({ section }) => (
-    <View style={styles.sectionHeader}>
-      <ResponsiveText style={styles.sectionHeaderText}>{section.header}</ResponsiveText>
-    </View>
-  );
-
-  const navigation = useNavigation();
-  
-  const handleCryptoSelect = (item) => {
-    // First close the bottom sheet
-    ref.current?.close();
-    
-    // Call the onSelectCrypto callback if provided
-    onSelectCrypto?.(item);
-    
-    // Navigate to the SelectNetwork screen with the selected crypto
-    setTimeout(() => {
-      navigation.navigate(Routes.AppNavigator, {
-        screen: Routes.SelectNetwork,
-        params: { selectedCrypto: item }
-      });
-    }, 300); // Small delay to allow the sheet to close smoothly
-  };
-
-  const renderCryptoItem = ({ item }) => (
-    <TouchableOpacity 
-      style={styles.cryptoSelectItem}
-      onPress={() => handleCryptoSelect(item)}
-    >
-      <Image source={item.icon} style={styles.cryptoSelectIcon} resizeMode="contain" />
-      <View style={styles.cryptoSelectDetails}>
-        <ResponsiveText style={styles.cryptoSymbol}>{item.symbol}</ResponsiveText>
-        <ResponsiveText style={styles.cryptoName}>{item.name}</ResponsiveText>
-      </View>
-    </TouchableOpacity>
-  );
-
-  return (
-    <RBSheet
-      ref={ref}
-      height={hp(120)}
-      customStyles={{
-        container: styles.selectCryptoRBSheetContainer,
-        wrapper: styles.selectCryptoRBSheetOverlay,
-        draggableIcon: styles.draggableIcon
-      }}
-    >
-      <AuthMainContainer >
-        {/* Header */}
-        <View style={styles.selectCryptoHeader}>
-          <TouchableOpacity 
-            onPress={() => ref.current?.close()} 
-            style={styles.backButtonContainer}
-          >
-            <Image 
-              source={images.backArrow}
-              style={styles.backArrowIcon}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-          <ResponsiveText style={styles.selectCryptoTitle}>SELECT CRYPTO</ResponsiveText>
-          <Image 
-            style={styles.selectCryptoCloseButton}
-            source={images.clockIcon}
-            resizeMode="contain"
-          />
-
-          
-        </View>
-        
-        {/* Search box */}
-        <View style={styles.selectCryptoSearchContainer}>
-          <TextInput
-            style={styles.selectCryptoSearchInput}
-            placeholder="Search..."
-            placeholderTextColor={colors.white}
-            
-            value={searchText}
-            onChangeText={handleSearch}
-            autoCapitalize="none"
-            autoCorrect={false}
-          />
-          <Image 
-            source={images.searchSign}
-            style={styles.searchIcon}
-            resizeMode="contain"
-          />
-        </View>
-        <Spacer />
-        {/* Crypto list */}
-        <SectionList
-          sections={filteredData}
-          keyExtractor={(item) => item.id}
-          renderItem={renderCryptoItem}
-          renderSectionHeader={renderSectionHeader}
-          stickySectionHeadersEnabled={false}
-          style={styles.selectCryptoListContainer}
-          contentContainerStyle={{ paddingBottom: hp(2) }}
-          initialNumToRender={10}
-          maxToRenderPerBatch={10}        windowSize={10}
-        removeClippedSubviews={true}
-      />
-      </AuthMainContainer>
-    </RBSheet>
-  );
-});
 
 export const TokenList = () => {
     return (
@@ -228,41 +148,11 @@ export const TokenList = () => {
     )
 }
 
- const assetAllocation = () => {
-  return (
-   <BottomSheet     visible={true}
-   onclose={() => {}}
-      height={hp(120)} width={wp(100)}>
-      <AuthMainContainer>
-        <View style={styles.selectCryptoHeader}>    
-          <TouchableOpacity
-            onPress={() => {}}
-            style={styles.backButtonContainer}  
-          >
-            <Image
-              source={images.backArrow}
-              style={styles.backArrowIcon}
-              resizeMode="contain"    
-            />
-          </TouchableOpacity>
-          <ResponsiveText style={styles.selectCryptoTitle}>ASSET ALLOCATION</ResponsiveText>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={styles.selectCryptoCloseButton}
-
-          >
-            <ResponsiveText style={styles.closeButtonText}>Close</ResponsiveText>
-          </TouchableOpacity>
-        </View>
-      </AuthMainContainer>
-   </BottomSheet>
-  )
-};
 export const useDepositNavigation = () => {
   const navigation = useNavigation();
   
   const handleDepositPress = () => {
-    navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory });
+    navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCrypto });
   };
   
   return { handleDepositPress };
@@ -355,120 +245,93 @@ export const styles = StyleSheet.create({
     color: colors.iconColor,
     fontSize: 12,
   },
-  // SelectCrypto Styles
- 
-  
-  selectCryptoRBSheetContainer: {
-    backgroundColor: 'transparent',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+   //asset Allocation
+  sheetContainer: {
+    backgroundColor: colors.bottomSheetBackgroundColor,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    paddingHorizontal: wp(4),
+    paddingTop: hp(3),
+    paddingBottom: hp(2),
+    alignItems: 'center',
   },
-  selectCryptoRBSheetOverlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-  },
-  draggableIcon: {
-    backgroundColor: colors.buttonSigninColor,
-    width: wp(10),
-  },
-  selectCryptoHeader: {
+  headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: hp(1.5),
-    position: 'relative',
+    justifyContent: 'space-between',
     width: '100%',
-   
+    marginBottom: hp(2),
   },
-  backButtonContainer: {
-    position: 'absolute',
-    left: wp(4),
-    zIndex: 1,
-    height: '100%',
+  sheetTitle: {
+    color: colors.white,
+    fontSize: 15,
+    fontFamily: fontFamily.appTextBold,
+  },
+  closeBtn: {
+    padding: wp(2),
+  },
+  closeText: {
+    color: colors.white,
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  doughnutContainer: {
+    alignItems: 'center',
     justifyContent: 'center',
+    marginVertical: hp(2),
   },
-  backArrowIcon: {
-    width: wp(5),
-    height: hp(2.5),
+  doughnutImg: {
+    width: wp(32),
+    height: wp(32),
   },
-  selectCryptoTitle: {
-    fontSize: 16,
-    color: colors.white,
-    fontFamily: fontFamily.appTextBold,
-  },
-  selectCryptoCloseButton: {
+  apyCenter: {
     position: 'absolute',
-    right: wp(4),
-    padding: wp(1),
-    width: wp(5),
-    height: hp(2.5),
+    top: '38%',
+    left: 0,
+    right: 0,
+    alignItems: 'center',
   },
-  closeButtonText: {
+  apyLabel: {
+    color: colors.iconColor,
+    fontSize: 13,
+    fontFamily: fontFamily.appTextRegular,
+  },
+  apyValue: {
+    color: colors.mainColor,
+    fontSize: 22,
+    fontFamily: fontFamily.appTextBold,
+    marginTop: 2,
+  },
+  legendRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: hp(2),
+  },
+  legendDot: {
+    width: 7,
+    height: 7,
+    borderRadius: 4,
+    backgroundColor: colors.mainColor,
+    marginHorizontal: 6,
+  },
+  legendText: {
+    color: colors.iconColor,
+    fontSize: 13,
+    fontFamily: fontFamily.appTextRegular,
+    marginRight: 10,
+  },
+  okBtn: {
+    width: '90%',
+    backgroundColor: colors.buttonSigninColor,
+    borderRadius: 20,
+    alignItems: 'center',
+    paddingVertical: hp(1.5),
+    marginTop: hp(2),
+  },
+  okText: {
     color: colors.white,
     fontSize: 16,
     fontFamily: fontFamily.appTextBold,
   },
-  selectCryptoSearchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.searchBar,
-    marginTop: hp(3),
-      paddingHorizontal: wp(4),
-    paddingVertical: hp(1.5),
-    borderRadius: 8,
-    height: hp(5),
-    marginHorizontal: wp(4),
-  },
-  selectCryptoSearchInput: {
-    flex: 1,
-    color: colors.white,
-    paddingVertical: hp(1),
-    fontFamily: fontFamily.appTextRegular,
-    fontSize: 14,
-  },
-  searchIconButton: {
-    paddingHorizontal: wp(1),
-  },
-  searchIcon: {
-    width: wp(5),
-    height: hp(2.5),
-  },
-  selectCryptoListContainer: {
-    flex: 1,
-  },
-  sectionHeader: {
-    paddingHorizontal: wp(4),
-    paddingVertical: hp(1),
- 
-  },
-  sectionHeaderText: {
-    color: colors.white,
-    fontSize: 14,
-    fontFamily: fontFamily.appTextMedium,
-  },
-  cryptoSelectItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: wp(4),
-    paddingVertical: hp(1.5),
-    borderBottomWidth: 0.5,
-    borderBottomColor: colors.buttonSigninColor,
-  },
-  cryptoSelectIcon: {
-    width: wp(9),
-    height: wp(9),
-    marginRight: wp(3),
-  },
-  cryptoSelectDetails: {
-    flex: 1,
-  },
-  cryptoSymbol: {
-    color: colors.white,
-    fontSize: 14,
-    fontFamily: fontFamily.appTextMedium,
-  },
-  cryptoName: {
-    color: colors.iconColor,
-    fontSize: 12,
-    fontFamily: fontFamily.appTextRegular,
-  }
 });
