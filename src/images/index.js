@@ -39,7 +39,7 @@ const images = {
     Wallet: require("../images/Wallet.png"),
     Setting: require("../images/Setting.png"),
     dashboardGraph: require("../images/DummyImage/DashboardDummyGraph.png"),
-    doughnutChart: require("../images/DummyImage/Doughnut.png"),
+    doughnutChart: require("../images/Doughnut.png"),
     tron: require("../images/tron.png"),
     optimism: require("../images/optimism.png"),
     polygon: require("../images/polygon.png"),

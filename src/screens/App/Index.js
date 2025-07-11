@@ -18,10 +18,12 @@ import Barcode from "./Barcode/Barcode";
 import Deposit from "./Deposit/Deposit";
 import AddNewAddress from "./AddNewAddress/AddNewAddress";
 import SettingEmailNotification from "./SettingEmailNotification/SettingEmailNotification";
+import SelectCrypto from "./SelectCrypto/SelectCrypto";
+import AssetAllocation from "./AssetAllocation/AssetAllocation";
 
 export {
      HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,
      Exchangescreen, WalletScreen, changePassword, antiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
-     SelectNetwork, Barcode, Deposit, AddNewAddress, SettingEmailNotification,
+     SelectNetwork, Barcode, Deposit, AddNewAddress, SettingEmailNotification, SelectCrypto, AssetAllocation,
 }
 

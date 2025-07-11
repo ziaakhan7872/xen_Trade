@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Image, Text } from 'react-native';
 import { ResponsiveText } from '../../../../components/ResponsiveText';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import images from '../../../../images';
-import { colors } from '../../../../constants';
+import { colors, Routes } from '../../../../constants';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { fontFamily } from '../../../../constants/fonts';
 
@@ -54,7 +54,11 @@ export const BarcodeHeader = () => {
             resizeMode="contain"
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton}>
+        <TouchableOpacity style={styles.actionButton}
+        onPress={() =>  navigation.navigate(Routes.AppNavigator, {
+                          screen: Routes.DepositHistory,
+                       
+                        })}>
           <Image 
             source={images.clockIcon}
             style={styles.actionIcon}

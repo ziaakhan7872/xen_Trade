@@ -22,6 +22,8 @@ const AppNavigation = () => {
             <Screen name={Routes.addNewAddress} component={App.AddNewAddress} />
             <Screen name={Routes.settingEmailNotification} component={App.SettingEmailNotification} />
             <Screen name={Routes.Home} component={App.HomeScreen} />
+            <Screen name={Routes.SelectCrypto} component={App.SelectCrypto} />
+            <Screen name={Routes.AssetAllocation} component={App.AssetAllocation} />
         </Navigator>
     );
 };
