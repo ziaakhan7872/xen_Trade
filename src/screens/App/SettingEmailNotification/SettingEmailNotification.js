@@ -28,7 +28,7 @@ const SettingEmailNotification = (props) => {
         <AuthMainContainer>
             <View style={styles.containerMain}>
                 <MainHeader leftImage={images.backArrow} title='EMAIL NOTIFICATION' onBackPress={() => props?.navigation.goBack()} />
-                <FlatListCustom toggles={toggles} setToggles={setToggles} disableAllNotificationsEnabled={disableAllNotificationsEnabled} />
+                <FlatListCustom toggles={toggles} setToggles={setToggles} disableAllNotificationsEnabled={disableAllNotificationsEnabled} setDisableAllNotificationsEnabled={setDisableAllNotificationsEnabled} />
             </View>
         </AuthMainContainer>
     )
