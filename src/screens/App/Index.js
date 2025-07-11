@@ -17,11 +17,12 @@ import SelectNetwork from "./SelectNetwork/SelectNetwork";
 import Barcode from "./Barcode/Barcode";
 import Deposit from "./Deposit/Deposit";
 import SelectCrypto from "./SelectCrypto/SelectCrypto";
+import AssetAllocation from "./AssetAllocation/AssetAllocation";
 
 export {
      HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,
      Exchangescreen, WalletScreen, changePassword, antiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
-     SelectNetwork, Barcode, Deposit,SelectCrypto,
+     SelectNetwork, Barcode, Deposit,SelectCrypto,AssetAllocation,
 }
 
 // export {

@@ -1,3 +1,4 @@
+import AssetAllocation from "../../screens/App/AssetAllocation/AssetAllocation";
 import { DepositHistory, SelectNetwork } from "../../screens/App/Index";
 
 export const Routes = {
@@ -28,4 +29,5 @@ export const Routes = {
     addressBook: "addressBook",
     addressDetailsExpanded: "addressDetailsExpanded",
     SelectCrypto: "SelectCrypto",
+    AssetAllocation: "AssetAllocation",
 }

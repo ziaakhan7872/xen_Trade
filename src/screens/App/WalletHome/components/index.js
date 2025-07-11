@@ -13,6 +13,9 @@ import { AuthMainContainer } from "../../../../components/authMainContainer";
 import { fontFamily } from '../../../../constants/fonts';
 import { Screen } from 'react-native-screens';
 import BottomSheet from '../../../../components/BottomSheet';
+import Navigation from '../../../../navigation';
+
+
 export const DepositWalletShowDetails = () => {
   const [showAssetSheet, setShowAssetSheet] = useState(false);
   const assetSheetRef = useRef(null);
@@ -56,6 +59,7 @@ export const DepositWalletShowDetails = () => {
 };
 // Asset Allocation BottomSheet Component
 const AssetAllocation = ({ onClose }) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.sheetContainer}>
       <View style={styles.headerRow}>
@@ -66,22 +70,18 @@ const AssetAllocation = ({ onClose }) => {
       </View>
       <View style={styles.doughnutContainer}>
         <Image source={images.doughnutChart} style={styles.doughnutImg} resizeMode="contain" />
-        <View style={styles.apyCenter}>
-          <ResponsiveText style={styles.apyLabel}>APY</ResponsiveText>
-          <ResponsiveText style={styles.apyValue}>127%</ResponsiveText>
-        </View>
       </View>
       <View style={styles.legendRow}>
         <View style={styles.legendDot} />
         <ResponsiveText style={styles.legendText}>BTC</ResponsiveText>
-        <View style={styles.legendDot} />
+        <View style={styles.legendDot3}  />
         <ResponsiveText style={styles.legendText}>ETH</ResponsiveText>
-        <View style={styles.legendDot} />
+        <View style={styles.legendDot2} />
         <ResponsiveText style={styles.legendText}>BTC</ResponsiveText>
-        <View style={styles.legendDot} />
+        <View style={styles.legendDot1} />
         <ResponsiveText style={styles.legendText}>RTH</ResponsiveText>
       </View>
-      <TouchableOpacity style={styles.okBtn} onPress={onClose}>
+      <TouchableOpacity style={styles.okBtn} onPress={() => navigation.navigate(Routes.AppNavigator, { screen: Routes.AssetAllocation })}>
         <ResponsiveText style={styles.okText}>Ok</ResponsiveText>
       </TouchableOpacity>
     </View>
@@ -312,7 +312,26 @@ export const styles = StyleSheet.create({
     width: 7,
     height: 7,
     borderRadius: 4,
-    backgroundColor: colors.mainColor,
+    backgroundColor: colors.dot3,
+    marginHorizontal: 6,
+  },
+   legendDot1: {
+    width: 7,
+    height: 7,
+    borderRadius: 4,
+    backgroundColor: colors.dot1,
+    marginHorizontal: 6,
+  }, legendDot3: {
+    width: 7,
+    height: 7,
+    borderRadius: 4,
+    backgroundColor: colors.dot3,
+    marginHorizontal: 6,
+  }, legendDot2: {
+    width: 7,
+    height: 7,
+    borderRadius: 4,
+    backgroundColor: colors.dot2,
     marginHorizontal: 6,
   },
   legendText: {
@@ -322,7 +341,7 @@ export const styles = StyleSheet.create({
     marginRight: 10,
   },
   okBtn: {
-    width: '90%',
+    width: wp(90),
     backgroundColor: colors.buttonSigninColor,
     borderRadius: 20,
     alignItems: 'center',

@@ -21,6 +21,7 @@ const AppNavigation = () => {
             <Screen name={Routes.addressDetailsExpanded} component={App.AddressDetailsExpanded} />
             <Screen name={Routes.Home} component={App.HomeScreen} />
             <Screen name={Routes.SelectCrypto} component={App.SelectCrypto} />
+            <Screen name={Routes.AssetAllocation} component={App.AssetAllocation} />
         </Navigator>
     );
 };
