@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { StyleSheet } from 'react-native'
-import { hp, wp } from '../../../../components/ResponsiveComponent'
-import { colors } from '../../../../constants'
+import { hp, wp } from './ResponsiveComponent'
+import { colors } from '../constants'
 
 const DropDown = ({ items, value, setValue, placeholder, zIndex, setIsOpen }) => {
     const [open, setOpen] = useState(false)
@@ -28,21 +28,20 @@ const DropDown = ({ items, value, setValue, placeholder, zIndex, setIsOpen }) =>
         />
     )
 }
-
 export default DropDown
 
 const styles = StyleSheet.create({
     dropdown: {
         backgroundColor: colors.inputBgColor,
         borderColor: colors.borderColor,
-        borderWidth: 1,
+        borderWidth: 1.5,
         borderRadius: wp(3),
         paddingVertical: hp(2)
     },
     dropdownContainer: {
         backgroundColor: colors.inputBgColor,
         borderColor: colors.borderColor,
-        borderWidth: 1,
+        borderWidth: 1.5,
         borderRadius: wp(3),
         zIndex: 1000
     },

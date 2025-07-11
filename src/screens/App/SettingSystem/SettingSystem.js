@@ -7,7 +7,7 @@ import { ResponsiveText } from '../../../components/ResponsiveText'
 import { MainHeader } from '../../../components/MainHeader'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { styles } from './styles'
-import DropDown from '../SettingProfile/Components/dropDown'
+import DropDown from '../../../components/dropDown'
 import { appStyles } from '../../../utilities'
 import { useSettingSystem } from './Hooks'
 

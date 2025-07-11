@@ -3,7 +3,7 @@ import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { MainHeader } from '../../../components/MainHeader'
 import { hp, wp } from '../../../components/ResponsiveComponent'
-import { colors } from '../../../constants'
+import { colors, Routes } from '../../../constants'
 import images from '../../../images'
 import Spacer from '../../../components/Spacer'
 import { SimpleButton } from '../../../components/SimpleButton'
@@ -23,7 +23,7 @@ const AddressBook = (props) => {
                 <Spacer height={hp(3)} />
 
                 <View style={styles.buttonRow}>
-                    <SimpleButton text="Add new Address" textColor={colors.white} styleView={styles.addAddressBtn} />
+                    <SimpleButton text="Add new Address" textColor={colors.white} styleView={styles.addAddressBtn} onPress={() => props?.navigation?.navigate?.(Routes.addNewAddress)} />
                 </View>
             </View>
         </AuthMainContainer>

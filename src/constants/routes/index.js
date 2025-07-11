@@ -26,5 +26,7 @@ export const Routes = {
     Deposit: "Deposit",
     settingSystem: "settingSystem",
     addressBook: "addressBook",
-    addressDetailsExpanded: "addressDetailsExpanded"
+    addressDetailsExpanded: "addressDetailsExpanded",
+    addNewAddress: "addNewAddress",
+    settingEmailNotification: "settingEmailNotification",
 }

@@ -38,7 +38,7 @@ const Settings = (props) => {
                 <Spacer height={hp(1)} />
                 <SettingOption icon={images.addressSettingIcon} label='Address Book' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.addressBook }) }} />
                 <Spacer height={hp(1)} />
-                <SettingOption icon={images.emailNotificationSettingIcon} label='Email Notifications' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingProfile }) }} />
+                <SettingOption icon={images.emailNotificationSettingIcon} label='Email Notifications' onPress={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.settingEmailNotification }) }} />
             </View>
             {/* <Spacer height={hp(6)} /> */}
             <View style={styles.btnView}>

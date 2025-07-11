@@ -9,7 +9,7 @@ import { ResponsiveText } from '../../../components/ResponsiveText'
 import { appStyles } from '../../../utilities'
 import { SimpleButton } from '../../../components/SimpleButton'
 import { hp, wp } from '../../../components/ResponsiveComponent'
-import DropDown from './Components/dropDown'
+import DropDown from '../../../components/dropDown'
 import { colors, Routes } from '../../../constants'
 import TextInputField from '../../../components/TextInputField'
 

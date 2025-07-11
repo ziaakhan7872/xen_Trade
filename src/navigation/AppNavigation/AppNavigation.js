@@ -19,6 +19,8 @@ const AppNavigation = () => {
             <Screen name={Routes.settingSystem} component={App.SettingSystem} />
             <Screen name={Routes.addressBook} component={App.AddressBook} />
             <Screen name={Routes.addressDetailsExpanded} component={App.AddressDetailsExpanded} />
+            <Screen name={Routes.addNewAddress} component={App.AddNewAddress} />
+            <Screen name={Routes.settingEmailNotification} component={App.SettingEmailNotification} />
             <Screen name={Routes.Home} component={App.HomeScreen} />
         </Navigator>
     );

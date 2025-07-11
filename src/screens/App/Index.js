@@ -16,16 +16,12 @@ import AddressDetailsExpanded from "./AddressDetailsExpanded/AddressDetailsExpan
 import SelectNetwork from "./SelectNetwork/SelectNetwork";
 import Barcode from "./Barcode/Barcode";
 import Deposit from "./Deposit/Deposit";
+import AddNewAddress from "./AddNewAddress/AddNewAddress";
+import SettingEmailNotification from "./SettingEmailNotification/SettingEmailNotification";
 
 export {
      HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,
      Exchangescreen, WalletScreen, changePassword, antiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
-     SelectNetwork, Barcode, Deposit,
+     SelectNetwork, Barcode, Deposit, AddNewAddress, SettingEmailNotification,
 }
-
-// export {
-//      HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen, 
-//      Exchangescreen, WalletScreen, changePassword, antiPhishingCode, SelectNetwork, Barcode, Deposit,
-// }
-
 
