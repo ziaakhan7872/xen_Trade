@@ -48,7 +48,7 @@ const images = {
     infoCircle: require("../images/infoCircle.png"),
     downloadIcon: require("../images/downloadIcon.png"),
     qrcode: require("../images/qrcode.png"),
-rightArrow: require('../images/rightArrow.png'),
+    rightArrow: require('../images/rightArrow.png'),
     backArrow: require('../images/backArrow.png'),
     rightsign: require('../images/rightsign.png'),
     doughtnut:require('../images/Doughnut.png'),
@@ -57,7 +57,10 @@ rightArrow: require('../images/rightArrow.png'),
     arrowDown: require("../images/arrowDown.png"),
     Refeeral: require("../images/Referral.png"),
     Deposit: require("../images/Deposit.png"),
+  
+
     copyIcon: require("../images/copyIcon.png"),
     ethIcon: require("../images/ethIcon.png"),
+    copesIcon: require("../images/copesIcon.png"),
 }
 export default images
