@@ -25,6 +25,7 @@ const AppNavigation = () => {
             <Screen name={Routes.SelectCrypto} component={App.SelectCrypto} />
             <Screen name={Routes.AssetAllocation} component={App.AssetAllocation} />
             <Screen name={Routes.MenuScreen} component={App.MenuScreen} />
+            {/* <Screen name={Routes.WithDraw} component={App.WithDraw} /> */}
 
         </Navigator>
     );

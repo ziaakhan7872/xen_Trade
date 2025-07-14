@@ -56,6 +56,8 @@ const images = {
     arrowUp: require("../images/arrowUp.png"),
     arrowDown: require("../images/arrowDown.png"),
     Deposit: require("../images/Deposit.png"),
+  
+
     copyIcon: require("../images/copyIcon.png"),
     ethIcon: require("../images/ethIcon.png"),
     Document :require("../images/Document.png"),
@@ -66,6 +68,7 @@ const images = {
     DrawerMarket:require("./DrawerMarket.png"),
     Address:require("./Address.png"),
     Contact:require("./Contact.png"),
-    Logout:require("./Logout.png")
+    Logout:require("./Logout.png"),
+    copesIcon: require("../images/copesIcon.png"),
 }
 export default images

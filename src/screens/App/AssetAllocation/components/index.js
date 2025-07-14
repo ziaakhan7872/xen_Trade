@@ -52,7 +52,7 @@ export const AssetAllocationBalance = () => (
       </View>
     </View>
     <TouchableOpacity style={styles.tradeButton}>
-      <Image source={images.tradeIcon || images.copyIcon} style={styles.tradeIcon} resizeMode="contain" />
+      <Image source={ images.copesIcon} style={styles.tradeIcon} resizeMode="contain" />
       <ResponsiveText style={styles.tradeButtonText}>Trade</ResponsiveText>
     </TouchableOpacity>
   </View>
@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
   historyLabel: {
     color: colors.white,
     fontSize: 14,
+    
     fontFamily: fontFamily.appTextBold,
     alignSelf: 'flex-start',
     marginLeft: wp(4),
