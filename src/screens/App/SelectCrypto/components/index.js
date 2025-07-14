@@ -44,6 +44,64 @@ export const SelectCryptoHeader = () => {
   );
 };
 
+
+// Search box component
+export const SelectCryptoSearchBox = ({ searchText, onChangeText }) => (
+  <View style={styles.selectCryptoSearchContainer}>
+    <TextInput
+      style={styles.selectCryptoSearchInput}
+      placeholder="Search..."
+      placeholderTextColor={colors.white}
+      value={searchText}
+      onChangeText={onChangeText}
+      autoCapitalize="none"
+      autoCorrect={false}
+    />
+    <Image
+      source={images.searchSign}
+      style={styles.searchIcon}
+      resizeMode="contain"
+    />
+  </View>
+);
+
+// Crypto list component
+export const SelectCryptoList = ({ sections, onSelect }) => {
+  const renderSectionHeader = ({ section }) => (
+    <View style={styles.sectionHeader}>
+      <ResponsiveText style={styles.sectionHeaderText}>{section.header}</ResponsiveText>
+    </View>
+  );
+  const renderCryptoItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.cryptoSelectItem}
+      onPress={() => onSelect(item)}
+    >
+      <Image source={item.icon} style={styles.cryptoSelectIcon} resizeMode="contain" />
+      <View style={styles.cryptoSelectDetails}>
+        <ResponsiveText style={styles.cryptoSymbol}>{item.symbol}</ResponsiveText>
+        <ResponsiveText style={styles.cryptoName}>{item.name}</ResponsiveText>
+      </View>
+    </TouchableOpacity>
+  );
+  return (
+    <SectionList
+      sections={sections}
+      keyExtractor={(item) => item.id}
+      renderItem={renderCryptoItem}
+      renderSectionHeader={renderSectionHeader}
+      stickySectionHeadersEnabled={false}
+      style={styles.selectCryptoListContainer}
+      contentContainerStyle={{ paddingBottom: hp(2) }}
+      initialNumToRender={10}
+      maxToRenderPerBatch={10}
+      windowSize={10}
+      removeClippedSubviews={true}
+    />
+  );
+};
+
+// Main content component
 export const SelectCryptoContent = ({ refProp, onSelectCrypto }) => {
   const [searchText, setSearchText] = useState('');
   const initialSections = [
@@ -78,62 +136,16 @@ export const SelectCryptoContent = ({ refProp, onSelectCrypto }) => {
     }, 300);
   };
 
-  const renderSectionHeader = ({ section }) => (
-    <View style={styles.sectionHeader}>
-      <ResponsiveText style={styles.sectionHeaderText}>{section.header}</ResponsiveText>
-    </View>
-  );
-
-  const renderCryptoItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.cryptoSelectItem}
-      onPress={() => handleCryptoSelect(item)}
-    >
-      <Image source={item.icon} style={styles.cryptoSelectIcon} resizeMode="contain" />
-      <View style={styles.cryptoSelectDetails}>
-        <ResponsiveText style={styles.cryptoSymbol}>{item.symbol}</ResponsiveText>
-        <ResponsiveText style={styles.cryptoName}>{item.name}</ResponsiveText>
-      </View>
-    </TouchableOpacity>
-  );
-
   return (
     <>
-      <View style={styles.selectCryptoSearchContainer}>
-        <TextInput
-          style={styles.selectCryptoSearchInput}
-          placeholder="Search..."
-          placeholderTextColor={colors.white}
-          value={searchText}
-          onChangeText={handleSearch}
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-        <Image
-          source={images.searchSign}
-          style={styles.searchIcon}
-          resizeMode="contain"
-        />
-      </View>
+      <SelectCryptoSearchBox searchText={searchText} onChangeText={handleSearch} />
       <Spacer />
-      <SectionList
-        sections={filteredData}
-        keyExtractor={(item) => item.id}
-        renderItem={renderCryptoItem}
-        renderSectionHeader={renderSectionHeader}
-        stickySectionHeadersEnabled={false}
-        style={styles.selectCryptoListContainer}
-        contentContainerStyle={{ paddingBottom: hp(2) }}
-        initialNumToRender={10}
-        maxToRenderPerBatch={10}
-        windowSize={10}
-        removeClippedSubviews={true}
-      />
+      <SelectCryptoList sections={filteredData} onSelect={handleCryptoSelect} />
     </>
   );
 };
 
-// ...existing styles...
+
 const styles = StyleSheet.create({
 // Header
 
