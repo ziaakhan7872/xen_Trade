@@ -9,6 +9,8 @@ import useHome from './Hooks/Index'
 import { hp, wp } from '../../../components/ResponsiveComponent'
 import RowButton from '../../../components/RowButton'
 import { colors } from '../../../constants'
+import images from '../../../images'
+import { ResponsiveText } from '../../../components/ResponsiveText'
 
 const HomeScreen = () => {
   const { threeRowTabButtonPress, setThreeRowTabButtonPress, portfolioButton, setPortfolioButton } = useHome()
@@ -32,11 +34,13 @@ const HomeScreen = () => {
         )}
         <Spacer height={hp(1)} />
         <RowButton
-        buttonRowWidth={wp(90)}
-        buttonBackGroundColor={colors.searchBar}
-        buttonWidth={wp(42)}
-        borderRadius={wp(3)}
-        image1={<Image/>}
+          buttonRowWidth={wp(90)}
+          buttonBackGroundColor={colors.searchBar}
+          buttonWidth={wp(42)}
+          borderRadius={wp(3)}
+          image1={<Image source={images.Refeeral} style={style.imageStyling} />}
+          image2={<Image source={images.Deposit} style={style.imageStyling} />}
+          label1={<ResponsiveText style={style.text1}>Referral</ResponsiveText>}
         />
 
       </View>
