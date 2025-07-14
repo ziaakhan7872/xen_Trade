@@ -1,15 +1,14 @@
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 
-import React, { useRef, useState } from 'react'
-
-const useHomeScreen = () => {
-     const [selectedCrypto, setSelectedCrypto] = useState(null);
-      const cryptoSheetRef = useRef();
-  return {
-    selectedCrypto,
-    setSelectedCrypto,
-    cryptoSheetRef
-  }
+const index = () => {
+  return (
+    <View>
+      <Text>index</Text>
+    </View>
+  )
 }
 
-export default useHomeScreen
+export default index
 
+const styles = StyleSheet.create({})

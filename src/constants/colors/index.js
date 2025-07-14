@@ -12,10 +12,10 @@ export const colors = {
     authButtonColor: "#01272E",
     buttonSigninColor: "#204147",
     boxColor: "rgba(1, 26, 31, 1)",
-    logOutBtn: "#FF3235",
+    redColorBtn: "#FF3235",
     borderColor: "#0A2228",
-    settingCardsBgColor: "#011A1F",
-    settingCardBorderColor: "#10272C",
+    cardsBgColor: "#011A1F",
+    cardBorderColor: "#10272C",
     inputBgColor: "#021E23",
     transparentBtn: 'rgba(255, 255, 255, 0.07)',
     lightTextColor: '#85A8AE',
@@ -31,8 +31,14 @@ export const colors = {
     bottomTabColor: "rgba(1, 26, 31, 1)",
     AccountInfoBorderColor: "#10272C",
     warningTextColor: "#E88F35",
+    warningBgColor: "rgba(232, 143, 53, 0.2)",
+    lineStroke: "#10272C",
     greenColor: "rgba(22, 168, 83, 0.18)",
     redColor:" rgba(255, 50, 53, 0.18);",
-    halfWhite:"#D1DADD"
+    halfWhite:"#D1DADD",
+    dot1:"#004B58",
+    dot2:"#006B7E",
+    dot3:"#0B8DA4",
+    available:"#0A2228"
 
 }

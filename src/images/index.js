@@ -1,3 +1,6 @@
+import { AppKitScaffold } from '@reown/appkit-react-native'
+import { optimism } from '@reown/appkit/networks'
+
 const images = {
     authBgImage: require('../images/authBgImage.png'),
     splashLogoImage: require('../images/splashLogoImage.png'),
@@ -36,13 +39,25 @@ const images = {
     Wallet: require("../images/Wallet.png"),
     Setting: require("../images/Setting.png"),
     dashboardGraph: require("../images/DummyImage/DashboardDummyGraph.png"),
-    doughnutChart: require("../images/DummyImage/Doughnut.png"),
+    doughnutChart: require("../images/Doughnut.png"),
+    tron: require("../images/tron.png"),
+    optimism: require("../images/optimism.png"),
+    polygon: require("../images/polygon.png"),
+    arbitrum: require("../images/arbitrum.png"),
+    aptos: require("../images/aptos.png"),
+    infoCircle: require("../images/infoCircle.png"),
+    downloadIcon: require("../images/downloadIcon.png"),
+    qrcode: require("../images/qrcode.png"),
+rightArrow: require('../images/rightArrow.png'),
+    backArrow: require('../images/backArrow.png'),
+    rightsign: require('../images/rightsign.png'),
+    doughtnut:require('../images/Doughnut.png'),
+    checkMark: require("../images/checkMark.png"),
     arrowUp: require("../images/arrowUp.png"),
     arrowDown: require("../images/arrowDown.png"),
     Refeeral: require("../images/Referral.png"),
     Deposit: require("../images/Deposit.png"),
-
-
-
+    copyIcon: require("../images/copyIcon.png"),
+    ethIcon: require("../images/ethIcon.png"),
 }
 export default images

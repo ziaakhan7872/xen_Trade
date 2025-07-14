@@ -20,18 +20,17 @@ const changePassword = (props) => {
                 <Spacer height={hp(4.5)} />
 
                 <ResponsiveText style={styles.inputLabel}>Current Password</ResponsiveText>
-                <TextInputField placeholder={'Enter your current password'} />
+                <TextInputField placeholder={'Enter your current password'} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1.5)} />
                 <ResponsiveText style={styles.inputLabel}>New Password</ResponsiveText>
-                <TextInputField placeholder={'Enter your new password'} />
+                <TextInputField placeholder={'Enter your new password'} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1.5)} />
                 <ResponsiveText style={styles.inputLabel}>Confirm new Password</ResponsiveText>
-                <TextInputField placeholder={'Confirm your new password'} />
+                <TextInputField placeholder={'Confirm your new password'} placeholderTextColor={colors.placeHolderTextColor} />
 
-                <Spacer height={hp(45)} />
-                <View style={styles.btnSaveChangesView}>
-                    <SimpleButton text="Save Changes" textColor={colors.disableTextColor} disabled={true} styleView={styles.btnSaveChanges} />
-                </View>
+            </View>
+            <View style={styles.btnSaveChangesView}>
+                <SimpleButton text="Save Changes" textColor={colors.disableTextColor} disabled={true} styleView={styles.btnSaveChanges} />
             </View>
         </AuthMainContainer>
     )

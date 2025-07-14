@@ -9,7 +9,7 @@ import { ResponsiveText } from '../../../components/ResponsiveText'
 import { appStyles } from '../../../utilities'
 import { SimpleButton } from '../../../components/SimpleButton'
 import { hp, wp } from '../../../components/ResponsiveComponent'
-import DropDown from './Components/dropDown'
+import DropDown from '../../../components/dropDown'
 import { colors, Routes } from '../../../constants'
 import TextInputField from '../../../components/TextInputField'
 
@@ -48,12 +48,12 @@ const SettingProfile = (props) => {
                 <Spacer height={hp(4)} />
 
                 <ResponsiveText style={styles.inputLabel}>Email</ResponsiveText>
-                <TextInputField placeholder={"Enter your email address"} />
+                <TextInputField placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
 
                 <Spacer height={hp(2)} />
 
                 <ResponsiveText style={styles.inputLabel}>Phone number</ResponsiveText>
-                <TextInputField placeholder={"Enter your phone number"} />
+                <TextInputField placeholder={"Enter your phone number"} placeholderTextColor={colors.placeHolderTextColor} />
 
                 <Spacer height={hp(2)} />
 

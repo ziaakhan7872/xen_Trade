@@ -1,13 +1,13 @@
 import { StyleSheet, TextInput } from 'react-native'
 import React from 'react'
-import { colors } from '../constants'
+import { colors, fontFamily } from '../constants'
 import { wp, hp } from './ResponsiveComponent'
 
-const TextInputField = ({ placeholder }) => {
+const TextInputField = ({ placeholder, placeholderTextColor }) => {
     return (
         <TextInput
             placeholder={placeholder}
-            placeholderTextColor={colors.placeHolderTextColor}
+            placeholderTextColor={placeholderTextColor}
             style={styles.inputField}
         />
     )
@@ -26,5 +26,7 @@ const styles = StyleSheet.create({
         borderWidth: 1.5,
         height: hp(6),
         fontSize: 14,
+        color: colors.white,
+        fontWeight: '400',
     },
 })

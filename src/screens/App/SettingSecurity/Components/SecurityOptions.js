@@ -46,10 +46,10 @@ export default SecurityOptions;
 
 const styles = StyleSheet.create({
     optionCard: {
-        backgroundColor: colors.settingCardsBgColor,
+        backgroundColor: colors.cardsBgColor,
         padding: wp(4.5),
         borderRadius: wp(3),
-        borderColor: colors.settingCardBorderColor,
+        borderColor: colors.cardBorderColor,
         borderWidth: 1.5,
     },
     optionDirection: {

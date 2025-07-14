@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { StyleSheet } from 'react-native'
-import { hp, wp } from '../../../../components/ResponsiveComponent'
-import { colors } from '../../../../constants'
+import { hp, wp } from './ResponsiveComponent'
+import { colors } from '../constants'
 
-const DropDown = ({ items, value, setValue, placeholder }) => {
+const DropDown = ({ items, value, setValue, placeholder, zIndex, setIsOpen }) => {
     const [open, setOpen] = useState(false)
 
     return (
@@ -12,34 +12,36 @@ const DropDown = ({ items, value, setValue, placeholder }) => {
             open={open}
             value={value}
             items={items}
-            setOpen={setOpen}
+            setOpen={(openState) => {
+                setOpen(openState)
+                setIsOpen(openState) // Track the dropdown open state
+            }}
             setValue={setValue}
             // setItems={() => { }} //For future use if we want to manage items dynamically
-            style={styles.dropdown}
-            dropDownContainerStyle={styles.dropdownContainer}
+            style={[styles.dropdown, { zIndex: zIndex }]}  // dynamic zIndex 
+            dropDownContainerStyle={[styles.dropdownContainer, { zIndex: zIndex }]}
             textStyle={styles.dropdownText}
             placeholder={placeholder}
-            placeholderStyle={{ color: '#7C9CA1' }}
+            // placeholderStyle={{ color: '#7C9CA1' }}
             listMode="SCROLLVIEW"
-            arrowIconStyle={{ tintColor: '#fff' }}
+            arrowIconStyle={{ tintColor: '#fff', marginRight: wp(2) }}
         />
     )
 }
-
 export default DropDown
 
 const styles = StyleSheet.create({
     dropdown: {
         backgroundColor: colors.inputBgColor,
-        borderColor: 'transparent',
+        borderColor: colors.borderColor,
+        borderWidth: 1.5,
         borderRadius: wp(3),
-        minHeight: hp(6.5),
-        paddingHorizontal: wp(2),
-        zIndex: 10
+        paddingVertical: hp(2)
     },
     dropdownContainer: {
         backgroundColor: colors.inputBgColor,
-        borderColor: 'transparent',
+        borderColor: colors.borderColor,
+        borderWidth: 1.5,
         borderRadius: wp(3),
         zIndex: 1000
     },

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { wp, hp } from '../../../components/ResponsiveComponent';
 import { colors, fontFamily } from '../../../constants';
 
@@ -40,19 +40,20 @@ export const styles = StyleSheet.create({
         color: colors.white,
     },
     buttonRow: {
-        paddingHorizontal: wp(3),
+        paddingHorizontal: wp(4),
+        paddingBottom: Platform.OS === 'android' ? hp(2) : hp(1),
     },
     cancelBtn: {
-        width: wp(42),
+        width: wp(44),
         backgroundColor: colors.transparentBtn,
-        paddingVertical: hp(1.8),
+        paddingVertical: hp(2),
         borderRadius: wp(10),
     },
 
     saveBtn: {
         width: wp(44),
         backgroundColor: colors.authButtonColor,
-        paddingVertical: hp(1.8),
+        paddingVertical: hp(2),
         borderRadius: wp(10),
         marginLeft: wp(3), // space between buttons
     },

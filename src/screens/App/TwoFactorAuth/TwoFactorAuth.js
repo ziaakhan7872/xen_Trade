@@ -39,14 +39,13 @@ const TwoFactorAuth = () => {
                 <Spacer height={hp(3)} />
 
                 <ResponsiveText style={styles.inputLabel}>Enter code from 2-FA app</ResponsiveText>
-                <TextInputField placeholder={'Enter Code'} />
+                <TextInputField placeholder={'Enter Code'} placeholderTextColor={colors.placeHolderTextColor} />
 
-                <Spacer height={hp(20)} />
 
-                <View style={[appStyles.row, styles.buttonRow]}>
-                    <SimpleButton text="Cancel" styleView={styles.cancelBtn} />
-                    <SimpleButton text="Save" textColor={colors.disableTextColor} styleView={styles.saveBtn} />
-                </View>
+            </View>
+            <View style={[appStyles.row, styles.buttonRow]}>
+                <SimpleButton text="Cancel" styleView={styles.cancelBtn} />
+                <SimpleButton text="Save" textColor={colors.disableTextColor} styleView={styles.saveBtn} />
             </View>
         </AuthMainContainer>
     );

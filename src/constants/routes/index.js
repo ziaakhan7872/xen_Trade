@@ -1,3 +1,6 @@
+import AssetAllocation from "../../screens/App/AssetAllocation/AssetAllocation";
+import { DepositHistory, SelectNetwork } from "../../screens/App/Index";
+
 export const Routes = {
     AuthNavigator: "AuthNavigator",
     AppNavigator: "AppNavigator",
@@ -19,4 +22,14 @@ export const Routes = {
     twoFactorAuth: "twoFactorAuth",
     changePassword: "changePassword",
     antiPhishingCode: "antiPhishingCode",
+    SelectNetwork: "SelectNetwork",
+    Barcode: "Barcode",
+    Deposit: "Deposit",
+    settingSystem: "settingSystem",
+    addressBook: "addressBook",
+    addressDetailsExpanded: "addressDetailsExpanded",
+    addNewAddress: "addNewAddress",
+    settingEmailNotification: "settingEmailNotification",
+    SelectCrypto: "SelectCrypto",
+    AssetAllocation: "AssetAllocation",
 }

@@ -16,10 +16,10 @@ export const AuthMainContainer = ({
 
       {/* Gradient Background */}
       <LinearGradient
-        colors={['#0a2a2f', '#010f10']} // Top: dark teal, Bottom: blackish
-        locations={[0, 0.5]}            // Move blackish color up slightly (was 0.9 before)
-        start={{ x: 0.5, y: 0 }}
-        end={{ x: 0.5, y: 1 }}
+        colors={['#0a2a2f', '#011316']} // Top: dark teal, Bottom: blackish
+        locations={[0, 0.54]}            // Move blackish color up slightly (was 0.9 before)
+        start={{ x: 0.5, y: 0.15 }}
+        end={{ x: 0.5, y: 0.6 }}
         style={styles.linearGradient}
       >
 

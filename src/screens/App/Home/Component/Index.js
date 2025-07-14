@@ -124,7 +124,7 @@ export const AccountOverView = ({ data = AccountActivity }) => {
                                         <ResponsiveText style={[style.text4]}>{item.date} {item.time}</ResponsiveText>
                                     </View>
                                 </View>
-                                <View style={{alignItems:"flex-end"}}>
+                                <View style={{ alignItems: "flex-end" }}>
                                     <ResponsiveText style={[style.text1]}>{item.marketOrder} market order</ResponsiveText>
                                     <ResponsiveText style={[style.text1]}>completed for {item.amount}</ResponsiveText>
                                 </View>
@@ -186,7 +186,7 @@ const style = StyleSheet.create({
         fontWeight: "500",
         color: colors.iconColor,
     },
-     text4: {
+    text4: {
         fontSize: 12,
         fontWeight: "400",
         color: colors.iconColor,
@@ -254,12 +254,12 @@ const style = StyleSheet.create({
     flatListDataView: {
         width: wp(90), // ✅ Take full width minus parent padding
         borderBottomWidth: 1,
-        borderBottomColor: colors.settingCardBorderColor,
+        borderBottomColor: colors.cardBorderColor,
         paddingHorizontal: wp(2),
         paddingVertical: wp(3),
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems:"center"
+        alignItems: "center"
     },
     circle: {
         width: wp(9.5),
