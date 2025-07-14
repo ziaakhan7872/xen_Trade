@@ -32,4 +32,6 @@ export const Routes = {
     settingEmailNotification: "settingEmailNotification",
     SelectCrypto: "SelectCrypto",
     AssetAllocation: "AssetAllocation",
+    MenuScreen: "MenuScreen",
+
 }

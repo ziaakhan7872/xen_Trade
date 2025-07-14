@@ -41,49 +41,103 @@ export const coinData = [
     amount: '3.5214',
     value: '$91.47',
   },
- 
+
 ];
 
-export const AccountActivity =[
+export const AccountActivity = [
+  {
+    id: 1,
+    type: "Buy",
+    date: "04/07/25",
+    time: "11:40 am",
+    marketOrder: "BTC/EUR",
+    amount: "0.001"
+  },
+  {
+    id: 2,
+    type: "Sell",
+    date: "04/07/25",
+    time: "11:40 am",
+    marketOrder: "BTC/EUR",
+    amount: "0.001"
+  },
+  {
+    id: 3,
+    type: "Buy",
+    date: "04/07/25",
+    time: "11:40 am",
+    marketOrder: "BTC/EUR",
+    amount: "0.001"
+  },
+  {
+    id: 4,
+    type: "Sell",
+    date: "04/07/25",
+    time: "11:40 am",
+    marketOrder: "BTC/EUR",
+    amount: "0.001"
+  },
+  {
+    id: 5,
+    type: "Buy",
+    date: "04/07/25",
+    time: "11:40 am",
+    marketOrder: "BTC/EUR",
+    amount: "0.001"
+  },
+
+]
+
+export const DummyLatestNews = [
+  {
+    id: 1,
+    title: "Future of Crypto",
+    description:"The future of crypto is rapidly evolving, driven by innovation and global News ",
+    newsImage:images.News1
+
+  },
+  {
+    id: 2,
+    title: "Future of Crpto",
+    description:"The future of crypto is rapidly evolving, driven by innovation and global ...",
+    newsImage:images.News2
+
+  },
+
+]
+
+export const watchListDumyData =[
   {
     id:1,
-    type:"Buy",
-    date:"04/07/25",
-    time:"11:40 am",
-    marketOrder:"BTC/EUR",
-    amount:"0.001"
+    nameLogo:"BTC",
+    fullName:"BitCoin",
+    market:"$67.88K",
+    percentage:"+1.64%",
+    image:images.BtcLogo
   },
-    {
+ 
+  {
     id:2,
-    type:"Sell",
-    date:"04/07/25",
-    time:"11:40 am",
-    marketOrder:"BTC/EUR",
-    amount:"0.001"
+    nameLogo:"ETH",
+    fullName:"Etheium",
+    market:"$2.53K",
+    percentage:"-0.98%",
+    image:images.ethIcon
   },
    {
     id:3,
-    type:"Buy",
-    date:"04/07/25",
-    time:"11:40 am",
-    marketOrder:"BTC/EUR",
-    amount:"0.001"
+    nameLogo:"SOL",
+    fullName:"Solana",
+    market:"$2.53K",
+    percentage:"-0.98%",
+    image:images.SolLogo
   },
-    {
+   {
     id:4,
-    type:"Sell",
-    date:"04/07/25",
-    time:"11:40 am",
-    marketOrder:"BTC/EUR",
-    amount:"0.001"
+    nameLogo:"USDT",
+    fullName:"TetherUS",
+    market:"$2.53K",
+    percentage:"-0.98%",
+    image:images.UsdtLogo
   },
-    {
-    id:5,
-    type:"Buy",
-    date:"04/07/25",
-    time:"11:40 am",
-    marketOrder:"BTC/EUR",
-    amount:"0.001"
-  },
-
 ]

@@ -20,10 +20,12 @@ import AddNewAddress from "./AddNewAddress/AddNewAddress";
 import SettingEmailNotification from "./SettingEmailNotification/SettingEmailNotification";
 import SelectCrypto from "./SelectCrypto/SelectCrypto";
 import AssetAllocation from "./AssetAllocation/AssetAllocation";
+import MenuScreen from "./MenuScreen/MenuScreen";
+
 
 export {
      HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,
      Exchangescreen, WalletScreen, changePassword, antiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
-     SelectNetwork, Barcode, Deposit, AddNewAddress, SettingEmailNotification, SelectCrypto, AssetAllocation,
+     SelectNetwork, Barcode, Deposit, AddNewAddress, SettingEmailNotification, SelectCrypto, AssetAllocation, MenuScreen
 }
 

@@ -7,7 +7,7 @@ import { ResponsiveText } from '../../../../components/ResponsiveText';
 import images from '../../../../images';
 import Line from '../../../../components/Liner';
 import { SimpleButton } from '../../../../components/SimpleButton';
-import { AccountActivity } from '../../../../utilities/dummyData';
+import { AccountActivity, DummyLatestNews, watchListDumyData } from '../../../../utilities/dummyData';
 import AntDesign from "react-native-vector-icons/AntDesign"
 
 export const AccountInfo = () => {
@@ -153,15 +153,104 @@ export const AccountOverView = ({ data = AccountActivity }) => {
         </View>
     )
 }
+
+export const LatestNewsComponent = ({ NewsData = DummyLatestNews }) => {
+    return (
+        <View style={{ width: wp(100) }}>
+            <FlatList
+                data={NewsData}
+                keyExtractor={(item, index) => item.id.toString() || index.toString()}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                    <View style={style.LatestNewsBox}>
+                        <Image resizeMode='contain' style={style.ImageNewsStyling} source={item.newsImage} />
+                        <HorizontalSpacer width={wp(3)} />
+                        <View>
+                            <ResponsiveText style={style.NewsTitl}>{item.title}</ResponsiveText>
+                            <Spacer height={hp(0.5)} />
+                            <ResponsiveText style={style.newsDescription} numberOfLines={3}>
+                                {item.description}
+                            </ResponsiveText>
+                            {/* <ResponsiveText>Read More</ResponsiveText> */}
+                        </View>
+                    </View>
+                )}
+                ItemSeparatorComponent={() => <HorizontalSpacer />}
+            />
+        </View>
+
+    )
+}
+
+export const WatchList = ({ WatchListButtonPress, setWatchListButtonPress, watchListData = watchListDumyData }) => {
+    return (
+        <View style={style.mainBox}>
+            <View style={style.watchListView}>
+                <TouchableOpacity onPress={() => setWatchListButtonPress("watchList")} style={{ width: wp(18) }}>
+                    <ResponsiveText style={[style.watchListText, { color: WatchListButtonPress === "watchList" ? colors.mainColor : colors.iconColor, },]} >
+                        Watchlist
+                    </ResponsiveText>
+                    <Spacer height={hp(1)} />
+                    {WatchListButtonPress === "watchList" && (
+                        <View style={style.watchListLine} />
+                    )}
+                </TouchableOpacity>
+                <HorizontalSpacer width={wp(2)} />
+                <TouchableOpacity onPress={() => setWatchListButtonPress("pairs")} style={{ width: wp(18) }}>
+                    <ResponsiveText style={[style.watchListText, { color: WatchListButtonPress === "pairs" ? colors.mainColor : colors.iconColor, },]} >
+                        All Pairs
+                    </ResponsiveText>
+                    <Spacer height={hp(1)} />
+                    {WatchListButtonPress === "pairs" && (
+                        <View style={style.watchListLine} />
+                    )}
+                </TouchableOpacity>
+            </View>
+            <FlatList
+                data={watchListData}
+                keyExtractor={(item, index) => item.id.toString() || index.toString()}
+                // horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                    <View style={style.watchListInnerView}>
+                        <View style={{ flexDirection: "row", width: wp(40)}}>
+                            <Image source={item.image} style={style.watchListImageStyling} resizeMode='contain' />
+                            <HorizontalSpacer />
+                            <View >
+                                <ResponsiveText style={[style.text2, { fontSize: 14 }]}>{item.nameLogo}</ResponsiveText>
+                                <ResponsiveText style={[style.text4]}>{item.fullName}</ResponsiveText>
+                            </View>
+                        </View>
+                        <View style={{ alignItems: 'flex-start', width: wp(20) }}>
+                            <ResponsiveText style={[style.marketText]}>{item.market}</ResponsiveText>
+
+                        </View>
+                        <View style={{ alignItems: 'flex-end', width: wp(20) }}>
+                            <ResponsiveText style={[style.text2, { fontSize: 14,color: item.percentage.startsWith('+') ? 'green' : 'red' }]}>{item.percentage}</ResponsiveText>
+                        </View>
+
+                    </View>
+                )}
+
+            />
+
+            {/* <Line/> */}
+
+            {/* {WatchListButtonPress=="watchList"} */}
+        </View>
+    )
+}
 const style = StyleSheet.create({
     mainBox: {
         width: wp(90),
-        paddingHorizontal: wp(4),
+        // paddingHorizontal: wp(4),
         paddingVertical: wp(4),
         backgroundColor: colors.searchBar,
         borderRadius: wp(3),
         borderWidth: 1,
         borderColor: colors.AccountInfoBorderColor,
+        alignItems: "center"
     },
     accountViewMainBox: {
         width: wp(90),
@@ -172,7 +261,7 @@ const style = StyleSheet.create({
         height: hp(33),
         alignItems: "center",
         justifyContent: "center",
-        paddingHorizontal: wp(0), // ✅ Add horizontal padding
+        paddingHorizontal: wp(0),
     },
 
     mainBoxInnerView: {
@@ -252,7 +341,7 @@ const style = StyleSheet.create({
         height: wp(6.41),
     },
     flatListDataView: {
-        width: wp(90), // ✅ Take full width minus parent padding
+        width: wp(90),
         borderBottomWidth: 1,
         borderBottomColor: colors.cardBorderColor,
         paddingHorizontal: wp(2),
@@ -268,6 +357,83 @@ const style = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
 
+    },
+    LatestNewsBox: {
+        width: wp(72),
+        paddingHorizontal: wp(4),
+        paddingVertical: wp(4),
+        backgroundColor: colors.searchBar,
+        borderRadius: wp(3),
+        borderWidth: 1,
+        borderColor: colors.AccountInfoBorderColor,
+        flexDirection: "row"
+    },
+    ImageNewsStyling: {
+        width: wp(20.25),
+        height: wp(20.25),
+        borderRadius: wp(1.2)
+    },
+    NewsTitl: {
+        fontSize: 16,
+        fontWeight: "500",
+        color: colors.white
+    },
+    newsDescription: {
+        fontSize: 14,
+        color: colors.iconColor,
+        lineHeight: 20,
+        flexWrap: 'wrap',
+        width: wp(40),
+        textAlign: "justify"
+    },
+
+    readMore: {
+        color: colors.buttonSigninColor,
+        fontWeight: '500',
+    },
+    watchListView: {
+        width: wp(90),
+        flexDirection: "row",
+        borderBottomWidth: 1,
+        paddingHorizontal: wp(3),
+        borderBottomColor: colors.borderColor
+
+    },
+    watchListLine: {
+        width: wp(17),
+        // paddingVertical:hp(1),
+        backgroundColor: colors.mainColor,
+        height: wp(1),
+        borderTopLeftRadius: wp(0.5),
+        borderTopRightRadius: wp(0.5)
+    },
+    watchListText: {
+        fontSize: 14,
+        fontWeight: "500",
+        textAlign: "center"
+        // color:colors.mainColor
+    },
+    watchListInnerView: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: wp(90),
+        paddingVertical: wp(3),
+        paddingHorizontal: wp(3),
+        borderBottomWidth: 1,
+        borderBottomColor: colors.borderColor,
+        alignItems: "center"
+    },
+    watchListImageStyling: {
+        width: wp(7.75),
+        height: wp(7.75),
+        borderRadius: wp(3.875)
+    },
+    marketText: {
+        fontSize: 14,
+        fontWeight: "600",
+        color: colors.white,
+        textAlign: "left",
+   
     }
 
 });
