@@ -39,6 +39,9 @@ export const colors = {
     dot1:"#004B58",
     dot2:"#006B7E",
     dot3:"#0B8DA4",
-    available:"#0A2228"
+    available:"#0A2228",
+    green:"#16A853",
+    red:"#FF3235"
+
 
 }

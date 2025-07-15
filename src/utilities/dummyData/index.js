@@ -149,7 +149,8 @@ export const MarketData =[
     Vol:"84.45M",
     previousPrice:"39,890.67",
     InUSdt:"$39,890.67",
-    Market:"+ 2.5%"
+    Market:"+ 2.5%",
+    favourite:true
   },
   {
     id:2,
@@ -157,21 +158,25 @@ export const MarketData =[
     Vol:"22.05M",
     previousPrice:"68,454",
     InUSdt:"$1,853.04",
-    Market:"+ 2.5%"
+    Market:"+ 2.5%",
+    favourite:false
+
   },{
     id:3,
     name:"AXS/USDT",
     Vol:"22.05M",
     previousPrice:"68,454",
     InUSdt:"$1,853.04",
-    Market:"- 2.5%"
+    Market:"- 2.5%",
+    favourite:true
   },{
     id:4,
     name:"BTC/USDT",
     Vol:"22.05M",
     previousPrice:"68,454",
     InUSdt:"$1,853.04",
-    Market:"+ 2.5%"
+    Market:"+ 2.5%",
+    favourite:true
   },
   {
     id:5,
@@ -179,7 +184,8 @@ export const MarketData =[
     Vol:"22.05M",
     previousPrice:"68,454",
     InUSdt:"$1,853.04",
-    Market:"+ 2.5%"
+    Market:"+ 2.5%",
+    favourite:false
   },
   {
     id:6,
@@ -187,7 +193,8 @@ export const MarketData =[
     Vol:"22.05M",
     previousPrice:"68,454",
     InUSdt:"$1,853.04",
-    Market:"+ 2.5%"
+    Market:"+ 2.5%",
+    favourite:false
   },
   {
     id:7,
@@ -195,7 +202,8 @@ export const MarketData =[
     Vol:"22.05M",
     previousPrice:"68,454",
     InUSdt:"$1,853.04",
-    Market:"+ 2.5%"
+    Market:"+ 2.5%",
+    favourite:true
   },
   {
     id:8,
@@ -203,7 +211,8 @@ export const MarketData =[
     Vol:"22.05M",
     previousPrice:"68,454",
     InUSdt:"$1,853.04",
-    Market:"+ 2.5%"
+    Market:"+ 2.5%",
+    favourite:true
   },
   {
     id:9,
@@ -211,7 +220,8 @@ export const MarketData =[
     Vol:"22.05M",
     previousPrice:"68,454",
     InUSdt:"$1,853.04",
-    Market:"+ 2.5%"
+    Market:"+ 2.5%",
+    favourite:true
   },
   
 

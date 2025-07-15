@@ -11,7 +11,7 @@ export const  style = StyleSheet.create({
     searchButton:{
         width:wp(90),
         backgroundColor:colors.searchBar,
-        paddingVertical:hp(2),
+        paddingVertical:hp(1.7),
         borderRadius:wp(3),
         flexDirection:"row",
         alignItems:"center"

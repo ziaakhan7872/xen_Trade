@@ -207,7 +207,8 @@ export const WatchList = ({ WatchListButtonPress, setWatchListButtonPress, watch
                     )}
                 </TouchableOpacity>
             </View>
-            <FlatList
+            <View>
+ <FlatList
                 data={watchListData}
                 keyExtractor={(item, index) => item.id.toString() || index.toString()}
                 // horizontal={true}
@@ -234,6 +235,8 @@ export const WatchList = ({ WatchListButtonPress, setWatchListButtonPress, watch
                 )}
 
             />
+            </View>
+           
 
             {/* <Line/> */}
 

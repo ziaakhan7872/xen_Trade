@@ -1,12 +1,13 @@
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Image, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { wp } from '../../../../components/ResponsiveComponent'
+import { hp, wp } from '../../../../components/ResponsiveComponent'
 import { colors } from '../../../../constants'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
 import AntDesign from "react-native-vector-icons/AntDesign"
-import { HorizontalSpacer } from '../../../../components/Spacer'
+import Spacer, { HorizontalSpacer } from '../../../../components/Spacer'
 import images from '../../../../images'
 import { MarketData } from '../../../../utilities/dummyData'
+import Line from '../../../../components/Liner'
 
 export const RenderMarketHeader = () => {
     return (
@@ -37,24 +38,33 @@ export const RenderMarketList = ({ marketData = MarketData }) => {
                 data={marketData}
                 keyExtractor={(item, index) => item.id.toString() || index.toString()}
                 renderItem={({ item }) => (
-                    <View style={style.MarketDataView}>
-                        {/* <AntDesign name="star" size={15} color={colors.mainColor}/> */}
-                        <Image source={images.starFill} style={style.StarImage} />
-                        <View>
-                            <ResponsiveText>{item.name}</ResponsiveText>
-                            <ResponsiveText>Vol {item.Vol}</ResponsiveText>
-
+                    <>
+                     <View style={style.MarketDataView}>
+                        <View style={{  flexDirection: "row", alignItems: "center",width:wp(37)}}>
+                            <TouchableOpacity>
+                            <Image source={item.favourite?images.starFill:images.starUnFill} style={style.StarImage} />
+                            </TouchableOpacity>
+                            <HorizontalSpacer />
+                            <View>
+                                <ResponsiveText style={style.textHeader}>{item.name}</ResponsiveText>
+                                <ResponsiveText style={style.volText}>Vol {item.Vol}</ResponsiveText>
+                            </View>
                         </View>
-                         <View>
-                            <ResponsiveText>{item.previousPrice}</ResponsiveText>
-                            <ResponsiveText>{item.InUSdt}</ResponsiveText>
-
+                        <View style={{  alignItems: "flex-start",justifyContent:"flex-start",width:wp(25)}}>
+                            <ResponsiveText style={[style.textHeader]}>{item.previousPrice}</ResponsiveText>
+                            <ResponsiveText style={style.volText}>{item.InUSdt}</ResponsiveText>
                         </View>
-                         <View>
-                            <ResponsiveText>{item.previousPrice}</ResponsiveText>
-
+                        <View style={{ flex: 1, alignItems: "flex-end" ,width:wp(25)}}>
+                            <ResponsiveText style={[style.textHeader,{color:item.Market.startsWith("+")?colors.green:colors.red}]}>{item.Market}</ResponsiveText>
                         </View>
+                        <Spacer/>
+                        
                     </View>
+                    <Line height={hp(0.1)}/>
+                    </>
+                   
+
+
                 )}
             />
         </View>
@@ -88,18 +98,29 @@ const style = StyleSheet.create({
         flex: 1
     },
     MarketDataView: {
-        width: wp(100),
+        width: wp(90),
         flexDirection: "row",
         justifyContent: "space-between",
-        borderBottomWidth: 1,
-        borderBottomColor: colors.borderColor,
+        alignItems: "center",
+        // borderBottomWidth: 1,
+        // borderBottomColor: colors.borderColor,
         marginHorizontal: wp(4),
-        // marginVertical:wp(4)
+        paddingVertical: hp(1.5), // 👈 Adds top & bottom spacing
     },
     StarImage: {
         width: wp(4.5),
         height: wp(4.5),
         resizeMode: "contain"
+    },
+    textHeader: {
+        fontSize: 16,
+        fontWeight: "500",
+        color: colors.white
+    },
+    volText: {
+        fontSize: 14,
+        fontWeight: "400",
+        color: colors.iconColor
     }
 })
 
