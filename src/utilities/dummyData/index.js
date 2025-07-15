@@ -141,3 +141,78 @@ export const watchListDumyData =[
     image:images.UsdtLogo
   },
 ]
+
+export const MarketData =[
+  {
+    id:1,
+    name:"SFM/USDT",
+    Vol:"84.45M",
+    previousPrice:"39,890.67",
+    InUSdt:"$39,890.67",
+    Market:"+ 2.5%"
+  },
+  {
+    id:2,
+    name:"ETH/UAH",
+    Vol:"22.05M",
+    previousPrice:"68,454",
+    InUSdt:"$1,853.04",
+    Market:"+ 2.5%"
+  },{
+    id:3,
+    name:"AXS/USDT",
+    Vol:"22.05M",
+    previousPrice:"68,454",
+    InUSdt:"$1,853.04",
+    Market:"- 2.5%"
+  },{
+    id:4,
+    name:"BTC/USDT",
+    Vol:"22.05M",
+    previousPrice:"68,454",
+    InUSdt:"$1,853.04",
+    Market:"+ 2.5%"
+  },
+  {
+    id:5,
+    name:"ADA/USD",
+    Vol:"22.05M",
+    previousPrice:"68,454",
+    InUSdt:"$1,853.04",
+    Market:"+ 2.5%"
+  },
+  {
+    id:6,
+    name:"XRP/USDT",
+    Vol:"22.05M",
+    previousPrice:"68,454",
+    InUSdt:"$1,853.04",
+    Market:"+ 2.5%"
+  },
+  {
+    id:7,
+    name:"DOGE/USDT",
+    Vol:"22.05M",
+    previousPrice:"68,454",
+    InUSdt:"$1,853.04",
+    Market:"+ 2.5%"
+  },
+  {
+    id:8,
+    name:"LTC/USDT",
+    Vol:"22.05M",
+    previousPrice:"68,454",
+    InUSdt:"$1,853.04",
+    Market:"+ 2.5%"
+  },
+  {
+    id:9,
+    name:"LINK/USDT",
+    Vol:"22.05M",
+    previousPrice:"68,454",
+    InUSdt:"$1,853.04",
+    Market:"+ 2.5%"
+  },
+  
+
+]

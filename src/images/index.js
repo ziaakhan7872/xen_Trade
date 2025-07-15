@@ -56,8 +56,6 @@ const images = {
     arrowUp: require("../images/arrowUp.png"),
     arrowDown: require("../images/arrowDown.png"),
     Deposit: require("../images/Deposit.png"),
-  
-
     copyIcon: require("../images/copyIcon.png"),
     ethIcon: require("../images/ethIcon.png"),
     Document :require("../images/Document.png"),
@@ -70,5 +68,8 @@ const images = {
     Contact:require("./Contact.png"),
     Logout:require("./Logout.png"),
     copesIcon: require("../images/copesIcon.png"),
+    filterMaarketHeader:require("./filterMarket.png"),
+    starFill:require("./starFill.png"),
+    starUnFill:require("./starUnFill.png")
 }
 export default images
