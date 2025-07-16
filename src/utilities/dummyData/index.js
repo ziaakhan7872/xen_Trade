@@ -92,136 +92,211 @@ export const DummyLatestNews = [
   {
     id: 1,
     title: "Future of Crypto",
-    description:"The future of crypto is rapidly evolving, driven by innovation and global News ",
-    newsImage:images.News1
+    description: "The future of crypto is rapidly evolving, driven by innovation and global News ",
+    newsImage: images.News1
 
   },
   {
     id: 2,
     title: "Future of Crpto",
-    description:"The future of crypto is rapidly evolving, driven by innovation and global ...",
-    newsImage:images.News2
+    description: "The future of crypto is rapidly evolving, driven by innovation and global ...",
+    newsImage: images.News2
 
   },
 
 ]
 
-export const watchListDumyData =[
+export const watchListDumyData = [
   {
-    id:1,
-    nameLogo:"BTC",
-    fullName:"BitCoin",
-    market:"$67.88K",
-    percentage:"+1.64%",
-    image:images.BtcLogo
+    id: 1,
+    nameLogo: "BTC",
+    fullName: "BitCoin",
+    market: "$67.88K",
+    percentage: "+1.64%",
+    image: images.BtcLogo
   },
- 
+
   {
-    id:2,
-    nameLogo:"ETH",
-    fullName:"Etheium",
-    market:"$2.53K",
-    percentage:"-0.98%",
-    image:images.ethIcon
+    id: 2,
+    nameLogo: "ETH",
+    fullName: "Etheium",
+    market: "$2.53K",
+    percentage: "-0.98%",
+    image: images.ethIcon
   },
-   {
-    id:3,
-    nameLogo:"SOL",
-    fullName:"Solana",
-    market:"$2.53K",
-    percentage:"-0.98%",
-    image:images.SolLogo
+  {
+    id: 3,
+    nameLogo: "SOL",
+    fullName: "Solana",
+    market: "$2.53K",
+    percentage: "-0.98%",
+    image: images.SolLogo
   },
-   {
-    id:4,
-    nameLogo:"USDT",
-    fullName:"TetherUS",
-    market:"$2.53K",
-    percentage:"-0.98%",
-    image:images.UsdtLogo
+  {
+    id: 4,
+    nameLogo: "USDT",
+    fullName: "TetherUS",
+    market: "$2.53K",
+    percentage: "-0.98%",
+    image: images.UsdtLogo
   },
 ]
 
-export const MarketData =[
+export const MarketData = [
   {
-    id:1,
-    name:"SFM/USDT",
-    Vol:"84.45M",
-    previousPrice:"39,890.67",
-    InUSdt:"$39,890.67",
-    Market:"+ 2.5%",
-    favourite:true
+    id: 1,
+    name: "SFM/USDT",
+    Vol: "84.45M",
+    previousPrice: "39,890.67",
+    InUSdt: "$39,890.67",
+    Market: "+ 2.5%",
+    favourite: true
   },
   {
-    id:2,
-    name:"ETH/UAH",
-    Vol:"22.05M",
-    previousPrice:"68,454",
-    InUSdt:"$1,853.04",
-    Market:"+ 2.5%",
-    favourite:false
+    id: 2,
+    name: "ETH/UAH",
+    Vol: "22.05M",
+    previousPrice: "68,454",
+    InUSdt: "$1,853.04",
+    Market: "+ 2.5%",
+    favourite: false
 
-  },{
-    id:3,
-    name:"AXS/USDT",
-    Vol:"22.05M",
-    previousPrice:"68,454",
-    InUSdt:"$1,853.04",
-    Market:"- 2.5%",
-    favourite:true
-  },{
-    id:4,
-    name:"BTC/USDT",
-    Vol:"22.05M",
-    previousPrice:"68,454",
-    InUSdt:"$1,853.04",
-    Market:"+ 2.5%",
-    favourite:true
+  }, {
+    id: 3,
+    name: "AXS/USDT",
+    Vol: "22.05M",
+    previousPrice: "68,454",
+    InUSdt: "$1,853.04",
+    Market: "- 2.5%",
+    favourite: true
+  }, {
+    id: 4,
+    name: "BTC/USDT",
+    Vol: "22.05M",
+    previousPrice: "68,454",
+    InUSdt: "$1,853.04",
+    Market: "+ 2.5%",
+    favourite: true
   },
   {
-    id:5,
-    name:"ADA/USD",
-    Vol:"22.05M",
-    previousPrice:"68,454",
-    InUSdt:"$1,853.04",
-    Market:"+ 2.5%",
-    favourite:false
+    id: 5,
+    name: "ADA/USD",
+    Vol: "22.05M",
+    previousPrice: "68,454",
+    InUSdt: "$1,853.04",
+    Market: "+ 2.5%",
+    favourite: false
   },
   {
-    id:6,
-    name:"XRP/USDT",
-    Vol:"22.05M",
-    previousPrice:"68,454",
-    InUSdt:"$1,853.04",
-    Market:"+ 2.5%",
-    favourite:false
+    id: 6,
+    name: "XRP/USDT",
+    Vol: "22.05M",
+    previousPrice: "68,454",
+    InUSdt: "$1,853.04",
+    Market: "+ 2.5%",
+    favourite: false
   },
   {
-    id:7,
-    name:"DOGE/USDT",
-    Vol:"22.05M",
-    previousPrice:"68,454",
-    InUSdt:"$1,853.04",
-    Market:"+ 2.5%",
-    favourite:true
+    id: 7,
+    name: "DOGE/USDT",
+    Vol: "22.05M",
+    previousPrice: "68,454",
+    InUSdt: "$1,853.04",
+    Market: "+ 2.5%",
+    favourite: true
   },
   {
-    id:8,
-    name:"LTC/USDT",
-    Vol:"22.05M",
-    previousPrice:"68,454",
-    InUSdt:"$1,853.04",
-    Market:"+ 2.5%",
-    favourite:true
+    id: 8,
+    name: "LTC/USDT",
+    Vol: "22.05M",
+    previousPrice: "68,454",
+    InUSdt: "$1,853.04",
+    Market: "+ 2.5%",
+    favourite: true
   },
   {
-    id:9,
-    name:"LINK/USDT",
-    Vol:"22.05M",
-    previousPrice:"68,454",
-    InUSdt:"$1,853.04",
-    Market:"+ 2.5%",
-    favourite:true
+    id: 9,
+    name: "LINK/USDT",
+    Vol: "22.05M",
+    previousPrice: "68,454",
+    InUSdt: "$1,853.04",
+    Market: "+ 2.5%",
+    favourite: true
+  },
+
+
+]
+
+export const dummyOrderBook = [
+  {
+    id: 1,
+    priceinUsdt: 0.106867,
+    priceInBtc: 0.106867,
+    type: "Buy"
+
+  },
+  {
+    id: 2,
+    priceinUsdt: 0.206867,
+    priceInBtc: 0.206867,
+    type: "Buy"
+
+
+  },
+  {
+    id: 3,
+    priceinUsdt: 0.406867,
+    priceInBtc: 0.406867,
+    type: "Buy"
+
+
+  },
+  {
+    id: 4,
+    priceinUsdt: 0.406867,
+    priceInBtc: 0.406867,
+    type: "Buy"
+  },
+   {
+    id: 5,
+    priceinUsdt: 0.606867,
+    priceInBtc: 0.606867,
+    type: "Buy"
+  },
+   {
+    id: 6,
+    priceinUsdt: 0.606867,
+    priceInBtc: 0.606867,
+    type: "Sell"
+  },
+   {
+    id: 7,
+    priceinUsdt: 0.406867,
+    priceInBtc: 0.406867,
+    type: "Sell"
+  },
+   {
+    id: 8,
+    priceinUsdt: 0.406867,
+    priceInBtc: 0.406867,
+    type: "Sell"
+
+
+  },
+   {
+    id: 9,
+    priceinUsdt: 0.206867,
+    priceInBtc: 0.206867,
+    type: "Sell"
+
+
+  },
+{
+    id: 10,
+    priceinUsdt: 0.106867,
+    priceInBtc: 0.106867,
+    type: "Sell"
+
   },
   
 

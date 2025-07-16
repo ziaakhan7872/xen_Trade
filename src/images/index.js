@@ -70,6 +70,7 @@ const images = {
     copesIcon: require("../images/copesIcon.png"),
     filterMaarketHeader:require("./filterMarket.png"),
     starFill:require("./starFill.png"),
-    starUnFill:require("./starUnFill.png")
+    starUnFill:require("./starUnFill.png"),
+    trading:require("./trading.png")
 }
 export default images
