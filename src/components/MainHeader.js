@@ -33,9 +33,8 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   title: {
-    fontSize: 17,
-    letterSpacing: 0.1,
-    fontFamily: fontFamily.appTextMedium,
+    fontSize: 18,
+    fontFamily: fontFamily.mainTextMedium,
     color: colors.white,
     alignItems: 'center',
   },

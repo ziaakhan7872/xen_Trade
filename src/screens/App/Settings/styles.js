@@ -7,10 +7,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: wp(4)
     },
-    bgImage: {
-        flex: 1,
-        width: wp(100),
-    },
     backArrowContainer: {
         left: wp(6),
         zIndex: 2,
@@ -24,12 +20,6 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         top: hp(6.5),
-    },
-    settingsTextHeading: {
-        fontSize: 21,
-        fontWeight: '650',
-        letterSpacing: 0.1,
-        // fontFamily: fontFamily?.appTextMedium, 
     },
     spacerHeight: hp(2),
 
@@ -52,14 +42,14 @@ export const styles = StyleSheet.create({
         marginRight: wp(4),
     },
     profileName: {
-        fontSize: 18,
-        fontWeight: '700',
-        letterSpacing: 1,
+        fontSize: 20,
+        fontFamily: fontFamily.appTextMedium,
         color: colors.white,
     },
     profileEmail: {
         fontSize: 14,
         color: '#ccc',
+        fontFamily: fontFamily.appTextRegular,
         marginTop: hp(0.5),
     },
     btnView: {

@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     optionText: {
-        fontSize: 15.5,
+        fontSize: 16,
         fontFamily: fontFamily.appTextMedium,
     },
     rightArrow: {

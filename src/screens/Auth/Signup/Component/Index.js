@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import images from '../../../../images';
 import Spacer, { HorizontalSpacer } from '../../../../components/Spacer';
-import { colors } from '../../../../constants';
+import { colors, fontFamily } from '../../../../constants';
 import InputText from '../../../../components/InputText';
 import { SimpleButton } from '../../../../components/SimpleButton';
 import RowButton from '../../../../components/RowButton';
@@ -62,7 +62,7 @@ const SignUpForm = ({ Login, isChecked, handleCheckboxToggle, handleEmailVerific
                 <Spacer />
                 <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                     <ResponsiveText style={[styles.signInWithStyle, { fontSize: 14 }]}>Already have an account?</ResponsiveText>
-                    <ResponsiveText onPress={Login} style={[styles.forgetPasswordStyling, { fontSize: 14 }]}>Sign In</ResponsiveText>
+                    <ResponsiveText onPress={Login} style={[styles.forgetPasswordStyling, { fontSize: 14, marginLeft: wp(1) }]}>Sign In</ResponsiveText>
                 </View>
             </View>
         </View>
@@ -85,24 +85,24 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 22,
-        fontWeight: "600",
+        fontFamily: fontFamily.mainTextSemiBold,
         color: colors.white
     },
     forgetPasswordStyling: {
         textAlign: "right",
         fontSize: 12,
-        fontWeight: "500",
+        fontFamily: fontFamily.appTextMedium,
         color: colors.mainColor
     },
     signInWithStyle: {
         fontSize: 16,
-        fontWeight: "400",
+        fontFamily: fontFamily.appTextRegular,
         textAlign: "center",
         color: colors.iconColor
     },
     PrivacyPolicyText: {
         fontSize: 12,
-        fontWeight: "400",
+        fontFamily: fontFamily.appTextRegular,
         color: colors.white,
         width: wp(70)
     },
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     },
     labelText: {
         fontSize: 14,
-        fontWeight: '400',
+        fontFamily: fontFamily.appTextRegular,
         color: colors.white,
     },
 

@@ -1,6 +1,3 @@
-import AssetAllocation from "../../screens/App/AssetAllocation/AssetAllocation";
-import { DepositHistory, SelectNetwork } from "../../screens/App/Index";
-
 export const Routes = {
     AuthNavigator: "AuthNavigator",
     AppNavigator: "AppNavigator",

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { StyleSheet } from 'react-native'
 import { hp, wp } from './ResponsiveComponent'
-import { colors } from '../constants'
+import { colors, fontFamily } from '../constants'
 
 const DropDown = ({ items, value, setValue, placeholder, zIndex, setIsOpen }) => {
     const [open, setOpen] = useState(false)
@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontSize: 14,
         paddingLeft: wp(2),
-        fontWeight: '600',
+        fontFamily: fontFamily.appTextMedium,
     },
 })

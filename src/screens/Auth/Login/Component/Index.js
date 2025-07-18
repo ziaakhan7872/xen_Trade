@@ -3,7 +3,7 @@ import React from 'react'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import images from '../../../../images'
 import Spacer from '../../../../components/Spacer'
-import { colors } from '../../../../constants'
+import { colors, fontFamily, } from '../../../../constants'
 import InputText from '../../../../components/InputText'
 import { SimpleButton } from '../../../../components/SimpleButton'
 import RowButton from '../../../../components/RowButton'
@@ -40,7 +40,7 @@ const LoginForm = ({ signUp, Login }) => {
                 <Spacer />
                 <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                     <ResponsiveText style={[styles.signInWithStyle, { fontSize: 14 }]}>Don't have an account?</ResponsiveText>
-                    <ResponsiveText onPress={signUp} style={[styles.forgetPasswordStyling, { fontSize: 14 }]}>Sign Up</ResponsiveText>
+                    <ResponsiveText onPress={signUp} style={[styles.forgetPasswordStyling, { fontSize: 14, marginLeft: wp(1) }]}>Sign Up</ResponsiveText>
 
                 </View>
             </View>
@@ -65,27 +65,25 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 22,
-        fontWeight: "600",
-        color: colors.white
+        color: colors.white,
+        fontFamily: fontFamily.mainTextSemiBold
     },
     forgetPasswordStyling: {
         textAlign: "right",
         fontSize: 12,
-        fontWeight: "500",
-        color: colors.mainColor
+        color: colors.mainColor,
+        fontFamily: fontFamily.appTextMedium,
 
     },
     signInWithStyle: {
         fontSize: 16,
-        fontWeight: "400",
+        fontFamily: fontFamily.appTextRegular,
         textAlign: "center",
         color: colors.iconColor
     },
     labelText: {
         fontSize: 14,
-        fontWeight: '400',
         color: colors.white,
+        fontFamily: fontFamily.appTextRegular,
     },
-
-
 })

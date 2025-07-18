@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { colors } from '../constants'
+import { colors, fontFamily } from '../constants'
 import { hp, wp } from './ResponsiveComponent'
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -36,9 +36,9 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 12,
-        fontWeight: '400',
         marginBottom: 5,
-        color: colors.white
+        color: colors.white,
+        fontFamily: fontFamily.appTextRegular
     },
     input: {
         height: hp(6),
@@ -47,8 +47,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "300",
         backgroundColor: colors.InputTextCOlor,
+        fontFamily: fontFamily.appTextLight,
         width: wp(80),
-        color:colors.white
+        color: colors.white
     },
     iconContainer: {
         position: "absolute",

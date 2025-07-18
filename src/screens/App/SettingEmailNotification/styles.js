@@ -1,6 +1,5 @@
-import { Platform, StyleSheet } from "react-native";
-import { hp, wp } from "../../../components/ResponsiveComponent";
-import { colors } from "../../../constants";
+import { StyleSheet } from "react-native";
+import { wp } from "../../../components/ResponsiveComponent";
 
 export const styles = StyleSheet.create({
     containerMain: {

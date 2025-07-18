@@ -4,7 +4,7 @@ import { ResponsiveText } from '../../../../components/ResponsiveText';
 import { wp, hp } from '../../../../components/ResponsiveComponent';
 import images from '../../../../images';
 import { appStyles } from '../../../../utilities';
-import { colors } from '../../../../constants';
+import { colors, fontFamily } from '../../../../constants';
 
 const SettingOption = ({ icon, label, onPress }) => {
   return (
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   optionText: {
-    fontSize: 15.5,
-    fontWeight: '600',
+    fontSize: 16,
+    fontFamily: fontFamily.appTextMedium,
   },
   rightArrow: {
     width: wp(5),

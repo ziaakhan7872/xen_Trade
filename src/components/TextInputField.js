@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
         height: hp(6),
         fontSize: 14,
         color: colors.white,
-        fontWeight: '400',
+        fontFamily: fontFamily.appTextLight,
     },
 })

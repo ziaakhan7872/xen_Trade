@@ -3,7 +3,7 @@ import React from 'react'
 import images from '../../../../images'
 import Spacer from '../../../../components/Spacer'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
-import { colors } from '../../../../constants'
+import { colors, fontFamily } from '../../../../constants'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
 import { OtpInput } from "react-native-otp-entry";
 import { SimpleButton } from '../../../../components/SimpleButton'
@@ -16,7 +16,7 @@ export const EmailVerificationForm = ({ submit }) => {
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode="contain" style={styles.logoImage} />
             <Spacer />
-            <ResponsiveText style={styles.titleText}>Email Verification</ResponsiveText>
+            <ResponsiveText style={styles.titleText}>EMAIL VERIFICATION</ResponsiveText>
             <Spacer height={hp(1)} />
             <ResponsiveText style={styles.infoText}>
                 Please enter the 6-digit verification code to confirm your email. The code is valid for 30 minutes
@@ -40,7 +40,7 @@ export const EmailVerificationForm = ({ submit }) => {
 }
 
 
-export const EmailVerificationBottomSheet = ({ bottomSheetRef, closeBottomSheet}) => {
+export const EmailVerificationBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
     return (
         <BottomSheet ref={bottomSheetRef} height={600}>
             <Spacer />
@@ -59,22 +59,22 @@ export const EmailVerificationBottomSheet = ({ bottomSheetRef, closeBottomSheet}
                 </View>
                 <Spacer />
                 <ResponsiveText style={styles.bottomSheetText}>SECURE YOUR ACCOUNT</ResponsiveText>
-                <Spacer />
+                <Spacer height={hp(0.5)} />
                 <ResponsiveText style={styles.bottomSheetTextInfo}>Enable 2 Factor authentification to enable transfers</ResponsiveText>
-                <Spacer/>
+                <Spacer />
                 <SimpleButton text={"Enable 2FA"} textColor={colors.black} height={hp(6)} buttonWidth={wp(80)} />
             </View>
-            <Spacer/>
-             <View style={styles.mainBox}>
+            <Spacer />
+            <View style={styles.mainBox}>
                 <View style={styles.bottomSheetImageView}>
                     <Image resizeMode='contain' source={images.AccountVerify} style={styles.Image} />
                 </View>
                 <Spacer />
                 <ResponsiveText style={styles.bottomSheetText}>VERIFY YOUR ACCOUNT</ResponsiveText>
-                <Spacer />
+                <Spacer height={hp(0.5)} />
                 <ResponsiveText style={styles.bottomSheetTextInfo}>Complete KYC account verification to enable transfers</ResponsiveText>
-                <Spacer/>
-                <SimpleButton text={"Complete Verification"} textColor={colors.white} height={hp(6)} buttonWidth={wp(80)} backgroundColor={colors.buttonSigninColor}/>
+                <Spacer />
+                <SimpleButton text={"Complete Verification"} textColor={colors.white} height={hp(6)} buttonWidth={wp(80)} backgroundColor={colors.buttonSigninColor} />
             </View>
         </BottomSheet>
     )
@@ -94,17 +94,19 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 22,
-        fontWeight: "600",
-        color: colors.white
+        color: colors.white,
+        fontFamily: fontFamily.mainTextSemiBold,
     },
     infoText: {
-        fontWeight: "400",
+        fontFamily: fontFamily.appTextRegular,
+        lineHeight: 20,
         fontSize: 14,
         color: colors.iconColor,
         width: wp(80)
     },
     otpInputStyle: {
         backgroundColor: colors.InputTextCOlor,
+        fontFamily: fontFamily.appTextMedium,
         borderRadius: wp(2.5),
         width: wp(12),
         height: hp(6.2),
@@ -119,7 +121,7 @@ const styles = StyleSheet.create({
     },
     resendCode: {
         fontSize: 14,
-        fontWeight: "500",
+        fontFamily: fontFamily.appTextMedium,
         color: colors.mainColor,
         textAlign: "center"
     },
@@ -127,17 +129,17 @@ const styles = StyleSheet.create({
         width: wp(90),
     },
     bottomSheetTitle: {
-        fontWeight: "700",
+        fontFamily: fontFamily.mainTextBold,
         fontSize: 18,
         color: colors.white
     },
     bottomSheetText: {
-        fontWeight: "500",
+        fontFamily: fontFamily.mainTextMedium,
         fontSize: 18,
         color: colors.white
     },
     bottomSheetTextInfo: {
-        fontWeight: "500",
+        fontFamily: fontFamily.appTextMedium,
         fontSize: 14,
         color: colors.iconColor
     },

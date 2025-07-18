@@ -18,11 +18,11 @@ const fontFamily = {
     appTextBold: 'HelveticaNowDisplay-Bold', // 700
 
     //Bomstad Display Fonts
-    mainTextLight: 'BomstadDisplay-Light', // 300
-    mainTextRegular: 'BomstadDisplay-Regular', // 400
-    mainTextMedium: 'BomstadDisplay-Medium', // 500
-    mainTextSemiBold: 'BomstadDisplay-SemiBold', // 600
-    mainTextBold: 'BomstadDisplay-Bold', // 700
+    mainTextLight: 'Bomstad Display Light', // 300
+    mainTextRegular: 'Bomstad Display Regular', // 400
+    mainTextMedium: 'Bomstad Display Medium', // 500
+    mainTextSemiBold: 'Bomstad Display SemiBold', // 600
+    mainTextBold: 'Bomstad Display Bold', // 700
 }
 
 const fontSize = {

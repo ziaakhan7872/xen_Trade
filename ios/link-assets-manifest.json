@@ -1,0 +1,77 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/constants/fonts/BomstadDisplay-Black.ttf",
+      "sha1": "8463b8e51c263620348aba9adc63c8dfda7583b0"
+    },
+    {
+      "path": "src/constants/fonts/BomstadDisplay-Bold.ttf",
+      "sha1": "719429c511765c52d3475d6fcfca9c5a4a4cfa84"
+    },
+    {
+      "path": "src/constants/fonts/BomstadDisplay-ExtraBold.ttf",
+      "sha1": "aa0230441746fea6e3bdb201483bdf0a8cddba08"
+    },
+    {
+      "path": "src/constants/fonts/BomstadDisplay-ExtraLight.ttf",
+      "sha1": "3808d938e5483c1d38a0e429af15513a1b1f6409"
+    },
+    {
+      "path": "src/constants/fonts/BomstadDisplay-Light.ttf",
+      "sha1": "40dacee918608507a97fa911933979726ee7700f"
+    },
+    {
+      "path": "src/constants/fonts/BomstadDisplay-Medium.ttf",
+      "sha1": "324731fa784481e790ffb1f3a6afa10e38a4fed2"
+    },
+    {
+      "path": "src/constants/fonts/BomstadDisplay-Regular.ttf",
+      "sha1": "45512679743b20958efdc95924a481de402b5161"
+    },
+    {
+      "path": "src/constants/fonts/BomstadDisplay-SemiBold.ttf",
+      "sha1": "87a88ec17f2d07ec23864b3c5821331eb457742e"
+    },
+    {
+      "path": "src/constants/fonts/BomstadDisplay-Thin.ttf",
+      "sha1": "3c9d12880ea8ed22e8bbd2586222056b92d7abca"
+    },
+    {
+      "path": "src/constants/fonts/HelveticaNowDisplay-Black.ttf",
+      "sha1": "a6b8c9680b7931b667007a1e7f22b96cef145c29"
+    },
+    {
+      "path": "src/constants/fonts/HelveticaNowDisplay-Bold.ttf",
+      "sha1": "8248b0b2e9ae92c269ebbf91153d0ea4db4d988f"
+    },
+    {
+      "path": "src/constants/fonts/HelveticaNowDisplay-ExtraBold.ttf",
+      "sha1": "dfcea144512ac398f2a271da2cec0a3253189ec0"
+    },
+    {
+      "path": "src/constants/fonts/HelveticaNowDisplay-Light.ttf",
+      "sha1": "a92f73b3f8ba98ad1bbe24596c9c83e67296e8a4"
+    },
+    {
+      "path": "src/constants/fonts/HelveticaNowDisplay-Medium.ttf",
+      "sha1": "13cb7b8ca80cddda1acb0e4c127680e0cf89092a"
+    },
+    {
+      "path": "src/constants/fonts/HelveticaNowDisplay-Regular.ttf",
+      "sha1": "6f45727ba77048302665ba3ddc61c117fb5fe7cc"
+    },
+    {
+      "path": "src/constants/fonts/HelveticaNowDisplay-Thin.ttf",
+      "sha1": "d82f64ddd48cddfaa3e365c86781c7d257fdeba9"
+    },
+    {
+      "path": "src/constants/fonts/index.js",
+      "sha1": "f10d9d68b9d5f1b1d996b9d3bebe69effd8bee5d"
+    },
+    {
+      "path": "src/constants/fonts/splashLogoImage.png",
+      "sha1": "40c1937301b0f8ef1ea212a1664df30edb325037"
+    }
+  ]
+}

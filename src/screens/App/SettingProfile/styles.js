@@ -1,6 +1,6 @@
 import { StyleSheet, Platform } from 'react-native'
 import { wp, hp } from '../../../components/ResponsiveComponent'
-import { colors } from '../../../constants'
+import { colors, fontFamily } from '../../../constants'
 
 
 export const styles = StyleSheet.create({
@@ -21,27 +21,26 @@ export const styles = StyleSheet.create({
         marginLeft: wp(3),
     },
     headingProfile: {
-        fontSize: 18,
-        fontWeight: '700',
-        letterSpacing: 0.5,
+        fontSize: 16,
+        fontFamily: fontFamily.mainTextMedium,
         color: colors.white,
         paddingLeft: wp(2),
     },
     imageProfileDescription: {
-        fontSize: Platform.OS === 'ios' ? 10.5 : 13,
+        fontSize: Platform.OS === 'ios' ? 10.5 : 12,
         letterSpacing: 0.2,
         color: colors.lightTextColor,
         marginTop: hp(1),
+        fontFamily: fontFamily.appTextRegular,
         paddingLeft: wp(2),
-        // lineHeight: hp(2.5),
         textAlign: 'left',
     },
     inputLabel: {
         fontSize: 14,
         color: colors.white,
+        fontFamily: fontFamily.appTextRegular,
         marginBottom: hp(0.8),
     },
-
     input: {
         backgroundColor: colors.inputBgColor,
         borderRadius: wp(3),
