@@ -30,11 +30,7 @@ export const ExchangeMainContainer = ({
 };
 
 const styles = StyleSheet.create({
-  linearGradient: {
-    flex: 1,
-    width: wp(100),
-    height: hp(100),
-  },
+ 
   safeArea: {
     flex: 1,
     backgroundColor:colors.backGroundCOlor

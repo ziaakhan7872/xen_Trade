@@ -68,13 +68,17 @@ const images = {
     Contact: require("./Contact.png"),
     Logout: require("./Logout.png"),
     copesIcon: require("../images/copesIcon.png"),
-    filterMaarketHeader: require("./filterMarket.png"),
-    starFill: require("./starFill.png"),
-    starUnFill: require("./starUnFill.png"),
-    trading: require("./trading.png"),
     track: require("./track.png"),
     stepOne: require("./stepOne.png"),
     stepTwo: require("./stepTwo.png"),
     stepThree: require("./stepThree.png"),
+    filterMaarketHeader: require("./filterMarket.png"),
+    starFill: require("./starFill.png"),
+    starUnFill: require("./starUnFill.png"),
+    trading: require("./trading.png"),
+    history: require("./history.png"),
+    checkBox: require("./check.png"),
+    openOrder: require("./OpenOrder.png"),
+
 }
 export default images

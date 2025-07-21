@@ -257,25 +257,25 @@ export const dummyOrderBook = [
     priceInBtc: 0.406867,
     type: "Buy"
   },
-   {
+  {
     id: 5,
     priceinUsdt: 0.606867,
     priceInBtc: 0.606867,
     type: "Buy"
   },
-   {
+  {
     id: 6,
     priceinUsdt: 0.606867,
     priceInBtc: 0.606867,
     type: "Sell"
   },
-   {
+  {
     id: 7,
     priceinUsdt: 0.406867,
     priceInBtc: 0.406867,
     type: "Sell"
   },
-   {
+  {
     id: 8,
     priceinUsdt: 0.406867,
     priceInBtc: 0.406867,
@@ -283,7 +283,7 @@ export const dummyOrderBook = [
 
 
   },
-   {
+  {
     id: 9,
     priceinUsdt: 0.206867,
     priceInBtc: 0.206867,
@@ -291,13 +291,108 @@ export const dummyOrderBook = [
 
 
   },
-{
+  {
     id: 10,
     priceinUsdt: 0.106867,
     priceInBtc: 0.106867,
     type: "Sell"
 
   },
-  
+
+
+]
+
+export const Amount = [
+  {
+    id: 1,
+    price: '19630.3',
+    amount: '0.0020',
+  },
+  {
+    id: 2,
+    price: '19630.1',
+    amount: '0.1500',
+  },
+  {
+    id: 3,
+    price: '19630.0',
+    amount: '0.4075',
+  },
+  {
+    id: 4,
+    price: '19630.3',
+    amount: '0.0020',
+  },
+  {
+    id: 5,
+    price: '19629.9',
+    amount: '0.3521',
+  },
+  {
+    id: 6,
+    price: '19629.0',
+    amount: '0.3521',
+  },
+
+  {
+    id: 7,
+    price: '19628.9',
+    amount: '0.2364',
+  },
+  {
+    id: 8,
+    price: '19628.9',
+    amount: '0.2364',
+  },
+  {
+    id: 9,
+    price: '19628.9',
+    amount: '0.2364',
+  },
+  {
+    id: 10,
+    price: '19628.9',
+    amount: '0.2364',
+  },
+  {
+    id: 11,
+    price: '19628.9',
+    amount: '0.2364',
+  },
+  {
+    id: 12,
+    price: '19628.9',
+    amount: '0.2364',
+  },
+  {
+    id: 13,
+    price: '19628.9',
+    amount: '0.2364',
+  },
+];
+
+export const DummyCurrentSymbol = [
+  {
+    id: 1,
+    name: "BTC/USD",
+    symbol: "BTC",
+    OrderAmount: 3.33,
+    Filled: 0,
+    OrderPrice: 0.0154,
+    marketType: "Limit",
+    type: "Buy",
+    time:"11/22, 17:26:15"
+  },
+  {
+    id: 2,
+    name: "SOL/USD",
+    symbol: "SOL",
+    OrderAmount: 3.33,
+    Filled: 0,
+    OrderPrice: 0.0154,
+    marketType: "Market",
+    type: "Sell",
+    time:"11/22, 17:26:15"
+  },
 
 ]
