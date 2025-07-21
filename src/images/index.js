@@ -71,6 +71,10 @@ const images = {
     filterMaarketHeader:require("./filterMarket.png"),
     starFill:require("./starFill.png"),
     starUnFill:require("./starUnFill.png"),
-    trading:require("./trading.png")
+    trading:require("./trading.png"),
+    history:require("./history.png"),
+    checkBox:require("./check.png"),
+    openOrder:require("./OpenOrder.png"),
+
 }
 export default images
