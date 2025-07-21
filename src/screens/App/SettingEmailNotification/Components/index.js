@@ -36,10 +36,10 @@ const styles = StyleSheet.create({
     optionText: {
         fontSize: 14,
         color: colors.lightTextColor,
-        fontWeight: '600'
+        fontFamily: fontFamily.appTextMedium,
     },
     groupParentText: {
-        fontWeight: '700',
+        fontFamily: fontFamily.appTextMedium,
         fontSize: 16,
         color: colors.white,
     },
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     },
     disableAllText: {
         color: colors.white,
-        fontWeight: 700,
+        fontFamily: fontFamily.appTextMedium,
+        fontSize: 16,
     }
 });

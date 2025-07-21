@@ -30,7 +30,7 @@ const changePassword = (props) => {
 
             </View>
             <View style={styles.btnSaveChangesView}>
-                <SimpleButton text="Save Changes" textColor={colors.disableTextColor} disabled={true} styleView={styles.btnSaveChanges} />
+                <SimpleButton text="Save" textColor={colors.disableTextColor} disabled={true} styleView={styles.btnSaveChanges} />
             </View>
         </AuthMainContainer>
     )

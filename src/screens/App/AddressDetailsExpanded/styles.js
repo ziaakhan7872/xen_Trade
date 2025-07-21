@@ -1,5 +1,5 @@
 import { Platform, StyleSheet } from 'react-native'
-import { colors } from '../../../constants'
+import { colors, fontFamily } from '../../../constants'
 import { hp, wp } from '../../../components/ResponsiveComponent'
 
 
@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     inputLabel: {
         fontSize: 14,
         marginBottom: hp(0.7),
-        fontWeight: 400,
+        fontFamily: fontFamily.appTextRegular,
         color: colors.white,
     },
 })

@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
         fontSize: 14,
         marginBottom: hp(0.7),
         color: colors.white,
+        fontFamily: fontFamily.appTextRegular,
     },
     btnSaveChangesView: {
         paddingHorizontal: wp(4),
@@ -27,16 +28,18 @@ export const styles = StyleSheet.create({
         fontSize: 14,
         color: colors.lightTextColor,
         textAlign: 'center',
+        fontFamily: fontFamily.appTextRegular,
     },
     warningContainer: {
         backgroundColor: colors.warningBgColor,
-        padding: wp(3),
+        padding: wp(3.5),
         borderRadius: 12,
         marginBottom: hp(2),
     },
     warningText: {
         fontSize: 14,
         color: colors.warningTextColor,
-        fontFamily: fontFamily.Regular,
+        fontFamily: fontFamily.appTextRegular,
+        lineHeight: wp(4.5),
     },
 })

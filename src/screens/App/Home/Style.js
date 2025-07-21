@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
 import { hp, wp } from "../../../components/ResponsiveComponent";
-import { colors } from "../../../constants";
+import { colors, fontFamily } from "../../../constants";
 
 export const style = StyleSheet.create({
     container: {
-    //    paddingBottom: hp(10), 
-    //    paddingTop: hp(1), 
-       width: wp(90), 
-       alignSelf: 'center'
+        //    paddingBottom: hp(10), 
+        //    paddingTop: hp(1), 
+        width: wp(90),
+        alignSelf: 'center'
     },
     imageStyling: {
         width: wp(5),
@@ -20,15 +20,15 @@ export const style = StyleSheet.create({
         color: colors.halfWhite
 
     },
-    LatestNewsStyling :{
-        width:wp(90),
-        flexDirection:"row",
-        justifyContent:"space-between",
-        alignItems:"center"
+    LatestNewsStyling: {
+        width: wp(90),
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
     },
-    latesteNewsTitle:{
-        fontSize:16,
-        fontWeight:"600",
-        color:colors.white
+    latesteNewsTitle: {
+        fontSize: 16,
+        fontFamily: fontFamily.mainTextMedium,
+        color: colors.white
     }
 })

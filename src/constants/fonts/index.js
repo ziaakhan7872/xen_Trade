@@ -1,14 +1,5 @@
 import { totalSize } from "react-native-dimension"
 
-// const fontFamily = {
-//     appTextLight: 'Pretendard-Light', // 300
-//     appTextRegular: 'Pretendard-Regular', // 400
-//     appTextMedium: 'Pretendard-Medium', // 500
-//     appTextSemiBold: 'Pretendard-SemiBold', // 600
-//     appTextBold: 'Pretendard-Bold', // 700
-//     zenDotRegular: 'ZenDots-Regular'
-// }
-
 const fontFamily = {
     //Helvetica Now Display Fonts
     appTextLight: 'HelveticaNowDisplay-Light', // 300

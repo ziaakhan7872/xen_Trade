@@ -1,5 +1,5 @@
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { AccountInfo, AccountOverView, BalanceOverView, LatestNewsComponent, PortfilioOverView, RowButtonTab, WatchList } from './Component/Index'
 import HomeHeader from '../../../components/HomeHeader'
@@ -14,6 +14,18 @@ import { ResponsiveText } from '../../../components/ResponsiveText'
 import Entypo from "react-native-vector-icons/Entypo"
 
 const HomeScreen = (props) => {
+  // useEffect(() => {
+  //   console.log("HomeScreen mounted");
+  //   try {
+  //     props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.referrals })
+
+  //   } catch (error) {
+  //     console.error("Error navigating to:", error);
+
+  //   }
+  // },
+  //   []);
+
   const { threeRowTabButtonPress, setThreeRowTabButtonPress, portfolioButton, setPortfolioButton, watchListButtonPressed, setWatchListButtonPress, showNewsView, setShowNewsView } = useHome(props)
   return (
     <AuthMainContainer>
@@ -44,27 +56,28 @@ const HomeScreen = (props) => {
           image2={<Image source={images.Deposit} style={style.imageStyling} />}
           label1={<ResponsiveText style={style.text1}>Referral</ResponsiveText>}
           label2={<ResponsiveText style={style.text1}>Deposit</ResponsiveText>}
-
+          onPressFirstButton={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.referrals }) }}
+          onPressSecondButton={() => props?.navigation?.navigate?.('')}
         />
         <Spacer height={hp(1)} />
         {showNewsView && (
           <>
-         
-          <View style={style.LatestNewsStyling}>
-            <View style={{ flexDirection: "row" }}>
-              <Image source={images.Document} style={style.imageStyling} />
-              <HorizontalSpacer />
-              <ResponsiveText style={style.latesteNewsTitle}>LATEST NEWS</ResponsiveText>
-            </View>
-            <TouchableOpacity onPress={()=>setShowNewsView(false)}>
-              <Entypo name="cross" size={22} color={colors.white} />
-            </TouchableOpacity>
-          </View>
-        
 
-        <Spacer height={hp(1)} />
-        <LatestNewsComponent />
-         </>
+            <View style={style.LatestNewsStyling}>
+              <View style={{ flexDirection: "row" }}>
+                <Image source={images.Document} style={style.imageStyling} />
+                <HorizontalSpacer />
+                <ResponsiveText style={style.latesteNewsTitle}>LATEST NEWS</ResponsiveText>
+              </View>
+              <TouchableOpacity onPress={() => setShowNewsView(false)}>
+                <Entypo name="cross" size={22} color={colors.white} />
+              </TouchableOpacity>
+            </View>
+
+
+            <Spacer height={hp(1)} />
+            <LatestNewsComponent />
+          </>
         )}
         <Spacer height={hp(1)} />
         <WatchList WatchListButtonPress={watchListButtonPressed} setWatchListButtonPress={setWatchListButtonPress} />

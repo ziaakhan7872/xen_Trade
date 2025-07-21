@@ -1,10 +1,11 @@
-import { View, TouchableOpacity, Image, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, Image, StyleSheet, Platform, ToastAndroid, Alert } from 'react-native'
 import React from 'react'
 import images from '../../../../images'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
 import { wp } from '../../../../components/ResponsiveComponent'
-import { colors, Routes } from '../../../../constants'
+import { colors, fontFamily, Routes } from '../../../../constants'
 import { appStyles } from '../../../../utilities'
+import Clipboard from '@react-native-clipboard/clipboard'
 
 const AddressCard = (props) => {
     return (
@@ -16,7 +17,15 @@ const AddressCard = (props) => {
             <View style={[appStyles.row, styles.addressTextContainer]}>
                 <View style={appStyles.rowBasic}>
                     <ResponsiveText style={styles.address}>0x8R2330...9UYT5665O</ResponsiveText>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            Clipboard.setString('0x8R2330...9UYT5665O')
+                            if (Platform.OS === 'android') {
+                                ToastAndroid.show('Address copied!', ToastAndroid.SHORT)
+                            } else {
+                                Alert.alert('Copied!', 'Address copied to clipboard')
+                            }
+                        }}>
                         <Image source={images.copyIcon} style={styles.copyIcon} resizeMode='contain' />
                     </TouchableOpacity>
                 </View>
@@ -36,7 +45,7 @@ const styles = StyleSheet.create({
     },
     label: {
         color: colors.white,
-        fontWeight: 'bold',
+        fontFamily: fontFamily.mainTextMedium,
         fontSize: 16
     },
     addressTextContainer: {
@@ -45,7 +54,7 @@ const styles = StyleSheet.create({
     address: {
         color: colors.lightTextColor,
         fontSize: 14,
-        letterSpacing: -0.40
+        fontFamily: fontFamily.appTextRegular,
     },
     copyIcon: {
         width: wp(4),

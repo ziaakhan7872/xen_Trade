@@ -2,7 +2,7 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
 import { wp } from '../../../../components/ResponsiveComponent'
-import { colors } from '../../../../constants'
+import { colors, fontFamily } from '../../../../constants'
 
 const RowTabs = () => {
     const [selected, setSelected] = useState('Crypto')
@@ -29,12 +29,13 @@ const styles = StyleSheet.create({
     },
     tabText: {
         fontSize: 16,
-        color: colors.lightTextColor
+        color: colors.lightTextColor,
+        fontFamily: fontFamily.appTextRegular,
     },
     activeTab: {
         color: colors.mainColor,
         borderBottomWidth: 2.5,
-        fontWeight: 500,
+        fontFamily: fontFamily.appTextMedium,
         borderColor: colors.mainColor,
         paddingBottom: wp(3.8)
     }

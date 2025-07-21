@@ -4,9 +4,9 @@ import { hp, wp } from './ResponsiveComponent'
 import { colors } from '../constants'
 
 
-const Line = ({ height,width=wp(100) }) => {
+const Line = ({ height, width = wp(100) }) => {
     return (
-        <View style={{ height: height ? height : hp(1) ,backgroundColor:colors.lineColor,width:width}}/>
+        <View style={{ height: height ? height : hp(1), backgroundColor: colors.lineColor, width: width }} />
     )
 }
 

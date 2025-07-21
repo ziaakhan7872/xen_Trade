@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { MainHeader } from '../../../components/MainHeader'
@@ -9,6 +9,7 @@ import Spacer from '../../../components/Spacer'
 import { SimpleButton } from '../../../components/SimpleButton'
 import RowTabs from './Components/RowTabs'
 import AddressCard from './Components/AddressCard'
+import { styles } from './styles'
 
 const AddressBook = (props) => {
     return (
@@ -33,20 +34,5 @@ const AddressBook = (props) => {
 export default AddressBook
 
 
-const styles = StyleSheet.create({
-    containerMain: {
-        flex: 1,
-        paddingHorizontal: wp(4)
-    },
-    addAddressBtn: {
-        width: wp(88),
-        backgroundColor: colors.transparentBtn,
-        alignSelf: 'center',
-        padding: wp(5),
-        borderRadius: 66
-    },
-    buttonRow: {
-        alignItems: 'center'
-    },
-})
+
 

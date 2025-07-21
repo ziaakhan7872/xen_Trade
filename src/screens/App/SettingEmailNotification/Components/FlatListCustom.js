@@ -2,7 +2,7 @@ import { FlatList, View, StyleSheet } from 'react-native'
 import React from 'react'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import ToggleSwitch from '.'
-import { colors } from '../../../../constants'
+import { colors, fontFamily } from '../../../../constants'
 import { SimpleButton } from '../../../../components/SimpleButton'
 import { appStyles } from '../../../../utilities'
 import Spacer from '../../../../components/Spacer'
@@ -122,9 +122,9 @@ const styles = StyleSheet.create({
     },
     topText: {
         textAlign: 'center',
-        fontSize: Platform.OS === 'android' ? 16 : 14,
+        fontSize: Platform.OS === 'android' ? 16 : 15,
         paddingHorizontal: wp(4),
-        fontWeight: '400',
+        fontFamily: fontFamily.appTextRegular,
         color: colors.lightTextColor,
     },
     disableToggleAllCard: {

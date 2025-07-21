@@ -21,11 +21,12 @@ import SettingEmailNotification from "./SettingEmailNotification/SettingEmailNot
 import SelectCrypto from "./SelectCrypto/SelectCrypto";
 import AssetAllocation from "./AssetAllocation/AssetAllocation";
 import MenuScreen from "./MenuScreen/MenuScreen";
-
+import Referrals from "./Referrals/Referrals";
 
 export {
      HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,
      Exchangescreen, WalletScreen, changePassword, antiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
-     SelectNetwork, Barcode, Deposit, AddNewAddress, SettingEmailNotification, SelectCrypto, AssetAllocation, MenuScreen
+     SelectNetwork, Barcode, Deposit, AddNewAddress, SettingEmailNotification, SelectCrypto, AssetAllocation, MenuScreen,
+     Referrals,
 }
 

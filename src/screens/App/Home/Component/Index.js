@@ -1,7 +1,7 @@
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
-import { colors, fontSize } from '../../../../constants';
+import { colors, fontFamily, fontSize } from '../../../../constants';
 import Spacer, { HorizontalSpacer } from '../../../../components/Spacer';
 import { ResponsiveText } from '../../../../components/ResponsiveText';
 import images from '../../../../images';
@@ -208,35 +208,35 @@ export const WatchList = ({ WatchListButtonPress, setWatchListButtonPress, watch
                 </TouchableOpacity>
             </View>
             <View>
- <FlatList
-                data={watchListData}
-                keyExtractor={(item, index) => item.id.toString() || index.toString()}
-                // horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => (
-                    <View style={style.watchListInnerView}>
-                        <View style={{ flexDirection: "row", width: wp(40)}}>
-                            <Image source={item.image} style={style.watchListImageStyling} resizeMode='contain' />
-                            <HorizontalSpacer />
-                            <View >
-                                <ResponsiveText style={[style.text2, { fontSize: 14 }]}>{item.nameLogo}</ResponsiveText>
-                                <ResponsiveText style={[style.text4]}>{item.fullName}</ResponsiveText>
+                <FlatList
+                    data={watchListData}
+                    keyExtractor={(item, index) => item.id.toString() || index.toString()}
+                    // horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={({ item }) => (
+                        <View style={style.watchListInnerView}>
+                            <View style={{ flexDirection: "row", width: wp(40) }}>
+                                <Image source={item.image} style={style.watchListImageStyling} resizeMode='contain' />
+                                <HorizontalSpacer />
+                                <View >
+                                    <ResponsiveText style={[style.text2, { fontSize: 14 }]}>{item.nameLogo}</ResponsiveText>
+                                    <ResponsiveText style={[style.text4]}>{item.fullName}</ResponsiveText>
+                                </View>
                             </View>
-                        </View>
-                        <View style={{ alignItems: 'flex-start', width: wp(20) }}>
-                            <ResponsiveText style={[style.marketText]}>{item.market}</ResponsiveText>
+                            <View style={{ alignItems: 'flex-start', width: wp(20) }}>
+                                <ResponsiveText style={[style.marketText]}>{item.market}</ResponsiveText>
+
+                            </View>
+                            <View style={{ alignItems: 'flex-end', width: wp(20) }}>
+                                <ResponsiveText style={[style.text2, { fontSize: 14, color: item.percentage.startsWith('+') ? 'green' : 'red' }]}>{item.percentage}</ResponsiveText>
+                            </View>
 
                         </View>
-                        <View style={{ alignItems: 'flex-end', width: wp(20) }}>
-                            <ResponsiveText style={[style.text2, { fontSize: 14,color: item.percentage.startsWith('+') ? 'green' : 'red' }]}>{item.percentage}</ResponsiveText>
-                        </View>
+                    )}
 
-                    </View>
-                )}
-
-            />
+                />
             </View>
-           
+
 
             {/* <Line/> */}
 
@@ -275,22 +275,22 @@ const style = StyleSheet.create({
     },
     text1: {
         fontSize: 12,
-        fontWeight: "500",
+        fontFamily: fontFamily.appTextMedium,
         color: colors.iconColor,
     },
     text4: {
         fontSize: 12,
-        fontWeight: "400",
+        fontFamily: fontFamily.appTextMedium,
         color: colors.iconColor,
     },
     text2: {
         fontSize: 24,
-        fontWeight: "600",
+        fontFamily: fontFamily.mainTextSemiBold,
         color: colors.white,
     },
     text3: {
         fontSize: 16,
-        fontWeight: "500",
+        fontFamily: fontFamily.mainTextMedium,
         color: colors.mainColor,
     },
     threeRowButton: {
@@ -311,7 +311,7 @@ const style = StyleSheet.create({
     },
     threeButtonText: {
         fontSize: 12,
-        fontWeight: "400",
+        fontFamily: fontFamily.appTextRegular,
         color: colors.white
     },
     dateBaseGraph: {
@@ -378,21 +378,23 @@ const style = StyleSheet.create({
     },
     NewsTitl: {
         fontSize: 16,
-        fontWeight: "500",
+        fontFamily: fontFamily.appTextMedium,
         color: colors.white
     },
     newsDescription: {
         fontSize: 14,
         color: colors.iconColor,
-        lineHeight: 20,
+        lineHeight: 18,
         flexWrap: 'wrap',
         width: wp(40),
+        fontFamily: fontFamily.appTextRegular,
         textAlign: "justify"
     },
 
     readMore: {
         color: colors.buttonSigninColor,
-        fontWeight: '500',
+        fontFamily: fontFamily.appTextRegular,
+        fontSize: 14,
     },
     watchListView: {
         width: wp(90),
@@ -412,7 +414,7 @@ const style = StyleSheet.create({
     },
     watchListText: {
         fontSize: 14,
-        fontWeight: "500",
+        fontFamily: fontFamily.appTextMedium,
         textAlign: "center"
         // color:colors.mainColor
     },
@@ -433,10 +435,10 @@ const style = StyleSheet.create({
     },
     marketText: {
         fontSize: 14,
-        fontWeight: "600",
+        fontFamily: fontFamily.appTextMedium,
         color: colors.white,
         textAlign: "left",
-   
+
     }
 
 });

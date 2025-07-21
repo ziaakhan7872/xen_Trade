@@ -1,6 +1,6 @@
 import { Platform, StyleSheet, } from 'react-native'
 import { wp, hp } from '../../../components/ResponsiveComponent'
-import { colors } from '../../../constants'
+import { colors, fontFamily } from '../../../constants'
 
 
 export const styles = StyleSheet.create({
@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
     inputLabel: {
         fontSize: 14,
         marginBottom: hp(0.7),
+        fontFamily: fontFamily.appTextRegular,
         color: colors.white,
     },
     btnSaveChangesView: {

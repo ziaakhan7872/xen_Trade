@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     },
     heading: {
         fontSize: 18,
-        fontFamily: fontFamily.appTextMedium,
+        fontFamily: fontFamily.mainTextMedium,
         color: colors.white,
         marginBottom: hp(0.5),
     },
@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
         fontSize: 14,
         marginBottom: hp(0.7),
         color: colors.white,
+        fontFamily: fontFamily.appTextRegular,
     },
     buttonRow: {
         paddingHorizontal: wp(4),

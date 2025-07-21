@@ -26,7 +26,7 @@ const WalletHome = () => {
 
       {/* Action Buttons */}
       <View style={appStyles.row}>
-        <SimpleButton  
+        <SimpleButton
           text="Deposit"
           textColor={colors.white}
           backgroundColor={colors.InputTextCOlor}
@@ -37,9 +37,9 @@ const WalletHome = () => {
           height={hp(5.5)}
           borderRadius={30}
           onPress={handleDepositPress}
-      
+
         />
-        <SimpleButton 
+        <SimpleButton
           text="Withdraw"
           textColor={colors.white}
           backgroundColor={colors.mainColor}
@@ -55,29 +55,29 @@ const WalletHome = () => {
       <View style={appStyles.row}>
         <ResponsiveText style={styles.portfolioTitle}>PORTFOLIO</ResponsiveText>
         <View style={appStyles.rowBasic}>
-           <Image
-          source={images.checkBox}
-          resizeMode="contain"
-          style={styles.checkBox}
-        />
+          <Image
+            source={images.checkBox}
+            resizeMode="contain"
+            style={styles.checkBox}
+          />
           <ResponsiveText style={styles.hideBalances}>Hide 0 Balances</ResponsiveText>
           <Spacer width={wp(2)} />
           <Image
-          source={images.clockIcon}
-          style={{width: wp(4), height: wp(4)}}
-          resizeMode="contain"
-        />
+            source={images.clockIcon}
+            style={{ width: wp(4), height: wp(4) }}
+            resizeMode="contain"
+          />
         </View>
       </View>
       <Spacer height={hp(1.5)} />
 
       {/* Search Bar */}
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.searchContainer}
-     
+
       >
         <ResponsiveText style={styles.searchText}>Search...</ResponsiveText>
-        <Image style ={styles.searchIcon}
+        <Image style={styles.searchIcon}
           source={images.searchSign}
           resizeMode="contain"
         />
@@ -85,11 +85,11 @@ const WalletHome = () => {
       <Spacer height={hp(2)} />
 
       {/* Crypto List */}
-        <TokenList/>
-        
-       
-        
-    
+      <TokenList />
+
+
+
+
     </AuthMainContainer>
   );
 };

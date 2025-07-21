@@ -14,6 +14,7 @@ export const colors = {
     boxColor: "rgba(1, 26, 31, 1)",
     redColorBtn: "#FF3235",
     borderColor: "#0A2228",
+    cardColor2: "#0A2228",
     cardsBgColor: "#011A1F",
     cardBorderColor: "#10272C",
     inputBgColor: "#021E23",
@@ -34,14 +35,14 @@ export const colors = {
     warningBgColor: "rgba(232, 143, 53, 0.2)",
     lineStroke: "#10272C",
     greenColor: "rgba(22, 168, 83, 0.18)",
-    redColor:" rgba(255, 50, 53, 0.18);",
-    halfWhite:"#D1DADD",
-    dot1:"#004B58",
-    dot2:"#006B7E",
-    dot3:"#0B8DA4",
-    available:"#0A2228",
-    green:"#16A853",
-    red:"#FF3235"
+    redColor: " rgba(255, 50, 53, 0.18);",
+    halfWhite: "#D1DADD",
+    dot1: "#004B58",
+    dot2: "#006B7E",
+    dot3: "#0B8DA4",
+    available: "#0A2228",
+    green: "#16A853",
+    red: "#FF3235"
 
 
 }

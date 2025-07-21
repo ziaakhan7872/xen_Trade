@@ -1,16 +1,16 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { wp } from './ResponsiveComponent';
-import { colors } from '../constants';
+import { colors, fontFamily } from '../constants';
 import { ResponsiveText } from './ResponsiveText';
 import Ionicons from 'react-native-vector-icons/Octicons';
 
-const HomeHeader = ({headerTitle,onpress}) => {
+const HomeHeader = ({ headerTitle, onpress }) => {
   return (
     <View style={styles.HeaderView}>
       <ResponsiveText style={styles.headerTitle}>{headerTitle}</ResponsiveText>
       <TouchableOpacity onPress={onpress}>
-      <Ionicons  name="three-bars" size={25} color={colors.mainColor} />  
+        <Ionicons name="three-bars" size={25} color={colors.mainColor} />
       </TouchableOpacity>
     </View>
   );
@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     alignSelf: 'center',
-    paddingVertical: 10,  
+    paddingVertical: 10,
   },
   headerTitle: {
     fontSize: 26,
-    fontWeight: '600',
+    fontFamily: fontFamily.mainTextSemiBold,
     color: colors.white,
   },
 });

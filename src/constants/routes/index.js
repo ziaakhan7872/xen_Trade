@@ -30,5 +30,6 @@ export const Routes = {
     SelectCrypto: "SelectCrypto",
     AssetAllocation: "AssetAllocation",
     MenuScreen: "MenuScreen",
+    referrals: "referrals",
 
 }

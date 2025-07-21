@@ -5,7 +5,7 @@ import { stateDropDowns } from '../Hooks'
 import Spacer from '../../../../components/Spacer'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
 import { hp } from '../../../../components/ResponsiveComponent'
-import { colors } from '../../../../constants'
+import { colors, fontFamily } from '../../../../constants'
 
 const DropDowns = () => {
     const {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     inputLabel: {
         fontSize: 14,
         marginBottom: hp(0.8),
-        fontWeight: 400,
+        fontFamily: fontFamily.appTextRegular,
         color: colors.white,
     },
 })

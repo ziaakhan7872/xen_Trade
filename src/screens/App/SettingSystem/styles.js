@@ -16,11 +16,12 @@ export const styles = StyleSheet.create({
     leftLabels: {
         color: colors.lightTextColor,
         fontSize: 16,
+        fontFamily: fontFamily.appTextRegular,
     },
     rightLabels: {
         color: colors.white,
         fontSize: 16,
-        fontWeight: '500',
+        fontFamily: fontFamily.appTextMedium,
     },
     dropDown: {
         width: '48%',

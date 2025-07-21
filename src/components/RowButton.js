@@ -4,16 +4,16 @@ import { wp } from './ResponsiveComponent';
 import { colors } from '../constants';
 import { HorizontalSpacer } from './Spacer';
 
-const RowButton = ({ iconShow = true, image1, label1, image2, label2,borderRadius,onPressFirstButton,onPressSecondButton,buttonWidth ,buttonBackGroundColor,buttonRowWidth}) => {
+const RowButton = ({ iconShow = true, image1, label1, image2, label2, borderRadius, onPressFirstButton, onPressSecondButton, buttonWidth, buttonBackGroundColor, buttonRowWidth }) => {
   return (
-    <View style={[styles.buttonRow,{width:buttonRowWidth}]}>
-      <TouchableOpacity onPress={onPressFirstButton} style={[styles.buttonStyling,{borderRadius:borderRadius,width:buttonWidth,backgroundColor:buttonBackGroundColor}]}>
+    <View style={[styles.buttonRow, { width: buttonRowWidth }]}>
+      <TouchableOpacity activeOpacity={0.8} onPress={onPressFirstButton} style={[styles.buttonStyling, { borderRadius: borderRadius, width: buttonWidth, backgroundColor: buttonBackGroundColor }]}>
         {iconShow && image1}
         <HorizontalSpacer width={wp(3)} />
         {label1}
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={onPressSecondButton} style={[styles.buttonStyling,{borderRadius:borderRadius,width:buttonWidth,backgroundColor:buttonBackGroundColor}]}>
+      <TouchableOpacity activeOpacity={0.8} onPress={onPressSecondButton} style={[styles.buttonStyling, { borderRadius: borderRadius, width: buttonWidth, backgroundColor: buttonBackGroundColor }]}>
         {iconShow && image2}
         <HorizontalSpacer width={wp(3)} />
         {label2}
