@@ -16,6 +16,7 @@ export const RenderFavouriteCoinList = ({ marketData = MarketData }) => {
             <Spacer/>
             <RenderSearchHeader/>
             <Spacer/>
+            {/* jskms */}
             <RenderFavourteHeader />
             <FlatList
                 data={marketData}
