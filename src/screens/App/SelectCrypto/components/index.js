@@ -13,34 +13,34 @@ import { coinData } from '../../../../utilities/dummyData';
 
 export const SelectCryptoHeader = () => {
   const navigation = useNavigation();
-  
+
   return (
     <View style={styles.selectCryptoHeader}>
-          <TouchableOpacity 
-            onPress={() => navigation.goBack()} 
-            style={styles.backButtonContainer}
-          >
-            <Image 
-              source={images.backArrow}
-              style={styles.backArrowIcon}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-          <ResponsiveText style={styles.selectCryptoTitle}>SELECT CRYPTO</ResponsiveText>
-          <TouchableOpacity onPress={() =>  navigation.navigate(Routes.AppNavigator, {
-                  screen: Routes.DepositHistory,
-               
-                })}
-                 style={styles.selectCryptoCloseButton}>
-          <Image 
-           
-            source={images.clockIcon}
-            resizeMode="contain"
-            
-          />
-</TouchableOpacity>
-          
-        </View>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.backButtonContainer}
+      >
+        <Image
+          source={images.backArrow}
+          style={styles.backArrowIcon}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
+      <ResponsiveText style={styles.selectCryptoTitle}>SELECT CRYPTO</ResponsiveText>
+      <TouchableOpacity onPress={() => navigation.navigate(Routes.AppNavigator, {
+        screen: Routes.DepositHistory,
+
+      })}
+        style={styles.selectCryptoCloseButton}>
+        <Image
+
+          source={images.clockIcon}
+          resizeMode="contain"
+
+        />
+      </TouchableOpacity>
+
+    </View>
   );
 };
 
@@ -48,14 +48,15 @@ export const SelectCryptoHeader = () => {
 // Search box component
 export const SelectCryptoSearchBox = ({ searchText, onChangeText }) => (
   <View style={styles.selectCryptoSearchContainer}>
+
     <TextInput
       style={styles.selectCryptoSearchInput}
       placeholder="Search..."
-      placeholderTextColor={colors.white}
+      placeholderTextColor={colors.placeHolderTextColor}
       value={searchText}
       onChangeText={onChangeText}
-      autoCapitalize="none"
-      autoCorrect={false}
+    // autoCapitalize="none"
+    // autoCorrect={false}
     />
     <Image
       source={images.searchSign}
@@ -147,7 +148,7 @@ export const SelectCryptoContent = ({ refProp, onSelectCrypto }) => {
 
 
 const styles = StyleSheet.create({
-// Header
+  // Header
 
   selectCryptoHeader: {
     flexDirection: 'row',
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
     paddingVertical: hp(1.5),
     position: 'relative',
     width: '100%',
-   
+
   },
   backButtonContainer: {
     position: 'absolute',
@@ -186,7 +187,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: fontFamily.appTextBold,
   },
- 
+
   //select crypto
   selectCryptoRBSheetContainer: {
     backgroundColor: 'transparent',
@@ -209,11 +210,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.searchBar,
-    marginTop: hp(3),
-      paddingHorizontal: wp(4),
-    paddingVertical: hp(1.5),
+    marginTop: hp(2),
+    paddingHorizontal: wp(4),
+    paddingVertical: hp(1),
     borderRadius: 8,
-    height: hp(5),
     marginHorizontal: wp(4),
   },
   selectCryptoSearchInput: {
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
   sectionHeader: {
     paddingHorizontal: wp(4),
     paddingVertical: hp(1),
- 
+
   },
   sectionHeaderText: {
     color: colors.white,
