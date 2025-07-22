@@ -7,6 +7,7 @@ import { wp } from '../../../components/ResponsiveComponent'
 import Spacer from '../../../components/Spacer'
 import useEmalVerification from './Hooks/Index'
 import { EmailVerificationBottomSheet, EmailVerificationForm } from './Component/Index'
+import { Portal } from 'react-native-portalize'
 
 const EmailVerificationScreen = () => {
     const {emailVerificationBottomSheetRef,handleOpenVerification,handleCloseVerification,handeGoBack} = useEmalVerification()
@@ -21,7 +22,10 @@ const EmailVerificationScreen = () => {
                     <Spacer/>
                     <EmailVerificationForm submit={handleOpenVerification} />
                 </View>
+                <Portal>
                 <EmailVerificationBottomSheet closeBottomSheet={handleCloseVerification} bottomSheetRef={emailVerificationBottomSheetRef} />
+
+                </Portal>
             </View>
 
         </AuthMainContainer>

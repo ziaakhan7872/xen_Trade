@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { hp, wp } from "../../../components/ResponsiveComponent";
-import { colors, fontFamily } from "../../../constants";
+import { hp, wp } from "../../../../components/ResponsiveComponent";
+import { colors, fontFamily } from "../../../../constants";
 
 export const style = StyleSheet.create({
     linearGradient: {

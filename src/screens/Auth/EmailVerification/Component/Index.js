@@ -9,6 +9,7 @@ import { OtpInput } from "react-native-otp-entry";
 import { SimpleButton } from '../../../../components/SimpleButton'
 import BottomSheet from '../../../../components/BottomSheet'
 import Line from '../../../../components/Liner'
+import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent';
 
 
 export const EmailVerificationForm = ({ submit }) => {
@@ -42,7 +43,7 @@ export const EmailVerificationForm = ({ submit }) => {
 
 export const EmailVerificationBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
     return (
-        <BottomSheet ref={bottomSheetRef} height={600}>
+        <GorhomBottomSheet sheetRef={bottomSheetRef}>
             <Spacer />
             <View style={styles.BottomSheetView}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
@@ -76,7 +77,7 @@ export const EmailVerificationBottomSheet = ({ bottomSheetRef, closeBottomSheet 
                 <Spacer />
                 <SimpleButton text={"Complete Verification"} textColor={colors.white} height={hp(6)} buttonWidth={wp(80)} backgroundColor={colors.buttonSigninColor} />
             </View>
-        </BottomSheet>
+        </GorhomBottomSheet>
     )
 }
 

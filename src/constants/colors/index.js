@@ -42,7 +42,8 @@ export const colors = {
     dot3: "#0B8DA4",
     available: "#0A2228",
     green: "#16A853",
-    red: "#FF3235"
+    red: "#FF3235",
+    buttonColor:"#011F25"
 
 
 }

@@ -1,6 +1,5 @@
 import HomeScreen from "./Home/HomeScreen";
 import MarketScreen from "./Market/MarketScreen";
-import Exchangescreen from "./Exchange/Exchangescreen";
 import WalletScreen from "./Wallet/WalletScreen";
 import WalletHome from "./WalletHome/WalletHome";
 import DepositHistory from "./DepositHistory/DepositHistory";
@@ -23,6 +22,7 @@ import AssetAllocation from "./AssetAllocation/AssetAllocation";
 import MenuScreen from "./MenuScreen/MenuScreen";
 import Referrals from "./Referrals/Referrals";
 import ReferralHistory from "./ReferralHistory/ReferralHistory";
+import Exchangescreen from "./Exchange/ExchangeScreen/Exchangescreen"
 
 export {
      HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,

@@ -82,5 +82,8 @@ const images = {
     download: require("./download.png"),
     filter: require("./filter.png"),
     noRecord: require("./noRecord.png"),
+    marketOrder: require("./MarketOrder.png"),
+    Limit: require("./Limit.png")
+
 }
 export default images
