@@ -5,7 +5,7 @@ import { ResponsiveText } from './ResponsiveText'
 import { colors, fontFamily } from '../constants'
 import { appStyles } from '../utilities'
 
-export const MainHeader = ({ leftImage, title, onBackPress }) => {
+export const MainHeader = ({ leftImage, rightImage, title, onBackPress, onRightPress }) => {
   return (
     <View style={{ ...appStyles.row, ...styles.headerMainContainer }}>
       <TouchableOpacity onPress={onBackPress} style={styles.leftIconWrapper}>
@@ -15,9 +15,10 @@ export const MainHeader = ({ leftImage, title, onBackPress }) => {
       <View style={styles.titleWrapper}>
         <ResponsiveText style={styles.title}>{title}</ResponsiveText>
       </View>
-
-      {/* Placeholder to balance the left icon */}
-      <View style={styles.rightSpacer} />
+      <TouchableOpacity onPress={onRightPress} style={styles.rightIconWrapper}>
+        <Image source={rightImage} style={styles.rightImage} />
+      </TouchableOpacity>
+      {/* <View style={styles.rightSpacer} /> */}
     </View>
   )
 }
@@ -32,6 +33,11 @@ const styles = StyleSheet.create({
     height: wp(6),
     resizeMode: 'contain',
   },
+  rightImage: {
+    width: wp(6),
+    height: wp(6),
+    resizeMode: 'contain',
+  },
   title: {
     fontSize: 18,
     fontFamily: fontFamily.mainTextMedium,
@@ -42,11 +48,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  rightSpacer: {
-    width: wp(10),
-  },
+  // rightSpacer: {
+  //   width: wp(10),
+  // },
   leftIconWrapper: {
     width: wp(10),
     alignItems: 'flex-start',
+  },
+  rightIconWrapper: {
+    width: wp(10),
+    alignItems: 'flex-end',
   },
 })

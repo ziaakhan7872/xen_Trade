@@ -31,5 +31,5 @@ export const Routes = {
     AssetAllocation: "AssetAllocation",
     MenuScreen: "MenuScreen",
     referrals: "referrals",
-
+    referralHistory: "referralHistory",
 }
