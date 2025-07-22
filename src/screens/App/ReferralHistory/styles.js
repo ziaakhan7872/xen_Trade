@@ -6,9 +6,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: wp(4)
     },
-    scrollViewContent: {
-        flexGrow: 1,
-    },
     historyImg: {
         width: wp(6),
         height: wp(6),

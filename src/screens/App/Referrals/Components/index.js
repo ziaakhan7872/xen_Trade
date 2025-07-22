@@ -7,7 +7,6 @@ import { hp, wp } from '../../../../components/ResponsiveComponent'
 import { SimpleButton } from '../../../../components/SimpleButton'
 import images from '../../../../images'
 import Spacer from '../../../../components/Spacer'
-import Line from '../../../../components/Liner'
 
 export const ReferText = () => {
     return (

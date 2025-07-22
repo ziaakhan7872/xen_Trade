@@ -79,6 +79,8 @@ const images = {
     history: require("./history.png"),
     checkBox: require("./check.png"),
     openOrder: require("./OpenOrder.png"),
-
+    download: require("./download.png"),
+    filter: require("./filter.png"),
+    noRecord: require("./noRecord.png"),
 }
 export default images
