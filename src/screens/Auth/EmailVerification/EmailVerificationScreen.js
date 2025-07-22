@@ -1,4 +1,4 @@
-import { Image,  TouchableOpacity, View } from 'react-native'
+import { Image, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { style } from './Style'
@@ -10,21 +10,20 @@ import { EmailVerificationBottomSheet, EmailVerificationForm } from './Component
 import { Portal } from 'react-native-portalize'
 
 const EmailVerificationScreen = () => {
-    const {emailVerificationBottomSheetRef,handleOpenVerification,handleCloseVerification,handeGoBack} = useEmalVerification()
+    const { emailVerificationBottomSheetRef, handleOpenVerification, handleCloseVerification, handeGoBack } = useEmalVerification()
     return (
         <AuthMainContainer>
             <View style={style.container}>
-                <Spacer/>
+                <Spacer />
                 <View style={style.outerMainBox}>
                     <TouchableOpacity onPress={handeGoBack}>
                         <Image style={style.leftImage} resizeMode='contain' source={images.backArrow} />
                     </TouchableOpacity>
-                    <Spacer/>
+                    <Spacer />
                     <EmailVerificationForm submit={handleOpenVerification} />
                 </View>
                 <Portal>
-                <EmailVerificationBottomSheet closeBottomSheet={handleCloseVerification} bottomSheetRef={emailVerificationBottomSheetRef} />
-
+                    <EmailVerificationBottomSheet closeBottomSheet={handleCloseVerification} bottomSheetRef={emailVerificationBottomSheetRef} />
                 </Portal>
             </View>
 

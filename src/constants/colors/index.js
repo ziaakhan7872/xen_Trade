@@ -43,7 +43,6 @@ export const colors = {
     available: "#0A2228",
     green: "#16A853",
     red: "#FF3235",
-    buttonColor:"#011F25"
-
-
+    buttonColor: "#011F25",
+    cardColor3: "#011F25",
 }

@@ -16,36 +16,41 @@ export const GorhomBottomSheet = ({ sheetRef, onCloseRequest, children }) => {
       pressBehavior="close"
     />
   ), []);
+  try {
+    return (
 
-  return (
-    <BottomSheet
-      ref={sheetRef}
-      index={-1}
-      enablePanDownToClose={true}
-      onClose={onCloseRequest}
-      backdropComponent={renderBackdrop}
-      keyboardBehavior="interactive"
-      android_keyboardInputMode="adjustResize"
-      backgroundStyle={{ backgroundColor: 'transparent' }}
-      handleIndicatorStyle={{ display: 'none' }}
+      <BottomSheet
+        ref={sheetRef}
+        index={-1}
+        enablePanDownToClose={true}
+        onClose={onCloseRequest}
+        backdropComponent={renderBackdrop}
+        keyboardBehavior="interactive"
+        android_keyboardInputMode="adjustResize"
+        backgroundStyle={{ backgroundColor: 'transparent' }}
+        handleIndicatorStyle={{ display: 'none' }}
+      >
+        <BottomSheetView style={styles.sheetContainer}>
+          <View style={styles.contentWrapper}>
+            {children}
+          </View>
+        </BottomSheetView>
+      </BottomSheet>
+    );
+  } catch (error) {
+    console.error("Error rendering GorhomBottomSheet:", error);
+  }
 
-    >
-      <BottomSheetView style={styles.sheetContainer}>
-        <View style={styles.contentWrapper}>
-          {children}
-        </View>
-      </BottomSheetView>
-    </BottomSheet>
-  );
+
 };
 
 const styles = StyleSheet.create({
   sheetContainer: {
     backgroundColor: colors.bottomSheetBackgroundColor,
-    borderTopLeftRadius:wp(4),
-    borderTopRightRadius:wp(4)
+    borderTopLeftRadius: wp(4),
+    borderTopRightRadius: wp(4)
   },
- 
+
   contentWrapper: {
     alignItems: 'center',
     paddingBottom: 20,

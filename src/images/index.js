@@ -83,7 +83,8 @@ const images = {
     filter: require("./filter.png"),
     noRecord: require("./noRecord.png"),
     marketOrder: require("./MarketOrder.png"),
-    Limit: require("./Limit.png")
-
+    Limit: require("./Limit.png"),
+    closeIcon: require("./closeIcon.png"),
+    blueTick: require("./blueTick.png"),
 }
 export default images
