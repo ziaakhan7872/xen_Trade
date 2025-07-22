@@ -1,4 +1,4 @@
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { colors, fontFamily, fontSize } from '../../../../constants';
@@ -9,6 +9,49 @@ import Line from '../../../../components/Liner';
 import { SimpleButton } from '../../../../components/SimpleButton';
 import { AccountActivity, DummyLatestNews, watchListDumyData } from '../../../../utilities/dummyData';
 import AntDesign from "react-native-vector-icons/AntDesign"
+// import {
+//     LineChart,
+//     LineChartPath,
+//     LineChartProvider,
+//     LineChartHorizontalLine
+// } from 'react-native-wagmi-charts';
+
+import { LineChart } from 'react-native-gifted-charts';
+import { PieChart } from 'react-native-gifted-charts';
+
+
+
+// import { LineChart } from 'react-native-chart-kit';
+
+// const data = [
+//     { timestamp: Date.now() - 1000 * 60 * 60 * 5, value: 1 },
+//     { timestamp: Date.now() - 1000 * 60 * 60 * 4, value: 2 },
+//     { timestamp: Date.now() - 1000 * 60 * 60 * 3, value: 3 },
+//     { timestamp: Date.now() - 1000 * 60 * 60 * 2, value: 2.5 },
+//     { timestamp: Date.now() - 1000 * 60 * 60 * 1, value: 3.5 },
+// ];
+
+const data = [
+    { value: 20 },
+    { value: 45 },
+    { value: 28 },
+    { value: 80 },
+    { value: 99 },
+    { value: 43 },
+];
+
+
+const data2 = {
+    labels: ["January", "February", "March", "April", "May", "June"],
+    datasets: [
+        {
+            data: [20, 45, 28, 80, 99, 43],
+            color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+            strokeWidth: 2 // optional
+        }
+    ],
+    legend: ["Rainy Days"] // optional
+};
 
 export const AccountInfo = () => {
     return (
@@ -52,6 +95,13 @@ export const RowButtonTab = ({ buttonPress, setButtonPress }) => {
 };
 
 export const PortfilioOverView = ({ buttonPress, setButtonPress }) => {
+
+    const chartConfig = {
+        backgroundGradientFrom: "rgba(2, 28, 36, 1)",
+        backgroundGradientFromOpacity: 0,
+        backgroundGradientTo: "rgba(2, 28, 36, 0)",
+        color: (opacity = 1) => `rgba(5, 186, 218, ${opacity})`,
+    };
     return (
         <View style={[style.mainBox]}>
             <View style={style.dateBaseGraph}>
@@ -69,22 +119,100 @@ export const PortfilioOverView = ({ buttonPress, setButtonPress }) => {
                 </TouchableOpacity>
             </View>
             {/* <Line/> */}
-            <Image
+            {/* <Image
                 style={{ width: wp(80), height: hp(33), resizeMode: "cover" }}
                 source={images.dashboardGraph}
-            />
+            /> */}
+            <View style={{ width: wp(90), alignSelf: 'center', alignItems: 'center', paddingHorizontal: wp(4) }}>
+                <LineChart
+                    data={[
+                        { value: 160 },
+                        { value: 180 },
+                        { value: 170 },
+                        { value: 190 },
+                        { value: 100 },
+                        { value: 100 },
+                        { value: 100 },
+                        { value: 100 },
+                        { value: 170 },
+                    ]}
+                    width={wp(75)}
+                    height={hp(20)}
+                    areaChart
+                    color={colors.mainColor}
+                    startFillColor="rgba(5,186,218,1)"
+                    endFillColor="rgba(5,186,218,0)"
+                    startOpacity={0.2}
+                    endOpacity={0}
+                    yAxisLabelWidth={0}
+                    yAxisColor="transparent"
+                    xAxisLabelTextStyle={{ display: 'none' }}
+                    xAxisColor="transparent"
+                    rulesColor="rgba(9,36,43,1)"
+                    rulesType="solid"
+                    showVerticalLines={false}
+                    hideDataPoints={true}
+                    showStripOnFocus={false}
+                // pointerConfig={{
+                //     persistPointer: false, // ❌ Do not persist pointer
+                //     showPointerStrip: true,
+                //     pointerStripColor: 'transparent',
+                //     //  showPointerStrip: false,
+                //     hideSecondaryPointer: true,
+                //      pointerEvents: 'none',
+                //     activatePointersInstantlyOnTouch: true, // ✅ Show on tap
+                //     pointerColor: 'white',
+                //     pointerComponent: () => null,
+                //     pointerLabelComponent: () => null,
+                //     horizontalStripConfig: {
+                //         thickness: 1,
+                //         color: '#05BADB',
+                //         strokeDashArray: [4, 4,4],
+                //         length: wp(75),
+                //     },
+
+                // }}
+
+                />
+
+            </View>
+
+
+
+
+
         </View>
     )
 }
 
 export const BalanceOverView = () => {
+    const pieData = [
+  {value: 50, color: '#79C5D3', text: 'Red'},
+  {value: 30, color: '#55B8CA', text: 'Blue'},
+  {value: 20, color: '#3DA1B3', text: 'Green'},
+];
     return (
         <View style={style.mainBox}>
             <View style={style.BalanceView}>
-                <Image
+                {/* <Image
                     style={{ width: wp(36), height: wp(36), borderRadius: wp(18), resizeMode: "contain" }}
                     source={images.doughnutChart}
-                />
+                /> */}
+                <View style={{ alignItems: 'center', marginTop: 20,backgroundColor:"transparent" }}>
+                    <PieChart
+                        data={pieData}
+                        // showText
+                        textColor=""
+                        textSize={12}
+                        radius={90}
+                        showText={false}
+                        innerRadius={67}  // Optional for donut style
+                        centerLabelComponent={() => (
+                           null
+                        )}
+                        innerCircleColor={colors.searchBar}
+                    />
+                </View>
                 <HorizontalSpacer width={wp(7)} />
                 <View >
                     <ResponsiveText style={[style.text1, { fontSize: 14 }]}>Account Balance</ResponsiveText>
