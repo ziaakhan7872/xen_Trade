@@ -1,25 +1,26 @@
 import { Dimensions, FlatList, SafeAreaView, ScrollView, StatusBar, View } from 'react-native'
 import React from 'react'
-import { colors } from '../../../constants'
+import { colors } from '../../../../constants/colors/index'
 import { style } from './Style'
-import { ResponsiveText } from '../../../components/ResponsiveText'
-import { AssetsComponent, BuyForm, BuySellRow, BuySellRowButton, CurrentOrderComponent, CurrentOrderHistoryHeader, CurrentSymbolHeader, ExchangeHeader, FlatlistValues, OrderBook, PriceUSDT, SellForm } from './Component/Index'
-import Spacer from '../../../components/Spacer'
+import { ResponsiveText } from '../../../../components/ResponsiveText'
+import { AssetsComponent, BuyForm, BuySellRow, BuySellRowButton, CurrentOrderComponent, CurrentOrderHistoryHeader, CurrentSymbolHeader, ExchangeHeader, FavoutiteBottomSheetComponnet, FlatlistValues, OrderBook, PriceUSDT, SellForm, TradingTypeComponent } from './Component/Index'
 import { UseExchange } from './Hooks/Index'
-import { hp, wp } from '../../../components/ResponsiveComponent'
+import { hp, wp } from '../../../../components/ResponsiveComponent'
 import LinearGradient from 'react-native-linear-gradient'
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context'
-import { ExchangeMainContainer } from '../../../components/ExchangeMainContainer'
-import { Amount } from '../../../utilities/dummyData'
-import { appStyles } from '../../../utilities'
-import Line from '../../../components/Liner'
+import { Amount } from '../../../../utilities/dummyData'
+import { appStyles } from '../../../../utilities/appStyles'
+import { Portal } from 'react-native-portalize'
+import Spacer from '../../../../components/Spacer'
+import Line from '../../../../components/Liner'
+import { ExchangeMainContainer } from '../../../../components/ExchangeMainContainer'
 
 const Exchangescreen = (props) => {
-  const { buySellButton, setBuySellButton, buyerSlider, setBuyerSlider, sellSlider, setSelSlider, currentOrderHistoryPress, setCurrentOrderHistoryPress, currentOrder, isCurrentSymbol, setIsCurrentSymbol } = UseExchange(props)
+  const { buySellButton, setBuySellButton, buyerSlider, setBuyerSlider, sellSlider, setSelSlider, currentOrderHistoryPress, setCurrentOrderHistoryPress, currentOrder, isCurrentSymbol, setIsCurrentSymbol, tradngBottomSheetRef, tradingType, setTradingType, favouriteBottomSheetRef } = UseExchange(props)
   return (
     <ExchangeMainContainer>
       <View style={style.container}>
-        <ExchangeHeader />
+        <ExchangeHeader onpress={()=>favouriteBottomSheetRef?.current?.expand()} />
         <Spacer />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={style.formandOrderBookView}>
@@ -27,9 +28,9 @@ const Exchangescreen = (props) => {
               <BuySellRowButton buySellButton={buySellButton} setBuySellButton={setBuySellButton} />
               <Spacer height={hp(1)} />
               {buySellButton === "buy" ? (
-                <BuyForm value={buyerSlider} setValue={setBuyerSlider} />
+                <BuyForm tradingType={tradingType} onPressTradingType={() => tradngBottomSheetRef?.current?.expand()} value={buyerSlider} setValue={setBuyerSlider} />
               ) : (
-                <SellForm value={sellSlider} setValue={setSelSlider} />
+                <SellForm tradingType={tradingType} onPressTradingType={() => tradngBottomSheetRef?.current?.expand()} value={sellSlider} setValue={setSelSlider} />
               )}
             </View>
 
@@ -67,8 +68,10 @@ const Exchangescreen = (props) => {
             <AssetsComponent />
           )}
         </ScrollView>
-
-
+        <Portal>
+          <TradingTypeComponent tradingTypePress={tradingType} setTradingTypePress={setTradingType} closeBottomSheet={() => tradngBottomSheetRef?.current?.close()} ref={tradngBottomSheetRef} />
+          <FavoutiteBottomSheetComponnet ref={favouriteBottomSheetRef} />
+        </Portal>
         <View >
 
         </View>

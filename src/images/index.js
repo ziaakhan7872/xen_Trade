@@ -79,6 +79,8 @@ const images = {
     history: require("./history.png"),
     checkBox: require("./check.png"),
     openOrder: require("./OpenOrder.png"),
+    marketOrder:require("./MarketOrder.png"),
+    Limit:require("./Limit.png")
 
 }
 export default images

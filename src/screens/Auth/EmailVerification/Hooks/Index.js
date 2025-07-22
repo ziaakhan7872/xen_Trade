@@ -8,7 +8,7 @@ const useEmalVerification = () => {
 
     const handleOpenVerification=()=>{
         console.log("open")
-        emailVerificationBottomSheetRef?.current?.open()
+        emailVerificationBottomSheetRef?.current?.expand()
     }
     const handleCloseVerification=()=>{
         console.log("open")
