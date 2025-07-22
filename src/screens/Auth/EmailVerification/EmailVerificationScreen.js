@@ -24,7 +24,6 @@ const EmailVerificationScreen = () => {
                 </View>
                 <Portal>
                     <EmailVerificationBottomSheet closeBottomSheet={handleCloseVerification} bottomSheetRef={emailVerificationBottomSheetRef} />
-
                 </Portal>
             </View>
 
