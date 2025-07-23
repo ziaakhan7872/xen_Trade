@@ -9,6 +9,22 @@
 /* Begin PBXBuildFile section */
 		0C80B921A6F3F58F76C31292 /* libPods-xen_Trade.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-xen_Trade.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		22570A642E313085003580CE /* HelveticaNowDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A542E313084003580CE /* HelveticaNowDisplay-Thin.ttf */; };
+		22570A652E313085003580CE /* BomstadDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A552E313084003580CE /* BomstadDisplay-Thin.ttf */; };
+		22570A662E313085003580CE /* HelveticaNowDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A562E313084003580CE /* HelveticaNowDisplay-Black.ttf */; };
+		22570A672E313085003580CE /* HelveticaNowDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A572E313084003580CE /* HelveticaNowDisplay-Regular.ttf */; };
+		22570A682E313085003580CE /* HelveticaNowDisplay-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A582E313084003580CE /* HelveticaNowDisplay-Light.ttf */; };
+		22570A692E313085003580CE /* BomstadDisplay-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A592E313084003580CE /* BomstadDisplay-Light.ttf */; };
+		22570A6A2E313085003580CE /* BomstadDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A5A2E313085003580CE /* BomstadDisplay-Regular.ttf */; };
+		22570A6B2E313085003580CE /* BomstadDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A5B2E313085003580CE /* BomstadDisplay-Black.ttf */; };
+		22570A6C2E313085003580CE /* BomstadDisplay-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A5C2E313085003580CE /* BomstadDisplay-SemiBold.ttf */; };
+		22570A6D2E313085003580CE /* BomstadDisplay-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A5D2E313085003580CE /* BomstadDisplay-ExtraBold.ttf */; };
+		22570A6E2E313085003580CE /* BomstadDisplay-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A5E2E313085003580CE /* BomstadDisplay-ExtraLight.ttf */; };
+		22570A6F2E313085003580CE /* HelveticaNowDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A5F2E313085003580CE /* HelveticaNowDisplay-Bold.ttf */; };
+		22570A702E313085003580CE /* HelveticaNowDisplay-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A602E313085003580CE /* HelveticaNowDisplay-ExtraBold.ttf */; };
+		22570A712E313085003580CE /* BomstadDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A612E313085003580CE /* BomstadDisplay-Bold.ttf */; };
+		22570A722E313085003580CE /* HelveticaNowDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A622E313085003580CE /* HelveticaNowDisplay-Medium.ttf */; };
+		22570A732E313085003580CE /* BomstadDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22570A632E313085003580CE /* BomstadDisplay-Medium.ttf */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		86552EA8C6D73CE1FEEF5B3C /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
@@ -19,6 +35,22 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = xen_Trade/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = xen_Trade/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = xen_Trade/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		22570A542E313084003580CE /* HelveticaNowDisplay-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaNowDisplay-Thin.ttf"; path = "../src/constants/fonts/HelveticaNowDisplay-Thin.ttf"; sourceTree = "<group>"; };
+		22570A552E313084003580CE /* BomstadDisplay-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BomstadDisplay-Thin.ttf"; path = "../src/constants/fonts/BomstadDisplay-Thin.ttf"; sourceTree = "<group>"; };
+		22570A562E313084003580CE /* HelveticaNowDisplay-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaNowDisplay-Black.ttf"; path = "../src/constants/fonts/HelveticaNowDisplay-Black.ttf"; sourceTree = "<group>"; };
+		22570A572E313084003580CE /* HelveticaNowDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaNowDisplay-Regular.ttf"; path = "../src/constants/fonts/HelveticaNowDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		22570A582E313084003580CE /* HelveticaNowDisplay-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaNowDisplay-Light.ttf"; path = "../src/constants/fonts/HelveticaNowDisplay-Light.ttf"; sourceTree = "<group>"; };
+		22570A592E313084003580CE /* BomstadDisplay-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BomstadDisplay-Light.ttf"; path = "../src/constants/fonts/BomstadDisplay-Light.ttf"; sourceTree = "<group>"; };
+		22570A5A2E313085003580CE /* BomstadDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BomstadDisplay-Regular.ttf"; path = "../src/constants/fonts/BomstadDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		22570A5B2E313085003580CE /* BomstadDisplay-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BomstadDisplay-Black.ttf"; path = "../src/constants/fonts/BomstadDisplay-Black.ttf"; sourceTree = "<group>"; };
+		22570A5C2E313085003580CE /* BomstadDisplay-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BomstadDisplay-SemiBold.ttf"; path = "../src/constants/fonts/BomstadDisplay-SemiBold.ttf"; sourceTree = "<group>"; };
+		22570A5D2E313085003580CE /* BomstadDisplay-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BomstadDisplay-ExtraBold.ttf"; path = "../src/constants/fonts/BomstadDisplay-ExtraBold.ttf"; sourceTree = "<group>"; };
+		22570A5E2E313085003580CE /* BomstadDisplay-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BomstadDisplay-ExtraLight.ttf"; path = "../src/constants/fonts/BomstadDisplay-ExtraLight.ttf"; sourceTree = "<group>"; };
+		22570A5F2E313085003580CE /* HelveticaNowDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaNowDisplay-Bold.ttf"; path = "../src/constants/fonts/HelveticaNowDisplay-Bold.ttf"; sourceTree = "<group>"; };
+		22570A602E313085003580CE /* HelveticaNowDisplay-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaNowDisplay-ExtraBold.ttf"; path = "../src/constants/fonts/HelveticaNowDisplay-ExtraBold.ttf"; sourceTree = "<group>"; };
+		22570A612E313085003580CE /* BomstadDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BomstadDisplay-Bold.ttf"; path = "../src/constants/fonts/BomstadDisplay-Bold.ttf"; sourceTree = "<group>"; };
+		22570A622E313085003580CE /* HelveticaNowDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaNowDisplay-Medium.ttf"; path = "../src/constants/fonts/HelveticaNowDisplay-Medium.ttf"; sourceTree = "<group>"; };
+		22570A632E313085003580CE /* BomstadDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BomstadDisplay-Medium.ttf"; path = "../src/constants/fonts/BomstadDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-xen_Trade.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xen_Trade.debug.xcconfig"; path = "Target Support Files/Pods-xen_Trade/Pods-xen_Trade.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-xen_Trade.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xen_Trade.release.xcconfig"; path = "Target Support Files/Pods-xen_Trade/Pods-xen_Trade.release.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-xen_Trade.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-xen_Trade.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +102,22 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				22570A5B2E313085003580CE /* BomstadDisplay-Black.ttf */,
+				22570A612E313085003580CE /* BomstadDisplay-Bold.ttf */,
+				22570A5D2E313085003580CE /* BomstadDisplay-ExtraBold.ttf */,
+				22570A5E2E313085003580CE /* BomstadDisplay-ExtraLight.ttf */,
+				22570A592E313084003580CE /* BomstadDisplay-Light.ttf */,
+				22570A632E313085003580CE /* BomstadDisplay-Medium.ttf */,
+				22570A5A2E313085003580CE /* BomstadDisplay-Regular.ttf */,
+				22570A5C2E313085003580CE /* BomstadDisplay-SemiBold.ttf */,
+				22570A552E313084003580CE /* BomstadDisplay-Thin.ttf */,
+				22570A562E313084003580CE /* HelveticaNowDisplay-Black.ttf */,
+				22570A5F2E313085003580CE /* HelveticaNowDisplay-Bold.ttf */,
+				22570A602E313085003580CE /* HelveticaNowDisplay-ExtraBold.ttf */,
+				22570A582E313084003580CE /* HelveticaNowDisplay-Light.ttf */,
+				22570A622E313085003580CE /* HelveticaNowDisplay-Medium.ttf */,
+				22570A572E313084003580CE /* HelveticaNowDisplay-Regular.ttf */,
+				22570A542E313084003580CE /* HelveticaNowDisplay-Thin.ttf */,
 				13B07FAE1A68108700A75B9A /* xen_Trade */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -158,6 +206,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22570A642E313085003580CE /* HelveticaNowDisplay-Thin.ttf in Resources */,
+				22570A652E313085003580CE /* BomstadDisplay-Thin.ttf in Resources */,
+				22570A662E313085003580CE /* HelveticaNowDisplay-Black.ttf in Resources */,
+				22570A672E313085003580CE /* HelveticaNowDisplay-Regular.ttf in Resources */,
+				22570A682E313085003580CE /* HelveticaNowDisplay-Light.ttf in Resources */,
+				22570A692E313085003580CE /* BomstadDisplay-Light.ttf in Resources */,
+				22570A6A2E313085003580CE /* BomstadDisplay-Regular.ttf in Resources */,
+				22570A6B2E313085003580CE /* BomstadDisplay-Black.ttf in Resources */,
+				22570A6C2E313085003580CE /* BomstadDisplay-SemiBold.ttf in Resources */,
+				22570A6D2E313085003580CE /* BomstadDisplay-ExtraBold.ttf in Resources */,
+				22570A6E2E313085003580CE /* BomstadDisplay-ExtraLight.ttf in Resources */,
+				22570A6F2E313085003580CE /* HelveticaNowDisplay-Bold.ttf in Resources */,
+				22570A702E313085003580CE /* HelveticaNowDisplay-ExtraBold.ttf in Resources */,
+				22570A712E313085003580CE /* BomstadDisplay-Bold.ttf in Resources */,
+				22570A722E313085003580CE /* HelveticaNowDisplay-Medium.ttf in Resources */,
+				22570A732E313085003580CE /* BomstadDisplay-Medium.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				86552EA8C6D73CE1FEEF5B3C /* PrivacyInfo.xcprivacy in Resources */,

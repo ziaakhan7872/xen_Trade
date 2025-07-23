@@ -56,23 +56,24 @@
 		<string>Octicons.ttf</string>
 		<string>Zocial.ttf</string>
 		<string>Fontisto.ttf</string>
-		<string>BomstadDisplay-Black.ttf</string>
-		<string>BomstadDisplay-Bold.ttf</string>
-		<string>BomstadDisplay-ExtraBold.ttf</string>
-		<string>BomstadDisplay-ExtraLight.ttf</string>
-		<string>BomstadDisplay-Light.ttf</string>
-		<string>BomstadDisplay-Medium.ttf</string>
-		<string>BomstadDisplay-Regular.ttf</string>
-		<string>BomstadDisplay-SemiBold.ttf</string>
-		<string>BomstadDisplay-Thin.ttf</string>
-		<string>HelveticaNowDisplay-Black.ttf</string>
-		<string>HelveticaNowDisplay-Bold.ttf</string>
-		<string>HelveticaNowDisplay-ExtraBold.ttf</string>
-		<string>HelveticaNowDisplay-Light.ttf</string>
-		<string>HelveticaNowDisplay-Medium.ttf</string>
-		<string>HelveticaNowDisplay-Regular.ttf</string>
-		<string>HelveticaNowDisplay-Thin.ttf</string>
-	</array>
+    <string>BomstadDisplay-Black.ttf</string>
+    <string>BomstadDisplay-Bold.ttf</string>
+    <string>BomstadDisplay-ExtraBold.ttf</string>
+    <string>BomstadDisplay-ExtraLight.ttf</string>
+    <string>BomstadDisplay-Light.ttf</string>
+    <string>BomstadDisplay-Medium.ttf</string>
+    <string>BomstadDisplay-Regular.ttf</string>
+    <string>BomstadDisplay-SemiBold.ttf</string>
+    <string>BomstadDisplay-Thin.ttf</string>
+    <string>HelveticaNowDisplay-Black.ttf</string>
+    <string>HelveticaNowDisplay-Bold.ttf</string>
+    <string>HelveticaNowDisplay-ExtraBold.ttf</string>
+    <string>HelveticaNowDisplay-Light.ttf</string>
+    <string>HelveticaNowDisplay-Medium.ttf</string>
+    <string>HelveticaNowDisplay-Regular.ttf</string>
+    <string>HelveticaNowDisplay-Thin.ttf</string>
+</array>
+
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
