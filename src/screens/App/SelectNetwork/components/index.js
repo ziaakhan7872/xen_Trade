@@ -10,12 +10,12 @@ import { fontFamily } from '../../../../constants/fonts';
 // Network Icon Component
 const NetworkIcon = ({ source, name }) => (
   <View style={styles.networkIconContainer}>
-    <Image 
-      source={source} 
-      style={styles.networkIcon} 
+    <Image
+      source={source}
+      style={styles.networkIcon}
       resizeMode="contain"
       onError={() => {
-       
+
         console.log(`Failed to load icon for ${name}`);
       }}
     />
@@ -25,14 +25,14 @@ const NetworkIcon = ({ source, name }) => (
 // Header component for SelectNetwork
 export const SelectNetworkHeader = () => {
   const navigation = useNavigation();
-  
+
   return (
     <View style={styles.header}>
-      <TouchableOpacity 
-        onPress={() => navigation.goBack()} 
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
         style={styles.backButton}
       >
-        <Image 
+        <Image
           source={images.backArrow}
           style={styles.backIcon}
           resizeMode="contain"
@@ -49,7 +49,7 @@ export const NetworkList = () => {
 
   const navigation = useNavigation();
 
-  
+
   // Network data with their respective icons
   const networks = [
     {
@@ -114,13 +114,13 @@ export const NetworkList = () => {
     // Navigate to Barcode screen with selected network and crypto data
     navigation.navigate(Routes.AppNavigator, {
       screen: Routes.Barcode,
-     
+
     });
   };
 
   const renderNetworkItem = ({ item }) => (
-    <TouchableOpacity 
-      style={styles.networkItem}
+    <TouchableOpacity
+      style={[styles.networkItem, { width: wp(100), }]}
       onPress={() => handleNetworkSelect()}
     >
       <NetworkIcon source={item.icon} name={item.name} />
@@ -133,7 +133,7 @@ export const NetworkList = () => {
           Est arrival in {item.arrivalTime}
         </ResponsiveText>
       </View>
-      
+
     </TouchableOpacity>
   );
 
@@ -179,7 +179,7 @@ const styles = {
   networkList: {
     flex: 1,
     paddingHorizontal: wp(4),
-    width: '100%',
+    // width: '100%',
   },
   networkListContent: {
     paddingBottom: hp(5),
@@ -187,10 +187,10 @@ const styles = {
   networkItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: hp(2.5),
-    borderBottomWidth: 1,
-    borderBottomColor: colors.buttonSigninColor,
-    width: '100%',
+    paddingVertical: hp(2),
+    borderBottomWidth: 0.3,
+    borderBottomColor: colors.lineColor,
+
   },
   networkIconContainer: {
     width: wp(12),
