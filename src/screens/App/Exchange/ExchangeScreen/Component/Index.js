@@ -18,7 +18,7 @@ import { hp, wp } from '../../../../../components/ResponsiveComponent'
 import Line from '../../../../../components/Liner'
 import { RenderFavouriteCoinList } from '../../Component/Index'
 
-export const ExchangeHeader = ({ onpress }) => {
+export const ExchangeHeader = ({ onpress, onPressTradeGraph }) => {
     return (
         <View style={styles.header}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -30,7 +30,9 @@ export const ExchangeHeader = ({ onpress }) => {
                 <HorizontalSpacer />
                 <ResponsiveText style={styles.currentPriceStyle}>+3.33%</ResponsiveText>
             </View>
-            <Image style={styles.tradingGraohImage} source={images.trading} />
+            <TouchableOpacity onPress={onPressTradeGraph} >
+                <Image style={styles.tradingGraohImage} source={images.trading} />
+            </TouchableOpacity>
         </View>
     )
 }

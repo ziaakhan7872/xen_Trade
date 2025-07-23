@@ -14,13 +14,14 @@ import { Portal } from 'react-native-portalize'
 import Spacer from '../../../../components/Spacer'
 import Line from '../../../../components/Liner'
 import { ExchangeMainContainer } from '../../../../components/ExchangeMainContainer'
+import { Routes } from '../../../../constants'
 
 const Exchangescreen = (props) => {
   const { buySellButton, setBuySellButton, buyerSlider, setBuyerSlider, sellSlider, setSelSlider, currentOrderHistoryPress, setCurrentOrderHistoryPress, currentOrder, isCurrentSymbol, setIsCurrentSymbol, tradngBottomSheetRef, tradingType, setTradingType, favouriteBottomSheetRef } = UseExchange(props)
   return (
     <ExchangeMainContainer>
       <View style={style.container}>
-        <ExchangeHeader onpress={() => favouriteBottomSheetRef?.current?.expand()} />
+        <ExchangeHeader onPressTradeGraph={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen })} onpress={() => favouriteBottomSheetRef?.current?.expand()} />
         <Spacer />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={style.formandOrderBookView}>

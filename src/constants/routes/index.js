@@ -33,4 +33,6 @@ export const Routes = {
     referrals: "referrals",
     referralHistory: "referralHistory",
     orderHistory: "orderHistory",
+    TradeGraphScreen: "TradeGraphScreen",
+
 }

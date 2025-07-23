@@ -1,6 +1,7 @@
 import { SearchBar } from "react-native-screens";
 
 export const colors = {
+      chartLine: '#11171F',
     mainBgColor: '#011316',
     white: "#FFFFFF",
     black: "#011316",
@@ -45,4 +46,6 @@ export const colors = {
     red: "#FF3235",
     buttonColor: "#011F25",
     cardColor3: "#011F25",
+    grayColor2:"#939FA3",
+    yellow1:"#EAB44C"
 }
