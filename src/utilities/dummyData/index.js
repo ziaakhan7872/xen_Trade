@@ -381,7 +381,7 @@ export const DummyCurrentSymbol = [
     OrderPrice: 0.0154,
     marketType: "Limit",
     type: "Buy",
-    time:"11/22, 17:26:15"
+    time: "11/22, 17:26:15"
   },
   {
     id: 2,
@@ -392,7 +392,54 @@ export const DummyCurrentSymbol = [
     OrderPrice: 0.0154,
     marketType: "Market",
     type: "Sell",
-    time:"11/22, 17:26:15"
+    time: "11/22, 17:26:15"
+  },
+]
+
+export const OrderHistoryData = [
+  {
+    id: 1,
+    name: "BTC/USD",
+    symbol: "BTC",
+    OrderAmount: 3.33,
+    Filled: 0,
+    OrderPrice: 0.0154,
+    marketType: "Limit",
+    type: "Buy",
+    time: "11/22, 17:26:15"
+  },
+  {
+    id: 2,
+    name: "BTC/USD",
+    symbol: "BTC",
+    OrderAmount: 3.33,
+    Filled: 0,
+    OrderPrice: 0.0154,
+    marketType: "Market Order",
+    type: "Buy",
+    time: "11/22, 17:26:15"
+  },
+  {
+    id: 3,
+    name: "BTC/USD",
+    symbol: "BTC",
+    OrderAmount: 3.33,
+    Filled: 0,
+    OrderPrice: 0.0154,
+    marketType: "Limit",
+    type: "Buy",
+    time: "11/22, 17:26:15"
+  },
+  {
+    id: 4,
+    name: "BTC/USD",
+    symbol: "BTC",
+    OrderAmount: 3.33,
+    Filled: 0,
+    OrderPrice: 0.0154,
+    marketType: "Market Order",
+    type: "Buy",
+    time: "11/22, 17:26:15"
   },
 
 ]

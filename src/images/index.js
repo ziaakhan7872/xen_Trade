@@ -86,5 +86,6 @@ const images = {
     Limit: require("./Limit.png"),
     closeIcon: require("./closeIcon.png"),
     blueTick: require("./blueTick.png"),
+    filter2: require("./filter2.png"),
 }
 export default images

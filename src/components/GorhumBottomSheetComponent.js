@@ -29,6 +29,9 @@ export const GorhomBottomSheet = ({ sheetRef, onCloseRequest, children }) => {
         android_keyboardInputMode="adjustResize"
         backgroundStyle={{ backgroundColor: 'transparent' }}
         handleIndicatorStyle={{ display: 'none' }}
+      // enableContentPanningGesture={false}
+      // enableHandlePanningGesture={false}
+
       >
         <BottomSheetView style={styles.sheetContainer}>
           <View style={styles.contentWrapper}>

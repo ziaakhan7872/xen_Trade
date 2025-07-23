@@ -27,6 +27,7 @@ const AppNavigation = () => {
             <Screen name={Routes.MenuScreen} component={App.MenuScreen} />
             <Screen name={Routes.referrals} component={App.Referrals} />
             <Screen name={Routes.referralHistory} component={App.ReferralHistory} />
+            <Screen name={Routes.orderHistory} component={App.OrderHistory} />
             {/* <Screen name={Routes.WithDraw} component={App.WithDraw} /> */}
 
         </Navigator>

@@ -8,10 +8,10 @@ import { ResponsiveText } from '../../../../components/ResponsiveText'
 import Spacer from '../../../../components/Spacer'
 import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent'
 import Line from '../../../../components/Liner'
-// import { useReferralHistory } from '../Hooks'
 import { FilterGroup } from '../Hooks'
+import { SimpleButton } from '../../../../components/SimpleButton'
+
 export const FilterTextInput = ({ openBottomSheet }) => {
-    // const { FilterGroup } = useReferralHistory()
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={openBottomSheet} style={styles.leftIconWrapper}>
@@ -134,7 +134,7 @@ export const FilterBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
                 <FilterGroup
                     options={['All', 'Today', 'Yesterday', 'Last Week', 'Last Month', 'Custom Date']}
                     initial="All"
-                    onChange={(val) => console.log('CreatedAt Filter:', val)}
+                // onChange={(val) => console.log('CreatedAt Filter:', val)}
                 />
             </View>
             <Spacer height={hp(1.5)} />
@@ -144,7 +144,7 @@ export const FilterBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
                 <FilterGroup
                     options={['Market', 'Limit']}
                     initial="Market"
-                    onChange={(val) => console.log('Order Type:', val)}
+                // onChange={(val) => console.log('Order Type:', val)}
                 />
             </View>
             <Spacer height={hp(1.5)} />
@@ -154,11 +154,14 @@ export const FilterBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
                 <FilterGroup
                     options={['All', 'Buy', 'Sell']}
                     initial="All"
-                    onChange={(val) => console.log('Transaction Type:', val)}
+                // onChange={(val) => console.log('Transaction Type:', val)}
                 />
             </View>
-            <Spacer height={hp(1)} />
-
+            <Spacer height={hp(2.5)} />
+            <View style={[appStyles.row, styles.buttonRow]}>
+                <SimpleButton text="Reset" textColor={colors.white} styleView={styles.resetBtn} />
+                <SimpleButton text="Show Results" textColor={colors.black} styleView={styles.showBtn} />
+            </View>
         </GorhomBottomSheet>
 
     )
@@ -256,8 +259,7 @@ const styles = StyleSheet.create({
         paddingVertical: hp(1),
         paddingBottom: hp(2),
         backgroundColor: colors.cardColor3,
-        borderRadius: wp(4),
-        // marginTop: hp(2.5),
+        borderRadius: wp(3),
         width: wp(90),
     },
     filterSelectionContainer: {
@@ -275,5 +277,25 @@ const styles = StyleSheet.create({
         fontFamily: fontFamily.appTextMedium,
         fontSize: 14,
         color: colors.white,
+    },
+    buttonRow: {
+        paddingHorizontal: wp(3.5),
+        paddingBottom: Platform.OS === 'android' ? hp(2) : hp(1), // More space on Android
+
+    },
+    resetBtn: {
+        paddingHorizontal: wp(17),
+        backgroundColor: colors.transparentBtn,
+        paddingVertical: hp(2),
+        marginStart: wp(1.5),
+        borderRadius: wp(10),
+    },
+    showBtn: {
+        paddingHorizontal: wp(11.5),
+        backgroundColor: colors.mainColor,
+        marginLeft: wp(3), // space between buttons
+        paddingVertical: hp(2),
+        borderRadius: wp(10),
+        marginRight: wp(1)
     },
 })

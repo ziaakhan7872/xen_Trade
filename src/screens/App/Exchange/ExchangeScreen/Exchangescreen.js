@@ -20,7 +20,7 @@ const Exchangescreen = (props) => {
   return (
     <ExchangeMainContainer>
       <View style={style.container}>
-        <ExchangeHeader onpress={()=>favouriteBottomSheetRef?.current?.expand()} />
+        <ExchangeHeader onpress={() => favouriteBottomSheetRef?.current?.expand()} />
         <Spacer />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={style.formandOrderBookView}>
@@ -52,7 +52,7 @@ const Exchangescreen = (props) => {
             </View>
           </View>
           <Spacer />
-          <CurrentOrderHistoryHeader currentOrders={currentOrder} buttonPress={currentOrderHistoryPress} setButtonPress={setCurrentOrderHistoryPress} />
+          <CurrentOrderHistoryHeader props={props} currentOrders={currentOrder} buttonPress={currentOrderHistoryPress} setButtonPress={setCurrentOrderHistoryPress} />
           {/* <View style={{width:wp(90), alignSelf: 'center' }}> */}
           <Line height={hp(0.1)} width={Dimensions.get('window').width} />
           {/* </View> */}

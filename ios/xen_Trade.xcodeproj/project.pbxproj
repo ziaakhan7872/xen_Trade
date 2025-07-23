@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		02A79526885D4B07BE1AEC72 /* BomstadDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5EB77DD3585D4AE4A391AB51 /* BomstadDisplay-Regular.ttf */; };
 		06B247D957D547CD95CA7048 /* BomstadDisplay-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35332B0C76514EA5A203F7B1 /* BomstadDisplay-SemiBold.ttf */; };
-		0C80B921A6F3F58F76C31292 /* libPods-xen_Trade.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-xen_Trade.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		15967D074B84489A8D67073E /* BomstadDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD046860B00E4FAB85461D1D /* BomstadDisplay-Black.ttf */; };
 		30523900589B4F92B40AA52E /* HelveticaNowDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 769EEAC738B346D497154A82 /* HelveticaNowDisplay-Regular.ttf */; };
@@ -23,6 +22,7 @@
 		87C50AB4D14D494D8621DBED /* HelveticaNowDisplay-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00F0EA04B4FC40E6AB72A137 /* HelveticaNowDisplay-Light.ttf */; };
 		8BBC495D6D8B4543A73CE552 /* HelveticaNowDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B864C3C2EEEB4301AB0808D4 /* HelveticaNowDisplay-Medium.ttf */; };
 		8FF280F62ABC4A9383B46B6B /* HelveticaNowDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F3F31017DCC4F24A917D4BA /* HelveticaNowDisplay-Bold.ttf */; };
+		AFE6FBF074DE6EB22FC9A3FE /* libPods-xen_Trade.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FBAAA1D653145F2AEF399F6 /* libPods-xen_Trade.a */; };
 		C961A087551145E8AD369441 /* BomstadDisplay-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 59DC495720514E84A6042051 /* BomstadDisplay-ExtraBold.ttf */; };
 		D32D1FE08F804D9FB9A19867 /* BomstadDisplay-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A659CD273C824661B7E5B092 /* BomstadDisplay-Light.ttf */; };
 		D38B340DFEC74315A9B927EA /* BomstadDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2DC834166D24D9A8B18712F /* BomstadDisplay-Thin.ttf */; };
@@ -43,19 +43,19 @@
 		310445EECE3245AE83BF1C01 /* BomstadDisplay-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BomstadDisplay-Bold.ttf"; path = "../src/constants/fonts/BomstadDisplay-Bold.ttf"; sourceTree = "<group>"; };
 		3225FD97DC1E44169321EC80 /* HelveticaNowDisplay-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "HelveticaNowDisplay-Thin.ttf"; path = "../src/constants/fonts/HelveticaNowDisplay-Thin.ttf"; sourceTree = "<group>"; };
 		35332B0C76514EA5A203F7B1 /* BomstadDisplay-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BomstadDisplay-SemiBold.ttf"; path = "../src/constants/fonts/BomstadDisplay-SemiBold.ttf"; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-xen_Trade.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xen_Trade.debug.xcconfig"; path = "Target Support Files/Pods-xen_Trade/Pods-xen_Trade.debug.xcconfig"; sourceTree = "<group>"; };
 		447002CEE922461789D540DF /* BomstadDisplay-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BomstadDisplay-ExtraLight.ttf"; path = "../src/constants/fonts/BomstadDisplay-ExtraLight.ttf"; sourceTree = "<group>"; };
 		5521CDEE5392409DB1C08666 /* splashLogoImage.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = splashLogoImage.png; path = ../src/constants/fonts/splashLogoImage.png; sourceTree = "<group>"; };
 		55D62ABFA48D408F89461710 /* HelveticaNowDisplay-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "HelveticaNowDisplay-ExtraBold.ttf"; path = "../src/constants/fonts/HelveticaNowDisplay-ExtraBold.ttf"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-xen_Trade.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xen_Trade.release.xcconfig"; path = "Target Support Files/Pods-xen_Trade/Pods-xen_Trade.release.xcconfig"; sourceTree = "<group>"; };
 		59DC495720514E84A6042051 /* BomstadDisplay-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BomstadDisplay-ExtraBold.ttf"; path = "../src/constants/fonts/BomstadDisplay-ExtraBold.ttf"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-xen_Trade.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-xen_Trade.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB77DD3585D4AE4A391AB51 /* BomstadDisplay-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BomstadDisplay-Regular.ttf"; path = "../src/constants/fonts/BomstadDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		6FBAAA1D653145F2AEF399F6 /* libPods-xen_Trade.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-xen_Trade.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = xen_Trade/AppDelegate.swift; sourceTree = "<group>"; };
 		769EEAC738B346D497154A82 /* HelveticaNowDisplay-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "HelveticaNowDisplay-Regular.ttf"; path = "../src/constants/fonts/HelveticaNowDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		80EC02196A23607DB6BBE72F /* Pods-xen_Trade.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xen_Trade.release.xcconfig"; path = "Target Support Files/Pods-xen_Trade/Pods-xen_Trade.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = xen_Trade/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E776C4A53E84D06B7693F8A /* BomstadDisplay-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BomstadDisplay-Medium.ttf"; path = "../src/constants/fonts/BomstadDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		A659CD273C824661B7E5B092 /* BomstadDisplay-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BomstadDisplay-Light.ttf"; path = "../src/constants/fonts/BomstadDisplay-Light.ttf"; sourceTree = "<group>"; };
+		AFD4F3A4500FD31E6278DF5F /* Pods-xen_Trade.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xen_Trade.debug.xcconfig"; path = "Target Support Files/Pods-xen_Trade/Pods-xen_Trade.debug.xcconfig"; sourceTree = "<group>"; };
 		B864C3C2EEEB4301AB0808D4 /* HelveticaNowDisplay-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "HelveticaNowDisplay-Medium.ttf"; path = "../src/constants/fonts/HelveticaNowDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		C2DC834166D24D9A8B18712F /* BomstadDisplay-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BomstadDisplay-Thin.ttf"; path = "../src/constants/fonts/BomstadDisplay-Thin.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -68,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-xen_Trade.a in Frameworks */,
+				AFE6FBF074DE6EB22FC9A3FE /* libPods-xen_Trade.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-xen_Trade.a */,
+				6FBAAA1D653145F2AEF399F6 /* libPods-xen_Trade.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -154,8 +154,8 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-xen_Trade.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-xen_Trade.release.xcconfig */,
+				AFD4F3A4500FD31E6278DF5F /* Pods-xen_Trade.debug.xcconfig */,
+				80EC02196A23607DB6BBE72F /* Pods-xen_Trade.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -167,13 +167,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "xen_Trade" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				300DDD205AE3CED359A96668 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				D078D516FD590635BD4BB336 /* [CP] Embed Pods Frameworks */,
+				203E1A00C69B693D9B335C30 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -263,24 +263,24 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
+		203E1A00C69B693D9B335C30 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-xen_Trade/Pods-xen_Trade-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-xen_Trade/Pods-xen_Trade-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-xen_Trade/Pods-xen_Trade-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-xen_Trade/Pods-xen_Trade-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-xen_Trade/Pods-xen_Trade-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-xen_Trade/Pods-xen_Trade-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		300DDD205AE3CED359A96668 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -302,21 +302,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+		D078D516FD590635BD4BB336 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-xen_Trade/Pods-xen_Trade-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-xen_Trade/Pods-xen_Trade-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-xen_Trade/Pods-xen_Trade-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-xen_Trade/Pods-xen_Trade-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-xen_Trade/Pods-xen_Trade-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-xen_Trade/Pods-xen_Trade-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -335,7 +335,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-xen_Trade.debug.xcconfig */;
+			baseConfigurationReference = AFD4F3A4500FD31E6278DF5F /* Pods-xen_Trade.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -367,7 +367,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-xen_Trade.release.xcconfig */;
+			baseConfigurationReference = 80EC02196A23607DB6BBE72F /* Pods-xen_Trade.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

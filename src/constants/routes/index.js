@@ -32,4 +32,5 @@ export const Routes = {
     MenuScreen: "MenuScreen",
     referrals: "referrals",
     referralHistory: "referralHistory",
+    orderHistory: "orderHistory",
 }

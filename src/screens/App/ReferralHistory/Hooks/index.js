@@ -65,7 +65,7 @@ export const FilterGroup = ({ options = [], initial = '', onChange }) => {
         </View>
     );
 };
-// export default FilterGroup
+
 const styles = StyleSheet.create({
     tickSelectIcon: {
         width: wp(4.5),

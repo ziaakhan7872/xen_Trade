@@ -11,6 +11,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Host } from 'react-native-portalize';
 // import { Provider } from 'react-redux';
 // import { store } from './src/redux/store';
+import { enableScreens } from 'react-native-screens';
+enableScreens(false); // Disable optimized screens
 
 const App = () => {
 

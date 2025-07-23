@@ -13,12 +13,12 @@ import moment from 'moment'
 import { GorhomBottomSheet } from '../../../../../components/GorhumBottomSheetComponent'
 import { ResponsiveText } from '../../../../../components/ResponsiveText'
 import Spacer, { HorizontalSpacer } from '../../../../../components/Spacer'
-import { colors, fontFamily } from '../../../../../constants'
+import { colors, fontFamily, Routes } from '../../../../../constants'
 import { hp, wp } from '../../../../../components/ResponsiveComponent'
 import Line from '../../../../../components/Liner'
 import { RenderFavouriteCoinList } from '../../Component/Index'
 
-export const ExchangeHeader = ({onpress}) => {
+export const ExchangeHeader = ({ onpress }) => {
     return (
         <View style={styles.header}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -48,13 +48,13 @@ export const BuySellRowButton = ({ buySellButton, setBuySellButton }) => {
     )
 }
 
-export const BuyForm = ({ setValue, value, onPressTradingType,tradingType }) => {
+export const BuyForm = ({ setValue, value, onPressTradingType, tradingType }) => {
     const marks = [0, 25, 50, 75, 100];
 
     return (
         <>
             <TouchableOpacity onPress={onPressTradingType} style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3) }]}>
-                <ResponsiveText style={styles.text1}>{tradingType==="limit"?"Limit":"Market"}</ResponsiveText>
+                <ResponsiveText style={styles.text1}>{tradingType === "limit" ? "Limit" : "Market"}</ResponsiveText>
                 <Entypo name="chevron-down" size={15} color={colors.white} />
             </TouchableOpacity>
             <Spacer height={hp(1)} />
@@ -126,13 +126,13 @@ export const BuyForm = ({ setValue, value, onPressTradingType,tradingType }) => 
 
     )
 }
-export const SellForm = ({ setValue, value, onPressTradingtype,tradingType }) => {
+export const SellForm = ({ setValue, value, onPressTradingtype, tradingType }) => {
     const marks = [0, 25, 50, 75, 100];
 
     return (
         <>
             <TouchableOpacity onPress={onPressTradingtype} style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3) }]}>
-                <ResponsiveText style={styles.text1}>{tradingType==="limit"?"Limit":"Market"}</ResponsiveText>
+                <ResponsiveText style={styles.text1}>{tradingType === "limit" ? "Limit" : "Market"}</ResponsiveText>
                 <Entypo name="chevron-down" size={15} color={colors.white} />
             </TouchableOpacity>
             <Spacer height={hp(1)} />
@@ -241,7 +241,7 @@ export const PriceUSDT = ({ title1, title2, title3, title4 }) => {
     );
 };
 
-export const CurrentOrderHistoryHeader = ({ buttonPress, setButtonPress, currentOrders }) => {
+export const CurrentOrderHistoryHeader = ({ props, buttonPress, setButtonPress, currentOrders }) => {
     return (
         <View style={[appStyles.row, { width: wp(90), alignSelf: "center" }]}>
             <View style={{ flexDirection: "row" }}>
@@ -259,7 +259,9 @@ export const CurrentOrderHistoryHeader = ({ buttonPress, setButtonPress, current
                         <View style={{ height: 2, width: '80%', backgroundColor: colors.withdrawBtn, borderRadius: 1 }} />)}
                 </View>
             </View>
-            <Image source={images.history} style={styles.images} resizeMode="contain" />
+            <TouchableOpacity onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.orderHistory })}>
+                <Image source={images.history} style={styles.images} resizeMode="contain" />
+            </TouchableOpacity>
         </View>
     );
 };
@@ -324,18 +326,18 @@ export const CurrentOrderComponent = ({ isCurrentSymbol, setIsCurrentSymbol }) =
                                 </View>
                                 <View style={styles.orderMainSubView}>
                                     <View>
-                                        <ResponsiveText style={[styles.text5]}>Order Amount {item.symbol}</ResponsiveText>
+                                        <ResponsiveText style={[styles.text5, { fontFamily: fontFamily.appTextMedium }]}>Order Amount {item.symbol}</ResponsiveText>
                                         <Spacer height={hp(0.5)} />
                                         <ResponsiveText style={styles.text7}>{item.OrderAmount}</ResponsiveText>
 
                                     </View>
                                     <View>
-                                        <ResponsiveText style={[styles.text5]}>Filled {item.symbol}</ResponsiveText>
+                                        <ResponsiveText style={[styles.text5, { fontFamily: fontFamily.appTextMedium }]}>Filled {item.symbol}</ResponsiveText>
                                         <Spacer height={hp(0.5)} />
                                         <ResponsiveText style={styles.text7}>{item.Filled}</ResponsiveText>
                                     </View>
                                     <View>
-                                        <ResponsiveText style={[styles.text5]}>Order Price</ResponsiveText>
+                                        <ResponsiveText style={[styles.text5, { fontFamily: fontFamily.appTextMedium }]}>Order Price</ResponsiveText>
                                         <Spacer height={hp(0.5)} />
                                         <ResponsiveText style={styles.text7}>{item.OrderPrice}</ResponsiveText>
                                     </View>
@@ -459,10 +461,10 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
     )
 }
 
-export const FavoutiteBottomSheetComponnet = ({ref})=>{
-    return(
+export const FavoutiteBottomSheetComponnet = ({ ref }) => {
+    return (
         <GorhomBottomSheet sheetRef={ref}>
-            <RenderFavouriteCoinList/>
+            <RenderFavouriteCoinList />
         </GorhomBottomSheet>
     )
 
@@ -526,13 +528,12 @@ const styles = StyleSheet.create({
     },
     text1: {
         fontSize: 14,
-        fontWeight: "400",
         color: colors.white,
         fontFamily: fontFamily.appTextRegular
     },
     minuePlusText: {
         fontSize: 22,
-        fontWeight: "400",
+        fontFamily: fontFamily.appTextRegular,
         color: colors.white
     },
     slider: {
@@ -628,8 +629,7 @@ const styles = StyleSheet.create({
     },
     text5: {
         fontSize: 14,
-        fontWeight: "500",
-        fontFamily: fontFamily.appTextMedium,
+        fontFamily: fontFamily.appTextRegular,
         color: colors.iconColor
     },
     OrderMainView: {
@@ -648,13 +648,11 @@ const styles = StyleSheet.create({
     },
     text6: {
         fontSize: 20,
-        fontWeight: "500",
-        fontFamily: fontFamily.appTextMedium,
+        fontFamily: fontFamily.mainTextMedium,
         color: colors.white
     },
     text7: {
         fontSize: 12,
-        fontWeight: "500",
         color: colors.white,
         fontFamily: fontFamily.appTextMedium
     },
