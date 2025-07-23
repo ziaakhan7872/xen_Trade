@@ -8,7 +8,7 @@ import BootSplash from "react-native-bootsplash";
 import { LogBox, View } from 'react-native';
 import Navigation from './src/navigation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { Host } from 'react-native-portalize';
+import { Host, Portal } from 'react-native-portalize';
 // import { Provider } from 'react-redux';
 // import { store } from './src/redux/store';
 
@@ -27,9 +27,9 @@ const App = () => {
   }, [])
   return (
 
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Host>
-        <Navigation />
+    <GestureHandlerRootView style={{flex:1}}>
+      <Host >
+      <Navigation />
 
       </Host>
       {/* <Provider 

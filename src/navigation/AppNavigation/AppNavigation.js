@@ -28,6 +28,7 @@ const AppNavigation = () => {
             <Screen name={Routes.referrals} component={App.Referrals} />
             <Screen name={Routes.referralHistory} component={App.ReferralHistory} />
             {/* <Screen name={Routes.WithDraw} component={App.WithDraw} /> */}
+            <Screen name={Routes.TradeGraphScreen} component={App.TradeGraphScreen} />
 
         </Navigator>
     );
