@@ -8,7 +8,6 @@ import Line from '../../../../components/Liner'
 import Spacer, { HorizontalSpacer } from '../../../../components/Spacer'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import { colors, fontFamily } from '../../../../constants'
-import { useOrderHistory } from '../Hooks'
 import { SimpleButton } from '../../../../components/SimpleButton'
 import { OrderHistoryData } from '../../../../utilities/dummyData'
 import Entypo from "react-native-vector-icons/FontAwesome6"
@@ -45,7 +44,12 @@ export const History = () => {
     )
 }
 
-export const FilterBottomSheet = ({ bottomSheetRef, closeBottomSheet, selected, setSelected }) => {
+export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, selected, setSelected }) => {
+
+    const resetFilters = () => {
+        setSelected(selected[groupKey] == 0)
+    }
+
     return (
         <GorhomBottomSheet sheetRef={bottomSheetRef}>
             <View style={[appStyles.row, { ...styles.containerSpacer }]}>
@@ -63,10 +67,9 @@ export const FilterBottomSheet = ({ bottomSheetRef, closeBottomSheet, selected, 
                 <ResponsiveText style={styles.filterTitles}>Created At</ResponsiveText>
                 <FilterGroup
                     options={['All', 'Today', 'Yesterday', 'Last Week', 'Last Month', 'Custom Date']}
-                    initial="All"
+                    groupKey="createdAt"
                     selected={selected}
                     setSelected={setSelected}
-                // onChange={(val) => console.log('CreatedAt Filter:', val)}
                 />
             </View>
             <Spacer height={hp(1.5)} />
@@ -75,8 +78,9 @@ export const FilterBottomSheet = ({ bottomSheetRef, closeBottomSheet, selected, 
                 <ResponsiveText style={styles.filterTitles}>Order Type</ResponsiveText>
                 <FilterGroup
                     options={['Market', 'Limit']}
-                    initial="Market"
-                // onChange={(val) => console.log('Order Type:', val)}
+                    groupKey="orderType"
+                    selected={selected}
+                    setSelected={setSelected}
                 />
             </View>
             <Spacer height={hp(1.5)} />
@@ -85,13 +89,14 @@ export const FilterBottomSheet = ({ bottomSheetRef, closeBottomSheet, selected, 
                 <ResponsiveText style={styles.filterTitles}>Transaction Type</ResponsiveText>
                 <FilterGroup
                     options={['All', 'Buy', 'Sell']}
-                    initial="All"
-                // onChange={(val) => console.log('Transaction Type:', val)}
+                    groupKey="transactionType"
+                    selected={selected}
+                    setSelected={setSelected}
                 />
             </View>
             <Spacer height={hp(2.5)} />
             <View style={[appStyles.row, styles.buttonRow]}>
-                <SimpleButton text="Reset" textColor={colors.white} styleView={styles.resetBtn} />
+                <SimpleButton onPress={() => resetFilters()} text="Reset" textColor={colors.white} styleView={styles.resetBtn} />
                 <SimpleButton text="Show Results" textColor={colors.black} styleView={styles.showBtn} onPress={closeBottomSheet} />
             </View>
         </GorhomBottomSheet>
@@ -170,17 +175,17 @@ export const OrderHistoryList = () => {
     )
 }
 
-const FilterGroup = ({ options = [], onChange, selected, setSelected }) => {
+const FilterGroup = ({ options = [], groupKey, selected, setSelected }) => {
+    const currentValue = selected[groupKey] || options[0];
 
     const handleSelect = (option) => {
-        setSelected(option);
-        // if (onChange) onChange(option)
+        setSelected((prev) => ({ ...prev, [groupKey]: option }));
     };
 
     return (
         <View style={styles.filterWrapContainer}>
             {options.map((item) => {
-                const isSelected = selected === item;
+                const isSelected = currentValue === item;
                 return (
                     <TouchableOpacity
                         key={item}
@@ -189,8 +194,7 @@ const FilterGroup = ({ options = [], onChange, selected, setSelected }) => {
                         style={[
                             styles.filterSelectionContainer,
                             {
-                                flexDirection: 'row',
-                                alignItems: 'center',
+                                ...appStyles.rowBasic,
                                 backgroundColor: colors.transparentBtn,
                             },
                         ]}
@@ -211,7 +215,7 @@ const FilterGroup = ({ options = [], onChange, selected, setSelected }) => {
             })}
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     containerMain: {
