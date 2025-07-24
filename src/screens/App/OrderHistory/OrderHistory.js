@@ -25,7 +25,10 @@ const OrderHistory = (props) => {
                 <Portal>
                     <FilterBottomSheet
                         selected={selected}
-                        setSelected={setSelected} bottomSheetRef={FilterBottomSheetRef} closeBottomSheet={handleCloseFilter} />
+                        setSelected={setSelected}
+                        bottomSheetRef={FilterBottomSheetRef}
+                        closeBottomSheet={handleCloseFilter}
+                    />
                 </Portal>
             </View>
         </AuthMainContainer >

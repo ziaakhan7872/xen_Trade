@@ -11,18 +11,22 @@ import { useReferralHistory } from './Hooks'
 import { Portal } from 'react-native-portalize'
 
 const ReferralHistory = (props) => {
-    const { FilterBottomSheetRef, handleOpenFilter, handleCloseFilter } = useReferralHistory()
+    const { FilterBottomSheetRef, handleOpenFilter, handleCloseFilter, input, setInput, selected, setSelected } = useReferralHistory()
     return (
         <AuthMainContainer>
             <View style={styles.containerMain}>
                 <MainHeader leftImage={images.backArrow} rightImage={images.download} title={'REFERRAL HISTORY'} onBackPress={() => props?.navigation?.goBack()} onRightPress={() => props?.navigation?.navigate?.('')} />
                 <Spacer height={hp(3)} />
-                <FilterTextInput openBottomSheet={handleOpenFilter} />
+                <FilterTextInput value={input} onChangeText={(text) => setInput(text)} openBottomSheet={handleOpenFilter} />
                 <Spacer height={hp(3)} />
                 <History />
 
                 <Portal>
-                    <FilterBottomSheet bottomSheetRef={FilterBottomSheetRef} closeBottomSheet={handleCloseFilter} />
+                    <FilterBottomSheet
+                        selected={selected}
+                        setSelected={setSelected}
+                        bottomSheetRef={FilterBottomSheetRef}
+                        closeBottomSheet={handleCloseFilter} />
                 </Portal>
             </View>
         </AuthMainContainer>

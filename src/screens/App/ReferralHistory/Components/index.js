@@ -8,7 +8,6 @@ import { ResponsiveText } from '../../../../components/ResponsiveText'
 import Spacer from '../../../../components/Spacer'
 import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent'
 import Line from '../../../../components/Liner'
-import { FilterGroup } from '../Hooks'
 import { SimpleButton } from '../../../../components/SimpleButton'
 
 export const FilterTextInput = ({ openBottomSheet }) => {
@@ -43,7 +42,12 @@ export const History = () => {
     )
 }
 
-export const FilterBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
+export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, selected, setSelected }) => {
+
+    const resetFilters = () => {
+        setSelected(selected[groupKey] == 0)
+    }
+
     return (
         <GorhomBottomSheet sheetRef={bottomSheetRef}>
             <View style={[appStyles.row, { ...styles.containerSpacer }]}>
@@ -57,84 +61,13 @@ export const FilterBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
 
             <Spacer height={hp(1.5)} />
 
-            {/* <View style={styles.filterContainer}>
-                <ResponsiveText style={styles.filterTitles}>Created At</ResponsiveText>
-
-                <View style={styles.filterWrapContainer}>
-                    <TouchableOpacity activeOpacity={0.6} style={[styles.filterSelectionContainer, appStyles.rowBasic]}>
-                        <Image source={images.blueTick} style={styles.tickSelectIcon} />
-                        <ResponsiveText style={styles.filterSelection}>All</ResponsiveText>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity activeOpacity={0.6} style={styles.filterSelectionContainer}>
-                        <ResponsiveText style={[styles.filterSelection, { color: colors.lightTextColor }]}>Today</ResponsiveText>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity activeOpacity={0.6} style={styles.filterSelectionContainer}>
-                        <ResponsiveText style={[styles.filterSelection, { color: colors.lightTextColor }]}>Yesterday</ResponsiveText>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styles.filterWrapContainer}>
-                    <TouchableOpacity activeOpacity={0.6} style={styles.filterSelectionContainer}>
-                        <ResponsiveText style={[styles.filterSelection, { color: colors.lightTextColor }]}>Last Week</ResponsiveText>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity activeOpacity={0.6} style={styles.filterSelectionContainer}>
-                        <ResponsiveText style={[styles.filterSelection, { color: colors.lightTextColor }]}>Last Month</ResponsiveText>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styles.filterWrapContainer}>
-                    <TouchableOpacity activeOpacity={0.6} style={styles.filterSelectionContainer}>
-                        <ResponsiveText style={[styles.filterSelection, { color: colors.lightTextColor }]}>Custom Date</ResponsiveText>
-                    </TouchableOpacity>
-                </View>
-            </View>
-
-            <Spacer height={hp(1.5)} />
-
-            <View style={styles.filterContainer}>
-                <ResponsiveText style={styles.filterTitles}>Order Type</ResponsiveText>
-
-                <View style={styles.filterWrapContainer}>
-                    <TouchableOpacity activeOpacity={0.6} style={[styles.filterSelectionContainer, appStyles.rowBasic]}>
-                        <Image source={images.blueTick} style={styles.tickSelectIcon} />
-                        <ResponsiveText style={styles.filterSelection}>Market</ResponsiveText>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity activeOpacity={0.6} style={styles.filterSelectionContainer}>
-                        <ResponsiveText style={[styles.filterSelection, { color: colors.lightTextColor }]}>Limit</ResponsiveText>
-                    </TouchableOpacity>
-                </View>
-            </View>
-
-            <Spacer height={hp(1.5)} />
-
-            <View style={styles.filterContainer}>
-                <ResponsiveText style={styles.filterTitles}>Order Type</ResponsiveText>
-
-                <View style={styles.filterWrapContainer}>
-                    <TouchableOpacity activeOpacity={0.6} style={[styles.filterSelectionContainer, appStyles.rowBasic]}>
-                        <Image source={images.blueTick} style={styles.tickSelectIcon} />
-                        <ResponsiveText style={styles.filterSelection}>All</ResponsiveText>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity activeOpacity={0.6} style={styles.filterSelectionContainer}>
-                        <ResponsiveText style={[styles.filterSelection, { color: colors.lightTextColor }]}>Buy</ResponsiveText>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity activeOpacity={0.6} style={styles.filterSelectionContainer}>
-                        <ResponsiveText style={[styles.filterSelection, { color: colors.lightTextColor }]}>Sell</ResponsiveText>
-                    </TouchableOpacity>
-                </View>
-            </View> */}
             <View style={styles.filterContainer}>
                 <ResponsiveText style={styles.filterTitles}>Created At</ResponsiveText>
                 <FilterGroup
                     options={['All', 'Today', 'Yesterday', 'Last Week', 'Last Month', 'Custom Date']}
-                    initial="All"
-                // onChange={(val) => console.log('CreatedAt Filter:', val)}
+                    groupKey="createdAt"
+                    selected={selected}
+                    setSelected={setSelected}
                 />
             </View>
             <Spacer height={hp(1.5)} />
@@ -143,8 +76,9 @@ export const FilterBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
                 <ResponsiveText style={styles.filterTitles}>Order Type</ResponsiveText>
                 <FilterGroup
                     options={['Market', 'Limit']}
-                    initial="Market"
-                // onChange={(val) => console.log('Order Type:', val)}
+                    groupKey="orderType"
+                    selected={selected}
+                    setSelected={setSelected}
                 />
             </View>
             <Spacer height={hp(1.5)} />
@@ -153,18 +87,61 @@ export const FilterBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
                 <ResponsiveText style={styles.filterTitles}>Transaction Type</ResponsiveText>
                 <FilterGroup
                     options={['All', 'Buy', 'Sell']}
-                    initial="All"
-                // onChange={(val) => console.log('Transaction Type:', val)}
+                    groupKey="transactionType"
+                    selected={selected}
+                    setSelected={setSelected}
                 />
             </View>
             <Spacer height={hp(2.5)} />
             <View style={[appStyles.row, styles.buttonRow]}>
-                <SimpleButton text="Reset" textColor={colors.white} styleView={styles.resetBtn} />
+                <SimpleButton onPress={() => resetFilters()} text="Reset" textColor={colors.white} styleView={styles.resetBtn} />
                 <SimpleButton text="Show Results" textColor={colors.black} styleView={styles.showBtn} />
             </View>
         </GorhomBottomSheet>
 
     )
+}
+
+const FilterGroup = ({ options = [], groupKey, selected, setSelected }) => {
+    const currentValue = selected[groupKey] || options[0];
+
+    const handleSelect = (option) => {
+        setSelected((prev) => ({ ...prev, [groupKey]: option }));
+    };
+
+    return (
+        <View style={styles.filterWrapContainer}>
+            {options.map((item) => {
+                const isSelected = currentValue === item;
+                return (
+                    <TouchableOpacity
+                        key={item}
+                        onPress={() => handleSelect(item)}
+                        activeOpacity={0.6}
+                        style={[
+                            styles.filterSelectionContainer,
+                            {
+                                ...appStyles.rowBasic,
+                                backgroundColor: colors.transparentBtn,
+                            },
+                        ]}
+                    >
+                        {isSelected && (
+                            <Image source={images.blueTick} style={styles.tickSelectIcon} />
+                        )}
+                        <ResponsiveText
+                            style={[
+                                styles.filterSelection,
+                                { color: isSelected ? colors.white : colors.lightTextColor },
+                            ]}
+                        >
+                            {item}
+                        </ResponsiveText>
+                    </TouchableOpacity>
+                );
+            })}
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -297,5 +274,28 @@ const styles = StyleSheet.create({
         paddingVertical: hp(2),
         borderRadius: wp(10),
         marginRight: wp(1)
+    },
+    tickSelectIcon: {
+        width: wp(4.5),
+        height: wp(4.5),
+        resizeMode: 'contain',
+        marginRight: wp(2),
+    },
+    filterSelectionContainer: {
+        paddingHorizontal: wp(5),
+        paddingVertical: hp(1.2),
+        backgroundColor: colors.transparentBtn,
+        borderRadius: wp(10),
+    },
+    filterSelection: {
+        fontFamily: fontFamily.appTextMedium,
+        fontSize: 14,
+        color: colors.white,
+    },
+    filterWrapContainer: {
+        flexDirection: 'row',
+        gap: wp(2.5),
+        flexWrap: 'wrap',
+        marginTop: hp(1.5),
     },
 })
