@@ -8,6 +8,7 @@ import { MarketData } from '../../../../utilities/dummyData'
 import { colors, fontFamily } from '../../../../constants'
 import images from '../../../../images'
 import EvilIcons from "react-native-vector-icons/EvilIcons"
+import InputText from '../../../../components/InputText'
 
 
 export const RenderFavouriteCoinList = ({ marketData = MarketData }) => {
@@ -57,12 +58,15 @@ export const RenderFavouriteCoinList = ({ marketData = MarketData }) => {
 
 const RenderSearchHeader = () => {
     return (
-        <TouchableOpacity style={style.searchButton}>
-            <HorizontalSpacer />
-            <EvilIcons name="search" color={colors.mainColor} size={25} />
-            <HorizontalSpacer />
-            <ResponsiveText style={style.searchText}>Search...</ResponsiveText>
-        </TouchableOpacity>
+        // <TouchableOpacity style={style.searchButton}>
+        //     <HorizontalSpacer />
+        //     <EvilIcons name="search" color={colors.mainColor} size={25} />
+        //     <HorizontalSpacer />
+        //     <ResponsiveText style={style.searchText}>Search...</ResponsiveText>
+        // </TouchableOpacity>
+        <InputText style={style.inputText} rightIcon={true} placeholderTextColor={colors.iconColor}  placeholder={"Search.."}/>
+
+
     )
 }
 
@@ -160,4 +164,10 @@ const style = StyleSheet.create({
         color: colors.white,
         fontFamily:fontFamily.mainTextRegular
     },
+    inputText:{
+        width:wp(90),
+        // paddingVertical:hp(1),
+        backgroundColor:colors.inputBgColor,
+        borderRadius:wp(3)
+    }
 })

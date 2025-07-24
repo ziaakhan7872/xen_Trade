@@ -22,5 +22,11 @@ export const  style = StyleSheet.create({
         fontSize:14,
         fontWeight:"400",
         color:colors.iconColor
+    },
+     inputText:{
+        width:wp(90),
+        // paddingVertical:hp(1),
+        backgroundColor:colors.inputBgColor,
+        borderRadius:wp(3)
     }
 })

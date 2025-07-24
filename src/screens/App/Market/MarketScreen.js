@@ -10,24 +10,28 @@ import EvilIcons from "react-native-vector-icons/EvilIcons"
 import { RenderMarketHeader, RenderMarketList } from './Component/Index'
 import Line from '../../../components/Liner'
 import { hp } from '../../../components/ResponsiveComponent'
+import InputText from '../../../components/InputText'
 
 const MarketScreen = (props) => {
   return (
     <AuthMainContainer>
       <HomeHeader onpress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.MenuScreen })} headerTitle={"MARKETS"} />
       <View style={style.container}>
-        <Spacer/>
-        <TouchableOpacity style={style.searchButton}>
+        <Spacer />
+        {/* <TouchableOpacity style={style.searchButton}>
           <HorizontalSpacer/>
           <EvilIcons name="search" color={colors.mainColor} size={25}/>
           <HorizontalSpacer/>
           <ResponsiveText style={style.searchText}>Search...</ResponsiveText>
-        </TouchableOpacity>
-        <Spacer/>
-        <RenderMarketHeader/>
-        <Spacer/>
-        <Line height={hp(0.1)}/>
-        <RenderMarketList/>
+        </TouchableOpacity> */}
+
+        <InputText style={style.inputText} rightIcon={true} placeholderTextColor={colors.iconColor} placeholder={"Search.."} />
+
+        <Spacer />
+        <RenderMarketHeader />
+        <Spacer />
+        <Line height={hp(0.1)} />
+        <RenderMarketList />
       </View>
 
     </AuthMainContainer>

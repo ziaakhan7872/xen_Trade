@@ -1,7 +1,9 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 
 const UseTradeGraphScreen = () => {
+  const favouriteBottomSheetRef = useRef(null)
   const [starPress, setStarPress] = useState(false);
+  const [orderBookHeaderPress, setOrderBookHeaderPress] = useState("orderbook")
 
   const [candleChartData, setCandleChartData] = useState([
     {
@@ -10,11 +12,10 @@ const UseTradeGraphScreen = () => {
       high: 32500,
       low: 31800,
       close: 32200,
-      volume: 150000, // Initial volume
+      volume: 150000,
     },
   ]);
 
-  // Generate new random candle with volume
   const selectRandomData = useCallback(() => {
     setCandleChartData((prevData) => {
       const lastCandle = prevData[prevData.length - 1];
@@ -24,7 +25,7 @@ const UseTradeGraphScreen = () => {
       const randomLow = basePrice - Math.floor(Math.random() * 500);
       const randomOpen = basePrice + Math.floor(Math.random() * 200 - 100);
       const randomClose = basePrice + Math.floor(Math.random() * 200 - 100);
-      const randomVolume = Math.floor(Math.random() * 200000) + 50000; // random volume
+      const randomVolume = Math.floor(Math.random() * 200000) + 50000;
 
       const newTimestamp = lastCandle.timestamp + 60 * 1000;
 
@@ -34,25 +35,28 @@ const UseTradeGraphScreen = () => {
         high: randomHigh,
         low: randomLow,
         close: randomClose,
-        volume: randomVolume, // include volume
+        volume: randomVolume,
       };
 
-      // console.log("New Candle Added:", newCandle);
       return [...prevData, newCandle];
     });
   }, []);
 
-  // Add candle every 10s
+  // Auto min/max calculation
+  const minPrice = useMemo(() => Math.min(...candleChartData.map(c => c.low)), [candleChartData]);
+  const maxPrice = useMemo(() => Math.max(...candleChartData.map(c => c.high)), [candleChartData]);
+
   useEffect(() => {
     const interval = setInterval(selectRandomData, 10000);
     return () => clearInterval(interval);
   }, [selectRandomData]);
 
   return {
-    starPress,
-    setStarPress,
-    candleChartData,
-    setCandleChartData,
+    starPress, setStarPress,
+    candleChartData, setCandleChartData,
+    minPrice, maxPrice,
+    orderBookHeaderPress, setOrderBookHeaderPress,
+    favouriteBottomSheetRef
   };
 };
 

@@ -1,4 +1,4 @@
-import { Dimensions, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, FlatList, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { hp, wp } from '../../../../../components/ResponsiveComponent'
 import { ResponsiveText } from '../../../../../components/ResponsiveText'
@@ -17,6 +17,8 @@ import {
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { appStyles } from '../../../../../utilities'
 import { BarChart } from "react-native-gifted-charts";
+import { GorhomBottomSheet } from '../../../../../components/GorhumBottomSheetComponent'
+import { RenderFavouriteCoinList } from '../../Component/Index'
 
 
 
@@ -200,7 +202,7 @@ export const TradeGraph = ({ data }) => {
                         <CandlestickChart.Provider data={data} >
                             <CandlestickChart width={width + (data?.length * wp(2))} height={hp(30)} aria-live='assertive' >
                                 <CandlestickChart.Candles positiveColor={colors.green} negativeColor={colors.red}
-                                    candleProps={{ width: wp(2) }} collapsable={true} />
+                                    candleProps={{ width: wp(3.1) }} collapsable={true} />
                                 <Spacer />
 
                             </CandlestickChart>
@@ -223,7 +225,7 @@ export const TradeGraph = ({ data }) => {
                                 hideYAxisText
                                 yAxisThickness={0}
                                 xAxisThickness={0}
-                                
+
                             />
                         </View>
 
@@ -235,27 +237,28 @@ export const TradeGraph = ({ data }) => {
 
 
 
-                <View style={styles.yAxisView}>
-                    <ResponsiveText style={styles.xAxisText}>35,000</ResponsiveText>
-                    <Spacer height={hp(Platform.OS == 'ios' ? 7 : 6.5)} />
-                    <ResponsiveText style={styles.xAxisText}>33,000</ResponsiveText>
-                    <Spacer height={hp(Platform.OS == 'ios' ? 8 : 7.5)} />
-                    <ResponsiveText style={styles.xAxisText}>31,000</ResponsiveText>
-                    <Spacer height={hp(Platform.OS == 'ios' ? 8 : 7.5)} />
-                    <ResponsiveText style={styles.xAxisText}>29,000</ResponsiveText>
+                <View style={[styles.yAxisView, { height: hp(30), justifyContent: "space-between" }]}>
+                    {[maxPrice, (maxPrice + minPrice) / 2, minPrice].map((price, index) => (
+                        <ResponsiveText key={index} style={styles.yAxisText}>
+                            {price.toLocaleString()}
+                        </ResponsiveText>
+                    ))}
                 </View>
+
 
                 {/* <View style={{ ...styles.lineView, top: hp(1.2) }} />
                 <View style={{ ...styles.lineView, top: hp(10) }} />
                 <View style={{ ...styles.lineView, top: hp(20) }} />
                 <View style={{ ...styles.lineView, top: hp(30) }} /> */}
             </GestureHandlerRootView>
-            <View style={[appStyles.row, { width: wp(90) }]}>
-                <ResponsiveText style={styles.xAxisText}>00:08</ResponsiveText>
-                <ResponsiveText style={styles.xAxisText}>00:09</ResponsiveText>
-                <ResponsiveText style={styles.xAxisText}>10:00</ResponsiveText>
-                <ResponsiveText style={styles.xAxisText}>11:00</ResponsiveText>
-                <ResponsiveText style={styles.xAxisText}>12:00</ResponsiveText>
+            <View style={[appStyles.row, { width: width + data.length * wp(2), justifyContent: "space-between" }]}>
+                {data.map((item, index) => (
+                    index % 5 === 0 && (
+                        <ResponsiveText key={index} style={styles.xAxisText}>
+                            {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </ResponsiveText>
+                    )
+                ))}
             </View>
 
 
@@ -266,6 +269,175 @@ export const TradeGraph = ({ data }) => {
     )
 }
 
+export const TradeGraphBelowHeader = ({ onPressTradeGraph }) => {
+    return (
+        <View style={[styles.header, { width: wp(100), paddingHorizontal: wp(5) }]}>
+            <View style={{ width: wp(30), flexDirection: "row", justifyContent: "space-between" }}>
+                <ResponsiveText style={styles.text8}>1D</ResponsiveText>
+                <ResponsiveText style={styles.text8}>1M</ResponsiveText>
+                <ResponsiveText style={styles.text8}>5M</ResponsiveText>
+                <ResponsiveText style={styles.text8}>1Y</ResponsiveText>
+            </View>
+            <View style={{ width: wp(45), flexDirection: "row", alignItems: "center", alignSelf: "flex-end" }}>
+                <ResponsiveText style={styles.text8}>12:06:36 UTC</ResponsiveText>
+                <HorizontalSpacer />
+                <Line height={hp(2.5)} width={wp(0.7)} backgroundColor={colors.iconColor} />
+                <HorizontalSpacer />
+                <ResponsiveText style={styles.text8}>%</ResponsiveText>
+                <HorizontalSpacer />
+                <ResponsiveText style={styles.text8}>Log</ResponsiveText>
+                <HorizontalSpacer />
+                <ResponsiveText style={[styles.text8, { color: colors.yellow1 }]}>Auto</ResponsiveText>
+            </View>
+        </View>
+    )
+}
+
+export const OrderBookHeader = ({ buttonPress, setButtonPress, currentOrders }) => {
+    return (
+        <View style={[appStyles.row, { width: wp(90), alignSelf: "center" }]}>
+            <View style={{ flexDirection: "row" }}>
+                <View style={{ alignItems: "center" }}>
+                    <ResponsiveText onPress={() => setButtonPress("orderbook")} style={[styles.currentPriceStyle, { color: buttonPress === "orderbook" ? colors.withdrawBtn : colors.iconColor }]} >Order book</ResponsiveText>
+                    <Spacer customHeight={hp(0.5)} />
+                    {buttonPress === "orderbook" && (
+                        <View style={{ height: 2, width: '80%', backgroundColor: colors.withdrawBtn, borderRadius: 1, alignSelf: "center" }} />)}
+                </View>
+                <HorizontalSpacer width={wp(5)} />
+                <View style={{ alignItems: "center" }}>
+                    <ResponsiveText onPress={() => setButtonPress("lasttrade")} style={[styles.currentPriceStyle, { color: buttonPress === "lasttrade" ? colors.withdrawBtn : colors.iconColor, textAlign: "center" }]} >Last trades </ResponsiveText>
+                    <Spacer customHeight={hp(0.5)} />
+                    {buttonPress === "lasttrade" && (
+                        <View style={{ height: 2, width: '80%', backgroundColor: colors.withdrawBtn, borderRadius: 1, alignSelf: "center" }} />)}
+                </View>
+            </View>
+            {/* <TouchableOpacity >
+                <Image source={images.history} style={styles.images} resizeMode="contain" />
+            </TouchableOpacity> */}
+        </View>
+    )
+}
+
+export const PriceUSDT = ({ title1, title2, title3, title4, onpress }) => {
+    return (
+        <View style={[appStyles.row, { width: wp(100), paddingHorizontal: wp(4) }]}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <ResponsiveText style={styles.textPrice}>Buy</ResponsiveText>
+                <ResponsiveText style={styles.textPrice}>{title2}</ResponsiveText>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <ResponsiveText style={styles.textPrice}>0.1</ResponsiveText>
+                <HorizontalSpacer />
+                <TouchableOpacity onPress={onpress}>
+                    <Entypo name="chevron-down" size={10} color={colors.grayColor2} />
+                </TouchableOpacity>
+                {/* <HorizontalSpacer /> */}
+            </View>
+
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <ResponsiveText style={styles.textPrice}>Sell</ResponsiveText>
+                <ResponsiveText style={{ ...styles.textPrice, textAlign: 'right' }}>{title4}</ResponsiveText>
+            </View>
+        </View>
+    );
+};
+
+export const FlatlistValues = ({ data = [], textColor }) => {
+    const maxAmount = Math.max(...data.map(item => item.amount));
+
+    return (
+        <View style={[appStyles.row, { width: wp(100), paddingHorizontal: wp(4) }]}>
+            <FlatList
+                data={data}
+                scrollEnabled={false}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => {
+                    const barWidth = (item.amount / maxAmount) * 100;
+                    return (
+                        <View style={{ ...appStyles.row, paddingVertical: 0, paddingHorizontal: wp(1), position: "relative", height: 32 }}>
+                            <View
+                                style={{
+                                    position: 'absolute',
+                                    height: '100%',
+                                    width: `${barWidth}%`, // dynamic width
+                                    backgroundColor: colors.green, // or red based on side
+                                    opacity: 0.3,
+                                    borderRadius: 0,
+                                    alignItems: "flex-end",
+                                    right: 0
+                                }}
+                            />
+                            <ResponsiveText style={styles.textFlatList1}>
+                                {item.amount}
+                            </ResponsiveText>
+                            <ResponsiveText style={{ ...styles.textFlatList, color: colors.green }}>
+                                {item.price}
+                            </ResponsiveText>
+
+                        </View>
+                    )
+                }}
+            />
+            <FlatList
+                data={data}
+                scrollEnabled={false}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => {
+                    const barWidth = (item.amount / maxAmount) * 100;
+
+                    return (
+
+                        <View style={{ ...appStyles.row, paddingVertical: 0, paddingHorizontal: wp(1), position: "relative", height: 32 }}>
+                            <View
+                                style={{
+                                    position: 'absolute',
+                                    height: '100%',
+                                    width: `${barWidth}%`, // dynamic width
+                                    backgroundColor: colors.red, // or red based on side
+                                    opacity: 0.3,
+                                    borderRadius: 0,
+                                    alignItems: "flex-end",
+                                    // right: 0
+                                }}
+                            />
+                            <ResponsiveText style={{ ...styles.textFlatList, color: colors.red }}>
+                                {item.price}
+                            </ResponsiveText>
+                            <ResponsiveText style={styles.textFlatList1}>
+                                {item.amount}
+                            </ResponsiveText>
+                        </View>
+                    )
+                }}
+            />
+        </View>
+
+    );
+};
+
+export const BuySellButton = () => {
+    return (
+        <View style={{ width: wp(80), alignItems: "center", justifyContent: "space-between", paddingHorizontal: wp(0), flexDirection: "row" }}>
+            <TouchableOpacity style={{ width: wp(40), backgroundColor: colors.green, borderRadius: wp(25), paddingVertical: hp(1.5), alignItems: "center" }}>
+                <Text style={{ color: "#fff", fontWeight: "600" }}>Buy</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ width: wp(40), backgroundColor: colors.red, borderRadius: wp(25), paddingVertical: hp(1.5), alignItems: "center", marginLeft: wp(2) }}>
+                <Text style={{ color: "#fff", fontWeight: "600" }}>Sell</Text>
+            </TouchableOpacity>
+
+        </View>
+    )
+}
+
+export const FavoutiteBottomSheetComponnet = ({ ref }) => {
+    return (
+        <GorhomBottomSheet sheetRef={ref}>
+            <RenderFavouriteCoinList />
+        </GorhomBottomSheet>
+    )
+
+}
+
 
 const styles = StyleSheet.create({
     header: {
@@ -274,6 +446,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         paddingHorizontal: wp(1),
         alignSelf: "center",
+        // borderWidth:1
         // borderWidth:1
     },
     tradingHeader: {
@@ -376,10 +549,17 @@ const styles = StyleSheet.create({
         height: wp(5),
         resizeMode: "contain"
     },
+    yAxisText: {
+        fontSize: 13,
+        fontFamily: fontFamily.appTextRegular,
+        color: colors.iconColor,
+        fontWeight: "400"
+    },
     xAxisText: {
         fontSize: 13,
         fontFamily: fontFamily.appTextRegular,
         color: colors.white,
+        fontWeight: "400"
     },
     lineView: {
         position: 'absolute',
@@ -392,11 +572,13 @@ const styles = StyleSheet.create({
         borderColor: colors.chartLine,
     },
     yAxisView: {
-        // position: 'absolute',
+        //   position: 'absolute',
         right: 0,
-        top: -wp(2.5),
-        borderWidth: 1
+        top: 0,
+        alignItems: 'flex-end',
+        paddingRight: wp(2),
     },
+
     lineView1: {
         position: 'absolute',
         left: 0,
@@ -405,5 +587,22 @@ const styles = StyleSheet.create({
         borderColor: colors.white,
         borderStyle: 'dashed',
     },
+    textPrice: {
+        fontSize: 10,
+        fontFamily: fontFamily.appTextMedium,
+        color: colors.iconColor,
+    },
+    textFlatList: {
+        fontSize: 12,
+        fontFamily: fontFamily.appTextMedium,
+        fontWeight: "500",
+
+    },
+    textFlatList1: {
+        fontSize: 12,
+        fontWeight: "500",
+        fontFamily: fontFamily.appTextMedium,
+        color: colors.white
+    }
 
 })
