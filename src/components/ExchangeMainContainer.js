@@ -14,7 +14,10 @@ export const ExchangeMainContainer = ({
   return (
     <>
       <StatusBar translucent backgroundColor="transparent" barStyle="light-content" />
-        <SafeAreaView style={[styles.safeArea, style]}>
+         <SafeAreaView
+        style={[styles.safeArea, style]}
+        edges={['top', 'left', 'right']} // ignore bottom safe area to remove space
+      >
           <View
             style={[
               styles.container,

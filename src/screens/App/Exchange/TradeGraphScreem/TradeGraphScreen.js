@@ -47,7 +47,7 @@ const TradeGraphScreen = (props) => {
                 <View style={{
                 position: "absolute",
                 paddingVertical:hp(2),
-                bottom: 5,
+                bottom: 0,
                 width: "100%",
                 alignItems: "center",
                 backgroundColor:colors.cardsBgColor
