@@ -1,6 +1,6 @@
 
-import { View, StyleSheet, FlatList, Image, TouchableOpacity, TextInput, SectionList } from 'react-native';
-import React, { useState, useRef, forwardRef, useImperativeHandle } from 'react';
+import { View, StyleSheet, FlatList, Image, TouchableOpacity, Platform } from 'react-native';
+import React, { useState, useRef } from 'react';
 import { ResponsiveText } from "../../../../components/ResponsiveText";
 import { coinData } from "../../../../utilities/dummyData";
 import Spacer from "../../../../components/Spacer";
@@ -8,12 +8,11 @@ import images from "../../../../images";
 import { colors, Routes } from "../../../../constants"
 import { useNavigation } from "@react-navigation/native"
 import { hp, wp } from '../../../../components/ResponsiveComponent';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import { AuthMainContainer } from "../../../../components/authMainContainer";
 import { fontFamily } from '../../../../constants/fonts';
-import { Screen } from 'react-native-screens';
 import BottomSheet from '../../../../components/BottomSheet';
-import Navigation from '../../../../navigation';
+import { appStyles } from '../../../../utilities';
+import Icon from 'react-native-vector-icons/Feather';
+import FontAwesome5 from 'react-native-vector-icons/Ionicons';
 
 
 export const DepositWalletShowDetails = () => {
@@ -33,30 +32,27 @@ export const DepositWalletShowDetails = () => {
   };
 
   return (
-    <>
-      <View style={styles.container}>
-        <View style={styles.textContainer}>
-          <ResponsiveText style={styles.label}>Total value (BTC)</ResponsiveText>
-          <ResponsiveText style={styles.btcValue}>0.2702145</ResponsiveText>
-          <ResponsiveText style={styles.usdValue}>= $19,458.89</ResponsiveText>
-          <ResponsiveText style={styles.pnl}>Today's PNL <ResponsiveText style={styles.pnlPositive}>+3.33%</ResponsiveText></ResponsiveText>
-        </View>
-        <View style={styles.chartContainer}>
-          <TouchableOpacity onPress={handleAssetOpen}>
-            <Image
-              source={images.DepositLogo}
-              style={styles.chartIcon}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-        </View>
+
+    <View style={[appStyles.row, styles.container]}>
+      <View>
+        <ResponsiveText style={styles.label}>Total value (BTC)</ResponsiveText>
+        <ResponsiveText style={styles.btcValue}>0.2702145</ResponsiveText>
+        <ResponsiveText style={styles.usdValue}>= $19,458.89</ResponsiveText>
+        <ResponsiveText style={styles.pnl}>Today's PNL <ResponsiveText style={styles.pnlPositive}>+3.33%</ResponsiveText></ResponsiveText>
       </View>
+
+      <TouchableOpacity onPress={handleAssetOpen}>
+        <Image source={images.DepositLogo} style={styles.chartIcon} resizeMode="contain" />
+      </TouchableOpacity>
+
       <BottomSheet ref={assetSheetRef} height={hp(45)}>
         <AssetAllocation onClose={handleAssetClose} />
       </BottomSheet>
-    </>
-  );
-};
+    </View>
+
+  )
+}
+
 // Asset Allocation BottomSheet Component
 const AssetAllocation = ({ onClose }) => {
   const navigation = useNavigation();
@@ -74,7 +70,7 @@ const AssetAllocation = ({ onClose }) => {
       <View style={styles.legendRow}>
         <View style={styles.legendDot} />
         <ResponsiveText style={styles.legendText}>BTC</ResponsiveText>
-        <View style={styles.legendDot3}  />
+        <View style={styles.legendDot3} />
         <ResponsiveText style={styles.legendText}>ETH</ResponsiveText>
         <View style={styles.legendDot2} />
         <ResponsiveText style={styles.legendText}>BTC</ResponsiveText>
@@ -88,6 +84,32 @@ const AssetAllocation = ({ onClose }) => {
   );
 };
 
+export const PortfolioHeader = () => {
+  return (
+    <View style={appStyles.row}>
+      <ResponsiveText style={styles.portfolioTitle}>PORTFOLIO</ResponsiveText>
+      <View style={appStyles.rowBasic}>
+        {/* <View style={styles.checkboxContainer}> */}
+        <TouchableOpacity onPress={handleCheckboxToggle} >
+          {isChecked ? (
+            <FontAwesome5 name="checkbox" size={25} color={colors.mainColor} />
+          ) : (
+            <Icon name="square" size={25} color={colors.white} />
+          )}
+        </TouchableOpacity>
+
+        {/* </View> */}
+        <ResponsiveText style={styles.hideBalances}>Hide 0 Balances</ResponsiveText>
+        <Spacer width={wp(2)} />
+        <Image
+          source={images.clockIcon}
+          style={{ width: wp(4), height: wp(4) }}
+          resizeMode="contain"
+        />
+      </View>
+    </View>
+  )
+}
 
 
 
@@ -118,94 +140,97 @@ const AssetAllocation = ({ onClose }) => {
 // );
 
 export const TokenList = () => {
-    return (
-        <FlatList 
-          data={[...coinData, ...coinData]}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ 
-          
-            flexGrow: 1
-          }}
-          keyExtractor={(item) => item.id}
-          ItemSeparatorComponent={() => <View style={{ height: 1, width: '100%', backgroundColor: colors.buttonSigninColor }} />}
-          removeClippedSubviews={false}
-          renderItem={({item,index}) => {
-            return (
-              <View style={styles.itemContainer}>
-                <Image source={item.icon} style={styles.icon} />
-                <View style={styles.coinDetails}>
-                  <ResponsiveText style={styles.symbol}>{item.symbol}</ResponsiveText>
-                  <ResponsiveText style={styles.name}>{item.name}</ResponsiveText>
-                </View>
-                <View style={styles.amountContainer}>
-                  <ResponsiveText style={styles.amount}>{item.amount}</ResponsiveText>
-                  <ResponsiveText style={styles.value}>{item.value}</ResponsiveText>
-                </View>
-              </View>
-            )
-          }}
-        />
-    )
+  return (
+    <FlatList
+      data={coinData}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{
+
+        flexGrow: 1
+      }}
+      keyExtractor={(item) => item.id}
+      ItemSeparatorComponent={() => <View style={{ height: 1, width: '100%', backgroundColor: colors.buttonSigninColor }} />}
+      removeClippedSubviews={false}
+      renderItem={({ item, index }) => {
+        return (
+          <View style={styles.itemContainer}>
+            <Image source={item.icon} style={styles.icon} />
+            <View style={styles.coinDetails}>
+              <ResponsiveText style={styles.symbol}>{item.symbol}</ResponsiveText>
+              <ResponsiveText style={styles.name}>{item.name}</ResponsiveText>
+            </View>
+            <View style={styles.amountContainer}>
+              <ResponsiveText style={styles.amount}>{item.amount}</ResponsiveText>
+              <ResponsiveText style={styles.value}>{item.value}</ResponsiveText>
+            </View>
+          </View>
+        )
+      }}
+    />
+  )
 }
 
 export const useDepositNavigation = () => {
   const navigation = useNavigation();
-  
+
   const handleDepositPress = () => {
     navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCrypto });
   };
-  
+
   return { handleDepositPress };
 };
 
 
 export const styles = StyleSheet.create({
-     // DepositShowDetails
-    container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: colors.InputTextCOlor, 
-    padding: 20,
-    borderRadius: 12,
-    marginHorizontal: wp(4),
+  // DepositShowDetails
+  container: {
+    backgroundColor: colors.cardColor3,
+    paddingHorizontal: wp(4),
+    paddingVertical: hp(1.5),
+    borderRadius: wp(3),
+    borderColor: colors.cardBorderColor,
+    borderWidth: 1.5,
   },
   textContainer: {
-    flex: 1,
+    // flex: 1,
   },
   label: {
-    color: colors.iconColor,
+    color: colors.lightTextColor,
     fontSize: 12,
-    marginBottom: 4,
+    fontFamily: fontFamily.appTextMedium,
+    marginBottom: wp(2),
   },
   btcValue: {
     color: colors.white,
     fontSize: 30,
-    fontWeight: 'bold',
+    fontFamily: fontFamily.mainTextMedium,
   },
   usdValue: {
-    color: colors.iconColor,
+    color: colors.lightTextColor,
     fontSize: 14,
-    marginTop: 4,
+    fontFamily: fontFamily.appTextMedium,
+    marginTop: Platform.OS === 'android' ? wp(2) : wp(0),
   },
   pnl: {
-    marginTop: 4,
+    fontFamily: fontFamily.appTextMedium,
+    marginTop: wp(2),
     fontSize: 14,
-    color: colors.iconColor,
+    color: colors.lightTextColor,
   },
   pnlPositive: {
-    color: colors.mainColor, 
-    fontWeight: 'bold',
+    color: colors.mainColor,
+    fontFamily: fontFamily.mainTextMedium,
+    fontSize: 15,
   },
   chartContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 10,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // marginLeft: 10,
   },
   chartIcon: {
     width: 60,
     height: 60,
-  
+
   },
   // TokenList
   tokenListContainer: {
@@ -245,7 +270,7 @@ export const styles = StyleSheet.create({
     color: colors.iconColor,
     fontSize: 12,
   },
-   //asset Allocation
+  //asset Allocation
   sheetContainer: {
     backgroundColor: colors.bottomSheetBackgroundColor,
     borderTopLeftRadius: 16,
@@ -315,19 +340,21 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.dot3,
     marginHorizontal: 6,
   },
-   legendDot1: {
+  legendDot1: {
     width: 7,
     height: 7,
     borderRadius: 4,
     backgroundColor: colors.dot1,
     marginHorizontal: 6,
-  }, legendDot3: {
+  },
+  legendDot3: {
     width: 7,
     height: 7,
     borderRadius: 4,
     backgroundColor: colors.dot3,
     marginHorizontal: 6,
-  }, legendDot2: {
+  },
+  legendDot2: {
     width: 7,
     height: 7,
     borderRadius: 4,

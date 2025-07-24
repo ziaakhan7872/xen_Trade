@@ -21,7 +21,7 @@ export const SimpleButton = ({
     btnImage,
     height,
     plus,
-    btnStyles
+    btnStyles,
 }) => {
     return (
         <TouchableOpacity

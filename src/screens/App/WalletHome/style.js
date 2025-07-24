@@ -4,16 +4,34 @@ import { colors, fontFamily } from '../../../constants'
 
 
 export const styles = StyleSheet.create({
-    tokenListContainer: {
-      flex: 1,
-      marginBottom: hp(5), 
-    },
-    checkBox:{
-      height: wp(4.5),
-      width: wp(4.5),
-      marginRight: wp(1.5),
-    },
-    header: {
+  containerMain: {
+    flex: 1,
+    paddingHorizontal: wp(4)
+  },
+  depositBtn: {
+    width: wp(45),
+    backgroundColor: colors.transparentBtn,
+    paddingVertical: hp(1.8),
+    marginStart: wp(0.5),
+    borderRadius: wp(10),
+  },
+  withdrawBtn: {
+    width: wp(45),
+    marginLeft: wp(2), // space between buttons
+    backgroundColor: colors.mainColor,
+    paddingVertical: hp(1.8),
+    borderRadius: wp(10),
+  },
+  tokenListContainer: {
+    flex: 1,
+    marginBottom: hp(5),
+  },
+  checkBox: {
+    height: wp(4.5),
+    width: wp(4.5),
+    marginRight: wp(1.5),
+  },
+  header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -128,7 +146,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.iconColor,
   },
- depositButton: {
+  depositButton: {
     text: "Deposit",
     textColor: colors.white,
     backgroundColor: colors.InputTextCOlor,
