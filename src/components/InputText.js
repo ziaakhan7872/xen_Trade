@@ -14,7 +14,7 @@ const InputText = ({ handleRightIconPress, rightIcon, label, value, onChangeText
             <View style={styles.inputWrapper}>
                 {/* Left Icon (Search) */}
                 {rightIcon && (
-                    <View onPress={handleRightIconPress} style={styles.leftIcon}>
+                    <View  style={styles.leftIcon}>
                         <EvilIcons name="search" color={colors.mainColor} size={25} />
                     </View>
                 )}

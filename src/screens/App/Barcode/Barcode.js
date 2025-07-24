@@ -1,27 +1,32 @@
 
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { AuthMainContainer } from '../../../components/authMainContainer';
 import {
   BarcodeHeader,
   NetworkSelector,
-  QRCodeDisplay,
   AddressSection,
   DetailsSection
 } from './components';
 import { styles } from './styles';
+import Spacer from '../../../components/Spacer';
+import { Routes } from '../../../constants';
 
-const Barcode = () => {
+const Barcode = (props) => {
   return (
     <AuthMainContainer >
-      <BarcodeHeader />
-      <NetworkSelector />
-      <QRCodeDisplay />
-      <AddressSection />
-      <DetailsSection />
-
+      <BarcodeHeader BackPress={()=>props?.navigation?.goBack()} HistoryPress={()=>props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory,  })} />
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <NetworkSelector />
+        <Spacer />
+        <AddressSection />
+        <Spacer/>
+        <DetailsSection />
+      </ScrollView>
     </AuthMainContainer>
   );
 };
 
 export default Barcode;
+
+

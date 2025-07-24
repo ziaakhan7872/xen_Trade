@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, Text } from 'react-native';
+import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
 import { ResponsiveText } from '../../../../components/ResponsiveText';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import images from '../../../../images';
@@ -7,96 +7,53 @@ import { colors, Routes } from '../../../../constants';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { fontFamily } from '../../../../constants/fonts';
 import { appStyles } from '../../../../utilities';
+import Spacer, { HorizontalSpacer } from '../../../../components/Spacer';
 
-// Header component for Barcode screen
-export const BarcodeHeader = () => {
-  const navigation = useNavigation();
-  const route = useRoute();
-  const { selectedCrypto, selectedNetwork } = route.params || {};
-
+export const BarcodeHeader = ({ BackPress, HistoryPress }) => {
   return (
     <View style={styles.header}>
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={styles.backButton}
-      >
-        <Image
-          source={images.backArrow}
-          style={styles.backIcon}
-          resizeMode="contain"
-        />
-      </TouchableOpacity>
+      <View style={{ width: wp(55), flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+        <TouchableOpacity onPress={BackPress} style={styles.backButton}>
+          <Image source={images.backArrow} style={styles.backIcon} resizeMode="contain" />
+        </TouchableOpacity>
 
-      <View style={styles.headerCenter}>
         <View style={styles.cryptoInfo}>
-          <Image
-            source={selectedCrypto?.icon || images.UsdtLogo}
-            style={styles.cryptoIcon}
-            resizeMode="contain"
-          />
-          <ResponsiveText style={styles.cryptoSymbol}>
-            {selectedCrypto?.symbol || 'USDT'}
-          </ResponsiveText>
+          <Image source={images.UsdtLogo} style={styles.cryptoIcon} resizeMode="contain" />
+          <HorizontalSpacer />
+          <ResponsiveText style={styles.cryptoSymbol}>USDT</ResponsiveText>
         </View>
       </View>
 
+
       <View style={styles.headerActions}>
         <TouchableOpacity style={styles.actionButton}>
-          <Image
-            source={images.downloadIcon}
-            style={styles.actionIcon}
-            resizeMode="contain"
-          />
+          <Image source={images.downloadIcon} style={styles.actionIcon} resizeMode="contain" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.actionButton}>
-          <Image
-            source={images.infoCircle}
-            style={styles.actionIcon}
-            resizeMode="contain"
-          />
+          <Image source={images.infoCircle} style={styles.actionIcon} resizeMode="contain" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton}
-          onPress={() => navigation.navigate(Routes.AppNavigator, {
-            screen: Routes.DepositHistory,
-
-          })}>
-          <Image
-            source={images.clockIcon}
-            style={styles.actionIcon}
-            resizeMode="contain"
-          />
+        <TouchableOpacity style={styles.actionButton} onPress={HistoryPress}>
+          <Image source={images.clockIcon} style={styles.actionIcon} resizeMode="contain" />
         </TouchableOpacity>
       </View>
     </View>
+
   );
 };
 
-// Network selection component
 export const NetworkSelector = () => {
-  const route = useRoute();
-  const { selectedNetwork } = route.params || {};
-
   return (
-    <View style={styles.networkSelector}>
+    <View style={{ alignItems: "center" }}>
       <ResponsiveText style={styles.networkLabel}>Network</ResponsiveText>
       <TouchableOpacity style={styles.networkDropdown}>
-        <ResponsiveText style={styles.networkText}>
-          Ethereum(ERC20)
-        </ResponsiveText>``
+        <ResponsiveText style={styles.networkText}> Ethereum(ERC20) </ResponsiveText>``
         <Image
           source={images.depositFilter}
           style={styles.dropdownArrow}
           resizeMode="contain"
         />
       </TouchableOpacity>
-    </View>
-  );
-};
-
-// QR Code component
-export const QRCodeDisplay = () => {
-  return (
-    <View style={styles.qrContainer}>
+      <Spacer />
       <Image
         source={images.qrcode}
         style={styles.qrCode}
@@ -106,13 +63,13 @@ export const QRCodeDisplay = () => {
   );
 };
 
-// Address component
 export const AddressSection = () => {
   const address = "0x21505337aa3b5254eb156ef4b851525824B6B55c";
 
   return (
+
     <View style={styles.addressSection}>
-      <View style={styles.addressHeader}>
+      <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: wp(4) }}>
         <ResponsiveText style={styles.addressLabel}>Address</ResponsiveText>
         <Image
           source={images.rightsign}
@@ -120,7 +77,7 @@ export const AddressSection = () => {
           resizeMode="contain"
         />
       </View>
-      <View style={[styles.addressContainer, { ...appStyles.rowBasic }]}>
+      <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: wp(4), justifyContent: "space-between" }}>
         <ResponsiveText style={styles.addressText}>{address}</ResponsiveText>
         <TouchableOpacity style={styles.copyButton}>
           <ResponsiveText style={styles.copyText}>Copy</ResponsiveText>
@@ -134,101 +91,97 @@ export const AddressSection = () => {
 export const DetailsSection = () => {
   return (
     <View style={styles.detailsSection}>
-      <DetailItem
-        label="Minimum deposit"
-        value="0.01 USDT"
-        icon={images.infoCircle}
-      />
-      <DetailItem
-        label="Deposit account"
-        value="Trading"
-      />
-      <DetailItem
-        label="Deposit arrival time"
-        value="7 minutes"
-      />
-      <DetailItem
-        label="Withdrawal enabled time"
-        value="20 minutes"
-      />
-      <DetailItem
-        label="Contract address"
-        value="Ends with 821cc7"
-        hasDropdown={true}
-      />
+      <View style={styles.detailSubSection}>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <ResponsiveText style={styles.detailLabel}>Minimum deposit</ResponsiveText>
+          <HorizontalSpacer width={wp(1)} />
+          <Image
+            source={images.infoCircle}
+            style={styles.detailIcon}
+            resizeMode="contain"
+          />
+        </View>
+        <ResponsiveText style={styles.detailValue}>0.01 USDT</ResponsiveText>
+      </View>
+      <View style={styles.detailSubSection}>
+        <ResponsiveText style={styles.detailLabel}>Deposit account</ResponsiveText>
+        <ResponsiveText style={styles.detailValue}>Trading</ResponsiveText>
+      </View>
+      <View style={styles.detailSubSection}>
+        <ResponsiveText style={styles.detailLabel}>Deposit arrival time</ResponsiveText>
+        <ResponsiveText style={styles.detailValue}>7 minutes</ResponsiveText>
+      </View>
+      <View style={styles.detailSubSection}>
+        <ResponsiveText style={styles.detailLabel}>Withdrawal enabled time</ResponsiveText>
+        <ResponsiveText style={styles.detailValue}>20 minutes</ResponsiveText>
+      </View>
+      <View style={styles.detailSubSection}>
+        <ResponsiveText style={styles.detailLabel}>Contract address</ResponsiveText>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <ResponsiveText style={styles.detailValue}>Ends with 821cc7</ResponsiveText>
+          <HorizontalSpacer width={wp(1)} />
+          <Image
+            source={images.depositFilter}
+            style={styles.detailDropdownArrow}
+            resizeMode="contain"
+          />
+        </View>
+      </View>
+
     </View>
   );
 };
 
-// Individual detail item component
-const DetailItem = ({ label, value, icon, hasDropdown }) => (
-  <View style={styles.detailItem}>
-    <View style={styles.detailLeft}>
-      <ResponsiveText style={styles.detailLabel}>{label}</ResponsiveText>
-      {icon && (
-        <Image
-          source={icon}
-          style={styles.detailIcon}
-          resizeMode="contain"
-        />
-      )}
-    </View>
-    <View style={styles.detailRight}>
-      <ResponsiveText style={styles.detailValue}>{value}</ResponsiveText>
-      {hasDropdown && (
-        <Image
-          source={images.depositFilter}
-          style={styles.detailDropdownArrow}
-          resizeMode="contain"
-        />
-      )}
-    </View>
-  </View>
-);
 
-const styles = {
+
+export const styles = StyleSheet.create({
+
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    width: wp(100),
     paddingHorizontal: wp(4),
-    paddingVertical: hp(2),
-    paddingTop: hp(3),
   },
+
   backButton: {
-    padding: wp(1),
+    justifyContent: 'center',
+    alignItems: 'flex-start',
   },
-  backIcon: {
-    width: wp(6),
-    height: hp(2.5),
-    tintColor: colors.white,
-  },
-  headerCenter: {
-    flex: 1,
-    alignItems: 'center',
-    marginLeft: wp(22),
-  },
+
   cryptoInfo: {
+    alignItems: "flex-end",
+    flexDirection: 'row',
+    width: wp(20),
+  },
+
+  headerActions: {
     flexDirection: 'row',
     alignItems: 'center',
+
   },
+
+  backIcon: {
+    width: wp(5.5),
+    width: wp(5.5),
+  },
+
+
   cryptoIcon: {
     width: wp(6),
     height: wp(6),
-    marginRight: wp(2),
+    resizeMode: "contain"
   },
   cryptoSymbol: {
     fontSize: 18,
     color: colors.white,
-    fontFamily: fontFamily.appTextBold,
+    fontFamily: fontFamily.mainTextMedium,
+    fontWeight: "500"
   },
-  headerActions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+
   actionButton: {
-    padding: wp(2),
-    marginLeft: wp(1),
+    paddingHorizontal: wp(1.4),
+    // marginLeft: wp(1),
   },
   actionIcon: {
     width: wp(5),
@@ -240,122 +193,82 @@ const styles = {
     marginVertical: hp(2),
     justifyContent: 'center',
     alignItems: 'center',
-
     flex: 1,
   },
   networkLabel: {
     fontSize: 12,
     color: colors.iconColor,
     fontFamily: fontFamily.appTextRegular,
-
+    fontWeight: "400"
   },
   networkDropdown: {
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'center',
-    // paddingHorizontal: wp(4),
   },
   networkText: {
     fontSize: 18,
     color: colors.white,
     fontFamily: fontFamily.mainTextMedium,
-    // marginLeft: wp(24),
+    fontWeight: "500"
   },
   dropdownArrow: {
     width: wp(5.5),
     height: hp(4.5),
     tintColor: colors.white,
-    marginLeft: wp(2)
+    marginLeft: wp(2),
   },
-  qrContainer: {
-    alignItems: 'center',
-    marginVertical: hp(1),
-  },
+
   qrCode: {
     width: wp(46),
     height: wp(46),
   },
   addressSection: {
-    paddingHorizontal: wp(4),
-    marginVertical: hp(2),
-  },
-  addressHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
     backgroundColor: colors.InputTextCOlor,
-    justifyContent: 'space-between',
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-    paddingHorizontal: wp(4),
+    width: wp(90),
+    alignSelf: "center",
+    borderRadius: wp(3),
+    paddingVertical: wp(5)
   },
+
   addressLabel: {
     fontSize: 14,
     color: colors.iconColor,
     fontFamily: fontFamily.appTextRegular,
-    marginTop: hp(2),
   },
   addressArrow: {
     width: wp(4),
     height: hp(2),
-    tintColor: colors.iconColor,
-    marginRight: wp(82),
-    marginTop: hp(2),
+
   },
-  addressContainer: {
-    // flex: 1,
-    backgroundColor: colors.InputTextCOlor,
-    paddingHorizontal: wp(4),
-    paddingBottom: wp(4.5),
-    // paddingVertical: hp(1),
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
-  },
+
   addressText: {
-    flex: 1,
     fontSize: 16,
     color: colors.white,
     fontFamily: fontFamily.appTextMedium,
-    marginRight: wp(12),
+    fontWeight: "500",
+    width: wp(60)
   },
   copyButton: {
-    paddingHorizontal: wp(4),
     paddingVertical: hp(1.2),
     width: wp(20),
     backgroundColor: colors.buttonSigninColor,
     borderRadius: wp(8),
-    // marginVertical: hp(1),
+    alignItems: "center"
   },
   copyText: {
     fontSize: 12,
     color: colors.white,
-    textAlign: 'center',
-
     fontFamily: fontFamily.appTextRegular,
+    fontWeight: "400"
   },
   detailsSection: {
-    // paddingHorizontal: wp(8),
-    // marginTop: hp(1),
-    // margin: hp(3),
-    // backgroundColor: colors.mainBgColor,
     backgroundColor: colors.InputTextCOlor,
-    paddingHorizontal: wp(4),
-    borderRadius: 8,
-    marginLeft: wp(4),
-    marginRight: wp(4),
+    borderRadius: wp(3),
+    width: wp(90),
+    alignSelf: "center",
   },
-  detailItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: hp(2),
-    borderBottomWidth: 1,
-    borderBottomColor: colors.buttonSigninColor,
-  },
-  detailLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
+
+
   detailLabel: {
     fontSize: 14,
     color: colors.iconColor,
@@ -364,13 +277,9 @@ const styles = {
   detailIcon: {
     width: wp(4),
     height: wp(4),
-    marginLeft: wp(1),
-    tintColor: colors.iconColor,
+    resizeMode: "contain"
   },
-  detailRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+
   detailValue: {
     fontSize: 14,
     color: colors.white,
@@ -380,10 +289,15 @@ const styles = {
   detailDropdownArrow: {
     width: wp(4),
     height: hp(2),
-    marginLeft: wp(2),
     tintColor: colors.white,
   },
-  detailContractAddress: {
-    marginLeft: wp(78),
-  },
-};
+  detailSubSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: wp(4),
+    paddingVertical: wp(3),
+    borderWidth: 1,
+    borderColor: colors.cardBorderColor
+  }
+});

@@ -443,3 +443,62 @@ export const OrderHistoryData = [
   },
 
 ]
+
+export const Networks = [
+    {
+      id: '1',
+      name: 'Tron (TRC20)',
+      icon: images.tron,
+      minDeposit: '0.01 USDT',
+      arrivalTime: '~1 minutes'
+    },
+    {
+      id: '2',
+      name: 'Ethereum (ERC20)',
+      icon: images.EthLogo,
+      minDeposit: '0.01 USDT',
+      arrivalTime: '~1 minutes'
+    },
+    {
+      id: '3',
+      name: 'X Layer',
+      icon: images.EthLogo, // Using ETH as placeholder for X Layer
+      minDeposit: '0.01 USDT',
+      arrivalTime: '~1 minutes'
+    },
+    {
+      id: '4',
+      name: 'Aptos',
+      icon: images.aptos,
+      minDeposit: '0.01 USDT',
+      arrivalTime: '~1 minutes'
+    },
+    {
+      id: '5',
+      name: 'Arbitrum One',
+      icon: images.arbitrum,
+      minDeposit: '0.01 USDT',
+      arrivalTime: '~1 minutes'
+    },
+    {
+      id: '6',
+      name: 'Avalanche C-Chain',
+      icon: images.AvaxLogo,
+      minDeposit: '0.01 USDT',
+      arrivalTime: '~1 minutes'
+    },
+    {
+      id: '7',
+      name: 'Optimism',
+      icon: images.optimism,
+      minDeposit: '0.01 USDT',
+      arrivalTime: '~1 minutes'
+    },
+    {
+      id: '8',
+      name: 'Polygon',
+      icon: images.polygon,
+      minDeposit: '0.01 USDT',
+      arrivalTime: '~1 minutes'
+    }
+  ];

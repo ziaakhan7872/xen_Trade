@@ -3,7 +3,7 @@ import { Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View }
 import { SafeAreaView } from 'react-native-safe-area-context' // ✅ Make sure you're using this one
 import { style } from './Style'
 import Entypo from "react-native-vector-icons/Entypo"
-import { colors } from '../../../constants'
+import { colors, Routes } from '../../../constants'
 import { hp, wp } from '../../../components/ResponsiveComponent'
 import images from '../../../images'
 import Spacer, { HorizontalSpacer } from '../../../components/Spacer'
@@ -28,13 +28,13 @@ const MenuScreen = (props) => {
                      <View style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.DrawerExchange} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
-                        <ResponsiveText style={style.label}>Exchange</ResponsiveText>
+                        <ResponsiveText onPress={()=>props?.navigation.navigate(Routes.BottomNavigator, { screen: Routes.ExchangeScreen }) } style={style.label}>Exchange</ResponsiveText>
                     </View>
                     <Spacer/>
                        <View style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.addressSettingIcon} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
-                        <ResponsiveText style={style.label}>Referrals</ResponsiveText>
+                        <ResponsiveText onPress={()=>props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.referrals }) } style={style.label}>Referrals</ResponsiveText>
                     </View>
                     <Spacer/>
                     <Line height={hp(0.1)} width={wp(90)} />
@@ -42,7 +42,7 @@ const MenuScreen = (props) => {
                      <View style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.DrawerMarket} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
-                        <ResponsiveText style={style.label}>Markets</ResponsiveText>
+                        <ResponsiveText onPress={()=>props?.navigation.navigate(Routes.BottomNavigator, { screen: Routes.MarketScreen }) } style={style.label}>Markets</ResponsiveText>
                     </View>
                     <Spacer/>
                      <View style={{flexDirection:"row",alignItems:"center"}}>
