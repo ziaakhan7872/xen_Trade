@@ -57,7 +57,7 @@ const HomeScreen = (props) => {
           label1={<ResponsiveText style={style.text1}>Referral</ResponsiveText>}
           label2={<ResponsiveText style={style.text1}>Deposit</ResponsiveText>}
           onPressFirstButton={() => { props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.referrals }) }}
-          onPressSecondButton={() => props?.navigation?.navigate?.('')}
+          onPressSecondButton={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCrypto })}
         />
         <Spacer height={hp(1)} />
         {showNewsView && (

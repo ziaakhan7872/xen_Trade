@@ -19,4 +19,8 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     width: '100%',
   },
+  mainHeaderView:{
+    width:wp(100),
+    paddingHorizontal:wp(5)
+  }
 });

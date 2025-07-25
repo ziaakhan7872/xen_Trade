@@ -1,249 +1,147 @@
-import React, { useState } from 'react';
-import { View, TextInput, SectionList, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { View, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
 import { ResponsiveText } from '../../../../components/ResponsiveText';
-import Spacer from '../../../../components/Spacer';
 import images from '../../../../images';
-import { colors, Routes } from '../../../../constants';
+import { colors } from '../../../../constants';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { fontFamily } from '../../../../constants/fonts';
 import { coinData } from '../../../../utilities/dummyData';
+import EvilIcons from "react-native-vector-icons/EvilIcons"
+import InputText from '../../../../components/InputText';
 
 
 
-export const SelectCryptoHeader = () => {
-  const navigation = useNavigation();
+
+export const SelectCryptoHeader = ({ BackPress, historyPress }) => {
 
   return (
     <View style={styles.selectCryptoHeader}>
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={styles.backButtonContainer}
-      >
-        <Image
-          source={images.backArrow}
-          style={styles.backArrowIcon}
-          resizeMode="contain"
-        />
+      <TouchableOpacity onPress={BackPress} style={styles.backButtonContainer} >
+        <Image source={images.backArrow} style={styles.backArrowIcon} resizeMode="contain" />
       </TouchableOpacity>
       <ResponsiveText style={styles.selectCryptoTitle}>SELECT CRYPTO</ResponsiveText>
-      <TouchableOpacity onPress={() => navigation.navigate(Routes.AppNavigator, {
-        screen: Routes.DepositHistory,
-
-      })}
-        style={styles.selectCryptoCloseButton}>
-        <Image
-
-          source={images.clockIcon}
-          resizeMode="contain"
-
-        />
+      <TouchableOpacity onPress={historyPress} style={styles.selectCryptoCloseButton}>
+        <Image source={images.clockIcon} resizeMode="contain" />
       </TouchableOpacity>
-
     </View>
   );
 };
 
 
-// Search box component
-export const SelectCryptoSearchBox = ({ searchText, onChangeText }) => (
-  <View style={styles.selectCryptoSearchContainer}>
-
-    <TextInput
-      style={styles.selectCryptoSearchInput}
-      placeholder="Search..."
-      placeholderTextColor={colors.placeHolderTextColor}
-      value={searchText}
-      onChangeText={onChangeText}
-    // autoCapitalize="none"
-    // autoCorrect={false}
-    />
-    <Image
-      source={images.searchSign}
-      style={styles.searchIcon}
-      resizeMode="contain"
-    />
-  </View>
-);
-
-// Crypto list component
-export const SelectCryptoList = ({ sections, onSelect }) => {
-  const renderSectionHeader = ({ section }) => (
-    <View style={styles.sectionHeader}>
-      <ResponsiveText style={styles.sectionHeaderText}>{section.header}</ResponsiveText>
-    </View>
-  );
-  const renderCryptoItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.cryptoSelectItem}
-      onPress={() => onSelect(item)}
-    >
-      <Image source={item.icon} style={styles.cryptoSelectIcon} resizeMode="contain" />
-      <View style={styles.cryptoSelectDetails}>
-        <ResponsiveText style={styles.cryptoSymbol}>{item.symbol}</ResponsiveText>
-        <ResponsiveText style={styles.cryptoName}>{item.name}</ResponsiveText>
+export const SelectCryptoSearchBox = () => {
+  return (
+    <View style={{ flexDirection: "row", justifyContent: "center" }}>
+      <InputText
+        placeholder={"Search..."}
+        placeholderTextColor={colors.iconColor}
+        style={styles.InputTextStyle}
+      />
+      <View style={styles.leftIcon}>
+        <EvilIcons name="search" color={colors.mainColor} size={25} />
       </View>
-    </TouchableOpacity>
-  );
+    </View>
+  )
+}
+
+export const PopularCrypto = ({onPress}) => {
   return (
-    <SectionList
-      sections={sections}
-      keyExtractor={(item) => item.id}
-      renderItem={renderCryptoItem}
-      renderSectionHeader={renderSectionHeader}
-      stickySectionHeadersEnabled={false}
-      style={styles.selectCryptoListContainer}
-      contentContainerStyle={{ paddingBottom: hp(2) }}
-      initialNumToRender={10}
-      maxToRenderPerBatch={10}
-      windowSize={10}
-      removeClippedSubviews={true}
-    />
-  );
-};
+    <View >
+      <FlatList
+        data={coinData}
+        keyExtractor={(item, index) => item.id.toString() || index.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.cryptoSelectItem}
+            onPress={onPress}
+          >
+            <Image source={item.icon} style={styles.cryptoSelectIcon} resizeMode="contain" />
+            <View style={styles.cryptoSelectDetails}>
+              <ResponsiveText style={styles.cryptoSymbol}>{item.symbol}</ResponsiveText>
+              <ResponsiveText style={styles.cryptoName}>{item.name}</ResponsiveText>
+            </View>
+          </TouchableOpacity>
+        )}
 
-// Main content component
-export const SelectCryptoContent = ({ refProp, onSelectCrypto }) => {
-  const [searchText, setSearchText] = useState('');
-  const initialSections = [
-    { header: 'Popular', data: coinData.slice(0, 5) },
-    { header: 'All Crypto', data: coinData }
-  ];
-  const [filteredData, setFilteredData] = useState(initialSections);
-  const navigation = useNavigation();
+      />
+    </View>
+  )
+}
 
-  const handleSearch = (text) => {
-    setSearchText(text);
-    if (!text.trim()) {
-      setFilteredData(initialSections);
-      return;
-    }
-    const searchTermLower = text.toLowerCase();
-    const filtered = coinData.filter(
-      item => item.name.toLowerCase().includes(searchTermLower) ||
-        item.symbol.toLowerCase().includes(searchTermLower)
-    );
-    setFilteredData([{ header: 'All Crypto', data: filtered }]);
-  };
-
-  const handleCryptoSelect = (item) => {
-    refProp?.current?.close && refProp.current.close();
-    onSelectCrypto?.(item);
-    setTimeout(() => {
-      navigation.navigate(Routes.AppNavigator, {
-        screen: Routes.SelectNetwork,
-        params: { selectedCrypto: item }
-      });
-    }, 300);
-  };
-
+export const ALlCrypto = ({onPress}) => {
   return (
-    <>
-      <SelectCryptoSearchBox searchText={searchText} onChangeText={handleSearch} />
-      <Spacer />
-      <SelectCryptoList sections={filteredData} onSelect={handleCryptoSelect} />
-    </>
-  );
-};
+    <View >
+      <FlatList
+        data={coinData}
+        keyExtractor={(item, index) => item.id.toString() || index.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.cryptoSelectItem}
+            onPress={onPress}
+          >
+            <Image source={item.icon} style={styles.cryptoSelectIcon} resizeMode="contain" />
+            <View style={styles.cryptoSelectDetails}>
+              <ResponsiveText style={styles.cryptoSymbol}>{item.symbol}</ResponsiveText>
+              <ResponsiveText style={styles.cryptoName}>{item.name}</ResponsiveText>
+            </View>
+          </TouchableOpacity>
+        )}
+
+      />
+    </View>
+  )
+}
+
+
 
 
 const styles = StyleSheet.create({
   // Header
 
   selectCryptoHeader: {
+    width: wp(90),
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: hp(1.5),
-    position: 'relative',
-    width: '100%',
+    alignSelf: 'center',
+    paddingVertical: 10,
 
   },
   backButtonContainer: {
-    position: 'absolute',
-    left: wp(4),
-    zIndex: 1,
-    height: '100%',
-    justifyContent: 'center',
   },
   backArrowIcon: {
     width: wp(5),
     height: hp(2.5),
   },
-  selectCryptoTitle: {
-    fontSize: 16,
+  InputTextStyle: {
+    width: wp(90),
+    backgroundColor: colors.cardColor3,
+    borderRadius: wp(3),
     color: colors.white,
-    fontFamily: fontFamily.appTextBold,
+
+  },
+  leftIcon: {
+    position: "absolute",
+    right: wp(7),
+
+    bottom: hp(4)
+  },
+  selectCryptoTitle: {
+    fontSize: 18,
+    color: colors.white,
+    fontFamily: fontFamily.mainTextMedium,
+    fontWeight: "500"
   },
   selectCryptoCloseButton: {
-    position: 'absolute',
-    right: wp(4),
-    padding: wp(1),
-    width: wp(5),
-    height: hp(2.5),
-  },
-  closeButtonText: {
-    color: colors.white,
-    fontSize: 16,
-    fontFamily: fontFamily.appTextBold,
+    // position: 'absolute',
+    // right: wp(4),
+    // padding: wp(1),
+    // width: wp(5),
+    // height: hp(2.5),
   },
 
-  //select crypto
-  selectCryptoRBSheetContainer: {
-    backgroundColor: 'transparent',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
-  selectCryptoRBSheetOverlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-  },
-  draggableIcon: {
-    backgroundColor: colors.buttonSigninColor,
-    width: wp(10),
-  },
-  closeButtonText: {
-    color: colors.white,
-    fontSize: 16,
-    fontFamily: fontFamily.appTextBold,
-  },
-  selectCryptoSearchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.searchBar,
-    marginTop: hp(2),
-    paddingHorizontal: wp(4),
-    paddingVertical: hp(1),
-    borderRadius: 8,
-    marginHorizontal: wp(4),
-  },
-  selectCryptoSearchInput: {
-    flex: 1,
-    color: colors.white,
-    paddingVertical: hp(1),
-    fontFamily: fontFamily.appTextRegular,
-    fontSize: 14,
-  },
-  searchIconButton: {
-    paddingHorizontal: wp(1),
-  },
-  searchIcon: {
-    width: wp(5),
-    height: hp(2.5),
-  },
-  selectCryptoListContainer: {
-    flex: 1,
-  },
-  sectionHeader: {
-    paddingHorizontal: wp(4),
-    paddingVertical: hp(1),
 
-  },
-  sectionHeaderText: {
-    color: colors.white,
-    fontSize: 14,
-    fontFamily: fontFamily.appTextMedium,
-  },
   cryptoSelectItem: {
+    width: wp(100),
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: wp(4),

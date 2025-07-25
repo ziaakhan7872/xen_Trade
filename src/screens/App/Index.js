@@ -14,7 +14,6 @@ import AddressBook from "./AddressBook/AddressBook";
 import AddressDetailsExpanded from "./AddressDetailsExpanded/AddressDetailsExpanded";
 import SelectNetwork from "./SelectNetwork/SelectNetwork";
 import Barcode from "./Barcode/Barcode";
-import Deposit from "./Deposit/Deposit";
 import AddNewAddress from "./AddNewAddress/AddNewAddress";
 import SettingEmailNotification from "./SettingEmailNotification/SettingEmailNotification";
 import SelectCrypto from "./SelectCrypto/SelectCrypto";
@@ -30,7 +29,7 @@ import TradeGraphScreen from "./Exchange/TradeGraphScreem/TradeGraphScreen"
 export {
      HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,
      Exchangescreen, WalletScreen, changePassword, antiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
-     SelectNetwork, Barcode, Deposit, AddNewAddress, SettingEmailNotification, SelectCrypto, AssetAllocation, MenuScreen,
+     SelectNetwork, Barcode, AddNewAddress, SettingEmailNotification, SelectCrypto, AssetAllocation, MenuScreen,
      Referrals, ReferralHistory, OrderHistory, TradeGraphScreen
 }
 
