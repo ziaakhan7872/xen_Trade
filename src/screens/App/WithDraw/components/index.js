@@ -169,7 +169,10 @@ export const WithDrawConfirmationBottomSheet = ({ ref, address = "0x21505337aa3b
             backgroundColor={colors.mainColor}
             height={hp(6)}
             buttonWidth={wp(80)}
-            onPress={handleSubmit}
+            onPress={() => {
+              handleSubmit()
+              ref?.current?.close()
+            }}
           />
         </View>
 

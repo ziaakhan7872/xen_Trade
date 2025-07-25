@@ -11,6 +11,8 @@ export const colors = {
   iconColor: "#85ABAE",
   mainColor: "#05BADA",
   authButtonColor: "#01272E",
+  disableColor: "#01272E",
+  disableColor2: "#204147",
   buttonSigninColor: "#204147",
   boxColor: "rgba(1, 26, 31, 1)",
   redColorBtn: "#FF3235",
@@ -44,9 +46,10 @@ export const colors = {
   red: "#FF3235",
   buttonColor: "#011F25",
   cardColor3: "#011F25",
+  disableCard: "#011F25",
   grayColor2: "#939FA3",
   yellow1: "#EAB44C",
-  gray2:"rgba(10, 30, 36, 1)",
-  gray3:"rgba(1, 39, 46, 1)",
+  gray2: "rgba(10, 30, 36, 1)",
+  gray3: "rgba(1, 39, 46, 1)",
 
 }

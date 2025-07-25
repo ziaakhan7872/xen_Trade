@@ -82,7 +82,7 @@ const WithDraw = (props) => {
       <View style={styles.spacer} />
       <FeeInfo handleSubmit={() => WithdrawConfirmationRef?.current?.expand()} fee={fee} amountReceived={amountReceived} />
       <Portal>
-        <WithDrawConfirmationBottomSheet ref={WithdrawConfirmationRef} />
+        <WithDrawConfirmationBottomSheet handleSubmit={() => props?.navigation?.navigate?.(Routes.WithdrawDetails)} ref={WithdrawConfirmationRef} />
       </Portal>
     </AuthMainContainer>
   );

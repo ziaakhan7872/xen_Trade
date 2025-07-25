@@ -6,6 +6,7 @@ import { colors, fontFamily } from '../constants'
 
 const DropDown = ({ items, value, setValue, placeholder, zIndex, setIsOpen }) => {
     const [open, setOpen] = useState(false)
+    console.log("value11111111", value);
 
     return (
         <DropDownPicker

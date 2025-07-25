@@ -1,30 +1,23 @@
-// import ImageCropPicker from "react-native-image-crop-picker";
+import { useState } from "react"
 
-// const useSettingProfile = () => {
+export const useSettingProfile = () => {
+    const [currency, setCurrency] = useState('usd')
+    const [isCurrencyOpen, setIsCurrencyOpen] = useState(false)
 
-//     const openGallery = async () => {
-//         try {
-
-//             const result = await ImageCropPicker.openPicker({
-//                 mediaType: "any",
-//                 includeBase64: true,
-//                 includeExif: true,
-//                 compressImageQuality: 1,
-//                 multiple: false,
-//             });
-
-//         } catch (error) {
-//             console.error("Gallery error:", error);
-//         }
-//     };
-//     return {
-//         openGallery
-//     };
-// };
+    const currencyItems = [
+        { label: 'USD', value: 'usd' },
+        { label: 'EUR', value: 'eur' },
+        { label: 'PKR', value: 'pkr' },
+        { label: 'GBP', value: 'gbp' },
+    ]
+    return {
+        currency, setCurrency,
+        isCurrencyOpen, setIsCurrencyOpen,
+        currencyItems,
+    }
+}
 
 
-
-// export default useSettingProfile;
 
 
 

@@ -10,7 +10,6 @@ import { colors, fontFamily, Routes } from "../../../constants"
 import { appStyles } from "../../../utilities"
 import { useHomeScreen } from "./Hooks"
 import { Portal } from "react-native-portalize"
-import images from "../../../images"
 
 const WalletHome = (props) => {
   const { isChecked, handleCheckboxToggle, input, setInput, assetSheetRef, handleAssetOpen, handleAssetClose } = useHomeScreen()
@@ -33,7 +32,7 @@ const WalletHome = (props) => {
           <SimpleButton
             onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCryptoWithDraw })}
             btnStyles={{ fontFamily: fontFamily.appTextRegular }}
-            text="Withdrawl"
+            text="Withdraw"
             textColor={colors.black}
             styleView={styles.withdrawBtn}
           />

@@ -12,17 +12,14 @@ import { hp, wp } from '../../../components/ResponsiveComponent'
 import DropDown from '../../../components/dropDown'
 import { colors, Routes } from '../../../constants'
 import TextInputField from '../../../components/TextInputField'
+import { useSettingProfile } from './Hooks'
 
 const SettingProfile = (props) => {
-    // const { openGallery } = useSettingProfile()
-    // const navigation = useNavigation()
-    const [currency, setCurrency] = useState('usd')
-    const currencyItems = [
-        { label: 'USD', value: 'usd' },
-        { label: 'EUR', value: 'eur' },
-        { label: 'PKR', value: 'pkr' },
-        { label: 'GBP', value: 'gbp' },
-    ]
+    const {
+        currency, setCurrency,
+        isCurrencyOpen, setIsCurrencyOpen,
+        currencyItems,
+    } = useSettingProfile()
 
     return (
         <AuthMainContainer>
@@ -62,6 +59,7 @@ const SettingProfile = (props) => {
                 <DropDown
                     items={currencyItems}
                     value={currency}
+                    setIsOpen={setIsCurrencyOpen}
                     setValue={setCurrency}
                     placeholder="Select currency"
                 />

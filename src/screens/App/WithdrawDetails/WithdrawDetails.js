@@ -18,9 +18,13 @@ const WithdrawDetails = (props) => {
         <Spacer height={hp(3)} />
 
         <ProgressWithdraw />
+        <Spacer height={hp(3)} />
+
         <WithdrawDetailsContainer />
-        <WithDrawBtn />
+        <Spacer height={hp(3)} />
+
       </View>
+      <WithDrawBtn />
     </AuthMainContainer>
 
   )
