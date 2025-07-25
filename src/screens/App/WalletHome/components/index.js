@@ -1,36 +1,22 @@
 
-import { View, StyleSheet, FlatList, Image, TouchableOpacity, Platform } from 'react-native';
-import React, { useState, useRef } from 'react';
+import { View, StyleSheet, FlatList, Image, TouchableOpacity, Platform, TextInput } from 'react-native';
+import React from 'react';
 import { ResponsiveText } from "../../../../components/ResponsiveText";
 import { coinData } from "../../../../utilities/dummyData";
 import Spacer from "../../../../components/Spacer";
 import images from "../../../../images";
-import { colors, Routes } from "../../../../constants"
-import { useNavigation } from "@react-navigation/native"
+import { colors } from "../../../../constants"
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { fontFamily } from '../../../../constants/fonts';
-import BottomSheet from '../../../../components/BottomSheet';
 import { appStyles } from '../../../../utilities';
 import Icon from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/Ionicons';
+import Line from '../../../../components/Liner';
+import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent';
+import { PieChart } from 'react-native-gifted-charts';
 
 
-export const DepositWalletShowDetails = () => {
-  const [showAssetSheet, setShowAssetSheet] = useState(false);
-  const assetSheetRef = useRef(null);
-
-  const handleAssetOpen = () => {
-    setShowAssetSheet(true);
-    setTimeout(() => {
-      assetSheetRef.current?.open();
-    }, 100);
-  };
-
-  const handleAssetClose = () => {
-    setShowAssetSheet(false);
-    assetSheetRef.current?.close();
-  };
-
+export const DepositWalletShowDetails = ({ openBottomSheet }) => {
   return (
 
     <View style={[appStyles.row, styles.container]}>
@@ -41,127 +27,65 @@ export const DepositWalletShowDetails = () => {
         <ResponsiveText style={styles.pnl}>Today's PNL <ResponsiveText style={styles.pnlPositive}>+3.33%</ResponsiveText></ResponsiveText>
       </View>
 
-      <TouchableOpacity onPress={handleAssetOpen}>
-        <Image source={images.DepositLogo} style={styles.chartIcon} resizeMode="contain" />
+      <TouchableOpacity onPress={openBottomSheet}>
+        <Image source={images.pieChart} style={styles.pieChart} />
       </TouchableOpacity>
-
-      <BottomSheet ref={assetSheetRef} height={hp(45)}>
-        <AssetAllocation onClose={handleAssetClose} />
-      </BottomSheet>
     </View>
-
   )
 }
 
-// Asset Allocation BottomSheet Component
-const AssetAllocation = ({ onClose }) => {
-  const navigation = useNavigation();
-  return (
-    <View style={styles.sheetContainer}>
-      <View style={styles.headerRow}>
-        <ResponsiveText style={styles.sheetTitle}>ASSETS ALLOCATION</ResponsiveText>
-        <TouchableOpacity onPress={onClose} style={styles.closeBtn}>
-          <ResponsiveText style={styles.closeText}>×</ResponsiveText>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.doughnutContainer}>
-        <Image source={images.doughnutChart} style={styles.doughnutImg} resizeMode="contain" />
-      </View>
-      <View style={styles.legendRow}>
-        <View style={styles.legendDot} />
-        <ResponsiveText style={styles.legendText}>BTC</ResponsiveText>
-        <View style={styles.legendDot3} />
-        <ResponsiveText style={styles.legendText}>ETH</ResponsiveText>
-        <View style={styles.legendDot2} />
-        <ResponsiveText style={styles.legendText}>BTC</ResponsiveText>
-        <View style={styles.legendDot1} />
-        <ResponsiveText style={styles.legendText}>RTH</ResponsiveText>
-      </View>
-      <TouchableOpacity style={styles.okBtn} onPress={() => navigation.navigate(Routes.AppNavigator, { screen: Routes.AssetAllocation })}>
-        <ResponsiveText style={styles.okText}>Ok</ResponsiveText>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-export const PortfolioHeader = () => {
+export const PortfolioHeader = ({ isChecked, handleCheckboxToggle }) => {
   return (
     <View style={appStyles.row}>
       <ResponsiveText style={styles.portfolioTitle}>PORTFOLIO</ResponsiveText>
       <View style={appStyles.rowBasic}>
-        {/* <View style={styles.checkboxContainer}> */}
         <TouchableOpacity onPress={handleCheckboxToggle} >
           {isChecked ? (
-            <FontAwesome5 name="checkbox" size={25} color={colors.mainColor} />
+            <FontAwesome5 name="checkbox" size={24} color={colors.mainColor} />
           ) : (
-            <Icon name="square" size={25} color={colors.white} />
+            <Icon name="square" size={24} color={colors.white} />
           )}
         </TouchableOpacity>
 
-        {/* </View> */}
         <ResponsiveText style={styles.hideBalances}>Hide 0 Balances</ResponsiveText>
         <Spacer width={wp(2)} />
-        <Image
-          source={images.clockIcon}
-          style={{ width: wp(4), height: wp(4) }}
-          resizeMode="contain"
-        />
+        <Image source={images.history} style={styles.historyIcon} />
       </View>
     </View>
   )
 }
 
-
-
-
-
-// const CoinItem = ({ item }) => (
-//   <View style={styles.itemContainer}>
-//     <Image source={item.icon} style={styles.icon} />
-//     <View style={styles.coinDetails}>
-//       <ResponsiveText style={styles.symbol}>{item.symbol}</ResponsiveText>
-//       <ResponsiveText style={styles.name}>{item.name}</ResponsiveText>
-
-
-
-
-// const CoinItem = ({ item }) => (
-//   <View style={styles.itemContainer}>
-//     <Image source={item.icon} style={styles.icon} />
-//     <View style={styles.coinDetails}>
-//       <ResponsiveText style={styles.symbol}>{item.symbol}</ResponsiveText>
-//       <ResponsiveText style={styles.name}>{item.name}</ResponsiveText>
-//     </View>
-//     <View style={styles.amountContainer}>
-//       <ResponsiveText style={styles.amount}>{item.amount}</ResponsiveText>
-//       <ResponsiveText style={styles.value}>{item.value}</ResponsiveText>
-//     </View>
-//   </View>
-// );
+export const TextInputSearch = ({ onChangeText, value }) => {
+  return (
+    <View style={styles.containerSearch}>
+      <TextInput value={value} onChangeText={onChangeText} style={styles.input} placeholder="Search..." placeholderTextColor={colors.lightTextColor} />
+      <TouchableOpacity style={styles.rightIconWrapper}>
+        <Image source={images.searchSign} style={styles.iconRight} />
+      </TouchableOpacity>
+    </View>
+  )
+}
 
 export const TokenList = () => {
   return (
     <FlatList
       data={coinData}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{
-
-        flexGrow: 1
-      }}
+      contentContainerStyle={{ flexGrow: 1 }}
       keyExtractor={(item) => item.id}
-      ItemSeparatorComponent={() => <View style={{ height: 1, width: '100%', backgroundColor: colors.buttonSigninColor }} />}
+      ItemSeparatorComponent={() => <Line height={hp(0.1)} />}
       removeClippedSubviews={false}
       renderItem={({ item, index }) => {
         return (
-          <View style={styles.itemContainer}>
+          <View style={[appStyles.rowBasic, styles.itemContainer]}>
             <Image source={item.icon} style={styles.icon} />
             <View style={styles.coinDetails}>
-              <ResponsiveText style={styles.symbol}>{item.symbol}</ResponsiveText>
-              <ResponsiveText style={styles.name}>{item.name}</ResponsiveText>
+              <ResponsiveText style={styles.upperText}>{item.symbol}</ResponsiveText>
+              <ResponsiveText style={styles.lowerText}>{item.name}</ResponsiveText>
             </View>
             <View style={styles.amountContainer}>
-              <ResponsiveText style={styles.amount}>{item.amount}</ResponsiveText>
-              <ResponsiveText style={styles.value}>{item.value}</ResponsiveText>
+              <ResponsiveText style={styles.upperText}>{item.amount}</ResponsiveText>
+              <ResponsiveText style={styles.lowerText}>{item.value}</ResponsiveText>
             </View>
           </View>
         )
@@ -170,29 +94,66 @@ export const TokenList = () => {
   )
 }
 
-export const useDepositNavigation = () => {
-  const navigation = useNavigation();
+export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
+  const pieData = [
+    { value: 30, color: '#05BADA' },
+    { value: 35, color: '#0B8DA4' },
+    { value: 10, color: '#006B7E' },
+    { value: 40, color: '#004B58' },
+  ];
+  return (
+    <GorhomBottomSheet sheetRef={bottomSheetRef} >
+      <View style={styles.sheetContainer}>
+        <View style={[appStyles.row, styles.headerRow]}>
+          <ResponsiveText style={styles.sheetTitle}>ASSETS ALLOCATION</ResponsiveText>
+          <TouchableOpacity onPress={closeBottomSheet} style={styles.closeBtn}>
+            {/* <ResponsiveText style={styles.closeText}></ResponsiveText> */}
+            <Image source={images.closeIcon} style={styles.historyIcon} />
+          </TouchableOpacity>
+        </View>
+        <Line height={hp(0.1)} />
+        <View style={{ alignItems: 'center', marginTop: 20, backgroundColor: "transparent" }}>
+          <PieChart
+            data={pieData}
+            showText={false}
+            radius={90}
+            innerRadius={68}
+            innerCircleColor={colors.bottomSheetBackgroundColor}
+            centerLabelComponent={() => (
+              <View style={{ alignItems: 'center' }}>
+                <ResponsiveText style={styles.pieCenterText}>APY</ResponsiveText>
+                <ResponsiveText style={styles.pieCenterText2}>127%</ResponsiveText>
+              </View>
+            )}
+          />
+        </View>
+        <View style={[appStyles.row, styles.legendRow]}>
+          <View style={styles.legendMarker} />
+          <ResponsiveText style={styles.legendText}>BTC</ResponsiveText>
+          <View style={[styles.legendMarker, { backgroundColor: '#0B8DA4' }]} />
+          <ResponsiveText style={styles.legendText}>ETH</ResponsiveText>
+          <View style={[styles.legendMarker, { backgroundColor: '#006B7E' }]} />
+          <ResponsiveText style={styles.legendText}>BTC</ResponsiveText>
+          <View style={[styles.legendMarker, { backgroundColor: '#004B58' }]} />
+          <ResponsiveText style={styles.legendText}>RTH</ResponsiveText>
+        </View>
+        <TouchableOpacity style={styles.okBtn} onPress={closeBottomSheet}>
+          <ResponsiveText style={styles.okText}>Ok</ResponsiveText>
+        </TouchableOpacity>
+      </View>
+    </GorhomBottomSheet>
+  )
+}
 
-  const handleDepositPress = () => {
-    navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCrypto });
-  };
-
-  return { handleDepositPress };
-};
-
-
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   // DepositShowDetails
   container: {
     backgroundColor: colors.cardColor3,
-    paddingHorizontal: wp(4),
+    paddingHorizontal: wp(4.5),
     paddingVertical: hp(1.5),
     borderRadius: wp(3),
     borderColor: colors.cardBorderColor,
     borderWidth: 1.5,
-  },
-  textContainer: {
-    // flex: 1,
   },
   label: {
     color: colors.lightTextColor,
@@ -222,162 +183,135 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.mainTextMedium,
     fontSize: 15,
   },
-  chartContainer: {
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // marginLeft: 10,
-  },
-  chartIcon: {
-    width: 60,
-    height: 60,
-
+  pieChart: {
+    width: wp(18),
+    height: wp(18),
+    resizeMode: "contain",
   },
   // TokenList
-  tokenListContainer: {
-    padding: 10,
-  },
   itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 12,
+    paddingHorizontal: wp(3),
+    paddingVertical: wp(3.5),
   },
   icon: {
-    width: 32,
-    height: 32,
-    marginRight: 12,
+    width: wp(9),
+    height: wp(9),
+    marginRight: wp(4),
   },
   coinDetails: {
     flex: 1,
   },
-  symbol: {
+  upperText: {
     color: colors.white,
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  name: {
-    color: colors.iconColor,
-    fontSize: 12,
+    fontSize: 16,
+    fontFamily: fontFamily.mainTextMedium,
   },
   amountContainer: {
     alignItems: 'flex-end',
   },
-  amount: {
-    color: colors.white,
+  lowerText: {
+    color: colors.lightTextColor,
     fontSize: 14,
-    fontWeight: '600',
-  },
-  value: {
-    color: colors.iconColor,
-    fontSize: 12,
+    fontFamily: fontFamily.appTextRegular,
   },
   //asset Allocation
   sheetContainer: {
-    backgroundColor: colors.bottomSheetBackgroundColor,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
     paddingHorizontal: wp(4),
     paddingTop: hp(3),
     paddingBottom: hp(2),
     alignItems: 'center',
   },
   headerRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     width: '100%',
-    marginBottom: hp(2),
+    marginBottom: hp(3),
   },
   sheetTitle: {
     color: colors.white,
-    fontSize: 15,
-    fontFamily: fontFamily.appTextBold,
+    fontSize: 18,
+    fontFamily: fontFamily.mainTextBold,
   },
-  closeBtn: {
-    padding: wp(2),
+  pieCenterText: {
+    color: colors.lightTextColor,
+    fontSize: 14,
+    fontFamily: fontFamily.appTextMedium
   },
-  closeText: {
+  pieCenterText2: {
     color: colors.white,
-    fontSize: 22,
-    fontWeight: 'bold',
-  },
-  doughnutContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: hp(2),
-  },
-  doughnutImg: {
-    width: wp(32),
-    height: wp(32),
-  },
-  apyCenter: {
-    position: 'absolute',
-    top: '38%',
-    left: 0,
-    right: 0,
-    alignItems: 'center',
-  },
-  apyLabel: {
-    color: colors.iconColor,
-    fontSize: 13,
-    fontFamily: fontFamily.appTextRegular,
-  },
-  apyValue: {
-    color: colors.mainColor,
-    fontSize: 22,
-    fontFamily: fontFamily.appTextBold,
-    marginTop: 2,
+    fontSize: 18,
+    fontFamily: fontFamily.mainTextMedium
   },
   legendRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: hp(3),
     marginVertical: hp(2),
   },
-  legendDot: {
-    width: 7,
-    height: 7,
-    borderRadius: 4,
-    backgroundColor: colors.dot3,
-    marginHorizontal: 6,
-  },
-  legendDot1: {
-    width: 7,
-    height: 7,
-    borderRadius: 4,
-    backgroundColor: colors.dot1,
-    marginHorizontal: 6,
-  },
-  legendDot3: {
-    width: 7,
-    height: 7,
-    borderRadius: 4,
-    backgroundColor: colors.dot3,
-    marginHorizontal: 6,
-  },
-  legendDot2: {
-    width: 7,
-    height: 7,
-    borderRadius: 4,
-    backgroundColor: colors.dot2,
-    marginHorizontal: 6,
+  legendMarker: {
+    width: wp(2),
+    height: wp(2),
+    borderRadius: wp(2),
+    backgroundColor: '#05BADA',
+    marginHorizontal: wp(1.5),
   },
   legendText: {
-    color: colors.iconColor,
-    fontSize: 13,
-    fontFamily: fontFamily.appTextRegular,
-    marginRight: 10,
+    color: colors.lightTextColor,
+    fontSize: 14,
+    fontFamily: fontFamily.appTextMedium,
+    marginRight: wp(4),
   },
   okBtn: {
-    width: wp(90),
-    backgroundColor: colors.buttonSigninColor,
-    borderRadius: 20,
+    width: wp(88),
+    backgroundColor: colors.transparentBtn,
+    borderRadius: wp(16),
     alignItems: 'center',
-    paddingVertical: hp(1.5),
+    paddingVertical: hp(2),
     marginTop: hp(2),
   },
   okText: {
     color: colors.white,
+    fontSize: 14,
+    fontFamily: fontFamily.appTextRegular,
+  },
+  portfolioTitle: {
+    fontSize: 24,
+    fontFamily: fontFamily.mainTextMedium,
+    color: colors.white,
+  },
+  hideBalances: {
+    paddingLeft: wp(1.5),
+    paddingRight: wp(1.5),
     fontSize: 16,
-    fontFamily: fontFamily.appTextBold,
+    color: colors.white,
+    fontFamily: fontFamily.appTextMedium,
+  },
+  historyIcon: {
+    width: wp(5.5),
+    height: wp(5.5),
+    color: colors.white,
+    resizeMode: "contain",
+  },
+  containerSearch: {
+    ...appStyles.rowBasic,
+    alignSelf: 'center',
+    backgroundColor: colors.inputBgColor,
+    borderRadius: wp(3),
+    height: hp(6.5),
+    width: wp(93),
+    paddingHorizontal: wp(4),
+    borderColor: colors.borderColor,
+    borderWidth: 1.5,
+  },
+  rightIconWrapper: {
+    paddingHorizontal: wp(2),
+  },
+  input: {
+    flex: 1,
+    color: colors.white,
+    fontSize: 14,
+    fontFamily: fontFamily.appTextRegular,
+  },
+  iconRight: {
+    width: wp(5),
+    height: wp(5),
+    resizeMode: 'contain',
+    tintColor: colors.mainColor,
   },
 });

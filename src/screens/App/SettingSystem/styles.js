@@ -29,6 +29,15 @@ export const styles = StyleSheet.create({
     dropDownRight: {
         width: '50%',
         alignItems: 'flex-end',
+        position: 'absolute',
+        right: 1,
+    },
+    dropDownRight1: {
+        width: '50%',
+        alignItems: 'flex-end',
+        // position: 'absolute',
+        // right: 1,
+        marginTop: hp(1.5)
     },
     separatorLine: {
         height: 1,

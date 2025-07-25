@@ -1,55 +1,47 @@
-import React, { useState, useRef } from "react"
-import { View, Image, TouchableOpacity } from "react-native"
+import React from "react"
+import { View, Platform } from "react-native"
 import { AuthMainContainer } from "../../../components/authMainContainer"
-import { hp, wp } from "../../../components/ResponsiveComponent"
-import { DepositWalletShowDetails, TokenList, useDepositNavigation, SelectCrypto } from "./components"
+import { hp } from "../../../components/ResponsiveComponent"
+import { DepositWalletShowDetails, TokenList, PortfolioHeader, TextInputSearch, ChartBottomSheet } from "./components"
 import Spacer from "../../../components/Spacer"
 import { styles } from "./style"
 import { SimpleButton } from "../../../components/SimpleButton"
-import { ResponsiveText } from "../../../components/ResponsiveText"
 import { colors, fontFamily, Routes } from "../../../constants"
-import images from "../../../images"
 import { appStyles } from "../../../utilities"
-import useHomeScreen from "./Hooks"
+import { useHomeScreen } from "./Hooks"
+import { Portal } from "react-native-portalize"
 
 const WalletHome = (props) => {
+  const { isChecked, handleCheckboxToggle, input, setInput, assetSheetRef, handleAssetOpen, handleAssetClose } = useHomeScreen()
   return (
     <AuthMainContainer>
       <View style={styles.containerMain}>
 
         <Spacer />
-        <DepositWalletShowDetails />
+        <DepositWalletShowDetails openBottomSheet={handleAssetOpen} />
         <Spacer />
 
         <View style={appStyles.row}>
-          <SimpleButton btnStyles={{ fontFamily: fontFamily.appTextRegular }} text="Deposit" textColor={colors.white} styleView={styles.depositBtn} />
+          <SimpleButton btnStyles={{ fontFamily: fontFamily.appTextRegular }} text="Deposit" textColor={colors.white} styleView={styles.depositBtn} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.SelectCrypto })} />
           <SimpleButton btnStyles={{ fontFamily: fontFamily.appTextRegular }} text="Withdrawl" textColor={colors.black} styleView={styles.withdrawBtn} />
         </View>
         <Spacer height={hp(3.5)} />
-
+        <PortfolioHeader isChecked={isChecked} handleCheckboxToggle={handleCheckboxToggle} />
 
         <Spacer height={hp(1.5)} />
-
-        {/* Search Bar */}
-        <TouchableOpacity
-          style={styles.searchContainer}
-
-        >
-          <ResponsiveText style={styles.searchText}>Search...</ResponsiveText>
-          <Image style={styles.searchIcon}
-            source={images.searchSign}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
+        <TextInputSearch value={input} onChangeText={(text) => setInput(text)} />
         <Spacer height={hp(2)} />
 
-        {/* Crypto List */}
+      </View>
+      <Spacer height={Platform.OS === 'android' ? hp(0) : hp(3.5)} />
+
+      <View style={{ flex: 1 }}>
         <TokenList />
-
-
-
       </View>
 
+      <Portal>
+        <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
+      </Portal>
     </AuthMainContainer>
   );
 };

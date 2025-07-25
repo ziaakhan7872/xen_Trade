@@ -19,10 +19,14 @@ const DropDown = ({ items, value, setValue, placeholder, zIndex, setIsOpen }) =>
             setValue={setValue}
             // setItems={() => { }} //For future use if we want to manage items dynamically
             style={[styles.dropdown, { zIndex: zIndex }]}  // dynamic zIndex 
-            dropDownContainerStyle={[styles.dropdownContainer, { zIndex: zIndex }]}
+            dropDownDirection="BOTTOM"
+            dropDownContainerStyle={[styles.dropdownContainer, {
+                // marginTop: 0,
+                // top: hp(6.5),
+                // zIndex: zIndex,
+            }]}
             textStyle={styles.dropdownText}
             placeholder={placeholder}
-            // placeholderStyle={{ color: '#7C9CA1' }}
             listMode="SCROLLVIEW"
             arrowIconStyle={{ tintColor: '#fff', marginRight: wp(2) }}
         />
@@ -36,14 +40,18 @@ const styles = StyleSheet.create({
         borderColor: colors.borderColor,
         borderWidth: 1.5,
         borderRadius: wp(3),
-        paddingVertical: hp(2)
+        paddingVertical: hp(2),
+        // position: 'relative',
     },
     dropdownContainer: {
         backgroundColor: colors.inputBgColor,
         borderColor: colors.borderColor,
         borderWidth: 1.5,
         borderRadius: wp(3),
-        zIndex: 1000
+        zIndex: -10,
+        // top: hp(6.5),
+        // marginTop: 0,
+        // position: 'absolute',
     },
     dropdownText: {
         color: colors.white,
