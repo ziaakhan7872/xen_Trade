@@ -87,6 +87,5 @@ const styles = StyleSheet.create({
         position: "absolute",
         left: 5,
         zIndex: 1,
-        bottom: hp(1.8)
     },
 })
