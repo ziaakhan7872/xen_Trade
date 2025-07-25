@@ -23,9 +23,20 @@ const WalletHome = (props) => {
         <Spacer />
 
         <View style={appStyles.row}>
-          <SimpleButton btnStyles={{ fontFamily: fontFamily.appTextRegular }} text="Deposit" textColor={colors.white} styleView={styles.depositBtn} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.SelectCrypto })} />
-          {/* <SimpleButton onPress={()=>props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCrypto }) } btnStyles={{ fontFamily: fontFamily.appTextRegular }} text="Deposit" textColor={colors.white} styleView={styles.depositBtn} /> */}
-          <SimpleButton btnStyles={{ fontFamily: fontFamily.appTextRegular }} text="Withdraw" textColor={colors.black} styleView={styles.withdrawBtn} />
+          <SimpleButton
+            onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCrypto })}
+            btnStyles={{ fontFamily: fontFamily.appTextRegular }}
+            text="Deposit"
+            textColor={colors.white}
+            styleView={styles.depositBtn}
+          />
+          <SimpleButton
+            onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.WithDraw })}
+            btnStyles={{ fontFamily: fontFamily.appTextRegular }}
+            text="Withdrawl"
+            textColor={colors.black}
+            styleView={styles.withdrawBtn}
+          />
         </View>
         <Spacer height={hp(3.5)} />
         <PortfolioHeader isChecked={isChecked} handleCheckboxToggle={handleCheckboxToggle} />

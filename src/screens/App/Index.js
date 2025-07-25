@@ -24,11 +24,13 @@ import ReferralHistory from "./ReferralHistory/ReferralHistory";
 import Exchangescreen from "./Exchange/ExchangeScreen/Exchangescreen"
 import OrderHistory from "./OrderHistory/OrderHistory";
 import TradeGraphScreen from "./Exchange/TradeGraphScreem/TradeGraphScreen"
+import WithDraw from "./WithDraw/WithDraw"
+
 
 export {
      HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,
      Exchangescreen, WalletScreen, changePassword, antiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
      SelectNetwork, Barcode, AddNewAddress, SettingEmailNotification, SelectCrypto, AssetAllocation, MenuScreen,
-     Referrals, ReferralHistory, OrderHistory, TradeGraphScreen
+     Referrals, ReferralHistory, OrderHistory, TradeGraphScreen,WithDraw
 }
 

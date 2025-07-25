@@ -30,6 +30,7 @@ const AppNavigation = () => {
             <Screen name={Routes.orderHistory} component={App.OrderHistory} />
             {/* <Screen name={Routes.WithDraw} component={App.WithDraw} /> */}
             <Screen name={Routes.TradeGraphScreen} component={App.TradeGraphScreen} />
+            <Screen name={Routes.WithDraw} component={App.WithDraw} />
 
         </Navigator>
     );
