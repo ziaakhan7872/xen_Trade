@@ -1,4 +1,4 @@
-import { TouchableOpacity, ActivityIndicator, View } from "react-native";
+import { TouchableOpacity, ActivityIndicator, View, Image, StyleSheet } from "react-native";
 import { appStyles } from "../utilities";
 import { colors, fontFamily } from "../constants";
 import { hp, wp } from "./ResponsiveComponent";
@@ -63,3 +63,11 @@ export const SimpleButton = ({
         </TouchableOpacity>
     );
 }
+
+export const styles = StyleSheet.create({
+    btnImage: {
+        width: wp(5),
+        height: hp(2.5),
+        marginRight: wp(2),
+    },
+})

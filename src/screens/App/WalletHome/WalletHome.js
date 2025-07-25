@@ -10,6 +10,7 @@ import { colors, fontFamily, Routes } from "../../../constants"
 import { appStyles } from "../../../utilities"
 import { useHomeScreen } from "./Hooks"
 import { Portal } from "react-native-portalize"
+import images from "../../../images"
 
 const WalletHome = (props) => {
   const { isChecked, handleCheckboxToggle, input, setInput, assetSheetRef, handleAssetOpen, handleAssetClose } = useHomeScreen()
@@ -24,7 +25,7 @@ const WalletHome = (props) => {
         <View style={appStyles.row}>
           <SimpleButton btnStyles={{ fontFamily: fontFamily.appTextRegular }} text="Deposit" textColor={colors.white} styleView={styles.depositBtn} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.SelectCrypto })} />
           {/* <SimpleButton onPress={()=>props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCrypto }) } btnStyles={{ fontFamily: fontFamily.appTextRegular }} text="Deposit" textColor={colors.white} styleView={styles.depositBtn} /> */}
-          <SimpleButton btnStyles={{ fontFamily: fontFamily.appTextRegular }} text="Withdrawl" textColor={colors.black} styleView={styles.withdrawBtn} />
+          <SimpleButton btnStyles={{ fontFamily: fontFamily.appTextRegular }} text="Withdraw" textColor={colors.black} styleView={styles.withdrawBtn} />
         </View>
         <Spacer height={hp(3.5)} />
         <PortfolioHeader isChecked={isChecked} handleCheckboxToggle={handleCheckboxToggle} />
@@ -37,7 +38,7 @@ const WalletHome = (props) => {
       <Spacer height={Platform.OS === 'android' ? hp(0) : hp(3.5)} />
 
       <View style={{ flex: 1 }}>
-        <TokenList />
+        <TokenList props={props} />
       </View>
 
       <Portal>
