@@ -1,4 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { wp } from '../../../components/ResponsiveComponent'
 
-
-const styles = StyleSheet.create({})
+export const styles = StyleSheet.create({
+    containerMain: {
+        flex: 1,
+        paddingHorizontal: wp(4)
+    },
+})

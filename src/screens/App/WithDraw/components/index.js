@@ -105,7 +105,7 @@ export const FeeInfo = ({ fee, amountReceived, handleSubmit, insufficentBalance 
   </View>
 );
 
-export const WithDrawConfirmationBottomSheet = ({ ref, address = "0x21505337aa3b5254eb154b", amount = "15.769112", fee = "0.15 USDT", received = "15.7" ,handleSubmit}) => {
+export const WithDrawConfirmationBottomSheet = ({ ref, address = "0x21505337aa3b5254eb154b", amount = "15.769112", fee = "0.15 USDT", received = "15.7", handleSubmit }) => {
 
 
   return (
@@ -173,8 +173,8 @@ export const WithDrawConfirmationBottomSheet = ({ ref, address = "0x21505337aa3b
           />
         </View>
 
-      </View>
-    </GorhomBottomSheet>
+      </View >
+    </GorhomBottomSheet >
   );
 };
 const styles = StyleSheet.create({

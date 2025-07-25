@@ -31,10 +31,9 @@ const AppNavigation = () => {
             {/* <Screen name={Routes.WithDraw} component={App.WithDraw} /> */}
             <Screen name={Routes.TradeGraphScreen} component={App.TradeGraphScreen} />
             <Screen name={Routes.WithDraw} component={App.WithDraw} />
+            <Screen name={Routes.WithdrawDetails} component={App.WithdrawDetails} />
             <Screen name={Routes.SelectCryptoWithDraw} component={App.SelectCryptoWithdraw} />
             <Screen name={Routes.SelectNetworkWIthdraw} component={App.SelectNetworkWithdraw} />
-
-
         </Navigator>
     );
 };

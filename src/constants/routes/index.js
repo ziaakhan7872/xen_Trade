@@ -35,6 +35,7 @@ export const Routes = {
     orderHistory: "orderHistory",
     TradeGraphScreen: "TradeGraphScreen",
     WithDraw: "WithDraw",
+    WithdrawDetails: "WithdrawDetails",
     SelectCryptoWithDraw: "SelectCryptoWithDraw",
     SelectNetworkWIthdraw: "SelectNetworkWIthdraw",
 
