@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
     buttonRow: {
         paddingHorizontal: wp(3.5),
         paddingBottom: Platform.OS === 'android' ? hp(2) : hp(1), // More space on Android
-
     },
     cancelBtn: {
         width: wp(44),

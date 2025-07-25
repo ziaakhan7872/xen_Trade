@@ -5,7 +5,7 @@ import { ResponsiveText } from "../../../../components/ResponsiveText";
 import { coinData } from "../../../../utilities/dummyData";
 import Spacer from "../../../../components/Spacer";
 import images from "../../../../images";
-import { colors } from "../../../../constants"
+import { colors, Routes } from "../../../../constants"
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { fontFamily } from '../../../../constants/fonts';
 import { appStyles } from '../../../../utilities';
@@ -66,9 +66,11 @@ export const TextInputSearch = ({ onChangeText, value }) => {
   )
 }
 
-export const TokenList = () => {
+export const TokenList = ({ props }) => {
+  // props = { props }
   return (
     <FlatList
+      // props={props}
       data={coinData}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ flexGrow: 1 }}
@@ -77,7 +79,7 @@ export const TokenList = () => {
       removeClippedSubviews={false}
       renderItem={({ item, index }) => {
         return (
-          <View style={[appStyles.rowBasic, styles.itemContainer]}>
+          <TouchableOpacity activeOpacity={0.6} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.AssetAllocation })} style={[appStyles.rowBasic, styles.itemContainer]}>
             <Image source={item.icon} style={styles.icon} />
             <View style={styles.coinDetails}>
               <ResponsiveText style={styles.upperText}>{item.symbol}</ResponsiveText>
@@ -87,7 +89,7 @@ export const TokenList = () => {
               <ResponsiveText style={styles.upperText}>{item.amount}</ResponsiveText>
               <ResponsiveText style={styles.lowerText}>{item.value}</ResponsiveText>
             </View>
-          </View>
+          </TouchableOpacity>
         )
       }}
     />

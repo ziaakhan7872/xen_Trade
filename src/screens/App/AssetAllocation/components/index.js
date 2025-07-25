@@ -1,48 +1,43 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native';
 import images from '../../../../images';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { ResponsiveText } from '../../../../components/ResponsiveText';
-import { colors, fontFamily } from '../../../../constants';
+import { colors, fontFamily, Routes } from '../../../../constants';
+import { appStyles } from '../../../../utilities';
+import Spacer from '../../../../components/Spacer';
+import { SimpleButton } from '../../../../components/SimpleButton';
+import Line from '../../../../components/Liner';
 
 
-export const AssetAllocationHeader = () => {
-  const navigation = useNavigation();
-  
+export const MainHeaderCustom = ({ leftImage, rightImage, title, titleLogo, onBackPress, onRightPress }) => {
   return (
-    <View style={styles.AssetHeader}>
-          <TouchableOpacity 
-            onPress={() => navigation.goBack()} 
-            style={styles.backButtonContainer}
-          >
-            <Image
-              source={images.backArrow}
-              style={styles.backArrowIcon}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-           <Image
-              source={images.EthLogo}
-              style={styles.backArrowIcon}
-              resizeMode="contain"
-            />
-          <ResponsiveText style={styles.selectCryptoTitle}>ETHEREUM</ResponsiveText>
-          
-          
-        </View>
-  );
-};
+    <View style={{ ...appStyles.row, ...styles.headerMainContainer }}>
+      <TouchableOpacity onPress={onBackPress} style={styles.leftIconWrapper}>
+        <Image source={leftImage} style={styles.leftImage} />
+      </TouchableOpacity>
 
+      <View style={[styles.titleWrapper, { ...appStyles.rowBasic }]}>
+        <Image source={titleLogo} style={styles.titleImage} />
+        <ResponsiveText style={styles.title}>{title}</ResponsiveText>
+      </View>
+      <TouchableOpacity onPress={onRightPress} style={styles.rightIconWrapper}>
+        <Image source={rightImage} style={styles.rightImage} />
+      </TouchableOpacity>
+    </View>
+  )
+}
 
-// Balance and trade section
-export const AssetAllocationBalance = () => (
+export const AssetAllocationBalance = ({ props }) => (
   <View style={styles.balanceContainer}>
     <ResponsiveText style={styles.totalAvailableLabel}>Total Available</ResponsiveText>
+    <Spacer height={hp(1)} />
     <ResponsiveText style={styles.totalAvailableValue}>1.25410012</ResponsiveText>
-    <ResponsiveText style={styles.usdValue}>* $3,322.33</ResponsiveText>
-    <View style={styles.balanceRow}>
-      <View style={styles.balanceBox}>
+    <ResponsiveText style={styles.usdValue}>≈ $3,322.33</ResponsiveText>
+    <Spacer height={hp(2.5)} />
+
+    <View style={appStyles.row}>
+      <View style={styles.balanceBox2}>
         <ResponsiveText style={styles.balanceBoxLabel}>Available</ResponsiveText>
         <ResponsiveText style={styles.balanceBoxValue}>1.254100</ResponsiveText>
       </View>
@@ -51,82 +46,132 @@ export const AssetAllocationBalance = () => (
         <ResponsiveText style={styles.balanceBoxValue}>0.002344</ResponsiveText>
       </View>
     </View>
-    <TouchableOpacity style={styles.tradeButton}>
-      <Image source={ images.copesIcon} style={styles.tradeIcon} resizeMode="contain" />
-      <ResponsiveText style={styles.tradeButtonText}>Trade</ResponsiveText>
-    </TouchableOpacity>
+
+    <Spacer />
+    <SimpleButton btnImage={images.copesIcon} text="Trade" textColor={colors.white} styleView={styles.depositBtn} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: '' })} />
   </View>
 );
 
-// History and actions section
 export const AssetAllocationHistory = () => (
   <View style={styles.historyContainer}>
     <ResponsiveText style={styles.historyLabel}>HISTORY</ResponsiveText>
-    <View style={styles.noRecordContainer}>
-      <Image source={images.union} style={styles.noRecordIcon} resizeMode="contain" />
-      <ResponsiveText style={styles.noRecordText}>No Record found</ResponsiveText>
-    </View>
-    <View style={styles.actionRow}>
-      <TouchableOpacity style={styles.depositButton}>
-        <ResponsiveText style={styles.depositButtonText}>Deposit</ResponsiveText>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.withdrawButton}>
-        <ResponsiveText style={styles.withdrawButtonText}>Withdraw</ResponsiveText>
-      </TouchableOpacity>
+    <Spacer />
+    <Line height={hp(0.1)} />
+    <Spacer height={hp(8)} />
+    <View style={styles.recordContainer}>
+      <Image source={images.noRecord} style={styles.recordIcon} />
+      <ResponsiveText style={styles.noRecordText}>No Open Orders</ResponsiveText>
     </View>
   </View>
 );
 
 
 const styles = StyleSheet.create({
-
+  headerMainContainer: {
+    paddingTop: wp(4),
+  },
+  leftImage: {
+    width: wp(6),
+    height: wp(6),
+    resizeMode: 'contain',
+  },
+  rightImage: {
+    width: wp(6),
+    height: wp(6),
+    resizeMode: 'contain',
+  },
+  titleImage: {
+    width: wp(5.5),
+    height: wp(5.5),
+    marginRight: wp(2),
+    resizeMode: 'contain',
+  },
+  title: {
+    fontSize: 18,
+    fontFamily: fontFamily.mainTextMedium,
+    color: colors.white,
+    alignItems: 'center',
+  },
+  titleWrapper: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  leftIconWrapper: {
+    width: wp(10),
+    alignItems: 'flex-start',
+  },
+  rightIconWrapper: {
+    width: wp(10),
+    alignItems: 'flex-end',
+  },
   balanceContainer: {
     backgroundColor: 'transparent',
     alignItems: 'center',
-    paddingTop: hp(2),
-    paddingBottom: hp(2),
+    paddingVertical: hp(2)
   },
   totalAvailableLabel: {
-    color: colors.iconColor,
-    fontSize: 13,
-    fontFamily: fontFamily.appTextRegular,
-    marginBottom: hp(0.5),
+    color: colors.white,
+    fontSize: 14,
+    fontFamily: fontFamily.appTextMedium,
   },
   totalAvailableValue: {
     color: colors.white,
-    fontSize: 28,
-    fontFamily: fontFamily.appTextBold,
-    marginBottom: hp(0.5),
+    fontSize: 30,
+    fontFamily: fontFamily.mainTextMedium,
+  },
+  depositBtn: {
+    width: wp(44),
+    backgroundColor: colors.transparentBtn,
+    paddingVertical: hp(1.8),
+    marginStart: wp(0.5),
+    borderRadius: wp(10),
   },
   usdValue: {
-    color: colors.iconColor,
-    fontSize: 13,
+    color: colors.lightTextColor,
+    fontSize: 14,
     fontFamily: fontFamily.appTextRegular,
-    marginBottom: hp(2),
-  },
-  balanceRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    width: '80%',
-    marginBottom: hp(2),
   },
   balanceBox: {
     flex: 1,
-    backgroundColor: colors.available,
-    marginHorizontal: wp(0.1),
-    borderRadius: 10,
-    alignItems: 'center',
+    backgroundColor: colors.cardColor3,
+    paddingHorizontal: wp(3),
+    borderTopRightRadius: wp(3),
+    borderBottomRightRadius: wp(3),
+    alignItems: 'flex-start',
     paddingVertical: hp(1.2),
+    paddingTop: hp(1.6),
+    borderRightWidth: 2,
+    borderRightColor: colors.borderColor,
+    borderBottomColor: colors.borderColor,
+    borderBottomWidth: 2,
+    borderLeftWidth: 2,
+    borderLeftColor: colors.borderColor,
+  },
+  balanceBox2: {
+    flex: 1,
+    borderLeftWidth: 2,
+    borderTopColor: colors.borderColor,
+    borderTopWidth: 2,
+    borderLeftColor: colors.borderColor,
+    backgroundColor: colors.cardColor3,
+    borderTopLeftRadius: wp(3),
+    borderBottomLeftRadius: wp(3),
+    paddingHorizontal: wp(3),
+    alignItems: 'flex-start',
+    paddingVertical: hp(1.2),
+    paddingTop: hp(1.6),
+
   },
   balanceBoxLabel: {
-    color: colors.iconColor,
-    fontSize: 13,
+    color: colors.lightTextColor,
+    fontSize: 14,
     fontFamily: fontFamily.appTextRegular,
   },
   balanceBoxValue: {
     color: colors.white,
-    fontSize: 16,
-    fontFamily: fontFamily.appTextBold,
+    fontSize: 20,
+    fontFamily: fontFamily.mainTextMedium,
   },
   tradeButton: {
     flexDirection: 'row',
@@ -149,7 +194,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: fontFamily.appTextBold,
   },
-
   historyContainer: {
     backgroundColor: 'transparent',
     flex: 1,
@@ -158,12 +202,9 @@ const styles = StyleSheet.create({
   },
   historyLabel: {
     color: colors.white,
-    fontSize: 14,
-    
-    fontFamily: fontFamily.appTextBold,
+    fontSize: 18,
+    fontFamily: fontFamily.mainTextBold,
     alignSelf: 'flex-start',
-    marginLeft: wp(4),
-    marginBottom: hp(1),
   },
   noRecordContainer: {
     alignItems: 'center',
@@ -172,16 +213,19 @@ const styles = StyleSheet.create({
     marginTop: hp(2),
     marginBottom: hp(2),
   },
-  noRecordIcon: {
-    width: wp(10),
-    height: wp(10),
-    marginBottom: hp(1),
-  
+  recordContainer: {
+    alignItems: 'center',
+  },
+  recordIcon: {
+    width: wp(12),
+    height: wp(12),
+    resizeMode: 'contain',
   },
   noRecordText: {
+    fontFamily: fontFamily.appTextMedium,
+    fontSize: 14,
     color: colors.white,
-    fontSize: 15,
-    fontFamily: fontFamily.appTextRegular,
+    paddingTop: hp(1),
   },
   actionRow: {
     flexDirection: 'row',
@@ -216,8 +260,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: fontFamily.appTextBold,
   },
-
-
   AssetHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -225,7 +267,7 @@ const styles = StyleSheet.create({
     paddingVertical: hp(1.5),
     position: 'relative',
     width: '100%',
-   
+
   },
   backButtonContainer: {
     position: 'absolute',
@@ -256,5 +298,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: fontFamily.appTextBold,
   },
-
 })

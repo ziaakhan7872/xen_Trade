@@ -10,6 +10,7 @@ import { colors, fontFamily, Routes } from "../../../constants"
 import { appStyles } from "../../../utilities"
 import { useHomeScreen } from "./Hooks"
 import { Portal } from "react-native-portalize"
+import images from "../../../images"
 
 const WalletHome = (props) => {
   const { isChecked, handleCheckboxToggle, input, setInput, assetSheetRef, handleAssetOpen, handleAssetClose } = useHomeScreen()
@@ -48,7 +49,7 @@ const WalletHome = (props) => {
       <Spacer height={Platform.OS === 'android' ? hp(0) : hp(3.5)} />
 
       <View style={{ flex: 1 }}>
-        <TokenList />
+        <TokenList props={props} />
       </View>
 
       <Portal>
