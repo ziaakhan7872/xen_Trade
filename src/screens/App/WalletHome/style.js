@@ -51,30 +51,12 @@ export const styles = StyleSheet.create({
     color: colors.white,
   },
   buttonContainer: {
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // alignItems: 'center',
     width: '100%',
-  },
-  portfolioHeader: {
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // alignItems: 'center',
-  },
-  portfolioTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: colors.white,
   },
   portfolioActions: {
     // flexDirection: 'row',
     // alignItems: 'center',
     // gap: wp(3),
-  },
-  hideBalances: {
-    fontSize: 12,
-    color: colors.iconColor,
-    marginRight: wp(1.5),
   },
   historyIcon: {
     fontSize: 16,

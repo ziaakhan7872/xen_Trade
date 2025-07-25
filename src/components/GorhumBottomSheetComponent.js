@@ -43,8 +43,6 @@ export const GorhomBottomSheet = ({ sheetRef, onCloseRequest, children }) => {
   } catch (error) {
     console.error("Error rendering GorhomBottomSheet:", error);
   }
-
-
 };
 
 const styles = StyleSheet.create({
@@ -56,6 +54,6 @@ const styles = StyleSheet.create({
 
   contentWrapper: {
     alignItems: 'center',
-    paddingBottom: 20,
+    paddingBottom: wp(5),
   },
 });

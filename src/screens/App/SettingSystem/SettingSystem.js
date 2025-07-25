@@ -59,8 +59,8 @@ const SettingSystem = (props) => {
 
                 <View style={appStyles.row}>
                     <ResponsiveText style={styles.leftLabels}>Language</ResponsiveText>
-                    <View style={styles.dropDownRight}>
-                        <DropDown items={languageItems} value={language} setValue={setLanguage} zIndex={isLanguageOpen ? 1001 : 999} setIsOpen={setIsLanguageOpen} placeholder="Select Language" />
+                    <View style={[styles.dropDownRight, { zIndex: 1000 }]}>
+                        <DropDown items={languageItems} value={language} setValue={setLanguage} zIndex={isLanguageOpen ? 1000 : 999} setIsOpen={setIsLanguageOpen} placeholder="Select Language" />
                     </View>
                 </View>
 
@@ -68,10 +68,11 @@ const SettingSystem = (props) => {
 
                 <View style={appStyles.row}>
                     <ResponsiveText style={styles.leftLabels}>Time zone</ResponsiveText>
-                    <View style={styles.dropDownRight}>
-                        <DropDown items={timezoneItems} value={timezone} setValue={setTimezone} zIndex={isTimezoneOpen ? 1001 : 999} setIsOpen={setIsTimezoneOpen} placeholder="Select Time Zone" />
+                    <View style={[styles.dropDownRight1, { zIndex: 999 }]}>
+                        <DropDown items={timezoneItems} value={timezone} setValue={setTimezone} zIndex={isTimezoneOpen ? 1000 : 998} setIsOpen={setIsTimezoneOpen} placeholder="Select Time Zone" />
                     </View>
                 </View>
+
                 <Spacer height={hp(5)} />
             </View>
         </AuthMainContainer>
