@@ -105,7 +105,7 @@ export const FeeInfo = ({ fee, amountReceived, handleSubmit, insufficentBalance 
   </View>
 );
 
-export const WithDrawConfirmationBottomSheet = ({ ref, disabled, address = "0x21505337aa3b5254eb154b", amount = "15.769112", fee = "0.15 USDT", received = "15.7" }) => {
+export const WithDrawConfirmationBottomSheet = ({ props, ref, disabled, address = "0x21505337aa3b5254eb154b", amount = "15.769112", fee = "0.15 USDT", received = "15.7" }) => {
 
 
   return (
@@ -117,8 +117,8 @@ export const WithDrawConfirmationBottomSheet = ({ ref, disabled, address = "0x21
             <ResponsiveText style={styles.confirmClose}>X</ResponsiveText>
           </TouchableOpacity>
         </View>
-        <Spacer/>
-        <View style={{paddingHorizontal:wp(5)}}>
+        <Spacer />
+        <View style={{ paddingHorizontal: wp(5) }}>
           <View style={styles.componentHeader}>
             <View style={styles.confirmItem}>
               <ResponsiveText style={styles.confirmLabel}>Network</ResponsiveText>
@@ -157,7 +157,7 @@ export const WithDrawConfirmationBottomSheet = ({ ref, disabled, address = "0x21
           <ResponsiveText style={styles.confirmWarningText}>Please make sure all information above is correct</ResponsiveText>
         </View>
 
-        <TouchableOpacity style={styles.confirmButton} onPress={() => navigation.navigate(Routes.AppNavigator, { screen: Routes.WithdrawDetails })}>
+        <TouchableOpacity style={styles.confirmButton} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.WithdrawDetails })}>
           <ResponsiveText style={styles.confirmButtonText}>Confirm</ResponsiveText>
         </TouchableOpacity>
 
@@ -360,15 +360,15 @@ const styles = StyleSheet.create({
   confirmLabel: {
     color: colors.iconColor,
     fontSize: 14,
-    fontWeight:"400",
-    fontFamily:fontFamily.appTextRegular
+    fontWeight: "400",
+    fontFamily: fontFamily.appTextRegular
   },
   confirmValue: {
     color: colors.white,
     fontSize: 16,
     fontWeight: '500',
-    fontFamily:fontFamily.mainTextMedium,
-    
+    fontFamily: fontFamily.mainTextMedium,
+
   },
   confirmAddressContainer: {
     flexDirection: 'row',

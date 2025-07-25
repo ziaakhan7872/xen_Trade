@@ -30,22 +30,22 @@ const WithDraw = (props) => {
   const handleBack = () => {
     // Handle navigation back
   };
-  
+
   const handleScan = () => {
     // Handle QR code scanning
   };
-  
+
   const handleCopy = () => {
     // Handle address copying
   };
-  
+
   const handleMax = () => {
     // Set maximum available amount
     setAmount('100');
     setDisabled(false);
     setError('');
   };
-  
+
   const handleAmountChange = (val) => {
     setAmount(val);
     // Validation logic
@@ -60,26 +60,26 @@ const WithDraw = (props) => {
       setDisabled(false);
     }
   };
-  
+
   const handleSubmit = () => {
     // Handle submission
   };
 
-  const {WithdrawConfirmationRef} = UseWidthDraw()
+  const { WithdrawConfirmationRef } = UseWidthDraw()
 
   return (
     <AuthMainContainer>
-      <Spacer/>
-      <WithdrawHeader BackPress={()=>props?.navigation?.goBack()} HistoryPress={() => props?.navigation?.navigate(Routes.AppNavigator, { screen:Routes.DepositHistory})} />
-      <AddressInput 
-        value={address} 
-        onChange={setAddress} 
+      <Spacer />
+      <WithdrawHeader BackPress={() => props?.navigation?.goBack()} HistoryPress={() => props?.navigation?.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory })} />
+      <AddressInput
+        value={address}
+        onChange={setAddress}
         onScan={handleScan}
-        onCopy={handleCopy} 
+        onCopy={handleCopy}
       />
       <View style={styles.spacer} />
-      <FeeInfo handleSubmit={()=>WithdrawConfirmationRef?.current?.expand()} fee={fee} amountReceived={amountReceived} />
-      <WithDrawConfirmationBottomSheet ref={WithdrawConfirmationRef}/>
+      <FeeInfo handleSubmit={() => WithdrawConfirmationRef?.current?.expand()} fee={fee} amountReceived={amountReceived} />
+      <WithDrawConfirmationBottomSheet props={props} ref={WithdrawConfirmationRef} />
     </AuthMainContainer>
   );
 };
