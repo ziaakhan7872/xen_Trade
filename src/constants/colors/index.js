@@ -48,5 +48,8 @@ export const colors = {
   buttonColor: "#011F25",
   cardColor3: "#011F25",
   grayColor2: "#939FA3",
-  yellow1: "#EAB44C"
+  yellow1: "#EAB44C",
+  gray2:"rgba(10, 30, 36, 1)",
+  gray3:"rgba(1, 39, 46, 1)",
+
 }

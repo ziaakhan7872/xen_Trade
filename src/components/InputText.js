@@ -6,7 +6,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import EvilIcons from "react-native-vector-icons/EvilIcons"
 
 
-const InputText = ({ handleRightIconPress, rightIcon, label, value, onChangeText, placeholder, secureTextEntry, style, placeholderTextColor, handleIconPress, isPasswordVisible, icon }) => {
+const InputText = ({ handleRightIconPress, rightIcon, label, value, onChangeText, placeholder, secureTextEntry, style, placeholderTextColor, handleIconPress, isPasswordVisible, icon, width = wp(80) }) => {
     return (
         <View style={[styles.container, style]}>
             {label && <Text style={styles.label}>{label}</Text>}
@@ -14,7 +14,7 @@ const InputText = ({ handleRightIconPress, rightIcon, label, value, onChangeText
             <View style={styles.inputWrapper}>
                 {/* Left Icon (Search) */}
                 {rightIcon && (
-                    <View  style={styles.leftIcon}>
+                    <View style={styles.leftIcon}>
                         <EvilIcons name="search" color={colors.mainColor} size={25} />
                     </View>
                 )}
@@ -27,10 +27,11 @@ const InputText = ({ handleRightIconPress, rightIcon, label, value, onChangeText
                     secureTextEntry={secureTextEntry}
                     style={[
                         styles.input,
-                        rightIcon && { paddingLeft: wp(8) } ,
+                        { paddingLeft: rightIcon ? wp(8) : 0, width: width }
                     ]}
                     placeholderTextColor={placeholderTextColor}
                 />
+
 
                 {/* Right Icon (Password Eye) */}
                 {icon && (
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     },
     input: {
         height: hp(6),
-        borderRadius: 12,
+        borderRadius: wp(3),
         paddingLeft: 10,
         fontSize: 14,
         fontWeight: "300",
@@ -83,9 +84,9 @@ const styles = StyleSheet.create({
 
     },
     leftIcon: {
-    position: "absolute",
-    left: 5,
-    zIndex: 1,
-    bottom:hp(2.3)
-  },
+        position: "absolute",
+        left: 5,
+        zIndex: 1,
+        bottom: hp(2.3)
+    },
 })

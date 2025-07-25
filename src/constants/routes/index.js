@@ -34,5 +34,6 @@ export const Routes = {
     referralHistory: "referralHistory",
     orderHistory: "orderHistory",
     TradeGraphScreen: "TradeGraphScreen",
+    WithDraw: "WithDraw",
 
 }
