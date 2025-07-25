@@ -18,9 +18,9 @@ const LoginForm = ({ signUp, Login }) => {
             <ResponsiveText style={styles.titleText}>LOG INTO XEN TRADE</ResponsiveText>
             <Spacer />
             <View>
-                <InputText label={"Email Address"} placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
+                <InputText paddingLeft={wp(3)} label={"Email Address"} placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
-                <InputText icon={true} label={"Password"} placeholder={"Enter your email password"} placeholderTextColor={colors.placeHolderTextColor} />
+                <InputText paddingLeft={wp(3)} icon={true} label={"Password"} placeholder={"Enter your  password"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
                 <ResponsiveText style={[styles.forgetPasswordStyling, { textDecorationLine: 'underline' }]}> Forgot Password?</ResponsiveText>
                 <Spacer />

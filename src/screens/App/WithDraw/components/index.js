@@ -35,7 +35,7 @@ export const WithdrawHeader = ({ BackPress, HistoryPress }) => {
     </View>
   );
 };
-export const AddressInput = ({ value, onChange, onCopy, onScan, onMax, error = true, errorText = "Insufficient balancee" }) => (
+export const AddressInput = ({ value, onChange, onCopy, onScan, onMax, error = false, errorText = "Insufficient balancee" }) => (
   <View style={{ alignItems: "center" }}>
     <View style={styles.inputContainer}>
       <ResponsiveText style={styles.label}>Address</ResponsiveText>
@@ -105,7 +105,7 @@ export const FeeInfo = ({ fee, amountReceived, handleSubmit, insufficentBalance 
   </View>
 );
 
-export const WithDrawConfirmationBottomSheet = ({ ref, disabled, address = "0x21505337aa3b5254eb154b", amount = "15.769112", fee = "0.15 USDT", received = "15.7" }) => {
+export const WithDrawConfirmationBottomSheet = ({ ref, address = "0x21505337aa3b5254eb154b", amount = "15.769112", fee = "0.15 USDT", received = "15.7" ,handleSubmit}) => {
 
 
   return (
@@ -113,12 +113,12 @@ export const WithDrawConfirmationBottomSheet = ({ ref, disabled, address = "0x21
       <View style={styles.confirmContainer}>
         <View style={styles.confirmHeader}>
           <ResponsiveText style={styles.confirmTitle}>WITHDRAWAL CONFIRMATION</ResponsiveText>
-          <TouchableOpacity onPress={() => sheetRef.current.close()}>
+          <TouchableOpacity onPress={() => ref?.current?.close()}>
             <ResponsiveText style={styles.confirmClose}>X</ResponsiveText>
           </TouchableOpacity>
         </View>
-        <Spacer/>
-        <View style={{paddingHorizontal:wp(5)}}>
+        <Spacer />
+        <View style={{ paddingHorizontal: wp(5) }}>
           <View style={styles.componentHeader}>
             <View style={styles.confirmItem}>
               <ResponsiveText style={styles.confirmLabel}>Network</ResponsiveText>
@@ -128,12 +128,15 @@ export const WithDrawConfirmationBottomSheet = ({ ref, disabled, address = "0x21
             <View style={styles.confirmItem}>
               <ResponsiveText style={styles.confirmLabel}>Address</ResponsiveText>
               <View style={styles.confirmAddressContainer}>
-                <ResponsiveText style={styles.confirmValue} numberOfLines={1}>{address}</ResponsiveText>
-                <TouchableOpacity >
+                <ResponsiveText style={[styles.confirmValue, { width: wp(50), overflow: 'hidden', textOverflow: 'ellipsis' }]} numberOfLines={1}>
+                  {address}
+                </ResponsiveText>
+                <TouchableOpacity>
                   <Image source={images.copyIcon} style={styles.confirmCopyIcon} />
                 </TouchableOpacity>
               </View>
             </View>
+
 
             <View style={styles.confirmItem}>
               <ResponsiveText style={styles.confirmLabel}>Withdrawal amount</ResponsiveText>
@@ -151,15 +154,24 @@ export const WithDrawConfirmationBottomSheet = ({ ref, disabled, address = "0x21
             </View>
           </View>
         </View>
-
-        <View style={styles.confirmWarning}>
-          <Image source={images.infoCircle} style={styles.confirmWarningIcon} />
-          <ResponsiveText style={styles.confirmWarningText}>Please make sure all information above is correct</ResponsiveText>
+        <Spacer />
+        <View style={{ paddingHorizontal: wp(5) }}>
+          <View style={[styles.componentHeader, { flexDirection: "row", paddingVertical: hp(2), paddingHorizontal: wp(3) }]}>
+            <Image source={images.infoCircle} style={styles.confirmWarningIcon} />
+            <ResponsiveText style={styles.confirmWarningText}>Please make sure all information above is correct</ResponsiveText>
+          </View>
         </View>
-
-        <TouchableOpacity style={styles.confirmButton} onPress={() => navigation.navigate(Routes.AppNavigator, { screen: Routes.WithdrawDetails })}>
-          <ResponsiveText style={styles.confirmButtonText}>Confirm</ResponsiveText>
-        </TouchableOpacity>
+        <Spacer />
+        <View style={{ alignItems: "center" }}>
+          <SimpleButton
+            text={"Submit"}
+            textColor={colors.black}
+            backgroundColor={colors.mainColor}
+            height={hp(6)}
+            buttonWidth={wp(80)}
+            onPress={handleSubmit}
+          />
+        </View>
 
       </View>
     </GorhomBottomSheet>
@@ -360,15 +372,15 @@ const styles = StyleSheet.create({
   confirmLabel: {
     color: colors.iconColor,
     fontSize: 14,
-    fontWeight:"400",
-    fontFamily:fontFamily.appTextRegular
+    fontWeight: "400",
+    fontFamily: fontFamily.appTextRegular
   },
   confirmValue: {
     color: colors.white,
     fontSize: 16,
     fontWeight: '500',
-    fontFamily:fontFamily.mainTextMedium,
-    
+    fontFamily: fontFamily.mainTextMedium,
+
   },
   confirmAddressContainer: {
     flexDirection: 'row',

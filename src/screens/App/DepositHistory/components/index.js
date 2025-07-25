@@ -478,13 +478,13 @@ import EvilIcons from "react-native-vector-icons/EvilIcons"
 import InputText from '../../../../components/InputText'
 
 
-export const DepositFilterHeader = ({ AllCryptoPress, DatePress, statusPress, SelectedSymbol,SelectedStatus }) => {
+export const DepositFilterHeader = ({ AllCryptoPress, DatePress, statusPress, SelectedSymbol, SelectedStatus }) => {
   return (
     <View style={styles.header}>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <TouchableOpacity onPress={AllCryptoPress} style={{ flexDirection: "row", alignItems: "center" }}>
         <ResponsiveText style={styles.text}>{SelectedSymbol}</ResponsiveText>
         <HorizontalSpacer width={wp(0.7)} />
-        <TouchableOpacity onPress={AllCryptoPress}>
+        <View >
           {/* {AllCryptoPress ?( */}
           <Entypo name="chevron-small-up" size={20} color={colors.iconColor} />
 
@@ -492,24 +492,24 @@ export const DepositFilterHeader = ({ AllCryptoPress, DatePress, statusPress, Se
           {/* <Entypo name="chevron-small-down" size={20} color={colors.iconColor} />
 
           )} */}
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
       <HorizontalSpacer width={wp(4)} />
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <TouchableOpacity onPress={DatePress} style={{ flexDirection: "row", alignItems: "center" }}>
         <ResponsiveText style={styles.text}>Date</ResponsiveText>
         <HorizontalSpacer width={wp(0.7)} />
-        <TouchableOpacity onPress={DatePress}>
+        <View >
           <Entypo name="chevron-small-down" size={20} color={colors.iconColor} />
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
       <HorizontalSpacer width={wp(4)} />
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <TouchableOpacity onPress={statusPress} style={{ flexDirection: "row", alignItems: "center" }}>
         <ResponsiveText style={styles.text}>{SelectedStatus}</ResponsiveText>
         <HorizontalSpacer width={wp(0.7)} />
-        <TouchableOpacity onPress={statusPress}>
+        <View >
           <Entypo name="chevron-small-down" size={20} color={colors.iconColor} />
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -553,7 +553,9 @@ const SearchBox = () => {
       <InputText
         placeholder={"Search..."}
         placeholderTextColor={colors.iconColor}
-        style={styles.InputTextStyle}
+        // style={styles.InputTextStyle}
+        width={wp(94)}
+        paddingLeft={wp(3)}
       />
       <View style={styles.leftIcon}>
         <EvilIcons name="search" color={colors.mainColor} size={25} />
@@ -561,7 +563,7 @@ const SearchBox = () => {
     </View>
   )
 }
-export const AllCryptoFilterBotomSheet = ({ ref,selectedStatus, closeBottomSheet, AllCryptoFilter, SelectedSymbol, setSelectedSymbol, statusPress}) => {
+export const AllCryptoFilterBotomSheet = ({ ref, selectedStatus, closeBottomSheet, AllCryptoFilter, SelectedSymbol, setSelectedSymbol, statusPress }) => {
   return (
     <GorhomBottomSheet sheetRef={ref}>
       <Spacer />
@@ -601,9 +603,9 @@ export const AllCryptoFilterBotomSheet = ({ ref,selectedStatus, closeBottomSheet
   )
 }
 
-export const StatusFilterBottomSheet=({ ref, closeBottomSheet, StatusData, SelectedSymbol, setSelectedStatus,selectedStatus,AllCryptoPress }) =>{
+export const StatusFilterBottomSheet = ({ ref, closeBottomSheet, StatusData, SelectedSymbol, setSelectedStatus, selectedStatus, AllCryptoPress }) => {
 
-  return(
+  return (
     <GorhomBottomSheet sheetRef={ref}>
       <Spacer />
       <View style={styles.BottomSheetView}>
@@ -719,8 +721,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: wp(4),
-    alignItems:"center",
-    height:hp(7)
+    alignItems: "center",
+    height: hp(7)
 
   },
   filterIcon: {

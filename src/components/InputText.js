@@ -6,7 +6,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import EvilIcons from "react-native-vector-icons/EvilIcons"
 
 
-const InputText = ({ handleRightIconPress, rightIcon, label, value, onChangeText, placeholder, secureTextEntry, style, placeholderTextColor, handleIconPress, isPasswordVisible, icon, width = wp(80) }) => {
+const InputText = ({ handleRightIconPress,paddingLeft=0, rightIcon, label, value, onChangeText, placeholder, secureTextEntry, style, placeholderTextColor, handleIconPress, isPasswordVisible, icon, width = wp(80) }) => {
     return (
         <View style={[styles.container, style]}>
             {label && <Text style={styles.label}>{label}</Text>}
@@ -27,7 +27,7 @@ const InputText = ({ handleRightIconPress, rightIcon, label, value, onChangeText
                     secureTextEntry={secureTextEntry}
                     style={[
                         styles.input,
-                        { paddingLeft: rightIcon ? wp(8) : 0, width: width }
+                        { paddingLeft: rightIcon ? wp(8) : paddingLeft, width: width }
                     ]}
                     placeholderTextColor={placeholderTextColor}
                 />
@@ -74,19 +74,19 @@ const styles = StyleSheet.create({
     },
     iconContainer: {
         position: "absolute",
-        right: 20,
-        bottom: 20
+        right: wp(5),
+        bottom: hp(2)
     },
     rightIconContainer: {
         position: "absolute",
-        left: 20,
-        bottom: 20
+        right: wp(5),
+        bottom: hp(2)
 
     },
     leftIcon: {
         position: "absolute",
         left: 5,
         zIndex: 1,
-        bottom: hp(2.3)
+        bottom: hp(1.8)
     },
 })

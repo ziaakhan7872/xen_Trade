@@ -30,7 +30,7 @@ const WalletHome = (props) => {
             styleView={styles.depositBtn}
           />
           <SimpleButton
-            onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.WithDraw })}
+            onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCryptoWithDraw })}
             btnStyles={{ fontFamily: fontFamily.appTextRegular }}
             text="Withdrawl"
             textColor={colors.black}
