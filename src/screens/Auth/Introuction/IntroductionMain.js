@@ -10,8 +10,7 @@ import images from '../../../images';
 import LinearGradient from 'react-native-linear-gradient';
 import { ResponsiveText } from '../../../components/ResponsiveText';
 
-const LoginMainScreen = () => {
-  const navigation = useNavigation();
+const LoginMainScreen = (props) => {
   console.log('Entered login Main Screen');
 
   return (
@@ -30,7 +29,7 @@ const LoginMainScreen = () => {
             textColor={colors.black}
             fontSize={14}
             fontWeight={500}
-            onPress={() => { navigation.navigate(Routes.LoginScreen); }}
+            onPress={() => { props?.navigation.navigate(Routes.LoginScreen); }}
             backgroundColor="#05BADA"
             text="Login"
 
@@ -46,7 +45,7 @@ const LoginMainScreen = () => {
               textColor={colors.white}
               fontSize={14}
               fontWeight={500}
-              onPress={() => { navigation.navigate(Routes.SignupScreen); }}
+              onPress={() => { props?.navigation.navigate(Routes.SignupScreen); }}
               backgroundColor={colors.transparent}
               text="Sign Up"
             />

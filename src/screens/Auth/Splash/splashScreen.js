@@ -1,58 +1,39 @@
-import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
-import images from '../../../images';
-import BootSplash from "react-native-bootsplash";
+import { useEffect } from 'react';
+import { Image, ImageBackground, StyleSheet, View } from 'react-native';
 import { Routes } from '../../../constants';
 import { hp, wp } from '../../../components/ResponsiveComponent';
-
+import images from '../../../images';
 
 const splashScreen = ({navigation}) => {
-  console.log('In splash screen')
-  //   useEffect(() => {
-  //   const init = async () => {
-  //     // …do multiple sync or async tasks
-  //   };
+  useEffect(() => {
+    const hideSplashScreen = async () => {
+      navigation.replace(Routes.IntroductMainScreem); 
+    };
 
-  //   init().finally(async () => {
-  //     await BootSplash.hide({ fade: true });
-  //     console.log("BootSplash has been hidden successfully");
-  //     navigation.replace(Routes.loginMainScreen)
-  //   }, 4000);
-  // }, []);
-  
-    useEffect(() => {
-    
-      navigation.replace(Routes.IntroductMainScreem);
-      setTimeout(() => {
-        BootSplash.hide();
-      }, 5000);
-
-    
-
-  }, [])
+    setTimeout(hideSplashScreen, 3000);
+  }, [navigation]);
 
   return (
     <View style={styles.mainContainer}>
-        <ImageBackground style={styles.splashBgContainer} source={images.splashScreenBg}>
-            <Image style={styles.splashImage} source={images.splashLogoImage} resizeMode='contain'></Image>
-        </ImageBackground>
+      <ImageBackground style={styles.splashBgContainer} source={images.splashScreenBg}>
+        <Image style={styles.splashImage} source={images.splashLogoImage} resizeMode='contain' />
+      </ImageBackground>
     </View>
-  )
+  );
 }
 
-export default splashScreen
+export default splashScreen;
 
 const styles = StyleSheet.create({
-    mainContainer: {
-        flex: 1,
-    },
-    splashBgContainer: {
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    splashImage: {
-        width: wp(50),
-        height: hp(100),
-        
-    }
-})
+  mainContainer: {
+    flex: 1,
+  },
+  splashBgContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  splashImage: {
+    width: wp(50),
+    height: hp(100),
+  },
+});

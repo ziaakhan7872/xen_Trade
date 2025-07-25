@@ -19,84 +19,84 @@ const MenuScreen = (props) => {
                 </TouchableOpacity>
                 <Spacer/>
                 <ScrollView contentContainerStyle={{flexGrow:1}}>
-                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                    <TouchableOpacity style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.CryptoWallet} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
                         <ResponsiveText style={style.label}>Crypto Wallet</ResponsiveText>
-                    </View>
+                    </TouchableOpacity>
                     <Spacer/>
-                     <View style={{flexDirection:"row",alignItems:"center"}}>
+                     <TouchableOpacity onPress={()=>props?.navigation.navigate(Routes.BottomNavigator, { screen: Routes.ExchangeScreen }) } style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.DrawerExchange} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
-                        <ResponsiveText onPress={()=>props?.navigation.navigate(Routes.BottomNavigator, { screen: Routes.ExchangeScreen }) } style={style.label}>Exchange</ResponsiveText>
-                    </View>
+                        <ResponsiveText  style={style.label}>Exchange</ResponsiveText>
+                    </TouchableOpacity>
                     <Spacer/>
-                       <View style={{flexDirection:"row",alignItems:"center"}}>
+                       <TouchableOpacity onPress={()=>props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.referrals }) } style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.addressSettingIcon} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
-                        <ResponsiveText onPress={()=>props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.referrals }) } style={style.label}>Referrals</ResponsiveText>
-                    </View>
+                        <ResponsiveText  style={style.label}>Referrals</ResponsiveText>
+                    </TouchableOpacity>
                     <Spacer/>
                     <Line height={hp(0.1)} width={wp(90)} />
                     <Spacer/>
-                     <View style={{flexDirection:"row",alignItems:"center"}}>
+                     <TouchableOpacity onPress={()=>props?.navigation.navigate(Routes.BottomNavigator, { screen: Routes.MarketScreen }) } style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.DrawerMarket} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
-                        <ResponsiveText onPress={()=>props?.navigation.navigate(Routes.BottomNavigator, { screen: Routes.MarketScreen }) } style={style.label}>Markets</ResponsiveText>
-                    </View>
+                        <ResponsiveText  style={style.label}>Markets</ResponsiveText>
+                    </TouchableOpacity>
                     <Spacer/>
-                     <View style={{flexDirection:"row",alignItems:"center"}}>
+                     <TouchableOpacity style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.Address} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
                         <ResponsiveText style={style.label}>Address Book</ResponsiveText>
-                    </View>
+                    </TouchableOpacity>
                     <Spacer/>
                      <Line height={hp(0.1)} width={wp(90)} />
                     <Spacer/>
-                     <View style={{flexDirection:"row",alignItems:"center"}}>
+                     <TouchableOpacity style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.profileSettingIcon} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
                         <ResponsiveText style={style.label}>Profile</ResponsiveText>
-                    </View>
+                    </TouchableOpacity>
                     <Spacer/>
-                     <View style={{flexDirection:"row",alignItems:"center"}}>
+                     <TouchableOpacity style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.securitySettingIcon} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
                         <ResponsiveText style={style.label}>Security</ResponsiveText>
-                    </View>
+                    </TouchableOpacity>
                      <Spacer/>
-                     <View style={{flexDirection:"row",alignItems:"center"}}>
+                     <TouchableOpacity style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.AccountVerify} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
                         <ResponsiveText style={style.label}>Verification</ResponsiveText>
-                    </View>
+                    </TouchableOpacity>
                      <Spacer/>
-                     <View style={{flexDirection:"row",alignItems:"center"}}>
+                     <TouchableOpacity style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.emailNotificationSettingIcon} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
                         <ResponsiveText style={style.label}>Notifications</ResponsiveText>
-                    </View>
+                    </TouchableOpacity>
                      <Spacer/>
-                     <View style={{flexDirection:"row",alignItems:"center"}}>
+                     <TouchableOpacity style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.systemSettingIcon} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
                         <ResponsiveText style={style.label}>System Settings</ResponsiveText>
-                    </View>
+                    </TouchableOpacity>
                      <Spacer/>
                       <Spacer/>
                      <Line height={hp(0.1)} width={wp(90)} />
                     <Spacer/>
-                     <View style={{flexDirection:"row",alignItems:"center"}}>
+                     <TouchableOpacity style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.Contact} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
                         <ResponsiveText style={style.label}>Contact Support</ResponsiveText>
-                    </View>
+                    </TouchableOpacity>
                     <Spacer/>
-                     <View style={{flexDirection:"row",alignItems:"center"}}>
+                     <TouchableOpacity style={{flexDirection:"row",alignItems:"center"}}>
                         <Image style={style.imageStyling} source={images.Logout} resizeMode='contain'/>
                         <HorizontalSpacer width={wp(3)}/>
                         <ResponsiveText style={style.label}>Log Out</ResponsiveText>
-                    </View>
+                    </TouchableOpacity>
                      <Spacer/>
                 </ScrollView>
             </View>
