@@ -23,11 +23,11 @@ const SignUpForm = ({ Login, isChecked, handleCheckboxToggle, handleEmailVerific
             <ResponsiveText style={styles.titleText}>WELCOME TO XEN TRADE</ResponsiveText>
             <Spacer />
             <View>
-                <InputText label={"Email Address"} placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
+                <InputText paddingLeft={wp(3)} label={"Email Address"} placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
-                <InputText icon={true} label={"Password"} placeholder={"Enter your  password"} placeholderTextColor={colors.placeHolderTextColor} />
+                <InputText  paddingLeft={wp(3)} icon={true} label={"Password"} placeholder={"Enter your  password"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
-                <InputText icon={true} label={"Confirm password"} placeholder={"Confirm your password"} placeholderTextColor={colors.placeHolderTextColor} />
+                <InputText  paddingLeft={wp(3)} icon={true} label={"Confirm password"} placeholder={"Confirm your password"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
 
                 <View style={styles.checkboxContainer}>

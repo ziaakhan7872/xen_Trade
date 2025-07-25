@@ -276,6 +276,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: fontFamily.mainTextMedium,
     color: colors.white,
+    fontWeight:"500"
   },
   hideBalances: {
     paddingLeft: wp(1.5),

@@ -34,7 +34,9 @@ export const SelectCryptoSearchBox = () => {
       <InputText
         placeholder={"Search..."}
         placeholderTextColor={colors.iconColor}
-        style={styles.InputTextStyle}
+        // style={styles.InputTextStyle}
+        width={wp(92)}
+        paddingLeft={wp(3)}
       />
       <View style={styles.leftIcon}>
         <EvilIcons name="search" color={colors.mainColor} size={25} />

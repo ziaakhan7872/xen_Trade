@@ -9,7 +9,7 @@ import { ResponsiveText } from '../../../components/ResponsiveText'
 import EvilIcons from "react-native-vector-icons/EvilIcons"
 import { RenderMarketHeader, RenderMarketList } from './Component/Index'
 import Line from '../../../components/Liner'
-import { hp } from '../../../components/ResponsiveComponent'
+import { hp, wp } from '../../../components/ResponsiveComponent'
 import InputText from '../../../components/InputText'
 
 const MarketScreen = (props) => {
@@ -25,7 +25,14 @@ const MarketScreen = (props) => {
           <ResponsiveText style={style.searchText}>Search...</ResponsiveText>
         </TouchableOpacity> */}
 
-        <InputText style={style.inputText} rightIcon={true} placeholderTextColor={colors.iconColor} placeholder={"Search.."} />
+        <InputText 
+        // style={style.inputText} 
+        rightIcon={true} 
+        placeholderTextColor={colors.iconColor} 
+        placeholder={"Search.."} 
+        width={wp(92)}
+        
+        />
 
         <Spacer />
         <RenderMarketHeader />

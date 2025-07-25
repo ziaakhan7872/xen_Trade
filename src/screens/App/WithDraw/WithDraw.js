@@ -7,6 +7,7 @@ import { AddressInput, AmountInput, FeeInfo, SubmitButton, WithDrawConfirmationB
 import { Routes } from '../../../constants';
 import Spacer from '../../../components/Spacer';
 import { UseWidthDraw } from './Hooks';
+import { Portal } from 'react-native-portalize';
 
 const WithDraw = (props) => {
   const [address, setAddress] = useState('');
@@ -71,6 +72,7 @@ const WithDraw = (props) => {
     <AuthMainContainer>
       <Spacer />
       <WithdrawHeader BackPress={() => props?.navigation?.goBack()} HistoryPress={() => props?.navigation?.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory })} />
+      <Spacer />
       <AddressInput
         value={address}
         onChange={setAddress}
@@ -79,7 +81,9 @@ const WithDraw = (props) => {
       />
       <View style={styles.spacer} />
       <FeeInfo handleSubmit={() => WithdrawConfirmationRef?.current?.expand()} fee={fee} amountReceived={amountReceived} />
-      <WithDrawConfirmationBottomSheet props={props} ref={WithdrawConfirmationRef} />
+      <Portal>
+        <WithDrawConfirmationBottomSheet ref={WithdrawConfirmationRef} />
+      </Portal>
     </AuthMainContainer>
   );
 };
