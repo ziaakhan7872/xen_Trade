@@ -1,27 +1,53 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useRef } from 'react'
+import { Alert, StyleSheet, Text, View } from 'react-native'
+import React, { useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { EmailVerificationApi } from '../../../../constants/Api/Index'
 
-const useEmalVerification = () => {
-    const emailVerificationBottomSheetRef = useRef(null)
-    const navigation = useNavigation()
+const useEmalVerification = (props) => {
+  const emailVerificationBottomSheetRef = useRef(null)
+  const userData = props?.route?.params?.userData || {}
+  const [otpCode, setOtpCode] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
+  console.log("User data in EmailVerificationScreen:", userData);
 
-    const handleOpenVerification=()=>{
-        console.log("open")
-        emailVerificationBottomSheetRef?.current?.expand()
+  const verifyEmail = async () => {
+    try {
+      if (!otpCode) {
+        console.error("OTP code is required");
+        return;
+      }
+      const response = await EmailVerificationApi({ emailOtpCode: otpCode, userId: userData?.id });
+      console.log("Email verification response:", response);
+      Alert.alert(response?.message)
+      emailVerificationBottomSheetRef?.current?.expand()
+
+
+    } catch (error) {
+      console.error("Error during email verification:", error);
+      setErrorMessage("An error occurred during email verification. Please try again.");
+
     }
-    const handleCloseVerification=()=>{
-        console.log("open")
-        emailVerificationBottomSheetRef?.current?.close()
-    }
-    const handeGoBack = ()=>{
-        navigation.goBack()
-    }
+  }
+
+
+  const handleOpenVerification = () => {
+    console.log("open")
+  }
+  const handleCloseVerification = () => {
+    console.log("open")
+    emailVerificationBottomSheetRef?.current?.close()
+  }
+  const handeGoBack = () => {
+    props?.navigation?.goBack()
+  }
   return {
     emailVerificationBottomSheetRef,
     handleOpenVerification,
     handleCloseVerification,
-    handeGoBack
+    handeGoBack,
+    setOtpCode, otpCode,
+    verifyEmail,
+    errorMessage, setErrorMessage
 
   }
 }

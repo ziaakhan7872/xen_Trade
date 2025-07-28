@@ -13,7 +13,17 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import { ResponsiveText } from '../../../../components/ResponsiveText';
 
 
-const SignUpForm = ({ Login, isChecked, handleCheckboxToggle, handleEmailVerification }) => {
+const SignUpForm = ({
+    Login, isChecked, handleCheckboxToggle, handleEmailVerification,
+    email, setEmail,
+    password, setPassword,
+    confirmPassword, setConfirmPassword,
+    errorMessage,
+    phoneNumber, setPhoneNumber,
+    referralCode, setReferralCode,
+    isPasswordVisible, setIsPasswordVisible,
+    isConfirmPasswordVisible, setIsConfirmPasswordVisible
+}) => {
 
 
     return (
@@ -23,11 +33,11 @@ const SignUpForm = ({ Login, isChecked, handleCheckboxToggle, handleEmailVerific
             <ResponsiveText style={styles.titleText}>WELCOME TO XEN TRADE</ResponsiveText>
             <Spacer />
             <View>
-                <InputText paddingLeft={wp(3)} label={"Email Address"} placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
+                <InputText paddingLeft={wp(3)} value={email} onChangeText={setEmail} label={"Email Address"} placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
-                <InputText  paddingLeft={wp(3)} icon={true} label={"Password"} placeholder={"Enter your  password"} placeholderTextColor={colors.placeHolderTextColor} />
+                <InputText isPasswordVisible={!isPasswordVisible} secureTextEntry={!isPasswordVisible} handleIconPress={() => setIsPasswordVisible(!isPasswordVisible)} paddingLeft={wp(3)} value={password} onChangeText={setPassword} icon={true} label={"Password"} placeholder={"Enter your  password"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
-                <InputText  paddingLeft={wp(3)} icon={true} label={"Confirm password"} placeholder={"Confirm your password"} placeholderTextColor={colors.placeHolderTextColor} />
+                <InputText isPasswordVisible={!isConfirmPasswordVisible} secureTextEntry={!isConfirmPasswordVisible} handleIconPress={() => setIsConfirmPasswordVisible(!isConfirmPasswordVisible)} paddingLeft={wp(3)} value={confirmPassword} onChangeText={setConfirmPassword} icon={true} label={"Confirm password"} placeholder={"Confirm your password"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
 
                 <View style={styles.checkboxContainer}>
@@ -45,7 +55,19 @@ const SignUpForm = ({ Login, isChecked, handleCheckboxToggle, handleEmailVerific
                 </View>
 
                 <Spacer />
-                <SimpleButton onPress={handleEmailVerification} textFontSize={14} text={"Sign Up"} textColor={colors.buttonSigninColor} backgroundColor={colors.authButtonColor} buttonWidth={wp(80)} />
+                {errorMessage && (
+                    <>
+                        <ResponsiveText style={{ color: colors.red, textAlign: 'center' }}>{errorMessage}</ResponsiveText>
+                        <Spacer />
+                    </>
+                )}
+                <SimpleButton
+                    disabled={!email || !password || !confirmPassword  || !isChecked}
+                    onPress={handleEmailVerification}
+                    textFontSize={14} text={"Sign Up"}
+                    textColor={colors.buttonSigninColor}
+                    backgroundColor={(!email || !password || !confirmPassword  || !isChecked) ? colors.authButtonColor : colors.mainColor}
+                    buttonWidth={wp(80)} />
                 <Spacer />
                 <ResponsiveText style={styles.signInWithStyle}>Or sign up with</ResponsiveText>
                 <Spacer />

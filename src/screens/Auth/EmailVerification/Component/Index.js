@@ -12,7 +12,7 @@ import Line from '../../../../components/Liner'
 import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent';
 
 
-export const EmailVerificationForm = ({ submit }) => {
+export const EmailVerificationForm = ({ submit,setOtpCode,errorMessage }) => {
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode="contain" style={styles.logoImage} />
@@ -26,13 +26,20 @@ export const EmailVerificationForm = ({ submit }) => {
             <OtpInput
                 focusColor={colors.mainColor}
                 numberOfDigits={6}
-                onTextChange={(text) => console.log(text)}
+                onTextChange={(text) => setOtpCode(text)}
                 theme={{
                     pinCodeContainerStyle: styles.otpInputStyle,
                     pinCodeTextStyle: styles.pinStyle
                 }}
             />
             <Spacer />
+            {errorMessage
+                && (
+                    <>
+                        <ResponsiveText style={{ color: colors.red, textAlign: 'center' }}>{errorMessage}</ResponsiveText>
+                        <Spacer />
+                    </>
+                )}
             <ResponsiveText style={styles.resendCode}>Resend Code</ResponsiveText>
             <Spacer />
             <SimpleButton onPress={submit} text={"Submit"} textColor={colors.black} backgroundColor={colors.mainColor} buttonWidth={wp(80)} />
