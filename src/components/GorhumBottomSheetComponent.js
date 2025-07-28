@@ -29,6 +29,9 @@ export const GorhomBottomSheet = ({ sheetRef, onCloseRequest, children }) => {
         android_keyboardInputMode="adjustResize"
         backgroundStyle={{ backgroundColor: 'transparent' }}
         handleIndicatorStyle={{ display: 'none' }}
+        animationConfigs={{
+    duration: 500, // default is ~250ms — increase for slower
+  }}
       // enableContentPanningGesture={false}
       // enableHandlePanningGesture={false}
 
