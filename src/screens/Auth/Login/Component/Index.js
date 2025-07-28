@@ -26,7 +26,7 @@ const LoginForm = ({ signUp, Login,email,setEmail,password,setPassword,passwordV
                 <Spacer height={hp(1)} />
                 <ResponsiveText style={[styles.forgetPasswordStyling, { textDecorationLine: 'underline' }]}> Forgot Password?</ResponsiveText>
                 <Spacer />
-                <SimpleButton onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={colors.authButtonColor} buttonWidth={wp(80)} />
+                <SimpleButton disabled={(!email || !password)} onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={(!email || !password) ? colors.authButtonColor : colors.mainColor} buttonWidth={wp(80)} />
                 <Spacer />
                 <ResponsiveText style={styles.signInWithStyle}>Or sign in with</ResponsiveText>
                 <Spacer />

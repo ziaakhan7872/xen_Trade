@@ -8,7 +8,11 @@ import { Routes } from '../../../constants'
 import { UseLogin } from './Hooks/Index'
 
 const LoginScreen = (props) => {
-  const {email,setEmail,password,setPassword,passwordVisible,setPasswordVisible}= UseLogin(props)
+  const {
+    email,setEmail,
+    password,setPassword,
+    passwordVisible,setPasswordVisible,
+    handleLogin}= UseLogin(props)
   return (
     <AuthMainContainer>
       <View style={style.container}>
@@ -16,7 +20,7 @@ const LoginScreen = (props) => {
         passwordVisible={passwordVisible} setPasswordVisible={setPasswordVisible}
         email={email} setEmail={setEmail} 
         password={password} setPassword={setPassword} 
-        Login={()=>props?.navigation.navigate(Routes.BottomNavigator)} 
+        Login={handleLogin} 
         signUp={()=>props?.navigation.navigate(Routes.SignupScreen)}/>
       </View>
 
