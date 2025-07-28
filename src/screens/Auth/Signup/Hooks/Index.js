@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Routes } from '../../../../constants';
-<<<<<<< Updated upstream
 import { SignUpApi } from '../../../../constants/Api/Index';
 
 const UseSignUp = (props) => {
@@ -13,15 +12,6 @@ const UseSignUp = (props) => {
   const [referralCode, setReferralCode] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
-=======
-// import { useDispatch } from 'react-redux';
-// import { setUser } from '../../../../redux/slices/userSlice';
-
-const UseSignUp = (props) => {
-  // const dispatch = useDispatch();
-
-  const [isChecked, setIsChecked] = useState(false);
->>>>>>> Stashed changes
 
   const handleCheckboxToggle = () => {
     setIsChecked(prevState => !prevState);
@@ -29,7 +19,6 @@ const UseSignUp = (props) => {
   const handleSignIn = () => {
     props?.navigation.navigate(Routes.LoginScreen)
   }
-<<<<<<< Updated upstream
   const handleEmailVerification = async () => {
     if (!email || !password) {
       setErrorMessage("Please fill in all required fields.");
@@ -60,20 +49,6 @@ console.log("Navigating to EmailVerificationScreen with userData:", SignUp);
 
     }
   }
-=======
-  const handleEmailVerification = () => {
-    props?.navigation.navigate(Routes.EmailVerificationScreen)
-  }
-  // const handleEmailVerification = () => {
-  //   const userData = {
-  //     name: 'John Doe', // replace with actual input data
-  //     email: 'john@example.com'
-  //   };
-  //   dispatch(setUser(userData));
-  //   console.log('User signed up:', userData);
-  // };
-
->>>>>>> Stashed changes
 
 
   return {
