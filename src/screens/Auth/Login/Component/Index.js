@@ -9,6 +9,8 @@ import { SimpleButton } from '../../../../components/SimpleButton'
 import RowButton from '../../../../components/RowButton'
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { ResponsiveText } from '../../../../components/ResponsiveText';
+// import { useDispatch, useSelector } from 'react-redux'
+// import { setUser, logoutUser } from '../../../../redux/slices/userSlice'
 
 const LoginForm = ({ signUp, Login,email,setEmail,password,setPassword,passwordVisible,setPasswordVisible }) => {
     return (

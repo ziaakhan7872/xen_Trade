@@ -11,6 +11,8 @@ import Icon from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/Ionicons';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { ResponsiveText } from '../../../../components/ResponsiveText';
+// import { useDispatch, useSelector } from 'react-redux'
+// import { setUser, logoutUser } from '../../../../redux/slices/userSlice';
 
 
 const SignUpForm = ({
@@ -25,7 +27,6 @@ const SignUpForm = ({
     isConfirmPasswordVisible, setIsConfirmPasswordVisible
 }) => {
 
-
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode="contain" style={styles.logoImage} />
@@ -35,9 +36,15 @@ const SignUpForm = ({
             <View>
                 <InputText paddingLeft={wp(3)} value={email} onChangeText={setEmail} label={"Email Address"} placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
+<<<<<<< Updated upstream
                 <InputText isPasswordVisible={!isPasswordVisible} secureTextEntry={!isPasswordVisible} handleIconPress={() => setIsPasswordVisible(!isPasswordVisible)} paddingLeft={wp(3)} value={password} onChangeText={setPassword} icon={true} label={"Password"} placeholder={"Enter your  password"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
                 <InputText isPasswordVisible={!isConfirmPasswordVisible} secureTextEntry={!isConfirmPasswordVisible} handleIconPress={() => setIsConfirmPasswordVisible(!isConfirmPasswordVisible)} paddingLeft={wp(3)} value={confirmPassword} onChangeText={setConfirmPassword} icon={true} label={"Confirm password"} placeholder={"Confirm your password"} placeholderTextColor={colors.placeHolderTextColor} />
+=======
+                <InputText paddingLeft={wp(3)} icon={true} label={"Password"} placeholder={"Enter your  password"} placeholderTextColor={colors.placeHolderTextColor} />
+                <Spacer height={hp(1)} />
+                <InputText paddingLeft={wp(3)} icon={true} label={"Confirm password"} placeholder={"Confirm your password"} placeholderTextColor={colors.placeHolderTextColor} />
+>>>>>>> Stashed changes
                 <Spacer height={hp(1)} />
 
                 <View style={styles.checkboxContainer}>
