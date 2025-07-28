@@ -17,7 +17,11 @@
     "@react-navigation/bottom-tabs": "^7.4.2",
     "@react-navigation/native": "^7.1.14",
     "@react-navigation/native-stack": "^7.3.21",
+<<<<<<< Updated upstream
     "axios": "^1.11.0",
+=======
+    "@reduxjs/toolkit": "^2.8.2",
+>>>>>>> Stashed changes
     "base-64": "^1.0.0",
     "buffer": "^6.0.3",
     "d3-shape": "^3.2.0",

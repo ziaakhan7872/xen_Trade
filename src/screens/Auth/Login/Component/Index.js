@@ -9,8 +9,17 @@ import { SimpleButton } from '../../../../components/SimpleButton'
 import RowButton from '../../../../components/RowButton'
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { ResponsiveText } from '../../../../components/ResponsiveText';
+// import { useDispatch, useSelector } from 'react-redux'
+// import { setUser, logoutUser } from '../../../../redux/slices/userSlice'
 
 const LoginForm = ({ signUp, Login }) => {
+    // const user = useSelector((state) => state.user);
+
+    // const handleLogin = () => {
+    //     console.log('User from Redux:', user);
+    //     () => props?.navigation.navigate(Routes.BottomNavigator)
+    // };
+
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode='contain' style={styles.logoImage} />

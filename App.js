@@ -8,9 +8,10 @@ import { LogBox, View } from 'react-native';
 import Navigation from './src/navigation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Host } from 'react-native-portalize';
-
 import { enableScreens } from 'react-native-screens';
 import { colors } from './src/constants';
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
 enableScreens(false); // Disable optimized screens
 
 const App = () => {
@@ -19,15 +20,17 @@ const App = () => {
     LogBox.ignoreAllLogs();
 
     setTimeout(() => {
-      BootSplash.hide({ fade: true }); 
-    }, 5000); 
+      BootSplash.hide({ fade: true });
+    }, 5000);
 
   }, []);
 
   return (
-    <GestureHandlerRootView style={{ flex: 1,backgroundColor:colors.black }}>
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: colors.black }}>
       <Host>
-        <Navigation />
+        <Provider store={store}>
+          <Navigation />
+        </Provider>
       </Host>
     </GestureHandlerRootView>
   );
