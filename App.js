@@ -20,7 +20,7 @@ const App = () => {
 
     setTimeout(() => {
       BootSplash.hide({ fade: true }); 
-    }, 2000); 
+    }, 5000); 
 
   }, []);
 
