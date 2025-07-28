@@ -8,8 +8,13 @@ export const SignUpApi = async({email,password,phoneNo,referredByCode})=>{
 }
 
 export const EmailVerificationApi = async({emailOtpCode,userId})=>{
-    console.log("EmailVerificationApi called with:", {emailOtpCode, userId})
     return axios.post(`${AUTH_BASE_URL}/verifications/otp-code`, {emailOtpCode:emailOtpCode,userId:userId},{
+    headers:getHeaders()
+    })
+}
+
+export const LoginApi = async({email,password})=>{
+    return axios.post(`${AUTH_BASE_URL}/auth/Login`, {email:email,password:password},{
     headers:getHeaders()
     })
 }

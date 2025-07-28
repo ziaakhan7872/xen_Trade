@@ -5,12 +5,19 @@ import { style } from './Style'
 import LoginForm from './Component/Index'
 import { useNavigation } from '@react-navigation/native'
 import { Routes } from '../../../constants'
+import { UseLogin } from './Hooks/Index'
 
 const LoginScreen = (props) => {
+  const {email,setEmail,password,setPassword,passwordVisible,setPasswordVisible}= UseLogin(props)
   return (
     <AuthMainContainer>
       <View style={style.container}>
-        <LoginForm Login={()=>props?.navigation.navigate(Routes.BottomNavigator)} signUp={()=>props?.navigation.navigate(Routes.SignupScreen)}/>
+        <LoginForm 
+        passwordVisible={passwordVisible} setPasswordVisible={setPasswordVisible}
+        email={email} setEmail={setEmail} 
+        password={password} setPassword={setPassword} 
+        Login={()=>props?.navigation.navigate(Routes.BottomNavigator)} 
+        signUp={()=>props?.navigation.navigate(Routes.SignupScreen)}/>
       </View>
 
     </AuthMainContainer>

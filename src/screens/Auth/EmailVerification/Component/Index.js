@@ -82,7 +82,7 @@ export const EmailVerificationBottomSheet = ({ bottomSheetRef, closeBottomSheet 
                 <Spacer height={hp(0.5)} />
                 <ResponsiveText style={styles.bottomSheetTextInfo}>Complete KYC account verification to enable transfers</ResponsiveText>
                 <Spacer />
-                <SimpleButton text={"Complete Verification"} textColor={colors.white} height={hp(6)} buttonWidth={wp(80)} backgroundColor={colors.buttonSigninColor} />
+                <SimpleButton  text={"Complete Verification"} textColor={colors.white} height={hp(6)} buttonWidth={wp(80)} backgroundColor={colors.buttonSigninColor} />
             </View>
         </GorhomBottomSheet>
     )
