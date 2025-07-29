@@ -19,7 +19,6 @@ export const EmailVerificationApi = async({emailOtpCode,userId})=>{
     })
 }
 export const LoginVerificationApi = async({emailOtpCode,userId})=>{
-    console.log("LoginVerificationApi called with:", {emailOtpCode, userId})
     return axios.post(`${AUTH_BASE_URL}/verifications/login-otp`, {emailOtpCode:emailOtpCode,rememberMe:true,userId:userId},{
     headers:getHeaders()
     })
@@ -37,5 +36,13 @@ export const LoginApi = async({email,password})=>{
 export const GetMarketListApi = async() => {
     return axios.get(`${ASSETS_MANAGER_BASE_URL}/markets`, {
         headers: getHeaders(token)
+    })
+}
+
+
+export const getPairApi = async(page,limit) => {
+    return axios.get(`${ASSETS_MANAGER_BASE_URL}/pairs`, {
+        headers: getHeaders(token),
+        params: {page:page, limit:limit ,isActive:true}
     })
 }

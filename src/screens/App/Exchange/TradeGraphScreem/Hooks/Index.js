@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
+import { Routes } from "../../../../../constants";
 
-const UseTradeGraphScreen = () => {
+const UseTradeGraphScreen = (props) => {
+   const { selectedData } = props?.route?.params || {}
   const favouriteBottomSheetRef = useRef(null)
   const [starPress, setStarPress] = useState(false);
   const [orderBookHeaderPress, setOrderBookHeaderPress] = useState("orderbook")
@@ -51,12 +53,24 @@ const UseTradeGraphScreen = () => {
     return () => clearInterval(interval);
   }, [selectRandomData]);
 
+  const BuyPress = () => {
+    props?.navigation?.navigate(Routes.BottomNavigator,{ screen: Routes.ExchangeScreen, params: { selectedData ,buySellButtonProps:"buy"} });
+    console.log("Buy button pressed");
+  };
+   const SellPress = () => {
+    props?.navigation?.navigate(Routes.BottomNavigator,{ screen: Routes.ExchangeScreen, params: { selectedData ,buySellButtonProps:"sell"} });
+    console.log("Sell button pressed");
+  };
+
+
   return {
     starPress, setStarPress,
     candleChartData, setCandleChartData,
     minPrice, maxPrice,
+    BuyPress,SellPress,
     orderBookHeaderPress, setOrderBookHeaderPress,
-    favouriteBottomSheetRef
+    favouriteBottomSheetRef,
+    selectedData
   };
 };
 

@@ -17,19 +17,27 @@ import { ExchangeMainContainer } from '../../../../components/ExchangeMainContai
 import { Routes } from '../../../../constants'
 
 const Exchangescreen = (props) => {
-  const { buySellButton, setBuySellButton, buyerSlider, setBuyerSlider, sellSlider, setSelSlider, currentOrderHistoryPress, setCurrentOrderHistoryPress, currentOrder, isCurrentSymbol, setIsCurrentSymbol, tradngBottomSheetRef, tradingType, setTradingType, favouriteBottomSheetRef } = UseExchange(props)
+  const { 
+    buySellButton, setBuySellButton, 
+    buyerSlider, setBuyerSlider, sellSlider, setSelSlider, 
+    currentOrderHistoryPress, setCurrentOrderHistoryPress, 
+    currentOrder, 
+    isCurrentSymbol, setIsCurrentSymbol, 
+    tradngBottomSheetRef, 
+    tradingType, setTradingType, 
+    favouriteBottomSheetRef ,selectedData} = UseExchange(props)
   return (
     <ExchangeMainContainer>
       <View style={style.container}>
-        <ExchangeHeader onPressTradeGraph={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen })} onpress={() => favouriteBottomSheetRef?.current?.expand()} />
+        <ExchangeHeader marketData={selectedData} onPressTradeGraph={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen })} onpress={() => favouriteBottomSheetRef?.current?.expand()} />
         <Spacer />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={style.formandOrderBookView}>
             <View style={{ flex: 1, marginRight: wp(2), justifyContent: 'space-between' }}>
-              <BuySellRowButton buySellButton={buySellButton} setBuySellButton={setBuySellButton} />
+              <BuySellRowButton  buySellButton={buySellButton} setBuySellButton={setBuySellButton} />
               <Spacer height={hp(1)} />
               {buySellButton === "buy" ? (
-                <BuyForm tradingType={tradingType} onPressTradingType={() => tradngBottomSheetRef?.current?.expand()} value={buyerSlider} setValue={setBuyerSlider} />
+                <BuyForm marketData={selectedData} tradingType={tradingType} onPressTradingType={() => tradngBottomSheetRef?.current?.expand()} value={buyerSlider} setValue={setBuyerSlider} />
               ) : (
                 <SellForm tradingType={tradingType} onPressTradingType={() => tradngBottomSheetRef?.current?.expand()} value={sellSlider} setValue={setSelSlider} />
               )}

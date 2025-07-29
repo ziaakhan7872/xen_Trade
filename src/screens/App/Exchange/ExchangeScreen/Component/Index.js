@@ -18,11 +18,11 @@ import { hp, wp } from '../../../../../components/ResponsiveComponent'
 import Line from '../../../../../components/Liner'
 import { RenderFavouriteCoinList } from '../../Component/Index'
 
-export const ExchangeHeader = ({ onpress, onPressTradeGraph }) => {
+export const ExchangeHeader = ({ onpress, onPressTradeGraph ,marketData}) => {
     return (
         <View style={styles.header}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <ResponsiveText style={styles.headerText}>BTC/USDT</ResponsiveText>
+                <ResponsiveText style={styles.headerText}>{marketData?.symbol}</ResponsiveText>
                 <HorizontalSpacer />
                 <TouchableOpacity onPress={onpress}>
                     <Entypo name="chevron-down" size={15} color={colors.white} />
@@ -50,7 +50,7 @@ export const BuySellRowButton = ({ buySellButton, setBuySellButton }) => {
     )
 }
 
-export const BuyForm = ({ setValue, value, onPressTradingType, tradingType }) => {
+export const BuyForm = ({ setValue, value, onPressTradingType, tradingType,marketData }) => {
     const marks = [0, 25, 50, 75, 100];
 
     return (
@@ -122,7 +122,7 @@ export const BuyForm = ({ setValue, value, onPressTradingType, tradingType }) =>
                 <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.000342 USDT</ResponsiveText>
             </View>
             <Spacer />
-            <SimpleButton buttonWidth={wp(43)} backgroundColor={colors.green} height={hp(4.5)} textColor={colors.white} text={"Buy"} />
+            <SimpleButton buttonWidth={wp(43)} backgroundColor={colors.green} height={hp(4.5)} textColor={colors.white} />
 
         </>
 

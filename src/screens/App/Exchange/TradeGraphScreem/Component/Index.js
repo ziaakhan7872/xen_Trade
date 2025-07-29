@@ -25,7 +25,7 @@ import { RenderFavouriteCoinList } from '../../Component/Index'
 const { width } = Dimensions.get('window');
 
 
-export const TradeHeader = ({ onpress, onPressTradeGraph, X = 10, starPress, setStarPress, onBackPress }) => {
+export const TradeHeader = ({ onpress, onPressTradeGraph, X = 10, starPress, setStarPress, onBackPress, marketData }) => {
     return (
         <View style={styles.header}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -33,7 +33,7 @@ export const TradeHeader = ({ onpress, onPressTradeGraph, X = 10, starPress, set
                     <Entypo name="chevron-left" size={15} color={colors.white} />
                 </TouchableOpacity>
                 <HorizontalSpacer />
-                <ResponsiveText style={styles.headerText}>BTC/USDT</ResponsiveText>
+                <ResponsiveText style={styles.headerText}>{marketData?.symbol}</ResponsiveText>
                 <HorizontalSpacer />
                 <View style={styles.XView}>
                     <ResponsiveText style={styles.text1}>{X}x</ResponsiveText>
@@ -415,13 +415,13 @@ export const FlatlistValues = ({ data = [], textColor }) => {
     );
 };
 
-export const BuySellButton = () => {
+export const BuySellButton = ({ onBuyPress, onSellPress }) => {
     return (
         <View style={{ width: wp(80), alignItems: "center", justifyContent: "space-between", paddingHorizontal: wp(0), flexDirection: "row" }}>
-            <TouchableOpacity style={{ width: wp(40), backgroundColor: colors.green, borderRadius: wp(25), paddingVertical: hp(1.5), alignItems: "center" }}>
+            <TouchableOpacity onPress={onBuyPress} style={{ width: wp(40), backgroundColor: colors.green, borderRadius: wp(25), paddingVertical: hp(1.5), alignItems: "center" }}>
                 <Text style={{ color: "#fff", fontWeight: "600" }}>Buy</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{ width: wp(40), backgroundColor: colors.red, borderRadius: wp(25), paddingVertical: hp(1.5), alignItems: "center", marginLeft: wp(2) }}>
+            <TouchableOpacity onPress={onSellPress} style={{ width: wp(40), backgroundColor: colors.red, borderRadius: wp(25), paddingVertical: hp(1.5), alignItems: "center", marginLeft: wp(2) }}>
                 <Text style={{ color: "#fff", fontWeight: "600" }}>Sell</Text>
             </TouchableOpacity>
 

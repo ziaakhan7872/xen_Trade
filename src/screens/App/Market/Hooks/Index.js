@@ -1,27 +1,35 @@
 import { useEffect, useState } from "react";
-import { GetMarketListApi } from "../../../../constants/Api/Index";
+import { GetMarketListApi, getPairApi } from "../../../../constants/Api/Index";
+import { Routes } from "../../../../constants";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-export const UseMarket = () => {
-    const [marketList,setMarketList] = useState([]);
+export const UseMarket = (props) => {
+    const [marketList, setMarketList] = useState([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         getMarketData();
-    },[])
+    }, [])
 
-    const getMarketData = async()=>{
+    const MarketPress = async(item) => {
+        await AsyncStorage.setItem("selectedData", JSON.stringify(item))
+        props?.navigation.navigate(Routes.AppNavigator,{ screen: Routes.TradeGraphScreen, params: { selectedData: item } })
+    }
+
+    const getMarketData = async () => {
         try {
-            const response = await GetMarketListApi();
+            const response = await getPairApi(1,20);
             setMarketList(response?.data?.data)
-            console.log("Market data fetched successfully:", response); 
+            console.log("Market data fetched successfully:", response);
         } catch (error) {
             console.error("Error fetching market data:", error);
         }
     }
-  return {
-    marketList,setMarketList
+    return {
+        marketList, setMarketList,
+        MarketPress
 
-  }
+    }
 }
 
 

@@ -1,7 +1,7 @@
 import { FlatList, Image, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
-import { colors } from '../../../../constants'
+import { colors, Routes } from '../../../../constants'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
 import AntDesign from "react-native-vector-icons/AntDesign"
 import Spacer, { HorizontalSpacer } from '../../../../components/Spacer'
@@ -31,7 +31,7 @@ export const RenderMarketHeader = () => {
     )
 }
 
-export const RenderMarketList = ({ marketData  }) => {
+export const RenderMarketList = ({ marketData ,props,marketPress }) => {
     return (
         <View style={style.MarketView}>
             <FlatList
@@ -39,32 +39,30 @@ export const RenderMarketList = ({ marketData  }) => {
                 keyExtractor={(item, index) => item.id.toString() || index.toString()}
                 renderItem={({ item }) => (
                     <>
-                     <View style={style.MarketDataView}>
+                     <TouchableOpacity onPress={() => marketPress(item)} style={style.MarketDataView}>
                         <View style={{  flexDirection: "row", alignItems: "center",width:wp(37)}}>
-                            {/* <TouchableOpacity>
-                            <Image source={item.favourite?images.starFill:images.starUnFill} style={style.StarImage} />
-                            </TouchableOpacity> */}
+                            <TouchableOpacity>
+                            <Image source={images.starUnFill} style={style.StarImage} />
+                            </TouchableOpacity>
                             <HorizontalSpacer />
                             <View>
-                                <ResponsiveText style={style.textHeader}>{item.name}</ResponsiveText>
-                                <ResponsiveText style={style.volText}>Vol {item.Vol}</ResponsiveText>
+                                <ResponsiveText style={style.textHeader}>{item.symbol}</ResponsiveText>
+                                <ResponsiveText style={style.volText}>Vol {item.Vol || "42.35M"}</ResponsiveText>
                             </View>
                         </View>
                         <View style={{  alignItems: "flex-start",justifyContent:"flex-start",width:wp(25)}}>
-                            <ResponsiveText style={[style.textHeader]}>{item.previousPrice}</ResponsiveText>
-                            <ResponsiveText style={style.volText}>{item.InUSdt}</ResponsiveText>
+                            <ResponsiveText style={[style.textHeader]}>{item.previousPrice ||"1.25"}</ResponsiveText>
+                            <ResponsiveText style={style.volText}>${item.InUSdt || "2,254.00"}</ResponsiveText>
                         </View>
-                        {/* <View style={{ flex: 1, alignItems: "flex-end" ,width:wp(25)}}>
-                            <ResponsiveText style={[style.textHeader,{color:item.Market.startsWith("+")?colors.green:colors.red}]}>{item.Market}</ResponsiveText>
-                        </View> */}
+                        <View style={{ flex: 1, alignItems: "flex-end" ,width:wp(25)}}>   
+                            <ResponsiveText style={[style.textHeader,{color:colors.green}]}>{item.Market || "0.01%"}</ResponsiveText>  
+                             {/* {color:item.Market.startsWith("+")?colors.green:colors.red} */}
+                        </View>
                         <Spacer/>
                         
-                    </View>
+                    </TouchableOpacity>
                     <Line height={hp(0.1)}/>
                     </>
-                   
-
-
                 )}
             />
         </View>

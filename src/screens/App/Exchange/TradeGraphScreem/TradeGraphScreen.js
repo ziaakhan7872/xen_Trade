@@ -12,14 +12,20 @@ import RowButton from '../../../../components/RowButton'
 import { Portal } from 'react-native-portalize'
 
 const TradeGraphScreen = (props) => {
-    const { starPress, setStarPress, candleChartData, setCandleChartData, orderBookHeaderPress, setOrderBookHeaderPress,favouriteBottomSheetRef } = UseTradeGraphScreen(props)
+    const {
+        starPress, setStarPress,
+        candleChartData, setCandleChartData,
+        orderBookHeaderPress, setOrderBookHeaderPress,
+        favouriteBottomSheetRef, selectedData,
+        BuyPress, SellPress
+    } = UseTradeGraphScreen(props)
 
 
 
     return (
         <ExchangeMainContainer>
-            <TradeHeader onpress={()=>favouriteBottomSheetRef?.current?.expand()} onBackPress={() => props?.navigation?.goBack()} setStarPress={setStarPress} starPress={starPress} />
-            <ScrollView contentContainerStyle={{ paddingBottom:hp(6) }}>
+            <TradeHeader marketData={selectedData} onpress={() => favouriteBottomSheetRef?.current?.expand()} onBackPress={() => props?.navigation?.goBack()} setStarPress={setStarPress} starPress={starPress} />
+            <ScrollView Dat contentContainerStyle={{ paddingBottom: hp(6) }}>
                 <Spacer />
                 <Line height={hp(0.1)} />
                 <CoinPriceDetail />
@@ -43,20 +49,21 @@ const TradeGraphScreen = (props) => {
                 <FlatlistValues data={Amount} textColor={colors.green} />
                 {/* <Spacer height={hp(5)}/> */}
             </ScrollView>
-            <Portal>
-                <View style={{
+            <View style={{
                 position: "absolute",
-                paddingVertical:hp(2),
+                paddingVertical: hp(2),
                 bottom: 0,
                 width: "100%",
                 alignItems: "center",
-                backgroundColor:colors.cardsBgColor
+                backgroundColor: colors.cardsBgColor
             }}>
-                <BuySellButton />
+                <BuySellButton onBuyPress={BuyPress} onSellPress={SellPress} />
             </View>
-            <FavoutiteBottomSheetComponnet ref={favouriteBottomSheetRef}/>
+            <Portal>
+
+                <FavoutiteBottomSheetComponnet ref={favouriteBottomSheetRef} />
             </Portal>
-            
+
 
 
         </ExchangeMainContainer>
