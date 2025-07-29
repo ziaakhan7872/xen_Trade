@@ -11,7 +11,8 @@ import { Host } from 'react-native-portalize';
 import { enableScreens } from 'react-native-screens';
 import { colors } from './src/constants';
 import { Provider } from 'react-redux';
-import store from './src/redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './src/redux/store';
 enableScreens(false); // Disable optimized screens
 
 const App = () => {
@@ -29,7 +30,9 @@ const App = () => {
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: colors.black }}>
       <Host>
         <Provider store={store}>
-          <Navigation />
+          <PersistGate loading={null} persistor={persistor}>
+            <Navigation />
+          </PersistGate>
         </Provider>
       </Host>
     </GestureHandlerRootView>
