@@ -21,7 +21,6 @@ const TradeGraphScreen = (props) => {
     } = UseTradeGraphScreen(props)
 
 
-
     return (
         <ExchangeMainContainer>
             <TradeHeader marketData={selectedData} onpress={() => favouriteBottomSheetRef?.current?.expand()} onBackPress={() => props?.navigation?.goBack()} setStarPress={setStarPress} starPress={starPress} />
