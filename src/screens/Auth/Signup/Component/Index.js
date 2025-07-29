@@ -1,5 +1,5 @@
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import images from '../../../../images';
 import Spacer, { HorizontalSpacer } from '../../../../components/Spacer';
@@ -11,9 +11,6 @@ import Icon from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/Ionicons';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { ResponsiveText } from '../../../../components/ResponsiveText';
-// import { useDispatch, useSelector } from 'react-redux'
-// import { setUser, logoutUser } from '../../../../redux/slices/userSlice';
-
 
 const SignUpForm = ({
     Login, isChecked, handleCheckboxToggle, handleEmailVerification,
@@ -63,11 +60,11 @@ const SignUpForm = ({
                     </>
                 )}
                 <SimpleButton
-                    disabled={!email || !password || !confirmPassword  || !isChecked}
+                    disabled={!email || !password || !confirmPassword || !isChecked}
                     onPress={handleEmailVerification}
                     textFontSize={14} text={"Sign Up"}
                     textColor={colors.buttonSigninColor}
-                    backgroundColor={(!email || !password || !confirmPassword  || !isChecked) ? colors.authButtonColor : colors.mainColor}
+                    backgroundColor={(!email || !password || !confirmPassword || !isChecked) ? colors.authButtonColor : colors.mainColor}
                     buttonWidth={wp(80)} />
                 <Spacer />
                 <ResponsiveText style={styles.signInWithStyle}>Or sign up with</ResponsiveText>

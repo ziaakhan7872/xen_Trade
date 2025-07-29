@@ -4,7 +4,7 @@ import 'react-native-get-random-values';
 import 'whatwg-fetch';
 import React, { useEffect } from 'react';
 import BootSplash from "react-native-bootsplash";  // Ensure BootSplash is imported
-import { LogBox, View } from 'react-native';
+import { LogBox } from 'react-native';
 import Navigation from './src/navigation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Host } from 'react-native-portalize';

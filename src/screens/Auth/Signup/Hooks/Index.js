@@ -34,8 +34,8 @@ const UseSignUp = (props) => {
     }
     try {
       const SignUp = await SignUpApi({ email: email, password: password, phoneNo: phoneNumber, referredByCode: referralCode })
-console.log("Navigating to EmailVerificationScreen with userData:", SignUp);
-      props?.navigation.navigate(Routes.EmailVerificationScreen,{userData: SignUp?.data})
+      console.log("Navigating to EmailVerificationScreen with userData:", SignUp);
+      props?.navigation.navigate(Routes.EmailVerificationScreen, { userData: SignUp?.data })
       setErrorMessage('');
       setEmail('');
       setPassword('');
@@ -46,7 +46,6 @@ console.log("Navigating to EmailVerificationScreen with userData:", SignUp);
     } catch (error) {
       console.error("Error during signup:", error);
       setErrorMessage("An error occurred during signup. Please try again.");
-
     }
   }
 
