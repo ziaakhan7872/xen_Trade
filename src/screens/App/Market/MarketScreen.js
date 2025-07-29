@@ -11,8 +11,10 @@ import { RenderMarketHeader, RenderMarketList } from './Component/Index'
 import Line from '../../../components/Liner'
 import { hp, wp } from '../../../components/ResponsiveComponent'
 import InputText from '../../../components/InputText'
+import { UseMarket } from './Hooks/Index'
 
 const MarketScreen = (props) => {
+  const {marketList,setMarketList} = UseMarket(props)
   return (
     <AuthMainContainer>
       <HomeHeader onpress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.MenuScreen })} headerTitle={"MARKETS"} />
@@ -24,21 +26,19 @@ const MarketScreen = (props) => {
           <HorizontalSpacer/>
           <ResponsiveText style={style.searchText}>Search...</ResponsiveText>
         </TouchableOpacity> */}
+        <InputText
+          // style={style.inputText} 
+          rightIcon={true}
+          placeholderTextColor={colors.iconColor}
+          placeholder={"Search.."}
+          width={wp(92)}
 
-        <InputText 
-        // style={style.inputText} 
-        rightIcon={true} 
-        placeholderTextColor={colors.iconColor} 
-        placeholder={"Search.."} 
-        width={wp(92)}
-        
         />
-
         <Spacer />
         <RenderMarketHeader />
         <Spacer />
         <Line height={hp(0.1)} />
-        <RenderMarketList />
+        <RenderMarketList marketData={marketList} />
       </View>
 
     </AuthMainContainer>

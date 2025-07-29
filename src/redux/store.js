@@ -22,3 +22,10 @@ const store = configureStore({
 const persistor = persistStore(store);
 
 export { store, persistor };
+
+
+export const getAuthToken = () => {
+  const state = store.getState();
+  return state?.user?.token || '';
+};
+

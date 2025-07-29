@@ -31,7 +31,7 @@ export const RenderMarketHeader = () => {
     )
 }
 
-export const RenderMarketList = ({ marketData = MarketData }) => {
+export const RenderMarketList = ({ marketData  }) => {
     return (
         <View style={style.MarketView}>
             <FlatList
@@ -41,9 +41,9 @@ export const RenderMarketList = ({ marketData = MarketData }) => {
                     <>
                      <View style={style.MarketDataView}>
                         <View style={{  flexDirection: "row", alignItems: "center",width:wp(37)}}>
-                            <TouchableOpacity>
+                            {/* <TouchableOpacity>
                             <Image source={item.favourite?images.starFill:images.starUnFill} style={style.StarImage} />
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                             <HorizontalSpacer />
                             <View>
                                 <ResponsiveText style={style.textHeader}>{item.name}</ResponsiveText>
@@ -54,9 +54,9 @@ export const RenderMarketList = ({ marketData = MarketData }) => {
                             <ResponsiveText style={[style.textHeader]}>{item.previousPrice}</ResponsiveText>
                             <ResponsiveText style={style.volText}>{item.InUSdt}</ResponsiveText>
                         </View>
-                        <View style={{ flex: 1, alignItems: "flex-end" ,width:wp(25)}}>
+                        {/* <View style={{ flex: 1, alignItems: "flex-end" ,width:wp(25)}}>
                             <ResponsiveText style={[style.textHeader,{color:item.Market.startsWith("+")?colors.green:colors.red}]}>{item.Market}</ResponsiveText>
-                        </View>
+                        </View> */}
                         <Spacer/>
                         
                     </View>
