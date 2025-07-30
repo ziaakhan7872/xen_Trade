@@ -12,7 +12,7 @@ import { useHomeScreen } from "./Hooks"
 import { Portal } from "react-native-portalize"
 
 const WalletHome = (props) => {
-  const { isChecked, handleCheckboxToggle, input, setInput, assetSheetRef, handleAssetOpen, handleAssetClose } = useHomeScreen()
+  const { isChecked, handleCheckboxToggle, input, setInput, assetSheetRef, handleAssetOpen, handleAssetClose, DisplayCryptoList } = useHomeScreen(props)
   return (
     <AuthMainContainer>
       <View style={styles.containerMain}>
@@ -23,7 +23,8 @@ const WalletHome = (props) => {
 
         <View style={appStyles.row}>
           <SimpleButton
-            onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCrypto })}
+            // onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCrypto })}
+            onPress={DisplayCryptoList}
             btnStyles={{ fontFamily: fontFamily.appTextRegular }}
             text="Deposit"
             textColor={colors.white}

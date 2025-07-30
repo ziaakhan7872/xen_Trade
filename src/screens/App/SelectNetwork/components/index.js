@@ -8,18 +8,18 @@ import { Networks } from '../../../../utilities/dummyData';
 import { HorizontalSpacer } from '../../../../components/Spacer';
 
 
-export const NetworkList = ({ onPress }) => {
+export const NetworkList = ({ onPress, data }) => {
   return (
     <View >
       <FlatList
-        data={Networks}
+        data={data}
         keyExtractor={(item, index) => item.id.toString() || index.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.networkItem} onPress={onPress} >
-            <Image source={item.icon} style={styles.networkIcon} resizeMode="contain" />
-            <HorizontalSpacer/>
+            <Image source={{ uri: item.logo }} style={styles.networkIcon} resizeMode="contain" />
+            <HorizontalSpacer />
             <View style={styles.networkDetails}>
-              <ResponsiveText style={styles.networkName}>{item.name}</ResponsiveText>
+              <ResponsiveText style={styles.networkName}>{item.name + ' ' + '(' + item.standard + ')'}</ResponsiveText>
               <ResponsiveText style={styles.networkInfo}>Minimum deposit: {item.minDeposit} </ResponsiveText>
               <ResponsiveText style={styles.networkInfo}> Est arrival in {item.arrivalTime} </ResponsiveText>
             </View>
@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     paddingTop: hp(1),
     width: '100%',
   },
- 
+
 
 
   networkItem: {
@@ -51,13 +51,13 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.AccountInfoBorderColor,
     width: wp(100),
-    paddingHorizontal:wp(5)
+    paddingHorizontal: wp(5)
   },
 
   networkIcon: {
-    width: wp(8),
-    height: wp(8),
-    resizeMode:"contain"
+    width: wp(9),
+    height: wp(9),
+    resizeMode: "cover"
   },
   networkDetails: {
     flex: 1,
@@ -66,13 +66,13 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.white,
     fontFamily: fontFamily.mainTextMedium,
-    fontWeight:"500"
+    fontWeight: "500"
   },
   networkInfo: {
     fontSize: 14,
     color: colors.iconColor,
     fontFamily: fontFamily.appTextRegular,
-    fontWeight:"400"
+    fontWeight: "400"
   },
 
 });
