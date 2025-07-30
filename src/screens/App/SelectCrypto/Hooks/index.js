@@ -32,7 +32,7 @@ export const useSelectCrypto = (props) => {
 
             // 2. Fetch minimum deposit info
             const minDepositResponse = await GetNetworkMinDepApi(marketId);
-            const minDeposits = minDepositResponse?.data?.data || [];
+            // const minDeposits = minDepositResponse?.data?.data || [];
 
             // 3. Merge the data
             const mergedNetworks = networks.map((network) => {

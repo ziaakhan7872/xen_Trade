@@ -30,9 +30,10 @@ export const LoginApi = async ({ email, password }) => {
 }
 
 // MarketApis
-export const GetCryptoListApi = async () => {
+export const GetCryptoListApi = async (page,limit) => {
     return axios.get(`${ASSETS_MANAGER_BASE_URL}/markets`, {
-        headers: getHeaders(token)
+        headers: getHeaders(token),
+        params:{page:page,limit:limit,isListed:true}
     })
 }
 export const GetNetworkListApi = async (symbol) => {
@@ -64,5 +65,12 @@ export const GetAccountBalanceMyMarket = async(userId,marketId) => {
     return axios.get(`${ACCOUNTS_SERVICE_BASE_URL}/account-details/account-balance-by-market`, {
         headers: getHeaders(token),
         params: {userId:userId, marketId:marketId }
+    })
+}
+
+export const getAccountDetail = async(page, limit, userId) => {
+    return axios.get(`${ACCOUNTS_SERVICE_BASE_URL}/account-details/`, {
+        headers: getHeaders(token),
+        params: {page:page, limit:limit, userId: userId }
     })
 }

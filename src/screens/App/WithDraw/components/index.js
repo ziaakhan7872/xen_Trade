@@ -14,7 +14,8 @@ import { SimpleButton } from '../../../../components/SimpleButton';
 
 
 
-export const WithdrawHeader = ({ BackPress, HistoryPress }) => {
+export const WithdrawHeader = ({ BackPress, HistoryPress, NetworkImage }) => {
+  console.log("NetworkImage", NetworkImage?.logo)
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerSide}>
@@ -23,7 +24,7 @@ export const WithdrawHeader = ({ BackPress, HistoryPress }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.headerCenterCustom}>
-        <Image source={images.ethIcon} style={styles.headerIconCustom} />
+        <Image source={{uri: NetworkImage?.logo}} resizeMode='contain' style={styles.headerIconCustom} />
         <HorizontalSpacer />
         <ResponsiveText style={styles.headerTitleCustom}>ON-CHAIN</ResponsiveText>
       </View>
@@ -35,13 +36,13 @@ export const WithdrawHeader = ({ BackPress, HistoryPress }) => {
     </View>
   );
 };
-export const AddressInput = ({ value, onChange, onCopy, onScan, onMax, error = false, errorText = "Insufficient balancee" }) => (
+export const AddressInput = ({Network, value, onChange, onCopy, onScan, onMax, error = false, errorText = "Insufficient balancee" }) => (
   <View style={{ alignItems: "center" }}>
     <View style={styles.inputContainer}>
       <ResponsiveText style={styles.label}>Address</ResponsiveText>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Image source={images.ethIcon} style={styles.networkIconTop} />
-        <ResponsiveText style={styles.networkTextTop}>Ethereum(ERC20)</ResponsiveText>
+        <Image source={{uri:Network?.logo}} style={styles.networkIconTop} />
+        <ResponsiveText style={styles.networkTextTop}>{Network?.name} ({Network?.standard})</ResponsiveText>
         <Image source={images.depositFilter} style={styles.arrowDownIconTop} />
       </View>
     </View>

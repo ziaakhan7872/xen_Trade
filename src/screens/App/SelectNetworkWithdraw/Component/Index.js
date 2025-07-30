@@ -8,23 +8,25 @@ import { Networks } from '../../../../utilities/dummyData';
 import { HorizontalSpacer } from '../../../../components/Spacer';
 
 
-export const NetworkList = ({ onPress }) => {
+export const NetworkList = ({ onPress ,Data}) => {
   return (
     <View >
       <FlatList
-        data={Networks}
+        data={Data}
         keyExtractor={(item, index) => item.id.toString() || index.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity style={styles.networkItem} onPress={onPress} >
-            <Image source={item.icon} style={styles.networkIcon} resizeMode="contain" />
+        renderItem={({ item }) => {
+          return(
+          <TouchableOpacity style={styles.networkItem} onPress={()=>onPress(item)} >
+            <Image source={{uri:item.logo}} style={styles.networkIcon} resizeMode="contain" />
             <HorizontalSpacer/>
             <View style={styles.networkDetails}>
               <ResponsiveText style={styles.networkName}>{item.name}</ResponsiveText>
-              <ResponsiveText style={styles.networkInfo}>Minimum deposit: {item.minDeposit} </ResponsiveText>
-              <ResponsiveText style={styles.networkInfo}> Est arrival in {item.arrivalTime} </ResponsiveText>
+              <ResponsiveText style={styles.networkInfo}>Minimum deposit: {item?.networks[0]?.minDeposit} </ResponsiveText>
+              <ResponsiveText style={styles.networkInfo}> Est arrival in {item?.network?.arrivalTime ||  "1 minutes"} </ResponsiveText>
             </View>
           </TouchableOpacity>
-        )}
+          )
+        }}
 
       />
     </View>
@@ -57,6 +59,7 @@ export const styles = StyleSheet.create({
   networkIcon: {
     width: wp(8),
     height: wp(8),
+    borderRadius:wp(40),
     resizeMode:"contain"
   },
   networkDetails: {

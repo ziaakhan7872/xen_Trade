@@ -7,9 +7,11 @@ import { Routes } from '../../../constants';
 import { PopularCrypto, SelectCryptoHeader, SelectCryptoRowButton, SelectCryptoSearchBox } from './Component/Index';
 import { styles } from './Style';
 import { hp } from '../../../components/ResponsiveComponent';
+import { UseSelectCryptoWithdraw } from './Hooks/Index';
 
 
 const SelectCryptoWithdraw = (props) => {
+    const {cryptoList,CryptoPress,RecentCryptoPress} = UseSelectCryptoWithdraw(props)
     return (
         <AuthMainContainer>
             <SelectCryptoHeader BackPress={() => props?.navigation?.goBack()} historyPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory })} />
@@ -20,9 +22,9 @@ const SelectCryptoWithdraw = (props) => {
                 <View style={styles.otherContainer}>
                     <ResponsiveText style={styles.title}>RECENT</ResponsiveText>
                     <Spacer />
-                    <SelectCryptoRowButton onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectNetworkWIthdraw })} />
+                    <SelectCryptoRowButton data={cryptoList} onPress={RecentCryptoPress} />
                     <Spacer />
-                    <PopularCrypto onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectNetworkWIthdraw })} />
+                    <PopularCrypto data={cryptoList} onPress={CryptoPress} />
                 </View>
             </ScrollView>
 
