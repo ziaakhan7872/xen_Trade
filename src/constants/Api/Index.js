@@ -82,3 +82,14 @@ export const getAccountDetail = async (page, limit, userId) => {
         params: { page: page, limit: limit, userId: userId }
     })
 }
+
+
+
+// Withdraw Api
+
+export const WithdrawOnchain = async ({ Payload }) => {
+    return axios.post(`${ACCOUNTS_SERVICE_BASE_URL}/withdrawals/on-chain`,
+        Payload, {
+        headers: getHeaders(token)
+    })
+}

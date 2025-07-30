@@ -12,15 +12,17 @@ import { Portal } from 'react-native-portalize';
 const WithDraw = (props) => {
 
   const {
-     WithdrawConfirmationRef,
-     address,setAddress,
-     amount,setAmount ,
-     fee,setFee,
-     error,setError,
-     amountReceived,setAmountReceived,
-      cryptoData, network
+    WithdrawConfirmationRef,
+    address, setAddress,
+    amount, setAmount,
+    fee, setFee,
+    error, setError,
+    amountReceived, setAmountReceived,
+    cryptoData, network,
+    handleSubmit
 
-    } = UseWidthDraw(props)
+
+  } = UseWidthDraw(props)
 
   return (
     <AuthMainContainer>
@@ -28,15 +30,30 @@ const WithDraw = (props) => {
       <WithdrawHeader NetworkImage={network} BackPress={() => props?.navigation?.goBack()} HistoryPress={() => props?.navigation?.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory })} />
       <Spacer />
       <AddressInput
-      Network={network}
-        value={address}
-        onChange={setAddress}
-       
+        cryptoData={cryptoData} Network={network}
+        address={address} setAddress={setAddress}
+        amount={amount} setAmount={setAmount}
+        error={error} setError={setError}
+
       />
       <View style={styles.spacer} />
-      <FeeInfo handleSubmit={() => WithdrawConfirmationRef?.current?.expand()} fee={fee} amountReceived={amountReceived} />
+      <FeeInfo
+        cryptoData={cryptoData}
+        handleSubmit={() => WithdrawConfirmationRef?.current?.expand()}
+        fee={fee}
+        amount={amount}
+        error={error}
+      />
       <Portal>
-        <WithDrawConfirmationBottomSheet handleSubmit={() => props?.navigation?.navigate?.(Routes.WithdrawDetails)} ref={WithdrawConfirmationRef} />
+        <WithDrawConfirmationBottomSheet
+          address={address}
+          amount={amount}
+          Network={network}
+          cryptData={cryptoData}
+          handleSubmit={handleSubmit}
+          ref={WithdrawConfirmationRef}
+
+        />
       </Portal>
     </AuthMainContainer>
   );

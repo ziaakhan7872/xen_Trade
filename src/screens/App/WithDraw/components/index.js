@@ -24,7 +24,7 @@ export const WithdrawHeader = ({ BackPress, HistoryPress, NetworkImage }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.headerCenterCustom}>
-        <Image source={{uri: NetworkImage?.logo}} resizeMode='contain' style={styles.headerIconCustom} />
+        <Image source={{ uri: NetworkImage?.logo }} resizeMode='contain' style={styles.headerIconCustom} />
         <HorizontalSpacer />
         <ResponsiveText style={styles.headerTitleCustom}>ON-CHAIN</ResponsiveText>
       </View>
@@ -36,78 +36,106 @@ export const WithdrawHeader = ({ BackPress, HistoryPress, NetworkImage }) => {
     </View>
   );
 };
-export const AddressInput = ({Network, value, onChange, onCopy, onScan, onMax, error = false, errorText = "Insufficient balancee" }) => (
-  <View style={{ alignItems: "center" }}>
-    <View style={styles.inputContainer}>
-      <ResponsiveText style={styles.label}>Address</ResponsiveText>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Image source={{uri:Network?.logo}} style={styles.networkIconTop} />
-        <ResponsiveText style={styles.networkTextTop}>{Network?.name} ({Network?.standard})</ResponsiveText>
-        <Image source={images.depositFilter} style={styles.arrowDownIconTop} />
-      </View>
-    </View>
-    <Spacer height={hp(1)} />
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <InputText width={wp(95)} />
-      <TouchableOpacity onPress={onScan} style={styles.iconButton}>
-        <Image source={images.ScanIcon} style={styles.scanIcon} />
-      </TouchableOpacity>
-    </View>
-    <View>
-      <ResponsiveText style={styles.label}>Withdrawal Amount</ResponsiveText>
-      <Spacer height={hp(1)} />
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <InputText width={wp(95)} style={{ borderWidth: error ? 1 : 0, borderColor: error ? colors.red : 'transparent', borderRadius: wp(3), marginBottom: 0 }} />
-        <View style={[styles.iconButton, { flexDirection: "row", alignItems: "center", bottom: wp(2) }]}>
-          <ResponsiveText style={styles.currency}>ETH</ResponsiveText>
-          <HorizontalSpacer width={wp(2)} />
-          <TouchableOpacity style={styles.maxBtn} onPress={onMax}>
-            <ResponsiveText style={styles.maxText}>MAX</ResponsiveText>
-          </TouchableOpacity>
+export const AddressInput = ({ amount, setAmount, address, setAddress, Network, cryptoData, onCopy, onScan, onMax, error, setError }) => {
+  return (
+    <View style={{ alignItems: "center" }}>
+      <View style={styles.inputContainer}>
+        <ResponsiveText style={styles.label}>Address</ResponsiveText>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Image source={{ uri: Network?.logo }} style={styles.networkIconTop} />
+          <ResponsiveText style={styles.networkTextTop}>{Network?.name} ({Network?.standard})</ResponsiveText>
+          <Image source={images.depositFilter} style={styles.arrowDownIconTop} />
         </View>
       </View>
       <Spacer height={hp(1)} />
-      {error && (
-        <ResponsiveText style={[styles.errorText,]}   > {errorText} </ResponsiveText>)}
-      <View style={styles.availableTextContainer}>
-        <ResponsiveText style={styles.availableText}>Available </ResponsiveText>
-        <HorizontalSpacer />
-        <ResponsiveText style={styles.USDTText}>0.022 USDT</ResponsiveText>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <InputText value={address} onChangeText={setAddress} paddingLeft={wp(3)} placeholder={"Scan or enter address"} placeholderTextColor={colors.placeHolderTextColor} width={wp(95)} />
+        <TouchableOpacity onPress={onScan} style={styles.iconButton}>
+          <Image source={images.ScanIcon} style={styles.scanIcon} />
+        </TouchableOpacity>
+      </View>
+      <View>
+        <ResponsiveText style={styles.label}>Withdrawal Amount</ResponsiveText>
+        <Spacer height={hp(1)} />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <InputText
+            placeholderTextColor={colors.placeHolderTextColor}
+            placeholder={`Min ${Number(Network?.networks[0]?.minWithdraw).toFixed(4)}`}
+            width={wp(95)}
+            style={{
+              borderWidth: error ? 1 : 0,
+              borderColor: error ? colors.red : 'transparent',
+              borderRadius: wp(3),
+              marginBottom: 0
+
+            }}
+            value={amount}
+            onChangeText={setAmount}
+            paddingLeft={wp(4)}
+            keyboardType="numeric"
+            onBlur={() => {
+              if (Number(amount) > Number(cryptoData?.account?.amount)) {
+                setError(true);
+                console.log(error)
+              } else {
+                setError(false);
+              }
+            }}
+          />
+          <View style={[styles.iconButton, { flexDirection: "row", alignItems: "center", bottom: wp(2) }]}>
+            <ResponsiveText style={styles.currency}>{cryptoData?.symbol}</ResponsiveText>
+            <HorizontalSpacer width={wp(2)} />
+            <TouchableOpacity style={styles.maxBtn} onPress={() => setAmount(cryptoData?.account?.amount)}>
+              <ResponsiveText style={styles.maxText}>MAX</ResponsiveText>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <Spacer height={hp(1)} />
+        {error && (
+          <ResponsiveText style={[styles.errorText,]}   > insufficent Balance </ResponsiveText>)}
+        <View style={styles.availableTextContainer}>
+          <ResponsiveText style={styles.availableText}>Available </ResponsiveText>
+          <HorizontalSpacer />
+          <ResponsiveText style={styles.USDTText}>{Number(cryptoData?.account?.amount).toFixed(3)} {cryptoData?.symbol}</ResponsiveText>
+        </View>
       </View>
     </View>
-  </View>
 
-);
+  );
+}
 
 
-export const FeeInfo = ({ fee, amountReceived, handleSubmit, insufficentBalance = false }) => (
-  <View style={styles.feeContainer}>
-    <View style={[styles.feeRow, { borderBottomWidth: 0.2, borderBottomColor: colors.lineColor }]}>
-      <ResponsiveText style={styles.feeLabel}>Network fee</ResponsiveText>
-      <ResponsiveText style={[styles.feeLabel, { color: colors.white }]}>{fee} </ResponsiveText>
+export const FeeInfo = ({ Network, cryptoData, fee, amount, handleSubmit, error }) => {
+  const AmountReceived = Number(amount) - Number(Network?.fee || 0);
+  return (
+    <View style={styles.feeContainer}>
+      <View style={[styles.feeRow, { borderBottomWidth: 0.2, borderBottomColor: colors.lineColor }]}>
+        <ResponsiveText style={styles.feeLabel}>Network fee</ResponsiveText>
+        <ResponsiveText style={[styles.feeLabel, { color: colors.white }]}>{Network?.fee || 0} {cryptoData?.symbol} </ResponsiveText>
+      </View>
+      <View style={styles.feeRow}>
+        <ResponsiveText style={styles.feeLabel}>Amount received</ResponsiveText>
+        <ResponsiveText style={[styles.feeValue]}>{AmountReceived} {cryptoData?.symbol}</ResponsiveText>
+      </View>
+      <Spacer />
+      <View style={{ alignItems: "center" }}>
+        <SimpleButton
+          text={"Submit"}
+          disabled={error ? true : false}
+          textColor={error ? colors.buttonSigninColor : colors.black}
+          backgroundColor={error ? colors.gray3 : colors.mainColor}
+          height={hp(6)}
+          buttonWidth={wp(80)}
+          onPress={handleSubmit}
+        />
+      </View>
+      <Spacer />
     </View>
-    <View style={styles.feeRow}>
-      <ResponsiveText style={styles.feeLabel}>Amount received</ResponsiveText>
-      <ResponsiveText style={[styles.feeValue]}>{amountReceived}</ResponsiveText>
-    </View>
-    <Spacer />
-    <View style={{ alignItems: "center" }}>
-      <SimpleButton
-        text={"Submit"}
-        disabled={insufficentBalance ? true : false}
-        textColor={insufficentBalance ? colors.buttonSigninColor : colors.black}
-        backgroundColor={insufficentBalance ? colors.gray3 : colors.mainColor}
-        height={hp(6)}
-        buttonWidth={wp(80)}
-        onPress={handleSubmit}
-      />
-    </View>
-    <Spacer />
-  </View>
-);
+  )
+};
 
-export const WithDrawConfirmationBottomSheet = ({ ref, address = "0x21505337aa3b5254eb154b", amount = "15.769112", fee = "0.15 USDT", received = "15.7", handleSubmit }) => {
-
+export const WithDrawConfirmationBottomSheet = ({ Network, cryptData, ref, address, amount, fee, received, handleSubmit }) => {
+  const amountReceived = Number(amount) + Number(Network?.fee || 0)
 
   return (
     <GorhomBottomSheet sheetRef={ref}>
@@ -123,7 +151,7 @@ export const WithDrawConfirmationBottomSheet = ({ ref, address = "0x21505337aa3b
           <View style={styles.componentHeader}>
             <View style={styles.confirmItem}>
               <ResponsiveText style={styles.confirmLabel}>Network</ResponsiveText>
-              <ResponsiveText style={styles.confirmValue}>ETH-TON</ResponsiveText>
+              <ResponsiveText style={styles.confirmValue}>{Network?.name}</ResponsiveText>
             </View>
 
             <View style={styles.confirmItem}>
@@ -141,17 +169,17 @@ export const WithDrawConfirmationBottomSheet = ({ ref, address = "0x21505337aa3b
 
             <View style={styles.confirmItem}>
               <ResponsiveText style={styles.confirmLabel}>Withdrawal amount</ResponsiveText>
-              <ResponsiveText style={styles.confirmValue}>{amount} ETH</ResponsiveText>
+              <ResponsiveText style={styles.confirmValue}>{amount} {cryptData?.symbol}</ResponsiveText>
             </View>
 
             <View style={styles.confirmItem}>
               <ResponsiveText style={styles.confirmLabel}>Network fee</ResponsiveText>
-              <ResponsiveText style={styles.confirmValue}>{fee}</ResponsiveText>
+              <ResponsiveText style={styles.confirmValue}>{Network?.fee || 0} {cryptData?.symbol}</ResponsiveText>
             </View>
 
             <View style={styles.confirmItem}>
               <ResponsiveText style={styles.confirmLabel}>Amount received</ResponsiveText>
-              <ResponsiveText style={styles.confirmValue}>{received} ETH</ResponsiveText>
+              <ResponsiveText style={styles.confirmValue}>{amountReceived} {cryptData?.symbol}</ResponsiveText>
             </View>
           </View>
         </View>
@@ -170,10 +198,7 @@ export const WithDrawConfirmationBottomSheet = ({ ref, address = "0x21505337aa3b
             backgroundColor={colors.mainColor}
             height={hp(6)}
             buttonWidth={wp(80)}
-            onPress={() => {
-              handleSubmit()
-              ref?.current?.close()
-            }}
+            onPress={handleSubmit}
           />
         </View>
 
