@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { GetMarketListApi, getPairApi } from "../../../../constants/Api/Index";
 import { Routes } from "../../../../constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getPairApi } from "../../../../constants/Api/Index";
 
 
 export const UseMarket = (props) => {

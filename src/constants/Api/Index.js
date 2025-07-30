@@ -50,6 +50,7 @@ export const GetNetworkMinDepApi = async (marketId) => {
 
 
 export const getPairApi = async (page, limit) => {
+    console.log("getPairApi called with page:", page, "and limit:", limit);
     return axios.get(`${ASSETS_MANAGER_BASE_URL}/pairs`, {
         headers: getHeaders(token),
         params: { page: page, limit: limit, isActive: true }

@@ -38,7 +38,7 @@ const MarketScreen = (props) => {
         <RenderMarketHeader />
         <Spacer />
         <Line height={hp(0.1)} />
-        <RenderMarketList marketPress={MarketPress} marketData={marketList} />
+        <RenderMarketList MarketScreen={MarketPress} marketData={marketList} />
       </View>
 
     </AuthMainContainer>

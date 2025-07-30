@@ -31,7 +31,7 @@ export const RenderMarketHeader = () => {
     )
 }
 
-export const RenderMarketList = ({ marketData ,props,marketPress }) => {
+export const RenderMarketList = ({ marketData ,props,MarketScreen }) => {
     return (
         <View style={style.MarketView}>
             <FlatList
@@ -39,7 +39,7 @@ export const RenderMarketList = ({ marketData ,props,marketPress }) => {
                 keyExtractor={(item, index) => item.id.toString() || index.toString()}
                 renderItem={({ item }) => (
                     <>
-                     <TouchableOpacity onPress={() => marketPress(item)} style={style.MarketDataView}>
+                     <TouchableOpacity onPress={() => MarketScreen(item)} style={style.MarketDataView}>
                         <View style={{  flexDirection: "row", alignItems: "center",width:wp(37)}}>
                             <TouchableOpacity>
                             <Image source={images.starUnFill} style={style.StarImage} />
