@@ -7,35 +7,44 @@ const token = getAuthToken()
 
 // AuthApis
 
-export const SignUpApi = async({email,password,phoneNo,referredByCode})=>{
-    return axios.post(`${AUTH_BASE_URL}/auth/signup`, {email:email, password:password, phoneNo:phoneNo, referredByCode:referredByCode },{
-    headers:getHeaders()
+export const SignUpApi = async ({ email, password, phoneNo, referredByCode }) => {
+    return axios.post(`${AUTH_BASE_URL}/auth/signup`, { email: email, password: password, phoneNo: phoneNo, referredByCode: referredByCode }, {
+        headers: getHeaders()
     })
 }
 
-export const EmailVerificationApi = async({emailOtpCode,userId})=>{
-    return axios.post(`${AUTH_BASE_URL}/verifications/otp-code`, {emailOtpCode:emailOtpCode,userId:userId},{
-    headers:getHeaders()
+export const EmailVerificationApi = async ({ emailOtpCode, userId }) => {
+    return axios.post(`${AUTH_BASE_URL}/verifications/otp-code`, { emailOtpCode: emailOtpCode, userId: userId }, {
+        headers: getHeaders()
     })
 }
-export const LoginVerificationApi = async({emailOtpCode,userId})=>{
-    return axios.post(`${AUTH_BASE_URL}/verifications/login-otp`, {emailOtpCode:emailOtpCode,rememberMe:true,userId:userId},{
-    headers:getHeaders()
+export const LoginVerificationApi = async ({ emailOtpCode, userId }) => {
+    return axios.post(`${AUTH_BASE_URL}/verifications/login-otp`, { emailOtpCode: emailOtpCode, rememberMe: true, userId: userId }, {
+        headers: getHeaders()
     })
 }
-export const LoginApi = async({email,password})=>{
-    return axios.post(`${AUTH_BASE_URL}/auth/login`, {email:email,password:password},{
-    headers:getHeaders()
+export const LoginApi = async ({ email, password }) => {
+    return axios.post(`${AUTH_BASE_URL}/auth/login`, { email: email, password: password }, {
+        headers: getHeaders()
     })
 }
-
 
 // MarketApis
-
-
-export const GetMarketListApi = async() => {
+export const GetCryptoListApi = async () => {
     return axios.get(`${ASSETS_MANAGER_BASE_URL}/markets`, {
         headers: getHeaders(token)
+    })
+}
+export const GetNetworkListApi = async (symbol) => {
+    return axios.get(`${ASSETS_MANAGER_BASE_URL}/chains/by-market-symbol`, {
+        headers: getHeaders(token),
+        params: { symbol },
+    })
+}
+export const GetNetworkMinDepApi = async (marketId) => {
+    return axios.get(`${ASSETS_MANAGER_BASE_URL}/networks`, {
+        headers: getHeaders(token),
+        params: { marketId },
     })
 }
 
@@ -45,7 +54,7 @@ export const GetMarketListApi = async() => {
 export const getPairApi = async(page,limit) => {
     return axios.get(`${ASSETS_MANAGER_BASE_URL}/pairs`, {
         headers: getHeaders(token),
-        params: {page:page, limit:limit ,isActive:true}
+        params: { page: page, limit: limit, isActive: true }
     })
 }
 

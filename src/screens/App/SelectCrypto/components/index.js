@@ -5,7 +5,6 @@ import images from '../../../../images';
 import { colors } from '../../../../constants';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { fontFamily } from '../../../../constants/fonts';
-import { coinData } from '../../../../utilities/dummyData';
 import EvilIcons from "react-native-vector-icons/EvilIcons"
 import InputText from '../../../../components/InputText';
 
@@ -45,18 +44,18 @@ export const SelectCryptoSearchBox = () => {
   )
 }
 
-export const PopularCrypto = ({onPress}) => {
+export const PopularCrypto = ({ onPress, data }) => {
   return (
     <View >
       <FlatList
-        data={coinData}
+        data={data}
         keyExtractor={(item, index) => item.id.toString() || index.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.cryptoSelectItem}
-            onPress={onPress}
+            onPress={() => onPress(item.symbol, item.id)}
           >
-            <Image source={item.icon} style={styles.cryptoSelectIcon} resizeMode="contain" />
+            <Image source={{ uri: item.icon }} style={styles.cryptoSelectIcon} resizeMode='cover' />
             <View style={styles.cryptoSelectDetails}>
               <ResponsiveText style={styles.cryptoSymbol}>{item.symbol}</ResponsiveText>
               <ResponsiveText style={styles.cryptoName}>{item.name}</ResponsiveText>
@@ -69,18 +68,18 @@ export const PopularCrypto = ({onPress}) => {
   )
 }
 
-export const ALlCrypto = ({onPress}) => {
+export const ALlCrypto = ({ onPress, data }) => {
   return (
     <View >
       <FlatList
-        data={coinData}
+        data={data}
         keyExtractor={(item, index) => item.id.toString() || index.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.cryptoSelectItem}
-            onPress={onPress}
+            onPress={() => onPress(item.symbol, item.id)}
           >
-            <Image source={item.icon} style={styles.cryptoSelectIcon} resizeMode="contain" />
+            <Image source={{ uri: item.icon }} style={styles.cryptoSelectIcon} resizeMode="cover" />
             <View style={styles.cryptoSelectDetails}>
               <ResponsiveText style={styles.cryptoSymbol}>{item.symbol}</ResponsiveText>
               <ResponsiveText style={styles.cryptoName}>{item.name}</ResponsiveText>
@@ -155,6 +154,7 @@ const styles = StyleSheet.create({
     width: wp(9),
     height: wp(9),
     marginRight: wp(3),
+    borderRadius: 100
   },
   cryptoSelectDetails: {
     flex: 1,

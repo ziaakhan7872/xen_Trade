@@ -8,19 +8,20 @@ import {
   AddressSection,
   DetailsSection
 } from './components';
-import { styles } from './styles';
 import Spacer from '../../../components/Spacer';
 import { Routes } from '../../../constants';
 
 const Barcode = (props) => {
+  const networkList = props.route?.params?.networkList // get passed data from API while navigating to Barcode
+
   return (
     <AuthMainContainer >
-      <BarcodeHeader BackPress={()=>props?.navigation?.goBack()} HistoryPress={()=>props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory,  })} />
+      <BarcodeHeader BackPress={() => props?.navigation?.goBack()} HistoryPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory, })} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <NetworkSelector />
         <Spacer />
         <AddressSection />
-        <Spacer/>
+        <Spacer />
         <DetailsSection />
       </ScrollView>
     </AuthMainContainer>
