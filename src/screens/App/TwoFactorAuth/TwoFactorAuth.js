@@ -4,7 +4,6 @@ import { AuthMainContainer } from '../../../components/authMainContainer';
 import { MainHeader } from '../../../components/MainHeader';
 import { styles } from './styles';
 import images from '../../../images';
-import { useNavigation } from '@react-navigation/native';
 import { colors } from '../../../constants';
 import { ResponsiveText } from '../../../components/ResponsiveText';
 import Spacer from '../../../components/Spacer';
@@ -13,13 +12,12 @@ import { SimpleButton } from '../../../components/SimpleButton';
 import { appStyles } from '../../../utilities';
 import TextInputField from '../../../components/TextInputField';
 
-const TwoFactorAuth = () => {
-    const navigation = useNavigation();
+const TwoFactorAuth = (props) => {
 
     return (
         <AuthMainContainer>
             <View style={styles.containerMain}>
-                <MainHeader leftImage={images.backArrow} title='2-FACTOR AUTHENTICATION' onBackPress={() => navigation.goBack()} />
+                <MainHeader leftImage={images.backArrow} title='2-FACTOR AUTHENTICATION' onBackPress={() => props?.navigation?.goBack?.()} />
 
                 <Spacer height={hp(3)} />
 

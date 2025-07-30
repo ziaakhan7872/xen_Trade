@@ -3,11 +3,11 @@ import MarketScreen from "./Market/MarketScreen";
 import WalletScreen from "./Wallet/WalletScreen";
 import WalletHome from "./WalletHome/WalletHome";
 import DepositHistory from "./DepositHistory/DepositHistory";
-import settingSecurity from "./SettingSecurity/SettingSecurity";
-import twoFactorAuth from "./TwoFactorAuth/TwoFactorAuth";
+import SettingSecurity from "./SettingSecurity/SettingSecurity";
+import TwoFactorAuth from "./TwoFactorAuth/TwoFactorAuth";
 import Settings from "./Settings/Settings";
-import changePassword from "./ChangePassword/ChangePassword";
-import antiPhishingCode from "./AntiPhishingCode/AntiPhishingCode";
+import ChangePassword from "./ChangePassword/ChangePassword";
+import AntiPhishingCode from "./AntiPhishingCode/AntiPhishingCode";
 import SettingProfile from "./SettingProfile/SettingProfile";
 import SettingSystem from "./SettingSystem/SettingSystem";
 import AddressBook from "./AddressBook/AddressBook";
@@ -30,8 +30,8 @@ import SelectCryptoWithdraw from "./SelectCryptoWithdraw/SelectCryptoWithdraw"
 import SelectNetworkWithdraw from "./SelectNetworkWithdraw/SelectNetworkWithdraw"
 
 export {
-     HomeScreen, Settings, twoFactorAuth, settingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,
-     Exchangescreen, WalletScreen, changePassword, antiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
+     HomeScreen, Settings, TwoFactorAuth, SettingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,
+     Exchangescreen, WalletScreen, ChangePassword, AntiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
      SelectNetwork, Barcode, AddNewAddress, SettingEmailNotification, SelectCrypto, AssetAllocation, MenuScreen,
      Referrals, ReferralHistory, OrderHistory, TradeGraphScreen, WithDraw, WithdrawDetails,
      SelectCryptoWithdraw, SelectNetworkWithdraw

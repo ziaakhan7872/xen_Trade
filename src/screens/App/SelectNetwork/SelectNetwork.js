@@ -1,18 +1,16 @@
 
 import React from 'react';
 import { AuthMainContainer } from '../../../components/authMainContainer';
-import { SelectNetworkHeader, NetworkList } from './components';
+import { NetworkList } from './components';
 import { MainHeader } from '../../../components/MainHeader';
 import images from '../../../images';
 import { ScrollView, View } from 'react-native';
 import { styles } from './styles';
 import Spacer from '../../../components/Spacer';
-import { Routes } from '../../../constants';
+import { useSelectNetwork } from './Hooks';
 
 const SelectNetwork = (props) => {
-  const networkList = props.route?.params?.networkList // get passed data from API while navigating to SelectNetwork
-  console.log("NETWORKS DATA|||", networkList);
-
+  const { handleNetworkNavigation, networkList } = useSelectNetwork(props)
 
   return (
     <AuthMainContainer>
@@ -21,7 +19,7 @@ const SelectNetwork = (props) => {
       </View>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Spacer />
-        <NetworkList data={networkList} onPress={() => props?.navigation?.navigate(Routes.AppNavigator, { screen: Routes.Barcode, })} />
+        <NetworkList data={networkList} onPress={handleNetworkNavigation} />
       </ScrollView>
     </AuthMainContainer>
   );

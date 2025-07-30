@@ -9,10 +9,15 @@ import { Routes } from '../../../constants';
 import { useSelectCrypto } from './Hooks';
 
 const SelectCrypto = (props) => {
-  const { DisplayNetworkList } = useSelectCrypto(props)
-  const cryptoList = props.route?.params?.cryptoList // get passed data from API while navigating to SelectCrypto
-  console.log("Crypto List Data|||", cryptoList)
+  const { cryptoList, loading, error, handleCryptoNavigation } = useSelectCrypto(props)
+  // console.log("Crypto List Data|||", cryptoList)
+  // if (loading) {
+  //   return <ResponsiveText>Loading...</ResponsiveText>;
+  // }
 
+  // if (error) {
+  //   return <ResponsiveText>{error}</ResponsiveText>;
+  // }
   return (
     <AuthMainContainer>
       <SelectCryptoHeader BackPress={() => props?.navigation?.goBack()} historyPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory })} />
@@ -24,11 +29,11 @@ const SelectCrypto = (props) => {
           <ResponsiveText style={styles.title}>Popular</ResponsiveText>
           <Spacer />
           {/* <PopularCrypto data={cryptoList} onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectNetwork })} /> */}
-          <PopularCrypto data={cryptoList} onPress={DisplayNetworkList} />
+          <PopularCrypto data={cryptoList} onPress={handleCryptoNavigation} />
           <Spacer />
           <ResponsiveText style={styles.title}>All Crypto</ResponsiveText>
           <Spacer />
-          <ALlCrypto data={cryptoList} onPress={DisplayNetworkList} />
+          <ALlCrypto data={cryptoList} onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectNetwork })} />
         </View>
       </ScrollView>
 

@@ -10,10 +10,10 @@ const AppNavigation = () => {
             <Screen name={Routes.WalletHome} component={App.WalletHome} />
             <Screen name={Routes.DepositHistory} component={App.DepositHistory} />
             <Screen name={Routes.settingProfile} component={App.SettingProfile} />
-            <Screen name={Routes.settingSecurity} component={App.settingSecurity} />
-            <Screen name={Routes.twoFactorAuth} component={App.twoFactorAuth} />
-            <Screen name={Routes.changePassword} component={App.changePassword} />
-            <Screen name={Routes.antiPhishingCode} component={App.antiPhishingCode} />
+            <Screen name={Routes.settingSecurity} component={App.SettingSecurity} />
+            <Screen name={Routes.twoFactorAuth} component={App.TwoFactorAuth} />
+            <Screen name={Routes.changePassword} component={App.ChangePassword} />
+            <Screen name={Routes.antiPhishingCode} component={App.AntiPhishingCode} />
             <Screen name={Routes.SelectNetwork} component={App.SelectNetwork} />
             <Screen name={Routes.Barcode} component={App.Barcode} />
             <Screen name={Routes.settingSystem} component={App.SettingSystem} />
