@@ -30,10 +30,10 @@ export const LoginApi = async ({ email, password }) => {
 }
 
 // MarketApis
-export const GetCryptoListApi = async (page,limit) => {
+export const GetCryptoListApi = async (page, limit) => {
     return axios.get(`${ASSETS_MANAGER_BASE_URL}/markets`, {
         headers: getHeaders(token),
-        params:{page:page,limit:limit,isListed:true}
+        params: { page: page, limit: limit, isListed: true }
     })
 }
 export const GetNetworkListApi = async (symbol) => {
@@ -42,25 +42,25 @@ export const GetNetworkListApi = async (symbol) => {
         params: { symbol },
     })
 }
-export const GetNetworkMinDepApi = async (payloads) => {
-    return axios.get(`${ASSETS_MANAGER_BASE_URL}/networks`, {
-        headers: getHeaders(token),
-        params: { payloads },
-    })
-}
+// export const GetNetworkMinDepApi = async (payloads) => {
+//     return axios.get(`${ASSETS_MANAGER_BASE_URL}/networks`, {
+//         headers: getHeaders(token),
+//         params: { payloads },
+//     })
+// }
 
 export const GetDepositDetailsApi = async (payLoads) => {
-    return axios.get(`${ASSETS_MANAGER_BASE_URL}/accounts/user-account`, {
+    return axios.get(`${ACCOUNTS_SERVICE_BASE_URL}/accounts/user-account`, {
         headers: getHeaders(token),
         // params: { id, chainId, symbol },
-        payLoads: payLoads
+        params: payLoads
     })
 }
 
 //Pair Api
 
 
-export const getPairApi = async(page,limit) => {
+export const getPairApi = async (page, limit) => {
     return axios.get(`${ASSETS_MANAGER_BASE_URL}/pairs`, {
         headers: getHeaders(token),
         params: { page: page, limit: limit, isActive: true }
@@ -69,16 +69,16 @@ export const getPairApi = async(page,limit) => {
 
 //Account Api
 
-export const GetAccountBalanceMyMarket = async(userId,marketId) => {    
+export const GetAccountBalanceMyMarket = async (userId, marketId) => {
     return axios.get(`${ACCOUNTS_SERVICE_BASE_URL}/account-details/account-balance-by-market`, {
         headers: getHeaders(token),
-        params: {userId:userId, marketId:marketId }
+        params: { userId: userId, marketId: marketId }
     })
 }
 
-export const getAccountDetail = async(page, limit, userId) => {
+export const getAccountDetail = async (page, limit, userId) => {
     return axios.get(`${ACCOUNTS_SERVICE_BASE_URL}/account-details/`, {
         headers: getHeaders(token),
-        params: {page:page, limit:limit, userId: userId }
+        params: { page: page, limit: limit, userId: userId }
     })
 }

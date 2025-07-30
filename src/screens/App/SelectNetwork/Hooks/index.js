@@ -9,7 +9,7 @@ export const useSelectNetwork = (props) => {
 
     useEffect(() => {
         DisplayNetworkList()
-    })
+    }, [])
 
     const DisplayNetworkList = async () => {
 
@@ -17,17 +17,16 @@ export const useSelectNetwork = (props) => {
             const networkListRes = await GetNetworkListApi(cryptoItem.symbol)
             console.log("--NETWORK LIST DATA--", networkListRes);
             setNetworkList(networkListRes?.data?.data || [])
-
         }
         catch (error) {
             console.log("Error Displaying Network List", error);
         }
     }
 
-    const handleNetworkNavigation = async () => {
+    const handleNetworkNavigation = (item) => {
         props?.navigation?.navigate?.(Routes.AppNavigator, {
             screen: Routes.Barcode,
-            params: { networkList: networkList },
+            params: { networkList: item, cryptoItem: cryptoItem },
         });
 
     }
@@ -38,33 +37,3 @@ export const useSelectNetwork = (props) => {
         networkList,
     }
 }
-// const previousData = props?.route?.params?.networkList
-// const userData = useSelector((state) => state.user)
-// const [depositDetailData, setDepositDetailData] = useState()
-
-// console.log(previousData, 'previousDatapreviousData');
-
-
-
-
-// const DisplayDepositDetails = async (userId, chainId, symbol) => {
-//     console.log("Starting Network Details API Fetch with symbol:", "userID", userId, "|", "chainId", chainId, "|", "symbol", symbol)
-//     try {
-
-//         let payLoads = {
-//             id: userData?.id,
-//             chainId: previousData?.chainId,
-//             symbol
-//         }
-
-//         const response = await GetDepositDetailsApi(payLoads)
-//         setDepositDetailData(response)
-
-//         console.log(depositDetailData, ':::::depositDetailDatadepositDetailDatadepositDetailData');
-
-//         // props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.Barcode, params: {} })
-//     }
-//     catch (error) {
-
-//     }
-// }

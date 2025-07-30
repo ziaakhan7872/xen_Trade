@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
 import { ResponsiveText } from '../../../../components/ResponsiveText';
-import { useNavigation, useRoute } from '@react-navigation/native';
 import images from '../../../../images';
 import { colors, Routes } from '../../../../constants';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
@@ -9,7 +8,7 @@ import { fontFamily } from '../../../../constants/fonts';
 import { appStyles } from '../../../../utilities';
 import Spacer, { HorizontalSpacer } from '../../../../components/Spacer';
 
-export const BarcodeHeader = ({ BackPress, HistoryPress }) => {
+export const BarcodeHeader = ({ BackPress, HistoryPress, previousCrypto }) => {
   return (
     <View style={styles.header}>
       <View style={{ width: wp(55), flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
@@ -18,9 +17,9 @@ export const BarcodeHeader = ({ BackPress, HistoryPress }) => {
         </TouchableOpacity>
 
         <View style={styles.cryptoInfo}>
-          <Image source={images.UsdtLogo} style={styles.cryptoIcon} resizeMode="contain" />
+          <Image source={{ uri: previousCrypto?.icon }} style={styles.cryptoIcon} resizeMode="cover" />
           <HorizontalSpacer />
-          <ResponsiveText style={styles.cryptoSymbol}>USDT</ResponsiveText>
+          <ResponsiveText style={styles.cryptoSymbol}>{previousCrypto?.symbol.toUpperCase()}</ResponsiveText>
         </View>
       </View>
 
@@ -41,12 +40,12 @@ export const BarcodeHeader = ({ BackPress, HistoryPress }) => {
   );
 };
 
-export const NetworkSelector = () => {
+export const NetworkSelector = ({ networkList }) => {
   return (
     <View style={{ alignItems: "center" }}>
       <ResponsiveText style={styles.networkLabel}>Network</ResponsiveText>
       <TouchableOpacity style={styles.networkDropdown}>
-        <ResponsiveText style={styles.networkText}> Ethereum(ERC20) </ResponsiveText>``
+        <ResponsiveText style={styles.networkText}> {networkList?.networkList?.name + "(" + networkList?.networkList?.standard + ")"} </ResponsiveText>``
         <Image
           source={images.depositFilter}
           style={styles.dropdownArrow}
@@ -63,11 +62,10 @@ export const NetworkSelector = () => {
   );
 };
 
-export const AddressSection = () => {
-  const address = "0x21505337aa3b5254eb156ef4b851525824B6B55c";
+export const AddressSection = ({ walletAddress }) => {
+  const WalletAddress = walletAddress?.data?.walletAddress
 
   return (
-
     <View style={styles.addressSection}>
       <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: wp(4) }}>
         <ResponsiveText style={styles.addressLabel}>Address</ResponsiveText>
@@ -78,7 +76,7 @@ export const AddressSection = () => {
         />
       </View>
       <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: wp(4), justifyContent: "space-between" }}>
-        <ResponsiveText style={styles.addressText}>{address}</ResponsiveText>
+        <ResponsiveText style={styles.addressText}>{WalletAddress}</ResponsiveText>
         <TouchableOpacity style={styles.copyButton}>
           <ResponsiveText style={styles.copyText}>Copy</ResponsiveText>
         </TouchableOpacity>
@@ -88,7 +86,9 @@ export const AddressSection = () => {
 };
 
 // Details section component
-export const DetailsSection = () => {
+export const DetailsSection = ({ networkList, walletAddress }) => {
+  const contractAddress = walletAddress?.data?.contractAddress
+
   return (
     <View style={styles.detailsSection}>
       <View style={styles.detailSubSection}>
@@ -101,7 +101,7 @@ export const DetailsSection = () => {
             resizeMode="contain"
           />
         </View>
-        <ResponsiveText style={styles.detailValue}>0.01 USDT</ResponsiveText>
+        <ResponsiveText style={styles.detailValue}>{networkList?.networkList?.networks[0]?.minDeposit.slice(0, 4)}</ResponsiveText>
       </View>
       <View style={styles.detailSubSection}>
         <ResponsiveText style={styles.detailLabel}>Deposit account</ResponsiveText>
@@ -118,7 +118,7 @@ export const DetailsSection = () => {
       <View style={styles.detailSubSection}>
         <ResponsiveText style={styles.detailLabel}>Contract address</ResponsiveText>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <ResponsiveText style={styles.detailValue}>Ends with 821cc7</ResponsiveText>
+          <ResponsiveText style={styles.detailValue}>Ends With {contractAddress?.slice(-6)}</ResponsiveText>
           <HorizontalSpacer width={wp(1)} />
           <Image
             source={images.depositFilter}
@@ -170,13 +170,14 @@ export const styles = StyleSheet.create({
   cryptoIcon: {
     width: wp(6),
     height: wp(6),
+    borderRadius: 100,
     resizeMode: "contain"
   },
   cryptoSymbol: {
     fontSize: 18,
     color: colors.white,
     fontFamily: fontFamily.mainTextMedium,
-    fontWeight: "500"
+    marginBottom: wp(0.6)
   },
 
   actionButton: {
@@ -281,9 +282,9 @@ export const styles = StyleSheet.create({
   },
 
   detailValue: {
-    fontSize: 14,
+    fontSize: 16,
     color: colors.white,
-    fontFamily: fontFamily.appTextMedium,
+    fontFamily: fontFamily.mainTextMedium,
     textAlign: 'right',
   },
   detailDropdownArrow: {

@@ -1,28 +1,27 @@
 
-import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { AuthMainContainer } from '../../../components/authMainContainer';
-import {
-  BarcodeHeader,
-  NetworkSelector,
-  AddressSection,
-  DetailsSection
-} from './components';
+import { BarcodeHeader, NetworkSelector, AddressSection, DetailsSection } from './components';
 import Spacer from '../../../components/Spacer';
 import { Routes } from '../../../constants';
+import useBarcode from './Hooks';
 
 const Barcode = (props) => {
-  const networkList = props.route?.params?.networkList // get passed data from API while navigating to Barcode
+  const { networkList, previousCrypto, depositDetailData } = useBarcode(props)
+  // console.log("previousCryptopreviousCrypto", previousCrypto);
+  console.log("networkListnetworkListnetworkList", networkList)
+  console.log("depositDetailDatadepositDetailDatadepositDetailData", depositDetailData)
+
 
   return (
     <AuthMainContainer >
-      <BarcodeHeader BackPress={() => props?.navigation?.goBack()} HistoryPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory, })} />
+      <BarcodeHeader previousCrypto={previousCrypto} BackPress={() => props?.navigation?.goBack()} HistoryPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory, })} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <NetworkSelector />
+        <NetworkSelector networkList={networkList} />
         <Spacer />
-        <AddressSection />
+        <AddressSection walletAddress={depositDetailData} />
         <Spacer />
-        <DetailsSection />
+        <DetailsSection networkList={networkList} walletAddress={depositDetailData} />
       </ScrollView>
     </AuthMainContainer>
   );
