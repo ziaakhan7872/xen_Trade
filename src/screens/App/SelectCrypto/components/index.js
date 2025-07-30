@@ -53,7 +53,8 @@ export const PopularCrypto = ({ onPress, data }) => {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.cryptoSelectItem}
-            onPress={() => onPress(item.symbol, item.id)}
+            // onPress={() => onPress(item.symbol, item.id)}
+            onPress={() => onPress(item)}
           >
             <Image source={{ uri: item.icon }} style={styles.cryptoSelectIcon} resizeMode='cover' />
             <View style={styles.cryptoSelectDetails}>

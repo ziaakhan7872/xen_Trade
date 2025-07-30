@@ -1,7 +1,5 @@
-import { Alert, StyleSheet, Text, View } from 'react-native'
-import React, { useRef, useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
-import {  LoginVerificationApi } from '../../../../constants/Api/Index'
+import { useState } from 'react'
+import { LoginVerificationApi } from '../../../../constants/Api/Index'
 import { Routes } from '../../../../constants'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../../../../redux/slices/userSlice'
@@ -21,10 +19,10 @@ const UseLoginVerification = (props) => {
       const response = await LoginVerificationApi({ emailOtpCode: Number(otpCode), userId: userData?.id });
       console.log("Login verification response:", response);
       dispatch(setUser({
-      user: response?.data,  
-      token: response?.data?.accessToken, 
-      refreshToken: response?.data?.refreshToken
-    }));
+        user: response?.data,
+        token: response?.data?.accessToken,
+        refreshToken: response?.data?.refreshToken
+      }));
       props?.navigation?.navigate(Routes.BottomNavigator);
 
 

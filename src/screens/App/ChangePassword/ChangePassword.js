@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { MainHeader } from '../../../components/MainHeader'
@@ -11,7 +11,7 @@ import TextInputField from '../../../components/TextInputField'
 import { colors } from '../../../constants'
 import { SimpleButton } from '../../../components/SimpleButton'
 
-const changePassword = (props) => {
+const ChangePassword = (props) => {
     return (
         <AuthMainContainer>
             <View style={styles.containerMain}>
@@ -36,4 +36,4 @@ const changePassword = (props) => {
     )
 }
 
-export default changePassword
+export default ChangePassword

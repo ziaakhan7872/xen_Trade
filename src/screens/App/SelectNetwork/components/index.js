@@ -4,24 +4,25 @@ import { ResponsiveText } from '../../../../components/ResponsiveText';
 import { colors } from '../../../../constants';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { fontFamily } from '../../../../constants/fonts';
-import { Networks } from '../../../../utilities/dummyData';
 import { HorizontalSpacer } from '../../../../components/Spacer';
+// import { useSelector } from 'react-redux';
 
 
 export const NetworkList = ({ onPress, data }) => {
+  // const { user } = useSelector((state) => state.user);
   return (
     <View >
       <FlatList
         data={data}
         keyExtractor={(item, index) => item.id.toString() || index.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.networkItem} onPress={onPress} >
+          <TouchableOpacity style={styles.networkItem} onPress={() => onPress(item)} >
             <Image source={{ uri: item.logo }} style={styles.networkIcon} resizeMode="contain" />
             <HorizontalSpacer />
             <View style={styles.networkDetails}>
               <ResponsiveText style={styles.networkName}>{item.name + ' ' + '(' + item.standard + ')'}</ResponsiveText>
-              <ResponsiveText style={styles.networkInfo}>Minimum deposit: {item.minDeposit} </ResponsiveText>
-              <ResponsiveText style={styles.networkInfo}> Est arrival in {item.arrivalTime} </ResponsiveText>
+              <ResponsiveText style={styles.networkInfo}>Minimum deposit: {item.networks?.[0]?.minDeposit?.slice(0, 4) || 'N/A'} </ResponsiveText>
+              <ResponsiveText style={styles.networkInfo}> Est arrival in {item.arrivalTime ?? "~1 minute"} </ResponsiveText>
             </View>
           </TouchableOpacity>
         )}
