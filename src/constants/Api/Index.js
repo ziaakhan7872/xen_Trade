@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ASSETS_MANAGER_BASE_URL, AUTH_BASE_URL, getHeaders } from "../../Configs/ApiBaseUrl"
+import { ACCOUNTS_SERVICE_BASE_URL, ASSETS_MANAGER_BASE_URL, AUTH_BASE_URL, getHeaders } from "../../Configs/ApiBaseUrl"
 import { getAuthToken } from "../../redux/store"
 
 
@@ -39,11 +39,21 @@ export const GetMarketListApi = async() => {
     })
 }
 
+//Pair Api
+
 
 export const getPairApi = async(page,limit) => {
-    console.log("getPairApi called with page:", page, "and limit:", limit);
     return axios.get(`${ASSETS_MANAGER_BASE_URL}/pairs`, {
         headers: getHeaders(token),
         params: {page:page, limit:limit ,isActive:true}
+    })
+}
+
+//Account Api
+
+export const GetAccountBalanceMyMarket = async(userId,marketId) => {    
+    return axios.get(`${ACCOUNTS_SERVICE_BASE_URL}/account-details/account-balance-by-market`, {
+        headers: getHeaders(token),
+        params: {userId:userId, marketId:marketId }
     })
 }

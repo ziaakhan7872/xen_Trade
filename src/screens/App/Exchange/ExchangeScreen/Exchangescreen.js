@@ -17,15 +17,23 @@ import { ExchangeMainContainer } from '../../../../components/ExchangeMainContai
 import { Routes } from '../../../../constants'
 
 const Exchangescreen = (props) => {
-  const { 
-    buySellButton, setBuySellButton, 
-    buyerSlider, setBuyerSlider, sellSlider, setSelSlider, 
-    currentOrderHistoryPress, setCurrentOrderHistoryPress, 
-    currentOrder, 
-    isCurrentSymbol, setIsCurrentSymbol, 
-    tradngBottomSheetRef, 
-    tradingType, setTradingType, 
-    favouriteBottomSheetRef ,selectedData} = UseExchange(props)
+  const {
+    buySellButton, setBuySellButton,
+    buyerSlider, setBuyerSlider, sellSlider, setSelSlider,
+    currentOrderHistoryPress, setCurrentOrderHistoryPress,
+    currentOrder,
+    isCurrentSymbol, setIsCurrentSymbol,
+    tradngBottomSheetRef,
+    tradingType, setTradingType,
+    favouriteBottomSheetRef, selectedData,
+    availableBaseBalance, availableQuoteBalance,
+    price, setPrice,
+    quantity, setQuantity, discreaseQuantity, addQuantity,
+    cureentCoinPrice, setCurrentCoinPrice,
+    handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange
+  } = UseExchange(props)
+
+
   return (
     <ExchangeMainContainer>
       <View style={style.container}>
@@ -34,12 +42,31 @@ const Exchangescreen = (props) => {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={style.formandOrderBookView}>
             <View style={{ flex: 1, marginRight: wp(2), justifyContent: 'space-between' }}>
-              <BuySellRowButton  buySellButton={buySellButton} setBuySellButton={setBuySellButton} />
+              <BuySellRowButton buySellButton={buySellButton} setBuySellButton={setBuySellButton} />
               <Spacer height={hp(1)} />
               {buySellButton === "buy" ? (
-                <BuyForm marketData={selectedData} tradingType={tradingType} onPressTradingType={() => tradngBottomSheetRef?.current?.expand()} value={buyerSlider} setValue={setBuyerSlider} />
+                <BuyForm
+                  handleBuyPriceChange={handleBuyPriceChange}
+                  handleBuyQuantityChange={handleBuyQuantityChange}
+                  handleBuySliderChange={handleBuySliderChange}
+                  Price={price}
+                  setPrice={setPrice}
+                  currentCoinPrice={cureentCoinPrice}
+                  setCurrentCoinPrice={setCurrentCoinPrice}
+                  addQuantity={addQuantity}
+                  dicreaseQuantity={discreaseQuantity}
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                  QuoteBalance={availableQuoteBalance}
+                  marketData={selectedData}
+                  tradingType={tradingType}
+                  onPressTradingType={() => tradngBottomSheetRef?.current?.expand()}
+                  value={buyerSlider}
+                  setValue={setBuyerSlider}
+                />
+
               ) : (
-                <SellForm tradingType={tradingType} onPressTradingType={() => tradngBottomSheetRef?.current?.expand()} value={sellSlider} setValue={setSelSlider} />
+                <SellForm marketData={selectedData} tradingType={tradingType} onPressTradingType={() => tradngBottomSheetRef?.current?.expand()} value={sellSlider} setValue={setSelSlider} />
               )}
             </View>
 
