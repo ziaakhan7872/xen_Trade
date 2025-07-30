@@ -17,8 +17,9 @@ import { colors, fontFamily, Routes } from '../../../../../constants'
 import { hp, wp } from '../../../../../components/ResponsiveComponent'
 import Line from '../../../../../components/Liner'
 import { RenderFavouriteCoinList } from '../../Component/Index'
+import BigNumber from 'bignumber.js'
 
-export const ExchangeHeader = ({ onpress, onPressTradeGraph ,marketData}) => {
+export const ExchangeHeader = ({ onpress, onPressTradeGraph, marketData }) => {
     return (
         <View style={styles.header}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -50,7 +51,7 @@ export const BuySellRowButton = ({ buySellButton, setBuySellButton }) => {
     )
 }
 
-export const BuyForm = ({ setValue, value, onPressTradingType, tradingType,marketData }) => {
+export const BuyForm = ({handleBuySliderChange, handleBuyPriceChange, handleBuyQuantityChange, currentCoinPrice, setCurrentCoinPrice, addQuantity, dicreaseQuantity, quantity, setQuantity, Price, setPrice, QuoteBalance, setValue, value, onPressTradingType, tradingType, marketData }) => {
     const marks = [0, 25, 50, 75, 100];
 
     return (
@@ -61,15 +62,42 @@ export const BuyForm = ({ setValue, value, onPressTradingType, tradingType,marke
             </TouchableOpacity>
             <Spacer height={hp(1)} />
             <View style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3) }]}>
-                <ResponsiveText style={styles.minuePlusText}>-</ResponsiveText>
-                <ResponsiveText style={styles.text1}>22976.27</ResponsiveText>
-                <ResponsiveText style={styles.minuePlusText}>+</ResponsiveText>
+
+                <TouchableOpacity onPress={() => setCurrentCoinPrice(currentCoinPrice - 1)}>
+                    <ResponsiveText style={styles.minuePlusText}>-</ResponsiveText>
+                </TouchableOpacity>
+
+                <TextInput
+                    style={{ textAlign: 'center', minWidth: wp(10), maxWidth: wp(30), color: colors.white }}
+                    value={currentCoinPrice ? currentCoinPrice.toString() : ""}
+                    onChangeText={setCurrentCoinPrice}
+                    keyboardType="numeric"
+                    placeholderTextColor={colors.placeHolderTextColor}
+                />
+
+                <TouchableOpacity onPress={() => setCurrentCoinPrice(currentCoinPrice + 1)}>
+                    <ResponsiveText style={styles.minuePlusText}>+</ResponsiveText>
+                </TouchableOpacity>
             </View>
             <Spacer height={hp(1)} />
             <View style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3) }]}>
-                <ResponsiveText style={styles.minuePlusText}>-</ResponsiveText>
-                <ResponsiveText style={styles.text1}>12</ResponsiveText>
-                <ResponsiveText style={styles.minuePlusText}>+</ResponsiveText>
+
+                <TouchableOpacity onPress={dicreaseQuantity}>
+                    <ResponsiveText style={styles.minuePlusText}>-</ResponsiveText>
+                </TouchableOpacity>
+
+                <TextInput
+                    style={{ textAlign: 'center', minWidth: wp(10), maxWidth: wp(30), color: colors.white }}
+                    value={quantity.toString()}
+                    onChangeText={handleBuyQuantityChange}
+                    placeholder={`Amount ${marketData?.base}`}
+                    keyboardType="numeric"
+                    placeholderTextColor={colors.placeHolderTextColor}
+                />
+
+                <TouchableOpacity onPress={addQuantity}>
+                    <ResponsiveText style={styles.minuePlusText}>+</ResponsiveText>
+                </TouchableOpacity>
             </View>
             <Spacer height={hp(1)} />
             <View style={{ width: wp(45), alignSelf: "flex-start" }}>
@@ -78,12 +106,12 @@ export const BuyForm = ({ setValue, value, onPressTradingType, tradingType,marke
                     style={{ width: wp(45), height: 40 }}
                     minimumValue={0}
                     maximumValue={100}
-                    step={25}
+                    step={1}
                     value={value}
                     minimumTrackTintColor={colors.white}
                     maximumTrackTintColor={colors.cardBorderColor}
                     thumbTintColor={colors.white}
-                    onValueChange={(val) => setValue(val)}
+                    onValueChange={handleBuySliderChange}
                 />
 
                 <View style={styles.tickContainer}>
@@ -100,18 +128,18 @@ export const BuyForm = ({ setValue, value, onPressTradingType, tradingType,marke
                 </View>
             </View>
             <Spacer height={hp(1)} />
-            <TextInput style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3) }]} />
+            <TextInput value={Price ? Price.toString() : ""} onChangeText={handleBuyPriceChange} placeholder={`Amount ${marketData?.quote}`} placeholderTextColor={colors.placeHolderTextColor} style={styles.inputTextStyling} keyboardType='numeric' />
             <Spacer height={hp(1)} />
             <View style={{ width: wp(43), flexDirection: "row", justifyContent: "space-between" }}>
                 <View>
                     <ResponsiveText style={styles.label2}>Balance</ResponsiveText>
                     <Spacer height={hp(1)} />
-                    <ResponsiveText style={styles.label2}>Fee</ResponsiveText>
+                    {/* <ResponsiveText style={styles.label2}>Fee</ResponsiveText> */}
                 </View>
                 <View>
-                    <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.0342 USDT</ResponsiveText>
+                    <ResponsiveText style={[styles.label3, { color: colors.white }]}>{Number(QuoteBalance).toFixed(3)} {marketData?.quote}</ResponsiveText>
                     <Spacer height={hp(1)} />
-                    <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.000342 USDT</ResponsiveText>
+                    {/* <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.000342 USDT</ResponsiveText> */}
                 </View>
             </View>
             <Spacer height={hp(1)} />
@@ -122,13 +150,13 @@ export const BuyForm = ({ setValue, value, onPressTradingType, tradingType,marke
                 <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.000342 USDT</ResponsiveText>
             </View>
             <Spacer />
-            <SimpleButton buttonWidth={wp(43)} backgroundColor={colors.green} height={hp(4.5)} textColor={colors.white} />
+            <SimpleButton buttonWidth={wp(43)} backgroundColor={colors.green} height={hp(4.5)} textColor={colors.white} text={`Buy ${marketData?.base}`} />
 
         </>
 
     )
 }
-export const SellForm = ({ setValue, value, onPressTradingtype, tradingType }) => {
+export const SellForm = ({ setValue, value, onPressTradingtype, tradingType, marketData }) => {
     const marks = [0, 25, 50, 75, 100];
 
     return (
@@ -178,7 +206,14 @@ export const SellForm = ({ setValue, value, onPressTradingtype, tradingType }) =
                 </View>
             </View>
             <Spacer height={hp(1)} />
-            <TextInput style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3) }]} />
+            <TextInput
+                // value={Price}
+                // onChangeText={setPrice}
+                placeholder={`Amount ${marketData?.quote}`}
+                placeholderTextColor={colors.placeHolderTextColor}
+                style={styles.inputTextStyling}
+                keyboardType="numeric"
+            />
             <Spacer height={hp(1)} />
             <View style={{ width: wp(43), flexDirection: "row", justifyContent: "space-between" }}>
                 <View>
@@ -200,7 +235,7 @@ export const SellForm = ({ setValue, value, onPressTradingtype, tradingType }) =
                 <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.000342 USDT</ResponsiveText>
             </View>
             <Spacer />
-            <SimpleButton buttonWidth={wp(43)} backgroundColor={colors.red} height={hp(4.5)} textColor={colors.white} text={"Sell"} />
+            <SimpleButton buttonWidth={wp(43)} backgroundColor={colors.red} height={hp(4.5)} textColor={colors.white} text={`Sell ${marketData?.base}`} />
 
         </>
 
@@ -511,6 +546,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
         color: colors.white
     },
+    inputTextStyling: {
+        width: wp(43),
+        height: hp(4.5),
+        borderRadius: wp(3),
+        backgroundColor: colors.cardsBgColor,
+        color: colors.white,
+        textAlign: 'center',
+        fontSize: 14,
+        fontFamily: fontFamily.appTextRegular,
+
+
+    },
     orderBookView: {
         width: wp(43),
 
@@ -695,6 +742,18 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         fontFamily: fontFamily.mainTextMedium,
         color: colors.white
+    },
+    InputText: {
+        width: wp(30),
+        height: hp(2),
+        color: colors.white,
+        fontFamily: fontFamily.appTextRegular,
+        fontSize: 14,
+        textAlign: "center",
+        backgroundColor: colors.cardsBgColor,
+        borderRadius: wp(3),
+        borderWidth: 1,
+        borderColor: colors.cardBorderColor,
     }
 
 

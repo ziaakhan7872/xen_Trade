@@ -45,19 +45,20 @@ export const SelectCryptoSearchBox = () => {
     )
 }
 
-export const PopularCrypto = ({ onPress }) => {
+export const PopularCrypto = ({ data, onPress }) => {
     return (
         <View >
             <FlatList
-                data={coinData}
+                data={data}
                 keyExtractor={(item, index) => item.id.toString() || index.toString()}
                 renderItem={({ item }) => (
                     <TouchableOpacity
                         style={styles.cryptoSelectItem}
-                        onPress={onPress}
+                        onPress={() => onPress(item)}
                     >
                         <View style={{ flexDirection: "row" }}>
-                            <Image source={item.icon} style={styles.cryptoSelectIcon} resizeMode="contain" />
+                            <Image source={{ uri: item?.icon }} style={styles.cryptoSelectIcon} resizeMode="cover" />
+                            <HorizontalSpacer width={wp(2)} />
                             <View style={styles.cryptoSelectDetails}>
                                 <ResponsiveText style={styles.cryptoSymbol}>{item.symbol}</ResponsiveText>
                                 <ResponsiveText style={styles.cryptoName}>{item.name}</ResponsiveText>
@@ -65,9 +66,21 @@ export const PopularCrypto = ({ onPress }) => {
                         </View>
 
                         <View style={styles.cryptoSelectDetails}>
-                            <ResponsiveText style={[styles.cryptoSymbol, { textAlign: "right" }]}>{item.amount}</ResponsiveText>
-                            <ResponsiveText style={[styles.cryptoName, { textAlign: "right" }]}>{item.value}</ResponsiveText>
-                        </View>
+                            <ResponsiveText style={[styles.cryptoSymbol, { textAlign: "right" }]}>
+                                {item?.account?.amount
+                                    ? item?.account?.amount.toString().includes(".")
+                                        ? Number(item.account.amount).toFixed(4)
+                                        : item.account.amount
+                                    : "0"}
+                            </ResponsiveText>
+                            <ResponsiveText style={[styles.cryptoName, { textAlign: "right" }]}>
+                                $ {item?.account?.amount
+                                    ? item?.account?.amount.toString().includes(".")
+                                        ? Number(item.account.amount).toFixed(4)
+                                        : item.account.amount
+                                    : "0"}
+                            </ResponsiveText>                       
+                             </View>
                     </TouchableOpacity>
                 )}
 
@@ -75,30 +88,31 @@ export const PopularCrypto = ({ onPress }) => {
         </View>
     )
 }
-export const SelectCryptoRowButton = ({ data=coinData ,onPress}) => {
-  return (
-    <View>
-      <FlatList
-        data={data}
-        keyExtractor={(item, index) => item.id.toString() || index.toString()}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: wp(5) }}  
-        ItemSeparatorComponent={() => (
-          <HorizontalSpacer width={wp(2)} />  
-        )}
-        renderItem={({ item }) => (
-          <View style={{ marginHorizontal: wp(0.2) }}>  
-            <TouchableOpacity onPress={onPress} style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.gray3 ,paddingVertical:hp(0.8),paddingHorizontal:wp(2.4),borderRadius:wp(5)}}>
-              <Image style={styles.image} source={item.icon} />
-              <HorizontalSpacer width={wp(1)} />
-              <ResponsiveText style={styles.text2}>{item.symbol}</ResponsiveText>
-            </TouchableOpacity>
-          </View>
-        )}
-      />
-    </View>
-  );
+export const SelectCryptoRowButton = ({ data, onPress }) => {
+    console.log("Data in SelectCryptoRowButton", data[0]?.icon)
+    return (
+        <View>
+            <FlatList
+                data={data}
+                keyExtractor={(item, index) => item.id.toString() || index.toString()}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{ paddingHorizontal: wp(5) }}
+                ItemSeparatorComponent={() => (
+                    <HorizontalSpacer width={wp(2)} />
+                )}
+                renderItem={({ item }) => (
+                    <View style={{ marginHorizontal: wp(0.2) }}>
+                        <TouchableOpacity onPress={() => onPress(item)} style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.gray3, paddingVertical: hp(0.8), paddingHorizontal: wp(2.4), borderRadius: wp(5) }}>
+                            <Image style={styles.image} source={{ uri: item?.icon }}  resizeMode='contain'/>
+                            <HorizontalSpacer width={wp(1)} />
+                            <ResponsiveText style={styles.text2}>{item?.symbol}</ResponsiveText>
+                        </TouchableOpacity>
+                    </View>
+                )}
+            />
+        </View>
+    );
 };
 
 
@@ -165,7 +179,7 @@ const styles = StyleSheet.create({
     cryptoSelectIcon: {
         width: wp(9),
         height: wp(9),
-        marginRight: wp(3),
+        borderRadius: 100
     },
     cryptoSelectDetails: {
         // flex: 1,
@@ -183,7 +197,8 @@ const styles = StyleSheet.create({
     image: {
         width: wp(6),
         height: wp(6),
-        resizeMode: "contain"
+        resizeMode: "contain",
+        borderRadius:100
     },
     text2: {
         fontSize: 14,

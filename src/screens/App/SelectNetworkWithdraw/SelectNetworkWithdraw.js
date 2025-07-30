@@ -8,8 +8,10 @@ import { Routes } from '../../../constants';
 import { MainHeader } from '../../../components/MainHeader';
 import { NetworkList } from './Component/Index';
 import { styles } from './Style';
+import { UseSelectNetworkWithdraw } from './Hooks/Index';
 
 const SelectNetworkWithdraw = (props) => {
+  const {networkList,setNetworkList,handleNetworkPress} = UseSelectNetworkWithdraw(props)
   return (
     <AuthMainContainer>
       <View style={styles.mainHeaderView}>
@@ -17,7 +19,7 @@ const SelectNetworkWithdraw = (props) => {
       </View>
       <ScrollView contentContainerStyle={{ flexGrow:1 }}>
         <Spacer/>
-        <NetworkList onPress={()=>props?.navigation?.navigate(Routes.AppNavigator, {screen: Routes.WithDraw,})} />
+        <NetworkList Data={networkList} onPress={handleNetworkPress} />
       </ScrollView>
     </AuthMainContainer>
   );

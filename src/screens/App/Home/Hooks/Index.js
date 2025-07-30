@@ -4,9 +4,7 @@ import { useSelector } from 'react-redux';
 
 const useHome = (props) => {
   const { user, token, refreshToken } = useSelector((state) => state.user);
-  console.log("User Data:", user);
-  console.log("Token:", token);
-  console.log("Refresh Token:", refreshToken);
+
 
     const [threeRowTabButtonPress,setThreeRowTabButtonPress] = useState("portfolio")
     const [portfolioButton,setPortfolioButton] = useState("weekly")

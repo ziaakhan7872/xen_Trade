@@ -10,6 +10,7 @@ export const useSelectCrypto = (props) => {
         DisplayCryptoList()
     }, [])
 
+
     const DisplayCryptoList = async () => {
         console.log("Starting API Request")
 

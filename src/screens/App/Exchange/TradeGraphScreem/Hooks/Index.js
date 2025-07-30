@@ -3,7 +3,6 @@ import { Routes } from "../../../../../constants";
 
 const UseTradeGraphScreen = (props) => {
    const { selectedData } = props?.route?.params || {}
-   console.log("UseTradeGraphScreen called with selectedData:", selectedData)
   const favouriteBottomSheetRef = useRef(null)
   const [starPress, setStarPress] = useState(false);
   const [orderBookHeaderPress, setOrderBookHeaderPress] = useState("orderbook")
