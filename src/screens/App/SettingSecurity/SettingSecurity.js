@@ -10,7 +10,7 @@ import Spacer from '../../../components/Spacer'
 import { hp } from '../../../components/ResponsiveComponent'
 import useSettingSecurity from './Hooks'
 
-const settingSecurity = (props) => {
+const SettingSecurity = (props) => {
     const {
         isBiometricEnabled, setIsBiometricEnabled,
         isScreenshotEnabled, setIsScreenshotEnabled,
@@ -40,4 +40,4 @@ const settingSecurity = (props) => {
     )
 }
 
-export default settingSecurity
+export default SettingSecurity

@@ -11,7 +11,7 @@ import { styles } from './styles'
 import TextInputField from '../../../components/TextInputField'
 import { colors } from '../../../constants'
 
-const antiPhishingCode = (props) => {
+const AntiPhishingCode = (props) => {
     return (
         <AuthMainContainer>
             <View style={styles.containerMain}>
@@ -36,4 +36,4 @@ const antiPhishingCode = (props) => {
     )
 }
 
-export default antiPhishingCode
+export default AntiPhishingCode
