@@ -39,5 +39,5 @@ export const Routes = {
     WithdrawDetails: "WithdrawDetails",
     SelectCryptoWithDraw: "SelectCryptoWithDraw",
     SelectNetworkWIthdraw: "SelectNetworkWIthdraw",
-
+    DepositDetails: "DepositDetails",
 }
