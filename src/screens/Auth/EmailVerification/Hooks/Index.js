@@ -16,9 +16,12 @@ const useEmalVerification = (props) => {
         console.error("OTP code is required");
         return;
       }
-      const response = await EmailVerificationApi({ emailOtpCode: Number(otpCode), userId: userData?.id });
+      const payload = {
+        emailOtpCode:Number(otpCode),
+        userId:userData?.id
+      }
+      const response = await EmailVerificationApi(payload);
       console.log("Email verification response:", response);
-      // Alert.alert(response?.message)
       emailVerificationBottomSheetRef?.current?.expand()
 
 

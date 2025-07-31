@@ -8,9 +8,11 @@ import { hp } from '../../../components/ResponsiveComponent'
 import { View } from 'react-native'
 import { MainHeader } from '../../../components/MainHeader'
 import images from '../../../images'
+import { UseWithdrawDetail } from './Hooks'
 
 
 const WithdrawDetails = (props) => {
+  const {CryptoData,network,response} = UseWithdrawDetail(props)
   return (
     <AuthMainContainer>
       <View style={styles.containerMain}>

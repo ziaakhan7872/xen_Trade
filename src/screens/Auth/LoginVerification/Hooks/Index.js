@@ -16,7 +16,12 @@ const UseLoginVerification = (props) => {
         console.error("OTP code is required");
         return;
       }
-      const response = await LoginVerificationApi({ emailOtpCode: Number(otpCode), userId: userData?.id });
+      const payload={
+        emailOtpCode:Number(otpCode),
+        rememberMe:true,
+        userId:userData?.id
+      }
+      const response = await LoginVerificationApi(payload);
       console.log("Login verification response:", response);
       dispatch(setUser({
         user: response?.data,

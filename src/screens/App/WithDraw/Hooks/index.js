@@ -23,17 +23,17 @@ export const UseWidthDraw = (props) => {
     try {
       const payload = {
         userId: user?.id,
-        market: cryptoData?.market?.symbol,
+        market: cryptoData?.account?.market?.symbol,
         amount: receivedAmount,
         recipientAddress: address,
         chain: network?.name
       }
-
+      console.log("payload",payload)
       const response = await WithdrawOnchain(payload)
       console.log(response)
       WithdrawConfirmationRef?.current?.close()
       setTimeout(() => {
-        props?.navigation?.navigate(Routes?.WithdrawDetails)
+        props?.navigation?.navigate(Routes?.WithdrawDetails,{CryptoData:cryptoData,network:network,response:response?.data?.data})
       }, 300);
 
     } catch (error) {

@@ -4,27 +4,28 @@ import { getAuthToken } from "../../redux/store"
 
 
 const token = getAuthToken()
+console.log("token",token)
 
 // AuthApis
 
-export const SignUpApi = async ({ email, password, phoneNo, referredByCode }) => {
-    return axios.post(`${AUTH_BASE_URL}/auth/signup`, { email: email, password: password, phoneNo: phoneNo, referredByCode: referredByCode }, {
+export const SignUpApi = async (payload) => {
+    return axios.post(`${AUTH_BASE_URL}/auth/signup`,payload, {
         headers: getHeaders()
     })
 }
 
-export const EmailVerificationApi = async ({ emailOtpCode, userId }) => {
-    return axios.post(`${AUTH_BASE_URL}/verifications/otp-code`, { emailOtpCode: emailOtpCode, userId: userId }, {
+export const EmailVerificationApi = async (payload) => {
+    return axios.post(`${AUTH_BASE_URL}/verifications/otp-code`,payload, {
         headers: getHeaders()
     })
 }
-export const LoginVerificationApi = async ({ emailOtpCode, userId }) => {
-    return axios.post(`${AUTH_BASE_URL}/verifications/login-otp`, { emailOtpCode: emailOtpCode, rememberMe: true, userId: userId }, {
+export const LoginVerificationApi = async (payload) => {
+    return axios.post(`${AUTH_BASE_URL}/verifications/login-otp`, payload, {
         headers: getHeaders()
     })
 }
-export const LoginApi = async ({ email, password }) => {
-    return axios.post(`${AUTH_BASE_URL}/auth/login`, { email: email, password: password }, {
+export const LoginApi = async (payload) => {
+    return axios.post(`${AUTH_BASE_URL}/auth/login`, payload, {
         headers: getHeaders()
     })
 }
@@ -87,9 +88,9 @@ export const getAccountDetail = async (page, limit, userId) => {
 
 // Withdraw Api
 
-export const WithdrawOnchain = async ({ Payload }) => {
-    return axios.post(`${ACCOUNTS_SERVICE_BASE_URL}/withdrawals/on-chain`,
-        Payload, {
+export const WithdrawOnchain = async (Payload ) => {
+    console.log("payload in function ",Payload )
+    return axios.post(`${ACCOUNTS_SERVICE_BASE_URL}/withdrawals/on-chain`, Payload, {
         headers: getHeaders(token)
     })
 }
