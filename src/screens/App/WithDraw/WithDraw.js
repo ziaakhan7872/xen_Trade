@@ -19,7 +19,7 @@ const WithDraw = (props) => {
     error, setError,
     amountReceived, setAmountReceived,
     cryptoData, network,
-    handleSubmit
+    handleSubmit,handleCopy
 
 
   } = UseWidthDraw(props)
@@ -46,6 +46,7 @@ const WithDraw = (props) => {
       />
       <Portal>
         <WithDrawConfirmationBottomSheet
+        handleCopy={handleCopy}
           address={address}
           amount={amount}
           Network={network}

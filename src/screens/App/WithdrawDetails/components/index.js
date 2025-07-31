@@ -8,121 +8,125 @@ import Spacer from '../../../../components/Spacer';
 import { appStyles } from '../../../../utilities';
 import { SimpleButton } from '../../../../components/SimpleButton';
 import Line from '../../../../components/Liner';
+import moment from 'moment';
 
-const steps = [
-  {
-    title: 'Withdrawal request submitted',
-    date: '09/01/2024, 21:19:27',
-  },
-  {
-    title: 'Pending',
-    description: 'You have one minute to cancel',
-  },
-  {
-    title: 'In progress',
-  },
-  {
-    title: 'Sent',
-  },
-]
 
-export const ProgressWithdraw = () => {
-  const currentStep = 2 // Make dynamic later
+const getStatusStyles = (status, step) => {
+  switch (step) {
+    case "submitted":
+      return status === "pending" || status === "inProgress" || status === "sent" ? styles.progressStepTitleActive : styles.progressStepTitleInactive;
+    case "pending":
+      return status === "pending" || status === "inProgress" || status === "sent" ? styles.progressStepTitleActive : styles.progressStepTitleInactive;
+    case "inProgress":
+      return status === "inProgress" || status === "sent" ? styles.progressStepTitleActive : styles.progressStepTitleInactive;
+    case "sent":
+      return status === "sent" ? styles.progressStepTitleActive : styles.progressStepTitleInactive;
+    default:
+      return styles.progressStepTitleInactive;
+  }
+};
+
+const getStepCircleStyles = (status, step) => {
+  switch (step) {
+    case "submitted":
+      return status === "pending" || status === "inProgress" || status === "sent" ? styles.stepCircleCompleted : styles.stepCircleInactive;
+    case "pending":
+      return status === "pending" || status === "inProgress" || status === "sent" ? styles.stepCircleCompleted : styles.stepCircleInactive;
+    case "inProgress":
+      return status === "inProgress" || status === "sent" ? styles.stepCircleCompleted : styles.stepCircleInactive;
+    case "sent":
+      return status === "sent" ? styles.stepCircleCompleted : styles.stepCircleInactive;
+    default:
+      return styles.stepCircleInactive;
+  }
+};
+
+const getTickIconStyles = (status, step) => {
+  switch (step) {
+    case "submitted":
+      return status === "pending" || status === "inProgress" || status === "sent" ? styles.tickIconCompleted : styles.tickIconInactive;
+    case "pending":
+      return status === "pending" || status === "inProgress" || status === "sent" ? styles.tickIconCompleted : styles.tickIconInactive;
+    case "inProgress":
+      return status === "inProgress" || status === "sent" ? styles.tickIconCompleted : styles.tickIconInactive;
+    case "sent":
+      return status === "sent" ? styles.tickIconCompleted : styles.tickIconInactive;
+    default:
+      return styles.tickIconInactive;
+  }
+};
+
+const shouldShowVerticalLine = (step) => {
+  return step !== "sent"; // Do not show the vertical line after "sent"
+};
+
+
+export const ProgressWithdraw = ({ response }) => {
+
 
   return (
     <View style={styles.progressContainer}>
       <ResponsiveText style={styles.progressAmountLabel}>Amount</ResponsiveText>
-      <ResponsiveText style={styles.progressAmountValue}>-15.619111 ETH</ResponsiveText>
+      <ResponsiveText style={styles.progressAmountValue}>{response?.amount && (parseFloat(response.amount).toFixed(5))} {response?.symbol}</ResponsiveText>
       <Spacer height={hp(1.2)} />
-      <View style={styles.progressStepsBox}>
-        {steps.map((step, index) => {
-          const isCompleted = index < currentStep
-          const isActive = index === currentStep - 1
-          const isLast = index === steps.length - 1
 
-          return (
-            <View style={styles.progressStepRow} key={index}>
-              <View style={styles.progressStepIndicator}>
+      <View style={styles.progressStepsBox}>
+        {["submitted", "pending", "inProgress", "sent"].map((step) => (
+          <View key={step} style={styles.progressStepRow}>
+            <View style={styles.progressStepIndicator}>
+              <View style={[getStepCircleStyles(response?.status, step), styles.stepCircle]}>
+                <Image
+                  source={images.simpleTick}
+                  style={[getTickIconStyles(response?.status, step), styles.tickIcon]}
+                />
+              </View>
+
+              {shouldShowVerticalLine(step) && (
                 <View
                   style={[
-                    styles.stepCircle,
-                    isCompleted
-                      ? styles.stepCircleCompleted
-                      : isActive
-                        ? styles.stepCircleActive
-                        : styles.stepCircleInactive,
+                    styles.verticalLine,
+                    (step === "submitted" || response?.status === "inProgress" || response?.status === "sent")
+                      ? styles.verticalLineActive
+                      : styles.verticalLineInactive,
                   ]}
-                >
-                  <Image
-                    source={images.simpleTick}
-                    style={[
-                      styles.tickIcon,
-                      isCompleted
-                        ? styles.tickIconCompleted
-                        : isActive
-                          ? styles.tickIconActive
-                          : styles.tickIconInactive,
-                    ]}
-                  />
-                </View>
+                />
+              )}
 
-                {!isLast && (
-                  <View
-                    style={[
-                      styles.verticalLine,
-                      index < currentStep
-                        ? styles.verticalLineActive
-                        : styles.verticalLineInactive,
-                    ]}
-                  />
-                )}
-              </View>
-
-              <View>
-                <ResponsiveText
-                  style={
-                    isCompleted
-                      ? styles.progressStepTitleActive
-                      : styles.progressStepTitleInactive
-                  }
-                >
-                  {step.title}
-                </ResponsiveText>
-
-                {step.date && (
-                  <ResponsiveText style={styles.progressStepDate}>
-                    {step.date}
-                  </ResponsiveText>
-                )}
-
-                {step.description && (
-                  <ResponsiveText style={styles.progressStepDesc}>
-                    {step.description}
-                  </ResponsiveText>
-                )}
-              </View>
             </View>
-          )
-        })}
+            <View>
+              <ResponsiveText style={getStatusStyles(response?.status, step)}>
+                {step === "submitted" && "Withdrawal request submitted"}
+                {step === "pending" && "Pending"}
+                {step === "inProgress" && "In Progress"}
+                {step === "sent" && "Sent"}
+              </ResponsiveText>
+
+              <ResponsiveText style={styles.progressStepDate}>
+                {step === "submitted" && response?.createdAt && moment(response.createdAt).format("DD/MM/YYYY, HH:mm:ss")}
+              </ResponsiveText>
+            </View>
+          </View>
+        ))}
       </View>
     </View>
-  )
-}
+  );
+};
 
-export const WithdrawDetailsContainer = ({ address = "0x21505337aa3b5254eb154b", fee = "0.15 USDT", time = "09/01/2024, 21:19:27", reference = "227491076" }) => {
+
+export const WithdrawDetailsContainer = ({ cryptoData,network,response}) => {
   return (
     <View >
       <View style={styles.componentHeader}>
         <View style={styles.confirmItem}>
           <ResponsiveText style={styles.confirmLabel}>Blockchain</ResponsiveText>
-          <ResponsiveText style={styles.confirmValue}>TON</ResponsiveText>
+          <ResponsiveText style={styles.confirmValue}>{response?.networkName}</ResponsiveText>
         </View>
         <Line height={hp(0.1)} width={wp(91.5)} />
         <View style={styles.confirmItem}>
           <ResponsiveText style={styles.confirmLabel}>Address</ResponsiveText>
           <View style={appStyles.rowBasic}>
             <ResponsiveText style={[styles.confirmValue, { width: wp(50), overflow: 'hidden', textOverflow: 'ellipsis' }]} numberOfLines={1}>
-              {address}
+              {response?.tokenAddress}
             </ResponsiveText>
             <TouchableOpacity>
               <Image source={images.copyIcon} style={styles.confirmCopyIcon} />
@@ -132,17 +136,17 @@ export const WithdrawDetailsContainer = ({ address = "0x21505337aa3b5254eb154b",
         <Line height={hp(0.1)} width={wp(91.5)} />
         <View style={styles.confirmItem}>
           <ResponsiveText style={styles.confirmLabel}>Network fee</ResponsiveText>
-          <ResponsiveText style={styles.confirmValue}>{fee}</ResponsiveText>
+          <ResponsiveText style={styles.confirmValue}>{network?.fee || 0} {network?.name}</ResponsiveText>
         </View>
         <Line height={hp(0.1)} width={wp(91.5)} />
         <View style={styles.confirmItem}>
           <ResponsiveText style={styles.confirmLabel}>Time</ResponsiveText>
-          <ResponsiveText style={styles.confirmValue}>{time}</ResponsiveText>
+          <ResponsiveText style={styles.confirmValue}>{moment(response.createdAt).format("DD/MM/YYYY, HH:mm:ss")}</ResponsiveText>
         </View>
         <Line height={hp(0.1)} width={wp(91.5)} />
         <View style={styles.confirmItem}>
           <ResponsiveText style={styles.confirmLabel}>Reference no.</ResponsiveText>
-          <ResponsiveText style={styles.confirmValue}>{reference}</ResponsiveText>
+          <ResponsiveText style={styles.confirmValue}>{response.createdAt || "227491076"}</ResponsiveText>
         </View>
       </View>
     </View>
