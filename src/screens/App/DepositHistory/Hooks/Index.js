@@ -1,12 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { GetDepositHistoryApi } from '../../../../constants/Api/Index'
+import { useSelector } from 'react-redux'
 
 export const UseDepositHstory = () => {
     const allCryptoFilterRef = useRef(null)
     const StatusRef = useRef(null)
+    const userData = useSelector((state) => state.user)
     const [selectedSymbol, SetSelectedSymbol] = useState("All crypto")
     const [selectedStatus, SetSelectedStatus] = useState("All statuses")
-
+    const [depositHistory, setDepositHistory] = useState([])
 
     const cryptoData = [
         { id: '1', name: 'All crypto', symbol: 'ALL' },
@@ -28,12 +31,28 @@ export const UseDepositHstory = () => {
         { id: '4', name: 'Others' },
     ];
 
+    useEffect(() => {
+        DepositHistoryData()
+    }, [])
+
+    const DepositHistoryData = async (userId) => {
+        try {
+            userId = userData?.user?.id
+            const depositHistoryRes = await GetDepositHistoryApi(userId)
+            setDepositHistory(depositHistoryRes?.data)
+        }
+        catch (error) {
+            console.log("Error fetching DepositHistoryData", userId, "|||", error)
+        }
+    }
+
 
     return {
         allCryptoFilterRef, StatusRef,
         cryptoData, statusData,
         selectedSymbol, SetSelectedSymbol,
-        selectedStatus,SetSelectedStatus
+        selectedStatus, SetSelectedStatus,
+        depositHistory
     }
 }
 

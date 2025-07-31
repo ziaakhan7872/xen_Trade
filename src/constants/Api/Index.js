@@ -1,21 +1,21 @@
 import axios from "axios"
-import { ACCOUNTS_SERVICE_BASE_URL, ASSETS_MANAGER_BASE_URL, AUTH_BASE_URL, getHeaders } from "../../Configs/ApiBaseUrl"
+import { ACCOUNTS_SERVICE_BASE_URL, ASSETS_MANAGER_BASE_URL, ASSETS_MANAGER_BASE_URL2, AUTH_BASE_URL, getHeaders } from "../../Configs/ApiBaseUrl"
 import { getAuthToken } from "../../redux/store"
 
 
 const token = getAuthToken()
-console.log("token",token)
+console.log("token", token)
 
 // AuthApis
 
 export const SignUpApi = async (payload) => {
-    return axios.post(`${AUTH_BASE_URL}/auth/signup`,payload, {
+    return axios.post(`${AUTH_BASE_URL}/auth/signup`, payload, {
         headers: getHeaders()
     })
 }
 
 export const EmailVerificationApi = async (payload) => {
-    return axios.post(`${AUTH_BASE_URL}/verifications/otp-code`,payload, {
+    return axios.post(`${AUTH_BASE_URL}/verifications/otp-code`, payload, {
         headers: getHeaders()
     })
 }
@@ -30,7 +30,7 @@ export const LoginApi = async (payload) => {
     })
 }
 
-// MarketApis
+// MarketApis for Deposit Flow
 export const GetCryptoListApi = async (page, limit) => {
     return axios.get(`${ASSETS_MANAGER_BASE_URL}/markets`, {
         headers: getHeaders(token),
@@ -43,18 +43,16 @@ export const GetNetworkListApi = async (symbol) => {
         params: { symbol },
     })
 }
-// export const GetNetworkMinDepApi = async (payloads) => {
-//     return axios.get(`${ASSETS_MANAGER_BASE_URL}/networks`, {
-//         headers: getHeaders(token),
-//         params: { payloads },
-//     })
-// }
-
 export const GetDepositDetailsApi = async (payLoads) => {
     return axios.get(`${ACCOUNTS_SERVICE_BASE_URL}/accounts/user-account`, {
         headers: getHeaders(token),
-        // params: { id, chainId, symbol },
         params: payLoads
+    })
+}
+export const GetDepositHistoryApi = async (userId) => {
+    return axios.get(`${ASSETS_MANAGER_BASE_URL2}/deposits`, {
+        headers: getHeaders(token),
+        params: { userId }
     })
 }
 
@@ -88,8 +86,8 @@ export const getAccountDetail = async (page, limit, userId) => {
 
 // Withdraw Api
 
-export const WithdrawOnchain = async (Payload ) => {
-    console.log("payload in function ",Payload )
+export const WithdrawOnchain = async (Payload) => {
+    console.log("payload in function ", Payload)
     return axios.post(`${ACCOUNTS_SERVICE_BASE_URL}/withdrawals/on-chain`, Payload, {
         headers: getHeaders(token)
     })

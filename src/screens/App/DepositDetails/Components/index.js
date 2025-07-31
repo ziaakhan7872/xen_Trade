@@ -1,4 +1,4 @@
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, Platform, StyleSheet, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
 import images from '../../../../images'
@@ -7,6 +7,7 @@ import { appStyles } from '../../../../utilities'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import Spacer from '../../../../components/Spacer'
 import Line from '../../../../components/Liner'
+import Clipboard from '@react-native-clipboard/clipboard'
 
 export const AmountTitle = () => {
     return (
@@ -55,7 +56,14 @@ export const WithdrawDetailsContainer = ({ address = "0x21505337aa3b5254eb154b8"
                         <ResponsiveText style={[styles.confirmValue, { width: wp(50), overflow: 'hidden', textOverflow: 'ellipsis' }]} numberOfLines={1}>
                             {address}
                         </ResponsiveText>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => {
+                            Clipboard.setString('https://www.exchange/code2354')
+                            if (Platform.OS === 'android') {
+                                ToastAndroid.show('Address copied!', ToastAndroid.SHORT)
+                            } else {
+                                Alert.alert('Copied!', 'Address copied to clipboard')
+                            }
+                        }}>
                             <Image source={images.copyIcon} style={styles.confirmCopyIcon} />
                         </TouchableOpacity>
                     </View>
@@ -67,7 +75,14 @@ export const WithdrawDetailsContainer = ({ address = "0x21505337aa3b5254eb154b8"
                         <ResponsiveText style={[styles.confirmValue, { width: wp(50), overflow: 'hidden', textOverflow: 'ellipsis' }]} numberOfLines={1}>
                             {txid}
                         </ResponsiveText>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => {
+                            Clipboard.setString('https://www.exchange/code2354')
+                            if (Platform.OS === 'android') {
+                                ToastAndroid.show('Address copied!', ToastAndroid.SHORT)
+                            } else {
+                                Alert.alert('Copied!', 'Address copied to clipboard')
+                            }
+                        }}>
                             <Image source={images.copyIcon} style={styles.confirmCopyIcon} />
                         </TouchableOpacity>
                     </View>

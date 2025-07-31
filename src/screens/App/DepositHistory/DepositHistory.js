@@ -10,7 +10,9 @@ import { UseDepositHstory } from './Hooks/Index'
 import { Portal } from 'react-native-portalize'
 
 const DepositHistory = (props) => {
-  const { allCryptoFilterRef, StatusRef, cryptoData, statusData, SetSelectedSymbol, selectedSymbol, selectedStatus, SetSelectedStatus } = UseDepositHstory()
+  const { allCryptoFilterRef, StatusRef, cryptoData, statusData, SetSelectedSymbol, selectedSymbol, selectedStatus, SetSelectedStatus, depositHistory } = UseDepositHstory()
+  console.log("depositHistorydepositHistorydepositHistory||", depositHistory)
+
   return (
     <AuthMainContainer  >
       <View style={{ paddingHorizontal: wp(5) }}>
@@ -27,6 +29,7 @@ const DepositHistory = (props) => {
       <Spacer height={hp(4)} />
 
       <DepositHistoryComponent props={props} />
+
       <AllCryptoFilterBotomSheet
         selectedStatus={selectedStatus}
         setSelectedSymbol={SetSelectedSymbol}

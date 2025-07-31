@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Image, TouchableOpacity, Platform, ToastAndroid, Alert } from 'react-native'
 import React from 'react'
 import { ResponsiveText } from '../../../../components/ResponsiveText';
 import images from '../../../../images';
@@ -9,6 +9,7 @@ import { appStyles } from '../../../../utilities';
 import { SimpleButton } from '../../../../components/SimpleButton';
 import Line from '../../../../components/Liner';
 import moment from 'moment';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 
 const getStatusStyles = (status, step) => {
@@ -113,7 +114,7 @@ export const ProgressWithdraw = ({ response }) => {
 };
 
 
-export const WithdrawDetailsContainer = ({ cryptoData,network,response}) => {
+export const WithdrawDetailsContainer = ({ cryptoData, network, response }) => {
   return (
     <View >
       <View style={styles.componentHeader}>
@@ -128,7 +129,14 @@ export const WithdrawDetailsContainer = ({ cryptoData,network,response}) => {
             <ResponsiveText style={[styles.confirmValue, { width: wp(50), overflow: 'hidden', textOverflow: 'ellipsis' }]} numberOfLines={1}>
               {response?.tokenAddress}
             </ResponsiveText>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              Clipboard.setString('https://www.exchange/code2354')
+              if (Platform.OS === 'android') {
+                ToastAndroid.show('Address copied!', ToastAndroid.SHORT)
+              } else {
+                Alert.alert('Copied!', 'Address copied to clipboard')
+              }
+            }}>
               <Image source={images.copyIcon} style={styles.confirmCopyIcon} />
             </TouchableOpacity>
           </View>

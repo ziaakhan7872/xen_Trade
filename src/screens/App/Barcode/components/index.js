@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Image, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { ResponsiveText } from '../../../../components/ResponsiveText';
 import images from '../../../../images';
 import { colors, Routes } from '../../../../constants';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { fontFamily } from '../../../../constants/fonts';
-import { appStyles } from '../../../../utilities';
 import Spacer, { HorizontalSpacer } from '../../../../components/Spacer';
+import QRCodeStyled from 'react-native-qrcode-styled';
 
 export const BarcodeHeader = ({ BackPress, HistoryPress, previousCrypto }) => {
   return (
@@ -40,24 +40,28 @@ export const BarcodeHeader = ({ BackPress, HistoryPress, previousCrypto }) => {
   );
 };
 
-export const NetworkSelector = ({ networkList }) => {
+export const NetworkSelector = ({ networkList, walletAddress }) => {
+  const WalletAddress = walletAddress?.data?.walletAddress
+
   return (
     <View style={{ alignItems: "center" }}>
       <ResponsiveText style={styles.networkLabel}>Network</ResponsiveText>
       <TouchableOpacity style={styles.networkDropdown}>
         <ResponsiveText style={styles.networkText}> {networkList?.networkList?.name + "(" + networkList?.networkList?.standard + ")"} </ResponsiveText>``
-        <Image
-          source={images.depositFilter}
-          style={styles.dropdownArrow}
-          resizeMode="contain"
-        />
+        <Image source={images.depositFilter} style={styles.dropdownArrow} resizeMode="contain" />
       </TouchableOpacity>
       <Spacer />
-      <Image
-        source={images.qrcode}
-        style={styles.qrCode}
-        resizeMode="contain"
-      />
+      {WalletAddress ? (
+        <QRCodeStyled
+          data={WalletAddress}
+          style={{ backgroundColor: colors.white }}
+          padding={Platform.OS == 'ios' ? wp(3) : wp(1.5)}
+          pieceScale={1.02}
+          pieceSize={6}
+        />
+      ) : (
+        <ActivityIndicator size="large" color={colors.white} style={{ marginTop: wp(4) }} />
+      )}
     </View>
   );
 };

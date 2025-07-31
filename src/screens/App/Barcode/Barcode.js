@@ -17,7 +17,7 @@ const Barcode = (props) => {
     <AuthMainContainer >
       <BarcodeHeader previousCrypto={previousCrypto} BackPress={() => props?.navigation?.goBack()} HistoryPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory, })} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <NetworkSelector networkList={networkList} />
+        <NetworkSelector networkList={networkList} walletAddress={depositDetailData} />
         <Spacer />
         <AddressSection walletAddress={depositDetailData} />
         <Spacer />

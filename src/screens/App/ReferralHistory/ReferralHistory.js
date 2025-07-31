@@ -18,8 +18,7 @@ const ReferralHistory = (props) => {
                 <MainHeader leftImage={images.backArrow} rightImage={images.download} title={'REFERRAL HISTORY'} onBackPress={() => props?.navigation?.goBack()} onRightPress={() => props?.navigation?.navigate?.('')} />
                 <Spacer height={hp(3)} />
                 <FilterTextInput value={input} onChangeText={(text) => setInput(text)} openBottomSheet={handleOpenFilter} />
-                <Spacer height={hp(3)} />
-                <HistoryList props={props} />
+                <Spacer />
 
                 <Portal>
                     <FilterBottomSheet
@@ -29,6 +28,7 @@ const ReferralHistory = (props) => {
                         closeBottomSheet={handleCloseFilter} />
                 </Portal>
             </View>
+            <HistoryList props={props} />
         </AuthMainContainer>
     )
 }

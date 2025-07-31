@@ -5,10 +5,13 @@ import { colors, fontFamily, Routes, } from '../../../../constants'
 import { appStyles } from '../../../../utilities'
 import images from '../../../../images'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
-import Spacer from '../../../../components/Spacer'
+import Spacer, { HorizontalSpacer } from '../../../../components/Spacer'
 import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent'
 import Line from '../../../../components/Liner'
 import { SimpleButton } from '../../../../components/SimpleButton'
+import { ReferralHistoryData } from '../../../../utilities/dummyData'
+import Entypo from "react-native-vector-icons/Entypo"
+
 
 export const FilterTextInput = ({ openBottomSheet }) => {
     return (
@@ -26,17 +29,20 @@ export const FilterTextInput = ({ openBottomSheet }) => {
 
 export const HistoryList = (props) => {
     return (
-        <>
-            <View style={appStyles.row}>
-                <ResponsiveText style={styles.historyHeadings}>Date</ResponsiveText>
+        <View>
+            <View style={[appStyles.rowBasic, styles.historyTitleHeaders]}>
+                <View style={appStyles.rowBasic} >
+                    <ResponsiveText style={styles.historyHeadings}>Date</ResponsiveText>
+                    <Entypo name="chevron-small-down" size={20} color={colors.white} />
+                </View>
+
                 <ResponsiveText style={styles.historyHeadings}>Transaction ID</ResponsiveText>
-                <ResponsiveText style={styles.historyHeadings}>Reward</ResponsiveText>
                 <ResponsiveText style={styles.historyHeadings}>Reward Type</ResponsiveText>
             </View>
 
-
+            <Spacer height={hp(3)} />
             <FlatList
-                data={DepositHistoryData}
+                data={ReferralHistoryData}
                 keyExtractor={(item, index) => item.id.toString() || index.toString()}
                 contentContainerStyle={{ flexGrow: 1 }}
                 ItemSeparatorComponent={() => <Line height={hp(0.1)} backgroundColor={colors.lineStroke} />}
@@ -50,19 +56,19 @@ export const HistoryList = (props) => {
                     </View>
                 )}
                 renderItem={({ item }) => (
-                    <TouchableOpacity activeOpacity={0.6} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.DepositDetails })} style={[appStyles.rowBasic, styles.itemContainer]}>
+                    <TouchableOpacity activeOpacity={0.6} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, {})} style={[appStyles.rowBasic, styles.itemContainer]}>
                         <View style={styles.coinDetails}>
-                            <ResponsiveText style={styles.upperText}>{item.cryptoName}</ResponsiveText>
-                            <ResponsiveText style={styles.lowerText}>{item.dateTime}</ResponsiveText>
+                            <ResponsiveText style={styles.upperText}>{item.dateTime}</ResponsiveText>
+                            <ResponsiveText style={styles.lowerText}>{item.txId}</ResponsiveText>
                         </View>
                         <View style={styles.amountContainer}>
                             <ResponsiveText style={styles.upperText}>{item.amount}</ResponsiveText>
-                            <ResponsiveText style={[styles.lowerText, { color: colors.green }]}>{item.status}</ResponsiveText>
+                            <ResponsiveText style={[styles.lowerText, { color: colors.green }]}>{item.rewardType}</ResponsiveText>
                         </View>
                     </TouchableOpacity>
                 )}
             />
-        </>
+        </View>
 
     )
 }
@@ -174,7 +180,7 @@ const styles = StyleSheet.create({
         ...appStyles.rowBasic,
         backgroundColor: colors.inputBgColor,
         borderRadius: wp(2),
-        height: hp(7),
+        height: hp(6.2),
         paddingHorizontal: wp(4),
         alignItems: 'center',
         borderColor: colors.borderColor,
@@ -207,6 +213,11 @@ const styles = StyleSheet.create({
         height: wp(5),
         resizeMode: 'contain',
         tintColor: colors.mainColor,
+    },
+    historyTitleHeaders: {
+        justifyContent: 'flex-start',
+        paddingHorizontal: wp(3),
+        gap: wp(6)
     },
     historyHeadings: {
         fontFamily: fontFamily.appTextRegular,

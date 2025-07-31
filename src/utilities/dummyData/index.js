@@ -561,3 +561,55 @@ export const DepositHistoryData = [
     status: 'Completed',
   },
 ]
+
+export const ReferralHistoryData = [
+  {
+    id: '1',
+    dateTime: '11/22, 17:26:15',
+    amount: '2521.25',
+    txId: 'TXN-REF-00321894',
+    rewardType: 'Bonus'
+  },
+  {
+    id: '2',
+    dateTime: '11/22, 17:26:15',
+    amount: '2521.25',
+    txId: 'TXN-REF-00321894',
+    rewardType: 'Credit'
+  },
+  {
+    id: '3',
+    dateTime: '11/22, 17:26:15',
+    amount: '2521.25',
+    txId: 'TXN-REF-00321894',
+    rewardType: 'Credit'
+  },
+  {
+    id: '4',
+    dateTime: '11/22, 17:26:15',
+    amount: '2521.25',
+    txId: 'TXN-REF-00321894',
+    rewardType: 'Discount'
+  },
+  {
+    id: '5',
+    dateTime: '11/22, 17:26:15',
+    amount: '2521.25',
+    txId: 'TXN-REF-00321894',
+    rewardType: 'Cashback'
+  },
+  {
+    id: '6',
+    dateTime: '11/22, 17:26:15',
+    amount: '2521.25',
+    txId: 'TXN-REF-00321894',
+    rewardType: 'Bonus'
+  },
+  {
+    id: '7',
+    dateTime: '11/22, 17:26:15',
+    amount: '2521.25',
+    txId: 'TXN-REF-00321894',
+    rewardType: 'Credit'
+  },
+]
