@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ACCOUNTS_SERVICE_BASE_URL, ASSETS_MANAGER_BASE_URL, AUTH_BASE_URL, getHeaders } from "../../Configs/ApiBaseUrl"
+import { ACCOUNTS_SERVICE_BASE_URL, ASSETS_MANAGER_BASE_URL, ASSETS_MANAGER_BASE_URL2, AUTH_BASE_URL, getHeaders } from "../../Configs/ApiBaseUrl"
 import { apiRequest } from "./mainService";
 
 
@@ -126,6 +126,12 @@ export const GetDepositDetailsApi = async (payLoads) => {
     } catch (error) {
         console.log(error, "Desposit  Api  error")
     }
+}
+export const GetDepositHistoryApi = async (userId) => {
+    return axios.get(`${ASSETS_MANAGER_BASE_URL2}/deposits`, {
+        headers: getHeaders(token),
+        params: { userId }
+    })
 }
 
 // //Pair Api

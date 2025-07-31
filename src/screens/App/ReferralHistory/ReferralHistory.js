@@ -4,7 +4,7 @@ import { styles } from './styles'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { MainHeader } from '../../../components/MainHeader'
 import images from '../../../images'
-import { FilterBottomSheet, FilterTextInput, History } from './Components'
+import { FilterBottomSheet, FilterTextInput, HistoryList } from './Components'
 import Spacer from '../../../components/Spacer'
 import { hp } from '../../../components/ResponsiveComponent'
 import { useReferralHistory } from './Hooks'
@@ -18,8 +18,7 @@ const ReferralHistory = (props) => {
                 <MainHeader leftImage={images.backArrow} rightImage={images.download} title={'REFERRAL HISTORY'} onBackPress={() => props?.navigation?.goBack()} onRightPress={() => props?.navigation?.navigate?.('')} />
                 <Spacer height={hp(3)} />
                 <FilterTextInput value={input} onChangeText={(text) => setInput(text)} openBottomSheet={handleOpenFilter} />
-                <Spacer height={hp(3)} />
-                <History />
+                <Spacer />
 
                 <Portal>
                     <FilterBottomSheet
@@ -29,6 +28,7 @@ const ReferralHistory = (props) => {
                         closeBottomSheet={handleCloseFilter} />
                 </Portal>
             </View>
+            <HistoryList props={props} />
         </AuthMainContainer>
     )
 }
