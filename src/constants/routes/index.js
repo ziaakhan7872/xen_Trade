@@ -40,4 +40,6 @@ export const Routes = {
     SelectCryptoWithDraw: "SelectCryptoWithDraw",
     SelectNetworkWIthdraw: "SelectNetworkWIthdraw",
     DepositDetails: "DepositDetails",
+    WithdrawHistory: "WithdrawHistory",
+
 }

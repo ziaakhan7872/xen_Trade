@@ -27,7 +27,7 @@ const WithDraw = (props) => {
   return (
     <AuthMainContainer>
       <Spacer />
-      <WithdrawHeader NetworkImage={network} BackPress={() => props?.navigation?.goBack()} HistoryPress={() => props?.navigation?.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory })} />
+      <WithdrawHeader NetworkImage={network} BackPress={() => props?.navigation?.goBack()} HistoryPress={() => props?.navigation?.navigate(Routes.AppNavigator, { screen: Routes.WithdrawHistory })} />
       <Spacer />
       <AddressInput
         cryptoData={cryptoData} Network={network}

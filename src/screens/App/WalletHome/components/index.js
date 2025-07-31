@@ -3,7 +3,7 @@ import { View, StyleSheet, FlatList, Image, TouchableOpacity, Platform, TextInpu
 import React from 'react';
 import { ResponsiveText } from "../../../../components/ResponsiveText";
 import { coinData } from "../../../../utilities/dummyData";
-import Spacer from "../../../../components/Spacer";
+import Spacer, { HorizontalSpacer } from "../../../../components/Spacer";
 import images from "../../../../images";
 import { colors, Routes } from "../../../../constants"
 import { hp, wp } from '../../../../components/ResponsiveComponent';
@@ -66,10 +66,10 @@ export const TextInputSearch = ({ onChangeText, value }) => {
   )
 }
 
-export const TokenList = ({ props }) => {
+export const TokenList = ({ props, cryptoData }) => {
   return (
     <FlatList
-      data={coinData}
+      data={cryptoData}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ flexGrow: 1 }}
       keyExtractor={(item) => item.id}
@@ -78,14 +78,25 @@ export const TokenList = ({ props }) => {
       renderItem={({ item, index }) => {
         return (
           <TouchableOpacity activeOpacity={0.6} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.AssetAllocation })} style={[appStyles.rowBasic, styles.itemContainer]}>
-            <Image source={item.icon} style={styles.icon} />
+            <Image source={{uri:item?.icon}} style={styles.icon} />
+            <HorizontalSpacer/>
             <View style={styles.coinDetails}>
               <ResponsiveText style={styles.upperText}>{item.symbol}</ResponsiveText>
               <ResponsiveText style={styles.lowerText}>{item.name}</ResponsiveText>
             </View>
             <View style={styles.amountContainer}>
-              <ResponsiveText style={styles.upperText}>{item.amount}</ResponsiveText>
-              <ResponsiveText style={styles.lowerText}>{item.value}</ResponsiveText>
+              <ResponsiveText style={styles.upperText}>{item?.account?.amount
+                ? item?.account?.amount.toString().includes(".")
+                  ? Number(item.account.amount).toFixed(4)
+                  : item.account.amount
+                : "0"}
+              </ResponsiveText>
+              <ResponsiveText style={styles.lowerText}>$ {item?.account?.amount
+                ? item?.account?.amount.toString().includes(".")
+                  ? Number(item.account.amount).toFixed(4)
+                  : item.account.amount
+                : "0"}
+                </ResponsiveText>
             </View>
           </TouchableOpacity>
         )
@@ -196,7 +207,7 @@ const styles = StyleSheet.create({
   icon: {
     width: wp(9),
     height: wp(9),
-    marginRight: wp(4),
+    borderRadius:100
   },
   coinDetails: {
     flex: 1,
