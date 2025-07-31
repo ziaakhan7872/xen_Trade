@@ -32,13 +32,16 @@ export const UseLogin = (props) => {
       const Login = await LoginApi(payload);
       console.log("Login successful:", Login);
       props?.navigation.navigate(Routes.LoginVerificationScreen, { userData: Login?.data })
+      setEmail("")
+      setPassword("")
+      setErrorMessage("")
 
     } catch (error) {
       if (error.name === 'ValidationError') {
         setErrorMessage(error.errors.join('\n'));
       } else {
-        console.error("Error during signup:", error);
-        setErrorMessage("An error occurred during signup. Please try again.");
+        console.error("Error during signup:", error.response);
+        setErrorMessage("An error occurred during Login. Please try again.");
       }
     }
 

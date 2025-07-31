@@ -19,10 +19,10 @@ const WithdrawDetails = (props) => {
         <MainHeader leftImage={images.backArrow} title={'WITHDRAWL DETAILS'} onBackPress={() => props?.navigation?.goBack()} />
         <Spacer height={hp(3)} />
 
-        <ProgressWithdraw />
+        <ProgressWithdraw response={response} />
         <Spacer height={hp(3)} />
 
-        <WithdrawDetailsContainer />
+        <WithdrawDetailsContainer response={response} network={network} cryptoData={CryptoData} />
         <Spacer height={hp(3)} />
 
       </View>

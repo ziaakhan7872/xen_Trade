@@ -29,7 +29,7 @@ export const SelectCryptoHeader = ({ BackPress, historyPress }) => {
 };
 
 
-export const SelectCryptoSearchBox = () => {
+export const SelectCryptoSearchBox = ({searchCoin,setSearchCoin}) => {
     return (
         <View style={{ flexDirection: "row", alignItems: "center" }}>
             <InputText
@@ -37,6 +37,8 @@ export const SelectCryptoSearchBox = () => {
                 placeholderTextColor={colors.iconColor}
                 width={wp(92)}
                 paddingLeft={wp(5)}
+                value={searchCoin}
+                onChangeText={setSearchCoin}
             />
             <View style={styles.leftIcon}>
                 <EvilIcons name="search" color={colors.mainColor} size={25} />

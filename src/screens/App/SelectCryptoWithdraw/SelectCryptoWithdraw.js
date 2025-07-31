@@ -11,13 +11,13 @@ import { UseSelectCryptoWithdraw } from './Hooks/Index';
 
 
 const SelectCryptoWithdraw = (props) => {
-    const {cryptoList,CryptoPress,RecentCryptoPress} = UseSelectCryptoWithdraw(props)
+    const {cryptoList,CryptoPress,RecentCryptoPress,searchCoin,setSearchCoin} = UseSelectCryptoWithdraw(props)
     return (
         <AuthMainContainer>
             <SelectCryptoHeader BackPress={() => props?.navigation?.goBack()} historyPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory })} />
             <Spacer />
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
-                <SelectCryptoSearchBox />
+                <SelectCryptoSearchBox searchCoin={searchCoin} setSearchCoin={setSearchCoin} />
                 <Spacer height={hp(1)} />
                 <View style={styles.otherContainer}>
                     <ResponsiveText style={styles.title}>RECENT</ResponsiveText>

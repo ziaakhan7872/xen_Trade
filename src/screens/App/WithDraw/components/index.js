@@ -134,7 +134,7 @@ export const FeeInfo = ({ Network, cryptoData, fee, amount, handleSubmit, error 
   )
 };
 
-export const WithDrawConfirmationBottomSheet = ({ Network, cryptData, ref, address, amount, fee, received, handleSubmit }) => {
+export const WithDrawConfirmationBottomSheet = ({ handleCopy ,Network, cryptData, ref, address, amount, fee, received, handleSubmit }) => {
   const amountReceived = Number(amount) + Number(Network?.fee || 0)
 
   return (
@@ -160,7 +160,7 @@ export const WithDrawConfirmationBottomSheet = ({ Network, cryptData, ref, addre
                 <ResponsiveText style={[styles.confirmValue, { width: wp(50), overflow: 'hidden', textOverflow: 'ellipsis' }]} numberOfLines={1}>
                   {address}
                 </ResponsiveText>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>handleCopy(address)}>
                   <Image source={images.copyIcon} style={styles.confirmCopyIcon} />
                 </TouchableOpacity>
               </View>
