@@ -12,7 +12,7 @@ import { ResponsiveText } from '../../../../components/ResponsiveText';
 // import { useDispatch, useSelector } from 'react-redux'
 // import { setUser, logoutUser } from '../../../../redux/slices/userSlice'
 
-const LoginForm = ({ signUp, Login,email,setEmail,password,setPassword,passwordVisible,setPasswordVisible }) => {
+const LoginForm = ({ signUp, Login,email,setEmail,password,setPassword,passwordVisible,setPasswordVisible,errorMessage }) => {
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode='contain' style={styles.logoImage} />
@@ -26,6 +26,12 @@ const LoginForm = ({ signUp, Login,email,setEmail,password,setPassword,passwordV
                 <Spacer height={hp(1)} />
                 <ResponsiveText style={[styles.forgetPasswordStyling, { textDecorationLine: 'underline' }]}> Forgot Password?</ResponsiveText>
                 <Spacer />
+                 {errorMessage && (
+                    <>
+                        <ResponsiveText style={{ color: colors.red, textAlign: 'center' }}>{errorMessage}</ResponsiveText>
+                        <Spacer />
+                    </>
+                )}
                 <SimpleButton disabled={(!email || !password)} onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={(!email || !password) ? colors.authButtonColor : colors.mainColor} buttonWidth={wp(80)} />
                 <Spacer />
                 <ResponsiveText style={styles.signInWithStyle}>Or sign in with</ResponsiveText>

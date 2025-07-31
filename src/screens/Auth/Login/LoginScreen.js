@@ -12,11 +12,13 @@ const LoginScreen = (props) => {
     email,setEmail,
     password,setPassword,
     passwordVisible,setPasswordVisible,
+    errorMessage,setErrorMessage,
     handleLogin}= UseLogin(props)
   return (
     <AuthMainContainer>
       <View style={style.container}>
         <LoginForm 
+        errorMessage={errorMessage}
         passwordVisible={passwordVisible} setPasswordVisible={setPasswordVisible}
         email={email} setEmail={setEmail} 
         password={password} setPassword={setPassword} 
