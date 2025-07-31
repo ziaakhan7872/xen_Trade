@@ -43,18 +43,18 @@ export const GetNetworkListApi = async (symbol) => {
         params: { symbol },
     })
 }
-export const GetNetworkMinDepApi = async (payloads) => {
-    return axios.get(`${ASSETS_MANAGER_BASE_URL}/networks`, {
-        headers: getHeaders(token),
-        params: { payloads },
-    })
-}
+// export const GetNetworkMinDepApi = async (payloads) => {
+//     return axios.get(`${ASSETS_MANAGER_BASE_URL}/networks`, {
+//         headers: getHeaders(token),
+//         params: { payloads },
+//     })
+// }
 
 export const GetDepositDetailsApi = async (payLoads) => {
-    return axios.get(`${ASSETS_MANAGER_BASE_URL}/accounts/user-account`, {
+    return axios.get(`${ACCOUNTS_SERVICE_BASE_URL}/accounts/user-account`, {
         headers: getHeaders(token),
         // params: { id, chainId, symbol },
-        payLoads: payLoads
+        params: payLoads
     })
 }
 
@@ -83,7 +83,6 @@ export const getAccountDetail = async (page, limit, userId) => {
         params: { page: page, limit: limit, userId: userId }
     })
 }
-
 
 
 
