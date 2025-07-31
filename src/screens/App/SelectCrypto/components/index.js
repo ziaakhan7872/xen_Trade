@@ -20,7 +20,7 @@ export const SelectCryptoHeader = ({ BackPress, historyPress }) => {
       </TouchableOpacity>
       <ResponsiveText style={styles.selectCryptoTitle}>SELECT CRYPTO</ResponsiveText>
       <TouchableOpacity onPress={historyPress} style={styles.selectCryptoCloseButton}>
-        <Image source={images.clockIcon} resizeMode="contain" />
+        <Image source={images.clockIcon} style={styles.historyImg} />
       </TouchableOpacity>
     </View>
   );
@@ -133,15 +133,6 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.mainTextMedium,
     fontWeight: "500"
   },
-  selectCryptoCloseButton: {
-    // position: 'absolute',
-    // right: wp(4),
-    // padding: wp(1),
-    // width: wp(5),
-    // height: hp(2.5),
-  },
-
-
   cryptoSelectItem: {
     width: wp(100),
     flexDirection: 'row',
@@ -170,5 +161,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: fontFamily.appTextRegular,
   },
-
+  historyImg: {
+    width: wp(5),
+    height: hp(5),
+    resizeMode: "contain"
+  },
 });

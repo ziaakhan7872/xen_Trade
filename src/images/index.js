@@ -89,6 +89,7 @@ const images = {
     filter2: require("./filter2.png"),
     share: require("./share.png"),
     ScanIcon: require("./ScanIcon.png"),
-    simpleTick: require("./simpleTick.png")
+    simpleTick: require("./simpleTick.png"),
+    greenTick: require("./greenTick.png"),
 }
 export default images

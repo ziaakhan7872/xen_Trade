@@ -452,60 +452,112 @@ export const OrderHistoryData = [
 ]
 
 export const Networks = [
-    {
-      id: '1',
-      name: 'Tron (TRC20)',
-      icon: images.tron,
-      minDeposit: '0.01 USDT',
-      arrivalTime: '~1 minutes'
-    },
-    {
-      id: '2',
-      name: 'Ethereum (ERC20)',
-      icon: images.EthLogo,
-      minDeposit: '0.01 USDT',
-      arrivalTime: '~1 minutes'
-    },
-    {
-      id: '3',
-      name: 'X Layer',
-      icon: images.EthLogo, // Using ETH as placeholder for X Layer
-      minDeposit: '0.01 USDT',
-      arrivalTime: '~1 minutes'
-    },
-    {
-      id: '4',
-      name: 'Aptos',
-      icon: images.aptos,
-      minDeposit: '0.01 USDT',
-      arrivalTime: '~1 minutes'
-    },
-    {
-      id: '5',
-      name: 'Arbitrum One',
-      icon: images.arbitrum,
-      minDeposit: '0.01 USDT',
-      arrivalTime: '~1 minutes'
-    },
-    {
-      id: '6',
-      name: 'Avalanche C-Chain',
-      icon: images.AvaxLogo,
-      minDeposit: '0.01 USDT',
-      arrivalTime: '~1 minutes'
-    },
-    {
-      id: '7',
-      name: 'Optimism',
-      icon: images.optimism,
-      minDeposit: '0.01 USDT',
-      arrivalTime: '~1 minutes'
-    },
-    {
-      id: '8',
-      name: 'Polygon',
-      icon: images.polygon,
-      minDeposit: '0.01 USDT',
-      arrivalTime: '~1 minutes'
-    }
-  ];
+  {
+    id: '1',
+    name: 'Tron (TRC20)',
+    icon: images.tron,
+    minDeposit: '0.01 USDT',
+    arrivalTime: '~1 minutes'
+  },
+  {
+    id: '2',
+    name: 'Ethereum (ERC20)',
+    icon: images.EthLogo,
+    minDeposit: '0.01 USDT',
+    arrivalTime: '~1 minutes'
+  },
+  {
+    id: '3',
+    name: 'X Layer',
+    icon: images.EthLogo, // Using ETH as placeholder for X Layer
+    minDeposit: '0.01 USDT',
+    arrivalTime: '~1 minutes'
+  },
+  {
+    id: '4',
+    name: 'Aptos',
+    icon: images.aptos,
+    minDeposit: '0.01 USDT',
+    arrivalTime: '~1 minutes'
+  },
+  {
+    id: '5',
+    name: 'Arbitrum One',
+    icon: images.arbitrum,
+    minDeposit: '0.01 USDT',
+    arrivalTime: '~1 minutes'
+  },
+  {
+    id: '6',
+    name: 'Avalanche C-Chain',
+    icon: images.AvaxLogo,
+    minDeposit: '0.01 USDT',
+    arrivalTime: '~1 minutes'
+  },
+  {
+    id: '7',
+    name: 'Optimism',
+    icon: images.optimism,
+    minDeposit: '0.01 USDT',
+    arrivalTime: '~1 minutes'
+  },
+  {
+    id: '8',
+    name: 'Polygon',
+    icon: images.polygon,
+    minDeposit: '0.01 USDT',
+    arrivalTime: '~1 minutes'
+  }
+];
+
+export const DepositHistoryData = [
+  {
+    id: '1',
+    cryptoName: 'USDT',
+    amount: '2521.25',
+    dateTime: '11/22, 17:26:15',
+    status: 'Completed',
+  },
+  {
+    id: '2',
+    cryptoName: 'BTC',
+    amount: '2521.25',
+    dateTime: '11/22, 17:26:15',
+    status: 'Completed',
+  },
+  {
+    id: '3',
+    cryptoName: 'ETH',
+    amount: '2521.25',
+    dateTime: '11/22, 17:26:15',
+    status: 'Completed',
+  },
+  {
+    id: '4',
+    cryptoName: 'SOL',
+    amount: '2521.25',
+    dateTime: '11/22, 17:26:15',
+    status: 'Completed',
+  },
+  {
+    id: '5',
+    cryptoName: 'USDT',
+    amount: '2521.25',
+    dateTime: '11/22, 17:26:15',
+    status: 'Completed',
+  },
+  {
+    id: '6',
+    cryptoName: 'USDT',
+    amount: '2521.25',
+    dateTime: '11/22, 17:26:15',
+    status: 'Completed',
+  },
+  {
+    id: '7',
+    cryptoName: 'USDT',
+    amount: '2521.25',
+    dateTime: '11/22, 17:26:15',
+    status: 'Completed',
+  },
+]

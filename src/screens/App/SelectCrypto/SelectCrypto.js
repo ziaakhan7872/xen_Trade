@@ -7,6 +7,7 @@ import { ScrollView, View } from 'react-native';
 import { ResponsiveText } from '../../../components/ResponsiveText';
 import { Routes } from '../../../constants';
 import { useSelectCrypto } from './Hooks';
+import { hp } from '../../../components/ResponsiveComponent';
 
 const SelectCrypto = (props) => {
   const { cryptoList, loading, error, handleCryptoNavigation } = useSelectCrypto(props)
@@ -21,7 +22,7 @@ const SelectCrypto = (props) => {
   return (
     <AuthMainContainer>
       <SelectCryptoHeader BackPress={() => props?.navigation?.goBack()} historyPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory })} />
-      <Spacer />
+      <Spacer height={hp(1)} />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
         <SelectCryptoSearchBox />
         <Spacer />

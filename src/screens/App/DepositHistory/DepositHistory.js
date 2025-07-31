@@ -1,13 +1,9 @@
 import { View, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { styles } from './styles'
-import { ResponsiveText } from "../../../components/ResponsiveText"
-import { colors } from "../../../constants"
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { hp, wp } from "../../../components/ResponsiveComponent"
-import { useNavigation } from '@react-navigation/native'
 import images from '../../../images'
-import { AllCryptoFilterBotomSheet, CryptoFilterModal, DepositFilterHeader, DepositHistoryComponent, StatusFilterBottomSheet, StatusFilterModal } from './components'
+import { AllCryptoFilterBotomSheet, DepositFilterHeader, DepositHistoryComponent, StatusFilterBottomSheet, StatusFilterModal } from './components'
 import { MainHeader } from '../../../components/MainHeader'
 import Spacer from '../../../components/Spacer'
 import { UseDepositHstory } from './Hooks/Index'
@@ -18,7 +14,7 @@ const DepositHistory = (props) => {
   return (
     <AuthMainContainer  >
       <View style={{ paddingHorizontal: wp(5) }}>
-        <MainHeader onBackPress={()=>props?.navigation?.goBack()} title={"Deposit History"} leftImage={images.backArrow} rightImage={images.infoIcon} />
+        <MainHeader onBackPress={() => props?.navigation?.goBack()} title={"DEPOSIT HISTORY"} leftImage={images.backArrow} rightImage={images.infoIcon} />
       </View>
       <Spacer height={hp(4)} />
       <DepositFilterHeader
@@ -28,8 +24,9 @@ const DepositHistory = (props) => {
         AllCryptoPress={() => allCryptoFilterRef?.current?.expand()}
 
       />
+      <Spacer height={hp(4)} />
 
-      <DepositHistoryComponent />
+      <DepositHistoryComponent props={props} />
       <AllCryptoFilterBotomSheet
         selectedStatus={selectedStatus}
         setSelectedSymbol={SetSelectedSymbol}
@@ -61,86 +58,7 @@ const DepositHistory = (props) => {
           closeBottomSheet={() => StatusRef?.current?.close()}
         />
       </Portal>
-
-
-      {/* <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-          <Image source={images.backArrow} style={styles.backIcon} resizeMode="contain" />
-        </TouchableOpacity>
-        <ResponsiveText style={styles.headerTitle}>DEPOSIT HISTORY</ResponsiveText>
-        <TouchableOpacity style={styles.infoButton}>
-          <View style={styles.infoIconContainer}>
-            <Image style={styles.infoIcon}
-              source={images.infoIcon}
-              resizeMode="contain"
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.filterContainer}>
-        <TouchableOpacity style={styles.filterButton} onPress={() => setShowCryptoModal(true)}>
-          <ResponsiveText style={styles.filterButtonText}>{selectedCrypto}</ResponsiveText>
-          <Image 
-            source={images.depositFilter}
-            style={styles.filterIcon}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.filterButton}>
-          <ResponsiveText style={styles.filterButtonText}>Date</ResponsiveText>
-          <Image 
-            source={images.depositFilter}
-            style={styles.filterIcon}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.filterButton} onPress={() => setShowStatusModal(true)}>
-          <ResponsiveText style={styles.filterButtonText}>{selectedStatus}</ResponsiveText>
-          <Image 
-            source={images.depositFilter}
-            style={styles.filterIcon}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      </View>
-      
-      <CryptoFilterModal 
-        visible={showCryptoModal} 
-        onClose={() => setShowCryptoModal(false)}
-        onSelectCrypto={(crypto) => setSelectedCrypto(crypto)}
-        selectedCrypto={selectedCrypto}
-        onSwitchToStatus={() => {
-          setShowCryptoModal(false);
-          setTimeout(() => setShowStatusModal(true), 300);
-        }}
-      />
-      
-      <StatusFilterModal
-        visible={showStatusModal}
-        onClose={() => setShowStatusModal(false)}
-        onSelectStatus={(status) => setSelectedStatus(status)}
-        selectedStatus={selectedStatus}
-        onSwitchToCrypto={() => {
-          setShowStatusModal(false);
-          setTimeout(() => setShowCryptoModal(true), 300);
-        }}
-      />
-
-      <View style={styles.emptyStateContainer}>
-        <Image 
-          source={images.union}
-          style={styles.emptyStateIcon}
-          resizeMode="contain"
-        />
-        <ResponsiveText style={styles.noResultsText}>No results found</ResponsiveText>
-        <ResponsiveText style={styles.emptyStateMessage}>
-          Try changing your filter to show your recent transactions
-        </ResponsiveText>
-      </View> */}
-    </AuthMainContainer>
+    </AuthMainContainer >
   )
 }
 
