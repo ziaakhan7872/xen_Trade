@@ -36,6 +36,8 @@ const AppNavigation = () => {
             <Screen name={Routes.SelectNetworkWIthdraw} component={App.SelectNetworkWithdraw} />
             <Screen name={Routes.DepositDetails} component={App.DepositDetails} />
             <Screen name={Routes.ContactSupport} component={App.ContactSupport} />
+            <Screen name={Routes.WithdrawHistory} component={App.WithdrawHistory} />
+
         </Navigator>
     );
 };

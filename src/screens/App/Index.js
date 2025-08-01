@@ -30,12 +30,14 @@ import SelectCryptoWithdraw from "./SelectCryptoWithdraw/SelectCryptoWithdraw"
 import SelectNetworkWithdraw from "./SelectNetworkWithdraw/SelectNetworkWithdraw"
 import DepositDetails from "./DepositDetails/DepositDetails";
 import ContactSupport from "./ContactSupport/ContactSupport";
+import WithdrawHistory from "./WithdrawHistory/WithdrawHistory";
+
 
 export {
      HomeScreen, Settings, TwoFactorAuth, SettingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,
      Exchangescreen, WalletScreen, ChangePassword, AntiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
      SelectNetwork, Barcode, AddNewAddress, SettingEmailNotification, SelectCrypto, AssetAllocation, MenuScreen,
      Referrals, ReferralHistory, OrderHistory, TradeGraphScreen, WithDraw, WithdrawDetails, SelectCryptoWithdraw,
-     SelectNetworkWithdraw, DepositDetails, ContactSupport,
+     SelectNetworkWithdraw, DepositDetails, ContactSupport, WithdrawHistory
 }
 

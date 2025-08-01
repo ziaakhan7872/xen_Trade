@@ -29,3 +29,8 @@ export const getAuthToken = () => {
   return state?.user?.token || '';
 };
 
+
+export const getRefreshToken = () => {
+  const state = store.getState();
+  return state?.user?.refreshToken || '';
+};

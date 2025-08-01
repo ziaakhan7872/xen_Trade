@@ -5,12 +5,12 @@ import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { ResponsiveText } from '../../../../components/ResponsiveText';
 import { colors, fontFamily, Routes } from '../../../../constants';
 import { appStyles } from '../../../../utilities';
-import Spacer from '../../../../components/Spacer';
+import Spacer, { HorizontalSpacer } from '../../../../components/Spacer';
 import { SimpleButton } from '../../../../components/SimpleButton';
 import Line from '../../../../components/Liner';
 
 
-export const MainHeaderCustom = ({ leftImage, rightImage, title, titleLogo, onBackPress, onRightPress }) => {
+export const MainHeaderCustom = ({ data, leftImage, rightImage, title, titleLogo, onBackPress, onRightPress }) => {
   return (
     <View style={{ ...appStyles.row, ...styles.headerMainContainer }}>
       <TouchableOpacity onPress={onBackPress} style={styles.leftIconWrapper}>
@@ -18,8 +18,9 @@ export const MainHeaderCustom = ({ leftImage, rightImage, title, titleLogo, onBa
       </TouchableOpacity>
 
       <View style={[styles.titleWrapper, { ...appStyles.rowBasic }]}>
-        <Image source={titleLogo} style={styles.titleImage} />
-        <ResponsiveText style={styles.title}>{title}</ResponsiveText>
+        <Image source={{ uri: data?.icon }} style={styles.titleImage} />
+        <HorizontalSpacer />
+        <ResponsiveText style={styles.title}>{data?.name}</ResponsiveText>
       </View>
       <TouchableOpacity onPress={onRightPress} style={styles.rightIconWrapper}>
         <Image source={rightImage} style={styles.rightImage} />
@@ -28,29 +29,38 @@ export const MainHeaderCustom = ({ leftImage, rightImage, title, titleLogo, onBa
   )
 }
 
-export const AssetAllocationBalance = ({ props }) => (
-  <View style={styles.balanceContainer}>
-    <ResponsiveText style={styles.totalAvailableLabel}>Total Available</ResponsiveText>
-    <Spacer height={hp(1)} />
-    <ResponsiveText style={styles.totalAvailableValue}>1.25410012</ResponsiveText>
-    <ResponsiveText style={styles.usdValue}>≈ $3,322.33</ResponsiveText>
-    <Spacer height={hp(2.5)} />
+export const AssetAllocationBalance = ({ props, data }) => {
+  const totalAvailableBalance = Number(data?.account?.amount) + Number(data?.account?.lockedAmount)
+  const availableBalance = Number(data?.account?.amount) - Number(data?.account?.lockedAmount)
+  const lockedAmount = Number(data?.account?.lockedAmount)
+  return (
+    <View style={styles.balanceContainer}>
+      <ResponsiveText style={styles.totalAvailableLabel}>Total Available</ResponsiveText>
+      <Spacer height={hp(1)} />
+      <ResponsiveText style={styles.totalAvailableValue}>{totalAvailableBalance ? totalAvailableBalance.toFixed(3) : 0}</ResponsiveText>
+      <ResponsiveText style={styles.usdValue}>
+        {totalAvailableBalance
+          ? `≈ $${(totalAvailableBalance * 1.0).toFixed(2)}`
+          : "≈ $0.00"}
+      </ResponsiveText>
+      <Spacer height={hp(2.5)} />
 
-    <View style={appStyles.row}>
-      <View style={styles.balanceBox2}>
-        <ResponsiveText style={styles.balanceBoxLabel}>Available</ResponsiveText>
-        <ResponsiveText style={styles.balanceBoxValue}>1.254100</ResponsiveText>
+      <View style={appStyles.row}>
+        <View style={styles.balanceBox2}>
+          <ResponsiveText style={styles.balanceBoxLabel}>Available</ResponsiveText>
+          <ResponsiveText style={styles.balanceBoxValue}>{availableBalance?availableBalance.toFixed(3):'0.00'}</ResponsiveText>
+        </View>
+        <View style={styles.balanceBox}>
+          <ResponsiveText style={styles.balanceBoxLabel}>In Order</ResponsiveText>
+          <ResponsiveText style={styles.balanceBoxValue}>{lockedAmount?lockedAmount?.toFixed(3):"0.00"}</ResponsiveText>
+        </View>
       </View>
-      <View style={styles.balanceBox}>
-        <ResponsiveText style={styles.balanceBoxLabel}>In Order</ResponsiveText>
-        <ResponsiveText style={styles.balanceBoxValue}>0.002344</ResponsiveText>
-      </View>
+
+      <Spacer />
+      <SimpleButton btnImage={images.copesIcon} text="Trade" textColor={colors.white} styleView={styles.depositBtn} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: '' })} />
     </View>
-
-    <Spacer />
-    <SimpleButton btnImage={images.copesIcon} text="Trade" textColor={colors.white} styleView={styles.depositBtn} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: '' })} />
-  </View>
-);
+  )
+};
 
 export const AssetAllocationHistory = () => (
   <View style={styles.historyContainer}>
@@ -83,8 +93,8 @@ const styles = StyleSheet.create({
   titleImage: {
     width: wp(5.5),
     height: wp(5.5),
-    marginRight: wp(2),
-    resizeMode: 'contain',
+    resizeMode: 'cover',
+    borderRadius: 100,
   },
   title: {
     fontSize: 18,

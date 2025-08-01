@@ -14,7 +14,7 @@ const SelectCryptoWithdraw = (props) => {
     const {cryptoList,CryptoPress,RecentCryptoPress,searchCoin,setSearchCoin} = UseSelectCryptoWithdraw(props)
     return (
         <AuthMainContainer>
-            <SelectCryptoHeader BackPress={() => props?.navigation?.goBack()} historyPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory })} />
+            <SelectCryptoHeader BackPress={() => props?.navigation?.goBack()} historyPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.WithdrawHistory })} />
             <Spacer />
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
                 <SelectCryptoSearchBox searchCoin={searchCoin} setSearchCoin={setSearchCoin} />

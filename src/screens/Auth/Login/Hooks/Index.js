@@ -39,6 +39,7 @@ export const UseLogin = (props) => {
         email: email,
         password: password
       }
+      console.log(payload,"login payload")
       const Login = await LoginApi(payload);
 
       console.log("Login successful:", Login);
@@ -60,7 +61,7 @@ export const UseLogin = (props) => {
       if (error.name === 'ValidationError') {
         setErrorMessage(error.errors.join('\n'));
       } else {
-        console.error("Error during signup:", error.response);
+        console.error("Error during signup:", error);
         setErrorMessage("An error occurred during Login. Please try again.");
       }
     }
