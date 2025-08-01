@@ -8,7 +8,7 @@ import { LoginVerificationForm } from './Component/Index'
 import UseLoginVerification from './Hooks/Index'
 
 const LoginVerification = (props) => {
-    const { handeGoBack ,otpCode,setOtpCode,verifyEmail,errorMessage,setErrorMessage} = UseLoginVerification(props)
+    const { handeGoBack, otpCode, setOtpCode, verifyEmail, errorMessage, setErrorMessage } = UseLoginVerification(props)
     return (
         <AuthMainContainer>
             <View style={style.container}>
@@ -20,7 +20,7 @@ const LoginVerification = (props) => {
                     <Spacer />
                     <LoginVerificationForm errorMessage={errorMessage} setOtpCode={setOtpCode} submit={verifyEmail} />
                 </View>
-             
+
             </View>
 
         </AuthMainContainer>

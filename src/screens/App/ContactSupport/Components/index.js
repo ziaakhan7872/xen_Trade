@@ -47,7 +47,7 @@ export const SubmitBottomSheet = ({ SubmitBottomSheetRef, closeBottomSheet }) =>
             <ResponsiveText style={styles.sheetContentText2} >Someone from our team will get in touch with you shortly</ResponsiveText>
             <Spacer height={hp(3)} />
 
-            <SimpleButton text="Ok" onPress={closeBottomSheet} textColor={colors.black} styleView={styles.btnSaveChanges} />
+            <SimpleButton text="Ok" onPress={closeBottomSheet} textColor={colors.black} styleView={styles.btnOk} />
 
         </GorhomBottomSheet>
     )
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         height: wp(22),
         resizeMode: 'contain',
     },
-    btnSaveChanges: {
+    btnOk: {
         width: wp(92),
         alignSelf: 'center',
         padding: wp(5),

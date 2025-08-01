@@ -3,15 +3,15 @@ import { wp } from "../../../components/ResponsiveComponent";
 
 export const style = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         alignItems: "center"
     },
     leftImage: {
         width: wp(6),
         height: wp(6)
     },
-    outerMainBox:{
-        width:wp(90)
+    outerMainBox: {
+        width: wp(90)
     }
 
 })

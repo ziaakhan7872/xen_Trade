@@ -39,7 +39,7 @@ export const UseLogin = (props) => {
         email: email,
         password: password
       }
-      console.log(payload,"login payload")
+      console.log(payload, "login payload")
       const Login = await LoginApi(payload);
 
       console.log("Login successful:", Login);
@@ -67,6 +67,14 @@ export const UseLogin = (props) => {
     }
 
   }
+
+  // const handleLogin = async () => {
+
+  //   // setTimeout(() => {
+  //   props?.navigation.navigate(Routes.LoginVerificationScreen)
+  //   // }, 1000)
+  // }
+
   return {
     email, setEmail,
     password, setPassword,

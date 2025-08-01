@@ -1,29 +1,33 @@
-import { Image, StyleSheet, View } from 'react-native'
+import { Image, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import images from '../../../../images'
 import Spacer from '../../../../components/Spacer'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import { colors, fontFamily } from '../../../../constants'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
-import { OtpInput } from "react-native-otp-entry";
+// import { OtpInput } from "react-native-otp-entry";
 import { SimpleButton } from '../../../../components/SimpleButton'
-import BottomSheet from '../../../../components/BottomSheet'
-import Line from '../../../../components/Liner'
-import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent';
+import { appStyles } from '../../../../utilities'
 
 
-export const LoginVerificationForm = ({ submit,setOtpCode,errorMessage }) => {
+export const LoginVerificationForm = ({ submit, setOtpCode, errorMessage }) => {
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode="contain" style={styles.logoImage} />
             <Spacer />
-            <ResponsiveText style={styles.titleText}>Login VERIFICATION</ResponsiveText>
+            <ResponsiveText style={styles.titleText}>EMAIL VERIFICATION</ResponsiveText>
             <Spacer height={hp(1)} />
-            <ResponsiveText style={styles.infoText}>
-                Please enter the 6-digit verification code to confirm your email. The code is valid for 30 minutes
-            </ResponsiveText>
+            <ResponsiveText style={styles.infoText}>Enter the Verification code we sent to <ResponsiveText style={styles.blueText}>demon@gmail.com</ResponsiveText> This helps us keep your account secure by verifying that it's really you. </ResponsiveText>
             <Spacer />
-            <OtpInput
+
+            <View style={styles.containerInner}>
+                <TextInput style={styles.input} placeholder="Enter Code..." placeholderTextColor={colors.placeHolderTextColor} />
+                {/* <TextInputField placeholder={"Enter Code"} placeholderTextColor={colors.placeHolderTextColor} /> */}
+                <TouchableOpacity style={styles.rightIconWrapper}>
+                    <ResponsiveText style={[styles.blueText, { alignItems: 'flex-end' }]}>Get Code</ResponsiveText>
+                </TouchableOpacity>
+            </View>
+            {/* <OtpInput
                 focusColor={colors.mainColor}
                 numberOfDigits={6}
                 onTextChange={(text) => setOtpCode(text)}
@@ -31,7 +35,7 @@ export const LoginVerificationForm = ({ submit,setOtpCode,errorMessage }) => {
                     pinCodeContainerStyle: styles.otpInputStyle,
                     pinCodeTextStyle: styles.pinStyle
                 }}
-            />
+            /> */}
             <Spacer />
             {errorMessage
                 && (
@@ -40,7 +44,7 @@ export const LoginVerificationForm = ({ submit,setOtpCode,errorMessage }) => {
                         <Spacer />
                     </>
                 )}
-            <ResponsiveText style={styles.resendCode}>Resend Code</ResponsiveText>
+            {/* <ResponsiveText style={styles.resendCode}>Resend Code</ResponsiveText> */}
             <Spacer />
             <SimpleButton onPress={submit} text={"Submit"} textColor={colors.black} backgroundColor={colors.mainColor} buttonWidth={wp(80)} />
         </View>
@@ -112,6 +116,12 @@ const styles = StyleSheet.create({
         color: colors.iconColor,
         width: wp(80)
     },
+    blueText: {
+        fontFamily: fontFamily.appTextMedium,
+        // lineHeight: 20,
+        fontSize: 14,
+        color: colors.mainColor,
+    },
     otpInputStyle: {
         backgroundColor: colors.InputTextCOlor,
         fontFamily: fontFamily.appTextMedium,
@@ -162,6 +172,26 @@ const styles = StyleSheet.create({
     Image: {
         width: wp(6.41),
         height: wp(6.41),
+    },
+    containerInner: {
+        ...appStyles.rowBasic,
+        backgroundColor: colors.inputBgColor,
+        borderRadius: wp(3),
+        height: hp(6.5),
+        width: wp(82),
+        paddingLeft: wp(3),
+        paddingRight: wp(1.2),
+        borderColor: colors.borderColor,
+        borderWidth: 1.5,
+    },
+    input: {
+        flex: 1,
+        color: colors.white,
+        fontSize: 14,
+        fontFamily: fontFamily.appTextRegular,
+    },
+    rightIconWrapper: {
+        paddingHorizontal: wp(2),
     },
 
 })
