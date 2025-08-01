@@ -1,7 +1,7 @@
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
-import { AccountInfo, AccountOverView, AllPairs, AllPars, BalanceOverView, LatestNewsComponent, PortfilioOverView, RowButtonTab, WaitchListPairRow, WatchList } from './Component/Index'
+import { AccountInfo, AccountOverView, AllPairs, AllPars, BalanceOverView, LatestNewsComponent, PortfilioOverView, PortfilioOverViewHeader, RowButtonTab, WaitchListPairRow, WatchList } from './Component/Index'
 import HomeHeader from '../../../components/HomeHeader'
 import { style } from './Style'
 import Spacer, { HorizontalSpacer } from '../../../components/Spacer'
@@ -18,7 +18,8 @@ const HomeScreen = (props) => {
     threeRowTabButtonPress, setThreeRowTabButtonPress,
     portfolioButton, setPortfolioButton,
     watchListButtonPressed, setWatchListButtonPress,
-    showNewsView, setShowNewsView
+    showNewsView, setShowNewsView,
+    marketList, MarketPress
   } = useHome(props)
   return (
     <AuthMainContainer>
@@ -31,7 +32,10 @@ const HomeScreen = (props) => {
         <RowButtonTab buttonPress={threeRowTabButtonPress} setButtonPress={setThreeRowTabButtonPress} />
         <Spacer height={hp(1)} />
         {threeRowTabButtonPress === "portfolio" && (
-          <PortfilioOverView buttonPress={portfolioButton} setButtonPress={setPortfolioButton} />
+          <View style={[style.mainBox]}>
+            <PortfilioOverViewHeader buttonPress={portfolioButton} setButtonPress={setPortfolioButton} />
+            <PortfilioOverView />
+          </View>
         )}
         {threeRowTabButtonPress === "balance" && (
           <BalanceOverView />
@@ -78,7 +82,7 @@ const HomeScreen = (props) => {
           {watchListButtonPressed === "watchList" ? (
             <WatchList WatchListButtonPress={watchListButtonPressed} setWatchListButtonPress={setWatchListButtonPress} />
           ) : (
-            <AllPairs WatchListButtonPress={watchListButtonPressed} setWatchListButtonPress={setWatchListButtonPress} />
+            <AllPairs MarketScreen={MarketPress} marketData={marketList} WatchListButtonPress={watchListButtonPressed} setWatchListButtonPress={setWatchListButtonPress} />
 
           )}
         </View>

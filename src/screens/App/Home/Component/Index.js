@@ -94,6 +94,25 @@ export const RowButtonTab = ({ buttonPress, setButtonPress }) => {
     );
 };
 
+export const PortfilioOverViewHeader = ({ buttonPress, setButtonPress }) => {
+    return (
+        <View style={style.dateBaseGraph}>
+            <TouchableOpacity onPress={() => setButtonPress('weekly')} style={[style.dateBaseButtonStyling, buttonPress === 'weekly' ? { backgroundColor: colors.bottomSheetImageViewColor } : { backgroundColor: colors.transparent },]}>
+                <ResponsiveText style={[style.threeButtonText, { color: buttonPress === 'weekly' ? colors.mainColor : colors.white },]} >Weekly</ResponsiveText>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setButtonPress('month')} style={[style.dateBaseButtonStyling, buttonPress === 'month' ? { backgroundColor: colors.bottomSheetImageViewColor } : { backgroundColor: colors.transparent },]}>
+                <ResponsiveText style={[style.threeButtonText, { color: buttonPress === 'month' ? colors.mainColor : colors.white },]} >Month</ResponsiveText>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setButtonPress('year')} style={[style.dateBaseButtonStyling, buttonPress === 'year' ? { backgroundColor: colors.bottomSheetImageViewColor } : { backgroundColor: colors.transparent },]}>
+                <ResponsiveText style={[style.threeButtonText, { color: buttonPress === 'year' ? colors.mainColor : colors.white },]} >Year</ResponsiveText>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setButtonPress('all')} style={[style.dateBaseButtonStyling, buttonPress === 'all' ? { backgroundColor: colors.bottomSheetImageViewColor } : { backgroundColor: colors.transparent },]}>
+                <ResponsiveText style={[style.threeButtonText, { color: buttonPress === 'all' ? colors.mainColor : colors.white },]} >All</ResponsiveText>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
 export const PortfilioOverView = ({ buttonPress, setButtonPress }) => {
 
     const chartConfig = {
@@ -103,26 +122,8 @@ export const PortfilioOverView = ({ buttonPress, setButtonPress }) => {
         color: (opacity = 1) => `rgba(5, 186, 218, ${opacity})`,
     };
     return (
-        <View style={[style.mainBox]}>
-            <View style={style.dateBaseGraph}>
-                <TouchableOpacity onPress={() => setButtonPress('weekly')} style={[style.dateBaseButtonStyling, buttonPress === 'weekly' ? { backgroundColor: colors.bottomSheetImageViewColor } : { backgroundColor: colors.transparent },]}>
-                    <ResponsiveText style={[style.threeButtonText, { color: buttonPress === 'weekly' ? colors.mainColor : colors.white },]} >Weekly</ResponsiveText>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setButtonPress('month')} style={[style.dateBaseButtonStyling, buttonPress === 'month' ? { backgroundColor: colors.bottomSheetImageViewColor } : { backgroundColor: colors.transparent },]}>
-                    <ResponsiveText style={[style.threeButtonText, { color: buttonPress === 'month' ? colors.mainColor : colors.white },]} >Month</ResponsiveText>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setButtonPress('year')} style={[style.dateBaseButtonStyling, buttonPress === 'year' ? { backgroundColor: colors.bottomSheetImageViewColor } : { backgroundColor: colors.transparent },]}>
-                    <ResponsiveText style={[style.threeButtonText, { color: buttonPress === 'year' ? colors.mainColor : colors.white },]} >Year</ResponsiveText>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setButtonPress('all')} style={[style.dateBaseButtonStyling, buttonPress === 'all' ? { backgroundColor: colors.bottomSheetImageViewColor } : { backgroundColor: colors.transparent },]}>
-                    <ResponsiveText style={[style.threeButtonText, { color: buttonPress === 'all' ? colors.mainColor : colors.white },]} >All</ResponsiveText>
-                </TouchableOpacity>
-            </View>
-            {/* <Line/> */}
-            {/* <Image
-                style={{ width: wp(80), height: hp(33), resizeMode: "cover" }}
-                source={images.dashboardGraph}
-            /> */}
+
+
             <View style={{ width: wp(90), alignSelf: 'center', alignItems: 'center', paddingHorizontal: wp(4) }}>
                 <LineChart
                     data={[
@@ -181,16 +182,15 @@ export const PortfilioOverView = ({ buttonPress, setButtonPress }) => {
 
 
 
-        </View>
     )
 }
 
 export const BalanceOverView = () => {
     const pieData = [
-  {value: 50, color: '#79C5D3', text: 'Red'},
-  {value: 30, color: '#55B8CA', text: 'Blue'},
-  {value: 20, color: '#3DA1B3', text: 'Green'},
-];
+        { value: 50, color: '#79C5D3', text: 'Red' },
+        { value: 30, color: '#55B8CA', text: 'Blue' },
+        { value: 20, color: '#3DA1B3', text: 'Green' },
+    ];
     return (
         <View style={style.mainBox}>
             <View style={style.BalanceView}>
@@ -198,7 +198,7 @@ export const BalanceOverView = () => {
                     style={{ width: wp(36), height: wp(36), borderRadius: wp(18), resizeMode: "contain" }}
                     source={images.doughnutChart}
                 /> */}
-                <View style={{ alignItems: 'center', marginTop: 20,backgroundColor:"transparent" }}>
+                <View style={{ alignItems: 'center', marginTop: 20, backgroundColor: "transparent" }}>
                     <PieChart
                         data={pieData}
                         // showText
@@ -208,7 +208,7 @@ export const BalanceOverView = () => {
                         showText={false}
                         innerRadius={67}  // Optional for donut style
                         centerLabelComponent={() => (
-                           null
+                            null
                         )}
                         innerCircleColor={colors.searchBar}
                     />
@@ -311,93 +311,97 @@ export const LatestNewsComponent = ({ NewsData = DummyLatestNews }) => {
     )
 }
 
-export const WaitchListPairRow=({WatchListButtonPress, setWatchListButtonPress})=>{
-    return(
-          <View style={style.watchListView}>
+export const WaitchListPairRow = ({ WatchListButtonPress, setWatchListButtonPress }) => {
+    return (
+        <View style={style.watchListView}>
             <TouchableOpacity onPress={() => setWatchListButtonPress("watchList")} style={{ width: wp(18) }}>
-              <ResponsiveText style={[style.watchListText, { color: WatchListButtonPress === "watchList" ? colors.mainColor : colors.iconColor, },]} >
-                Watchlist
-              </ResponsiveText>
-              <Spacer height={hp(1)} />
-              {WatchListButtonPress === "watchList" && (
-                <View style={style.watchListLine} />
-              )}
+                <ResponsiveText style={[style.watchListText, { color: WatchListButtonPress === "watchList" ? colors.mainColor : colors.iconColor, },]} >
+                    Watchlist
+                </ResponsiveText>
+                <Spacer height={hp(1)} />
+                {WatchListButtonPress === "watchList" && (
+                    <View style={style.watchListLine} />
+                )}
             </TouchableOpacity>
             <HorizontalSpacer width={wp(2)} />
             <TouchableOpacity onPress={() => setWatchListButtonPress("pairs")} style={{ width: wp(18) }}>
-              <ResponsiveText style={[style.watchListText, { color: WatchListButtonPress === "pairs" ? colors.mainColor : colors.iconColor, },]} >
-                All Pairs
-              </ResponsiveText>
-              <Spacer height={hp(1)} />
-              {WatchListButtonPress === "pairs" && (
-                <View style={style.watchListLine} />
-              )}
+                <ResponsiveText style={[style.watchListText, { color: WatchListButtonPress === "pairs" ? colors.mainColor : colors.iconColor, },]} >
+                    All Pairs
+                </ResponsiveText>
+                <Spacer height={hp(1)} />
+                {WatchListButtonPress === "pairs" && (
+                    <View style={style.watchListLine} />
+                )}
             </TouchableOpacity>
-          </View>
+        </View>
     )
 }
 
-export const WatchList = ({  watchListData = watchListDumyData }) => {
+export const WatchList = ({ watchListData = watchListDumyData }) => {
     return (
-                <FlatList
-                    data={watchListData}
-                    keyExtractor={(item, index) => item.id.toString() || index.toString()}
-                    // horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({ item }) => (
-                        <View style={style.watchListInnerView}>
-                            <View style={{ flexDirection: "row", width: wp(40) }}>
-                                <Image source={item.image} style={style.watchListImageStyling} resizeMode='contain' />
-                                <HorizontalSpacer />
-                                <View >
-                                    <ResponsiveText style={[style.text2, { fontSize: 14 }]}>{item.nameLogo}</ResponsiveText>
-                                    <ResponsiveText style={[style.text4]}>{item.fullName}</ResponsiveText>
-                                </View>
-                            </View>
-                            <View style={{ alignItems: 'flex-start', width: wp(20) }}>
-                                <ResponsiveText style={[style.marketText]}>{item.market}</ResponsiveText>
-
-                            </View>
-                            <View style={{ alignItems: 'flex-end', width: wp(20) }}>
-                                <ResponsiveText style={[style.text2, { fontSize: 14, color: item.percentage.startsWith('+') ? 'green' : 'red' }]}>{item.percentage}</ResponsiveText>
-                            </View>
-
+        <FlatList
+            data={watchListData}
+            keyExtractor={(item, index) => item.id.toString() || index.toString()}
+            // horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item }) => (
+                <View style={style.watchListInnerView}>
+                    <View style={{ flexDirection: "row", width: wp(40) }}>
+                        <Image source={item.image} style={style.watchListImageStyling} resizeMode='contain' />
+                        <HorizontalSpacer />
+                        <View >
+                            <ResponsiveText style={[style.text2, { fontSize: 14 }]}>{item.nameLogo}</ResponsiveText>
+                            <ResponsiveText style={[style.text4]}>{item.fullName}</ResponsiveText>
                         </View>
-                    )}
+                    </View>
+                    <View style={{ alignItems: 'flex-start', width: wp(20) }}>
+                        <ResponsiveText style={[style.marketText]}>{item.market}</ResponsiveText>
 
-                />  
+                    </View>
+                    <View style={{ alignItems: 'flex-end', width: wp(20) }}>
+                        <ResponsiveText style={[style.text2, { fontSize: 14, color: item.percentage.startsWith('+') ? 'green' : 'red' }]}>{item.percentage}</ResponsiveText>
+                    </View>
+
+                </View>
+            )}
+
+        />
     )
 }
 
-export const AllPairs = ({  watchListData = watchListDumyData }) => {
+export const AllPairs = ({ marketData, MarketScreen }) => {
     return (
-                <FlatList
-                    data={watchListData}
-                    keyExtractor={(item, index) => item.id.toString() || index.toString()}
-                    // horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({ item }) => (
-                        <View style={style.watchListInnerView}>
-                            <View style={{ flexDirection: "row", width: wp(40) }}>
-                                <Image source={item.image} style={style.watchListImageStyling} resizeMode='contain' />
-                                <HorizontalSpacer />
-                                <View >
-                                    <ResponsiveText style={[style.text2, { fontSize: 14 }]}>{item.nameLogo}</ResponsiveText>
-                                    <ResponsiveText style={[style.text4]}>{item.fullName}</ResponsiveText>
-                                </View>
+        <FlatList
+            data={marketData}
+            keyExtractor={(item, index) => item.id.toString() || index.toString()}
+            renderItem={({ item }) => (
+                <>
+                    <TouchableOpacity onPress={() => MarketScreen(item)} style={style.MarketDataView}>
+                        <View style={{ flexDirection: "row", alignItems: "center", width: wp(37) }}>
+                            <TouchableOpacity>
+                                <Image source={images.starUnFill} style={style.StarImage} />
+                            </TouchableOpacity>
+                            <HorizontalSpacer />
+                            <View>
+                                <ResponsiveText style={style.textHeader}>{item.symbol}</ResponsiveText>
+                                <ResponsiveText style={style.volText}>Vol {item.Vol || "42.35M"}</ResponsiveText>
                             </View>
-                            <View style={{ alignItems: 'flex-start', width: wp(20) }}>
-                                <ResponsiveText style={[style.marketText]}>{item.market}</ResponsiveText>
-
-                            </View>
-                            <View style={{ alignItems: 'flex-end', width: wp(20) }}>
-                                <ResponsiveText style={[style.text2, { fontSize: 14, color: item.percentage.startsWith('+') ? 'green' : 'red' }]}>{item.percentage}</ResponsiveText>
-                            </View>
-
                         </View>
-                    )}
+                        <View style={{ alignItems: "flex-start", justifyContent: "flex-start", width: wp(25) }}>
+                            <ResponsiveText style={[style.textHeader]}>{item.previousPrice || "1.25"}</ResponsiveText>
+                            <ResponsiveText style={style.volText}>${item.InUSdt || "2,254.00"}</ResponsiveText>
+                        </View>
+                        <View style={{ flex: 1, alignItems: "flex-end", width: wp(25) }}>
+                            <ResponsiveText style={[style.textHeader, { color: colors.green }]}>{item.Market || "0.01%"}</ResponsiveText>
+                            {/* {color:item.Market.startsWith("+")?colors.green:colors.red} */}
+                        </View>
+                        <Spacer />
 
-                />  
+                    </TouchableOpacity>
+                    <Line height={hp(0.1)} />
+                </>
+            )}
+        />
     )
 }
 const style = StyleSheet.create({
@@ -595,6 +599,31 @@ const style = StyleSheet.create({
         color: colors.white,
         textAlign: "left",
 
+    },
+    MarketDataView: {
+        width: wp(90),
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        // borderBottomWidth: 1,
+        // borderBottomColor: colors.borderColor,
+        paddingHorizontal: wp(3.5),
+        paddingVertical: hp(1.5), // 👈 Adds top & bottom spacing
+    },
+    StarImage: {
+        width: wp(4.5),
+        height: wp(4.5),
+        resizeMode: "contain"
+    },
+    textHeader: {
+        fontSize: 16,
+        fontWeight: "500",
+        color: colors.white
+    },
+    volText: {
+        fontSize: 14,
+        fontWeight: "400",
+        color: colors.iconColor
     }
 
 });
