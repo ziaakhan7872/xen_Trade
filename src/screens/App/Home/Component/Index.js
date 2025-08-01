@@ -311,31 +311,34 @@ export const LatestNewsComponent = ({ NewsData = DummyLatestNews }) => {
     )
 }
 
-export const WatchList = ({ WatchListButtonPress, setWatchListButtonPress, watchListData = watchListDumyData }) => {
+export const WaitchListPairRow=({WatchListButtonPress, setWatchListButtonPress})=>{
+    return(
+          <View style={style.watchListView}>
+            <TouchableOpacity onPress={() => setWatchListButtonPress("watchList")} style={{ width: wp(18) }}>
+              <ResponsiveText style={[style.watchListText, { color: WatchListButtonPress === "watchList" ? colors.mainColor : colors.iconColor, },]} >
+                Watchlist
+              </ResponsiveText>
+              <Spacer height={hp(1)} />
+              {WatchListButtonPress === "watchList" && (
+                <View style={style.watchListLine} />
+              )}
+            </TouchableOpacity>
+            <HorizontalSpacer width={wp(2)} />
+            <TouchableOpacity onPress={() => setWatchListButtonPress("pairs")} style={{ width: wp(18) }}>
+              <ResponsiveText style={[style.watchListText, { color: WatchListButtonPress === "pairs" ? colors.mainColor : colors.iconColor, },]} >
+                All Pairs
+              </ResponsiveText>
+              <Spacer height={hp(1)} />
+              {WatchListButtonPress === "pairs" && (
+                <View style={style.watchListLine} />
+              )}
+            </TouchableOpacity>
+          </View>
+    )
+}
+
+export const WatchList = ({  watchListData = watchListDumyData }) => {
     return (
-        <View style={style.mainBox}>
-            <View style={style.watchListView}>
-                <TouchableOpacity onPress={() => setWatchListButtonPress("watchList")} style={{ width: wp(18) }}>
-                    <ResponsiveText style={[style.watchListText, { color: WatchListButtonPress === "watchList" ? colors.mainColor : colors.iconColor, },]} >
-                        Watchlist
-                    </ResponsiveText>
-                    <Spacer height={hp(1)} />
-                    {WatchListButtonPress === "watchList" && (
-                        <View style={style.watchListLine} />
-                    )}
-                </TouchableOpacity>
-                <HorizontalSpacer width={wp(2)} />
-                <TouchableOpacity onPress={() => setWatchListButtonPress("pairs")} style={{ width: wp(18) }}>
-                    <ResponsiveText style={[style.watchListText, { color: WatchListButtonPress === "pairs" ? colors.mainColor : colors.iconColor, },]} >
-                        All Pairs
-                    </ResponsiveText>
-                    <Spacer height={hp(1)} />
-                    {WatchListButtonPress === "pairs" && (
-                        <View style={style.watchListLine} />
-                    )}
-                </TouchableOpacity>
-            </View>
-            <View>
                 <FlatList
                     data={watchListData}
                     keyExtractor={(item, index) => item.id.toString() || index.toString()}
@@ -362,14 +365,39 @@ export const WatchList = ({ WatchListButtonPress, setWatchListButtonPress, watch
                         </View>
                     )}
 
-                />
-            </View>
+                />  
+    )
+}
 
+export const AllPairs = ({  watchListData = watchListDumyData }) => {
+    return (
+                <FlatList
+                    data={watchListData}
+                    keyExtractor={(item, index) => item.id.toString() || index.toString()}
+                    // horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={({ item }) => (
+                        <View style={style.watchListInnerView}>
+                            <View style={{ flexDirection: "row", width: wp(40) }}>
+                                <Image source={item.image} style={style.watchListImageStyling} resizeMode='contain' />
+                                <HorizontalSpacer />
+                                <View >
+                                    <ResponsiveText style={[style.text2, { fontSize: 14 }]}>{item.nameLogo}</ResponsiveText>
+                                    <ResponsiveText style={[style.text4]}>{item.fullName}</ResponsiveText>
+                                </View>
+                            </View>
+                            <View style={{ alignItems: 'flex-start', width: wp(20) }}>
+                                <ResponsiveText style={[style.marketText]}>{item.market}</ResponsiveText>
 
-            {/* <Line/> */}
+                            </View>
+                            <View style={{ alignItems: 'flex-end', width: wp(20) }}>
+                                <ResponsiveText style={[style.text2, { fontSize: 14, color: item.percentage.startsWith('+') ? 'green' : 'red' }]}>{item.percentage}</ResponsiveText>
+                            </View>
 
-            {/* {WatchListButtonPress=="watchList"} */}
-        </View>
+                        </View>
+                    )}
+
+                />  
     )
 }
 const style = StyleSheet.create({
