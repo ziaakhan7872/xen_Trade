@@ -10,23 +10,39 @@ import { useSelectCrypto } from './Hooks';
 import { hp } from '../../../components/ResponsiveComponent';
 
 const SelectCrypto = (props) => {
-  const { cryptoList, loading, error, handleCryptoNavigation } = useSelectCrypto(props)
+  const {
+    cryptoList, loading, error, handleCryptoNavigation,
+    searchCoin, setSearchCoin, papulaistrCryptoL
+
+
+  } = useSelectCrypto(props)
 
   return (
     <AuthMainContainer>
       <SelectCryptoHeader BackPress={() => props?.navigation?.goBack()} historyPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.DepositHistory })} />
       <Spacer height={hp(1)} />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
-        <SelectCryptoSearchBox />
+        <SelectCryptoSearchBox searchCoin={searchCoin} setSearchCoin={setSearchCoin} />
         <Spacer />
         <View style={styles.otherContainer}>
-          <ResponsiveText style={styles.title}>Popular</ResponsiveText>
-          <Spacer />
-          <PopularCrypto data={cryptoList} onPress={handleCryptoNavigation} />
-          <Spacer />
-          <ResponsiveText style={styles.title}>All Crypto</ResponsiveText>
+
+          {(papulaistrCryptoL && papulaistrCryptoL?.length>0) && (
+            <>
+              <ResponsiveText style={styles.title}>Popular</ResponsiveText>
+              <Spacer />
+              <PopularCrypto data={papulaistrCryptoL} onPress={handleCryptoNavigation} />
+              <Spacer />
+            </>
+
+          )}
+          {(cryptoList && cryptoList?.length>0) && (
+            <>
+            <ResponsiveText style={styles.title}>All Crypto</ResponsiveText>
           <Spacer />
           <ALlCrypto data={cryptoList} onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectNetwork })} />
+            </>
+          )}
+          
         </View>
       </ScrollView>
 

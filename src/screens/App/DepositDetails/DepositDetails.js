@@ -8,8 +8,10 @@ import { AmountTitle, WithdrawDetailsContainer } from './Components'
 import Spacer from '../../../components/Spacer'
 import Line from '../../../components/Liner'
 import { colors } from '../../../constants'
+import { useDepositDetails } from './Hooks'
 
 const DepositDetails = (props) => {
+    const {response} = useDepositDetails(props)
     return (
         <AuthMainContainer>
             <View style={{ paddingHorizontal: wp(4) }}>
@@ -17,11 +19,11 @@ const DepositDetails = (props) => {
             </View>
 
             <Spacer height={hp(3.5)} />
-            <AmountTitle />
+            <AmountTitle  data={response}/>
             <Spacer height={hp(3.5)} />
             <Line height={hp(0.2)} backgroundColor={colors.lineStroke} />
             <Spacer height={hp(3.5)} />
-            <WithdrawDetailsContainer />
+            <WithdrawDetailsContainer data={response} />
         </AuthMainContainer>
     )
 }

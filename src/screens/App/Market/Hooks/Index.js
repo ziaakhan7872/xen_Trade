@@ -6,6 +6,7 @@ import { getPairApi } from "../../../../constants/Api/Index";
 
 export const UseMarket = (props) => {
     const [marketList, setMarketList] = useState([]);
+    const [searchText,setSearchText] = useState("")
 
     useEffect(() => {
         getMarketData();
@@ -25,9 +26,15 @@ export const UseMarket = (props) => {
             console.error("Error fetching market data:", error);
         }
     }
+
+     const filteredMarketList = marketList.filter((item) =>
+        item?.name?.toLowerCase().includes(searchText.toLowerCase()) ||
+        item?.symbol?.toLowerCase().includes(searchText.toLowerCase())
+    );
     return {
-        marketList, setMarketList,
-        MarketPress
+        marketList:filteredMarketList, setMarketList,
+        MarketPress,
+        searchText,setSearchText
 
     }
 }

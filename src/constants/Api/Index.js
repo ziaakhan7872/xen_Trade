@@ -127,11 +127,18 @@ export const GetDepositDetailsApi = async (payLoads) => {
         console.log(error, "Desposit  Api  error")
     }
 }
-export const GetDepositHistoryApi = async (userId) => {
-    return axios.get(`${ASSETS_MANAGER_BASE_URL2}/deposits`, {
-        headers: getHeaders(token),
-        params: { userId }
-    })
+export const GetDepositHistoryApi = async (payload) => {
+   try {
+        return apiRequest({
+            method: "GET",
+            url: `${ASSETS_MANAGER_BASE_URL2}/deposits`,
+            params: payload,
+            isAuth: true,
+        });
+
+    } catch (error) {
+        console.log(error, "Desposit History Api  error")
+    }
 }
 
 // //Pair Api

@@ -56,8 +56,8 @@ export const useHomeScreen = (props) => {
   useEffect(() => {
     let filtered = cryptoList.filter(
       (item) =>
-        item.name.toLowerCase().includes(searchCoin.toLowerCase()) ||
-        item.symbol.toLowerCase().includes(searchCoin.toLowerCase())
+        item?.name?.toLowerCase().includes(searchCoin.toLowerCase()) ||
+        item?.symbol?.toLowerCase().includes(searchCoin.toLowerCase())
     );
 
     if (isChecked) {
