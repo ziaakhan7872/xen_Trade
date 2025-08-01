@@ -40,7 +40,7 @@ export const SimpleButton = ({
                     borderColor: borderColor,
                     fontSize: fontSize,
                     fontWeight: fontWeight,
-                    
+
                 }
             }
             onPress={onPress}>

@@ -91,5 +91,7 @@ const images = {
     ScanIcon: require("./ScanIcon.png"),
     simpleTick: require("./simpleTick.png"),
     greenTick: require("./greenTick.png"),
+    verifyTick: require("./verifyTick.png"),
+    emailSent: require("./emailSent.png"),
 }
 export default images

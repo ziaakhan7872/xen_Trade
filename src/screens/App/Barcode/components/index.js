@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { ResponsiveText } from '../../../../components/ResponsiveText';
 import images from '../../../../images';
-import { colors, Routes } from '../../../../constants';
+import { colors } from '../../../../constants';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { fontFamily } from '../../../../constants/fonts';
 import Spacer, { HorizontalSpacer } from '../../../../components/Spacer';

@@ -9,6 +9,7 @@ import images from '../../../images'
 import Spacer, { HorizontalSpacer } from '../../../components/Spacer'
 import { ResponsiveText } from '../../../components/ResponsiveText'
 import Line from '../../../components/Liner'
+import { appStyles } from '../../../utilities'
 
 const MenuScreen = (props) => {
     return (
@@ -86,7 +87,7 @@ const MenuScreen = (props) => {
                     <Spacer />
                     <Line height={hp(0.1)} width={wp(90)} />
                     <Spacer />
-                    <TouchableOpacity style={{ flexDirection: "row", alignItems: "center" }}>
+                    <TouchableOpacity style={appStyles.rowBasic} onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.ContactSupport })}>
                         <Image style={style.imageStyling} source={images.Contact} resizeMode='contain' />
                         <HorizontalSpacer width={wp(3)} />
                         <ResponsiveText style={style.label}>Contact Support</ResponsiveText>
