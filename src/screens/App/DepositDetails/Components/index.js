@@ -8,56 +8,73 @@ import { hp, wp } from '../../../../components/ResponsiveComponent'
 import Spacer from '../../../../components/Spacer'
 import Line from '../../../../components/Liner'
 import Clipboard from '@react-native-clipboard/clipboard'
+import moment from 'moment'
 
-export const AmountTitle = () => {
+export const AmountTitle = ({ data }) => {
+    const Amount = data?.amount ? parseFloat(data?.amount) : 0
     return (
         <View style={styles.amountTitleContainer}>
             <ResponsiveText style={styles.textV1}>Amount</ResponsiveText>
             <Spacer height={hp(0.5)} />
             <View style={appStyles.row}>
-                <ResponsiveText style={styles.amountMainText}>2521.25</ResponsiveText>
-                <ResponsiveText style={styles.amountMainTextV2}>USDT</ResponsiveText>
+                <ResponsiveText style={styles.amountMainText}>{Amount.toFixed(3)}</ResponsiveText>
+                <ResponsiveText style={styles.amountMainTextV2}>{data?.symbol}</ResponsiveText>
             </View>
+            {data?.status === "completed" ? (
+                <View style={appStyles.rowBasic}>
+                    <Image source={images.greenTick} style={styles.tickImg} />
+                    <ResponsiveText style={[styles.textV1, { color: colors.green, marginLeft: wp(2) }]} >{data?.status}</ResponsiveText>
+                </View>
+            ) : (
+                <View style={appStyles.rowBasic}>
+                    <ResponsiveText
+                        style={[
+                            styles.textV1,
+                            {
+                                color: data?.status === "failed" ? "red" : data?.status === "pending" || data?.status === "processing" ? "yellow" : "white", marginLeft: wp(2),
+                            },
+                        ]}
+                    >
+                        {data?.status}
+                    </ResponsiveText>
+                </View>
+            )}
 
-            <View style={appStyles.rowBasic}>
-                <Image source={images.greenTick} style={styles.tickImg} />
-                <ResponsiveText style={[styles.textV1, { color: colors.green, marginLeft: wp(2) }]} >Completed</ResponsiveText>
-            </View>
             <Spacer />
             <ResponsiveText style={[styles.textV1, { textAlign: 'center', }]} >Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam </ResponsiveText>
         </View >
     )
 }
 
-export const WithdrawDetailsContainer = ({ address = "0x21505337aa3b5254eb154b8", txid = "0x21505337aa3b5254eb154b8", fee = "1 USDT", date = "11/22, 17:26:15", reference = "227491076" }) => {
+export const WithdrawDetailsContainer = ({ data }) => {
     return (
         <View style={{ paddingHorizontal: wp(4) }} >
             <View style={styles.componentHeader}>
                 <View style={styles.confirmItem}>
                     <ResponsiveText style={styles.confirmLabel}>Confirmations</ResponsiveText>
-                    <ResponsiveText style={styles.confirmValue}>50/4</ResponsiveText>
+                    <ResponsiveText style={styles.confirmValue}>{data?.confirmations}</ResponsiveText>
                 </View>
                 <Line height={hp(0.1)} width={wp(91.5)} />
 
                 <View style={styles.confirmItem}>
                     <ResponsiveText style={styles.confirmLabel}>Network</ResponsiveText>
-                    <ResponsiveText style={styles.confirmValue}>TRX</ResponsiveText>
+                    <ResponsiveText style={styles.confirmValue}>{data?.networkName}</ResponsiveText>
                 </View>
                 <Line height={hp(0.1)} width={wp(91.5)} />
 
                 <View style={styles.confirmItem}>
                     <ResponsiveText style={styles.confirmLabel}>Deposit Wallet</ResponsiveText>
-                    <ResponsiveText style={styles.confirmValue}>Ethereum</ResponsiveText>
+                    <ResponsiveText style={styles.confirmValue}>{data?.symbol}</ResponsiveText>
                 </View>
                 <Line height={hp(0.1)} width={wp(91.5)} />
                 <View style={styles.confirmItem}>
                     <ResponsiveText style={styles.confirmLabel}>Address</ResponsiveText>
                     <View style={appStyles.rowBasic}>
                         <ResponsiveText style={[styles.confirmValue, { width: wp(50), overflow: 'hidden', textOverflow: 'ellipsis' }]} numberOfLines={1}>
-                            {address}
+                            {data?.walletAddress}
                         </ResponsiveText>
                         <TouchableOpacity onPress={() => {
-                            Clipboard.setString('https://www.exchange/code2354')
+                            Clipboard.setString(data?.walletAddress)
                             if (Platform.OS === 'android') {
                                 ToastAndroid.show('Address copied!', ToastAndroid.SHORT)
                             } else {
@@ -73,10 +90,10 @@ export const WithdrawDetailsContainer = ({ address = "0x21505337aa3b5254eb154b8"
                     <ResponsiveText style={styles.confirmLabel}>TXID</ResponsiveText>
                     <View style={appStyles.rowBasic}>
                         <ResponsiveText style={[styles.confirmValue, { width: wp(50), overflow: 'hidden', textOverflow: 'ellipsis' }]} numberOfLines={1}>
-                            {txid}
+                            {data?.txHash}
                         </ResponsiveText>
                         <TouchableOpacity onPress={() => {
-                            Clipboard.setString('https://www.exchange/code2354')
+                            Clipboard.setString(data?.txHash)
                             if (Platform.OS === 'android') {
                                 ToastAndroid.show('Address copied!', ToastAndroid.SHORT)
                             } else {
@@ -90,13 +107,15 @@ export const WithdrawDetailsContainer = ({ address = "0x21505337aa3b5254eb154b8"
                 <Line height={hp(0.1)} width={wp(91.5)} />
                 <View style={styles.confirmItem}>
                     <ResponsiveText style={styles.confirmLabel}>Network Fee</ResponsiveText>
-                    <ResponsiveText style={styles.confirmValue}>{fee}</ResponsiveText>
+                    <ResponsiveText style={styles.confirmValue}>{data?.fee || 0}</ResponsiveText>
                 </View>
                 <Line height={hp(0.1)} width={wp(91.5)} />
                 <View style={styles.confirmItem}>
                     <ResponsiveText style={styles.confirmLabel}>Date</ResponsiveText>
-                    <ResponsiveText style={styles.confirmValue}>{date}</ResponsiveText>
-                </View>
+                    <ResponsiveText style={styles.confirmValue}>
+                        {data?.updatedAt ? moment(data?.updatedAt).format('MM/YYYY, HH:mm:ss') : '--'}
+                    </ResponsiveText>              
+                      </View>
 
             </View>
         </View>

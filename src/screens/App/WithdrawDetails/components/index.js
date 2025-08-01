@@ -95,16 +95,23 @@ const getTickIconStyles = (status, step) => {
 };
 
 
+const stepsOrder = ["submitted", "pending", "inProgress", "sent"];
+
 const shouldShowVerticalLine = (status, step) => {
   const normalizedStatus = normalizeStatus(status);
 
-  // Stop line after failed or sent
-  if (normalizedStatus === "failed" && step === "inProgress") return true; // show red line
-  if (normalizedStatus === "failed" && step === "sent") return false;      // stop line
-  if (normalizedStatus === "sent" && step === "inProgress") return true;   // show line till sent
-  if (normalizedStatus === "sent" && step === "sent") return false;        // stop line
-  return step !== "sent";
+  const currentStatusIndex = stepsOrder.indexOf(normalizedStatus);
+  const stepIndex = stepsOrder.indexOf(step);
+
+  if (step === "sent") return false;
+
+  if (normalizedStatus === "failed") {
+    return stepIndex < currentStatusIndex ? "active" : "inactive";
+  }
+  return stepIndex < currentStatusIndex ? "active" : "inactive";
 };
+
+
 
 
 export const ProgressWithdraw = ({ response }) => {
@@ -127,14 +134,23 @@ export const ProgressWithdraw = ({ response }) => {
                 />
               </View>
 
-              {shouldShowVerticalLine(response?.status, step) && (
-                <View
-                  style={[
-                    styles.verticalLine,
-                    styles.verticalLineActive // always normal color, even if failed
-                  ]}
-                />
-              )}
+              {(() => {
+                const lineState = shouldShowVerticalLine(response?.status, step);
+                if (!lineState) return null;
+
+                return (
+                  <View
+                    style={[
+                      styles.verticalLine,
+                      lineState === "active"
+                        ? styles.verticalLineActive
+                        : styles.verticalLineInactive
+                    ]}
+                  />
+                );
+              })()}
+
+
 
 
             </View>

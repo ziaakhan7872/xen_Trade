@@ -41,8 +41,8 @@ export const UseSelectCryptoWithdraw = (props) => {
     }
 
     const filteredCryptoList = cryptoList.filter((item) =>
-        item.name.toLowerCase().includes(searchCoin.toLowerCase()) ||
-        item.symbol.toLowerCase().includes(searchCoin.toLowerCase())
+        item?.name?.toLowerCase().includes(searchCoin.toLowerCase()) ||
+        item?.symbol?.toLowerCase().includes(searchCoin.toLowerCase())
     );
 
     const RecentCryptoPress = (item) => {

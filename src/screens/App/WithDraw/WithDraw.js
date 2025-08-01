@@ -20,8 +20,8 @@ const WithDraw = (props) => {
     walletAddressError,setWalletAddressError,
     amountReceived, setAmountReceived,
     cryptoData, network,
-    handleSubmit,handleCopy, validateAddress
-
+    handleSubmit,handleCopy, validateAddress,
+    apiError,setApiError
 
   } = UseWidthDraw(props)
 
@@ -41,6 +41,7 @@ const WithDraw = (props) => {
       />
       <View style={styles.spacer} />
       <FeeInfo
+      address={address}
         cryptoData={cryptoData}
         handleSubmit={() => WithdrawConfirmationRef?.current?.expand()}
         fee={fee}
@@ -49,6 +50,7 @@ const WithDraw = (props) => {
       />
       <Portal>
         <WithDrawConfirmationBottomSheet
+        apiError={apiError}
         handleCopy={handleCopy}
           address={address}
           amount={amount}

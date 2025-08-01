@@ -4,8 +4,10 @@ import { Routes } from '../../../../constants';
 
 export const useSelectCrypto = (props) => {
     const [cryptoList, setCryptoList] = useState([])
+    const [papulaistrCryptoL, setPapulaistrCryptoL] = useState([])
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [searchCoin, setSearchCoin] = useState("")
     useEffect(() => {
         DisplayCryptoList()
     }, [])
@@ -18,6 +20,7 @@ export const useSelectCrypto = (props) => {
             const cryptoList = await GetCryptoListApi()
             console.log("--CRYPTO LIST DATA--", cryptoList?.data?.data)
             setCryptoList(cryptoList?.data?.data || 'N/A')
+            setPapulaistrCryptoL(cryptoList?.data?.data)
         } catch (error) {
             console.log("Error Displaying Crypto List", error);
             setError('Failed to load crypto list');
@@ -26,13 +29,20 @@ export const useSelectCrypto = (props) => {
         }
     }
 
+    const filteredCryptoList = cryptoList.filter((item) =>
+        item?.name?.toLowerCase().includes(searchCoin.toLowerCase()) ||
+        item?.symbol?.toLowerCase().includes(searchCoin.toLowerCase())
+    );
+
     const handleCryptoNavigation = (item) => {
         props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectNetwork, params: { cryptoItem: item }, });
     };
 
 
     return {
-        cryptoList, loading, error,
-        handleCryptoNavigation
+        cryptoList: filteredCryptoList, loading, error,
+        handleCryptoNavigation,
+        searchCoin, setSearchCoin,
+        papulaistrCryptoL:filteredCryptoList
     }
 }

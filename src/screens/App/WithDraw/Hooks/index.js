@@ -19,9 +19,10 @@ export const UseWidthDraw = (props) => {
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState('');
   const [error, setError] = useState(false);
-  const [fee, setFee] = useState('0.39');
-  const [amountReceived, setAmountReceived] = useState('7.61');
+  const [fee, setFee] = useState('');
+  const [amountReceived, setAmountReceived] = useState('');
   const [walletAddressError , setWalletAddressError] = useState(false)
+  const [apiError,setApiError] = useState("")
 
 
   const handleSubmit = async () => {
@@ -44,7 +45,11 @@ export const UseWidthDraw = (props) => {
       }, 300);
 
     } catch (error) {
-      console.log("error in withdraw onchaib", error)
+      console.log("error in withdraw onchaib", error?.response?.data)
+      const catchError = error?.response?.data
+      if(catchError?.status){
+        setApiError(catchError?.message)
+      }
     }
   }
 
@@ -82,6 +87,7 @@ const validateAddress = (address) => {
     address, setAddress,
     amount, setAmount,
     error, setError,
+    apiError,setApiError,
     walletAddressError,setWalletAddressError,
     fee, setFee,
     amountReceived, setAmountReceived,

@@ -1,7 +1,7 @@
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
-import { AccountInfo, AccountOverView, BalanceOverView, LatestNewsComponent, PortfilioOverView, RowButtonTab, WatchList } from './Component/Index'
+import { AccountInfo, AccountOverView, AllPairs, AllPars, BalanceOverView, LatestNewsComponent, PortfilioOverView, PortfilioOverViewHeader, RowButtonTab, WaitchListPairRow, WatchList } from './Component/Index'
 import HomeHeader from '../../../components/HomeHeader'
 import { style } from './Style'
 import Spacer, { HorizontalSpacer } from '../../../components/Spacer'
@@ -14,19 +14,13 @@ import { ResponsiveText } from '../../../components/ResponsiveText'
 import Entypo from "react-native-vector-icons/Entypo"
 
 const HomeScreen = (props) => {
-  // useEffect(() => {
-  //   console.log("HomeScreen mounted");
-  //   try {
-  //     props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.referrals })
-
-  //   } catch (error) {
-  //     console.error("Error navigating to:", error);
-
-  //   }
-  // },
-  //   []);
-
-  const { threeRowTabButtonPress, setThreeRowTabButtonPress, portfolioButton, setPortfolioButton, watchListButtonPressed, setWatchListButtonPress, showNewsView, setShowNewsView } = useHome(props)
+  const {
+    threeRowTabButtonPress, setThreeRowTabButtonPress,
+    portfolioButton, setPortfolioButton,
+    watchListButtonPressed, setWatchListButtonPress,
+    showNewsView, setShowNewsView,
+    marketList, MarketPress
+  } = useHome(props)
   return (
     <AuthMainContainer>
       <HomeHeader onpress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.MenuScreen })} headerTitle={"DASHBOARD"} />
@@ -38,7 +32,10 @@ const HomeScreen = (props) => {
         <RowButtonTab buttonPress={threeRowTabButtonPress} setButtonPress={setThreeRowTabButtonPress} />
         <Spacer height={hp(1)} />
         {threeRowTabButtonPress === "portfolio" && (
-          <PortfilioOverView buttonPress={portfolioButton} setButtonPress={setPortfolioButton} />
+          <View style={[style.mainBox]}>
+            <PortfilioOverViewHeader buttonPress={portfolioButton} setButtonPress={setPortfolioButton} />
+            <PortfilioOverView />
+          </View>
         )}
         {threeRowTabButtonPress === "balance" && (
           <BalanceOverView />
@@ -80,7 +77,15 @@ const HomeScreen = (props) => {
           </>
         )}
         <Spacer height={hp(1)} />
-        <WatchList WatchListButtonPress={watchListButtonPressed} setWatchListButtonPress={setWatchListButtonPress} />
+        <View style={style.mainBox}>
+          <WaitchListPairRow WatchListButtonPress={watchListButtonPressed} setWatchListButtonPress={setWatchListButtonPress} />
+          {watchListButtonPressed === "watchList" ? (
+            <WatchList WatchListButtonPress={watchListButtonPressed} setWatchListButtonPress={setWatchListButtonPress} />
+          ) : (
+            <AllPairs MarketScreen={MarketPress} marketData={marketList} WatchListButtonPress={watchListButtonPressed} setWatchListButtonPress={setWatchListButtonPress} />
+
+          )}
+        </View>
       </ScrollView>
     </AuthMainContainer>
 

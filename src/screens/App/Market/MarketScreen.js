@@ -14,7 +14,7 @@ import InputText from '../../../components/InputText'
 import { UseMarket } from './Hooks/Index'
 
 const MarketScreen = (props) => {
-  const {marketList,setMarketList,MarketPress} = UseMarket(props)
+  const {marketList,setMarketList,MarketPress,searchText,setSearchText} = UseMarket(props)
   return (
     <AuthMainContainer>
       <HomeHeader onpress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.MenuScreen })} headerTitle={"MARKETS"} />
@@ -32,6 +32,8 @@ const MarketScreen = (props) => {
           placeholderTextColor={colors.iconColor}
           placeholder={"Search.."}
           width={wp(92)}
+          value={searchText}
+          onChangeText={setSearchText}
 
         />
         <Spacer />

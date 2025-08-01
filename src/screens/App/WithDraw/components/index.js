@@ -36,7 +36,7 @@ export const WithdrawHeader = ({ BackPress, HistoryPress, NetworkImage }) => {
     </View>
   );
 };
-export const AddressInput = ({walletAddressError , setWalletAddressError, validateAddress, amount, setAmount, address, setAddress, Network, cryptoData, onCopy, onScan, onMax, error, setError }) => {
+export const AddressInput = ({ walletAddressError, setWalletAddressError, validateAddress, amount, setAmount, address, setAddress, Network, cryptoData, onCopy, onScan, onMax, error, setError }) => {
   return (
     <View style={{ alignItems: "center" }}>
       <View style={styles.inputContainer}>
@@ -56,7 +56,7 @@ export const AddressInput = ({walletAddressError , setWalletAddressError, valida
           width={wp(95)}
           onBlur={() => {
             if (validateAddress(address)) {
-              
+
               setWalletAddressError(false);
             } else {
               setWalletAddressError(true);
@@ -67,8 +67,8 @@ export const AddressInput = ({walletAddressError , setWalletAddressError, valida
           <Image source={images.ScanIcon} style={styles.scanIcon} />
         </TouchableOpacity>
       </View>
-      {walletAddressError &&(
-         <ResponsiveText style={[styles.errorText,]}   > Invalid Wallet Address </ResponsiveText>)}
+      {walletAddressError && (
+        <ResponsiveText style={[styles.errorText,]}   > Invalid Wallet Address </ResponsiveText>)}
       <View>
         <ResponsiveText style={styles.label}>Withdrawal Amount</ResponsiveText>
         <Spacer height={hp(1)} />
@@ -120,7 +120,7 @@ export const AddressInput = ({walletAddressError , setWalletAddressError, valida
 }
 
 
-export const FeeInfo = ({ Network, cryptoData, fee, amount, handleSubmit, error }) => {
+export const FeeInfo = ({ Network, cryptoData, fee, amount, handleSubmit, error, address }) => {
   const AmountReceived = Number(amount) - Number(Network?.fee || 0);
   return (
     <View style={styles.feeContainer}>
@@ -136,9 +136,9 @@ export const FeeInfo = ({ Network, cryptoData, fee, amount, handleSubmit, error 
       <View style={{ alignItems: "center" }}>
         <SimpleButton
           text={"Submit"}
-          disabled={error ? true : false}
-          textColor={error ? colors.buttonSigninColor : colors.black}
-          backgroundColor={error ? colors.gray3 : colors.mainColor}
+          disabled={error || !AmountReceived || !address}
+          textColor={error || !AmountReceived || !address ? colors.buttonSigninColor : colors.black}
+          backgroundColor={error || !AmountReceived || !address ? colors.gray3 : colors.mainColor}
           height={hp(6)}
           buttonWidth={wp(80)}
           onPress={handleSubmit}
@@ -149,7 +149,7 @@ export const FeeInfo = ({ Network, cryptoData, fee, amount, handleSubmit, error 
   )
 };
 
-export const WithDrawConfirmationBottomSheet = ({ handleCopy, Network, cryptData, ref, address, amount, fee, received, handleSubmit }) => {
+export const WithDrawConfirmationBottomSheet = ({ apiError, handleCopy, Network, cryptData, ref, address, amount, fee, received, handleSubmit }) => {
   const amountReceived = Number(amount) + Number(Network?.fee || 0)
 
   return (
@@ -205,6 +205,12 @@ export const WithDrawConfirmationBottomSheet = ({ handleCopy, Network, cryptData
             <ResponsiveText style={styles.confirmWarningText}>Please make sure all information above is correct</ResponsiveText>
           </View>
         </View>
+        {apiError && (
+          <ResponsiveText style={[styles.errorText, { textAlign: "center" }]}>
+            {apiError}
+          </ResponsiveText>
+        )}
+
         <Spacer />
         <View style={{ alignItems: "center" }}>
           <SimpleButton
