@@ -63,7 +63,7 @@ export const DepositHistoryComponent = ({ props, HistoryData }) => {
         </View>
       )}
       renderItem={({ item }) => (
-        <View  style={[appStyles.rowBasic, styles.itemContainer]}>
+        <TouchableOpacity onPress={() => props?.navigation?.navigate(Routes.AppNavigator, { screen: Routes.WithdrawDetails, params: { response: item } })} style={[appStyles.rowBasic, styles.itemContainer]}>
           <View style={styles.coinDetails}>
             <ResponsiveText style={styles.upperText}>{item.symbol}</ResponsiveText>
             <ResponsiveText style={styles.lowerText}>
@@ -80,13 +80,13 @@ export const DepositHistoryComponent = ({ props, HistoryData }) => {
               }]} >{item.status}
             </ResponsiveText>
           </View>
-        </View>
+        </TouchableOpacity>
       )}
     />
   )
 }
 
-const SearchBox = ({searchCoin,setSearchCoin}) => {
+const SearchBox = ({ searchCoin, setSearchCoin }) => {
   return (
     <View style={{ flexDirection: "row", justifyContent: "center" }}>
       <InputText
@@ -105,49 +105,49 @@ const SearchBox = ({searchCoin,setSearchCoin}) => {
   )
 }
 
-export const AllCryptoFilterBotomSheet = ({ ref, selectedStatus, closeBottomSheet, AllCryptoFilter, SelectedSymbol, setSelectedSymbol, statusPress,searchCoin,setSearchCoin }) => {
+export const AllCryptoFilterBotomSheet = ({ ref, selectedStatus, closeBottomSheet, AllCryptoFilter, SelectedSymbol, setSelectedSymbol, statusPress, searchCoin, setSearchCoin }) => {
   return (
     <GorhomBottomSheet sheetRef={ref}>
-       <KeyboardAvoidingView
+      <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-      <Spacer />
-      <View style={styles.BottomSheetView}>
-        <View style={styles.bottomHeader}>
-          <ResponsiveText style={styles.bottomSheetTitle}>ALL CRYPTO</ResponsiveText>
-          <ResponsiveText onPress={closeBottomSheet} style={styles.bottomSheetTitle}>X</ResponsiveText>
+        <Spacer />
+        <View style={styles.BottomSheetView}>
+          <View style={styles.bottomHeader}>
+            <ResponsiveText style={styles.bottomSheetTitle}>ALL CRYPTO</ResponsiveText>
+            <ResponsiveText onPress={closeBottomSheet} style={styles.bottomSheetTitle}>X</ResponsiveText>
+          </View>
+          <Spacer />
+          <Line width={wp(100)} height={hp(0.1)} backgroundColor={colors.lineColor} />
+          <Spacer />
+          <DepositFilterHeader statusPress={statusPress} SelectedStatus={selectedStatus} SelectedSymbol={SelectedSymbol} />
+          <Spacer />
+          <Line width={wp(100)} height={hp(0.1)} backgroundColor={colors.lineColor} />
+          <Spacer />
+          <SearchBox setSearchCoin={setSearchCoin} searchCoin={searchCoin} />
+          <FlatList
+            data={AllCryptoFilter}
+            keyExtractor={(item, index) => item.id.toString() || index.toString()}
+            renderItem={({ item }) => (
+              <View style={styles.filterView}>
+                <TouchableOpacity onPress={() => {
+                  // console.log("item", item?.name)
+                  setSelectedSymbol(item.symbol)
+                }} style={styles.filterView2}>
+                  <ResponsiveText style={styles.text}>{item.symbol}</ResponsiveText>
+                  {SelectedSymbol === item.symbol && (
+                    <Image
+                      source={images.tickBoxes}
+                      style={styles.filterIcon}
+                      resizeMode="contain"
+                    />
+                  )}
+                </TouchableOpacity>
+              </View>
+            )}
+          />
         </View>
-        <Spacer />
-        <Line width={wp(100)} height={hp(0.1)} backgroundColor={colors.lineColor} />
-        <Spacer />
-        <DepositFilterHeader statusPress={statusPress} SelectedStatus={selectedStatus} SelectedSymbol={SelectedSymbol} />
-        <Spacer />
-        <Line width={wp(100)} height={hp(0.1)} backgroundColor={colors.lineColor} />
-        <Spacer />
-        <SearchBox setSearchCoin={setSearchCoin}  searchCoin={searchCoin}/>
-        <FlatList
-          data={AllCryptoFilter}
-          keyExtractor={(item, index) => item.id.toString() || index.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.filterView}>
-              <TouchableOpacity onPress={() => {
-                // console.log("item", item?.name)
-                setSelectedSymbol(item.symbol)
-              }} style={styles.filterView2}>
-                <ResponsiveText style={styles.text}>{item.symbol}</ResponsiveText>
-                {SelectedSymbol === item.symbol && (
-                  <Image
-                    source={images.tickBoxes}
-                    style={styles.filterIcon}
-                    resizeMode="contain"
-                  />
-                )}
-              </TouchableOpacity>
-            </View>
-          )}
-        />
-      </View>
       </KeyboardAvoidingView>
     </GorhomBottomSheet>
   )

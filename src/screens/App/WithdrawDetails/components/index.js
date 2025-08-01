@@ -13,97 +13,144 @@ import Clipboard from '@react-native-clipboard/clipboard';
 
 
 const getStatusStyles = (status, step) => {
+  status = normalizeStatus(status);
   switch (step) {
     case "submitted":
-      return status === "pending" || status === "inProgress" || status === "sent" ? styles.progressStepTitleActive : styles.progressStepTitleInactive;
+      return ["pending", "inProgress", "sent", "failed"].includes(status)
+        ? styles.progressStepTitleActive
+        : styles.progressStepTitleInactive;
     case "pending":
-      return status === "pending" || status === "inProgress" || status === "sent" ? styles.progressStepTitleActive : styles.progressStepTitleInactive;
+      return ["pending", "inProgress", "sent", "failed"].includes(status)
+        ? styles.progressStepTitleActive
+        : styles.progressStepTitleInactive;
     case "inProgress":
-      return status === "inProgress" || status === "sent" ? styles.progressStepTitleActive : styles.progressStepTitleInactive;
+      return ["inProgress", "sent", "failed"].includes(status)
+        ? styles.progressStepTitleActive
+        : styles.progressStepTitleInactive;
     case "sent":
-      return status === "sent" ? styles.progressStepTitleActive : styles.progressStepTitleInactive;
+      return status === "sent"
+        ? styles.progressStepTitleActive
+        : status === "failed"
+          ? styles.progressStepTitleFailed // <-- New failed style
+          : styles.progressStepTitleInactive;
     default:
       return styles.progressStepTitleInactive;
   }
 };
 
+
 const getStepCircleStyles = (status, step) => {
+  status = normalizeStatus(status);
+
   switch (step) {
     case "submitted":
-      return status === "pending" || status === "inProgress" || status === "sent" ? styles.stepCircleCompleted : styles.stepCircleInactive;
+      return ["pending", "inProgress", "sent", "failed"].includes(status)
+        ? styles.stepCircleCompleted
+        : styles.stepCircleInactive;
     case "pending":
-      return status === "pending" || status === "inProgress" || status === "sent" ? styles.stepCircleCompleted : styles.stepCircleInactive;
+      return ["pending", "inProgress", "sent", "failed"].includes(status)
+        ? styles.stepCircleCompleted
+        : styles.stepCircleInactive;
     case "inProgress":
-      return status === "inProgress" || status === "sent" ? styles.stepCircleCompleted : styles.stepCircleInactive;
+      return ["inProgress", "sent", "failed"].includes(status)
+        ? styles.stepCircleCompleted
+        : styles.stepCircleInactive;
     case "sent":
-      return status === "sent" ? styles.stepCircleCompleted : styles.stepCircleInactive;
+      return status === "sent"
+        ? styles.stepCircleCompleted
+        : status === "failed"
+          ? styles.stepCircleFailed // <-- New failed style
+          : styles.stepCircleInactive;
     default:
       return styles.stepCircleInactive;
   }
 };
 
+
 const getTickIconStyles = (status, step) => {
+  status = normalizeStatus(status);
+
   switch (step) {
     case "submitted":
-      return status === "pending" || status === "inProgress" || status === "sent" ? styles.tickIconCompleted : styles.tickIconInactive;
+      return ["pending", "inProgress", "sent", "failed"].includes(status)
+        ? styles.tickIconCompleted
+        : styles.tickIconInactive;
     case "pending":
-      return status === "pending" || status === "inProgress" || status === "sent" ? styles.tickIconCompleted : styles.tickIconInactive;
+      return ["pending", "inProgress", "sent", "failed"].includes(status)
+        ? styles.tickIconCompleted
+        : styles.tickIconInactive;
     case "inProgress":
-      return status === "inProgress" || status === "sent" ? styles.tickIconCompleted : styles.tickIconInactive;
+      return ["inProgress", "sent", "failed"].includes(status)
+        ? styles.tickIconCompleted
+        : styles.tickIconInactive;
     case "sent":
-      return status === "sent" ? styles.tickIconCompleted : styles.tickIconInactive;
+      return status === "sent"
+        ? styles.tickIconCompleted
+        : status === "failed"
+          ? styles.tickIconFailed // <-- New failed style
+          : styles.tickIconInactive;
     default:
       return styles.tickIconInactive;
   }
 };
 
-const shouldShowVerticalLine = (step) => {
-  return step !== "sent"; // Do not show the vertical line after "sent"
+
+const shouldShowVerticalLine = (status, step) => {
+  const normalizedStatus = normalizeStatus(status);
+
+  // Stop line after failed or sent
+  if (normalizedStatus === "failed" && step === "inProgress") return true; // show red line
+  if (normalizedStatus === "failed" && step === "sent") return false;      // stop line
+  if (normalizedStatus === "sent" && step === "inProgress") return true;   // show line till sent
+  if (normalizedStatus === "sent" && step === "sent") return false;        // stop line
+  return step !== "sent";
 };
 
 
 export const ProgressWithdraw = ({ response }) => {
-
-
   return (
     <View style={styles.progressContainer}>
       <ResponsiveText style={styles.progressAmountLabel}>Amount</ResponsiveText>
-      <ResponsiveText style={styles.progressAmountValue}>{response?.amount && (parseFloat(response.amount).toFixed(5))} {response?.symbol}</ResponsiveText>
+      <ResponsiveText style={styles.progressAmountValue}>
+        {response?.amount && parseFloat(response.amount).toFixed(5)} {response?.symbol}
+      </ResponsiveText>
       <Spacer height={hp(1.2)} />
 
       <View style={styles.progressStepsBox}>
         {["submitted", "pending", "inProgress", "sent"].map((step) => (
           <View key={step} style={styles.progressStepRow}>
             <View style={styles.progressStepIndicator}>
-              <View style={[getStepCircleStyles(response?.status, step), styles.stepCircle]}>
+              <View style={[getStepCircleStyles(normalizeStatus(response?.status), step), styles.stepCircle]}>
                 <Image
                   source={images.simpleTick}
-                  style={[getTickIconStyles(response?.status, step), styles.tickIcon]}
+                  style={[getTickIconStyles(normalizeStatus(response?.status), step), styles.tickIcon]}
                 />
               </View>
 
-              {shouldShowVerticalLine(step) && (
+              {shouldShowVerticalLine(response?.status, step) && (
                 <View
                   style={[
                     styles.verticalLine,
-                    (step === "submitted" || response?.status === "inProgress" || response?.status === "sent")
-                      ? styles.verticalLineActive
-                      : styles.verticalLineInactive,
+                    styles.verticalLineActive // always normal color, even if failed
                   ]}
                 />
               )}
 
+
             </View>
+
             <View>
-              <ResponsiveText style={getStatusStyles(response?.status, step)}>
+              <ResponsiveText style={getStatusStyles(normalizeStatus(response?.status), step)}>
                 {step === "submitted" && "Withdrawal request submitted"}
                 {step === "pending" && "Pending"}
                 {step === "inProgress" && "In Progress"}
-                {step === "sent" && "Sent"}
+                {step === "sent" && (normalizeStatus(response?.status) === "failed" ? "Failed" : "Sent")}
               </ResponsiveText>
 
               <ResponsiveText style={styles.progressStepDate}>
-                {step === "submitted" && response?.createdAt && moment(response.createdAt).format("DD/MM/YYYY, HH:mm:ss")}
+                {step === "submitted" &&
+                  response?.createdAt &&
+                  moment(response.createdAt).format("DD/MM/YYYY, HH:mm:ss")}
               </ResponsiveText>
             </View>
           </View>
@@ -112,6 +159,12 @@ export const ProgressWithdraw = ({ response }) => {
     </View>
   );
 };
+
+const normalizeStatus = (status) => {
+  if (status === "processing") return "inProgress";
+  return status;
+};
+
 
 
 export const WithdrawDetailsContainer = ({ cryptoData, network, response }) => {
@@ -127,7 +180,7 @@ export const WithdrawDetailsContainer = ({ cryptoData, network, response }) => {
           <ResponsiveText style={styles.confirmLabel}>Address</ResponsiveText>
           <View style={appStyles.rowBasic}>
             <ResponsiveText style={[styles.confirmValue, { width: wp(50), overflow: 'hidden', textOverflow: 'ellipsis' }]} numberOfLines={1}>
-              {response?.tokenAddress}
+              {response?.recipientAddress}
             </ResponsiveText>
             <TouchableOpacity onPress={() => {
               Clipboard.setString('https://www.exchange/code2354')
@@ -144,7 +197,11 @@ export const WithdrawDetailsContainer = ({ cryptoData, network, response }) => {
         <Line height={hp(0.1)} width={wp(91.5)} />
         <View style={styles.confirmItem}>
           <ResponsiveText style={styles.confirmLabel}>Network fee</ResponsiveText>
-          <ResponsiveText style={styles.confirmValue}>{network?.fee || 0} {network?.name}</ResponsiveText>
+          <ResponsiveText style={styles.confirmValue}>
+            {network
+              ? `${network?.fee || 0} ${network?.name}`
+              : `${response?.fee || 0} ${response?.symbol}`}
+          </ResponsiveText>
         </View>
         <Line height={hp(0.1)} width={wp(91.5)} />
         <View style={styles.confirmItem}>
@@ -154,7 +211,7 @@ export const WithdrawDetailsContainer = ({ cryptoData, network, response }) => {
         <Line height={hp(0.1)} width={wp(91.5)} />
         <View style={styles.confirmItem}>
           <ResponsiveText style={styles.confirmLabel}>Reference no.</ResponsiveText>
-          <ResponsiveText style={styles.confirmValue}>{response.createdAt || "227491076"}</ResponsiveText>
+          <ResponsiveText style={styles.confirmValue}>{"227491076"}</ResponsiveText>
         </View>
       </View>
     </View>
@@ -313,4 +370,19 @@ const styles = StyleSheet.create({
     borderColor: colors.borderColor,
     borderWidth: 1.5
   },
+  progressStepTitleFailed: {
+    color: 'red',
+    fontWeight: '600',
+  },
+  stepCircleFailed: {
+    borderColor: 'red',
+    backgroundColor: '#ffe5e5',
+  },
+  tickIconFailed: {
+    tintColor: 'red',
+  },
+  verticalLineFailed: {
+    backgroundColor: 'red',
+  },
+
 })

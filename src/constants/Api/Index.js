@@ -118,7 +118,7 @@ export const GetDepositDetailsApi = async (payLoads) => {
     try {
         return apiRequest({
             method: "GET",
-            url: `${ASSETS_MANAGER_BASE_URL}/accounts/user-account`,
+            url: `${ACCOUNTS_SERVICE_BASE_URL}/accounts/user-account`,
             params: payLoads,
             isAuth: true,
         });

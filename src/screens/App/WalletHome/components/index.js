@@ -77,7 +77,7 @@ export const TokenList = ({ props, cryptoData }) => {
       removeClippedSubviews={false}
       renderItem={({ item, index }) => {
         return (
-          <TouchableOpacity activeOpacity={0.6} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.AssetAllocation })} style={[appStyles.rowBasic, styles.itemContainer]}>
+          <TouchableOpacity activeOpacity={0.6} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.AssetAllocation ,params:{data:item}})} style={[appStyles.rowBasic, styles.itemContainer]}>
             <Image source={{uri:item?.icon}} style={styles.icon} />
             <HorizontalSpacer/>
             <View style={styles.coinDetails}>

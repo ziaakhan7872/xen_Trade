@@ -17,9 +17,10 @@ const WithDraw = (props) => {
     amount, setAmount,
     fee, setFee,
     error, setError,
+    walletAddressError,setWalletAddressError,
     amountReceived, setAmountReceived,
     cryptoData, network,
-    handleSubmit,handleCopy
+    handleSubmit,handleCopy, validateAddress
 
 
   } = UseWidthDraw(props)
@@ -30,6 +31,8 @@ const WithDraw = (props) => {
       <WithdrawHeader NetworkImage={network} BackPress={() => props?.navigation?.goBack()} HistoryPress={() => props?.navigation?.navigate(Routes.AppNavigator, { screen: Routes.WithdrawHistory })} />
       <Spacer />
       <AddressInput
+      walletAddressError={walletAddressError} setWalletAddressError={setWalletAddressError}
+      validateAddress={validateAddress}
         cryptoData={cryptoData} Network={network}
         address={address} setAddress={setAddress}
         amount={amount} setAmount={setAmount}

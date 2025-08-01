@@ -36,7 +36,7 @@ export const WithdrawHeader = ({ BackPress, HistoryPress, NetworkImage }) => {
     </View>
   );
 };
-export const AddressInput = ({ amount, setAmount, address, setAddress, Network, cryptoData, onCopy, onScan, onMax, error, setError }) => {
+export const AddressInput = ({walletAddressError , setWalletAddressError, validateAddress, amount, setAmount, address, setAddress, Network, cryptoData, onCopy, onScan, onMax, error, setError }) => {
   return (
     <View style={{ alignItems: "center" }}>
       <View style={styles.inputContainer}>
@@ -49,11 +49,26 @@ export const AddressInput = ({ amount, setAmount, address, setAddress, Network, 
       </View>
       <Spacer height={hp(1)} />
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <InputText value={address} onChangeText={setAddress} paddingLeft={wp(3)} placeholder={"Scan or enter address"} placeholderTextColor={colors.placeHolderTextColor} width={wp(95)} />
+        <InputText
+          value={address} onChangeText={setAddress}
+          paddingLeft={wp(3)} placeholder={"Scan or enter address"}
+          placeholderTextColor={colors.placeHolderTextColor}
+          width={wp(95)}
+          onBlur={() => {
+            if (validateAddress(address)) {
+              
+              setWalletAddressError(false);
+            } else {
+              setWalletAddressError(true);
+            }
+          }}
+        />
         <TouchableOpacity onPress={onScan} style={styles.iconButton}>
           <Image source={images.ScanIcon} style={styles.scanIcon} />
         </TouchableOpacity>
       </View>
+      {walletAddressError &&(
+         <ResponsiveText style={[styles.errorText,]}   > Invalid Wallet Address </ResponsiveText>)}
       <View>
         <ResponsiveText style={styles.label}>Withdrawal Amount</ResponsiveText>
         <Spacer height={hp(1)} />
@@ -134,7 +149,7 @@ export const FeeInfo = ({ Network, cryptoData, fee, amount, handleSubmit, error 
   )
 };
 
-export const WithDrawConfirmationBottomSheet = ({ handleCopy ,Network, cryptData, ref, address, amount, fee, received, handleSubmit }) => {
+export const WithDrawConfirmationBottomSheet = ({ handleCopy, Network, cryptData, ref, address, amount, fee, received, handleSubmit }) => {
   const amountReceived = Number(amount) + Number(Network?.fee || 0)
 
   return (
@@ -160,7 +175,7 @@ export const WithDrawConfirmationBottomSheet = ({ handleCopy ,Network, cryptData
                 <ResponsiveText style={[styles.confirmValue, { width: wp(50), overflow: 'hidden', textOverflow: 'ellipsis' }]} numberOfLines={1}>
                   {address}
                 </ResponsiveText>
-                <TouchableOpacity onPress={()=>handleCopy(address)}>
+                <TouchableOpacity onPress={() => handleCopy(address)}>
                   <Image source={images.copyIcon} style={styles.confirmCopyIcon} />
                 </TouchableOpacity>
               </View>

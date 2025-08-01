@@ -4,6 +4,9 @@ import { WithdrawOnchain } from "../../../../constants/Api/Index";
 import { Routes } from "../../../../constants";
 import Clipboard from '@react-native-clipboard/clipboard';
 import { Alert } from "react-native";
+import WAValidator from "multicoin-address-validator";
+import { coinRegexValidation } from "../../../../constants/CoinRegexValidation/Index";
+
 
 
 
@@ -11,12 +14,14 @@ export const UseWidthDraw = (props) => {
   const WithdrawConfirmationRef = useRef(null)
   const { cryptoData, network } = props?.route?.params || {};
   const { user } = useSelector((state) => state.user);
-  
+ 
+
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState('');
   const [error, setError] = useState(false);
   const [fee, setFee] = useState('0.39');
   const [amountReceived, setAmountReceived] = useState('7.61');
+  const [walletAddressError , setWalletAddressError] = useState(false)
 
 
   const handleSubmit = async () => {
@@ -31,7 +36,7 @@ export const UseWidthDraw = (props) => {
       }
       console.log("payload", payload)
       const response = await WithdrawOnchain(payload)
-      const responseData = response.data;  
+      const responseData = response.data;
       console.log("Response Data:", responseData);
       WithdrawConfirmationRef?.current?.close()
       setTimeout(() => {
@@ -49,6 +54,27 @@ export const UseWidthDraw = (props) => {
     Alert.alert("Copied to ClipBoard")
   }
 
+const validateAddress = (address) => {
+  const symbol = cryptoData?.account?.market?.symbol?.toUpperCase(); // e.g., USDT
+  const networkSYmbol = network?.standard; // e.g., ERC20, TRC20, BTC
+  console.log(symbol,network?.standard)
+
+  if ((symbol === "ETH" || symbol === "USDT" || symbol === "USDC") && networkSYmbol === "ERC20") {
+    return /^0x[a-fA-F0-9]{40}$/.test(address); // EVM format
+  } else if ((symbol === "BTC" && networkSYmbol === "BTC") || (symbol === "BTC" && networkSYmbol === "ERC20")) {
+    return /^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}$/.test(address);
+  } else if (((symbol === "USDT" || symbol === "USDC") && networkSYmbol === "TRC20") ) {
+    return /^T[A-Za-z1-9]{33}$/.test(address); // Tron format
+  } else if (symbol === "SOL" && networkSYmbol === "SOL") {
+    return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address); // Solana format
+  }
+
+  return false;
+};
+
+
+
+
 
 
   return {
@@ -56,11 +82,12 @@ export const UseWidthDraw = (props) => {
     address, setAddress,
     amount, setAmount,
     error, setError,
+    walletAddressError,setWalletAddressError,
     fee, setFee,
     amountReceived, setAmountReceived,
     cryptoData, network,
-    handleSubmit,
-    handleCopy
+    handleSubmit, handleCopy,
+    validateAddress
   }
 }
 

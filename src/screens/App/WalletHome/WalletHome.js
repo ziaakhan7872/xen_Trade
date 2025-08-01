@@ -16,7 +16,8 @@ const WalletHome = (props) => {
     isChecked, handleCheckboxToggle, 
     input, setInput, 
     assetSheetRef, handleAssetOpen, handleAssetClose ,
-    cryptoList,searchCoin,setSearchCoin
+    cryptoList,searchCoin,setSearchCoin,
+    // totalUsdt
 
   } = useHomeScreen(props)
   return (
