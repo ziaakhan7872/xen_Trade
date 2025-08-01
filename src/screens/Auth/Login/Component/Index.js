@@ -12,7 +12,7 @@ import { ResponsiveText } from '../../../../components/ResponsiveText';
 // import { useDispatch, useSelector } from 'react-redux'
 // import { setUser, logoutUser } from '../../../../redux/slices/userSlice'
 
-const LoginForm = ({ signUp, Login,email,setEmail,password,setPassword,passwordVisible,setPasswordVisible,errorMessage }) => {
+const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, passwordVisible, setPasswordVisible, errorMessage }) => {
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode='contain' style={styles.logoImage} />
@@ -22,11 +22,11 @@ const LoginForm = ({ signUp, Login,email,setEmail,password,setPassword,passwordV
             <View>
                 <InputText value={email} onChangeText={setEmail} paddingLeft={wp(3)} label={"Email Address"} placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
-                <InputText handleIconPress={()=>setPasswordVisible(!passwordVisible)} isPasswordVisible={!passwordVisible} secureTextEntry={!passwordVisible} value={password} onChangeText={setPassword} paddingLeft={wp(3)} icon={true} label={"Password"} placeholder={"Enter your  password"} placeholderTextColor={colors.placeHolderTextColor} />
+                <InputText handleIconPress={() => setPasswordVisible(!passwordVisible)} isPasswordVisible={!passwordVisible} secureTextEntry={!passwordVisible} value={password} onChangeText={setPassword} paddingLeft={wp(3)} icon={true} label={"Password"} placeholder={"Enter your  password"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
                 <ResponsiveText style={[styles.forgetPasswordStyling, { textDecorationLine: 'underline' }]}> Forgot Password?</ResponsiveText>
                 <Spacer />
-                 {errorMessage && (
+                {errorMessage && (
                     <>
                         <ResponsiveText style={{ color: colors.red, textAlign: 'center' }}>{errorMessage}</ResponsiveText>
                         <Spacer />

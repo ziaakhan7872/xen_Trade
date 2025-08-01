@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 export const useReferralHistory = () => {
     const [input, setInput] = useState('')
@@ -7,7 +7,7 @@ export const useReferralHistory = () => {
         orderType: '',
         transactionType: '',
     });
-    const FilterBottomSheetRef = useState(null)
+    const FilterBottomSheetRef = useRef(null)
 
     const handleOpenFilter = () => {
         FilterBottomSheetRef?.current?.expand()
