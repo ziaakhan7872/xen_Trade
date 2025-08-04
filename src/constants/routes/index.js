@@ -4,6 +4,8 @@ export const Routes = {
     BottomNavigator: "BottomNavigator",
     splashScreen: "splashScreen",
     LoginScreen: "LoginScreen",
+    ForgotPassword: "ForgotPassword",
+    ChangePasswordForgot: "ChangePasswordForgot",
     SignupScreen: "SignupScreen",
     EmailVerificationScreen: "EmailVerificationScreen",
     LoginVerificationScreen: "LoginVerificationScreen",

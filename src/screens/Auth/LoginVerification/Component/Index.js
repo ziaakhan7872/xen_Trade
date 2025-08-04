@@ -10,33 +10,24 @@ import { SimpleButton } from '../../../../components/SimpleButton'
 import { appStyles } from '../../../../utilities'
 
 
-export const LoginVerificationForm = ({ submit, setOtpCode, errorMessage }) => {
+export const LoginVerificationForm = ({ submit, setOtpCode, errorMessage, code, setCode, showToast, userEmail }) => {
     return (
         <View style={styles.mainBox}>
+            <Spacer height={hp(0.5)} />
             <Image source={images.splashLogoImage} resizeMode="contain" style={styles.logoImage} />
             <Spacer />
             <ResponsiveText style={styles.titleText}>EMAIL VERIFICATION</ResponsiveText>
             <Spacer height={hp(1)} />
-            <ResponsiveText style={styles.infoText}>Enter the Verification code we sent to <ResponsiveText style={styles.blueText}>demon@gmail.com</ResponsiveText> This helps us keep your account secure by verifying that it's really you. </ResponsiveText>
+            <ResponsiveText style={styles.infoText}>Enter the Verification code we sent to <ResponsiveText style={styles.blueText}>{userEmail}</ResponsiveText> This helps us keep your account secure by verifying that it's really you. </ResponsiveText>
             <Spacer />
 
             <View style={styles.containerInner}>
-                <TextInput style={styles.input} placeholder="Enter Code..." placeholderTextColor={colors.placeHolderTextColor} />
-                {/* <TextInputField placeholder={"Enter Code"} placeholderTextColor={colors.placeHolderTextColor} /> */}
-                <TouchableOpacity style={styles.rightIconWrapper}>
+                <TextInput value={code} keyboardType='number-pad' inputMode='numeric' maxLength={6} onChangeText={setCode} style={styles.input} placeholder="Enter Code" placeholderTextColor={colors.placeHolderTextColor} />
+                <TouchableOpacity onPress={showToast}>
                     <ResponsiveText style={[styles.blueText, { alignItems: 'flex-end' }]}>Get Code</ResponsiveText>
                 </TouchableOpacity>
             </View>
-            {/* <OtpInput
-                focusColor={colors.mainColor}
-                numberOfDigits={6}
-                onTextChange={(text) => setOtpCode(text)}
-                theme={{
-                    pinCodeContainerStyle: styles.otpInputStyle,
-                    pinCodeTextStyle: styles.pinStyle
-                }}
-            /> */}
-            <Spacer />
+            <Spacer height={hp(0.6)} />
             {errorMessage
                 && (
                     <>
@@ -44,9 +35,11 @@ export const LoginVerificationForm = ({ submit, setOtpCode, errorMessage }) => {
                         <Spacer />
                     </>
                 )}
-            {/* <ResponsiveText style={styles.resendCode}>Resend Code</ResponsiveText> */}
             <Spacer />
-            <SimpleButton onPress={submit} text={"Submit"} textColor={colors.black} backgroundColor={colors.mainColor} buttonWidth={wp(80)} />
+            <SimpleButton onPress={submit} text={"Submit"} textColor={code == '' ? colors.disableColor2 : colors.black} backgroundColor={code != '' ? colors.mainColor : colors.disableColor} buttonWidth={wp(84.2)} height={hp(6.5)}
+                disabled={code == '' ? true : false}
+            />
+
         </View>
     )
 }
@@ -94,7 +87,7 @@ export const LoginVerificationForm = ({ submit, setOtpCode, errorMessage }) => {
 
 const styles = StyleSheet.create({
     mainBox: {
-        width: wp(90),
+        width: wp(92),
         paddingHorizontal: wp(4),
         paddingVertical: wp(4),
         backgroundColor: colors.boxColor,
@@ -111,38 +104,38 @@ const styles = StyleSheet.create({
     },
     infoText: {
         fontFamily: fontFamily.appTextRegular,
-        lineHeight: 20,
+        lineHeight: 17,
         fontSize: 14,
         color: colors.iconColor,
-        width: wp(80)
+        textAlign: 'justify'
+        // width: wp(80)
     },
     blueText: {
         fontFamily: fontFamily.appTextMedium,
-        // lineHeight: 20,
         fontSize: 14,
         color: colors.mainColor,
     },
-    otpInputStyle: {
-        backgroundColor: colors.InputTextCOlor,
-        fontFamily: fontFamily.appTextMedium,
-        borderRadius: wp(2.5),
-        width: wp(12),
-        height: hp(6.2),
-        color: colors.mainColor,
-        textAlign: 'center',
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: colors.borderColor
-    },
-    pinStyle: {
-        color: colors.mainColor
-    },
-    resendCode: {
-        fontSize: 14,
-        fontFamily: fontFamily.appTextMedium,
-        color: colors.mainColor,
-        textAlign: "center"
-    },
+    // otpInputStyle: {
+    //     backgroundColor: colors.InputTextCOlor,
+    //     fontFamily: fontFamily.appTextMedium,
+    //     borderRadius: wp(2.5),
+    //     width: wp(12),
+    //     height: hp(6.2),
+    //     color: colors.mainColor,
+    //     textAlign: 'center',
+    //     fontSize: 18,
+    //     borderWidth: 1,
+    //     borderColor: colors.borderColor
+    // },
+    // pinStyle: {
+    //     color: colors.mainColor
+    // },
+    // resendCode: {
+    //     fontSize: 14,
+    //     fontFamily: fontFamily.appTextMedium,
+    //     color: colors.mainColor,
+    //     textAlign: "center"
+    // },
     BottomSheetView: {
         width: wp(90),
     },
@@ -177,10 +170,9 @@ const styles = StyleSheet.create({
         ...appStyles.rowBasic,
         backgroundColor: colors.inputBgColor,
         borderRadius: wp(3),
-        height: hp(6.5),
-        width: wp(82),
-        paddingLeft: wp(3),
-        paddingRight: wp(1.2),
+        height: hp(6.4),
+        width: wp(84.2),
+        paddingHorizontal: wp(2.5),
         borderColor: colors.borderColor,
         borderWidth: 1.5,
     },
@@ -190,8 +182,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: fontFamily.appTextRegular,
     },
-    rightIconWrapper: {
-        paddingHorizontal: wp(2),
-    },
-
+    // rightIconWrapper: {
+    //     paddingHorizontal: wp(2),
+    // },
 })

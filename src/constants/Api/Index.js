@@ -31,6 +31,7 @@ export const EmailVerificationApi = async (payload) => {
         console.log(error, "email verification error ")
     }
 }
+
 export const LoginVerificationApi = async (payload) => {
     try {
         return apiRequest({
@@ -63,6 +64,21 @@ export const LoginApi = async (payload) => {
     }
 }
 
+export const ForgotPasswordApi = async (email) => {
+    try {
+        return apiRequest({
+            method: "POST",
+            url: `${AUTH_BASE_URL}/auth/forgot-password`,
+            data: { email: email },
+            // params: { email: email },
+            isAuth: false,
+        });
+
+    } catch (error) {
+        console.log(error, "forgot password error")
+    }
+}
+
 // // MarketApis
 
 
@@ -84,7 +100,7 @@ export const GetCryptoListApi = async (page, limit) => {
     }
 }
 export const GetNetworkListApi = async (symbol) => {
-     try {
+    try {
         return apiRequest({
             method: "GET",
             url: `${ASSETS_MANAGER_BASE_URL}/chains/by-market-symbol`,
@@ -128,7 +144,7 @@ export const GetDepositDetailsApi = async (payLoads) => {
     }
 }
 export const GetDepositHistoryApi = async (payload) => {
-   try {
+    try {
         return apiRequest({
             method: "GET",
             url: `${ASSETS_MANAGER_BASE_URL2}/deposits`,
@@ -145,13 +161,13 @@ export const GetDepositHistoryApi = async (payload) => {
 
 
 export const getPairApi = async (page, limit) => {
-     try {
+    try {
         return apiRequest({
             method: "GET",
             url: `${ASSETS_MANAGER_BASE_URL}/pairs`,
             params: {
-                page:page,
-                limit:limit,
+                page: page,
+                limit: limit,
                 isActive: true
             },
             isAuth: true,
@@ -170,8 +186,8 @@ export const GetAccountBalanceMyMarket = async (userId, marketId) => {
             method: "GET",
             url: `${ACCOUNTS_SERVICE_BASE_URL}/account-details/account-balance-by-market`,
             params: {
-                userId:userId,
-                marketId:marketId,
+                userId: userId,
+                marketId: marketId,
             },
             isAuth: true,
         });
@@ -182,14 +198,14 @@ export const GetAccountBalanceMyMarket = async (userId, marketId) => {
 }
 
 export const getAccountDetail = async (page, limit, userId) => {
-     try {
+    try {
         return apiRequest({
             method: "GET",
             url: `${ACCOUNTS_SERVICE_BASE_URL}/account-details`,
             params: {
-                page:page,
-                userId:userId,
-                limit:limit,
+                page: page,
+                userId: userId,
+                limit: limit,
             },
             isAuth: true,
         });
@@ -204,11 +220,11 @@ export const getAccountDetail = async (page, limit, userId) => {
 // // Withdraw Api
 
 export const WithdrawOnchain = async (Payload) => {
-     try {
+    try {
         return apiRequest({
             method: "POST",
             url: `${ACCOUNTS_SERVICE_BASE_URL}/withdrawals/on-chain`,
-            data:Payload,
+            data: Payload,
             isAuth: true,
         });
 
@@ -218,11 +234,11 @@ export const WithdrawOnchain = async (Payload) => {
 }
 
 export const getWithdrawlsHistory = async (payload) => {
-      try {
+    try {
         return apiRequest({
             method: "GET",
             url: `${ACCOUNTS_SERVICE_BASE_URL}/withdrawals/`,
-            params:payload,
+            params: payload,
             isAuth: true,
         });
 

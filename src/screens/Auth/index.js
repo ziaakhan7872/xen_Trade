@@ -4,8 +4,11 @@ import LoginScreen from "./Login/LoginScreen";
 import SignupScreen from "./Signup/SignupScreen";
 import EmailVerificationScreen from "./EmailVerification/EmailVerificationScreen";
 import LoginVerification from "./LoginVerification/LoginVerification";
+import ForgotPassword from "./ForgotPassword/ForgotPassword";
+import ChangePasswordForgot from "./ChangePasswordForgot/ChangePasswordForgot";
 
 
 export {
-     splashScreen, IntroductionMain, LoginScreen, SignupScreen, EmailVerificationScreen, LoginVerification
+     splashScreen, IntroductionMain, LoginScreen, SignupScreen, EmailVerificationScreen, LoginVerification,
+     ForgotPassword, ChangePasswordForgot
 }

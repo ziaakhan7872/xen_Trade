@@ -2,8 +2,12 @@ import { Alert, StyleSheet, Text, View } from 'react-native'
 import React, { useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { EmailVerificationApi } from '../../../../constants/Api/Index'
+import { Routes } from '../../../../constants'
 
 const useEmalVerification = (props) => {
+
+  const previousScreenName = props?.route?.params?.screenName
+
   const emailVerificationBottomSheetRef = useRef(null)
   const userData = props?.route?.params?.userData || {}
   const [otpCode, setOtpCode] = useState("")
@@ -12,17 +16,22 @@ const useEmalVerification = (props) => {
 
   const verifyEmail = async () => {
     try {
-      if (!otpCode) {
-        console.error("OTP code is required");
-        return;
+      // if (!otpCode) {
+      //   console.error("OTP code is required");
+      //   return;
+      // }
+      // const payload = {
+      //   emailOtpCode: Number(otpCode),
+      //   userId: userData?.id
+      // }
+      // const response = await EmailVerificationApi(payload);
+      // console.log("Email verification response:", response);
+      if (previousScreenName == 'forgotPassword') {
+        props?.navigation.navigate(Routes.ChangePasswordForgot)
+      } else {
+        emailVerificationBottomSheetRef?.current?.expand()
       }
-      const payload = {
-        emailOtpCode:Number(otpCode),
-        userId:userData?.id
-      }
-      const response = await EmailVerificationApi(payload);
-      console.log("Email verification response:", response);
-      emailVerificationBottomSheetRef?.current?.expand()
+
 
 
     } catch (error) {

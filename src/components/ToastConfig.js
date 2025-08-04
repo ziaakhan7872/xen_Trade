@@ -20,7 +20,7 @@ export const ToastConfig = {
         <ResponsiveText style={styles.title}>{text1}</ResponsiveText>
         <View style={appStyles.rowBasic}>
           <ResponsiveText style={styles.subtitle}>{text2} </ResponsiveText>
-          <ResponsiveText style={[styles.subtitle, { color: colors.mainColor }]}>{props?.email}</ResponsiveText>
+          <ResponsiveText style={[styles.subtitle, { color: colors.mainColor }]}>{props}</ResponsiveText>
         </View>
       </View>
     </LinearGradient>
@@ -49,7 +49,7 @@ export const ToastConfig = {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: hp(1),
+    // marginTop: hp(0.5),
     width: wp(91.5),
     backgroundColor: colors.cardsBgColor,
     paddingHorizontal: wp(2.5),

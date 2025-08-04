@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { style } from './Style'
@@ -12,7 +12,7 @@ const LoginScreen = (props) => {
     password, setPassword,
     passwordVisible, setPasswordVisible,
     errorMessage, setErrorMessage,
-    handleLogin } = UseLogin(props)
+    handleLogin, goToForgotPassword } = UseLogin(props)
   return (
     <AuthMainContainer>
       <View style={style.container}>
@@ -22,6 +22,7 @@ const LoginScreen = (props) => {
           email={email} setEmail={setEmail}
           password={password} setPassword={setPassword}
           Login={handleLogin}
+          goToForgotPassword={goToForgotPassword}
           signUp={() => props?.navigation.navigate(Routes.SignupScreen)} />
       </View>
 

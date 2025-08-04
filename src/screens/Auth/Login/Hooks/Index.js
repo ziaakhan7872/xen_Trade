@@ -2,26 +2,12 @@ import { useState } from "react";
 import { LoginApi } from "../../../../constants/Api/Index";
 import { Routes } from "../../../../constants";
 import * as Yup from 'yup';
-import Toast from "react-native-toast-message";
-
-
 
 export const UseLogin = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("")
-
-  const showToast = () => {
-    Toast.show({
-      type: 'verificationAlert',
-      text1: 'VERIFICATION EMAIL SENT',
-      text2: 'Verification code sent to',
-      visibilityTime: 1500,
-      autoHide: true,
-      props: "memememe"
-    });
-  };
 
 
   const validationSchema = Yup.object().shape({
@@ -46,10 +32,10 @@ export const UseLogin = (props) => {
 
       if (Login?.status === 200) {
         console.log("Entered in IF statement");
-        showToast()
+        // showToast()
 
         // setTimeout(() => {
-        props?.navigation.navigate(Routes.LoginVerificationScreen, { userData: Login?.data })
+        props?.navigation.navigate(Routes.LoginVerificationScreen, { userData: Login?.data, userEmail: payload?.email })
         // }, 1000)
       }
 
@@ -65,15 +51,11 @@ export const UseLogin = (props) => {
         setErrorMessage("An error occurred during Login. Please try again.");
       }
     }
-
   }
 
-  // const handleLogin = async () => {
-
-  //   // setTimeout(() => {
-  //   props?.navigation.navigate(Routes.LoginVerificationScreen)
-  //   // }, 1000)
-  // }
+  const goToForgotPassword = () => {
+    props?.navigation?.navigate?.(Routes.ForgotPassword)
+  }
 
   return {
     email, setEmail,
@@ -81,6 +63,7 @@ export const UseLogin = (props) => {
     passwordVisible, setPasswordVisible,
     handleLogin,
     errorMessage, setErrorMessage,
+    goToForgotPassword,
   }
 }
 

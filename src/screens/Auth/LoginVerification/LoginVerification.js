@@ -6,23 +6,20 @@ import images from '../../../images'
 import Spacer from '../../../components/Spacer'
 import { LoginVerificationForm } from './Component/Index'
 import UseLoginVerification from './Hooks/Index'
+import { hp } from '../../../components/ResponsiveComponent'
 
 const LoginVerification = (props) => {
-    const { handeGoBack, otpCode, setOtpCode, verifyEmail, errorMessage, setErrorMessage } = UseLoginVerification(props)
+    const { handeGoBack, otpCode, setOtpCode, verifyEmail, errorMessage, setErrorMessage, code, setCode, showToast, userEmail } = UseLoginVerification(props)
     return (
         <AuthMainContainer>
             <View style={style.container}>
+                <TouchableOpacity onPress={handeGoBack} style={{}}>
+                    <Image style={style.leftImage} resizeMode='contain' source={images.backArrow} />
+                </TouchableOpacity>
+                <Spacer height={hp(1.2)} />
                 <Spacer />
-                <View style={style.outerMainBox}>
-                    <TouchableOpacity onPress={handeGoBack}>
-                        <Image style={style.leftImage} resizeMode='contain' source={images.backArrow} />
-                    </TouchableOpacity>
-                    <Spacer />
-                    <LoginVerificationForm errorMessage={errorMessage} setOtpCode={setOtpCode} submit={verifyEmail} />
-                </View>
-
+                <LoginVerificationForm errorMessage={errorMessage} code={code} setCode={setCode} submit={verifyEmail} showToast={showToast} userEmail={userEmail} />
             </View>
-
         </AuthMainContainer>
     )
 }

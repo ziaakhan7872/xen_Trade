@@ -12,7 +12,7 @@ import { ResponsiveText } from '../../../../components/ResponsiveText';
 // import { useDispatch, useSelector } from 'react-redux'
 // import { setUser, logoutUser } from '../../../../redux/slices/userSlice'
 
-const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, passwordVisible, setPasswordVisible, errorMessage }) => {
+const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, passwordVisible, setPasswordVisible, errorMessage, goToForgotPassword }) => {
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode='contain' style={styles.logoImage} />
@@ -24,7 +24,7 @@ const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, pass
                 <Spacer height={hp(1)} />
                 <InputText handleIconPress={() => setPasswordVisible(!passwordVisible)} isPasswordVisible={!passwordVisible} secureTextEntry={!passwordVisible} value={password} onChangeText={setPassword} paddingLeft={wp(3)} icon={true} label={"Password"} placeholder={"Enter your  password"} placeholderTextColor={colors.placeHolderTextColor} />
                 <Spacer height={hp(1)} />
-                <ResponsiveText style={[styles.forgetPasswordStyling, { textDecorationLine: 'underline' }]}> Forgot Password?</ResponsiveText>
+                <ResponsiveText onPress={goToForgotPassword} style={[styles.forgetPasswordStyling, { textDecorationLine: 'underline' }]}> Forgot Password?</ResponsiveText>
                 <Spacer />
                 {errorMessage && (
                     <>
@@ -32,8 +32,8 @@ const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, pass
                         <Spacer />
                     </>
                 )}
-                {/* <SimpleButton disabled={(!email || !password)} onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={(!email || !password) ? colors.authButtonColor : colors.mainColor} buttonWidth={wp(80)} /> */}
-                <SimpleButton onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={(!email || !password) ? colors.authButtonColor : colors.mainColor} buttonWidth={wp(80)} />
+                <SimpleButton disabled={(!email || !password)} onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={(!email || !password) ? colors.authButtonColor : colors.mainColor} buttonWidth={wp(80)} />
+                {/* <SimpleButton onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={(!email || !password) ? colors.authButtonColor : colors.mainColor} buttonWidth={wp(80)} /> */}
                 <Spacer />
                 <ResponsiveText style={styles.signInWithStyle}>Or sign in with</ResponsiveText>
                 <Spacer />
