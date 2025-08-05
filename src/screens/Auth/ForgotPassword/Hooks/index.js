@@ -7,6 +7,7 @@ import { Routes } from "../../../../constants"
 export const useForgotPassword = (props) => {
 
     const [email, setEmail] = useState('')
+    const [apiError, setApiError] = useState("")
 
     const showToast = () => {
         Toast.show({
@@ -38,11 +39,20 @@ export const useForgotPassword = (props) => {
             if (passResponse?.status == 200) {
                 showToast()
                 setTimeout(() => {
-                    props?.navigation?.navigate?.(Routes.EmailVerificationScreen, { screenName: "forgotPassword" })
+                    props?.navigation?.navigate?.(Routes.EmailVerificationScreen, { screenName: "forgotPassword" ,userData:passResponse})
                 }, 1500);
             }
         } catch (error) {
-            console.log("Error Sending OTP--", error.response)
+            if (error.name === 'ValidationError') {
+                console.log("Validation Error:", error.message);
+                setApiError(error?.message)
+            }
+            const status = error?.response?.status
+            const message = error?.response?.data?.message
+            console.log(error)
+            if(status===404){
+                setApiError(message)
+            }
 
         }
     }
@@ -51,6 +61,7 @@ export const useForgotPassword = (props) => {
         goBack,
         email, setEmail,
         RecoverPassword,
+        apiError
     }
 }
 

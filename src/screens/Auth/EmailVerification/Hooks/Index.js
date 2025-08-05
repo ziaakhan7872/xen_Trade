@@ -35,7 +35,17 @@ const useEmalVerification = (props) => {
 
 
     } catch (error) {
-      console.error("Error during email verification:", error);
+      console.error("Error during email verification:", error?.response);
+      if (error?.response) {
+        const status = error?.response?.status
+        const message = error?.response?.data?.message
+        console.log(error)
+        if (status === 400) {
+          setErrorMessage(message)
+          return
+        }
+      }
+
       setErrorMessage("An error occurred during email verification. Please try again.");
 
     }
