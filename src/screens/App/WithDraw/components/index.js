@@ -44,7 +44,7 @@ export const AddressInput = ({ walletAddressError, setWalletAddressError, valida
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Image source={{ uri: Network?.logo }} style={styles.networkIconTop} />
           <ResponsiveText style={styles.networkTextTop}>{Network?.name} ({Network?.standard})</ResponsiveText>
-          <Image source={images.depositFilter} style={styles.arrowDownIconTop} />
+          {/* <Image source={images.depositFilter} style={styles.arrowDownIconTop} /> */}
         </View>
       </View>
       <Spacer height={hp(1)} />

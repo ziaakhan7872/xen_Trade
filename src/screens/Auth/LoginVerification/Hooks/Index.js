@@ -50,8 +50,18 @@ const UseLoginVerification = (props) => {
       }
 
     } catch (error) {
-      console.error("Error during Login verification:", error);
-      setErrorMessage("An error occurred during Login verification. Please try again.");
+      if (error?.response) {
+        const status = error?.response?.status
+        const message = error?.response?.data?.message
+        if (status === 400) {
+          setErrorMessage(message)
+        }
+        else {
+          console.error("Error during Login verification:", error?.response);
+          setErrorMessage("An error occurred during Login verification. Please try again.");
+        }
+      }
+
 
     }
   }

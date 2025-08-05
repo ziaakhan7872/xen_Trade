@@ -19,6 +19,7 @@ export const apiRequest = async ({
 
     if (isAuth) {
         token = getAuthToken();
+        console.log("tken", token)
     }
 
     const finalHeaders = {

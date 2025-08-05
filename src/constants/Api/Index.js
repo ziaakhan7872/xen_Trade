@@ -17,12 +17,11 @@ export const LoginVerificationApi = async (payload) => {
 
 
 export const LoginApi = async (payload) => {
-    console.log("login function", payload)
     return axios.post(`${AUTH_BASE_URL}/auth/login`, payload)
 }
 
 export const ForgotPasswordApi = async (email) => {
-        return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, payload)
+    return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, { email })
 }
 
 // // MarketApis
@@ -144,6 +143,8 @@ export const GetAccountBalanceMyMarket = async (userId, marketId) => {
 }
 
 export const getAccountDetail = async (page, limit, userId) => {
+
+
     try {
         return apiRequest({
             method: "GET",
