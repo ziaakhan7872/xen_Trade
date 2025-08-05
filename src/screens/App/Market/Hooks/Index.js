@@ -7,6 +7,7 @@ import { getPairApi } from "../../../../constants/Api/Index";
 export const UseMarket = (props) => {
     const [marketList, setMarketList] = useState([]);
     const [searchText,setSearchText] = useState("")
+    const [loading,setLoading] = useState(false)
 
     useEffect(() => {
         getMarketData();
@@ -19,11 +20,15 @@ export const UseMarket = (props) => {
 
     const getMarketData = async () => {
         try {
+            setLoading(true)
             const response = await getPairApi(1,20);
             setMarketList(response?.data?.data)
             console.log("Market data fetched successfully:", response);
         } catch (error) {
             console.error("Error fetching market data:", error);
+            setLoading(false)
+        } finally{
+            setLoading(false)
         }
     }
 
@@ -34,7 +39,8 @@ export const UseMarket = (props) => {
     return {
         marketList:filteredMarketList, setMarketList,
         MarketPress,
-        searchText,setSearchText
+        searchText,setSearchText,
+        loading
 
     }
 }
