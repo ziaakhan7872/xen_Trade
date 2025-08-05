@@ -74,7 +74,7 @@ export const UseWidthDraw = (props) => {
       if (codes.length > 0) {
         console.log(codes)
         setAddress(codes[0].value);
-              setCameraActive(false);
+        setCameraActive(false);
 
       }
     },
@@ -116,7 +116,7 @@ export const UseWidthDraw = (props) => {
     handleSubmit, handleCopy,
     validateAddress,
     codeScanner,
-    cameraActive,setCameraActive,
+    cameraActive, setCameraActive,
     device
   }
 }
