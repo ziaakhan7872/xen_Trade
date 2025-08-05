@@ -2,16 +2,17 @@ import React, { useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { EmailVerificationApi } from '../../../../constants/Api/Index'
 import { Routes } from '../../../../constants'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 const useEmalVerification = (props) => {
-  const userData = useSelector((state) => state.user)
+  // const userData = useSelector((state) => state.user)
   const previousScreenName = props?.route?.params?.screenName
   const emailVerificationBottomSheetRef = useRef(null)
-  // const userData = props?.route?.params?.userData || {}
+  const previousUserData = props?.route?.params?.userData || ''
   const [otpCode, setOtpCode] = useState("")
   const [errorMessage, setErrorMessage] = useState("");
-  console.log("User data in EmailVerificationScreen:", userData?.user?.id);
+
+  console.log("User data in EmailVerificationScreen::::::previousUserData", previousUserData?.data);
 
   const verifyEmail = async () => {
     try {
@@ -21,12 +22,12 @@ const useEmalVerification = (props) => {
       }
       const payload = {
         emailOtpCode: Number(otpCode),
-        userId: userData?.id
+        userId: previousUserData?.data?.id
       }
       const response = await EmailVerificationApi(payload);
       console.log("Email verification response:", response);
       if (previousScreenName == 'forgotPassword') {
-        props?.navigation.navigate(Routes.ChangePasswordForgot, { otpCode: otpCode, id: userData?.user?.id })
+        props?.navigation.navigate(Routes.ChangePasswordForgot, { otpCode: otpCode, id: previousUserData?.data?.id })
       } else {
         emailVerificationBottomSheetRef?.current?.expand()
       }

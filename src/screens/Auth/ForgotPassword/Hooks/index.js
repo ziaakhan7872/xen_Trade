@@ -42,7 +42,7 @@ export const useForgotPassword = (props) => {
                 }, 1500);
             }
         } catch (error) {
-            console.log("Error Sending OTP--", error)
+            console.log("Error Sending OTP--", error.response)
 
         }
     }

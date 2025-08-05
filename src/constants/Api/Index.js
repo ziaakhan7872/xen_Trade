@@ -8,6 +8,7 @@ export const SignUpApi = async (payload) => {
 }
 
 export const EmailVerificationApi = async (payload) => {
+    console.log("email ver function", payload)
     return axios.post(`${AUTH_BASE_URL}/verifications/otp-code`, payload)
 }
 
@@ -22,7 +23,9 @@ export const LoginApi = async (payload) => {
 }
 
 export const ForgotPasswordApi = async (email) => {
-    return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, payload)
+    console.log("EMAIL---", email);
+
+    return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, { email })
 }
 
 export const ResetPasswordApi = async (payload) => {

@@ -2,6 +2,7 @@ import { useState } from "react"
 import { ResetPasswordApi } from "../../../../constants/Api/Index";
 import { Routes } from "../../../../constants";
 import Toast from "react-native-toast-message";
+import * as Yup from 'yup';
 
 export const useChangePasswordForgot = (props) => {
     const otp = props?.route?.params?.otpCode || {}
@@ -23,8 +24,20 @@ export const useChangePasswordForgot = (props) => {
         })
     }
 
+    const validationSchema = Yup.object().shape({
+        password: Yup.string()
+            .min(6, 'Password must be at least 6 characters')
+            .required('Password is required'),
+        confirmPassword: Yup.string()
+            .oneOf([Yup.ref('password'), null], 'Passwords must match')
+            .required('Confirm password is required'),
+    })
+
     const ResetPassword = async () => {
+        const values = { password, confirmPassword }
         try {
+            await validationSchema(values, { abortEarly: false })
+
             const payload = {
                 emailOtpCode: Number(otp),
                 id: userId,
@@ -41,20 +54,21 @@ export const useChangePasswordForgot = (props) => {
             }
         }
         catch (error) {
-            console.log("Error RESETTING Password -- ", error);
+            console.log("Error RESETTING Password -- ", error)
         }
     }
 
     const goBack = () => {
         props?.navigation?.goBack()
     }
+
     return {
         goBack,
         password, setPassword,
         confirmPassword, setConfirmPassword,
         passwordVisible, setPasswordVisible,
         confirmPasswordVisible, setConfirmPasswordVisible,
-        resetRes
+        ResetPassword
     }
 }
 

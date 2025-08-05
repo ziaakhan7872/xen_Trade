@@ -11,7 +11,7 @@ import { colors, fontFamily } from '../../../../constants'
 export const ResetPasswordContainer = ({
     passwordVisible, setPasswordVisible,
     confirmPasswordVisible, setConfirmPasswordVisible,
-    password, setPassword, confirmPassword, setConfirmPassword,
+    password, setPassword, confirmPassword, setConfirmPassword, ResetPassword
 }) => {
     return (
         <View style={styles.mainBox}>
@@ -34,7 +34,7 @@ export const ResetPasswordContainer = ({
                     </>
                 )} */}
             <Spacer />
-            <SimpleButton onPress={''} text={"Continue"} textColor={colors.black} backgroundColor={colors.mainColor} buttonWidth={wp(84.2)} height={hp(6.5)} />
+            <SimpleButton onPress={ResetPassword} text={"Continue"} textColor={colors.black} backgroundColor={colors.mainColor} buttonWidth={wp(84.2)} height={hp(6.5)} />
             <Spacer height={hp(0.8)} />
 
         </View>

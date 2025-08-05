@@ -15,8 +15,9 @@ const SignupScreen = (props) => {
     phoneNumber, setPhoneNumber,
     referralCode, setReferralCode,
     isPasswordVisible, setIsPasswordVisible,
-    isConfirmPasswordVisible, setIsConfirmPasswordVisible
+    isConfirmPasswordVisible, setIsConfirmPasswordVisible, SignUp
   } = UseSignUp(props)
+
   return (
     <AuthMainContainer>
       <View style={style.container}>
@@ -33,7 +34,7 @@ const SignupScreen = (props) => {
           handleCheckboxToggle={handleCheckboxToggle}
           isPasswordVisible={isPasswordVisible} setIsPasswordVisible={setIsPasswordVisible}
           isConfirmPasswordVisible={isConfirmPasswordVisible} setIsConfirmPasswordVisible={setIsConfirmPasswordVisible}
-          />
+        />
       </View>
 
     </AuthMainContainer>
