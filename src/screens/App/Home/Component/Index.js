@@ -213,11 +213,10 @@ export const BalanceOverView = () => {
                         innerCircleColor={colors.searchBar}
                     />
                 </View>
-                <HorizontalSpacer width={wp(7)} />
                 <View >
                     <ResponsiveText style={[style.text1, { fontSize: 14 }]}>Account Balance</ResponsiveText>
                     <Spacer height={hp(1)} />
-                    <ResponsiveText style={style.text2}>$2,976.00</ResponsiveText>
+                    <ResponsiveText style={style.text2}>$2,976.0000</ResponsiveText>
                     <Spacer height={hp(1)} />
                     <ResponsiveText style={[style.text1, { fontSize: 14 }]}>Wallet Account</ResponsiveText>
 
@@ -495,9 +494,10 @@ const style = StyleSheet.create({
         justifyContent: "center"
     },
     BalanceView: {
-        width: wp(80),
+        width: wp(90),
         flexDirection: "row",
-        alignItems: "center"
+        alignItems: "center",
+        justifyContent:"space-around"
     },
     accountOverViewemptyDataImage: {
         width: wp(6.41),

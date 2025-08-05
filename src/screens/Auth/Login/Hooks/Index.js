@@ -56,6 +56,7 @@ export const UseLogin = (props) => {
           setErrorMessage("Login error, please try again later");
         }
       } else {
+        console.log(error,"else error")
         setErrorMessage("Network error, please try again later");
       }
     }

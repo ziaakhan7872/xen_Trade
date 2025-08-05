@@ -17,6 +17,7 @@ export const LoginVerificationApi = async (payload) => {
 
 
 export const LoginApi = async (payload) => {
+    console.log("login api payload", payload)
     return axios.post(`${AUTH_BASE_URL}/auth/login`, payload)
 }
 
