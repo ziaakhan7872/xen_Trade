@@ -4,78 +4,25 @@ import { apiRequest } from "./mainService";
 
 
 export const SignUpApi = async (payload) => {
-    try {
-        return apiRequest({
-            method: "POST",
-            url: `${AUTH_BASE_URL}/auth/signup`,
-            data: payload,
-            isAuth: false,
-        });
-
-    } catch (error) {
-        console.log(error, "error sign up")
-    }
-
+    return axios.post(`${AUTH_BASE_URL}/auth/signup`, payload)
 }
 
 export const EmailVerificationApi = async (payload) => {
-    try {
-        return apiRequest({
-            method: "POST",
-            url: `${AUTH_BASE_URL}/verifications/otp-code`,
-            data: payload,
-            isAuth: false,
-        });
-
-    } catch (error) {
-        console.log(error, "email verification error ")
-    }
+    return axios.post(`${AUTH_BASE_URL}/verifications/otp-code`, payload)
 }
 
 export const LoginVerificationApi = async (payload) => {
-    try {
-        return apiRequest({
-            method: "POST",
-            url: `${AUTH_BASE_URL}/verifications/login-otp`,
-            data: payload,
-            isAuth: false,
-        });
-
-    } catch (error) {
-        console.log(error, "login verification error")
-    }
+    return axios.post(`${AUTH_BASE_URL}/verifications/login-otp`, payload)
 }
 
 
 export const LoginApi = async (payload) => {
     console.log("login function", payload)
-    try {
-        return apiRequest({
-            method: "POST",
-            url: `${AUTH_BASE_URL}/auth/login`,
-            data: payload,
-            isAuth: false,
-        });
-
-    } catch (error) {
-        console.log(error, "login auth error")
-
-        throw error
-    }
+    return axios.post(`${AUTH_BASE_URL}/auth/login`, payload)
 }
 
 export const ForgotPasswordApi = async (email) => {
-    try {
-        return apiRequest({
-            method: "POST",
-            url: `${AUTH_BASE_URL}/auth/forgot-password`,
-            data: { email: email },
-            isAuth: false,
-        });
-
-    } catch (error) {
-        console.log(error, "forgot password error")
-    }
+    return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, payload)
 }
 
 export const ResetPasswordApi = async (payload) => {

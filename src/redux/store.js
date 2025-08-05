@@ -17,18 +17,31 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore redux-persist specific actions
+        ignoredActions: [
+          'persist/PERSIST',
+          'persist/REHYDRATE',
+          'persist/PAUSE',
+          'persist/PURGE',
+          'persist/FLUSH',
+          'persist/REGISTER',
+        ],
+      },
+    }),
 });
 
 const persistor = persistStore(store);
 
 export { store, persistor };
 
-
+// Helpers to get tokens
 export const getAuthToken = () => {
   const state = store.getState();
   return state?.user?.token || '';
 };
-
 
 export const getRefreshToken = () => {
   const state = store.getState();

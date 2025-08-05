@@ -56,10 +56,22 @@ const UseSignUp = (props) => {
 
     } catch (error) {
       if (error.name === 'ValidationError') {
-        setErrorMessage(error.errors.join('\n'));  
-      } else {
-        console.error("Error during signup:", error);
-        setErrorMessage("An error occurred during signup. Please try again.");
+        setErrorMessage(error.errors.join('\n'));
+
+      } else if (error?.response) {
+        const status = error?.response?.status
+        const message = error?.response?.data?.message || "Signup failed"
+        if (status === 409) {
+          setErrorMessage(message)
+        }
+        else {
+          setErrorMessage("An error occurred during signup. Please try again.");
+        }
+        console.error("Error during signup:", error?.response);
+      }
+      else {
+        setErrorMessage("A Network Error . Please try again.");
+
       }
     }
   }

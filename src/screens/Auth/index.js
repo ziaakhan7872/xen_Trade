@@ -1,4 +1,4 @@
-import splashScreen from "./Splash/splashScreen";
+import splashScreen from "./Splash/SplashScreen";
 import IntroductionMain from "./Introuction/IntroductionMain";
 import LoginScreen from "./Login/LoginScreen";
 import SignupScreen from "./Signup/SignupScreen";
