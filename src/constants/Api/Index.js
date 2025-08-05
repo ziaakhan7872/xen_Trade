@@ -70,12 +70,25 @@ export const ForgotPasswordApi = async (email) => {
             method: "POST",
             url: `${AUTH_BASE_URL}/auth/forgot-password`,
             data: { email: email },
-            // params: { email: email },
             isAuth: false,
         });
 
     } catch (error) {
         console.log(error, "forgot password error")
+    }
+}
+
+export const ResetPasswordApi = async (payload) => {
+    try {
+        return apiRequest({
+            method: "POST",
+            url: `${AUTH_BASE_URL}/auth/reset-password`,
+            data: payload,
+            isAuth: false,
+        });
+
+    } catch (error) {
+        console.log(error, "reset password error")
     }
 }
 
