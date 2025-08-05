@@ -13,6 +13,7 @@ export const useHomeScreen = (props) => {
   const [searchCoin, setSearchCoin] = useState("")
   const [totalUsdt, setTotalUsdt] = useState("")
   const [filteredCryptoList, setFilteredCryptoList] = useState([]);
+  const [loading , setLoading ] = useState(false)
 
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export const useHomeScreen = (props) => {
 
   const getCryptoData = async () => {
     try {
+      setLoading(true)
       const getCryptoData = await GetCryptoListApi(1, 10)
       console.log("Crypto Data:", getCryptoData?.data?.data)
       setCryptoList(getCryptoData?.data?.data)
@@ -50,6 +52,9 @@ export const useHomeScreen = (props) => {
 
     } catch (error) {
       console.log("Error fetching crypto data:", error?.response);
+      setLoading(false)
+    } finally{
+      setLoading(false)
     }
   }
 
@@ -93,6 +98,6 @@ export const useHomeScreen = (props) => {
     handleAssetOpen, handleAssetClose,
     cryptoList: filteredCryptoList,
     setSearchCoin, searchCoin,
-    totalUsdt
+    totalUsdt,loading
   }
 }

@@ -9,9 +9,10 @@ import { MainHeader } from '../../../components/MainHeader';
 import { NetworkList } from './Component/Index';
 import { styles } from './Style';
 import { UseSelectNetworkWithdraw } from './Hooks/Index';
+import SkeletionLoader from '../../../components/SkeletonLoader';
 
 const SelectNetworkWithdraw = (props) => {
-  const {networkList,setNetworkList,handleNetworkPress} = UseSelectNetworkWithdraw(props)
+  const {networkList,setNetworkList,handleNetworkPress,loading} = UseSelectNetworkWithdraw(props)
   return (
     <AuthMainContainer>
       <View style={styles.mainHeaderView}>
@@ -19,7 +20,10 @@ const SelectNetworkWithdraw = (props) => {
       </View>
       <ScrollView contentContainerStyle={{ flexGrow:1 }}>
         <Spacer/>
+        {loading?<SkeletionLoader rows={5}/>:(
         <NetworkList Data={networkList} onPress={handleNetworkPress} />
+
+        )}
       </ScrollView>
     </AuthMainContainer>
   );

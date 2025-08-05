@@ -9,6 +9,7 @@ export const UseSelectCryptoWithdraw = (props) => {
     const { user } = useSelector((state) => state.user);
     const [cryptoList, setCryptoList] = useState([]);
     const [searchCoin, setSearchCoin] = useState("")
+    const [loading,setLoading] = useState(false)
 
 
     useEffect(() => {
@@ -17,6 +18,7 @@ export const UseSelectCryptoWithdraw = (props) => {
 
     const getCryptoData = async () => {
         try {
+            setLoading(true)
             const getCryptoData = await GetCryptoListApi(1, 10)
             console.log("Crypto Data:", getCryptoData?.data?.data)
             setCryptoList(getCryptoData?.data?.data)
@@ -37,6 +39,9 @@ export const UseSelectCryptoWithdraw = (props) => {
 
         } catch (error) {
             console.log("Error fetching crypto data:", error);
+            setLoading(false)
+        } finally{
+            setLoading(false)
         }
     }
 
@@ -57,7 +62,8 @@ export const UseSelectCryptoWithdraw = (props) => {
         cryptoList:filteredCryptoList,
         RecentCryptoPress,
         CryptoPress,
-        searchCoin,setSearchCoin
+        searchCoin,setSearchCoin,
+        loading
     }
 }
 

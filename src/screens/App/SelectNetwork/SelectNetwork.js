@@ -8,9 +8,10 @@ import { ScrollView, View } from 'react-native';
 import { styles } from './styles';
 import Spacer from '../../../components/Spacer';
 import { useSelectNetwork } from './Hooks';
+import SkeletionLoader from '../../../components/SkeletonLoader';
 
 const SelectNetwork = (props) => {
-  const { handleNetworkNavigation, networkList } = useSelectNetwork(props)
+  const { handleNetworkNavigation, networkList,loading } = useSelectNetwork(props)
 
   return (
     <AuthMainContainer>
@@ -19,7 +20,9 @@ const SelectNetwork = (props) => {
       </View>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Spacer />
+        {loading? <SkeletionLoader rows={5}/>:(
         <NetworkList data={networkList} onPress={handleNetworkNavigation} />
+        )}
       </ScrollView>
     </AuthMainContainer>
   );

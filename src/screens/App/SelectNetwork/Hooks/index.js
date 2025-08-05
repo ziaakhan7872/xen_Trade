@@ -6,6 +6,7 @@ export const useSelectNetwork = (props) => {
     const { cryptoItem } = props?.route?.params  // get passed data from SelectCrypto API screen
     console.log("NETWORKS DATA|||", cryptoItem)
     const [networkList, setNetworkList] = useState([])
+    const [loading,setLoading] = useState(false)
 
     useEffect(() => {
         DisplayNetworkList()
@@ -14,12 +15,16 @@ export const useSelectNetwork = (props) => {
     const DisplayNetworkList = async () => {
 
         try {
+            setLoading(true)
             const networkListRes = await GetNetworkListApi(cryptoItem.symbol)
             console.log("--NETWORK LIST DATA--", networkListRes);
             setNetworkList(networkListRes?.data?.data || [])
         }
         catch (error) {
             console.log("Error Displaying Network List", error);
+            setLoading(false)
+        } finally{
+            setLoading(false)
         }
     }
 
@@ -34,6 +39,6 @@ export const useSelectNetwork = (props) => {
     return {
         // DisplayDepositDetails
         handleNetworkNavigation,
-        networkList,
+        networkList, loading
     }
 }

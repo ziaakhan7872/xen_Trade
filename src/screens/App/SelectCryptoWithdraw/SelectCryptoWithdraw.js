@@ -8,10 +8,11 @@ import { PopularCrypto, SelectCryptoHeader, SelectCryptoRowButton, SelectCryptoS
 import { styles } from './Style';
 import { hp } from '../../../components/ResponsiveComponent';
 import { UseSelectCryptoWithdraw } from './Hooks/Index';
+import SkeletionLoader from '../../../components/SkeletonLoader';
 
 
 const SelectCryptoWithdraw = (props) => {
-    const {cryptoList,CryptoPress,RecentCryptoPress,searchCoin,setSearchCoin} = UseSelectCryptoWithdraw(props)
+    const {cryptoList,CryptoPress,RecentCryptoPress,searchCoin,setSearchCoin,loading} = UseSelectCryptoWithdraw(props)
     return (
         <AuthMainContainer>
             <SelectCryptoHeader BackPress={() => props?.navigation?.goBack()} historyPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.WithdrawHistory })} />
@@ -24,7 +25,9 @@ const SelectCryptoWithdraw = (props) => {
                     <Spacer />
                     <SelectCryptoRowButton data={cryptoList} onPress={RecentCryptoPress} />
                     <Spacer />
+                    {loading? <SkeletionLoader rows={5}/> :(
                     <PopularCrypto data={cryptoList} onPress={CryptoPress} />
+                    )}
                 </View>
             </ScrollView>
 

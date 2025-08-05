@@ -8,12 +8,12 @@ import { ResponsiveText } from '../../../components/ResponsiveText';
 import { Routes } from '../../../constants';
 import { useSelectCrypto } from './Hooks';
 import { hp } from '../../../components/ResponsiveComponent';
+import SkeletionLoader from '../../../components/SkeletonLoader';
 
 const SelectCrypto = (props) => {
   const {
     cryptoList, loading, error, handleCryptoNavigation,
-    searchCoin, setSearchCoin, papulaistrCryptoL
-
+    searchCoin, setSearchCoin, papulaistrCryptoL,
 
   } = useSelectCrypto(props)
 
@@ -26,23 +26,37 @@ const SelectCrypto = (props) => {
         <Spacer />
         <View style={styles.otherContainer}>
 
-          {(papulaistrCryptoL && papulaistrCryptoL?.length>0) && (
-            <>
-              <ResponsiveText style={styles.title}>Popular</ResponsiveText>
-              <Spacer />
-              <PopularCrypto data={papulaistrCryptoL} onPress={handleCryptoNavigation} />
-              <Spacer />
-            </>
+          {loading ? (
+            <SkeletionLoader rows={5} />
+          ) : (
+            papulaistrCryptoL?.length > 0 && (
+              <>
+                <ResponsiveText style={styles.title}>Popular</ResponsiveText>
+                <Spacer />
+                <PopularCrypto data={papulaistrCryptoL} onPress={handleCryptoNavigation} />
+                <Spacer />
+              </>
+            )
+          )}
 
+          {loading ? (
+            <SkeletionLoader rows={5} />
+          ) : (
+            cryptoList && cryptoList.length > 0 && (
+              <>
+                <ResponsiveText style={styles.title}>All Crypto</ResponsiveText>
+                <Spacer />
+                <ALlCrypto
+                  data={cryptoList}
+                  onPress={() =>
+                    props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectNetwork })
+                  }
+                />
+              </>
+            )
           )}
-          {(cryptoList && cryptoList?.length>0) && (
-            <>
-            <ResponsiveText style={styles.title}>All Crypto</ResponsiveText>
-          <Spacer />
-          <ALlCrypto data={cryptoList} onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectNetwork })} />
-            </>
-          )}
-          
+
+
         </View>
       </ScrollView>
 

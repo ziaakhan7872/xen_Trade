@@ -6,6 +6,7 @@ import { Routes } from "../../../../constants";
 export const UseSelectNetworkWithdraw = (props) => {
     const { cryptoData } = props?.route?.params || {};
     const [networkList, setNetworkList] = useState([])
+    const [loading,setLoading] = useState(false)
 
     useEffect(() => {
         getNetworkList()
@@ -13,11 +14,15 @@ export const UseSelectNetworkWithdraw = (props) => {
 
     const getNetworkList = async () => {
         try {
+            setLoading(true)
             const getNetwork = await GetNetworkListApi(cryptoData?.symbol);
             console.log("Network List:", getNetwork)
             setNetworkList(getNetwork?.data?.data);
         } catch (error) {
             console.log("Error fetching network list:", error);
+            setLoading(fasle)
+        } finally{
+            setLoading(false)
         }
     }
 
@@ -32,7 +37,8 @@ export const UseSelectNetworkWithdraw = (props) => {
     }
     return {
         networkList, setNetworkList,
-        handleNetworkPress
+        handleNetworkPress,
+        loading
 
     }
 }
