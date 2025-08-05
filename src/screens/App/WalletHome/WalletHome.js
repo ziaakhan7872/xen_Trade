@@ -53,7 +53,7 @@ const WalletHome = (props) => {
         <Spacer height={hp(2)} />
 
       </View>
-      <Spacer height={Platform.OS === 'android' ? hp(0) : hp(3.5)} />
+      {/* <Spacer height={Platform.OS === 'android' ? hp(0) : hp(3.5)} /> */}
 
       <View style={{ flex: 1 }}>
         <TokenList cryptoData={cryptoList} props={props} />

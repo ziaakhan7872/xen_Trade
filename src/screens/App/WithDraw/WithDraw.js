@@ -1,13 +1,14 @@
 
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { AuthMainContainer } from '../../../components/authMainContainer';
-import styles from './styles';
 import { AddressInput, AmountInput, FeeInfo, SubmitButton, WithDrawConfirmationBottomSheet, WithdrawHeader } from './components';
 import { Routes } from '../../../constants';
 import Spacer from '../../../components/Spacer';
 import { UseWidthDraw } from './Hooks';
 import { Portal } from 'react-native-portalize';
+import { Camera } from 'react-native-vision-camera';
+import { styles } from './styles';
 
 const WithDraw = (props) => {
 
@@ -17,11 +18,13 @@ const WithDraw = (props) => {
     amount, setAmount,
     fee, setFee,
     error, setError,
-    walletAddressError,setWalletAddressError,
+    walletAddressError, setWalletAddressError,
     amountReceived, setAmountReceived,
     cryptoData, network,
-    handleSubmit,handleCopy, validateAddress,
-    apiError,setApiError
+    handleSubmit, handleCopy, validateAddress,
+    apiError, setApiError,
+    setCameraActive, cameraActive, codeScanner,
+    device
 
   } = UseWidthDraw(props)
 
@@ -31,17 +34,21 @@ const WithDraw = (props) => {
       <WithdrawHeader NetworkImage={network} BackPress={() => props?.navigation?.goBack()} HistoryPress={() => props?.navigation?.navigate(Routes.AppNavigator, { screen: Routes.WithdrawHistory })} />
       <Spacer />
       <AddressInput
-      walletAddressError={walletAddressError} setWalletAddressError={setWalletAddressError}
-      validateAddress={validateAddress}
+        onScan={() => setCameraActive(!cameraActive)}
+        walletAddressError={walletAddressError} setWalletAddressError={setWalletAddressError}
+        validateAddress={validateAddress}
         cryptoData={cryptoData} Network={network}
         address={address} setAddress={setAddress}
         amount={amount} setAmount={setAmount}
         error={error} setError={setError}
 
       />
+      
+
+
       <View style={styles.spacer} />
       <FeeInfo
-      address={address}
+        address={address}
         cryptoData={cryptoData}
         handleSubmit={() => WithdrawConfirmationRef?.current?.expand()}
         fee={fee}
@@ -50,8 +57,8 @@ const WithDraw = (props) => {
       />
       <Portal>
         <WithDrawConfirmationBottomSheet
-        apiError={apiError}
-        handleCopy={handleCopy}
+          apiError={apiError}
+          handleCopy={handleCopy}
           address={address}
           amount={amount}
           Network={network}
@@ -60,6 +67,23 @@ const WithDraw = (props) => {
           ref={WithdrawConfirmationRef}
 
         />
+        {cameraActive && (
+  <View style={StyleSheet.absoluteFill}>
+    <Camera
+      style={StyleSheet.absoluteFill}
+      device={device}
+      isActive={true}
+      codeScanner={codeScanner}
+    />
+
+    {/* Optional: Add a semi-transparent overlay with close button */}
+    <View style={styles.overlay}>
+      <View style={styles.closeButtonContainer}>
+        <Text style={styles.closeText} onPress={() => setCameraActive(false)}>X</Text>
+      </View>
+    </View>
+  </View>
+)}
       </Portal>
     </AuthMainContainer>
   );

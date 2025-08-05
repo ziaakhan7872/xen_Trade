@@ -49,7 +49,7 @@ export const useHomeScreen = (props) => {
 
 
     } catch (error) {
-      console.log("Error fetching crypto data:", error);
+      console.log("Error fetching crypto data:", error?.response);
     }
   }
 

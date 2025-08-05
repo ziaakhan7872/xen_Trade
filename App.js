@@ -2,8 +2,8 @@ import './shim';
 import './globals';
 import 'react-native-get-random-values';
 import 'whatwg-fetch';
-import React, { useEffect } from 'react';
-import BootSplash from "react-native-bootsplash";  // Ensure BootSplash is imported
+import React, { useEffect, useState } from 'react';
+import BootSplash from "react-native-bootsplash";
 import { LogBox } from 'react-native';
 import Navigation from './src/navigation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -15,18 +15,30 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './src/redux/store';
 import Toast from 'react-native-toast-message';
 import { ToastConfig } from './src/components/ToastConfig';
-enableScreens(false); // Disable optimized screens
+import { Camera } from 'react-native-vision-camera';
+
+enableScreens(false);
 
 const App = () => {
+
   useEffect(() => {
-    // Disable any unnecessary warnings
     LogBox.ignoreAllLogs();
 
+    // Hide splash after 4s
     setTimeout(() => {
       BootSplash.hide({ fade: true });
     }, 4000);
 
+    const requestPermissions = async () => {
+      const permission = await Camera.requestCameraPermission();
+    };
+
+    requestPermissions();
+
   }, []);
+
+
+
 
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: colors.black }}>
@@ -40,6 +52,6 @@ const App = () => {
       </Host>
     </GestureHandlerRootView>
   );
-}
+};
 
 export default App;
