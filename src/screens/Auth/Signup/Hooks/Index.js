@@ -70,6 +70,7 @@ const UseSignUp = (props) => {
         console.error("Error during signup:", error?.response);
       }
       else {
+        console.log("errpr", error)
         setErrorMessage("A Network Error . Please try again.");
 
       }
