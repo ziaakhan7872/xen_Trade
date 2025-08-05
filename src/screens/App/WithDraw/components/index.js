@@ -2,8 +2,6 @@ import React, { useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import images from '../../../../images';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import { useNavigation } from '@react-navigation/native';
 import { colors, fontFamily, Routes } from '../../../../constants';
 import { ResponsiveText } from '../../../../components/ResponsiveText';
 import Spacer, { HorizontalSpacer } from '../../../../components/Spacer';
@@ -36,6 +34,7 @@ export const WithdrawHeader = ({ BackPress, HistoryPress, NetworkImage }) => {
     </View>
   );
 };
+
 export const AddressInput = ({ walletAddressError, setWalletAddressError, validateAddress, amount, setAmount, address, setAddress, Network, cryptoData, onCopy, onScan, onMax, error, setError }) => {
   return (
     <View style={{ alignItems: "center" }}>
@@ -50,13 +49,16 @@ export const AddressInput = ({ walletAddressError, setWalletAddressError, valida
       <Spacer height={hp(1)} />
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <InputText
-          value={address} onChangeText={setAddress}
+          value={address}
+          onChangeText={(text) => {
+            setAddress(text);
+            setWalletAddressError(false); // clear error on typing
+          }}
           paddingLeft={wp(3)} placeholder={"Scan or enter address"}
           placeholderTextColor={colors.placeHolderTextColor}
           width={wp(95)}
           onBlur={() => {
             if (validateAddress(address)) {
-
               setWalletAddressError(false);
             } else {
               setWalletAddressError(true);
@@ -68,7 +70,7 @@ export const AddressInput = ({ walletAddressError, setWalletAddressError, valida
         </TouchableOpacity>
       </View>
       {walletAddressError && (
-        <ResponsiveText style={[styles.errorText,]}   > Invalid Wallet Address </ResponsiveText>)}
+        <ResponsiveText style={[styles.errorText,]}  > Invalid Wallet Address </ResponsiveText>)}
       <View>
         <ResponsiveText style={styles.label}>Withdrawal Amount</ResponsiveText>
         <Spacer height={hp(1)} />

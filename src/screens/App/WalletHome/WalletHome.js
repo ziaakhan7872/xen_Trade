@@ -12,11 +12,11 @@ import { useHomeScreen } from "./Hooks"
 import { Portal } from "react-native-portalize"
 
 const WalletHome = (props) => {
-  const { 
-    isChecked, handleCheckboxToggle, 
-    input, setInput, 
-    assetSheetRef, handleAssetOpen, handleAssetClose ,
-    cryptoList,searchCoin,setSearchCoin,
+  const {
+    isChecked, handleCheckboxToggle,
+    input, setInput,
+    assetSheetRef, handleAssetOpen, handleAssetClose,
+    cryptoList, searchCoin, setSearchCoin,
     // totalUsdt
 
   } = useHomeScreen(props)
@@ -55,9 +55,9 @@ const WalletHome = (props) => {
       </View>
       {/* <Spacer height={Platform.OS === 'android' ? hp(0) : hp(3.5)} /> */}
 
-      <View style={{ flex: 1 }}>
-        <TokenList cryptoData={cryptoList} props={props} />
-      </View>
+      {/* <View style={{ flex: 1 }}> */}
+      <TokenList cryptoData={cryptoList} props={props} />
+      {/* </View> */}
 
       <Portal>
         <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />

@@ -14,9 +14,6 @@ import {
   useMicrophonePermission,
 } from "react-native-vision-camera";
 
-
-
-
 export const UseWidthDraw = (props) => {
   const WithdrawConfirmationRef = useRef(null)
   const { cryptoData, network } = props?.route?.params || {};
@@ -36,7 +33,20 @@ export const UseWidthDraw = (props) => {
 
 
   const handleSubmit = async () => {
-    const receivedAmount = Number(amount) + Number(network?.fee || 0)
+    const availableBalance = Number(cryptoData?.account?.amount || 0);
+    const withdrawAmount = Number(amount);
+
+    if (!withdrawAmount || withdrawAmount <= 0) {
+      setApiError("Please enter a valid withdrawal amount.");
+      return;
+    }
+
+    if (withdrawAmount > availableBalance) {
+      setApiError("Withdrawal amount exceeds available balance.");
+      return;
+    }
+
+    const receivedAmount = withdrawAmount + Number(network?.fee || 0)
     try {
       const payload = {
         userId: user?.id,
@@ -49,14 +59,27 @@ export const UseWidthDraw = (props) => {
       const response = await WithdrawOnchain(payload)
       const responseData = response.data;
       console.log("Response Data:", responseData);
+
+      // if (response?.status === 200) {
       WithdrawConfirmationRef?.current?.close()
       setTimeout(() => {
         props?.navigation?.navigate(Routes?.WithdrawDetails, { CryptoData: cryptoData, network: network, response: responseData })
       }, 300);
+      // } else {
+      //   setApiError(response?.message || "Something went wrong. Try again.");
+      // }
 
     } catch (error) {
       console.log("error in withdraw onchaib", error?.response?.data)
       const catchError = error?.response?.data
+
+      // Check if API error is due to invalid address
+      if (catchError?.message?.toLowerCase().includes("address")) {
+        setWalletAddressError(true);
+      }
+
+      setApiError(catchError?.message || "Withdrawal failed. Please check your details.");
+
       if (catchError?.status) {
         setApiError(catchError?.message)
       }
@@ -97,11 +120,6 @@ export const UseWidthDraw = (props) => {
 
     return false;
   };
-
-
-
-
-
 
   return {
     WithdrawConfirmationRef,

@@ -41,10 +41,7 @@ const WithDraw = (props) => {
         address={address} setAddress={setAddress}
         amount={amount} setAmount={setAmount}
         error={error} setError={setError}
-
       />
-      
-
 
       <View style={styles.spacer} />
       <FeeInfo
@@ -65,25 +62,24 @@ const WithDraw = (props) => {
           cryptData={cryptoData}
           handleSubmit={handleSubmit}
           ref={WithdrawConfirmationRef}
-
         />
         {cameraActive && (
-  <View style={StyleSheet.absoluteFill}>
-    <Camera
-      style={StyleSheet.absoluteFill}
-      device={device}
-      isActive={true}
-      codeScanner={codeScanner}
-    />
+          <View style={StyleSheet.absoluteFill}>
+            <Camera
+              style={StyleSheet.absoluteFill}
+              device={device}
+              isActive={true}
+              codeScanner={codeScanner}
+            />
 
-    {/* Optional: Add a semi-transparent overlay with close button */}
-    <View style={styles.overlay}>
-      <View style={styles.closeButtonContainer}>
-        <Text style={styles.closeText} onPress={() => setCameraActive(false)}>X</Text>
-      </View>
-    </View>
-  </View>
-)}
+            {/* Optional: Add a semi-transparent overlay with close button */}
+            <View style={styles.overlay}>
+              <View style={styles.closeButtonContainer}>
+                <Text style={styles.closeText} onPress={() => setCameraActive(false)}>X</Text>
+              </View>
+            </View>
+          </View>
+        )}
       </Portal>
     </AuthMainContainer>
   );
