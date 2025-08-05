@@ -74,7 +74,6 @@ export const UseExchange = (props) => {
   };
 
   const handleBuySliderChange = (value)=>{
-    console.log("Slider Value:", value);
     const availableBalance = new BigNumber(availableQuoteBalance || 0);
     const sliderValue = new BigNumber(value).dividedBy(100);
     const newPrice = availableBalance.multipliedBy(sliderValue).toString();
@@ -134,16 +133,20 @@ export const UseExchange = (props) => {
     }
   }
 
-  const discreaseQuantity = () => {
-    const newValue = quantity - 1;
-    setQuantity(newValue);
-    handleBuyQuantityChange(newValue)
-  }
-  const addQuantity = () => {
-    const newValue = quantity + 1;
-    setQuantity(newValue);
-    handleBuyQuantityChange(newValue)
-  }
+ const discreaseQuantity = () => {
+  const currentQty = new BigNumber(quantity || 0); // Ensure numeric
+  const newValue = currentQty.minus(1);
+  if (newValue.isNegative()) return; // prevent negative
+  setQuantity(newValue.toString());
+  handleBuyQuantityChange(newValue.toString());
+};
+
+const addQuantity = () => {
+  const currentQty = new BigNumber(quantity || 0);
+  const newValue = currentQty.plus(1);
+  setQuantity(newValue.toString());
+  handleBuyQuantityChange(newValue.toString());
+};
 
   useEffect(() => {
     getPair()
