@@ -31,7 +31,6 @@ export const UseLogin = (props) => {
       console.log("Login successful:", Login);
 
       if (Login?.status === 200) {
-        console.log("Entered in IF statement");
         // showToast()
 
         // setTimeout(() => {
@@ -46,9 +45,18 @@ export const UseLogin = (props) => {
     } catch (error) {
       if (error.name === 'ValidationError') {
         setErrorMessage(error.errors.join('\n'));
+      } else if (error?.response) {
+        const status = error?.response?.status
+        const message = error?.response?.data?.message || "Login Failed"
+        console.log("api  in screen", error?.response)
+        if (status === 404 || status === 401) {
+          setErrorMessage(message)
+        }
+        else {
+          setErrorMessage("Login error, please try again later");
+        }
       } else {
-        console.error("Error during signup:", error);
-        setErrorMessage("An error occurred during Login. Please try again.");
+        setErrorMessage("Network error, please try again later");
       }
     }
   }

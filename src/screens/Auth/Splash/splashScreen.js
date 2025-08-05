@@ -4,7 +4,7 @@ import { Routes } from '../../../constants';
 import { hp, wp } from '../../../components/ResponsiveComponent';
 import images from '../../../images';
 
-const splashScreen = ({navigation}) => {
+const SplashScreen = ({navigation}) => {
   useEffect(() => {
     const hideSplashScreen = async () => {
       navigation.replace(Routes.IntroductMainScreem); 
@@ -22,7 +22,7 @@ const splashScreen = ({navigation}) => {
   );
 }
 
-export default splashScreen;
+export default SplashScreen;
 
 const styles = StyleSheet.create({
   mainContainer: {

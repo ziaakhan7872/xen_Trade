@@ -5,6 +5,7 @@ import { Routes } from "../constants";
 import BottomNavigation from "./BottomNavigation/BottomNavigation";
 import AppNavigation from "./AppNavigation/AppNavigation";
 import { useSelector } from "react-redux";
+import { navigationRef } from "./NavigationService/NavigationService";
 
 
 const Navigation = () => {
@@ -12,7 +13,7 @@ const Navigation = () => {
   const { token, refreshToken } = useSelector((state) => state.user);
 
   return (
-    <NavigationContainer >
+    <NavigationContainer ref={navigationRef} >
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {(refreshToken || token) ? (
           <>
