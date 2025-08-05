@@ -46,9 +46,9 @@ const MarketScreen = (props) => {
         <InputText
           // style={style.inputText} 
           rightIcon={true}
+          paddingLeft={wp(18)}
           placeholderTextColor={colors.iconColor}
           placeholder={"Search.."}
-          width={wp(92)}
           value={searchText}
           onChangeText={setSearchText}
           onFocus={handleFocus}
@@ -61,8 +61,8 @@ const MarketScreen = (props) => {
         <Line height={hp(0.1)} />
         {loading ? <SkeletionLoader rows={6} /> : (
           <RenderMarketList MarketScreen={MarketPress} marketData={marketList} />
-        )}      
-        </View>
+        )}
+      </View>
 
     </AuthMainContainer>
   )

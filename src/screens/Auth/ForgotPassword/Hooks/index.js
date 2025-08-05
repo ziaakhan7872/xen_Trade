@@ -38,7 +38,7 @@ export const useForgotPassword = (props) => {
             if (passResponse?.status == 200) {
                 showToast()
                 setTimeout(() => {
-                    props?.navigation?.navigate?.(Routes.EmailVerificationScreen, { screenName: "forgotPassword" })
+                    props?.navigation?.navigate?.(Routes.EmailVerificationScreen, { screenName: "forgotPassword", id: passResponse?.data?.id })
                 }, 1500);
             }
         } catch (error) {
