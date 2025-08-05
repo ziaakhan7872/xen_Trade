@@ -12,8 +12,9 @@ const ChangePasswordForgot = (props) => {
     const {
         goBack, passwordVisible, setPasswordVisible,
         confirmPasswordVisible, setConfirmPasswordVisible,
-        password, setPassword, confirmPassword, setConfirmPassword,
+        password, setPassword, confirmPassword, setConfirmPassword, resetRes
     } = useChangePasswordForgot(props)
+    console.log("RESET PASSWORD API RESPONSE -- ", resetRes);
 
     return (
         <AuthMainContainer>

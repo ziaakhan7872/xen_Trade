@@ -21,7 +21,21 @@ export const LoginApi = async (payload) => {
 }
 
 export const ForgotPasswordApi = async (email) => {
-    return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, { email })
+    return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, {email})
+}
+
+export const ResetPasswordApi = async (payload) => {
+    try {
+        return apiRequest({
+            method: "POST",
+            url: `${AUTH_BASE_URL}/auth/reset-password`,
+            data: payload,
+            isAuth: false,
+        });
+
+    } catch (error) {
+        console.log(error, "reset password error")
+    }
 }
 
 // // MarketApis
