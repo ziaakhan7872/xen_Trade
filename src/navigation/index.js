@@ -17,7 +17,7 @@ const Navigation = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {(refreshToken || token) ? (
           <>
-            <Stack.Screen name={Routes.AuthNavigator} component={AuthNavigation} />
+            {/* <Stack.Screen name={Routes.AuthNavigator} component={AuthNavigation} /> */}
             <Stack.Screen name={Routes.BottomNavigator} component={BottomNavigation} />
             <Stack.Screen name={Routes.AppNavigator} component={AppNavigation} />
           </>

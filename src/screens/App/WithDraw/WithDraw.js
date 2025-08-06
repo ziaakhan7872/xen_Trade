@@ -51,6 +51,7 @@ const WithDraw = (props) => {
         fee={fee}
         amount={amount}
         error={error}
+        walletAddressError={walletAddressError}
       />
       <Portal>
         <WithDrawConfirmationBottomSheet

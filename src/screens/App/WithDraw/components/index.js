@@ -70,7 +70,7 @@ export const AddressInput = ({ walletAddressError, setWalletAddressError, valida
         </TouchableOpacity>
       </View>
       {walletAddressError && (
-        <ResponsiveText style={[styles.errorText,]}  > Invalid Wallet Address </ResponsiveText>)}
+        <ResponsiveText style={[styles.errorText,]}>Invalid Wallet Address </ResponsiveText>)}
       <View>
         <ResponsiveText style={styles.label}>Withdrawal Amount</ResponsiveText>
         <Spacer height={hp(1)} />
@@ -122,7 +122,7 @@ export const AddressInput = ({ walletAddressError, setWalletAddressError, valida
 }
 
 
-export const FeeInfo = ({ Network, cryptoData, fee, amount, handleSubmit, error, address }) => {
+export const FeeInfo = ({ Network, cryptoData, fee, amount, handleSubmit, error, address, walletAddressError }) => {
   const AmountReceived = Number(amount) - Number(Network?.fee || 0);
   return (
     <View style={styles.feeContainer}>
@@ -138,9 +138,9 @@ export const FeeInfo = ({ Network, cryptoData, fee, amount, handleSubmit, error,
       <View style={{ alignItems: "center" }}>
         <SimpleButton
           text={"Submit"}
-          disabled={error || !AmountReceived || !address}
+          disabled={error || !AmountReceived || !address || walletAddressError}
           textColor={error || !AmountReceived || !address ? colors.buttonSigninColor : colors.black}
-          backgroundColor={error || !AmountReceived || !address ? colors.gray3 : colors.mainColor}
+          backgroundColor={error || !AmountReceived || !address || walletAddressError ? colors.gray3 : colors.mainColor}
           height={hp(6)}
           buttonWidth={wp(80)}
           onPress={handleSubmit}
