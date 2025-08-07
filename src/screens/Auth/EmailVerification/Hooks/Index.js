@@ -8,11 +8,12 @@ const useEmalVerification = (props) => {
   // const userData = useSelector((state) => state.user)
   const previousScreenName = props?.route?.params?.screenName
   const emailVerificationBottomSheetRef = useRef(null)
-  const previousUserData = props?.route?.params?.userData || ''
+  // const previousUserData = props?.route?.params?.userData || ''
+  const id = props?.route?.params?.id
   const [otpCode, setOtpCode] = useState("")
   const [errorMessage, setErrorMessage] = useState("");
 
-  console.log("User data in EmailVerificationScreen::::::previousUserData", previousUserData?.data);
+  console.log("User data in EmailVerificationScreen::::::previousUserData", id);
 
   const verifyEmail = async () => {
     try {
@@ -22,12 +23,12 @@ const useEmalVerification = (props) => {
       }
       const payload = {
         emailOtpCode: Number(otpCode),
-        userId: previousUserData?.data?.id
+        userId: id
       }
       const response = await EmailVerificationApi(payload);
       console.log("Email verification response:", response);
       if (previousScreenName == 'forgotPassword') {
-        props?.navigation.navigate(Routes.ChangePasswordForgot, { otpCode: otpCode, id: previousUserData?.data?.id })
+        props?.navigation.navigate(Routes.ChangePasswordForgot, { otpCode: otpCode, id: id })
       } else {
         emailVerificationBottomSheetRef?.current?.expand()
       }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { LoginApi } from "../../../../constants/Api/Index";
 import { Routes } from "../../../../constants";
 import * as Yup from 'yup';
+import Toast from "react-native-toast-message";
 
 export const UseLogin = (props) => {
   const [email, setEmail] = useState('');
@@ -14,6 +15,17 @@ export const UseLogin = (props) => {
     email: Yup.string().email('Invalid email address').required('Email is required'),
     password: Yup.string().required('Password is required'),
   });
+
+  const showToast = () => {
+    Toast.show({
+      type: 'verificationAlert',
+      text1: 'VERIFICATION EMAIL SENT',
+      text2: 'Verification code sent to',
+      visibilityTime: 2000,
+      autoHide: true,
+      props: email
+    })
+  }
 
   const handleLogin = async () => {
     const values = { email, password };
@@ -31,11 +43,11 @@ export const UseLogin = (props) => {
       console.log("Login successful:", Login);
 
       if (Login?.status === 200) {
-        // showToast()
+        showToast()
 
-        // setTimeout(() => {
-        props?.navigation.navigate(Routes.LoginVerificationScreen, { userData: Login?.data, userEmail: payload?.email })
-        // }, 1000)
+        setTimeout(() => {
+          props?.navigation.navigate(Routes.LoginVerificationScreen, { userData: Login?.data, userEmail: payload?.email })
+        }, 1500)
       }
 
       setEmail("")
@@ -56,7 +68,7 @@ export const UseLogin = (props) => {
           setErrorMessage("Login error, please try again later");
         }
       } else {
-        console.log(error,"else error")
+        console.log(error, "else error")
         setErrorMessage("Network error, please try again later");
       }
     }

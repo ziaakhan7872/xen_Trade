@@ -10,38 +10,39 @@ import { Usewithdrawhistory } from './Hook/Index'
 import { AllCryptoFilterBotomSheet, DepositFilterHeader, DepositHistoryComponent, StatusFilterBottomSheet } from './Component/Index'
 
 const WithdrawHistory = (props) => {
-  const { 
-    allCryptoFilterRef, StatusRef, 
-    cryptoData,  statusData, 
-    SetSelectedSymbol, selectedSymbol, 
-    selectedStatus, SetSelectedStatus ,
+  const {
+    allCryptoFilterRef, StatusRef,
+    cryptoData, statusData,
+    SetSelectedSymbol, selectedSymbol,
+    selectedStatus, SetSelectedStatus,
     withdrawHistory,
-    selectedHeaderButton,setSelectedHeaderButton,
-    searchCoin,setSearchCoin
-} = Usewithdrawhistory()
+    selectedHeaderButton, setSelectedHeaderButton,
+    searchCoin, setSearchCoin
+  } = Usewithdrawhistory()
   return (
     <AuthMainContainer  >
       <View style={{ paddingHorizontal: wp(5) }}>
-        <MainHeader onBackPress={() => props?.navigation?.goBack()} title={"Withdraw HISTORY"} leftImage={images.backArrow} rightImage={images.infoIcon} />
+        <MainHeader onBackPress={() => props?.navigation?.goBack()} title={"WITHDRAW HISTORY"} leftImage={images.backArrow} rightImage={images.infoIcon} />
       </View>
       <Spacer height={hp(4)} />
       <DepositFilterHeader
         SelectedStatus={selectedStatus}
         statusPress={() => {
-            StatusRef?.current?.expand()
-            setSelectedHeaderButton("status")
+          StatusRef?.current?.expand()
+          setSelectedHeaderButton("status")
         }}
         SelectedSymbol={selectedSymbol}
         AllCryptoPress={() => {
-            setSelectedHeaderButton("crypto")
-            allCryptoFilterRef?.current?.expand()}}
+          setSelectedHeaderButton("crypto")
+          allCryptoFilterRef?.current?.expand()
+        }}
 
       />
       <Spacer height={hp(4)} />
 
-      <DepositHistoryComponent  HistoryData={withdrawHistory} props={props} />
+      <DepositHistoryComponent HistoryData={withdrawHistory} props={props} />
       <AllCryptoFilterBotomSheet
-      searchCoin={searchCoin} setSearchCoin={setSearchCoin}
+        searchCoin={searchCoin} setSearchCoin={setSearchCoin}
         selectedStatus={selectedStatus}
         setSelectedSymbol={SetSelectedSymbol}
         SelectedSymbol={selectedSymbol}
