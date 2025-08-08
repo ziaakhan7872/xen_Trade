@@ -12,7 +12,7 @@ export const GorhomBottomSheet = ({ sheetRef, onCloseRequest, children }) => {
       {...props}
       opacity={0.3}
       disappearsOnIndex={-1}
-      appearsOnIndex={0}
+      // appearsOnIndex={0}
       pressBehavior="close"
     />
   ), []);
@@ -25,15 +25,14 @@ export const GorhomBottomSheet = ({ sheetRef, onCloseRequest, children }) => {
         enablePanDownToClose={true}
         onClose={onCloseRequest}
         backdropComponent={renderBackdrop}
-        keyboardBehavior="interactive"
-        android_keyboardInputMode="adjustResize"
+        keyboardBehavior="extend"
+        // android_keyboardInputMode="adjustResize"
         backgroundStyle={{ backgroundColor: 'transparent' }}
         handleIndicatorStyle={{ display: 'none' }}
         animationConfigs={{
-    duration: 500, // default is ~250ms — increase for slower
+    duration: 400, // default is ~250ms — increase for slower
   }}
-      // enableContentPanningGesture={false}
-      // enableHandlePanningGesture={false}
+  
 
       >
         <BottomSheetView style={styles.sheetContainer}>

@@ -55,11 +55,11 @@ export const PortfolioHeader = ({ isChecked, handleCheckboxToggle }) => {
   )
 }
 
-export const TextInputSearch = ({ onChangeText, value }) => {
+export const TextInputSearch = ({ onChangeText, value , onPress}) => {
   return (
     <View style={styles.containerSearch}>
       <TextInput value={value} onChangeText={onChangeText} style={styles.input} placeholder="Search..." placeholderTextColor={colors.lightTextColor} />
-      <TouchableOpacity style={styles.rightIconWrapper}>
+      <TouchableOpacity onPress={onPress} style={styles.rightIconWrapper}>
         <Image source={images.searchSign} style={styles.iconRight} />
       </TouchableOpacity>
     </View>
@@ -113,7 +113,7 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
     { value: 40, color: '#004B58' },
   ];
   return (
-    <GorhomBottomSheet sheetRef={bottomSheetRef} >
+    <GorhomBottomSheet sheetRef={bottomSheetRef} onCloseRequest={closeBottomSheet} >
       <View style={styles.sheetContainer}>
         <View style={[appStyles.row, styles.headerRow]}>
           <ResponsiveText style={styles.sheetTitle}>ASSETS ALLOCATION</ResponsiveText>

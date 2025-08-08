@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { getAccountDetail, GetCryptoListApi } from '../../../../constants/Api/Index';
 import { useSelector } from 'react-redux';
+import { Keyboard } from 'react-native';
+import { colors } from '../../../../constants';
+import { hp } from '../../../../components/ResponsiveComponent';
 
 export const useHomeScreen = (props) => {
   const { user } = useSelector((state) => state.user);
-  const assetSheetRef = useRef(null);
+  const assetSheetRef = useState(null);
+
+  
 
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
@@ -14,6 +19,49 @@ export const useHomeScreen = (props) => {
   const [totalUsdt, setTotalUsdt] = useState("")
   const [filteredCryptoList, setFilteredCryptoList] = useState([]);
   const [loading , setLoading ] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
+
+    console.log(isVisible,"bottomsheet");
+
+      useEffect(() => {
+    if (isVisible && assetSheetRef.current) {
+      // Ensure the BottomSheet expands when isVisible is true
+      assetSheetRef.current.expand();
+    }
+  }, [isVisible]);
+ 
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+         props.navigation.setOptions({
+      tabBarStyle: { display: 'none' },
+    });
+         
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setIsVisible(false); 
+       
+    props.navigation.setOptions({
+      tabBarStyle: {
+        paddingTop: hp(0.9),
+        backgroundColor: colors.bottomTabColor,
+        borderTopWidth: 0,
+      }, 
+    });
+      }
+    );
+
+    return () => {
+      // Clean up listeners on component unmount
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
 
   useEffect(() => {
@@ -74,30 +122,23 @@ export const useHomeScreen = (props) => {
     setFilteredCryptoList(filtered);
   }, [cryptoList, searchCoin, isChecked]);
 
-  const handleAssetOpen = () => {
-    setTimeout(() => {
-      assetSheetRef.current?.expand();
-    }, 100)
-  }
+  
 
-  const handleAssetClose = () => {
-    assetSheetRef.current?.close();
-  }
+ 
+
    const handleCheckboxToggle = () => {
     setIsChecked((prev) => !prev);
   };
-  const cryptoSheetRef = useRef();
 
   return {
     selectedCrypto, setSelectedCrypto,
-    cryptoSheetRef,
     isChecked, setIsChecked,
     handleCheckboxToggle,
     input, setInput,
     assetSheetRef,
-    handleAssetOpen, handleAssetClose,
     cryptoList: filteredCryptoList,
     setSearchCoin, searchCoin,
-    totalUsdt,loading
+    totalUsdt,loading,isVisible,setIsVisible
   }
 }
+

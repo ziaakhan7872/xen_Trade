@@ -11,6 +11,7 @@ import { appStyles } from "../../../utilities"
 import { useHomeScreen } from "./Hooks"
 import { Portal } from "react-native-portalize"
 import SkeletionLoader from "../../../components/SkeletonLoader"
+import TextInputField from "../../../components/TextInputField"
 
 const WalletHome = (props) => {
   const {
@@ -18,7 +19,7 @@ const WalletHome = (props) => {
     input, setInput,
     assetSheetRef, handleAssetOpen, handleAssetClose,
     cryptoList, searchCoin, setSearchCoin,
-    loading
+    loading, isVisible
     // totalUsdt
 
   } = useHomeScreen(props)
@@ -27,7 +28,7 @@ const WalletHome = (props) => {
       <View style={styles.containerMain}>
 
         <Spacer />
-        <DepositWalletShowDetails openBottomSheet={handleAssetOpen} />
+        <DepositWalletShowDetails openBottomSheet={()=> assetSheetRef?.current?.expand()} />
         <Spacer />
 
         <View style={appStyles.row}>
@@ -51,21 +52,25 @@ const WalletHome = (props) => {
         <PortfolioHeader isChecked={isChecked} handleCheckboxToggle={handleCheckboxToggle} />
 
         <Spacer height={hp(1.5)} />
-        <TextInputSearch value={searchCoin} onChangeText={setSearchCoin} />
+        {/* <TextInputSearch value={searchCoin} onChangeText={setSearchCoin} /> */}
+        <TextInputField/>
         <Spacer height={hp(2)} />
 
       </View>
       {/* <Spacer height={Platform.OS === 'android' ? hp(0) : hp(3.5)} /> */}
 
       {/* <View style={{ flex: 1 }}> */}
-      {loading ? <SkeletionLoader rows={6} /> :(
-      <TokenList cryptoData={cryptoList} props={props} />
+      {loading ? <SkeletionLoader rows={6} /> : (
+        <TokenList cryptoData={cryptoList} props={props} />
       )}
       {/* </View> */}
-
       <Portal>
-        <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
+        {/* {isVisible && ( */}
+
+          <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={() => assetSheetRef?.current?.close()} />
+                {/* )} */}
       </Portal>
+
     </AuthMainContainer>
   );
 };
