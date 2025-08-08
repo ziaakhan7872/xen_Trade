@@ -480,7 +480,7 @@ export const AssetsComponent = (data = coinData) => {
 }
 export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, setTradingTypePress }) => {
     return (
-        <BottomSheet ref={ref} >
+        <BottomSheet height={hp(30)} ref={ref} >
             <Spacer />
             <View style={styles.BottomSheetView}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: wp(5) }}>
@@ -494,10 +494,10 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
                     <TouchableOpacity onPress={() => setTradingTypePress("limit")} style={styles.bottomSheetButtonView}>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Image source={images.marketOrder} style={styles.Images3} />
-                            <HorizontalSpacer width={wp(3)} />
+                            <HorizontalSpacer width={wp(2)} />
                             <View>
                                 <ResponsiveText style={styles.text8}>Limit order</ResponsiveText>
-                                <ResponsiveText style={styles.text2}>Buy or Sell at a specified price or better</ResponsiveText>
+                                <ResponsiveText style={[styles.text2,{width:wp(60)}]} numberOfLines={2}>Buy or Sell at a specified price or better</ResponsiveText>
                             </View>
                         </View>
 
@@ -512,7 +512,7 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
                             <HorizontalSpacer width={wp(3)} />
                             <View>
                                 <ResponsiveText style={styles.text8}>Market order</ResponsiveText>
-                                <ResponsiveText style={styles.text2}>Buy or sell instantly at the best market price.</ResponsiveText>
+                                <ResponsiveText style={[styles.text2,{width:wp(60)}]} numberOfLines={2}>Buy or sell instantly at the best market price.</ResponsiveText>
                             </View>
                         </View>
                         {tradingTypePress === "market" && (
@@ -756,6 +756,7 @@ const styles = StyleSheet.create({
         borderRadius: wp(3),
         backgroundColor: colors.buttonColor,
         paddingVertical: wp(3),
+        width:wp(90),
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
