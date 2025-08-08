@@ -53,6 +53,7 @@ const MarketScreen = (props) => {
           onChangeText={setSearchText}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          width={wp(90)}
 
         />
         <Spacer />

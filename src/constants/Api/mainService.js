@@ -51,7 +51,6 @@ export const apiRequest = async ({
 
             dispatch(setUser({
                 token: newToken.accessToken,
-                refreshToken: newToken.refreshToken,
             }));
 
             config.headers["Authorization"] = `Bearer ${newToken.accessToken}`;
@@ -75,7 +74,7 @@ const refreshToken = async (dispatch) => {
         const response = await apiRequest({
             method: "POST",
             url: `${AUTH_BASE_URL}/sessions/refresh-token`,
-            data: { AccessTokenRequestDto: refreshToken },
+            data: { refreshToken: refreshToken },
             isAuth: false,
             dispatch,
         });

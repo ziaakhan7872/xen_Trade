@@ -9,8 +9,6 @@ import { SimpleButton } from '../../../../components/SimpleButton'
 import RowButton from '../../../../components/RowButton'
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { ResponsiveText } from '../../../../components/ResponsiveText';
-// import { useDispatch, useSelector } from 'react-redux'
-// import { setUser, logoutUser } from '../../../../redux/slices/userSlice'
 
 const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, passwordVisible, setPasswordVisible, errorMessage, goToForgotPassword }) => {
     return (
@@ -67,6 +65,12 @@ const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, pass
 export default LoginForm
 
 const styles = StyleSheet.create({
+    scrollViewContainer: {
+        flexGrow: 1,
+        // justifyContent: 'center', // Vertically center the content
+        // alignItems: 'center', // Horizontally center the content
+        // paddingVertical: hp(3), // Add some vertical spacing to the container
+    },
     mainBox: {
         width: wp(90),
         paddingHorizontal: wp(4),
@@ -94,7 +98,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: colors.mainColor,
         fontFamily: fontFamily.appTextMedium,
-
     },
     signInWithStyle: {
         fontSize: 16,
@@ -107,4 +110,4 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontFamily: fontFamily.appTextRegular,
     },
-})
+});
