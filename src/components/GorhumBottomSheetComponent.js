@@ -1,12 +1,72 @@
-import React, { useCallback, useMemo } from 'react';
+// import React, { useCallback, useMemo } from 'react';
+// import { Dimensions, StyleSheet, View } from 'react-native';
+// import { wp } from './ResponsiveComponent';
+// import { colors } from '../constants';
+// import BottomSheet, { BottomSheetBackdrop, BottomSheetView } from '@gorhom/bottom-sheet';
+
+
+// export const GorhomBottomSheet = ({ sheetRef, onCloseRequest, children }) => {
+
+//   const renderBackdrop = useCallback((props) => (
+//     <BottomSheetBackdrop
+//       {...props}
+//       opacity={0.3}
+//       disappearsOnIndex={-1}
+//       appearsOnIndex={0}
+//       pressBehavior="close"
+//     />
+//   ), []);
+//   try {
+//     return (
+
+//       <BottomSheet
+//         ref={sheetRef}
+//         index={-1}
+//         enablePanDownToClose={true}
+//         onClose={onCloseRequest}
+//         backdropComponent={renderBackdrop}
+//         keyboardBehavior="interactive"
+//         android_keyboardInputMode="adjustResize"
+//         backgroundStyle={{ backgroundColor: 'transparent' }}
+//         handleIndicatorStyle={{ display: 'none' }}
+//         animationConfigs={{
+//     duration: 500, // default is ~250ms — increase for slower
+//   }}
+//       // enableContentPanningGesture={false}
+//       // enableHandlePanningGesture={false}
+
+//       >
+//         <BottomSheetView style={styles.sheetContainer}>
+//           <View style={styles.contentWrapper}>
+//             {children}
+//           </View>
+//         </BottomSheetView>
+//       </BottomSheet>
+//     );
+//   } catch (error) {
+//     console.error("Error rendering GorhomBottomSheet:", error);
+//   }
+// };
+
+// const styles = StyleSheet.create({
+//   sheetContainer: {
+//     backgroundColor: colors.bottomSheetBackgroundColor,
+//     borderTopLeftRadius: wp(4),
+//     borderTopRightRadius: wp(4)
+//   },
+
+//   contentWrapper: {
+//     alignItems: 'center',
+//     paddingBottom: wp(5),
+//   },
+// });
+import React, { useCallback, useMemo, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { wp } from './ResponsiveComponent';
 import { colors } from '../constants';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetView } from '@gorhom/bottom-sheet';
-
-
 export const GorhomBottomSheet = ({ sheetRef, onCloseRequest, children }) => {
-
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
   const renderBackdrop = useCallback((props) => (
     <BottomSheetBackdrop
       {...props}
@@ -16,44 +76,43 @@ export const GorhomBottomSheet = ({ sheetRef, onCloseRequest, children }) => {
       pressBehavior="close"
     />
   ), []);
-  try {
-    return (
-
-      <BottomSheet
-        ref={sheetRef}
-        index={-1}
-        enablePanDownToClose={true}
-        onClose={onCloseRequest}
-        backdropComponent={renderBackdrop}
-        keyboardBehavior="extend"
-        // android_keyboardInputMode="adjustResize"
-        backgroundStyle={{ backgroundColor: 'transparent' }}
-        handleIndicatorStyle={{ display: 'none' }}
-        animationConfigs={{
-    duration: 400, // default is ~250ms — increase for slower
-  }}
-  
-
-      >
-        <BottomSheetView style={styles.sheetContainer}>
-          <View style={styles.contentWrapper}>
-            {children}
-          </View>
-        </BottomSheetView>
-      </BottomSheet>
-    );
-  } catch (error) {
-    console.error("Error rendering GorhomBottomSheet:", error);
-  }
+  const handleSheetChange = (index) => {
+    if (index === -1) {
+      setIsSheetOpen(false);
+    } else {
+      setIsSheetOpen(true);
+    }
+  };
+  return (
+    <BottomSheet
+      ref={sheetRef}
+      index={-1}
+      enablePanDownToClose={true}
+      onClose={onCloseRequest}
+      backdropComponent={renderBackdrop}
+      onChange={handleSheetChange}
+      keyboardBehavior="interactive"
+      android_keyboardInputMode="adjustResize"
+      backgroundStyle={{ backgroundColor: 'transparent' }}
+      handleIndicatorStyle={{ display: 'none' }}
+      animationConfigs={{
+        duration: 500, // default is ~250ms — increase for slower
+      }}
+    >
+      <BottomSheetView style={styles.sheetContainer}>
+        <View style={styles.contentWrapper}>
+          {children}
+        </View>
+      </BottomSheetView>
+    </BottomSheet>
+  );
 };
-
 const styles = StyleSheet.create({
   sheetContainer: {
     backgroundColor: colors.bottomSheetBackgroundColor,
     borderTopLeftRadius: wp(4),
     borderTopRightRadius: wp(4)
   },
-
   contentWrapper: {
     alignItems: 'center',
     paddingBottom: wp(5),

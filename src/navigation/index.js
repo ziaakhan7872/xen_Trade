@@ -21,20 +21,18 @@ const Navigation = () => {
       <Stack.Navigator
         initialRouteName={initialRoute}
         screenOptions={{ headerShown: false }}>
-          {Platform?.OS === "ios" &&
-              <Stack.Screen name={Routes.splashScreen} component={SplashScreen} />
-            }
+        {Platform?.OS === "ios" &&
+          <Stack.Screen name={Routes.splashScreen} component={SplashScreen} />
+        }
         {(refreshToken || token) ? (
           <>
-            
-                        {/* <Stack.Screen name={Routes.AuthNavigator} component={AuthNavigation} /> */}
-
+            {/* <Stack.Screen name={Routes.AuthNavigator} component={AuthNavigation} /> */}
             <Stack.Screen name={Routes.BottomNavigator} component={BottomNavigation} />
             <Stack.Screen name={Routes.AppNavigator} component={AppNavigation} />
           </>
         ) : (
           <>
-          
+
             <Stack.Screen name={Routes.AuthNavigator} component={AuthNavigation} />
             <Stack.Screen name={Routes.BottomNavigator} component={BottomNavigation} />
             <Stack.Screen name={Routes.AppNavigator} component={AppNavigation} />

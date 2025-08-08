@@ -1,25 +1,21 @@
-import React from 'react';
-import { Image, KeyboardAvoidingView, ScrollView, StyleSheet, View, Platform } from 'react-native';
-import { hp, wp } from '../../../../components/ResponsiveComponent';
-import images from '../../../../images';
-import Spacer from '../../../../components/Spacer';
-import { colors, fontFamily } from '../../../../constants';
-import InputText from '../../../../components/InputText';
-import { SimpleButton } from '../../../../components/SimpleButton';
-import RowButton from '../../../../components/RowButton';
+import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import { hp, wp } from '../../../../components/ResponsiveComponent'
+import images from '../../../../images'
+import Spacer from '../../../../components/Spacer'
+import { colors, fontFamily, } from '../../../../constants'
+import InputText from '../../../../components/InputText'
+import { SimpleButton } from '../../../../components/SimpleButton'
+import RowButton from '../../../../components/RowButton'
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { ResponsiveText } from '../../../../components/ResponsiveText';
 
 const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, passwordVisible, setPasswordVisible, errorMessage, goToForgotPassword }) => {
     return (
         <KeyboardAvoidingView
-            // style={{ flex: 1 }}
-            // behavior={Platform.OS === 'ios' ? 'padding' : 'height'}  // Adjust behavior for iOS and Android
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
-            {/* <ScrollView
-                contentContainerStyle={styles.scrollViewContainer}
-                keyboardShouldPersistTaps="handled"  // Ensures taps outside of inputs dismiss the keyboard
-            > */}
+            <ScrollView contentContainerStyle={styles.scrollViewContainer}>
                 <View style={styles.mainBox}>
                     <Image source={images.splashLogoImage} resizeMode='contain' style={styles.logoImage} />
                     <Spacer />
@@ -39,6 +35,7 @@ const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, pass
                             </>
                         )}
                         <SimpleButton disabled={(!email || !password)} onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={(!email || !password) ? colors.authButtonColor : colors.mainColor} buttonWidth={wp(80)} />
+                        {/* <SimpleButton onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={(!email || !password) ? colors.authButtonColor : colors.mainColor} buttonWidth={wp(80)} /> */}
                         <Spacer />
                         <ResponsiveText style={styles.signInWithStyle}>Or sign in with</ResponsiveText>
                         <Spacer />
@@ -55,15 +52,17 @@ const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, pass
                         <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                             <ResponsiveText style={[styles.signInWithStyle, { fontSize: 14 }]}>Don't have an account?</ResponsiveText>
                             <ResponsiveText onPress={signUp} style={[styles.forgetPasswordStyling, { fontSize: 14, marginLeft: wp(1) }]}>Sign Up</ResponsiveText>
+
                         </View>
                     </View>
-                </View>
-            {/* </ScrollView> */}
-        </KeyboardAvoidingView>
-    );
-};
 
-export default LoginForm;
+                </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
+    )
+}
+
+export default LoginForm
 
 const styles = StyleSheet.create({
     scrollViewContainer: {
@@ -78,7 +77,12 @@ const styles = StyleSheet.create({
         paddingVertical: wp(4),
         backgroundColor: colors.boxColor,
         borderRadius: wp(3),
-        // alignItems: 'center', // Ensure the inner content is centered
+    },
+    scrollViewContainer: {
+        flexGrow: 1,
+        paddingTop: hp(10), // visually center when keyboard is closed
+        paddingBottom: hp(5),
+        alignItems: 'center',
     },
     logoImage: {
         width: wp(30),

@@ -14,6 +14,7 @@ import FontAwesome5 from 'react-native-vector-icons/Ionicons';
 import Line from '../../../../components/Liner';
 import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent';
 import { PieChart } from 'react-native-gifted-charts';
+import BottomSheet from '../../../../components/BottomSheet';
 
 
 export const DepositWalletShowDetails = ({ openBottomSheet }) => {
@@ -77,9 +78,9 @@ export const TokenList = ({ props, cryptoData }) => {
       removeClippedSubviews={false}
       renderItem={({ item, index }) => {
         return (
-          <TouchableOpacity activeOpacity={0.6} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.AssetAllocation ,params:{data:item}})} style={[appStyles.rowBasic, styles.itemContainer]}>
-            <Image source={{uri:item?.icon}} style={styles.icon} />
-            <HorizontalSpacer/>
+          <TouchableOpacity activeOpacity={0.6} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.AssetAllocation, params: { data: item } })} style={[appStyles.rowBasic, styles.itemContainer]}>
+            <Image source={{ uri: item?.icon }} style={styles.icon} />
+            <HorizontalSpacer />
             <View style={styles.coinDetails}>
               <ResponsiveText style={styles.upperText}>{item.symbol}</ResponsiveText>
               <ResponsiveText style={styles.lowerText}>{item.name}</ResponsiveText>
@@ -96,7 +97,7 @@ export const TokenList = ({ props, cryptoData }) => {
                   ? Number(item.account.amount).toFixed(4)
                   : item.account.amount
                 : "0"}
-                </ResponsiveText>
+              </ResponsiveText>
             </View>
           </TouchableOpacity>
         )
@@ -113,7 +114,7 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
     { value: 40, color: '#004B58' },
   ];
   return (
-    <GorhomBottomSheet sheetRef={bottomSheetRef} onCloseRequest={closeBottomSheet} >
+    <BottomSheet ref={bottomSheetRef} height={hp(60)}>
       <View style={styles.sheetContainer}>
         <View style={[appStyles.row, styles.headerRow]}>
           <ResponsiveText style={styles.sheetTitle}>ASSETS ALLOCATION</ResponsiveText>
@@ -152,7 +153,7 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
           <ResponsiveText style={styles.okText}>Ok</ResponsiveText>
         </TouchableOpacity>
       </View>
-    </GorhomBottomSheet>
+    </BottomSheet>
   )
 }
 
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
   icon: {
     width: wp(9),
     height: wp(9),
-    borderRadius:100
+    borderRadius: 100
   },
   coinDetails: {
     flex: 1,

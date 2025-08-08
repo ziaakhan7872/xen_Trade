@@ -21,8 +21,8 @@ const WalletHome = (props) => {
     cryptoList, searchCoin, setSearchCoin,
     loading, isVisible
     // totalUsdt
-
   } = useHomeScreen(props)
+
   return (
     <AuthMainContainer>
       <View style={styles.containerMain}>

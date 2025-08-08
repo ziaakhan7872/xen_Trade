@@ -18,6 +18,7 @@ import { hp, wp } from '../../../../../components/ResponsiveComponent'
 import Line from '../../../../../components/Liner'
 import { RenderFavouriteCoinList } from '../../Component/Index'
 import BigNumber from 'bignumber.js'
+import BottomSheet from '../../../../../components/BottomSheet'
 
 export const ExchangeHeader = ({ onpress, onPressTradeGraph, marketData }) => {
     return (
@@ -162,7 +163,7 @@ export const SellForm = ({
     marketData,
     currentCoinPrice, setCurrentCoinPrice,
     dicreaseQuantity, handleBuyQuantityChange, quantity, addQuantity,
-    Price,handleBuyPriceChange
+    Price, handleBuyPriceChange
 }) => {
     const marks = [0, 25, 50, 75, 100];
 
@@ -200,7 +201,7 @@ export const SellForm = ({
 
                 <TextInput
                     style={{ textAlign: 'center', minWidth: wp(10), maxWidth: wp(30), color: colors.white }}
-                    value={quantity ? quantity.toString():""}
+                    value={quantity ? quantity.toString() : ""}
                     onChangeText={handleBuyQuantityChange}
                     placeholder={`Amount ${marketData?.base}`}
                     keyboardType="numeric"
@@ -479,7 +480,7 @@ export const AssetsComponent = (data = coinData) => {
 }
 export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, setTradingTypePress }) => {
     return (
-        <GorhomBottomSheet sheetRef={ref}>
+        <BottomSheet ref={ref}>
             <Spacer />
             <View style={styles.BottomSheetView}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: wp(5) }}>
@@ -522,15 +523,15 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
                 </View>
             </View>
             <Spacer />
-        </GorhomBottomSheet>
+        </BottomSheet>
     )
 }
 
 export const FavoutiteBottomSheetComponnet = ({ ref }) => {
     return (
-        <GorhomBottomSheet sheetRef={ref}>
+        <BottomSheet ref={ref}>
             <RenderFavouriteCoinList />
-        </GorhomBottomSheet>
+        </BottomSheet>
     )
 
 }

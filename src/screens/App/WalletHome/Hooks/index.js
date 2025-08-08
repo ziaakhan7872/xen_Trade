@@ -101,7 +101,7 @@ export const useHomeScreen = (props) => {
     } catch (error) {
       console.log("Error fetching crypto data:", error?.response);
       setLoading(false)
-    } finally{
+    } finally {
       setLoading(false)
     }
   }
@@ -122,13 +122,24 @@ export const useHomeScreen = (props) => {
     setFilteredCryptoList(filtered);
   }, [cryptoList, searchCoin, isChecked]);
 
-  
+  // const handleAssetOpen = () => { // gorhom sheet
+  //   setTimeout(() => {
+  //     assetSheetRef.current?.expand();
+  //   }, 100)
+  // }
+  const handleAssetOpen = () => {
+    setTimeout(() => {
+      assetSheetRef.current?.open()
+    }, 100)
+  }
 
- 
-
-   const handleCheckboxToggle = () => {
+  const handleAssetClose = () => {
+    assetSheetRef.current?.close();
+  }
+  const handleCheckboxToggle = () => {
     setIsChecked((prev) => !prev);
   };
+  // const cryptoSheetRef = useRef();
 
   return {
     selectedCrypto, setSelectedCrypto,
@@ -138,7 +149,7 @@ export const useHomeScreen = (props) => {
     assetSheetRef,
     cryptoList: filteredCryptoList,
     setSearchCoin, searchCoin,
-    totalUsdt,loading,isVisible,setIsVisible
+    totalUsdt, loading,handleAssetClose,handleAssetOpen
   }
 }
 
