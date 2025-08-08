@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View } from 'react-native'
+import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native'
 import React from 'react'
 import Spacer from '../../../../components/Spacer'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
@@ -14,30 +14,36 @@ export const ResetPasswordContainer = ({
     password, setPassword, confirmPassword, setConfirmPassword, ResetPassword
 }) => {
     return (
-        <View style={styles.mainBox}>
-            <Spacer height={hp(0.5)} />
-            <Image source={images.splashLogoImage} style={styles.logoImage} />
-            <Spacer />
-            <ResponsiveText style={styles.titleText}>CHANGE PASSWORD</ResponsiveText>
-            <Spacer height={hp(2.5)} />
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
+            <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+                <View style={styles.mainBox}>
+                    <Spacer height={hp(0.5)} />
+                    <Image source={images.splashLogoImage} style={styles.logoImage} />
+                    <Spacer />
+                    <ResponsiveText style={styles.titleText}>CHANGE PASSWORD</ResponsiveText>
+                    <Spacer height={hp(2.5)} />
 
-            <InputText passwordVisible={!passwordVisible} secureTextEntry={!passwordVisible} handleIconPress={() => setPasswordVisible(!passwordVisible)} paddingLeft={wp(3)} value={password} onChangeText={setPassword} icon={true} label={"New Password"} placeholder={"Enter your new password"} placeholderTextColor={colors.placeHolderTextColor} width={wp(84.5)} />
-            <Spacer height={hp(1)} />
-            <InputText passwordVisible={!confirmPasswordVisible} secureTextEntry={!confirmPasswordVisible} handleIconPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)} paddingLeft={wp(3)} value={confirmPassword} onChangeText={setConfirmPassword} icon={true} label={"Confirm new password"} placeholder={"Confirm your new password"} placeholderTextColor={colors.placeHolderTextColor} width={wp(84.5)} />
+                    <InputText passwordVisible={!passwordVisible} secureTextEntry={!passwordVisible} handleIconPress={() => setPasswordVisible(!passwordVisible)} paddingLeft={wp(3)} value={password} onChangeText={setPassword} icon={true} label={"New Password"} placeholder={"Enter your new password"} placeholderTextColor={colors.placeHolderTextColor} width={wp(84.5)} />
+                    <Spacer height={hp(1)} />
+                    <InputText passwordVisible={!confirmPasswordVisible} secureTextEntry={!confirmPasswordVisible} handleIconPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)} paddingLeft={wp(3)} value={confirmPassword} onChangeText={setConfirmPassword} icon={true} label={"Confirm new password"} placeholder={"Confirm your new password"} placeholderTextColor={colors.placeHolderTextColor} width={wp(84.5)} />
 
-            <Spacer height={hp(0.6)} />
-            {/* {errorMessage
+                    <Spacer height={hp(0.6)} />
+                    {/* {errorMessage
                 && (
                     <>
                         <ResponsiveText style={{ color: colors.red, textAlign: 'center' }}>{errorMessage}</ResponsiveText>
                         <Spacer />
                     </>
                 )} */}
-            <Spacer />
-            <SimpleButton onPress={ResetPassword} text={"Continue"} textColor={colors.black} backgroundColor={colors.mainColor} buttonWidth={wp(84.2)} height={hp(6.5)} />
-            <Spacer height={hp(0.8)} />
+                    <Spacer />
+                    <SimpleButton onPress={ResetPassword} text={"Continue"} textColor={colors.black} backgroundColor={colors.mainColor} buttonWidth={wp(84.2)} height={hp(6.5)} />
+                    <Spacer height={hp(0.8)} />
 
-        </View>
+                </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -49,6 +55,12 @@ const styles = StyleSheet.create({
         paddingVertical: wp(4),
         backgroundColor: colors.boxColor,
         borderRadius: wp(3)
+    },
+    scrollViewContainer: {
+        flexGrow: 1,
+        // paddingTop: hp(5), // visually center when keyboard is closed
+        paddingBottom: hp(5),
+        alignItems: 'center',
     },
     logoImage: {
         width: wp(30),
