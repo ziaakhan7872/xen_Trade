@@ -20,8 +20,8 @@ const WalletHome = (props) => {
     cryptoList, searchCoin, setSearchCoin,
     loading
     // totalUsdt
-
   } = useHomeScreen(props)
+
   return (
     <AuthMainContainer>
       <View style={styles.containerMain}>
@@ -58,8 +58,8 @@ const WalletHome = (props) => {
       {/* <Spacer height={Platform.OS === 'android' ? hp(0) : hp(3.5)} /> */}
 
       {/* <View style={{ flex: 1 }}> */}
-      {loading ? <SkeletionLoader rows={6} /> :(
-      <TokenList cryptoData={cryptoList} props={props} />
+      {loading ? <SkeletionLoader rows={6} /> : (
+        <TokenList cryptoData={cryptoList} props={props} />
       )}
       {/* </View> */}
 

@@ -13,7 +13,7 @@ export const useHomeScreen = (props) => {
   const [searchCoin, setSearchCoin] = useState("")
   const [totalUsdt, setTotalUsdt] = useState("")
   const [filteredCryptoList, setFilteredCryptoList] = useState([]);
-  const [loading , setLoading ] = useState(false)
+  const [loading, setLoading] = useState(false)
 
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export const useHomeScreen = (props) => {
     } catch (error) {
       console.log("Error fetching crypto data:", error?.response);
       setLoading(false)
-    } finally{
+    } finally {
       setLoading(false)
     }
   }
@@ -74,23 +74,27 @@ export const useHomeScreen = (props) => {
     setFilteredCryptoList(filtered);
   }, [cryptoList, searchCoin, isChecked]);
 
+  // const handleAssetOpen = () => { // gorhom sheet
+  //   setTimeout(() => {
+  //     assetSheetRef.current?.expand();
+  //   }, 100)
+  // }
   const handleAssetOpen = () => {
     setTimeout(() => {
-      assetSheetRef.current?.expand();
+      assetSheetRef.current?.open()
     }, 100)
   }
 
   const handleAssetClose = () => {
     assetSheetRef.current?.close();
   }
-   const handleCheckboxToggle = () => {
+  const handleCheckboxToggle = () => {
     setIsChecked((prev) => !prev);
   };
-  const cryptoSheetRef = useRef();
+  // const cryptoSheetRef = useRef();
 
   return {
     selectedCrypto, setSelectedCrypto,
-    cryptoSheetRef,
     isChecked, setIsChecked,
     handleCheckboxToggle,
     input, setInput,
@@ -98,6 +102,6 @@ export const useHomeScreen = (props) => {
     handleAssetOpen, handleAssetClose,
     cryptoList: filteredCryptoList,
     setSearchCoin, searchCoin,
-    totalUsdt,loading
+    totalUsdt, loading
   }
 }

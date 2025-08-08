@@ -37,7 +37,7 @@ const Exchangescreen = (props) => {
   return (
     <ExchangeMainContainer>
       <View style={style.container}>
-        <ExchangeHeader marketData={selectedData} onPressTradeGraph={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen })} onpress={() => favouriteBottomSheetRef?.current?.expand()} />
+        <ExchangeHeader marketData={selectedData} onPressTradeGraph={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen })} onpress={() => favouriteBottomSheetRef?.current?.open()} />
         <Spacer />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={style.formandOrderBookView}>
@@ -60,7 +60,7 @@ const Exchangescreen = (props) => {
                   QuoteBalance={availableQuoteBalance}
                   marketData={selectedData}
                   tradingType={tradingType}
-                  onPressTradingType={() => tradngBottomSheetRef?.current?.expand()}
+                  onPressTradingType={() => tradngBottomSheetRef?.current?.open()}
                   value={buyerSlider}
                   setValue={setBuyerSlider}
                 />

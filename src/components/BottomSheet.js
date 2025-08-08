@@ -7,10 +7,13 @@ import { colors } from '../constants';
 const BottomSheet = forwardRef(({ children, height }, ref) => {
   return (
     <RBSheet
-      ref={ref} 
+      ref={ref}
       closeOnDragDown={true}
       closeOnPressMask={true}
       height={height}
+      openDuration={600}
+      closeDuration={400}
+      animationType="fade"
       customStyles={{
         wrapper: {
           backgroundColor: 'rgba(52, 52, 52, 0.3)',
@@ -21,11 +24,11 @@ const BottomSheet = forwardRef(({ children, height }, ref) => {
         },
         container: {
           backgroundColor: colors.bottomSheetBackgroundColor,
-          alignItems:"center"        
+          alignItems: "center"
         },
       }}
     >
-      {children} 
+      {children}
     </RBSheet>
   );
 });
@@ -38,7 +41,7 @@ const styles = StyleSheet.create({
   },
   sheetText: {
     fontSize: 18,
-    padding: 20,
+    // padding: 20,
     textAlign: 'center',
   },
 });
