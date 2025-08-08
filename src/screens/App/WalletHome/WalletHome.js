@@ -28,7 +28,7 @@ const WalletHome = (props) => {
       <View style={styles.containerMain}>
 
         <Spacer />
-        <DepositWalletShowDetails openBottomSheet={()=> assetSheetRef?.current?.expand()} />
+        <DepositWalletShowDetails openBottomSheet={handleAssetOpen} />
         <Spacer />
 
         <View style={appStyles.row}>
@@ -67,7 +67,7 @@ const WalletHome = (props) => {
       <Portal>
         {/* {isVisible && ( */}
 
-          <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={() => assetSheetRef?.current?.close()} />
+          <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
                 {/* )} */}
       </Portal>
 
