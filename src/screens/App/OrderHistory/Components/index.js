@@ -13,6 +13,7 @@ import { OrderHistoryData } from '../../../../utilities/dummyData'
 import Entypo from "react-native-vector-icons/FontAwesome6"
 import Feather from 'react-native-vector-icons/Feather';
 import moment from 'moment'
+import BottomSheet from '../../../../components/BottomSheet'
 
 
 export const FilterTextInput = ({ openBottomSheet, onChangeText, value }) => {
@@ -51,7 +52,7 @@ export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, 
     }
 
     return (
-        <GorhomBottomSheet sheetRef={bottomSheetRef}>
+        <BottomSheet ref={bottomSheetRef} height={hp(95)}>
             <View style={[appStyles.row, { ...styles.containerSpacer }]}>
                 <ResponsiveText style={styles.bottomSheetTitle}>FILTER</ResponsiveText>
                 <TouchableOpacity onPress={closeBottomSheet}>
@@ -99,7 +100,7 @@ export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, 
                 <SimpleButton onPress={() => resetFilters()} text="Reset" textColor={colors.white} styleView={styles.resetBtn} />
                 <SimpleButton text="Show Results" textColor={colors.black} styleView={styles.showBtn} onPress={closeBottomSheet} />
             </View>
-        </GorhomBottomSheet>
+        </BottomSheet>
 
     )
 }
