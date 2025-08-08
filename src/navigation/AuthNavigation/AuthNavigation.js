@@ -6,18 +6,18 @@ import { Platform } from 'react-native';
 const { Navigator, Screen } = createNativeStackNavigator();
 
 const AuthNavigation = (props) => {
-    useEffect(() => {
-        if (Platform.OS === 'ios') {
-            props?.navigation?.navigate?.(Routes.splashScreen)
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (Platform.OS === 'ios') {
+    //         props?.navigation?.navigate?.(Routes.splashScreen)
+    //     }
+    // }, [])
 
     return (
         <Navigator screenOptions={{ headerShown: false }}>
-            {Platform.OS ==="ios" &&
+            {/* {Platform.OS ==="ios" &&
                         <Screen name={Routes.splashScreen} component={Auth.splashScreen} />
 
-            }
+            } */}
             <Screen name={Routes.IntroductMainScreem} component={Auth.IntroductionMain} />
             <Screen name={Routes.LoginScreen} component={Auth.LoginScreen} />
             <Screen name={Routes.SignupScreen} component={Auth.SignupScreen} />

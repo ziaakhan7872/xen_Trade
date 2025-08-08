@@ -51,12 +51,12 @@ export const BuySellRowButton = ({ buySellButton, setBuySellButton }) => {
     )
 }
 
-export const BuyForm = ({handleBuySliderChange, handleBuyPriceChange, handleBuyQuantityChange, currentCoinPrice, setCurrentCoinPrice, addQuantity, dicreaseQuantity, quantity, setQuantity, Price, setPrice, QuoteBalance, setValue, value, onPressTradingType, tradingType, marketData }) => {
+export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuyQuantityChange, currentCoinPrice, setCurrentCoinPrice, addQuantity, dicreaseQuantity, quantity, setQuantity, Price, setPrice, QuoteBalance, setValue, value, onPressTradingType, tradingType, marketData }) => {
     const marks = [0, 25, 50, 75, 100];
 
     return (
         <>
-            <TouchableOpacity onPress={onPressTradingType} style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3) }]}>
+            <TouchableOpacity onPress={onPressTradingType} style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3), paddingVertical: wp(2) }]}>
                 <ResponsiveText style={styles.text1}>{tradingType === "limit" ? "Limit" : "Market"}</ResponsiveText>
                 <Entypo name="chevron-down" size={15} color={colors.white} />
             </TouchableOpacity>
@@ -156,26 +156,60 @@ export const BuyForm = ({handleBuySliderChange, handleBuyPriceChange, handleBuyQ
 
     )
 }
-export const SellForm = ({ setValue, value, onPressTradingtype, tradingType, marketData }) => {
+export const SellForm = ({
+    setValue, value,
+    onPressTradingtype, tradingType,
+    marketData,
+    currentCoinPrice, setCurrentCoinPrice,
+    dicreaseQuantity, handleBuyQuantityChange, quantity, addQuantity,
+    Price,handleBuyPriceChange
+}) => {
     const marks = [0, 25, 50, 75, 100];
 
     return (
         <>
-            <TouchableOpacity onPress={onPressTradingtype} style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3) }]}>
+            <TouchableOpacity onPress={onPressTradingtype} style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3), paddingVertical: wp(2) }]}>
                 <ResponsiveText style={styles.text1}>{tradingType === "limit" ? "Limit" : "Market"}</ResponsiveText>
                 <Entypo name="chevron-down" size={15} color={colors.white} />
             </TouchableOpacity>
             <Spacer height={hp(1)} />
             <View style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3) }]}>
-                <ResponsiveText style={styles.minuePlusText}>-</ResponsiveText>
-                <ResponsiveText style={styles.text1}>22976.27</ResponsiveText>
-                <ResponsiveText style={styles.minuePlusText}>+</ResponsiveText>
+
+                <TouchableOpacity onPress={() => setCurrentCoinPrice(currentCoinPrice - 1)}>
+                    <ResponsiveText style={styles.minuePlusText}>-</ResponsiveText>
+                </TouchableOpacity>
+
+                <TextInput
+                    style={{ textAlign: 'center', minWidth: wp(10), maxWidth: wp(30), color: colors.white }}
+                    value={currentCoinPrice ? currentCoinPrice.toString() : ""}
+                    onChangeText={setCurrentCoinPrice}
+                    keyboardType="numeric"
+                    placeholderTextColor={colors.placeHolderTextColor}
+                />
+
+                <TouchableOpacity onPress={() => setCurrentCoinPrice(currentCoinPrice + 1)}>
+                    <ResponsiveText style={styles.minuePlusText}>+</ResponsiveText>
+                </TouchableOpacity>
             </View>
             <Spacer height={hp(1)} />
             <View style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3) }]}>
-                <ResponsiveText style={styles.minuePlusText}>-</ResponsiveText>
-                <ResponsiveText style={styles.text1}>12</ResponsiveText>
-                <ResponsiveText style={styles.minuePlusText}>+</ResponsiveText>
+
+                <TouchableOpacity onPress={dicreaseQuantity}>
+                    <ResponsiveText style={styles.minuePlusText}>-</ResponsiveText>
+                </TouchableOpacity>
+
+                <TextInput
+                    style={{ textAlign: 'center', minWidth: wp(10), maxWidth: wp(30), color: colors.white }}
+                    value={quantity ? quantity.toString():""}
+                    onChangeText={handleBuyQuantityChange}
+                    placeholder={`Amount ${marketData?.base}`}
+                    keyboardType="numeric"
+                    placeholderTextColor={colors.placeHolderTextColor}
+                />
+
+                <TouchableOpacity onPress={addQuantity}>
+                    <ResponsiveText style={styles.minuePlusText}>+</ResponsiveText>
+                </TouchableOpacity>
             </View>
             <Spacer height={hp(1)} />
             <View style={{ width: wp(45), alignSelf: "flex-start" }}>
@@ -206,14 +240,8 @@ export const SellForm = ({ setValue, value, onPressTradingtype, tradingType, mar
                 </View>
             </View>
             <Spacer height={hp(1)} />
-            <TextInput
-                // value={Price}
-                // onChangeText={setPrice}
-                placeholder={`Amount ${marketData?.quote}`}
-                placeholderTextColor={colors.placeHolderTextColor}
-                style={styles.inputTextStyling}
-                keyboardType="numeric"
-            />
+            <TextInput value={Price ? Price.toString() : ""} onChangeText={handleBuyPriceChange} placeholder={`Amount ${marketData?.quote}`} placeholderTextColor={colors.placeHolderTextColor} style={styles.inputTextStyling} keyboardType='numeric' />
+
             <Spacer height={hp(1)} />
             <View style={{ width: wp(43), flexDirection: "row", justifyContent: "space-between" }}>
                 <View>
@@ -538,13 +566,13 @@ const styles = StyleSheet.create({
     },
     buySellRowView: {
         width: wp(43),
-        height: hp(4.5),
+        // height: hp(4.5),
         borderRadius: wp(10),
         backgroundColor: colors.cardsBgColor,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        color: colors.white
+        color: colors.white,
     },
     inputTextStyling: {
         width: wp(43),

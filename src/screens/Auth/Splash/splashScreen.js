@@ -3,15 +3,25 @@ import { Image, ImageBackground, StyleSheet, View } from 'react-native';
 import { Routes } from '../../../constants';
 import { hp, wp } from '../../../components/ResponsiveComponent';
 import images from '../../../images';
+import { useSelector } from 'react-redux';
 
-const SplashScreen = ({navigation}) => {
+const SplashScreen = (props) => {
+  const { token, refreshToken } = useSelector((state) => state.user);
+
   useEffect(() => {
     const hideSplashScreen = async () => {
-      navigation.replace(Routes.IntroductMainScreem); 
+      if (token || refreshToken) {
+        props?.navigation.replace(Routes.BottomNavigator);
+
+      }
+      else {
+        props?.navigation.replace(Routes.AuthNavigator);
+
+      }
     };
 
     setTimeout(hideSplashScreen, 3000);
-  }, [navigation]);
+  }, []);
 
   return (
     <View style={styles.mainContainer}>
