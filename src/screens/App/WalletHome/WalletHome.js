@@ -52,8 +52,8 @@ const WalletHome = (props) => {
         <PortfolioHeader isChecked={isChecked} handleCheckboxToggle={handleCheckboxToggle} />
 
         <Spacer height={hp(1.5)} />
-        {/* <TextInputSearch value={searchCoin} onChangeText={setSearchCoin} /> */}
-        <TextInputField/>
+        <TextInputSearch value={searchCoin} onChangeText={setSearchCoin} />
+        {/* <TextInputField/> */}
         <Spacer height={hp(2)} />
 
       </View>

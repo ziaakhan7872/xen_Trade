@@ -22,13 +22,6 @@ export const useHomeScreen = (props) => {
   const [isVisible, setIsVisible] = useState(false);
 
     console.log(isVisible,"bottomsheet");
-
-      useEffect(() => {
-    if (isVisible && assetSheetRef.current) {
-      // Ensure the BottomSheet expands when isVisible is true
-      assetSheetRef.current.expand();
-    }
-  }, [isVisible]);
  
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
