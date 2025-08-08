@@ -19,6 +19,7 @@ import { appStyles } from '../../../../../utilities'
 import { BarChart } from "react-native-gifted-charts";
 import { GorhomBottomSheet } from '../../../../../components/GorhumBottomSheetComponent'
 import { RenderFavouriteCoinList } from '../../Component/Index'
+import BottomSheet from '../../../../../components/BottomSheet'
 
 
 
@@ -431,9 +432,9 @@ export const BuySellButton = ({ onBuyPress, onSellPress }) => {
 
 export const FavoutiteBottomSheetComponnet = ({ ref }) => {
     return (
-        <GorhomBottomSheet sheetRef={ref}>
+        <BottomSheet ref={ref}>
             <RenderFavouriteCoinList />
-        </GorhomBottomSheet>
+        </BottomSheet>
     )
 
 }

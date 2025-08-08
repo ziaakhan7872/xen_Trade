@@ -56,11 +56,11 @@ export const PortfolioHeader = ({ isChecked, handleCheckboxToggle }) => {
   )
 }
 
-export const TextInputSearch = ({ onChangeText, value }) => {
+export const TextInputSearch = ({ onChangeText, value , onPress}) => {
   return (
     <View style={styles.containerSearch}>
       <TextInput value={value} onChangeText={onChangeText} style={styles.input} placeholder="Search..." placeholderTextColor={colors.lightTextColor} />
-      <TouchableOpacity style={styles.rightIconWrapper}>
+      <TouchableOpacity onPress={onPress} style={styles.rightIconWrapper}>
         <Image source={images.searchSign} style={styles.iconRight} />
       </TouchableOpacity>
     </View>
@@ -113,13 +113,13 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
     { value: 10, color: '#006B7E' },
     { value: 40, color: '#004B58' },
   ];
+
   return (
-    <BottomSheet ref={bottomSheetRef} height={hp(60)}>
+    <BottomSheet height={hp(50)} ref={bottomSheetRef}  >
       <View style={styles.sheetContainer}>
         <View style={[appStyles.row, styles.headerRow]}>
           <ResponsiveText style={styles.sheetTitle}>ASSETS ALLOCATION</ResponsiveText>
           <TouchableOpacity onPress={closeBottomSheet} style={styles.closeBtn}>
-            {/* <ResponsiveText style={styles.closeText}></ResponsiveText> */}
             <Image source={images.closeIcon} style={styles.historyIcon} />
           </TouchableOpacity>
         </View>
@@ -154,8 +154,8 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
         </TouchableOpacity>
       </View>
     </BottomSheet>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   // DepositShowDetails
@@ -229,8 +229,8 @@ const styles = StyleSheet.create({
   //asset Allocation
   sheetContainer: {
     paddingHorizontal: wp(4),
-    paddingTop: hp(3),
-    paddingBottom: hp(2),
+    // paddingTop: hp(3),
+    // paddingBottom: hp(10),
     alignItems: 'center',
   },
   headerRow: {

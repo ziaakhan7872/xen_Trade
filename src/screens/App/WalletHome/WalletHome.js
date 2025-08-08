@@ -11,6 +11,7 @@ import { appStyles } from "../../../utilities"
 import { useHomeScreen } from "./Hooks"
 import { Portal } from "react-native-portalize"
 import SkeletionLoader from "../../../components/SkeletonLoader"
+import TextInputField from "../../../components/TextInputField"
 
 const WalletHome = (props) => {
   const {
@@ -18,7 +19,7 @@ const WalletHome = (props) => {
     input, setInput,
     assetSheetRef, handleAssetOpen, handleAssetClose,
     cryptoList, searchCoin, setSearchCoin,
-    loading
+    loading, isVisible
     // totalUsdt
   } = useHomeScreen(props)
 
@@ -52,6 +53,7 @@ const WalletHome = (props) => {
 
         <Spacer height={hp(1.5)} />
         <TextInputSearch value={searchCoin} onChangeText={setSearchCoin} />
+        {/* <TextInputField/> */}
         <Spacer height={hp(2)} />
 
       </View>
@@ -62,10 +64,13 @@ const WalletHome = (props) => {
         <TokenList cryptoData={cryptoList} props={props} />
       )}
       {/* </View> */}
-
       <Portal>
-        <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
+        {/* {isVisible && ( */}
+
+          <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
+                {/* )} */}
       </Portal>
+
     </AuthMainContainer>
   );
 };

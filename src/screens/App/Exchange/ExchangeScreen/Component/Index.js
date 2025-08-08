@@ -480,7 +480,7 @@ export const AssetsComponent = (data = coinData) => {
 }
 export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, setTradingTypePress }) => {
     return (
-        <BottomSheet ref={ref}>
+        <BottomSheet ref={ref} >
             <Spacer />
             <View style={styles.BottomSheetView}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: wp(5) }}>
@@ -501,7 +501,6 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
                             </View>
                         </View>
 
-                        <HorizontalSpacer width={wp(6)} />
                         {tradingTypePress === "limit" && (
                             <Image style={styles.images} source={images.tickBoxes} />
                         )}
@@ -529,7 +528,7 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
 
 export const FavoutiteBottomSheetComponnet = ({ ref }) => {
     return (
-        <BottomSheet ref={ref}>
+        <BottomSheet  ref={ref}>
             <RenderFavouriteCoinList />
         </BottomSheet>
     )
@@ -759,7 +758,8 @@ const styles = StyleSheet.create({
         paddingVertical: wp(3),
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        // borderWidth:1
     },
     Images3: {
         width: wp(11),

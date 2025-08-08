@@ -16,22 +16,7 @@ import SkeletionLoader from '../../../components/SkeletonLoader'
 
 const MarketScreen = (props) => {
   const { marketList, setMarketList, MarketPress, searchText, setSearchText, loading } = UseMarket(props)
-  const handleFocus = () => {
-    props.navigation.setOptions({
-      tabBarStyle: { display: 'none' },
-    });
-  };
 
-
-  const handleBlur = () => {
-    props.navigation.setOptions({
-      tabBarStyle: {
-        paddingTop: hp(0.9),
-        backgroundColor: colors.bottomTabColor,
-        borderTopWidth: 0,
-      }, // Restore default style
-    });
-  };
   return (
     <AuthMainContainer>
       <HomeHeader onpress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.MenuScreen })} headerTitle={"MARKETS"} />
@@ -51,8 +36,6 @@ const MarketScreen = (props) => {
           placeholder={"Search.."}
           value={searchText}
           onChangeText={setSearchText}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
           width={wp(90)}
 
         />

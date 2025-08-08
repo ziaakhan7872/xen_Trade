@@ -23,7 +23,7 @@ const TradeGraphScreen = (props) => {
 
     return (
         <ExchangeMainContainer>
-            <TradeHeader marketData={selectedData} onpress={() => favouriteBottomSheetRef?.current?.expand()} onBackPress={() => props?.navigation?.goBack()} setStarPress={setStarPress} starPress={starPress} />
+            <TradeHeader marketData={selectedData} onpress={() => favouriteBottomSheetRef?.current?.open()} onBackPress={() => props?.navigation?.goBack()} setStarPress={setStarPress} starPress={starPress} />
             <ScrollView Dat contentContainerStyle={{ paddingBottom: hp(6) }}>
                 <Spacer />
                 <Line height={hp(0.1)} />

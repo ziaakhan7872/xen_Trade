@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { Routes } from "../../../../constants";
+import { colors, Routes } from "../../../../constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getPairApi } from "../../../../constants/Api/Index";
+import { Keyboard } from "react-native";
+import { hp } from "../../../../components/ResponsiveComponent";
 
 
 export const UseMarket = (props) => {
@@ -12,6 +14,39 @@ export const UseMarket = (props) => {
     useEffect(() => {
         getMarketData();
     }, [])
+
+     useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+         props.navigation.setOptions({
+      tabBarStyle: { display: 'none' },
+    });
+         
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        // setIsVisible(false); 
+       
+    props.navigation.setOptions({
+      tabBarStyle: {
+        paddingTop: hp(0.9),
+        backgroundColor: colors.bottomTabColor,
+        borderTopWidth: 0,
+      }, 
+    });
+      }
+    );
+
+    return () => {
+      // Clean up listeners on component unmount
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
     const MarketPress = async(item) => {
         await AsyncStorage.setItem("selectedData", JSON.stringify(item))

@@ -72,7 +72,7 @@ export const GorhomBottomSheet = ({ sheetRef, onCloseRequest, children }) => {
       {...props}
       opacity={0.3}
       disappearsOnIndex={-1}
-      appearsOnIndex={0}
+      // appearsOnIndex={0}
       pressBehavior="close"
     />
   ), []);
