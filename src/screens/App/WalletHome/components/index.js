@@ -15,6 +15,7 @@ import Line from '../../../../components/Liner';
 import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent';
 import { PieChart } from 'react-native-gifted-charts';
 import BottomSheet from '../../../../components/BottomSheet';
+import InputText from '../../../../components/InputText';
 
 
 export const DepositWalletShowDetails = ({ openBottomSheet }) => {
@@ -56,13 +57,23 @@ export const PortfolioHeader = ({ isChecked, handleCheckboxToggle }) => {
   )
 }
 
-export const TextInputSearch = ({ onChangeText, value , onPress}) => {
+export const TextInputSearch = ({ onChangeText, value, onPress }) => {
   return (
     <View style={styles.containerSearch}>
-      <TextInput value={value} onChangeText={onChangeText} style={styles.input} placeholder="Search..." placeholderTextColor={colors.lightTextColor} />
-      <TouchableOpacity onPress={onPress} style={styles.rightIconWrapper}>
+      <InputText
+        placeholder={"Search..."}
+        placeholderTextColor={colors.iconColor}
+        style={styles.InputTextStyle}
+        width={wp(92)}
+        paddingLeft={wp(3)}
+        value={value}
+        onChangeText={onChangeText}
+        icon={true}
+        iconChildren={<Image source={images.searchSign} style={styles.iconRight} />}
+      />     
+       {/* <TouchableOpacity onPress={onPress} style={styles.rightIconWrapper}>
         <Image source={images.searchSign} style={styles.iconRight} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   )
 }
@@ -304,16 +315,16 @@ const styles = StyleSheet.create({
   containerSearch: {
     ...appStyles.rowBasic,
     alignSelf: 'center',
-    backgroundColor: colors.inputBgColor,
-    borderRadius: wp(3),
-    height: hp(6.5),
-    width: wp(93),
-    paddingHorizontal: wp(4),
-    borderColor: colors.borderColor,
-    borderWidth: 1.5,
+    // backgroundColor: colors.inputBgColor,
+    // borderRadius: wp(3),
+    // height: hp(6.5),
+    // width: wp(93),
+    // paddingHorizontal: wp(4),
+    // borderColor: colors.borderColor,
+    // borderWidth: 1.5,
   },
   rightIconWrapper: {
-    paddingHorizontal: wp(2),
+    // paddingHorizontal: wp(2),
   },
   input: {
     flex: 1,
