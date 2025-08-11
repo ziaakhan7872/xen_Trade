@@ -18,7 +18,8 @@ const InputText = ({
      icon, 
      width = wp(80),
      leftChildren=<EvilIcons name="search" color={colors.mainColor} size={25} />  ,
-     iconChildren=<Feather name={isPasswordVisible ? 'eye-off' : 'eye'} size={20} color={colors.iconColor} />
+     iconChildren=<Feather name={isPasswordVisible ? 'eye-off' : 'eye'} size={20} color={colors.iconColor} />,
+     paddingRight=paddingRight
     }) => {
     return (
         <View style={[styles.container, style]}>
@@ -40,7 +41,7 @@ const InputText = ({
                     secureTextEntry={secureTextEntry}
                     style={[
                         styles.input,
-                        { paddingLeft: rightIcon ? wp(8) : paddingLeft, width: width }
+                        { paddingLeft: rightIcon ? wp(8) : paddingLeft, width: width ,paddingRight:icon?wp(10):paddingRight}
                     ]}
                     placeholderTextColor={placeholderTextColor}
                     onBlur={onBlur}
