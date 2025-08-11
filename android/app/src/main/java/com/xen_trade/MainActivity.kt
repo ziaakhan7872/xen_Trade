@@ -25,11 +25,11 @@ class MainActivity : ReactActivity() {
 
   
 override fun onCreate(savedInstanceState: Bundle?) {
-  RNBootSplash.init(this, R.style.BootTheme) // keep this BEFORE super
+  RNBootSplash.init(this, R.style.BootTheme) // before super
   super.onCreate(savedInstanceState)
 
-  // Drop BootTheme so its windowBackground won’t flash on keyboard resize
   setTheme(R.style.AppTheme)
+  window.setBackgroundDrawableResource(R.color.app_bg) // ensure it’s black during relayouts
 }
 
 }
