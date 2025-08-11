@@ -165,7 +165,7 @@ export const WithDrawConfirmationBottomSheet = ({ apiError, handleCopy, Network,
   const amountReceived = Number(amount) + Number(Network?.fee || 0)
 
   return (
-    <BottomSheet ref={ref}>
+    <BottomSheet height={hp(70)} ref={ref}>
       <View style={styles.confirmContainer}>
         <View style={styles.confirmHeader}>
           <ResponsiveText style={styles.confirmTitle}>WITHDRAWAL CONFIRMATION</ResponsiveText>

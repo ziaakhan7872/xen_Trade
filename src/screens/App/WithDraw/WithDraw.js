@@ -47,7 +47,7 @@ const WithDraw = (props) => {
       <FeeInfo
         address={address}
         cryptoData={cryptoData}
-        handleSubmit={() => WithdrawConfirmationRef?.current?.expand()}
+        handleSubmit={() => WithdrawConfirmationRef?.current?.open()}
         fee={fee}
         amount={amount}
         error={error}
