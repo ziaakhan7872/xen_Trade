@@ -1,7 +1,6 @@
 import { FlatList, Image, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import images from '../../../../images'
-import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent'
 import { appStyles } from '../../../../utilities'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
 import Line from '../../../../components/Liner'
@@ -52,7 +51,7 @@ export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, 
     }
 
     return (
-        <BottomSheet ref={bottomSheetRef} height={hp(95)}>
+        <BottomSheet ref={bottomSheetRef} height={hp(70)} >
             <View style={[appStyles.row, { ...styles.containerSpacer }]}>
                 <ResponsiveText style={styles.bottomSheetTitle}>FILTER</ResponsiveText>
                 <TouchableOpacity onPress={closeBottomSheet}>
@@ -98,8 +97,9 @@ export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, 
             <Spacer height={hp(2.5)} />
             <View style={[appStyles.row, styles.buttonRow]}>
                 <SimpleButton onPress={() => resetFilters()} text="Reset" textColor={colors.white} styleView={styles.resetBtn} />
-                <SimpleButton text="Show Results" textColor={colors.black} styleView={styles.showBtn} onPress={closeBottomSheet} />
+                <SimpleButton text="Show Results" textColor={colors.black} styleView={styles.showBtn} />
             </View>
+            <Spacer height={hp(2.5)} />
         </BottomSheet>
 
     )
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
     },
     containerSpacer: {
         paddingHorizontal: wp(4),
-        paddingVertical: hp(3),
+        paddingVertical: hp(2),
     },
     closeIcon: {
         width: wp(6),
@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1),
     },
     filterContainer: {
-        flex: 1,
+        // flex: 1,
         paddingHorizontal: wp(4),
         paddingVertical: hp(1),
         paddingBottom: hp(2),
@@ -330,8 +330,7 @@ const styles = StyleSheet.create({
     },
     buttonRow: {
         paddingHorizontal: wp(3.5),
-        paddingBottom: Platform.OS === 'android' ? hp(2) : hp(1), // More space on Android
-
+        // paddingBottom: Platform.OS === 'android' ? hp(5.5) : hp(1.5), // More space on Android
     },
     resetBtn: {
         paddingHorizontal: wp(17),
@@ -346,11 +345,9 @@ const styles = StyleSheet.create({
         marginLeft: wp(3), // space between buttons
         paddingVertical: hp(2),
         borderRadius: wp(10),
-        marginRight: wp(1)
+        marginRight: wp(1),
     },
     OrderMainView: {
-        // width: wp(90),
-        justifyContent: "center",
         backgroundColor: colors.cardsBgColor,
         paddingHorizontal: wp(3),
         paddingVertical: hp(1),

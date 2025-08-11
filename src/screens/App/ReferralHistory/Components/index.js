@@ -5,8 +5,7 @@ import { colors, fontFamily, Routes, } from '../../../../constants'
 import { appStyles } from '../../../../utilities'
 import images from '../../../../images'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
-import Spacer, { HorizontalSpacer } from '../../../../components/Spacer'
-import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent'
+import Spacer from '../../../../components/Spacer'
 import Line from '../../../../components/Liner'
 import { SimpleButton } from '../../../../components/SimpleButton'
 import { ReferralHistoryData } from '../../../../utilities/dummyData'
@@ -74,66 +73,6 @@ export const HistoryList = (props) => {
     )
 }
 
-// export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, selected, setSelected }) => {
-
-//     const resetFilters = () => {
-//         setSelected(selected[groupKey] == 0)
-//     }
-
-//     return (
-//         <GorhomBottomSheet sheetRef={bottomSheetRef}>
-//             <View style={[appStyles.row, { ...styles.containerSpacer }]}>
-//                 <ResponsiveText style={styles.bottomSheetTitle}>FILTER</ResponsiveText>
-//                 <TouchableOpacity onPress={closeBottomSheet}>
-//                     <Image source={images.closeIcon} style={styles.closeIcon} />
-//                 </TouchableOpacity>
-//             </View>
-
-//             <Line height={1} backgroundColor={colors.lineColor} />
-
-//             <Spacer height={hp(1.5)} />
-
-//             <View style={styles.filterContainer}>
-//                 <ResponsiveText style={styles.filterTitles}>Created At</ResponsiveText>
-//                 <FilterGroup
-//                     options={['All', 'Today', 'Yesterday', 'Last Week', 'Last Month', 'Custom Date']}
-//                     groupKey="createdAt"
-//                     selected={selected}
-//                     setSelected={setSelected}
-//                 />
-//             </View>
-//             <Spacer height={hp(1.5)} />
-
-//             <View style={styles.filterContainer}>
-//                 <ResponsiveText style={styles.filterTitles}>Order Type</ResponsiveText>
-//                 <FilterGroup
-//                     options={['Market', 'Limit']}
-//                     groupKey="orderType"
-//                     selected={selected}
-//                     setSelected={setSelected}
-//                 />
-//             </View>
-//             <Spacer height={hp(1.5)} />
-
-//             <View style={styles.filterContainer}>
-//                 <ResponsiveText style={styles.filterTitles}>Transaction Type</ResponsiveText>
-//                 <FilterGroup
-//                     options={['All', 'Buy', 'Sell']}
-//                     groupKey="transactionType"
-//                     selected={selected}
-//                     setSelected={setSelected}
-//                 />
-//             </View>
-//             <Spacer height={hp(2.5)} />
-//             <View style={[appStyles.row, styles.buttonRow]}>
-//                 <SimpleButton onPress={() => resetFilters()} text="Reset" textColor={colors.white} styleView={styles.resetBtn} />
-//                 <SimpleButton text="Show Results" textColor={colors.black} styleView={styles.showBtn} />
-//             </View>
-//         </GorhomBottomSheet>
-
-//     )
-// }
-
 export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, selected, setSelected }) => {
 
     const resetFilters = () => {
@@ -141,7 +80,7 @@ export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, 
     }
 
     return (
-        <BottomSheet ref={bottomSheetRef}>
+        <BottomSheet ref={bottomSheetRef} height={hp(71)}>
             <View style={[appStyles.row, { ...styles.containerSpacer }]}>
                 <ResponsiveText style={styles.bottomSheetTitle}>FILTER</ResponsiveText>
                 <TouchableOpacity onPress={closeBottomSheet}>

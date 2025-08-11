@@ -66,9 +66,8 @@ const WalletHome = (props) => {
       {/* </View> */}
       <Portal>
         {/* {isVisible && ( */}
-
-          <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
-                {/* )} */}
+        <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
+        {/* )} */}
       </Portal>
 
     </AuthMainContainer>

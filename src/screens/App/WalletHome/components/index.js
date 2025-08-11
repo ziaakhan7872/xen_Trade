@@ -56,7 +56,7 @@ export const PortfolioHeader = ({ isChecked, handleCheckboxToggle }) => {
   )
 }
 
-export const TextInputSearch = ({ onChangeText, value , onPress}) => {
+export const TextInputSearch = ({ onChangeText, value, onPress }) => {
   return (
     <View style={styles.containerSearch}>
       <TextInput value={value} onChangeText={onChangeText} style={styles.input} placeholder="Search..." placeholderTextColor={colors.lightTextColor} />
@@ -115,7 +115,7 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
   ];
 
   return (
-    <BottomSheet height={hp(50)} ref={bottomSheetRef}  >
+    <BottomSheet height={hp(46)} ref={bottomSheetRef}  >
       <View style={styles.sheetContainer}>
         <View style={[appStyles.row, styles.headerRow]}>
           <ResponsiveText style={styles.sheetTitle}>ASSETS ALLOCATION</ResponsiveText>
@@ -229,6 +229,7 @@ const styles = StyleSheet.create({
   //asset Allocation
   sheetContainer: {
     paddingHorizontal: wp(4),
+    paddingVertical: hp(2),
     // paddingTop: hp(3),
     // paddingBottom: hp(10),
     alignItems: 'center',
