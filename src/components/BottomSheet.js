@@ -4,6 +4,7 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import { BlurView } from "@react-native-community/blur";
 import { wp } from './ResponsiveComponent';
 import { colors } from '../constants';
+import { Portal } from 'react-native-portalize';
 
 const BottomSheet = forwardRef(({ maxHeight, customHeight, children, height }, ref) => {
   const [measuredHeight, setMeasuredHeight] = useState(null);
@@ -21,12 +22,15 @@ const BottomSheet = forwardRef(({ maxHeight, customHeight, children, height }, r
     <>
       {/* Only render blur when open */}
       {isOpen && (
-        <BlurView
-          style={StyleSheet.absoluteFill}
-          blurType="dark"
-          blurAmount={6}
-        // reducedTransparencyFallbackColor="rgba(0,0,0,0.3)"
-        />
+        <Portal>
+          <BlurView
+            style={StyleSheet.absoluteFill  }
+            blurType="dark"
+            blurAmount={6}
+          // reducedTransparencyFallbackColor="rgba(0,0,0,0.3)"
+          />
+        </Portal>
+
       )}
 
       {/* Layout measurement off-screen */}
@@ -46,7 +50,7 @@ const BottomSheet = forwardRef(({ maxHeight, customHeight, children, height }, r
         animationType='slide'
         onOpen={() => setIsOpen(true)}   // Show blur
         onClose={() => setIsOpen(false)} // Hide blur
-        customModalProps={{ statusBarTranslucent: true, transparent: true }}
+        customModalProps={{ statusBarTranslucent: true, transparent: true,presentationStyle: 'overFullScreen', }}
         customStyles={{
           wrapper: { backgroundColor: 'transparent' },
           container: {
