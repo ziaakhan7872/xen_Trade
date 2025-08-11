@@ -24,9 +24,12 @@ class MainActivity : ReactActivity() {
       DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
 
   
-  override fun onCreate(savedInstanceState: Bundle?) {
-    // Correct call with activity and theme
-    RNBootSplash.init(this, R.style.BootTheme)
-    super.onCreate(savedInstanceState)
-  }
+override fun onCreate(savedInstanceState: Bundle?) {
+  RNBootSplash.init(this, R.style.BootTheme) // keep this BEFORE super
+  super.onCreate(savedInstanceState)
+
+  // Drop BootTheme so its windowBackground won’t flash on keyboard resize
+  setTheme(R.style.AppTheme)
+}
+
 }
