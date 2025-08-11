@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     },
     btnSaveChangesView: {
         paddingHorizontal: wp(4),
-        paddingBottom: Platform.OS === 'android' ? hp(2) : hp(1), // More space on Android
+        paddingBottom: Platform.OS === 'android' ? hp(3.5) : hp(2.5), // More space on Android
     },
     btnSaveChanges: {
         width: wp(88),

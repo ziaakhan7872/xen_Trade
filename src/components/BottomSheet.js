@@ -1,5 +1,5 @@
 import React, { forwardRef, useState } from 'react';
-import { View, Dimensions, StyleSheet } from 'react-native';
+import { View, Dimensions, StyleSheet, Platform } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { BlurView } from "@react-native-community/blur";
 import { wp } from './ResponsiveComponent';
@@ -8,7 +8,7 @@ import { Portal } from 'react-native-portalize';
 
 const BottomSheet = forwardRef(({ maxHeight, customHeight, children, height }, ref) => {
   const [measuredHeight, setMeasuredHeight] = useState(null);
-  const [isOpen, setIsOpen] = useState(false); // Track sheet state if it is open or not
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleContentLayout = (event) => {
     const { height } = event.nativeEvent.layout;
@@ -24,10 +24,10 @@ const BottomSheet = forwardRef(({ maxHeight, customHeight, children, height }, r
       {isOpen && (
         <Portal>
           <BlurView
-            style={StyleSheet.absoluteFill  }
+            style={StyleSheet.absoluteFill}
             blurType="dark"
             blurAmount={6}
-          // reducedTransparencyFallbackColor="rgba(0,0,0,0.3)"
+            reducedTransparencyFallbackColor="rgba(0,0,0,0.3)"
           />
         </Portal>
 
@@ -50,15 +50,20 @@ const BottomSheet = forwardRef(({ maxHeight, customHeight, children, height }, r
         animationType='slide'
         onOpen={() => setIsOpen(true)}   // Show blur
         onClose={() => setIsOpen(false)} // Hide blur
-        customModalProps={{ statusBarTranslucent: true, transparent: true,presentationStyle: 'overFullScreen', }}
+        customModalProps={{ statusBarTranslucent: true, transparent: true, presentationStyle: 'overFullScreen', }}
         customStyles={{
-          wrapper: { backgroundColor: 'transparent' },
+          wrapper: {
+            backgroundColor: 'transparent', // Allow seeing behind
+            ...(isOpen && Platform.OS === 'ios'
+              ? { flex: 1 }
+              : {})
+          },
           container: {
             backgroundColor: colors.bottomSheetBackgroundColor,
             alignItems: 'center',
             borderTopLeftRadius: wp(3.5),
             borderTopRightRadius: wp(3.5),
-            // overflow: 'hidden',
+            overflow: 'hidden', // required on iOS to clip corners
           },
         }}
       >
@@ -69,3 +74,4 @@ const BottomSheet = forwardRef(({ maxHeight, customHeight, children, height }, r
 });
 
 export default BottomSheet;
+

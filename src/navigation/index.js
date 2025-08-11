@@ -13,7 +13,7 @@ import SplashScreen from "../screens/Auth/Splash/SplashScreen";
 const Navigation = () => {
   const Stack = createNativeStackNavigator()
   const { token, refreshToken } = useSelector((state) => state.user);
-  const initialRoute = Platform.OS === 'ios' ? Routes.BottomNavigator :  Routes.BottomNavigator ;
+  const initialRoute = Platform.OS === 'ios' ? Routes.BottomNavigator : Routes.BottomNavigator;
 
 
   return (
@@ -21,9 +21,9 @@ const Navigation = () => {
       <Stack.Navigator
         initialRouteName={initialRoute}
         screenOptions={{ headerShown: false }}>
-        {Platform?.OS === "ios" &&
+        {/* {Platform?.OS === "ios" &&
           <Stack.Screen name={Routes.splashScreen} component={SplashScreen} />
-        }
+        } */}
         {(refreshToken || token) ? (
           <>
             {/* <Stack.Screen name={Routes.AuthNavigator} component={AuthNavigation} /> */}

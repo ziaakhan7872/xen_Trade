@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     },
     buttonRow: {
         paddingHorizontal: wp(4),
-        paddingBottom: Platform.OS === 'android' ? hp(2) : hp(1),
+        paddingVertical: Platform.OS === 'android' ? hp(3) : hp(2),
     },
     cancelBtn: {
         width: wp(44),

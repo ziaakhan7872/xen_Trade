@@ -11,40 +11,49 @@ import { hp } from '../../../components/ResponsiveComponent';
 import { SimpleButton } from '../../../components/SimpleButton';
 import { appStyles } from '../../../utilities';
 import TextInputField from '../../../components/TextInputField';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const TwoFactorAuth = (props) => {
 
     return (
         <AuthMainContainer>
-            <View style={styles.containerMain}>
-                <MainHeader leftImage={images.backArrow} title='2-FACTOR AUTHENTICATION' onBackPress={() => props?.navigation?.goBack?.()} />
+            <ScrollView
+                contentContainerStyle={{
+                    flexGrow: 1,
+                    justifyContent: 'space-between',
+                    // minHeight: hp(120), // slightly larger than screen height
+                }}
+                keyboardShouldPersistTaps="handled">
 
-                <Spacer height={hp(3)} />
+                <View style={styles.containerMain}>
+                    <MainHeader leftImage={images.backArrow} title='2-FACTOR AUTHENTICATION' onBackPress={() => props?.navigation?.goBack?.()} />
 
-                <ResponsiveText style={styles.heading}>2-Factor authentication</ResponsiveText>
-                <ResponsiveText style={styles.description}>Enable 2-Factor authentication via Google Authenticator, or any 2FA App</ResponsiveText>
+                    <Spacer height={hp(3)} />
 
-                <Spacer height={hp(4)} />
+                    <ResponsiveText style={styles.heading}>2-Factor authentication</ResponsiveText>
+                    <ResponsiveText style={styles.description}>Enable 2-Factor authentication via Google Authenticator, or any 2FA App</ResponsiveText>
 
-                <View style={styles.qrWrapper}>
-                    <Image source={images.testQrImg} style={styles.qrImage} />
+                    <Spacer height={hp(4)} />
+
+                    <View style={styles.qrWrapper}>
+                        <Image source={images.testQrImg} style={styles.qrImage} />
+                    </View>
+
+                    <Spacer height={hp(2)} />
+
+                    <SimpleButton text="Secret Code" styleView={styles.secretBtn} />
+
+                    <Spacer height={hp(3)} />
+
+                    <ResponsiveText style={styles.inputLabel}>Enter code from 2-FA app</ResponsiveText>
+                    <TextInputField placeholder={'Enter Code'} placeholderTextColor={colors.placeHolderTextColor} />
                 </View>
 
-                <Spacer height={hp(2)} />
-
-                <SimpleButton text="Secret Code" styleView={styles.secretBtn} />
-
-                <Spacer height={hp(3)} />
-
-                <ResponsiveText style={styles.inputLabel}>Enter code from 2-FA app</ResponsiveText>
-                <TextInputField placeholder={'Enter Code'} placeholderTextColor={colors.placeHolderTextColor} />
-
-
-            </View>
-            <View style={[appStyles.row, styles.buttonRow]}>
-                <SimpleButton text="Cancel" styleView={styles.cancelBtn} />
-                <SimpleButton text="Save" textColor={colors.disableTextColor} styleView={styles.saveBtn} />
-            </View>
+                <View style={[appStyles.row, styles.buttonRow]}>
+                    <SimpleButton text="Cancel" styleView={styles.cancelBtn} />
+                    <SimpleButton text="Save" textColor={colors.disableTextColor} styleView={styles.saveBtn} />
+                </View>
+            </ScrollView>
         </AuthMainContainer>
     );
 };
