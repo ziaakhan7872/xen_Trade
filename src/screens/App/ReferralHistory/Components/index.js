@@ -11,6 +11,7 @@ import Line from '../../../../components/Liner'
 import { SimpleButton } from '../../../../components/SimpleButton'
 import { ReferralHistoryData } from '../../../../utilities/dummyData'
 import Entypo from "react-native-vector-icons/Entypo"
+import BottomSheet from '../../../../components/BottomSheet'
 
 
 export const FilterTextInput = ({ openBottomSheet }) => {
@@ -73,6 +74,66 @@ export const HistoryList = (props) => {
     )
 }
 
+// export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, selected, setSelected }) => {
+
+//     const resetFilters = () => {
+//         setSelected(selected[groupKey] == 0)
+//     }
+
+//     return (
+//         <GorhomBottomSheet sheetRef={bottomSheetRef}>
+//             <View style={[appStyles.row, { ...styles.containerSpacer }]}>
+//                 <ResponsiveText style={styles.bottomSheetTitle}>FILTER</ResponsiveText>
+//                 <TouchableOpacity onPress={closeBottomSheet}>
+//                     <Image source={images.closeIcon} style={styles.closeIcon} />
+//                 </TouchableOpacity>
+//             </View>
+
+//             <Line height={1} backgroundColor={colors.lineColor} />
+
+//             <Spacer height={hp(1.5)} />
+
+//             <View style={styles.filterContainer}>
+//                 <ResponsiveText style={styles.filterTitles}>Created At</ResponsiveText>
+//                 <FilterGroup
+//                     options={['All', 'Today', 'Yesterday', 'Last Week', 'Last Month', 'Custom Date']}
+//                     groupKey="createdAt"
+//                     selected={selected}
+//                     setSelected={setSelected}
+//                 />
+//             </View>
+//             <Spacer height={hp(1.5)} />
+
+//             <View style={styles.filterContainer}>
+//                 <ResponsiveText style={styles.filterTitles}>Order Type</ResponsiveText>
+//                 <FilterGroup
+//                     options={['Market', 'Limit']}
+//                     groupKey="orderType"
+//                     selected={selected}
+//                     setSelected={setSelected}
+//                 />
+//             </View>
+//             <Spacer height={hp(1.5)} />
+
+//             <View style={styles.filterContainer}>
+//                 <ResponsiveText style={styles.filterTitles}>Transaction Type</ResponsiveText>
+//                 <FilterGroup
+//                     options={['All', 'Buy', 'Sell']}
+//                     groupKey="transactionType"
+//                     selected={selected}
+//                     setSelected={setSelected}
+//                 />
+//             </View>
+//             <Spacer height={hp(2.5)} />
+//             <View style={[appStyles.row, styles.buttonRow]}>
+//                 <SimpleButton onPress={() => resetFilters()} text="Reset" textColor={colors.white} styleView={styles.resetBtn} />
+//                 <SimpleButton text="Show Results" textColor={colors.black} styleView={styles.showBtn} />
+//             </View>
+//         </GorhomBottomSheet>
+
+//     )
+// }
+
 export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, selected, setSelected }) => {
 
     const resetFilters = () => {
@@ -80,7 +141,7 @@ export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, 
     }
 
     return (
-        <GorhomBottomSheet sheetRef={bottomSheetRef}>
+        <BottomSheet ref={bottomSheetRef}>
             <View style={[appStyles.row, { ...styles.containerSpacer }]}>
                 <ResponsiveText style={styles.bottomSheetTitle}>FILTER</ResponsiveText>
                 <TouchableOpacity onPress={closeBottomSheet}>
@@ -128,7 +189,7 @@ export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, 
                 <SimpleButton onPress={() => resetFilters()} text="Reset" textColor={colors.white} styleView={styles.resetBtn} />
                 <SimpleButton text="Show Results" textColor={colors.black} styleView={styles.showBtn} />
             </View>
-        </GorhomBottomSheet>
+        </BottomSheet>
 
     )
 }
@@ -246,7 +307,7 @@ const styles = StyleSheet.create({
     },
     containerSpacer: {
         paddingHorizontal: wp(4),
-        paddingVertical: hp(3),
+        paddingVertical: hp(2.5),
     },
     closeIcon: {
         width: wp(6),
@@ -267,7 +328,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1),
     },
     filterContainer: {
-        flex: 1,
+        // flex: 1,
         paddingHorizontal: wp(4),
         paddingVertical: hp(1),
         paddingBottom: hp(2),
@@ -335,7 +396,6 @@ const styles = StyleSheet.create({
         marginTop: hp(1.5),
     },
     itemContainer: {
-        paddingHorizontal: wp(3),
         paddingVertical: wp(3.5),
     },
     icon: {

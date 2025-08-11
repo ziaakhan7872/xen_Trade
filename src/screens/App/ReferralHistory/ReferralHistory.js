@@ -8,7 +8,6 @@ import { FilterBottomSheet, FilterTextInput, HistoryList } from './Components'
 import Spacer from '../../../components/Spacer'
 import { hp } from '../../../components/ResponsiveComponent'
 import { useReferralHistory } from './Hooks'
-import { Portal } from 'react-native-portalize'
 
 const ReferralHistory = (props) => {
     const { FilterBottomSheetRef, handleOpenFilter, handleCloseFilter, input, setInput, selected, setSelected } = useReferralHistory()
@@ -20,15 +19,14 @@ const ReferralHistory = (props) => {
                 <FilterTextInput value={input} onChangeText={(text) => setInput(text)} openBottomSheet={handleOpenFilter} />
                 <Spacer />
 
-                <Portal>
-                    <FilterBottomSheet
-                        selected={selected}
-                        setSelected={setSelected}
-                        bottomSheetRef={FilterBottomSheetRef}
-                        closeBottomSheet={handleCloseFilter} />
-                </Portal>
+                <HistoryList props={props} />
+
+                <FilterBottomSheet
+                    selected={selected}
+                    setSelected={setSelected}
+                    bottomSheetRef={FilterBottomSheetRef}
+                    closeBottomSheet={handleCloseFilter} />
             </View>
-            <HistoryList props={props} />
         </AuthMainContainer>
     )
 }

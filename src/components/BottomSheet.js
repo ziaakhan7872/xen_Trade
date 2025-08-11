@@ -1,28 +1,35 @@
 import React, { forwardRef, useState } from 'react';
 import { View, Dimensions, StyleSheet } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import { BlurView } from "@react-native-community/blur";
 import { wp } from './ResponsiveComponent';
 import { colors } from '../constants';
 
 const BottomSheet = forwardRef(({ maxHeight, customHeight, children, height }, ref) => {
   const [measuredHeight, setMeasuredHeight] = useState(null);
+  const [isOpen, setIsOpen] = useState(false); // Track sheet state if it is open or not
 
   const handleContentLayout = (event) => {
     const { height } = event.nativeEvent.layout;
-
-    // Set the max height for the BottomSheet
     const maxSheetHeight = Dimensions.get('window').height * (customHeight || 0.85);
-
-    // Calculate the height dynamically, ensuring it doesn't exceed the available space
     setMeasuredHeight(maxHeight ? maxSheetHeight : Math.min(height, maxSheetHeight));
   };
 
-  // Fallback to hardcoded height if measuredHeight is not calculated
-  const finalHeight = height || measuredHeight  // Fallback to wp(100) or custom height
+  const finalHeight = height || measuredHeight;
 
   return (
     <>
-      {/* Layout measurement only once */}
+      {/* Only render blur when open */}
+      {isOpen && (
+        <BlurView
+          style={StyleSheet.absoluteFill}
+          blurType="dark"
+          blurAmount={6}
+        // reducedTransparencyFallbackColor="rgba(0,0,0,0.3)"
+        />
+      )}
+
+      {/* Layout measurement off-screen */}
       {!measuredHeight && (
         <View onLayout={handleContentLayout} style={{ position: 'absolute', left: -9999 }}>
           {children}
@@ -33,41 +40,28 @@ const BottomSheet = forwardRef(({ maxHeight, customHeight, children, height }, r
         ref={ref}
         closeOnDragDown={true}
         closeOnPressMask={true}
-        height={finalHeight} // Use the final height (either measured or fallback)
-        openDuration={600}
+        height={finalHeight}
+        openDuration={500}
         closeDuration={400}
-        animationType="fade"
+        animationType='slide'
+        onOpen={() => setIsOpen(true)}   // Show blur
+        onClose={() => setIsOpen(false)} // Hide blur
+        customModalProps={{ statusBarTranslucent: true, transparent: true }}
         customStyles={{
-          wrapper: {
-            backgroundColor: 'rgba(52, 52, 52, 0.3)',
-          },
-          draggableIcon: {
-            backgroundColor: "#E4E4E4",
-            width: wp('30%'),
-          },
+          wrapper: { backgroundColor: 'transparent' },
           container: {
             backgroundColor: colors.bottomSheetBackgroundColor,
             alignItems: 'center',
-            paddingTop: 20, // You can adjust the padding if needed
+            borderTopLeftRadius: wp(3.5),
+            borderTopRightRadius: wp(3.5),
+            // overflow: 'hidden',
           },
         }}
       >
-        {children} {/* Render children here */}
+        {children}
       </RBSheet>
     </>
   );
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  sheetText: {
-    fontSize: 18,
-    textAlign: 'center',
-  },
 });
 
 export default BottomSheet;
