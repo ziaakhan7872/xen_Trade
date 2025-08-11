@@ -27,7 +27,7 @@ const BottomSheet = forwardRef(({ maxHeight, customHeight, children, height }, r
             style={StyleSheet.absoluteFill}
             blurType="dark"
             blurAmount={6}
-          // reducedTransparencyFallbackColor="rgba(0,0,0,0.3)"
+            reducedTransparencyFallbackColor="rgba(0,0,0,0.3)"
           />
         </Portal>
 
