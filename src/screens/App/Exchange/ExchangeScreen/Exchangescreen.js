@@ -6,8 +6,6 @@ import { ResponsiveText } from '../../../../components/ResponsiveText'
 import { AssetsComponent, BuyForm, BuySellRow, BuySellRowButton, CurrentOrderComponent, CurrentOrderHistoryHeader, CurrentSymbolHeader, ExchangeHeader, FavoutiteBottomSheetComponnet, FlatlistValues, OrderBook, PriceUSDT, SellForm, TradingTypeComponent } from './Component/Index'
 import { UseExchange } from './Hooks/Index'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
-import LinearGradient from 'react-native-linear-gradient'
-import { SafeAreaInsetsContext } from 'react-native-safe-area-context'
 import { Amount } from '../../../../utilities/dummyData'
 import { appStyles } from '../../../../utilities/appStyles'
 import { Portal } from 'react-native-portalize'
@@ -89,9 +87,7 @@ const Exchangescreen = (props) => {
           </View>
           <Spacer />
           <CurrentOrderHistoryHeader props={props} currentOrders={currentOrder} buttonPress={currentOrderHistoryPress} setButtonPress={setCurrentOrderHistoryPress} />
-          {/* <View style={{width:wp(90), alignSelf: 'center' }}> */}
           <Line height={hp(0.1)} width={Dimensions.get('window').width} />
-          {/* </View> */}
           {currentOrderHistoryPress === "currentOrder" ? (
             <>
               <Spacer />

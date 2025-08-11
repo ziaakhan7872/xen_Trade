@@ -28,13 +28,13 @@ const WithdrawHistory = (props) => {
       <DepositFilterHeader
         SelectedStatus={selectedStatus}
         statusPress={() => {
-            StatusRef?.current?.expand()
+            StatusRef?.current?.open()
             setSelectedHeaderButton("status")
         }}
         SelectedSymbol={selectedSymbol}
         AllCryptoPress={() => {
             setSelectedHeaderButton("crypto")
-            allCryptoFilterRef?.current?.expand()}}
+            allCryptoFilterRef?.current?.open()}}
 
       />
       <Spacer height={hp(4)} />

@@ -12,9 +12,7 @@ import { ResponsiveText } from '../../../../components/ResponsiveText';
 
 const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, passwordVisible, setPasswordVisible, errorMessage, goToForgotPassword }) => {
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        >
+       
             <ScrollView contentContainerStyle={styles.scrollViewContainer}>
                 <View style={styles.mainBox}>
                     <Image source={images.splashLogoImage} resizeMode='contain' style={styles.logoImage} />
@@ -57,8 +55,7 @@ const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, pass
                     </View>
 
                 </View>
-            </ScrollView>
-        </KeyboardAvoidingView>
+             </ScrollView>
     )
 }
 
@@ -72,11 +69,11 @@ const styles = StyleSheet.create({
         // paddingVertical: hp(3), // Add some vertical spacing to the container
     },
     mainBox: {
-        width: wp(90),
+        width: wp(92),
         paddingHorizontal: wp(4),
         paddingVertical: wp(4),
         backgroundColor: colors.boxColor,
-        borderRadius: wp(3),
+        borderRadius: wp(3)
     },
     scrollViewContainer: {
         flexGrow: 1,

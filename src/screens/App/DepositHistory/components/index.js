@@ -13,6 +13,7 @@ import InputText from '../../../../components/InputText'
 import { appStyles } from '../../../../utilities'
 import { DepositHistoryData } from '../../../../utilities/dummyData'
 import moment from 'moment'
+import BottomSheet from '../../../../components/BottomSheet'
 
 
 export const DepositFilterHeader = ({ AllCryptoPress, DatePress, statusPress, SelectedSymbol, SelectedStatus, selectedHeaderButton }) => {
@@ -107,11 +108,11 @@ const SearchBox = ({ searchCoin, setSearchCoin }) => {
 
 export const AllCryptoFilterBotomSheet = ({ ref, selectedStatus, closeBottomSheet, AllCryptoFilter, SelectedSymbol, setSelectedSymbol, statusPress, searchCoin, setSearchCoin }) => {
   return (
-    <GorhomBottomSheet sheetRef={ref}>
-      <KeyboardAvoidingView
+    <BottomSheet ref={ref}>
+      {/* <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
+      > */}
         <Spacer />
         <View style={styles.BottomSheetView}>
           <View style={styles.bottomHeader}>
@@ -148,15 +149,15 @@ export const AllCryptoFilterBotomSheet = ({ ref, selectedStatus, closeBottomShee
             )}
           />
         </View>
-      </KeyboardAvoidingView>
-    </GorhomBottomSheet>
+      {/* </KeyboardAvoidingView> */}
+    </BottomSheet>
   )
 }
 
 export const StatusFilterBottomSheet = ({ ref, closeBottomSheet, StatusData, SelectedSymbol, setSelectedStatus, selectedStatus, AllCryptoPress }) => {
 
   return (
-    <GorhomBottomSheet sheetRef={ref}>
+    <BottomSheet ref={ref}>
       <Spacer />
       <View style={styles.BottomSheetView}>
         <View style={styles.bottomHeader}>
@@ -189,7 +190,7 @@ export const StatusFilterBottomSheet = ({ ref, closeBottomSheet, StatusData, Sel
           )}
         />
       </View>
-    </GorhomBottomSheet>
+    </BottomSheet>
   )
 
 }

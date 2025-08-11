@@ -355,6 +355,8 @@ export const CurrentOrderComponent = ({ isCurrentSymbol, setIsCurrentSymbol }) =
                     <FlatList
                         data={DummyCurrentSymbol}
                         keyExtractor={(item, index) => item.id}
+                        scrollEnabled
+                        nestedScrollEnabled
                         ItemSeparatorComponent={(
                             <Spacer height={hp(1)} />
                         )}
@@ -480,7 +482,7 @@ export const AssetsComponent = (data = coinData) => {
 }
 export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, setTradingTypePress }) => {
     return (
-        <BottomSheet height={hp(30)} ref={ref} >
+        <BottomSheet height={hp(40)} ref={ref} >
             <Spacer />
             <View style={styles.BottomSheetView}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: wp(5) }}>

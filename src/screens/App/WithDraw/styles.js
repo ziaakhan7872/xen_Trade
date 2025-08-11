@@ -8,7 +8,7 @@ export const styles =  StyleSheet.create({
   },
   spacer: {
     flex: 1,
-    minHeight: 80,
+    minHeight: 130,
   },
   overlay: {
     // ...StyleSheet.absoluteFillObject,

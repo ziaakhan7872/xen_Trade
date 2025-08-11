@@ -47,13 +47,12 @@ const WithDraw = (props) => {
       <FeeInfo
         address={address}
         cryptoData={cryptoData}
-        handleSubmit={() => WithdrawConfirmationRef?.current?.expand()}
+        handleSubmit={() => WithdrawConfirmationRef?.current?.open()}
         fee={fee}
         amount={amount}
         error={error}
         walletAddressError={walletAddressError}
       />
-      <Portal>
         <WithDrawConfirmationBottomSheet
           apiError={apiError}
           handleCopy={handleCopy}
@@ -64,6 +63,7 @@ const WithDraw = (props) => {
           handleSubmit={handleSubmit}
           ref={WithdrawConfirmationRef}
         />
+        <Portal>
         {cameraActive && (
           <View style={StyleSheet.absoluteFill}>
             <Camera
