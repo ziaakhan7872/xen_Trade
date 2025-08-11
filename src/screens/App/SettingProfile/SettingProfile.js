@@ -1,76 +1,54 @@
-import { View, Image, TextInput } from 'react-native'
-import React, { useState } from 'react'
+import { View, ScrollView } from 'react-native'
+import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { styles } from './styles'
 import { MainHeader } from '../../../components/MainHeader'
 import images from '../../../images'
 import Spacer from '../../../components/Spacer'
-import { ResponsiveText } from '../../../components/ResponsiveText'
-import { appStyles } from '../../../utilities'
 import { SimpleButton } from '../../../components/SimpleButton'
 import { hp, wp } from '../../../components/ResponsiveComponent'
-import DropDown from '../../../components/dropDown'
-import { colors, Routes } from '../../../constants'
-import TextInputField from '../../../components/TextInputField'
+import { colors } from '../../../constants'
 import { useSettingProfile } from './Hooks'
+import { ImageUploadContainer, Inputs } from './Component'
 
 const SettingProfile = (props) => {
     const {
         currency, setCurrency,
         isCurrencyOpen, setIsCurrencyOpen,
         currencyItems,
+        email, setEmail,
+        phonenum, setPhonenum,
     } = useSettingProfile()
+    console.log("email --", email, "|||", "phonenum --", phonenum);
 
     return (
         <AuthMainContainer>
-            <View style={styles.containerMain}>
-                <MainHeader leftImage={images.backArrow} title='PROFILE' onBackPress={() => props.navigation.goBack()} />
-                <Spacer />
+            <ScrollView
+                contentContainerStyle={{
+                    flexGrow: 1,
+                }}
+                keyboardShouldPersistTaps="handled">
+                <View style={styles.containerMain}>
+                    <MainHeader leftImage={images.backArrow} title='PROFILE' onBackPress={() => props.navigation.goBack()} />
+                    <Spacer />
 
-                <View style={styles.profileCard}>
-                    <View style={appStyles.rowBasic}>
-                        <Image source={images.placeholderProfileImg} style={styles.profilePlaceholderImg} />
-
-                        <View style={styles.profileTextContainer}>
-                            <ResponsiveText style={styles.headingProfile}>PROFILE IMAGE</ResponsiveText>
-                            <ResponsiveText style={styles.imageProfileDescription} numberOfLines={3}>
-                                We recommend to upload images in{'\n'}500x500 resolution. Max 5 MB in JPEG{'\n'}or PNG format
-                            </ResponsiveText>
-                            <Spacer />
-                            <SimpleButton text="Upload Image" styleView={styles.btnUploadImg} onPress={() => { }} />
-                        </View>
-                    </View>
+                    <ImageUploadContainer />
+                    <Spacer height={hp(4)} />
+                    <Inputs email={email} setEmail={setEmail} phonenum={phonenum} setPhonenum={setPhonenum} currencyItems={currencyItems} currency={currency} setCurrency={setCurrency} isCurrencyOpen={isCurrencyOpen} setIsCurrencyOpen={setIsCurrencyOpen} />
                 </View>
 
-                <Spacer height={hp(4)} />
-
-                <ResponsiveText style={styles.inputLabel}>Email</ResponsiveText>
-                <TextInputField placeholder={"Enter your email address"} placeholderTextColor={colors.placeHolderTextColor} />
-
-                <Spacer height={hp(2)} />
-
-                <ResponsiveText style={styles.inputLabel}>Phone number</ResponsiveText>
-                <TextInputField placeholder={"Enter your phone number"} placeholderTextColor={colors.placeHolderTextColor} />
-
-                <Spacer height={hp(2)} />
-
-                <ResponsiveText style={styles.inputLabel}>Primary Market Currency</ResponsiveText>
-                {/* <View style={styles.input}> */}
-                <DropDown
-                    items={currencyItems}
-                    value={currency}
-                    setIsOpen={setIsCurrencyOpen}
-                    setValue={setCurrency}
-                    placeholder="Select currency"
-                />
-                {/* </View> */}
-
-                <Spacer height={hp(24)} />
                 <View style={styles.btnSaveChangesView}>
-                    <SimpleButton text="Save Changes" textColor={colors.disableTextColor} disabled={true} styleView={styles.btnSaveChanges} />
+                    <SimpleButton
+                        text="Save Changes"
+                        textColor={colors.disableTextColor}
+                        disabled={email.trim() == '' || phonenum.trim() == '' ? true : false}
+                        styleView={{
+                            ...styles.btnSaveChanges,
+                            backgroundColor: email.trim() != '' && phonenum.trim() != '' ? colors.mainColor : colors.transparentBtn
+                        }}
+                    />
                 </View>
-
-            </View>
+            </ScrollView>
         </AuthMainContainer>
     )
 }

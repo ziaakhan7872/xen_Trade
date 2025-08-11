@@ -21,7 +21,6 @@ const TwoFactorAuth = (props) => {
                 contentContainerStyle={{
                     flexGrow: 1,
                     justifyContent: 'space-between',
-                    // minHeight: hp(120), // slightly larger than screen height
                 }}
                 keyboardShouldPersistTaps="handled">
 
@@ -29,10 +28,8 @@ const TwoFactorAuth = (props) => {
                     <MainHeader leftImage={images.backArrow} title='2-FACTOR AUTHENTICATION' onBackPress={() => props?.navigation?.goBack?.()} />
 
                     <Spacer height={hp(3)} />
-
                     <ResponsiveText style={styles.heading}>2-Factor authentication</ResponsiveText>
                     <ResponsiveText style={styles.description}>Enable 2-Factor authentication via Google Authenticator, or any 2FA App</ResponsiveText>
-
                     <Spacer height={hp(4)} />
 
                     <View style={styles.qrWrapper}>
@@ -40,9 +37,7 @@ const TwoFactorAuth = (props) => {
                     </View>
 
                     <Spacer height={hp(2)} />
-
                     <SimpleButton text="Secret Code" styleView={styles.secretBtn} />
-
                     <Spacer height={hp(3)} />
 
                     <ResponsiveText style={styles.inputLabel}>Enter code from 2-FA app</ResponsiveText>

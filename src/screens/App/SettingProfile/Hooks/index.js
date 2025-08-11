@@ -3,6 +3,8 @@ import { useState } from "react"
 export const useSettingProfile = () => {
     const [currency, setCurrency] = useState('usd')
     const [isCurrencyOpen, setIsCurrencyOpen] = useState(false)
+    const [email, setEmail] = useState('')
+    const [phonenum, setPhonenum] = useState('')
 
     const currencyItems = [
         { label: 'USD', value: 'usd' },
@@ -14,6 +16,8 @@ export const useSettingProfile = () => {
         currency, setCurrency,
         isCurrencyOpen, setIsCurrencyOpen,
         currencyItems,
+        email, setEmail,
+        phonenum, setPhonenum,
     }
 }
 
