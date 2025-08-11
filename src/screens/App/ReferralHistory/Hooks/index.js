@@ -10,7 +10,7 @@ export const useReferralHistory = () => {
     const FilterBottomSheetRef = useRef(null)
 
     const handleOpenFilter = () => {
-        FilterBottomSheetRef?.current?.expand()
+        FilterBottomSheetRef?.current?.open()
     }
     const handleCloseFilter = () => {
         FilterBottomSheetRef?.current?.close()
