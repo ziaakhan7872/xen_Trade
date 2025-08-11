@@ -53,7 +53,6 @@ const WithDraw = (props) => {
         error={error}
         walletAddressError={walletAddressError}
       />
-      <Portal>
         <WithDrawConfirmationBottomSheet
           apiError={apiError}
           handleCopy={handleCopy}
@@ -64,6 +63,7 @@ const WithDraw = (props) => {
           handleSubmit={handleSubmit}
           ref={WithdrawConfirmationRef}
         />
+        <Portal>
         {cameraActive && (
           <View style={StyleSheet.absoluteFill}>
             <Camera

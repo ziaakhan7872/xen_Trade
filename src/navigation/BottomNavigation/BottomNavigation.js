@@ -23,6 +23,8 @@ const BottomNavigation = () => {
                 },
                 tabBarActiveTintColor: colors.mainColor,
                 tabBarInactiveTintColor: colors.iconColor,
+                tabBarHideOnKeyboard: true,
+
             }}
         >
             <Screen

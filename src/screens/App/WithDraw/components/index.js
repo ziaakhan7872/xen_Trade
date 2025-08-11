@@ -9,6 +9,7 @@ import InputText from '../../../../components/InputText';
 import Line from '../../../../components/Liner';
 import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent';
 import { SimpleButton } from '../../../../components/SimpleButton';
+import BottomSheet from '../../../../components/BottomSheet';
 
 
 
@@ -54,15 +55,24 @@ export const AddressInput = ({ walletAddressError, setWalletAddressError, valida
             setAddress(text);
             setWalletAddressError(false); // clear error on typing
           }}
+           style={{
+              borderWidth: walletAddressError ? 1 : 0,
+              borderColor: walletAddressError ? colors.red : 'transparent',
+              borderRadius: wp(3),
+
+            }}
           paddingLeft={wp(3)} placeholder={"Scan or enter address"}
           placeholderTextColor={colors.placeHolderTextColor}
           width={wp(95)}
           onBlur={() => {
+            if(address?.trim()?.length>0){
             if (validateAddress(address)) {
               setWalletAddressError(false);
             } else {
               setWalletAddressError(true);
             }
+          }
+          
           }}
         />
         <TouchableOpacity onPress={onScan} style={styles.iconButton}>
@@ -155,7 +165,7 @@ export const WithDrawConfirmationBottomSheet = ({ apiError, handleCopy, Network,
   const amountReceived = Number(amount) + Number(Network?.fee || 0)
 
   return (
-    <GorhomBottomSheet sheetRef={ref}>
+    <BottomSheet ref={ref}>
       <View style={styles.confirmContainer}>
         <View style={styles.confirmHeader}>
           <ResponsiveText style={styles.confirmTitle}>WITHDRAWAL CONFIRMATION</ResponsiveText>
@@ -226,7 +236,7 @@ export const WithDrawConfirmationBottomSheet = ({ apiError, handleCopy, Network,
         </View>
 
       </View >
-    </GorhomBottomSheet >
+    </BottomSheet >
   );
 };
 const styles = StyleSheet.create({

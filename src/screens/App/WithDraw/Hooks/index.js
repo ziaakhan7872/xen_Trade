@@ -30,6 +30,7 @@ export const UseWidthDraw = (props) => {
   const [cameraActive, setCameraActive] = useState(false);
   const { hasPermission, requestPermission } = useCameraPermission();
   const device = useCameraDevice('back');
+  
 
 
   const handleSubmit = async () => {
@@ -106,7 +107,7 @@ export const UseWidthDraw = (props) => {
   const validateAddress = (address) => {
     const symbol = cryptoData?.account?.market?.symbol?.toUpperCase();
     const networkSYmbol = network?.standard;
-    console.log(symbol, network?.standard)
+    console.log(symbol, network?.standard,cryptoData)
 
     if ((symbol === "ETH" || symbol === "USDT" || symbol === "USDC") && networkSYmbol === "ERC20") {
       return /^0x[a-fA-F0-9]{40}$/.test(address); // EVM format

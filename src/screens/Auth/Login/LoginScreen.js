@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { style } from './Style'
@@ -16,14 +16,15 @@ const LoginScreen = (props) => {
   return (
     <AuthMainContainer>
       <View style={style.container}>
-        <LoginForm
-          errorMessage={errorMessage}
-          passwordVisible={passwordVisible} setPasswordVisible={setPasswordVisible}
-          email={email} setEmail={setEmail}
-          password={password} setPassword={setPassword}
-          Login={handleLogin}
-          goToForgotPassword={goToForgotPassword}
-          signUp={() => props?.navigation.navigate(Routes.SignupScreen)} />
+          <LoginForm
+            errorMessage={errorMessage}
+            passwordVisible={passwordVisible} setPasswordVisible={setPasswordVisible}
+            email={email} setEmail={setEmail}
+            password={password} setPassword={setPassword}
+            Login={handleLogin}
+            goToForgotPassword={goToForgotPassword}
+            signUp={() => props?.navigation.navigate(Routes.SignupScreen)} />
+
       </View>
 
     </AuthMainContainer>

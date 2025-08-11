@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
+import { hp, wp } from "../../../components/ResponsiveComponent";
 
 export const style = StyleSheet.create({
     container: {
-        flex: 1,
-        // justifyContent: "center",
-        // alignItems: "center"
-        // alignSelf: 'center'
+        flex:1,
+        alignSelf:"center",
     },
+    
 })

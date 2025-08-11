@@ -23,38 +23,7 @@ export const useHomeScreen = (props) => {
 
     console.log(isVisible,"bottomsheet");
  
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      () => {
-         props.navigation.setOptions({
-      tabBarStyle: { display: 'none' },
-    });
-         
-      }
-    );
-
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => {
-        setIsVisible(false); 
-       
-    props.navigation.setOptions({
-      tabBarStyle: {
-        paddingTop: hp(0.9),
-        backgroundColor: colors.bottomTabColor,
-        borderTopWidth: 0,
-      }, 
-    });
-      }
-    );
-
-    return () => {
-      // Clean up listeners on component unmount
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
-    };
-  }, []);
+  
 
 
   useEffect(() => {

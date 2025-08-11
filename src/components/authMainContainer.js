@@ -1,56 +1,62 @@
-import { StatusBar, StyleSheet, View } from 'react-native';
-import React from 'react';
+import React, { useMemo } from 'react';
+import { StatusBar, StyleSheet, View, Dimensions, Platform, KeyboardAvoidingView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { wp } from './ResponsiveComponent';
 import LinearGradient from 'react-native-linear-gradient';
+import { wp } from './ResponsiveComponent';
 
 export const AuthMainContainer = ({
   style,
   containerStyle,
   children,
   paddingHorizontal = 0,
+  // allow screens to tweak the offset if they have a header
+  keyboardVerticalOffset = 0,
+  behavior = Platform.OS === 'ios' ? 'padding' : 'height',
 }) => {
-  return (
-    <>
-      <StatusBar
-        translucent
-        backgroundColor="transparent"
-        barStyle="light-content"
-      />
+  // Use screen height so the gradient ignores window resize when keyboard shows
+  const screenHeight = useMemo(() => Dimensions.get('screen').height, []);
 
-      {/* Gradient Background - Absolute full screen */}
+  return (
+    <View style={{ flex: 1, backgroundColor: '#011316' }}>
+      <StatusBar translucent backgroundColor="transparent" barStyle="light-content" />
+
+      {/* Fixed full-screen gradient that never moves */}
       <LinearGradient
-        colors={['#0a2a2f', '#011316']} // Top: dark teal, Bottom: blackish
-        locations={[0, 0.54]}            // Adjust gradient position
+        pointerEvents="none"
+        colors={['#0a2a2f', '#011316']}
+        locations={[0, 0.54]}
         start={{ x: 0.5, y: 0.15 }}
         end={{ x: 0.5, y: 0.6 }}
-        style={StyleSheet.absoluteFillObject} // Full screen overlay
+        style={[StyleSheet.absoluteFillObject, { height: screenHeight }]}
       />
 
-      {/* Content */}
-      <SafeAreaView
-        style={[styles.safeArea, style]}
-        edges={['top', 'left', 'right']} // Ignore bottom safe area padding
-      >
-        <View
-          style={[
-            styles.container,
-            { paddingHorizontal: wp(paddingHorizontal) },
-            containerStyle,
-          ]}
-        >
-          {children}
+      {/* Content + built-in KeyboardAvoidingView */}
+      <SafeAreaView style={[styles.safeArea, style]} edges={['top', 'left', 'right']}>
+        <View style={styles.flex}>
+          <View
+            style={[
+              styles.container,
+              { paddingHorizontal: wp(paddingHorizontal) },
+              containerStyle,
+            ]}
+          >
+            <KeyboardAvoidingView
+              style={styles.flex}
+              behavior={behavior}
+              keyboardVerticalOffset={keyboardVerticalOffset}
+            >
+              {children}
+            </KeyboardAvoidingView>
+            
+          </View>
         </View>
       </SafeAreaView>
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-  },
+  safeArea: { flex: 1 },
+  flex: { flex: 1 },
+  container: { flex: 1 },
 });
