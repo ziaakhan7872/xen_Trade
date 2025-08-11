@@ -6,7 +6,21 @@ import Feather from 'react-native-vector-icons/Feather';
 import EvilIcons from "react-native-vector-icons/EvilIcons"
 
 
-const InputText = ({onFocus, onBlur, handleRightIconPress, paddingLeft = 0, rightIcon, label, value, onChangeText, placeholder, secureTextEntry, style, placeholderTextColor, handleIconPress, isPasswordVisible, icon, width = wp(80) }) => {
+const InputText = ({
+    onFocus, onBlur,
+     handleRightIconPress, 
+     paddingLeft = 0, rightIcon, 
+     label, value, onChangeText, 
+     placeholder, secureTextEntry, 
+     style, placeholderTextColor, 
+     handleIconPress, 
+     isPasswordVisible, 
+     icon, 
+     width = wp(80),
+     leftChildren=<EvilIcons name="search" color={colors.mainColor} size={25} />  ,
+     iconChildren=<Feather name={isPasswordVisible ? 'eye-off' : 'eye'} size={20} color={colors.iconColor} />,
+     paddingRight=paddingRight
+    }) => {
     return (
         <View style={[styles.container, style]}>
             {label && <Text style={styles.label}>{label}</Text>}
@@ -15,7 +29,7 @@ const InputText = ({onFocus, onBlur, handleRightIconPress, paddingLeft = 0, righ
                 {/* Left Icon (Search) */}
                 {rightIcon && (
                     <View style={styles.leftIcon}>
-                        <EvilIcons name="search" color={colors.mainColor} size={25} />
+                        {leftChildren}
                     </View>
                 )}
 
@@ -27,7 +41,7 @@ const InputText = ({onFocus, onBlur, handleRightIconPress, paddingLeft = 0, righ
                     secureTextEntry={secureTextEntry}
                     style={[
                         styles.input,
-                        { paddingLeft: rightIcon ? wp(8) : paddingLeft, width: width }
+                        { paddingLeft: rightIcon ? wp(8) : paddingLeft, width: width ,paddingRight:icon?wp(10):paddingRight}
                     ]}
                     placeholderTextColor={placeholderTextColor}
                     onBlur={onBlur}
@@ -39,7 +53,7 @@ const InputText = ({onFocus, onBlur, handleRightIconPress, paddingLeft = 0, righ
                 {/* Right Icon (Password Eye) */}
                 {icon && (
                     <TouchableOpacity onPress={handleIconPress} style={styles.iconContainer}>
-                        <Feather name={isPasswordVisible ? 'eye-off' : 'eye'} size={20} color={colors.iconColor} />
+                        {iconChildren}
                     </TouchableOpacity>
                 )}
             </View>

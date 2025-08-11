@@ -1,3 +1,4 @@
 <resources>
-    <color name="splash_background_color">#E8F2FF</color> <!-- Light blue color for splash screen -->
+  <color name="app_bg">#000000</color> <!-- pure black -->
+  <color name="splash_background_color">#011316</color> <!-- keep if you still use it -->
 </resources>

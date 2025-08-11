@@ -14,9 +14,9 @@ export const ResetPasswordContainer = ({
     password, setPassword, confirmPassword, setConfirmPassword, ResetPassword
 }) => {
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        >
+        // <KeyboardAvoidingView
+        //     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        // >
             <ScrollView contentContainerStyle={styles.scrollViewContainer}>
                 <View style={styles.mainBox}>
                     <Spacer height={hp(0.5)} />
@@ -43,7 +43,7 @@ export const ResetPasswordContainer = ({
 
                 </View>
             </ScrollView>
-        </KeyboardAvoidingView>
+        // </KeyboardAvoidingView>
     )
 }
 

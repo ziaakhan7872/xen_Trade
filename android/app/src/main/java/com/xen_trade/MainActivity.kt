@@ -24,9 +24,12 @@ class MainActivity : ReactActivity() {
       DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
 
   
-  override fun onCreate(savedInstanceState: Bundle?) {
-    // Correct call with activity and theme
-    RNBootSplash.init(this, R.style.BootTheme)
-    super.onCreate(savedInstanceState)
-  }
+override fun onCreate(savedInstanceState: Bundle?) {
+  RNBootSplash.init(this, R.style.BootTheme) // before super
+  super.onCreate(savedInstanceState)
+
+  setTheme(R.style.AppTheme)
+  window.setBackgroundDrawableResource(R.color.app_bg) // ensure it’s black during relayouts
+}
+
 }

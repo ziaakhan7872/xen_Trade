@@ -39,10 +39,12 @@ export const SelectCryptoSearchBox = ({searchCoin,setSearchCoin}) => {
                 paddingLeft={wp(5)}
                 value={searchCoin}
                 onChangeText={setSearchCoin}
+                icon={true}
+                iconChildren={ <EvilIcons name="search" color={colors.mainColor} size={25} />}
             />
-            <View style={styles.leftIcon}>
+            {/* <View style={styles.leftIcon}>
                 <EvilIcons name="search" color={colors.mainColor} size={25} />
-            </View>
+            </View> */}
         </View>
     )
 }
