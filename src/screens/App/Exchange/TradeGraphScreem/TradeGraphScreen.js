@@ -5,7 +5,7 @@ import UseTradeGraphScreen from './Hooks/Index'
 import Line from '../../../../components/Liner'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import Spacer from '../../../../components/Spacer'
-import { BuySellButton, CoinPriceDetail, FavoutiteBottomSheetComponnet, FlatlistValues, OrderBookHeader, PriceUSDT, TradeGraph, TradeGraphBelowHeader, TradeGraphHeader, TradeHeader } from './Component/Index'
+import { BuySellButton, CoinPriceDetail, ExchangeInnerHeader, FavoutiteBottomSheetComponnet, FlatlistValues, OrderBookHeader, PriceUSDT, TradeGraph, TradeGraphBelowHeader, TradeGraphHeader, TradeHeader } from './Component/Index'
 import { Amount } from '../../../../utilities/dummyData'
 import { colors } from '../../../../constants'
 import RowButton from '../../../../components/RowButton'
@@ -33,6 +33,7 @@ const TradeGraphScreen = (props) => {
                 <Spacer />
                 <Line height={hp(0.1)} />
                 <Spacer />
+                <ExchangeInnerHeader/>
                 <TradeGraph data={candleChartData} />
                 <Spacer />
                 <TradeGraphBelowHeader />

@@ -11,14 +11,16 @@ import { hp } from '../../../components/ResponsiveComponent'
 import { MainHeader } from '../../../components/MainHeader'
 import { appStyles } from '../../../utilities'
 import { Routes } from '../../../constants'
+import { UseSetting } from './Hooks/Index'
 
 
 const Settings = (props) => {
+    const {showBotomTab} = UseSetting(props)
     return (
         <AuthMainContainer>
             {/* <Spacer height={hp(1)} /> */}
             <View style={styles.containerMain}>
-                <MainHeader leftImage={images.backArrow} title={'SETTINGS'} />
+                <MainHeader onBackPress={()=>props?.navigation?.goBack()} leftImage={images.backArrow} title={'SETTINGS'} />
                 <Spacer height={hp(4)} />
                 <View style={styles.profileCard}>
                     <View style={appStyles.rowBasic}>

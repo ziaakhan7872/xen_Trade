@@ -38,7 +38,7 @@ const HomeScreen = (props) => {
           </View>
         )}
         {threeRowTabButtonPress === "balance" && (
-          <BalanceOverView />
+          <BalanceOverView walletPress={()=>props?.navigation?.navigate(Routes.WalletHome)} />
         )}
         {threeRowTabButtonPress === "account" && (
           <AccountOverView />

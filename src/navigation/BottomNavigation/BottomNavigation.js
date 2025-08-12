@@ -151,6 +151,7 @@ const BottomNavigation = () => {
                 name={Routes.settings}
                 component={App.Settings}
                 options={{
+                    tabBarStyle: { display: 'none' },
                     tabBarButton: (props) => (
                         <TouchableOpacity
                             {...props}

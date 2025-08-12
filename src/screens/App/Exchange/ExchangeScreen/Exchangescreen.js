@@ -16,6 +16,7 @@ import { Routes } from '../../../../constants'
 
 const Exchangescreen = (props) => {
   const {
+    stage, setStage,
     buySellButton, setBuySellButton,
     buyerSlider, setBuyerSlider, sellSlider, setSelSlider,
     currentOrderHistoryPress, setCurrentOrderHistoryPress,
@@ -35,73 +36,120 @@ const Exchangescreen = (props) => {
   return (
     <ExchangeMainContainer>
       <View style={style.container}>
-        <ExchangeHeader marketData={selectedData} onPressTradeGraph={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen })} onpress={() => favouriteBottomSheetRef?.current?.open()} />
+        <ExchangeHeader
+          marketData={selectedData}
+          onPressTradeGraph={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen })}
+          onpress={() => favouriteBottomSheetRef?.current?.open()}
+        />
+
         <Spacer />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={style.formandOrderBookView}>
             <View style={{ flex: 1, marginRight: wp(2), justifyContent: 'space-between' }}>
-              <BuySellRowButton buySellButton={buySellButton} setBuySellButton={setBuySellButton} />
-              <Spacer height={hp(1)} />
-              {buySellButton === "buy" ? (
-                <BuyForm
-                  handleBuyPriceChange={handleBuyPriceChange}
-                  handleBuyQuantityChange={handleBuyQuantityChange}
-                  handleBuySliderChange={handleBuySliderChange}
-                  Price={price}
-                  setPrice={setPrice}
-                  currentCoinPrice={cureentCoinPrice}
-                  setCurrentCoinPrice={setCurrentCoinPrice}
-                  addQuantity={addQuantity}
-                  dicreaseQuantity={discreaseQuantity}
-                  quantity={quantity}
-                  setQuantity={setQuantity}
-                  QuoteBalance={availableQuoteBalance}
-                  marketData={selectedData}
-                  tradingType={tradingType}
-                  onPressTradingType={() => tradngBottomSheetRef?.current?.open()}
-                  value={buyerSlider}
-                  setValue={setBuyerSlider}
-                />
+              {stage >= 1 ? (
+                <>
+                  <BuySellRowButton
+                    buySellButton={buySellButton}
+                    setBuySellButton={setBuySellButton}
+                  />
+                  <Spacer height={hp(1)} />
+                  {buySellButton === "buy" ? (
+                    <BuyForm
+                      handleBuyPriceChange={handleBuyPriceChange}
+                      handleBuyQuantityChange={handleBuyQuantityChange}
+                      handleBuySliderChange={handleBuySliderChange}
+                      Price={price}
+                      setPrice={setPrice}
+                      currentCoinPrice={cureentCoinPrice}
+                      setCurrentCoinPrice={setCurrentCoinPrice}
+                      addQuantity={addQuantity}
+                      dicreaseQuantity={discreaseQuantity}
+                      quantity={quantity}
+                      setQuantity={setQuantity}
+                      QuoteBalance={availableQuoteBalance}
+                      marketData={selectedData}
+                      tradingType={tradingType}
+                      onPressTradingType={() => tradngBottomSheetRef?.current?.open()}
+                      value={buyerSlider}
+                      setValue={setBuyerSlider}
+                    />
 
+                  ) : (
+                    <SellForm
+                      marketData={selectedData}
+                      tradingType={tradingType}
+                      onPressTradingType={() => tradngBottomSheetRef?.current?.open()}
+                      value={sellSlider}
+                      setValue={setSelSlider}
+                    />
+                  )}
+                </>
               ) : (
-                <SellForm marketData={selectedData} tradingType={tradingType} onPressTradingType={() => tradngBottomSheetRef?.current?.expand()} value={sellSlider} setValue={setSelSlider} />
+                <View style={{ height: hp(28) }} />
               )}
             </View>
 
             <View style={{ flex: 1, marginLeft: wp(2), justifyContent: 'space-between' }}>
-              <PriceUSDT title1={'Price'} title2={`(${'USDT'})`} title3={'Amount'} title4={`(${'ETH'})`} />
-              <Spacer height={hp(0.5)} />
-              <FlatlistValues data={Amount} textColor={colors.green} />
-              <Spacer height={hp(1)} />
-              <Line height={hp(0.1)} />
-              <Spacer height={hp(1)} />
-              <View style={appStyles.row}>
-                <ResponsiveText style={style.priceText}>2,048.15</ResponsiveText>
-                <ResponsiveText style={style.priceText2}>≈$2,048.15</ResponsiveText>
-              </View>
-              <Spacer height={hp(1)} />
-              <Line height={hp(0.1)} />
-              <Spacer height={hp(1)} />
-              <FlatlistValues data={Amount} />
+              {stage >= 2 ? (
+                <>
+                  <PriceUSDT title1={'Price'} title2={`(${'USDT'})`} title3={'Amount'} title4={`(${'ETH'})`} />
+                  <Spacer height={hp(0.5)} />
+                  <FlatlistValues data={Amount} textColor={colors.green} />
+                  <Spacer height={hp(1)} />
+                  <Line height={hp(0.1)} />
+                  <Spacer height={hp(1)} />
+                  <View style={appStyles.row}>
+                    <ResponsiveText style={style.priceText}>2,048.15</ResponsiveText>
+                    <ResponsiveText style={style.priceText2}>≈$2,048.15</ResponsiveText>
+                  </View>
+                  <Spacer height={hp(1)} />
+                  <Line height={hp(0.1)} />
+                  <Spacer height={hp(1)} />
+                  <FlatlistValues data={Amount} />
+                </>
+              ) : (
+                <View style={{ height: hp(28) }} />
+              )}
+
             </View>
           </View>
           <Spacer />
-          <CurrentOrderHistoryHeader props={props} currentOrders={currentOrder} buttonPress={currentOrderHistoryPress} setButtonPress={setCurrentOrderHistoryPress} />
-          <Line height={hp(0.1)} width={Dimensions.get('window').width} />
-          {currentOrderHistoryPress === "currentOrder" ? (
+          {stage >= 3 ? (
             <>
-              <Spacer />
+              <CurrentOrderHistoryHeader
+                props={props}
+                currentOrders={currentOrder}
+                buttonPress={currentOrderHistoryPress}
+                setButtonPress={setCurrentOrderHistoryPress}
+              />
+              <Line height={hp(0.1)} width={Dimensions.get('window').width} />
+              {currentOrderHistoryPress === "currentOrder" ? (
+                <>
+                  <Spacer />
+                  <CurrentOrderComponent
+                    setIsCurrentSymbol={setIsCurrentSymbol}
+                    isCurrentSymbol={isCurrentSymbol}
+                  />
+                </>
 
-              <CurrentOrderComponent setIsCurrentSymbol={setIsCurrentSymbol} isCurrentSymbol={isCurrentSymbol} />
+
+              ) : (
+                <AssetsComponent />
+              )}
             </>
-
-
           ) : (
-            <AssetsComponent />
+            <View style={{ height: hp(28) }} />
+
           )}
+
         </ScrollView>
         <Portal>
-          <TradingTypeComponent tradingTypePress={tradingType} setTradingTypePress={setTradingType} closeBottomSheet={() => tradngBottomSheetRef?.current?.close()} ref={tradngBottomSheetRef} />
+          <TradingTypeComponent
+            tradingTypePress={tradingType}
+            setTradingTypePress={setTradingType}
+            closeBottomSheet={() => tradngBottomSheetRef?.current?.close()}
+            ref={tradngBottomSheetRef}
+          />
           <FavoutiteBottomSheetComponnet ref={favouriteBottomSheetRef} />
         </Portal>
         <View >
@@ -115,5 +163,5 @@ const Exchangescreen = (props) => {
   )
 }
 
-export default Exchangescreen
+export default React.memo(Exchangescreen);
 

@@ -33,7 +33,7 @@ export const AuthMainContainer = ({
       />
 
       {/* Content + built-in KeyboardAvoidingView */}
-      <SafeAreaView style={[styles.safeArea, style]} edges={['top', 'left', 'right','bottom']}>
+      <SafeAreaView style={[styles.safeArea, style]} edges={['top', 'left', 'right']}>
         <View style={styles.flex}>
           <View
             style={[

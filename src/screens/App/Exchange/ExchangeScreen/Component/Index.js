@@ -91,7 +91,7 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
                     style={{ textAlign: 'center', minWidth: wp(10), maxWidth: wp(30), color: colors.white }}
                     value={quantity.toString()}
                     onChangeText={handleBuyQuantityChange}
-                    placeholder={`Amount ${marketData?.base}`}
+                    placeholder={marketData?.base?`Amount ${marketData?.base}`:`Amount`}
                     keyboardType="numeric"
                     placeholderTextColor={colors.placeHolderTextColor}
                 />
@@ -129,7 +129,14 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
                 </View>
             </View>
             <Spacer height={hp(1)} />
-            <TextInput value={Price ? Price.toString() : ""} onChangeText={handleBuyPriceChange} placeholder={`Amount ${marketData?.quote}`} placeholderTextColor={colors.placeHolderTextColor} style={styles.inputTextStyling} keyboardType='numeric' />
+            <TextInput
+                value={Price ? Price.toString() : ""}
+                onChangeText={handleBuyPriceChange}
+                placeholder={marketData?.quote?`Amount ${marketData?.quote}`:`Amount`}
+                placeholderTextColor={colors.placeHolderTextColor}
+                style={styles.inputTextStyling}
+                keyboardType='numeric'
+            />
             <Spacer height={hp(1)} />
             <View style={{ width: wp(43), flexDirection: "row", justifyContent: "space-between" }}>
                 <View>
@@ -151,7 +158,13 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
                 <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.000342 USDT</ResponsiveText>
             </View>
             <Spacer />
-            <SimpleButton buttonWidth={wp(43)} backgroundColor={colors.green} height={hp(4.5)} textColor={colors.white} text={`Buy ${marketData?.base}`} />
+            <SimpleButton
+                buttonWidth={wp(43)}
+                backgroundColor={colors.green}
+                height={hp(4.5)}
+                textColor={colors.white}
+                text={marketData?.base ? `Buy ${marketData.base}` : 'Buy'}
+            />
 
         </>
 
@@ -499,7 +512,7 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
                             <HorizontalSpacer width={wp(2)} />
                             <View>
                                 <ResponsiveText style={styles.text8}>Limit order</ResponsiveText>
-                                <ResponsiveText style={[styles.text2,{width:wp(60)}]} numberOfLines={2}>Buy or Sell at a specified price or better</ResponsiveText>
+                                <ResponsiveText style={[styles.text2, { width: wp(60) }]} numberOfLines={2}>Buy or Sell at a specified price or better</ResponsiveText>
                             </View>
                         </View>
 
@@ -514,7 +527,7 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
                             <HorizontalSpacer width={wp(3)} />
                             <View>
                                 <ResponsiveText style={styles.text8}>Market order</ResponsiveText>
-                                <ResponsiveText style={[styles.text2,{width:wp(60)}]} numberOfLines={2}>Buy or sell instantly at the best market price.</ResponsiveText>
+                                <ResponsiveText style={[styles.text2, { width: wp(60) }]} numberOfLines={2}>Buy or sell instantly at the best market price.</ResponsiveText>
                             </View>
                         </View>
                         {tradingTypePress === "market" && (
@@ -530,7 +543,7 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
 
 export const FavoutiteBottomSheetComponnet = ({ ref }) => {
     return (
-        <BottomSheet  ref={ref}>
+        <BottomSheet ref={ref}>
             <RenderFavouriteCoinList />
         </BottomSheet>
     )
@@ -578,7 +591,7 @@ const styles = StyleSheet.create({
     },
     inputTextStyling: {
         width: wp(43),
-        height: hp(4.5),
+        // height: hp(4.5),
         borderRadius: wp(3),
         backgroundColor: colors.cardsBgColor,
         color: colors.white,
@@ -758,7 +771,7 @@ const styles = StyleSheet.create({
         borderRadius: wp(3),
         backgroundColor: colors.buttonColor,
         paddingVertical: wp(3),
-        width:wp(90),
+        width: wp(90),
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",

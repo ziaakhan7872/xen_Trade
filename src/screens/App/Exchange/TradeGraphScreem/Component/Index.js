@@ -154,6 +154,43 @@ const calculateYPosition = (price, minPrice, maxPrice) => {
     return hp(30) * (1 - normalizedPrice);
 };
 
+export const ExchangeInnerHeader = () => {
+    return (
+        <View style={styles.tradingHeader}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>30</ResponsiveText>
+                <HorizontalSpacer />
+                <View style={{ width: wp(1), height: wp(1), borderRadius: wp(0.5), backgroundColor: colors.iconColor }} />
+                <HorizontalSpacer />
+
+                <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>BTC/USDT</ResponsiveText>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <HorizontalSpacer />
+                    <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>O</ResponsiveText>
+                    <HorizontalSpacer width={wp(1)} />
+                    <ResponsiveText style={[styles.text6, { fontWeight: "400", color: colors.green }]}>0.15894</ResponsiveText>
+                </View>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <HorizontalSpacer />
+                    <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>H</ResponsiveText>
+                    <HorizontalSpacer width={wp(1)} />
+                    <ResponsiveText style={[styles.text6, { fontWeight: "400", color: colors.red }]}>0.15894</ResponsiveText>
+                </View>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <HorizontalSpacer />
+                    <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>L</ResponsiveText>
+                    <HorizontalSpacer width={wp(1)} />
+                    <ResponsiveText style={[styles.text6, { fontWeight: "400", color: colors.red }]}>0.15894</ResponsiveText>
+                </View>
+                <HorizontalSpacer />
+
+                <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>C</ResponsiveText>
+
+            </View>
+        </View>
+    )
+}
+
 export const TradeGraph = ({ data }) => {
     // const barCart = [{ value: 50 }, { value: 80 }, { value: 90 }, { value: 70 }]
     // console.log(data,"data")
@@ -162,105 +199,83 @@ export const TradeGraph = ({ data }) => {
     const currentPrice = lastCandle.close;
     const maxPrice = Math.max(...data.map(c => c.high));
     const minPrice = Math.min(...data.map(c => c.low));
+    const CANDLE_W = wp(3.1);
+    const GAP = wp(1);                  // visual gap between candles
+    const SIDE_PAD = GAP * 4;           // left/right padding for ScrollView
+
+    // Chart width must be >= data.length * (candle width + gap)
+    const CHART_W = Math.max(width, data.length * (CANDLE_W + GAP));
+
+    // Ensure candle width never exceeds each step
+    const step = CHART_W / Math.max(1, data.length);
+    const SAFE_CANDLE_W = Math.max(1, Math.min(CANDLE_W, step - GAP));
     return (
         <>
-            <View style={styles.tradingHeader}>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>30</ResponsiveText>
-                    <HorizontalSpacer />
-                    <View style={{ width: wp(1), height: wp(1), borderRadius: wp(0.5), backgroundColor: colors.iconColor }} />
-                    <HorizontalSpacer />
-
-                    <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>BTC/USDT</ResponsiveText>
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <HorizontalSpacer />
-                        <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>O</ResponsiveText>
-                        <HorizontalSpacer width={wp(1)} />
-                        <ResponsiveText style={[styles.text6, { fontWeight: "400", color: colors.green }]}>0.15894</ResponsiveText>
-                    </View>
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <HorizontalSpacer />
-                        <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>H</ResponsiveText>
-                        <HorizontalSpacer width={wp(1)} />
-                        <ResponsiveText style={[styles.text6, { fontWeight: "400", color: colors.red }]}>0.15894</ResponsiveText>
-                    </View>
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <HorizontalSpacer />
-                        <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>L</ResponsiveText>
-                        <HorizontalSpacer width={wp(1)} />
-                        <ResponsiveText style={[styles.text6, { fontWeight: "400", color: colors.red }]}>0.15894</ResponsiveText>
-                    </View>
-                    <HorizontalSpacer />
-
-                    <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>C</ResponsiveText>
-
-                </View>
-            </View>
-            <GestureHandlerRootView style={{ flexDirection: "row" }}>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
-
-                    <View style={{}}>
-                        <CandlestickChart.Provider data={data} >
-                            <CandlestickChart width={width + (data?.length * wp(2))} height={hp(30)} aria-live='assertive' >
-                                <CandlestickChart.Candles positiveColor={colors.green} negativeColor={colors.red}
-                                    candleProps={{ width: wp(3.1) }} collapsable={true} />
-                                <Spacer />
-
-                            </CandlestickChart>
-                        </CandlestickChart.Provider>
-                        <View style={{ flexDirection: "row" }}>
-                            <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>Volume SMA 9 </ResponsiveText>
-                            <ResponsiveText style={[styles.text6, { fontWeight: "400", color: colors.green }]}>$223K</ResponsiveText>
-
+            <GestureHandlerRootView style={{ flexDirection: 'row' }}>
+                <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                >
+                    <View >
+                    <View style={{ paddingHorizontal:wp(5)}}>
+                            <CandlestickChart.Provider data={data}>
+                                <CandlestickChart width={CHART_W} height={hp(30)} aria-live="assertive">
+                                    <CandlestickChart.Candles
+                                        positiveColor={colors.green}
+                                        negativeColor={colors.red}
+                                        candleProps={{ width: SAFE_CANDLE_W }}
+                                    />
+                                </CandlestickChart>
+                            </CandlestickChart.Provider>
                         </View>
-                        <View style={{ marginTop: hp(1) }}>
+
+
+                        {/* volume / labels under the chart */}
+                        <View style={{ flexDirection: 'row' ,paddingHorizontal:wp(5)}}>
+                            <ResponsiveText style={[styles.text6, { fontWeight: '400' }]}>Volume SMA 9 </ResponsiveText>
+                            <ResponsiveText style={[styles.text6, { fontWeight: '400', color: colors.green }]}>$223K</ResponsiveText>
+                        </View>
+
+                        <View style={{ marginTop: hp(1), width: CHART_W,paddingHorizontal:wp(2) }}>
                             <BarChart
-                                data={data.map(item => ({
-                                    value: item.volume,
-                                    frontColor: item.close >= item.open ? colors.green : colors.red,
+                                data={data.map(d => ({
+                                    value: d.volume,
+                                    frontColor: d.close >= d.open ? colors.green : colors.red,
                                 }))}
-                                barWidth={wp(2)}
-                                spacing={wp(1)}
+                                barWidth={SAFE_CANDLE_W * 0.65}
+                                spacing={GAP}
                                 height={hp(8)}
                                 hideRules
                                 hideYAxisText
                                 yAxisThickness={0}
                                 xAxisThickness={0}
-
                             />
                         </View>
-
                     </View>
                 </ScrollView>
 
-
                 <View style={{ ...styles.lineView1, top: calculateYPosition(currentPrice, minPrice, maxPrice) }} />
 
-
-
-                <View style={[styles.yAxisView, { height: hp(30), justifyContent: "space-between" }]}>
-                    {[maxPrice, (maxPrice + minPrice) / 2, minPrice].map((price, index) => (
-                        <ResponsiveText key={index} style={styles.yAxisText}>
-                            {price.toLocaleString()}
+                <View style={[styles.yAxisView, { height: hp(30), justifyContent: 'space-between' }]}>
+                    {[maxPrice, (maxPrice + minPrice) / 2, minPrice].map((p, i) => (
+                        <ResponsiveText key={i} style={styles.yAxisText}>
+                            {p.toLocaleString()}
                         </ResponsiveText>
                     ))}
                 </View>
-
-
-                {/* <View style={{ ...styles.lineView, top: hp(1.2) }} />
-                <View style={{ ...styles.lineView, top: hp(10) }} />
-                <View style={{ ...styles.lineView, top: hp(20) }} />
-                <View style={{ ...styles.lineView, top: hp(30) }} /> */}
             </GestureHandlerRootView>
-            <View style={[appStyles.row, { width: width + data.length * wp(2), justifyContent: "space-between" }]}>
-                {data.map((item, index) => (
-                    index % 5 === 0 && (
+
+            {/* X-axis labels must match CHART_W as well */}
+            <View style={[appStyles.row, { width: CHART_W, justifyContent: 'space-between', paddingHorizontal: SIDE_PAD }]}>
+                {data.map((item, index) =>
+                    index % 5 === 0 ? (
                         <ResponsiveText key={index} style={styles.xAxisText}>
                             {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </ResponsiveText>
-                    )
-                ))}
+                    ) : null
+                )}
             </View>
+
 
 
             {/* </View> */}
@@ -445,7 +460,7 @@ const styles = StyleSheet.create({
         width: wp(90),
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingHorizontal: wp(1),
+        // paddingHorizontal: wp(1),
         alignSelf: "center",
         // borderWidth:1
         // borderWidth:1
@@ -454,7 +469,6 @@ const styles = StyleSheet.create({
         width: wp(90),
         flexDirection: "row",
         // justifyContent: "space-between",
-        paddingHorizontal: wp(1),
         alignSelf: "center",
         // borderWidth:1
     },

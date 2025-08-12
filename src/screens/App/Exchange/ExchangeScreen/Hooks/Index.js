@@ -3,6 +3,7 @@ import { GetAccountBalanceMyMarket, getPairApi } from "../../../../../constants/
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useSelector } from "react-redux"
 import BigNumber from 'bignumber.js';
+import { InteractionManager } from "react-native";
 
 
 export const UseExchange = (props) => {
@@ -25,6 +26,21 @@ export const UseExchange = (props) => {
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(0);
   const [cureentCoinPrice, setCurrentCoinPrice] = useState(22976.27)
+  const [stage, setStage] = useState(0);
+
+  useEffect(() => {
+    let t1, t2;
+    const task = InteractionManager.runAfterInteractions(() => {
+      setStage(1);
+      requestAnimationFrame(() => {
+        t1 = setTimeout(() => setStage(2), 16);
+        t2 = setTimeout(() => setStage(3), 32);
+      });
+    });
+    return () => { task.cancel(); clearTimeout(t1); clearTimeout(t2); };
+  }, []);
+
+
 
   useEffect(() => {
     setPrice(quantity * cureentCoinPrice);
@@ -45,7 +61,7 @@ export const UseExchange = (props) => {
     const coinPriceBN = new BigNumber(cureentCoinPrice || 0);
 
     if (!coinPriceBN.isZero() && !priceBN.isNaN()) {
-      const newQuantity = priceBN.dividedBy(coinPriceBN).toString(); 
+      const newQuantity = priceBN.dividedBy(coinPriceBN).toString();
       const newQ = new BigNumber(newQuantity).toFormat(6)
       setQuantity(newQ);
       console.log("New Quantity:", newQuantity);
@@ -73,7 +89,7 @@ export const UseExchange = (props) => {
     }
   };
 
-  const handleBuySliderChange = (value)=>{
+  const handleBuySliderChange = (value) => {
     const availableBalance = new BigNumber(availableQuoteBalance || 0);
     const sliderValue = new BigNumber(value).dividedBy(100);
     const newPrice = availableBalance.multipliedBy(sliderValue).toString();
@@ -85,7 +101,7 @@ export const UseExchange = (props) => {
       setQuantity(formattedQuantity);
     }
     setBuyerSlider(value);
-     
+
   }
 
 
@@ -133,20 +149,20 @@ export const UseExchange = (props) => {
     }
   }
 
- const discreaseQuantity = () => {
-  const currentQty = new BigNumber(quantity || 0); // Ensure numeric
-  const newValue = currentQty.minus(1);
-  if (newValue.isNegative()) return; // prevent negative
-  setQuantity(newValue.toString());
-  handleBuyQuantityChange(newValue.toString());
-};
+  const discreaseQuantity = () => {
+    const currentQty = new BigNumber(quantity || 0); // Ensure numeric
+    const newValue = currentQty.minus(1);
+    if (newValue.isNegative()) return; // prevent negative
+    setQuantity(newValue.toString());
+    handleBuyQuantityChange(newValue.toString());
+  };
 
-const addQuantity = () => {
-  const currentQty = new BigNumber(quantity || 0);
-  const newValue = currentQty.plus(1);
-  setQuantity(newValue.toString());
-  handleBuyQuantityChange(newValue.toString());
-};
+  const addQuantity = () => {
+    const currentQty = new BigNumber(quantity || 0);
+    const newValue = currentQty.plus(1);
+    setQuantity(newValue.toString());
+    handleBuyQuantityChange(newValue.toString());
+  };
 
   useEffect(() => {
     getPair()
@@ -158,6 +174,7 @@ const addQuantity = () => {
   }, [selectedData])
 
   return {
+    stage, setStage,
     buySellButton, setBuySellButton,
     buyerSlider, setBuyerSlider,
     sellSlider, setSelSlider,
@@ -170,7 +187,7 @@ const addQuantity = () => {
     quantity, setQuantity, discreaseQuantity, addQuantity,
     price, setPrice,
     cureentCoinPrice, setCurrentCoinPrice,
-    handleBuyPriceChange, handleBuyQuantityChange,handleBuySliderChange
+    handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange
   }
 }
 

@@ -124,59 +124,59 @@ export const PortfilioOverView = ({ buttonPress, setButtonPress }) => {
     return (
 
 
-            <View style={{ width: wp(90), alignSelf: 'center', alignItems: 'center', paddingHorizontal: wp(4) }}>
-                <LineChart
-                    data={[
-                        { value: 160 },
-                        { value: 180 },
-                        { value: 170 },
-                        { value: 190 },
-                        { value: 100 },
-                        { value: 100 },
-                        { value: 100 },
-                        { value: 100 },
-                        { value: 170 },
-                    ]}
-                    width={wp(75)}
-                    height={hp(20)}
-                    areaChart
-                    color={colors.mainColor}
-                    startFillColor="rgba(5,186,218,1)"
-                    endFillColor="rgba(5,186,218,0)"
-                    startOpacity={0.2}
-                    endOpacity={0}
-                    yAxisLabelWidth={0}
-                    yAxisColor="transparent"
-                    xAxisLabelTextStyle={{ display: 'none' }}
-                    xAxisColor="transparent"
-                    rulesColor="rgba(9,36,43,1)"
-                    rulesType="solid"
-                    showVerticalLines={false}
-                    hideDataPoints={true}
-                    showStripOnFocus={false}
-                // pointerConfig={{
-                //     persistPointer: false, // ❌ Do not persist pointer
-                //     showPointerStrip: true,
-                //     pointerStripColor: 'transparent',
-                //     //  showPointerStrip: false,
-                //     hideSecondaryPointer: true,
-                //      pointerEvents: 'none',
-                //     activatePointersInstantlyOnTouch: true, // ✅ Show on tap
-                //     pointerColor: 'white',
-                //     pointerComponent: () => null,
-                //     pointerLabelComponent: () => null,
-                //     horizontalStripConfig: {
-                //         thickness: 1,
-                //         color: '#05BADB',
-                //         strokeDashArray: [4, 4,4],
-                //         length: wp(75),
-                //     },
+        <View style={{ width: wp(90), alignSelf: 'center', alignItems: 'center', paddingHorizontal: wp(4) }}>
+            <LineChart
+                data={[
+                    { value: 160 },
+                    { value: 180 },
+                    { value: 170 },
+                    { value: 190 },
+                    { value: 100 },
+                    { value: 100 },
+                    { value: 100 },
+                    { value: 100 },
+                    { value: 170 },
+                ]}
+                width={wp(75)}
+                height={hp(20)}
+                areaChart
+                color={colors.mainColor}
+                startFillColor="rgba(5,186,218,1)"
+                endFillColor="rgba(5,186,218,0)"
+                startOpacity={0.2}
+                endOpacity={0}
+                yAxisLabelWidth={0}
+                yAxisColor="transparent"
+                xAxisLabelTextStyle={{ display: 'none' }}
+                xAxisColor="transparent"
+                rulesColor="rgba(9,36,43,1)"
+                rulesType="solid"
+                showVerticalLines={false}
+                hideDataPoints={true}
+                showStripOnFocus={false}
+            // pointerConfig={{
+            //     persistPointer: false, // ❌ Do not persist pointer
+            //     showPointerStrip: true,
+            //     pointerStripColor: 'transparent',
+            //     //  showPointerStrip: false,
+            //     hideSecondaryPointer: true,
+            //      pointerEvents: 'none',
+            //     activatePointersInstantlyOnTouch: true, // ✅ Show on tap
+            //     pointerColor: 'white',
+            //     pointerComponent: () => null,
+            //     pointerLabelComponent: () => null,
+            //     horizontalStripConfig: {
+            //         thickness: 1,
+            //         color: '#05BADB',
+            //         strokeDashArray: [4, 4,4],
+            //         length: wp(75),
+            //     },
 
-                // }}
+            // }}
 
-                />
+            />
 
-            </View>
+        </View>
 
 
 
@@ -185,7 +185,7 @@ export const PortfilioOverView = ({ buttonPress, setButtonPress }) => {
     )
 }
 
-export const BalanceOverView = () => {
+export const BalanceOverView = ({ walletPress }) => {
     const pieData = [
         { value: 50, color: '#79C5D3', text: 'Red' },
         { value: 30, color: '#55B8CA', text: 'Blue' },
@@ -194,19 +194,15 @@ export const BalanceOverView = () => {
     return (
         <View style={style.mainBox}>
             <View style={style.BalanceView}>
-                {/* <Image
-                    style={{ width: wp(36), height: wp(36), borderRadius: wp(18), resizeMode: "contain" }}
-                    source={images.doughnutChart}
-                /> */}
+
                 <View style={{ alignItems: 'center', marginTop: 20, backgroundColor: "transparent" }}>
                     <PieChart
                         data={pieData}
-                        // showText
                         textColor=""
                         textSize={12}
                         radius={90}
                         showText={false}
-                        innerRadius={67}  // Optional for donut style
+                        innerRadius={67}
                         centerLabelComponent={() => (
                             null
                         )}
@@ -216,14 +212,20 @@ export const BalanceOverView = () => {
                 <View >
                     <ResponsiveText style={[style.text1, { fontSize: 14 }]}>Account Balance</ResponsiveText>
                     <Spacer height={hp(1)} />
-                    <ResponsiveText style={style.text2}>$2,976.0000</ResponsiveText>
+                    <ResponsiveText style={style.text2}>$2,976.00</ResponsiveText>
                     <Spacer height={hp(1)} />
                     <ResponsiveText style={[style.text1, { fontSize: 14 }]}>Wallet Account</ResponsiveText>
 
                 </View>
             </View>
             <Spacer />
-            <SimpleButton text={"Wallets"} buttonWidth={wp(80)} height={hp(5)} backgroundColor={colors.transparentBtn} />
+            <SimpleButton
+                text={"Wallets"}
+                buttonWidth={wp(80)}
+                height={hp(5)}
+                backgroundColor={colors.transparentBtn}
+                onPress={walletPress}
+            />
         </View>
     )
 }
@@ -497,7 +499,7 @@ const style = StyleSheet.create({
         width: wp(90),
         flexDirection: "row",
         alignItems: "center",
-        justifyContent:"space-around"
+        justifyContent: "space-around"
     },
     accountOverViewemptyDataImage: {
         width: wp(6.41),

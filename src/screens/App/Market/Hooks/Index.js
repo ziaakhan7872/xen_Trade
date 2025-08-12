@@ -15,6 +15,7 @@ export const UseMarket = (props) => {
         getMarketData();
     }, [])
 
+  
 
     const MarketPress = async(item) => {
         await AsyncStorage.setItem("selectedData", JSON.stringify(item))
