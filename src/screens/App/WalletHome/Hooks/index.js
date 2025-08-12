@@ -38,7 +38,6 @@ export const useHomeScreen = (props) => {
       setLoading(true)
       const getCryptoData = await GetCryptoListApi(newPage, 10)
       console.log("Crypto Data:", getCryptoData?.data?.data)
-      setCryptoList(getCryptoData?.data?.data)
 
       const GetAccountDetail = await getAccountDetail(newPage, 10, user?.id);
       console.log("Account Details:", GetAccountDetail);
@@ -52,7 +51,6 @@ export const useHomeScreen = (props) => {
       });
       setPage(newPage)
       setHasMore(mergeData?.length === 20)
-      // setCryptoList(mergeData);
        if (mergeData.length > 0) {
           setCryptoList(prevFavorites => [...prevFavorites, ...mergeData]);
         }
