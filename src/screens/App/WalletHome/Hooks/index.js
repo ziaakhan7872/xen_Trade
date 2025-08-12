@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { getAccountDetail, GetCryptoListApi } from '../../../../constants/Api/Index';
 import { useSelector } from 'react-redux';
-import { Keyboard } from 'react-native';
-import { colors } from '../../../../constants';
-import { hp } from '../../../../components/ResponsiveComponent';
 
 export const useHomeScreen = (props) => {
   const { user } = useSelector((state) => state.user);
@@ -97,7 +94,6 @@ export const useHomeScreen = (props) => {
   const handleCheckboxToggle = () => {
     setIsChecked((prev) => !prev);
   };
-  // const cryptoSheetRef = useRef();
 
   return {
     selectedCrypto, setSelectedCrypto,

@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getAccountDetail, GetCryptoListApi } from '../../../../constants/Api/Index';
 import { useSelector } from 'react-redux';
@@ -9,7 +8,7 @@ export const UseSelectCryptoWithdraw = (props) => {
     const { user } = useSelector((state) => state.user);
     const [cryptoList, setCryptoList] = useState([]);
     const [searchCoin, setSearchCoin] = useState("")
-    const [loading,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
@@ -40,7 +39,7 @@ export const UseSelectCryptoWithdraw = (props) => {
         } catch (error) {
             console.log("Error fetching crypto data:", error);
             setLoading(false)
-        } finally{
+        } finally {
             setLoading(false)
         }
     }
@@ -59,10 +58,10 @@ export const UseSelectCryptoWithdraw = (props) => {
     }
 
     return {
-        cryptoList:filteredCryptoList,
+        cryptoList: filteredCryptoList,
         RecentCryptoPress,
         CryptoPress,
-        searchCoin,setSearchCoin,
+        searchCoin, setSearchCoin,
         loading
     }
 }

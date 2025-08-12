@@ -1,44 +1,11 @@
 import { Platform, StyleSheet } from 'react-native';
 import { wp, hp } from '../../../components/ResponsiveComponent';
-import { colors, fontFamily } from '../../../constants';
+import { colors } from '../../../constants';
 
 export const styles = StyleSheet.create({
     containerMain: {
         flex: 1,
         paddingHorizontal: wp(4),
-    },
-    heading: {
-        fontSize: 18,
-        fontFamily: fontFamily.mainTextMedium,
-        color: colors.white,
-        marginBottom: hp(0.5),
-    },
-    description: {
-        fontSize: 12,
-        color: colors.lightTextColor,
-        fontFamily: fontFamily.appTextRegular,
-    },
-    qrWrapper: {
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    qrImage: {
-        width: wp(50),
-        height: wp(50),
-        resizeMode: 'contain',
-    },
-    secretBtn: {
-        width: wp(46),
-        alignSelf: 'center',
-        backgroundColor: colors.transparentBtn,
-        paddingVertical: hp(2),
-        borderRadius: wp(10),
-    },
-    inputLabel: {
-        fontSize: 14,
-        marginBottom: hp(0.7),
-        color: colors.white,
-        fontFamily: fontFamily.appTextRegular,
     },
     buttonRow: {
         paddingHorizontal: wp(4),
@@ -50,10 +17,9 @@ export const styles = StyleSheet.create({
         paddingVertical: hp(2),
         borderRadius: wp(10),
     },
-
     saveBtn: {
         width: wp(44),
-        backgroundColor: colors.authButtonColor,
+        // backgroundColor: colors.authButtonColor,
         paddingVertical: hp(2),
         borderRadius: wp(10),
         marginLeft: wp(3), // space between buttons

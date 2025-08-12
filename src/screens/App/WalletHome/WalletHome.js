@@ -70,8 +70,6 @@ const WalletHome = (props) => {
         {cryptoList.length === 0 && loading ? <SkeletionLoader rows={6} /> : null}
       </View>
 
-
-
       <Portal>
         <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
       </Portal>
