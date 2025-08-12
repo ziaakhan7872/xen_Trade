@@ -1,5 +1,5 @@
 import { Platform, StyleSheet } from 'react-native'
-import { colors, fontFamily } from '../../../constants'
+import { colors } from '../../../constants'
 import { hp, wp } from '../../../components/ResponsiveComponent'
 
 
@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     },
     buttonRow: {
         paddingHorizontal: wp(3.5),
-        paddingBottom: Platform.OS === 'android' ? hp(2) : hp(1), // More space on Android
+        paddingBottom: Platform.OS === 'android' ? hp(3.5) : hp(0.5), // More space on Android
 
     },
     deleteBtn: {
@@ -26,11 +26,5 @@ export const styles = StyleSheet.create({
         paddingVertical: hp(2),
         borderRadius: wp(10),
         marginRight: wp(1)
-    },
-    inputLabel: {
-        fontSize: 14,
-        marginBottom: hp(0.7),
-        fontFamily: fontFamily.appTextRegular,
-        color: colors.white,
     },
 })

@@ -3,13 +3,14 @@ import React from 'react'
 import { colors, fontFamily } from '../constants'
 import { wp, hp } from './ResponsiveComponent'
 
-const TextInputField = ({ placeholder, placeholderTextColor, multiline, maxLength, height, borderColor, textAlignVertical, value, onChangeText, fontFamily }) => {
+const TextInputField = ({ placeholder, placeholderTextColor, multiline, maxLength, height, borderColor, textAlignVertical, value, onChangeText, fontFamily, editable }) => {
 
     return (
         <TextInput
             placeholder={placeholder}
             placeholderTextColor={placeholderTextColor}
             style={[styles.inputField, height ? { height } : {}, borderColor ? { borderColor } : {}, fontFamily ? { fontFamily } : {}]}
+            editable={editable}
             multiline={multiline}
             maxLength={maxLength}
             textAlignVertical={textAlignVertical}

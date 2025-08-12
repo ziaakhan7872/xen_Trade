@@ -8,7 +8,7 @@ import { appStyles } from '../../../../utilities'
 import Spacer from '../../../../components/Spacer'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
 
-const FlatListCustom = ({ toggles, setToggles, disableAllNotificationsEnabled, setDisableAllNotificationsEnabled }) => {
+const FlatListCustom = ({ toggles, setToggles, disableAllNotificationsEnabled, setDisableAllNotificationsEnabled, props }) => {
     const sections = [
         {
             title: 'Orders',
@@ -101,7 +101,7 @@ const FlatListCustom = ({ toggles, setToggles, disableAllNotificationsEnabled, s
             contentContainerStyle={{ paddingBottom: hp(6) }}
             ListFooterComponent={() => (
                 <View style={[appStyles.row, styles.buttonRow]}>
-                    <SimpleButton text="Cancel" textColor={colors.white} styleView={styles.cancelBtn} />
+                    <SimpleButton text="Cancel" textColor={colors.white} styleView={styles.cancelBtn} onPress={() => props?.navigation.goBack()} />
                     <SimpleButton text="Save" textColor={colors.black} styleView={styles.saveBtn} />
                 </View>
             )}
