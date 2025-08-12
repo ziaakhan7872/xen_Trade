@@ -34,8 +34,7 @@ const useHome = (props) => {
         if (marketData.length > 0) {
           setMarketList(prevFavorites => [...prevFavorites, ...marketData]);
         }
-        let offset = Page + 1
-        setPage(offset)
+        setPage(newPage)
         setHasMore(marketData?.length === 20)
         console.log("Market data fetched successfully:", response);
       } catch (error) {

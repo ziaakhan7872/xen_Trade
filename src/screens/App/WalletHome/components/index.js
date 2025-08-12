@@ -78,42 +78,44 @@ export const TextInputSearch = ({ onChangeText, value, onPress }) => {
   )
 }
 
-export const TokenList = ({ props, cryptoData }) => {
+export const TokenList = ({ props, cryptoData, handleWalletData }) => {
   return (
-    <FlatList
-      data={cryptoData}
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ flexGrow: 1 }}
-      keyExtractor={(item) => item.id}
-      ItemSeparatorComponent={() => <Line height={hp(0.1)} />}
-      removeClippedSubviews={false}
-      renderItem={({ item, index }) => {
-        return (
-          <TouchableOpacity activeOpacity={0.6} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.AssetAllocation, params: { data: item } })} style={[appStyles.rowBasic, styles.itemContainer]}>
-            <Image source={{ uri: item?.icon }} style={styles.icon} />
-            <HorizontalSpacer />
-            <View style={styles.coinDetails}>
-              <ResponsiveText style={styles.upperText}>{item.symbol}</ResponsiveText>
-              <ResponsiveText style={styles.lowerText}>{item.name}</ResponsiveText>
-            </View>
-            <View style={styles.amountContainer}>
-              <ResponsiveText style={styles.upperText}>{item?.account?.amount
-                ? item?.account?.amount.toString().includes(".")
-                  ? Number(item.account.amount).toFixed(4)
-                  : item.account.amount
-                : "0"}
-              </ResponsiveText>
-              <ResponsiveText style={styles.lowerText}>$ {item?.account?.amount
-                ? item?.account?.amount.toString().includes(".")
-                  ? Number(item.account.amount).toFixed(4)
-                  : item.account.amount
-                : "0"}
-              </ResponsiveText>
-            </View>
-          </TouchableOpacity>
-        )
-      }}
-    />
+    // <View style={styles.cryptoView}>
+      <FlatList
+        data={cryptoData}
+        showsVerticalScrollIndicator={false}
+        onEndReached={handleWalletData}
+        keyExtractor={(item) => item.id}
+        ItemSeparatorComponent={() => <Line height={hp(0.1)} />}
+        renderItem={({ item, index }) => {
+          return (
+            <TouchableOpacity activeOpacity={0.6} onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.AssetAllocation, params: { data: item } })} style={[appStyles.rowBasic, styles.itemContainer]}>
+              <Image source={{ uri: item?.icon }} style={styles.icon} />
+              <HorizontalSpacer />
+              <View style={styles.coinDetails}>
+                <ResponsiveText style={styles.upperText}>{item.symbol}</ResponsiveText>
+                <ResponsiveText style={styles.lowerText}>{item.name}</ResponsiveText>
+              </View>
+              <View style={styles.amountContainer}>
+                <ResponsiveText style={styles.upperText}>{item?.account?.amount
+                  ? item?.account?.amount.toString().includes(".")
+                    ? Number(item.account.amount).toFixed(4)
+                    : item.account.amount
+                  : "0"}
+                </ResponsiveText>
+                <ResponsiveText style={styles.lowerText}>$ {item?.account?.amount
+                  ? item?.account?.amount.toString().includes(".")
+                    ? Number(item.account.amount).toFixed(4)
+                    : item.account.amount
+                  : "0"}
+                </ResponsiveText>
+              </View>
+            </TouchableOpacity>
+          )
+        }}
+      />
+    // </View>
+
   )
 }
 
@@ -338,5 +340,10 @@ const styles = StyleSheet.create({
     height: wp(5),
     resizeMode: 'contain',
     tintColor: colors.mainColor,
+  },
+  cryptoView: {
+    // width: '100%', 
+    alignItems: "center",
+    flex: 1
   },
 });
