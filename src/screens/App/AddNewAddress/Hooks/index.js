@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const stateDropDowns = () => {
+export const useAddNewAddress = () => {
     const [coin, setCoin] = useState("BTC")
     const [network, setNetwork] = useState("BTC")
     const [isCoinListOpen, setIsCoinListOpen] = useState(false)

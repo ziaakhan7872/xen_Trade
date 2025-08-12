@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     },
     buttonRow: {
         paddingHorizontal: wp(3.5),
-        paddingBottom: Platform.OS === 'android' ? hp(2) : hp(1), // More space on Android
+        paddingBottom: Platform.OS === 'android' ? hp(3) : hp(1), // More space on Android
     },
     cancelBtn: {
         width: wp(44),
@@ -24,11 +24,5 @@ export const styles = StyleSheet.create({
         paddingVertical: hp(2),
         borderRadius: wp(10),
         marginRight: wp(1)
-    },
-    inputLabel: {
-        fontSize: 14,
-        marginBottom: hp(0.8),
-        fontFamily: fontFamily.appTextRegular,
-        color: colors.white,
     },
 })
