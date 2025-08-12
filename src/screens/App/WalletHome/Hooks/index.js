@@ -9,8 +9,6 @@ export const useHomeScreen = (props) => {
   const { user } = useSelector((state) => state.user);
   const assetSheetRef = useState(null);
 
-
-
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
   const [input, setInput] = useState('')
@@ -25,49 +23,46 @@ export const useHomeScreen = (props) => {
 
   console.log(isVisible, "bottomsheet");
 
-
-
-
   useEffect(() => {
     getCryptoData()
   }, [])
 
   const getCryptoData = async (newPage) => {
-    if(hasMore){
-    try {
-      setLoading(true)
-      const getCryptoData = await GetCryptoListApi(newPage, 10)
-      console.log("Crypto Data:", getCryptoData?.data?.data)
-      setCryptoList(getCryptoData?.data?.data)
+    if (hasMore) {
+      try {
+        setLoading(true)
+        const getCryptoData = await GetCryptoListApi(newPage, 10)
+        console.log("Crypto Data:", getCryptoData?.data?.data)
+        // setCryptoList(getCryptoData?.data?.data)
 
-      const GetAccountDetail = await getAccountDetail(newPage, 10, user?.id);
-      console.log("Account Details:", GetAccountDetail);
+        const GetAccountDetail = await getAccountDetail(newPage, 10, user?.id);
+        console.log("Account Details:", GetAccountDetail);
 
-      const mergeData = getCryptoData?.data?.data?.map((item) => {
-        const matchAccount = GetAccountDetail?.data?.data?.find((acount) => acount?.market?.symbol === item?.symbol);
-        return {
-          ...item,
-          account: matchAccount || null,
-        };
-      });
-      setPage(newPage)
-      setHasMore(mergeData?.length === 20)
-      // setCryptoList(mergeData);
-       if (mergeData.length > 0) {
+        const mergeData = getCryptoData?.data?.data?.map((item) => {
+          const matchAccount = GetAccountDetail?.data?.data?.find((acount) => acount?.market?.symbol === item?.symbol);
+          return {
+            ...item,
+            account: matchAccount || null,
+          };
+        });
+        setPage(newPage)
+        setHasMore(mergeData?.length === 20)
+        // setCryptoList(mergeData);
+        if (mergeData.length > 0) {
           setCryptoList(prevFavorites => [...prevFavorites, ...mergeData]);
         }
-    } catch (error) {
-      console.log("Error fetching crypto data:", error?.response);
-      setLoading(false)
-    } finally {
-      setLoading(false)
+      } catch (error) {
+        console.log("Error fetching crypto data:", error?.response);
+        setLoading(false)
+      } finally {
+        setLoading(false)
+      }
     }
   }
-}
 
   const handleWalletData = () => {
     if (Page) {
-      getCryptoData(Page +1);
+      getCryptoData(Page + 1);
     }
   };
 
@@ -114,7 +109,7 @@ export const useHomeScreen = (props) => {
     assetSheetRef,
     cryptoList: filteredCryptoList,
     setSearchCoin, searchCoin,
-    totalUsdt, loading, handleAssetClose, handleAssetOpen,handleWalletData
+    totalUsdt, loading, handleAssetClose, handleAssetOpen, handleWalletData
   }
 }
 
