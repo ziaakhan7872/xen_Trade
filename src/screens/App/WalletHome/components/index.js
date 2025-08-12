@@ -70,8 +70,8 @@ export const TextInputSearch = ({ onChangeText, value, onPress }) => {
         onChangeText={onChangeText}
         icon={true}
         iconChildren={<Image source={images.searchSign} style={styles.iconRight} />}
-      />     
-       {/* <TouchableOpacity onPress={onPress} style={styles.rightIconWrapper}>
+      />
+      {/* <TouchableOpacity onPress={onPress} style={styles.rightIconWrapper}>
         <Image source={images.searchSign} style={styles.iconRight} />
       </TouchableOpacity> */}
     </View>
