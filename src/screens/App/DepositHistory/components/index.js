@@ -108,7 +108,7 @@ const SearchBox = ({ searchCoin, setSearchCoin }) => {
 
 export const AllCryptoFilterBotomSheet = ({ ref, selectedStatus, closeBottomSheet, AllCryptoFilter, SelectedSymbol, setSelectedSymbol, statusPress, searchCoin, setSearchCoin }) => {
   return (
-    <BottomSheet ref={ref}>
+    <BottomSheet height={hp(60)} ref={ref}>
       {/* <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
