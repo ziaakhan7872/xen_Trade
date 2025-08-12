@@ -31,37 +31,41 @@ export const RenderMarketHeader = () => {
     )
 }
 
-export const RenderMarketList = ({ marketData ,props,MarketScreen }) => {
+export const RenderMarketList = ({ marketData, props, MarketScreen, handleMarketData }) => {
     return (
         <View style={style.MarketView}>
             <FlatList
                 data={marketData}
+                style={{ flex: 1 }}
+                onEndReached={handleMarketData}
+                scrollEnabled={true}
+                nestedScrollEnabled={true}
                 keyExtractor={(item, index) => item.id.toString() || index.toString()}
                 renderItem={({ item }) => (
                     <>
-                     <TouchableOpacity onPress={() => MarketScreen(item)} style={style.MarketDataView}>
-                        <View style={{  flexDirection: "row", alignItems: "center",width:wp(37)}}>
-                            <TouchableOpacity>
-                            <Image source={images.starUnFill} style={style.StarImage} />
-                            </TouchableOpacity>
-                            <HorizontalSpacer />
-                            <View>
-                                <ResponsiveText style={style.textHeader}>{item.symbol}</ResponsiveText>
-                                <ResponsiveText style={style.volText}>Vol {item.Vol || "42.35M"}</ResponsiveText>
+                        <TouchableOpacity onPress={() => MarketScreen(item)} style={style.MarketDataView}>
+                            <View style={{ flexDirection: "row", alignItems: "center", width: wp(37) }}>
+                                <TouchableOpacity>
+                                    <Image source={images.starUnFill} style={style.StarImage} />
+                                </TouchableOpacity>
+                                <HorizontalSpacer />
+                                <View>
+                                    <ResponsiveText style={style.textHeader}>{item.symbol}</ResponsiveText>
+                                    <ResponsiveText style={style.volText}>Vol {item.Vol || "42.35M"}</ResponsiveText>
+                                </View>
                             </View>
-                        </View>
-                        <View style={{  alignItems: "flex-start",justifyContent:"flex-start",width:wp(25)}}>
-                            <ResponsiveText style={[style.textHeader]}>{item.previousPrice ||"1.25"}</ResponsiveText>
-                            <ResponsiveText style={style.volText}>${item.InUSdt || "2,254.00"}</ResponsiveText>
-                        </View>
-                        <View style={{ flex: 1, alignItems: "flex-end" ,width:wp(25)}}>   
-                            <ResponsiveText style={[style.textHeader,{color:colors.green}]}>{item.Market || "0.01%"}</ResponsiveText>  
-                             {/* {color:item.Market.startsWith("+")?colors.green:colors.red} */}
-                        </View>
-                        <Spacer/>
-                        
-                    </TouchableOpacity>
-                    <Line height={hp(0.1)}/>
+                            <View style={{ alignItems: "flex-start", justifyContent: "flex-start", width: wp(25) }}>
+                                <ResponsiveText style={[style.textHeader]}>{item.previousPrice || "1.25"}</ResponsiveText>
+                                <ResponsiveText style={style.volText}>${item.InUSdt || "2,254.00"}</ResponsiveText>
+                            </View>
+                            <View style={{ flex: 1, alignItems: "flex-end", width: wp(25) }}>
+                                <ResponsiveText style={[style.textHeader, { color: colors.green }]}>{item.Market || "0.01%"}</ResponsiveText>
+                                {/* {color:item.Market.startsWith("+")?colors.green:colors.red} */}
+                            </View>
+                            <Spacer />
+
+                        </TouchableOpacity>
+                        <Line height={hp(0.1)} />
                     </>
                 )}
             />
@@ -91,7 +95,7 @@ const style = StyleSheet.create({
         resizeMode: "contain"
     },
     MarketView: {
-        // width: wp(100),
+        // width: '100%', 
         alignItems: "center",
         flex: 1
     },

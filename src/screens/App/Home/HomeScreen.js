@@ -19,13 +19,17 @@ const HomeScreen = (props) => {
     portfolioButton, setPortfolioButton,
     watchListButtonPressed, setWatchListButtonPress,
     showNewsView, setShowNewsView,
-    marketList, MarketPress
+    marketList, MarketPress,handleMarketData
   } = useHome(props)
   return (
     <AuthMainContainer>
       <HomeHeader onpress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.MenuScreen })} headerTitle={"DASHBOARD"} />
 
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={style.container}>
+      <ScrollView 
+      showsVerticalScrollIndicator={false} 
+      contentContainerStyle={style.container}
+      nestedScrollEnabled
+      >
         <Spacer height={hp(1)} />
         <AccountInfo />
         <Spacer height={hp(1)} />
@@ -38,7 +42,7 @@ const HomeScreen = (props) => {
           </View>
         )}
         {threeRowTabButtonPress === "balance" && (
-          <BalanceOverView walletPress={()=>props?.navigation?.navigate(Routes.WalletHome)} />
+          <BalanceOverView walletPress={() => props?.navigation?.navigate(Routes.WalletHome)} />
         )}
         {threeRowTabButtonPress === "account" && (
           <AccountOverView />
@@ -78,14 +82,28 @@ const HomeScreen = (props) => {
         )}
         <Spacer height={hp(1)} />
         <View style={style.mainBox}>
-          <WaitchListPairRow WatchListButtonPress={watchListButtonPressed} setWatchListButtonPress={setWatchListButtonPress} />
+          <WaitchListPairRow 
+          WatchListButtonPress={watchListButtonPressed} 
+          setWatchListButtonPress={setWatchListButtonPress}
+           />
           {watchListButtonPressed === "watchList" ? (
-            <WatchList WatchListButtonPress={watchListButtonPressed} setWatchListButtonPress={setWatchListButtonPress} />
+            <WatchList 
+            WatchListButtonPress={watchListButtonPressed} 
+            setWatchListButtonPress={setWatchListButtonPress} 
+            />
           ) : (
-            <AllPairs MarketScreen={MarketPress} marketData={marketList} WatchListButtonPress={watchListButtonPressed} setWatchListButtonPress={setWatchListButtonPress} />
+            <AllPairs 
+            MarketScreen={MarketPress} 
+            marketData={marketList} 
+            WatchListButtonPress={watchListButtonPressed} 
+            setWatchListButtonPress={setWatchListButtonPress} 
+            handleMarketData={handleMarketData}
+            />
 
           )}
         </View>
+                <Spacer height={hp(1)} />
+
       </ScrollView>
     </AuthMainContainer>
 

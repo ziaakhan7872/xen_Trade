@@ -5,6 +5,7 @@ import { colors } from "../../../constants";
 export const  style = StyleSheet.create({
     container:{
         flex:1,
+        // width: '100%', 
         alignItems:"center",
     // justifyContent:"center"
     },

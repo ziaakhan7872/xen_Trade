@@ -9,7 +9,7 @@ export const useHomeScreen = (props) => {
   const { user } = useSelector((state) => state.user);
   const assetSheetRef = useState(null);
 
-  
+
 
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
@@ -18,55 +18,61 @@ export const useHomeScreen = (props) => {
   const [searchCoin, setSearchCoin] = useState("")
   const [totalUsdt, setTotalUsdt] = useState("")
   const [filteredCryptoList, setFilteredCryptoList] = useState([]);
-  const [loading , setLoading ] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [isVisible, setIsVisible] = useState(false);
+  const [Page, setPage] = useState(1)
+  const [hasMore, setHasMore] = useState(true)
 
-    console.log(isVisible,"bottomsheet");
- 
-  
+  console.log(isVisible, "bottomsheet");
+
+
 
 
   useEffect(() => {
     getCryptoData()
   }, [])
 
-  const getCryptoData = async () => {
-    try {
-      setLoading(true)
-      const getCryptoData = await GetCryptoListApi(1, 10)
-      console.log("Crypto Data:", getCryptoData?.data?.data)
-      setCryptoList(getCryptoData?.data?.data)
+  const getCryptoData = async (newPage) => {
+    if (hasMore) {
 
-      const GetAccountDetail = await getAccountDetail(1, 10, user?.id);
-      console.log("Account Details:", GetAccountDetail);
+      try {
+        setLoading(true)
+        const getCryptoData = await GetCryptoListApi(newPage, 20)
+        console.log("Crypto Data:", getCryptoData?.data?.data)
+        setCryptoList(getCryptoData?.data?.data)
 
-      const mergeData = getCryptoData?.data?.data?.map((item) => {
-        const matchAccount = GetAccountDetail?.data?.data?.find((acount) => acount?.market?.symbol === item?.symbol);
-        return {
-          ...item,
-          account: matchAccount || null,
-        };
-      });
-      setCryptoList(mergeData);
+        const GetAccountDetail = await getAccountDetail(newPage, 20, user?.id);
+        console.log("Account Details:", GetAccountDetail);
 
-      // const getAccountAMount = GetAccountDetail?.data?.data
-      // const total = getAccountAMount.reduce((sum, item) => {
-      //   const value = parseFloat(item?.amount) || 0
-      //   return sum + value
-      // },0)
-      //       console.log("Merged Crypto Data:", total);
+        const mergeData = getCryptoData?.data?.data?.map((item) => {
+          const matchAccount = GetAccountDetail?.data?.data?.find((acount) => acount?.market?.symbol === item?.symbol);
+          return {
+            ...item,
+            account: matchAccount || null,
+          };
 
-      // setTotalUsdt(total)
-      // console.log("Merged Crypto Data:", mergeData);
+        });
+        // setCryptoList(mergeData);
 
-
-    } catch (error) {
-      console.log("Error fetching crypto data:", error?.response);
-      setLoading(false)
-    } finally {
-      setLoading(false)
+        if (mergeData.length > 0) {
+          setCryptoList(prevFavorites => [...prevFavorites, ...mergeData]);
+        }
+        let offset = Page + 1
+        setPage(offset)
+        setHasMore(mergeData?.length === 20)
+      } catch (error) {
+        console.log("Error fetching crypto data:", error?.response);
+        setLoading(false)
+      } finally {
+        setLoading(false)
+      }
     }
   }
+  const handleWalletData = () => {
+    if (Page) {
+      getCryptoData(Page + 1);
+    }
+  };
 
   useEffect(() => {
     let filtered = cryptoList.filter(
@@ -111,7 +117,7 @@ export const useHomeScreen = (props) => {
     assetSheetRef,
     cryptoList: filteredCryptoList,
     setSearchCoin, searchCoin,
-    totalUsdt, loading,handleAssetClose,handleAssetOpen
+    totalUsdt, loading, handleAssetClose, handleAssetOpen, handleWalletData
   }
 }
 

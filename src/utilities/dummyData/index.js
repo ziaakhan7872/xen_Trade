@@ -49,6 +49,14 @@ export const coinData = [
     amount: '1.2541',
     value: '$3,222.33',
   },
+  {
+    id: '7',
+    icon: images.EthLogo,
+    symbol: 'ETH',
+    name: 'Ethereum',
+    amount: '1.2541',
+    value: '$3,222.33',
+  },
 ];
 
 export const AccountActivity = [

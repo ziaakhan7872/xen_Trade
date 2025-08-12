@@ -76,6 +76,6 @@ export const style = StyleSheet.create({
         borderRadius: wp(3),
         borderWidth: 1,
         borderColor: colors.AccountInfoBorderColor,
-        alignItems: "center"
+        alignItems: "center",
     },
 })
