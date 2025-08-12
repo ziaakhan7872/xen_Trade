@@ -31,8 +31,7 @@ export const UseMarket = (props) => {
                 const response = await getPairApi(newPage || Page, 20);
                 setMarketList(response?.data?.data)
                 const marketData = response?.data?.data
-                let offset = Page + 1
-                setPage(offset)
+                setPage(newPage)
                 setHasMore(marketData?.length === 20)
                 console.log("Market data fetched successfully:", response);
             } catch (error) {

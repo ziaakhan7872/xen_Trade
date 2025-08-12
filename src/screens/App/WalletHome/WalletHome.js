@@ -19,7 +19,7 @@ const WalletHome = (props) => {
     input, setInput,
     assetSheetRef, handleAssetOpen, handleAssetClose,
     cryptoList, searchCoin, setSearchCoin,
-    loading, isVisible
+    loading, isVisible,handleWalletData
     // totalUsdt
   } = useHomeScreen(props)
 
@@ -57,17 +57,14 @@ const WalletHome = (props) => {
         <Spacer height={hp(2)} />
 
       </View>
-      {/* <Spacer height={Platform.OS === 'android' ? hp(0) : hp(3.5)} /> */}
-
-      {/* <View style={{ flex: 1 }}> */}
       {loading ? <SkeletionLoader rows={6} /> : (
-        <TokenList cryptoData={cryptoList} props={props} />
+        <TokenList   cryptoData={cryptoList} props={props} />
+
       )}
-      {/* </View> */}
+
+      
       <Portal>
-        {/* {isVisible && ( */}
         <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
-        {/* )} */}
       </Portal>
 
     </AuthMainContainer>
