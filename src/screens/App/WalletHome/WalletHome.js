@@ -57,10 +57,21 @@ const WalletHome = (props) => {
         <Spacer height={hp(2)} />
 
       </View>
-      {loading ? <SkeletionLoader rows={6} /> : (
+      {/* {loading ? <SkeletionLoader rows={6} /> : (
         <TokenList handleWalletData={handleWalletData} cryptoData={cryptoList} props={props} />
 
-      )}
+      )} */}
+      <View style={{ flex: 1 }}>
+        <TokenList
+          props={props}
+          cryptoData={cryptoList}
+          handleWalletData={handleWalletData}
+        />
+        {cryptoList.length === 0 && loading ? <SkeletionLoader rows={6} /> : null}
+      </View>
+
+
+
       <Portal>
         <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
       </Portal>
