@@ -3,7 +3,6 @@ import { ResetPasswordApi } from "../../../../constants/Api/Index";
 import { Routes } from "../../../../constants";
 import Toast from "react-native-toast-message";
 import * as Yup from 'yup';
-import { Alert } from "react-native";
 
 export const useChangePasswordForgot = (props) => {
     const { otpCode, id } = props?.route?.params
@@ -12,36 +11,44 @@ export const useChangePasswordForgot = (props) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false)
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false)
 
     console.log("User data in ResetPassword::::::previousUserData", id, "||||", otpCode, "||||", password);
 
 
     const showToast = () => {
         Toast.show({
-            type: 'verificationAlert',
+            type: 'successAlert',
             text1: 'PASSWORD RESET SUCCESSFUL',
             text2: 'You can now login',
             visibilityTime: 2000,
             autoHide: true,
-            props: email
+            // props: email
         })
     }
 
-    // const validationSchema = Yup.object().shape({
-    //     password: Yup.string()
-    //         .min(6, 'Password must be at least 6 characters')
-    //         .required('Password is required'),
-    //     confirmPassword: Yup.string()
-    //         .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    //         .required('Confirm password is required'),
-    // })
+    const validationSchema = Yup.object().shape({
+        password: Yup.string()
+            .min(6, 'Password must be at least 6 characters')
+            .matches(/[a-z]/, 'Password must include at least one lowercase letter')
+            .matches(/[A-Z]/, 'Password must include at least one uppercase letter')
+            .matches(/\d/, 'Password must include at least one number')
+            .matches(/[^A-Za-z0-9]/, 'Password must include at least one special character')
+            .required('Password is required'),
+
+        confirmPassword: Yup.string()
+            .oneOf([Yup.ref('password')], 'Passwords must match')
+            .required('Confirm password is required'),
+    })
 
     const ResetPassword = async () => {
-        // const values = { password, confirmPassword }
+        const values = { password, confirmPassword }
         console.log("ENTERED ResetPassword FUNCTION");
+        setLoading(true)
 
         try {
-            // await validationSchema.validate(values, { abortEarly: false })
+            await validationSchema.validate(values, { abortEarly: false })
 
             const payload = {
                 EmailOtpCode: Number(otpCode),
@@ -56,13 +63,32 @@ export const useChangePasswordForgot = (props) => {
             if (resetRes?.status == 200) {
                 showToast()
                 setTimeout(() => {
-                    props?.naviagtion?.navigate(Routes.LoginScreen)
-
+                    props?.navigation?.navigate(Routes.LoginScreen)
                 }, 1500)
             }
         }
         catch (error) {
-            console.log("Error RESETTING Password -- ", error?.response)
+            if (error.name === 'ValidationError') {
+                setErrorMessage(error.errors.join('\n'));
+
+            } else if (error?.response) {
+                const status = error?.response?.status
+                const message = error?.response?.data?.message || "resetting password failed"
+                if (status === 400 || status === 500) {
+                    setErrorMessage(message)
+                }
+                else {
+                    setErrorMessage("An error occurred during resetting password. Please try again.");
+                }
+                console.error("Error during resetting password:", error?.response);
+            }
+            else {
+                console.log("errpr", error)
+                setErrorMessage("A Network Error . Please try again.");
+            }
+        }
+        finally {
+            setLoading(false)
         }
     }
 
@@ -76,7 +102,9 @@ export const useChangePasswordForgot = (props) => {
         confirmPassword, setConfirmPassword,
         passwordVisible, setPasswordVisible,
         confirmPasswordVisible, setConfirmPasswordVisible,
-        ResetPassword
+        ResetPassword,
+        errorMessage, setErrorMessage,
+        loading,
     }
 }
 
