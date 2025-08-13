@@ -5,15 +5,14 @@ import Toast from "react-native-toast-message";
 import * as Yup from 'yup';
 
 export const useChangePasswordForgot = (props) => {
-    const otp = props?.route?.params?.otpCode || {}
-    const userId = props?.route?.params?.id || {}
+    const {otpCode,id} = props?.route?.params || {}
 
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false)
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false)
 
-    console.log("User data in ResetPassword::::::previousUserData", userId, "||||", otp, "||||", password);
+    console.log("User data in ResetPassword::::::previousUserData", id, "||||", otpCode, "||||", password);
 
 
     const showToast = () => {
@@ -42,8 +41,8 @@ export const useChangePasswordForgot = (props) => {
             await validationSchema.validate(values, { abortEarly: false })
 
             const payload = {
-                emailOtpCode: Number(otp),
-                id: userId,
+                emailOtpCode: Number(otpCode),
+                id: id,
                 password: password
             }
             const resetRes = await ResetPasswordApi(payload)
@@ -57,7 +56,7 @@ export const useChangePasswordForgot = (props) => {
             }
         }
         catch (error) {
-            console.log("Error RESETTING Password -- ", error)
+            console.log("Error RESETTING Password -- ", error?.response)
         }
     }
 

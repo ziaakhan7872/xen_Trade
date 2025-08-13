@@ -22,10 +22,10 @@ export const LoginApi = async (payload) => {
     return axios.post(`${AUTH_BASE_URL}/auth/login`, payload)
 }
 
-export const ForgotPasswordApi = async (email) => {
-    console.log("EMAIL---", email);
+export const ForgotPasswordApi = async (payload) => {
+    console.log("EMAIL---", payload);
 
-    return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, { email })
+    return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, payload)
 }
 
 export const LogoutUser = async (payload) => {
