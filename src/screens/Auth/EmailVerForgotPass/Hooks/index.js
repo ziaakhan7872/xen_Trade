@@ -11,7 +11,6 @@ export const useEmailVerForgotPass = (props) => {
 
     const id = userData?.id
 
-    console.log("User data in EmailVerificationScreen::::::previousUserData", userData, "||||", email);
 
     const showToast = () => {
         Toast.show({

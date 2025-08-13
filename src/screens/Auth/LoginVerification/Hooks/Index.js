@@ -48,7 +48,7 @@ const UseLoginVerification = (props) => {
 
       if (response?.status === 200) {
         console.log("Entered in IF statement");
-        props?.navigation?.replace(Routes.BottomNavigator);
+        props?.navigation?.navigate(Routes.BottomNavigator);
       }
 
     } catch (error) {

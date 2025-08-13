@@ -9,7 +9,7 @@ import { useForgotPassword } from './Hooks'
 import { ForgotPasswordContainer } from './Components'
 
 const ForgotPassword = (props) => {
-    const { goBack, email, setEmail, RecoverPassword, apiError } = useForgotPassword(props)
+    const { goBack, email, setEmail, RecoverPassword, apiError, loading } = useForgotPassword(props)
     return (
         <AuthMainContainer>
             <View style={styles.container}>
@@ -17,7 +17,13 @@ const ForgotPassword = (props) => {
                     <Image style={styles.leftImage} source={images.backArrow} />
                 </TouchableOpacity>
                 <Spacer height={hp(3.5)} />
-                <ForgotPasswordContainer apiError={apiError} email={email} setEmail={setEmail} RecoverPassword={RecoverPassword} />
+                <ForgotPasswordContainer
+                    apiError={apiError}
+                    email={email}
+                    setEmail={setEmail}
+                    RecoverPassword={RecoverPassword}
+                    loading={loading}
+                />
             </View>
         </AuthMainContainer>
     )

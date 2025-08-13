@@ -8,6 +8,7 @@ export const useForgotPassword = (props) => {
 
     const [email, setEmail] = useState('')
     const [apiError, setApiError] = useState("")
+    const [loading,setLoading ]= useState(false)
 
     const showToast = () => {
         Toast.show({
@@ -30,6 +31,7 @@ export const useForgotPassword = (props) => {
 
     const RecoverPassword = async () => {
         try {
+            setLoading(true)
             await validationSchema.validate({ email })
             console.log("USER EMAIL ", email);
             const payload = {
@@ -46,6 +48,7 @@ export const useForgotPassword = (props) => {
                 }, 1500);
             }
         } catch (error) {
+            setLoading(false)
             if (error.name === 'ValidationError') {
                 console.log("Validation Error:", error.message);
                 setApiError(error?.message)
@@ -57,6 +60,8 @@ export const useForgotPassword = (props) => {
                 setApiError(message)
             }
 
+        } finally{
+            setLoading(false)
         }
     }
 
@@ -64,7 +69,7 @@ export const useForgotPassword = (props) => {
         goBack,
         email, setEmail,
         RecoverPassword,
-        apiError
+        apiError,loading
     }
 }
 

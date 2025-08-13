@@ -8,7 +8,7 @@ import { SimpleButton } from '../../../../components/SimpleButton'
 import { colors, fontFamily } from '../../../../constants'
 import TextInputField from '../../../../components/TextInputField'
 
-export const ForgotPasswordContainer = ({ email, setEmail, RecoverPassword ,apiError}) => {
+export const ForgotPasswordContainer = ({ email, setEmail, RecoverPassword ,apiError,loading}) => {
     return (
         <View style={styles.mainBox}>
             <Spacer height={hp(0.5)} />
@@ -29,7 +29,15 @@ export const ForgotPasswordContainer = ({ email, setEmail, RecoverPassword ,apiE
                     </>
                 )}
             <Spacer />
-            <SimpleButton onPress={RecoverPassword} text={"Continue"} textColor={colors.black} backgroundColor={colors.mainColor} buttonWidth={wp(84.2)} height={hp(6.5)} />
+            <SimpleButton 
+            onPress={RecoverPassword} 
+            text={"Continue"} 
+            textColor={colors.black} 
+            backgroundColor={colors.mainColor} 
+            buttonWidth={wp(84.2)} 
+            height={hp(6.5)} 
+            loading={loading}
+            />
             <Spacer height={hp(0.8)} />
 
         </View>
