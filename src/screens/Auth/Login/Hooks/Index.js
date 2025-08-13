@@ -75,7 +75,7 @@ export const UseLogin = (props) => {
   }
 
   const goToForgotPassword = () => {
-    props?.navigation?.navigate?.(Routes.ChangePasswordForgot)
+    props?.navigation?.navigate?.(Routes.ForgotPassword)
   }
 
   return {

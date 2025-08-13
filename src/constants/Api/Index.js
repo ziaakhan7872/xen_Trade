@@ -41,6 +41,11 @@ export const LogoutUser = async (payload) => {
         console.log(error, "reset password error")
     }
 }
+export const ResendOtpApi = async (payload) => {
+    console.log("Resend OTP API--", payload);
+
+    return axios.post(`${AUTH_BASE_URL}/otp/resend-otp`, { payload })
+}
 
 export const ResetPasswordApi = async (payload) => {
     try {

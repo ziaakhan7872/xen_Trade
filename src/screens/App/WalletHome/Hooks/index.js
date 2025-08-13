@@ -1,15 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { getAccountDetail, GetCryptoListApi } from '../../../../constants/Api/Index';
 import { useSelector } from 'react-redux';
-import { Keyboard } from 'react-native';
-import { colors } from '../../../../constants';
-import { hp } from '../../../../components/ResponsiveComponent';
 
 export const useHomeScreen = (props) => {
   const { user } = useSelector((state) => state.user);
   const assetSheetRef = useRef(null);
-
-
 
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
@@ -23,9 +18,6 @@ export const useHomeScreen = (props) => {
   const [hasMore, setHasMore] = useState(true)
 
 
-
-
-
   useEffect(() => {
     getCryptoData()
   }, [])
@@ -34,10 +26,10 @@ export const useHomeScreen = (props) => {
     if (hasMore) {
       try {
         setLoading(true)
-        const getCryptoData = await GetCryptoListApi(newPage, 20)
+        const getCryptoData = await GetCryptoListApi(newPage, 10)
         console.log("Crypto Data:", getCryptoData?.data?.data)
 
-        const GetAccountDetail = await getAccountDetail(1, 20, user?.id);
+        const GetAccountDetail = await getAccountDetail(newPage, 10, user?.id);
         console.log("Account Details:", GetAccountDetail);
 
         const mergeData = getCryptoData?.data?.data?.map((item) => {

@@ -12,7 +12,7 @@ import Line from '../../../../components/Liner'
 import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent';
 
 
-export const EmailVerificationForm = ({ submit,setOtpCode,errorMessage }) => {
+export const EmailVerificationForm = ({ submit, setOtpCode, errorMessage, resendOtp, previousScreenName }) => {
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode="contain" style={styles.logoImage} />
@@ -40,9 +40,9 @@ export const EmailVerificationForm = ({ submit,setOtpCode,errorMessage }) => {
                         <Spacer />
                     </>
                 )}
-            <ResponsiveText style={styles.resendCode}>Resend Code</ResponsiveText>
+            <ResponsiveText onPress={resendOtp} style={styles.resendCode}>Resend Code</ResponsiveText>
             <Spacer />
-            <SimpleButton onPress={submit} text={"Submit"} textColor={colors.black} backgroundColor={colors.mainColor} buttonWidth={wp(80)} />
+            <SimpleButton onPress={submit} text={previousScreenName == "forgotPassword" ? "Continue" : "Submit"} textColor={colors.black} backgroundColor={colors.mainColor} buttonWidth={wp(80)} />
         </View>
     )
 }
@@ -82,7 +82,7 @@ export const EmailVerificationBottomSheet = ({ bottomSheetRef, closeBottomSheet 
                 <Spacer height={hp(0.5)} />
                 <ResponsiveText style={styles.bottomSheetTextInfo}>Complete KYC account verification to enable transfers</ResponsiveText>
                 <Spacer />
-                <SimpleButton  text={"Complete Verification"} textColor={colors.white} height={hp(6)} buttonWidth={wp(80)} backgroundColor={colors.buttonSigninColor} />
+                <SimpleButton text={"Complete Verification"} textColor={colors.white} height={hp(6)} buttonWidth={wp(80)} backgroundColor={colors.buttonSigninColor} />
             </View>
         </GorhomBottomSheet>
     )

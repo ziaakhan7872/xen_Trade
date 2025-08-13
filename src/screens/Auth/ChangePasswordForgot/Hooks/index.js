@@ -13,6 +13,9 @@ export const useChangePasswordForgot = (props) => {
     const [passwordVisible, setPasswordVisible] = useState(false)
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false)
 
+    console.log("User data in ResetPassword::::::previousUserData", userId, "||||", otp, "||||", password);
+
+
     const showToast = () => {
         Toast.show({
             type: 'verificationAlert',
@@ -36,7 +39,7 @@ export const useChangePasswordForgot = (props) => {
     const ResetPassword = async () => {
         const values = { password, confirmPassword }
         try {
-            await validationSchema(values, { abortEarly: false })
+            await validationSchema.validate(values, { abortEarly: false })
 
             const payload = {
                 emailOtpCode: Number(otp),

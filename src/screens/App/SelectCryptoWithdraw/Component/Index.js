@@ -29,7 +29,7 @@ export const SelectCryptoHeader = ({ BackPress, historyPress }) => {
 };
 
 
-export const SelectCryptoSearchBox = ({searchCoin,setSearchCoin}) => {
+export const SelectCryptoSearchBox = ({ searchCoin, setSearchCoin }) => {
     return (
         <View style={{ flexDirection: "row", alignItems: "center" }}>
             <InputText
@@ -40,7 +40,7 @@ export const SelectCryptoSearchBox = ({searchCoin,setSearchCoin}) => {
                 value={searchCoin}
                 onChangeText={setSearchCoin}
                 icon={true}
-                iconChildren={ <EvilIcons name="search" color={colors.mainColor} size={25} />}
+                iconChildren={<EvilIcons name="search" color={colors.mainColor} size={25} />}
             />
             {/* <View style={styles.leftIcon}>
                 <EvilIcons name="search" color={colors.mainColor} size={25} />
@@ -83,8 +83,8 @@ export const PopularCrypto = ({ data, onPress }) => {
                                         ? Number(item.account.amount).toFixed(4)
                                         : item.account.amount
                                     : "0"}
-                            </ResponsiveText>                       
-                             </View>
+                            </ResponsiveText>
+                        </View>
                     </TouchableOpacity>
                 )}
 
@@ -108,7 +108,7 @@ export const SelectCryptoRowButton = ({ data, onPress }) => {
                 renderItem={({ item }) => (
                     <View style={{ marginHorizontal: wp(0.2) }}>
                         <TouchableOpacity onPress={() => onPress(item)} style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.gray3, paddingVertical: hp(0.8), paddingHorizontal: wp(2.4), borderRadius: wp(5) }}>
-                            <Image style={styles.image} source={{ uri: item?.icon }}  resizeMode='contain'/>
+                            <Image style={styles.image} source={{ uri: item?.icon }} resizeMode='contain' />
                             <HorizontalSpacer width={wp(1)} />
                             <ResponsiveText style={styles.text2}>{item?.symbol}</ResponsiveText>
                         </TouchableOpacity>
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
         width: wp(6),
         height: wp(6),
         resizeMode: "contain",
-        borderRadius:100
+        borderRadius: 100
     },
     text2: {
         fontSize: 14,
