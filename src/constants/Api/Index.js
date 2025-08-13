@@ -28,6 +28,12 @@ export const ForgotPasswordApi = async (email) => {
     return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, { email })
 }
 
+export const ResendOtpApi = async (payload) => {
+    console.log("Resend OTP API--", payload);
+
+    return axios.post(`${AUTH_BASE_URL}/otp/resend-otp`, { payload })
+}
+
 export const ResetPasswordApi = async (payload) => {
     try {
         return apiRequest({

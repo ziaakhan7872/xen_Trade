@@ -1,19 +1,29 @@
 import React, { useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { EmailVerificationApi } from '../../../../constants/Api/Index'
+import { EmailVerificationApi, ResendOtpApi } from '../../../../constants/Api/Index'
 import { Routes } from '../../../../constants'
+import * as Yup from 'yup'
+import { useSelector } from 'react-redux'
 // import { useSelector } from 'react-redux'
 
 const useEmalVerification = (props) => {
-  // const userData = useSelector((state) => state.user)
+  const userData = useSelector((state) => state.user)
   const previousScreenName = props?.route?.params?.screenName
   const emailVerificationBottomSheetRef = useRef(null)
   // const previousUserData = props?.route?.params?.userData || ''
-  const id = props?.route?.params?.id
+  // const id = props?.route?.params?.id
+  const email = props?.route?.params?.email
   const [otpCode, setOtpCode] = useState("")
   const [errorMessage, setErrorMessage] = useState("");
+  const [apiError, setApiError] = useState("")
 
-  console.log("User data in EmailVerificationScreen::::::previousUserData", id);
+  const id = userData?.user?.id
+
+  console.log("User data in EmailVerificationScreen::::::previousUserData", id, "||||", email);
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email address').required('Email is required'),
+  })
 
   const verifyEmail = async () => {
     try {
@@ -33,8 +43,6 @@ const useEmalVerification = (props) => {
         emailVerificationBottomSheetRef?.current?.expand()
       }
 
-
-
     } catch (error) {
       console.error("Error during email verification:", error?.response);
       if (error?.response) {
@@ -46,9 +54,36 @@ const useEmalVerification = (props) => {
           return
         }
       }
-
       setErrorMessage("An error occurred during email verification. Please try again.");
+    }
+  }
 
+  const resendOtp = async () => {
+    try {
+      const validatedEmail = await validationSchema.validate({ email })
+
+      const payload = {
+        email: email,
+        userId: id
+      }
+
+      const otpResponse = await ResendOtpApi(payload)
+
+      if (otpResponse?.status == 200) {
+        props?.navigation?.navigate?.(Routes.ChangePasswordForgot)
+      }
+    }
+    catch (error) {
+      if (error.name === 'ValidationError') {
+        console.log("Validation Error:", error.message);
+        setApiError(error?.message)
+      }
+      const status = error?.response?.status
+      const message = error?.response?.data?.message
+      console.log(error)
+      if (status === 400) {
+        setApiError(message)
+      }
     }
   }
 
@@ -63,6 +98,7 @@ const useEmalVerification = (props) => {
   const handeGoBack = () => {
     props?.navigation?.goBack()
   }
+
   return {
     emailVerificationBottomSheetRef,
     handleOpenVerification,
@@ -70,8 +106,9 @@ const useEmalVerification = (props) => {
     handeGoBack,
     setOtpCode, otpCode,
     verifyEmail,
-    errorMessage, setErrorMessage
-
+    errorMessage, setErrorMessage,
+    resendOtp,
+    previousScreenName
   }
 }
 
