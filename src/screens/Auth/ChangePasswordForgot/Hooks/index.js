@@ -52,15 +52,14 @@ export const useChangePasswordForgot = (props) => {
 
             const resetRes = await ResetPasswordApi(payload)
             console.log(resetRes, "reset")
-            Alert.alert("success")
 
-            // if (resetRes) {
-            //     showToast()
-            //     setTimeout(() => {
-            //         props?.navigation?.navigate?.(Routes.LoginScreen)
+            if (resetRes?.status == 200) {
+                showToast()
+                setTimeout(() => {
+                    props?.naviagtion?.navigate(Routes.LoginScreen)
 
-            //     }, 1500)
-            // }
+                }, 1500)
+            }
         }
         catch (error) {
             console.log("Error RESETTING Password -- ", error?.response)

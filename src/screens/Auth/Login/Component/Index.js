@@ -10,7 +10,7 @@ import RowButton from '../../../../components/RowButton'
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { ResponsiveText } from '../../../../components/ResponsiveText';
 
-const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, passwordVisible, setPasswordVisible, errorMessage, goToForgotPassword }) => {
+const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, passwordVisible, setPasswordVisible, errorMessage, goToForgotPassword ,loading}) => {
     return (
        
             <ScrollView contentContainerStyle={styles.scrollViewContainer}>
@@ -32,7 +32,17 @@ const LoginForm = ({ signUp, Login, email, setEmail, password, setPassword, pass
                                 <Spacer />
                             </>
                         )}
-                        <SimpleButton disabled={(!email || !password)} onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={(!email || !password) ? colors.authButtonColor : colors.mainColor} buttonWidth={wp(80)} />
+                        <SimpleButton 
+                        disabled={(!email || !password)} 
+                        onPress={Login} 
+                        textFontSize={14} 
+                        text={"Sign in"} 
+                        textColor={colors.buttonSigninColor} 
+                        backgroundColor={(!email || !password) ? colors.authButtonColor : colors.mainColor} 
+                        buttonWidth={wp(80)} 
+                        loading={loading}
+                        
+                        />
                         {/* <SimpleButton onPress={Login} textFontSize={14} text={"Sign in"} textColor={colors.buttonSigninColor} backgroundColor={(!email || !password) ? colors.authButtonColor : colors.mainColor} buttonWidth={wp(80)} /> */}
                         <Spacer />
                         <ResponsiveText style={styles.signInWithStyle}>Or sign in with</ResponsiveText>

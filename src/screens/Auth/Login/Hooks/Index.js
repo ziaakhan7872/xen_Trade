@@ -9,6 +9,7 @@ export const UseLogin = (props) => {
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("")
+  const [loading,setLoading] = useState(false)
 
 
   const validationSchema = Yup.object().shape({
@@ -31,6 +32,7 @@ export const UseLogin = (props) => {
     const values = { email, password };
 
     try {
+      setLoading(true)
       await validationSchema.validate(values, { abortEarly: false });
 
       const payload = {
@@ -55,6 +57,7 @@ export const UseLogin = (props) => {
       setErrorMessage("")
 
     } catch (error) {
+      setLoading(false)
       if (error.name === 'ValidationError') {
         setErrorMessage(error.errors.join('\n'));
       } else if (error?.response) {
@@ -72,6 +75,9 @@ export const UseLogin = (props) => {
         setErrorMessage("Network error, please try again later");
       }
     }
+    finally{
+      setLoading(false)
+    }
   }
 
   const goToForgotPassword = () => {
@@ -83,8 +89,8 @@ export const UseLogin = (props) => {
     password, setPassword,
     passwordVisible, setPasswordVisible,
     handleLogin,
-    errorMessage, setErrorMessage,
-    goToForgotPassword,
+    errorMessage,
+    goToForgotPassword, loading
   }
 }
 
