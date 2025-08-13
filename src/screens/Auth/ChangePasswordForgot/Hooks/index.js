@@ -57,7 +57,7 @@ export const useChangePasswordForgot = (props) => {
             }
         }
         catch (error) {
-            console.log("Error RESETTING Password -- ", error)
+            console.log("Error RESETTING Password -- ", error.response)
         }
     }
 

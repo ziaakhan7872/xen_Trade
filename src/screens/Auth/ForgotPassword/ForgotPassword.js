@@ -9,7 +9,7 @@ import { useForgotPassword } from './Hooks'
 import { ForgotPasswordContainer } from './Components'
 
 const ForgotPassword = (props) => {
-    const { goBack, email, setEmail, RecoverPassword,apiError } = useForgotPassword(props)
+    const { goBack, email, setEmail, RecoverPassword, apiError } = useForgotPassword(props)
     return (
         <AuthMainContainer>
             <View style={styles.container}>

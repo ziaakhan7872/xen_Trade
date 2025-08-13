@@ -21,10 +21,6 @@ const useEmalVerification = (props) => {
 
   console.log("User data in EmailVerificationScreen::::::previousUserData", id, "||||", email);
 
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email address').required('Email is required'),
-  })
-
   const verifyEmail = async () => {
     try {
       if (!otpCode) {
@@ -60,7 +56,6 @@ const useEmalVerification = (props) => {
 
   const resendOtp = async () => {
     try {
-      const validatedEmail = await validationSchema.validate({ email })
 
       const payload = {
         email: email,
