@@ -13,7 +13,7 @@ const UseLoginVerification = (props) => {
   const [otpCode, setOtpCode] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
   const [code, setCode] = useState("")
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const showToast = () => {
     Toast.show({
@@ -67,7 +67,7 @@ const UseLoginVerification = (props) => {
 
 
     }
-    finally{
+    finally {
       setLoading(false)
     }
   }
@@ -105,7 +105,7 @@ const UseLoginVerification = (props) => {
     verifyEmail,
     errorMessage, setErrorMessage,
     code, setCode,
-    userEmail,resendOtp,loading
+    userEmail, resendOtp, loading
   }
 }
 

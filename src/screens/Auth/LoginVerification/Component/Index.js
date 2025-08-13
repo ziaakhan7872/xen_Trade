@@ -36,12 +36,12 @@ export const LoginVerificationForm = ({ submit, setOtpCode, errorMessage, code, 
                     </>
                 )}
             <Spacer />
-            <SimpleButton o
-                nPress={submit}
+            <SimpleButton
+                onPress={submit}
                 text={"Submit"}
                 textColor={code == '' ? colors.disableColor2 : colors.black}
-                backgroundColor={code != '' ? colors.mainColor : colors.disableColor} 
-                buttonWidth={wp(84.2)} 
+                backgroundColor={code != '' ? colors.mainColor : colors.disableColor}
+                buttonWidth={wp(84.2)}
                 height={hp(6.5)}
                 disabled={code == '' ? true : false}
                 loading={loading}
