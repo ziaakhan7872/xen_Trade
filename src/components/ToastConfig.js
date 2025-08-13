@@ -26,7 +26,7 @@ export const ToastConfig = {
     </LinearGradient>
   ),
 
-  successAlert: ({ text1, text2, props }) => (
+  successAlert: ({ text1, text2 }) => (
     <LinearGradient
       colors={['rgba(1, 26, 31, 1)', 'rgba(1, 19, 22, 1)']}
       start={{ x: 0, y: 0 }}
@@ -38,11 +38,12 @@ export const ToastConfig = {
         <ResponsiveText style={styles.title}>{text1}</ResponsiveText>
         <View style={appStyles.rowBasic}>
           <ResponsiveText style={styles.subtitle}>{text2} </ResponsiveText>
-          <ResponsiveText style={[styles.subtitle, { color: colors.mainColor }]}>{props?.email}</ResponsiveText>
+          {/* <ResponsiveText style={[styles.subtitle, { color: colors.mainColor }]}>{props}</ResponsiveText> */}
         </View>
       </View>
     </LinearGradient>
   ),
+
 };
 
 

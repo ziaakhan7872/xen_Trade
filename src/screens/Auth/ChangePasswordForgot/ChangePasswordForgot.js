@@ -12,7 +12,9 @@ const ChangePasswordForgot = (props) => {
     const {
         goBack, passwordVisible, setPasswordVisible,
         confirmPasswordVisible, setConfirmPasswordVisible,
-        password, setPassword, confirmPassword, setConfirmPassword, ResetPassword
+        password, setPassword, confirmPassword, setConfirmPassword, ResetPassword,
+        errorMessage, setErrorMessage,
+        loading
     } = useChangePasswordForgot(props)
     // console.log("RESET PASSWORD API RESPONSE -- ", resetRes);
 
@@ -29,6 +31,8 @@ const ChangePasswordForgot = (props) => {
                     password={password} setPassword={setPassword}
                     confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword}
                     ResetPassword={ResetPassword}
+                    errorMessage={errorMessage} setErrorMessage={setErrorMessage}
+                    loading={loading}
                 />
             </View>
         </AuthMainContainer>
