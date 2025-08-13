@@ -5,7 +5,7 @@ import Toast from "react-native-toast-message";
 import * as Yup from 'yup';
 
 export const useChangePasswordForgot = (props) => {
-    const {otpCode,id} = props?.route?.params || {}
+    const { otpCode, id } = props?.route?.params || {}
 
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');

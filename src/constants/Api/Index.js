@@ -48,18 +48,23 @@ export const ResendOtpApi = async (payload) => {
 }
 
 export const ResetPasswordApi = async (payload) => {
-    try {
-        return apiRequest({
-            method: "POST",
-            url: `${AUTH_BASE_URL}/auth/reset-password`,
-            data: payload,
-            isAuth: false,
-        });
+    console.log("Reset Password API--", payload);
 
-    } catch (error) {
-        console.log(error, "reset password error")
-    }
+    return axios.post(`${AUTH_BASE_URL}/auth/reset-password`, { payload })
 }
+// export const ResetPasswordApi = async (payload) => {
+//     try {
+//         return apiRequest({
+//             method: "POST",
+//             url: `${AUTH_BASE_URL}/auth/reset-password`,
+//             data: payload,
+//             isAuth: false,
+//         });
+
+//     } catch (error) {
+//         console.log(error, "reset password error")
+//     }
+// }
 
 // // MarketApis
 

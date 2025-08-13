@@ -10,7 +10,7 @@ import Toast from 'react-native-toast-message'
 const useEmalVerification = (props) => {
   const previousScreenName = props?.route?.params?.screenName
   const emailVerificationBottomSheetRef = useRef(null)
-  const {userData,email} = props?.route?.params
+  const { userData, email } = props?.route?.params
   const [otpCode, setOtpCode] = useState("")
   const [errorMessage, setErrorMessage] = useState("");
   const [apiError, setApiError] = useState("")
@@ -29,8 +29,6 @@ const useEmalVerification = (props) => {
               props: email
           })
       }
-
-  
 
   const verifyEmail = async () => {
     try {
