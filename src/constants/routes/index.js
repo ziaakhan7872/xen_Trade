@@ -5,6 +5,7 @@ export const Routes = {
     splashScreen: "splashScreen",
     LoginScreen: "LoginScreen",
     ForgotPassword: "ForgotPassword",
+    EmailVerForgotPass: "EmailVerForgotPass",
     ChangePasswordForgot: "ChangePasswordForgot",
     SignupScreen: "SignupScreen",
     EmailVerificationScreen: "EmailVerificationScreen",

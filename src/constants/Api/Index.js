@@ -23,13 +23,17 @@ export const LoginApi = async (payload) => {
 }
 
 export const ForgotPasswordApi = async (payload) => {
-    console.log("EMAIL---", payload);
-
+    console.log("EMAIL---", payload)
     return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, payload)
 }
 
+export const ForgotPasswordOtpApi = async (payload) => {
+    console.log("ForgotPasswordOtpApi Response---", payload)
+    return axios.post(`${AUTH_BASE_URL}/verifications/forgot-password-otp`, payload)
+}
+
 export const LogoutUser = async (payload) => {
-     try {
+    try {
         return apiRequest({
             method: "DELETE",
             url: `${AUTH_BASE_URL}/auth/logout`,
@@ -44,13 +48,13 @@ export const LogoutUser = async (payload) => {
 export const ResendOtpApi = async (payload) => {
     console.log("Resend OTP API--", payload);
 
-    return axios.post(`${AUTH_BASE_URL}/otp/resend-otp`,  payload )
+    return axios.post(`${AUTH_BASE_URL}/otp/resend-otp`, payload)
 }
 
 export const ResetPasswordApi = async (payload) => {
     console.log("Reset Password API--", payload);
 
-    return axios.post(`${AUTH_BASE_URL}/auth/reset-password`, { payload })
+    return axios.post(`${AUTH_BASE_URL}/auth/reset-password`, payload)
 }
 // export const ResetPasswordApi = async (payload) => {
 //     try {

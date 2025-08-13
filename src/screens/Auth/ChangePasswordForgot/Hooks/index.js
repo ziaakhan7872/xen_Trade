@@ -3,9 +3,10 @@ import { ResetPasswordApi } from "../../../../constants/Api/Index";
 import { Routes } from "../../../../constants";
 import Toast from "react-native-toast-message";
 import * as Yup from 'yup';
+import { Alert } from "react-native";
 
 export const useChangePasswordForgot = (props) => {
-    const { otpCode, id } = props?.route?.params || {}
+    const { otpCode, id } = props?.route?.params
 
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,34 +27,40 @@ export const useChangePasswordForgot = (props) => {
         })
     }
 
-    const validationSchema = Yup.object().shape({
-        password: Yup.string()
-            .min(6, 'Password must be at least 6 characters')
-            .required('Password is required'),
-        confirmPassword: Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Passwords must match')
-            .required('Confirm password is required'),
-    })
+    // const validationSchema = Yup.object().shape({
+    //     password: Yup.string()
+    //         .min(6, 'Password must be at least 6 characters')
+    //         .required('Password is required'),
+    //     confirmPassword: Yup.string()
+    //         .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    //         .required('Confirm password is required'),
+    // })
 
     const ResetPassword = async () => {
-        const values = { password, confirmPassword }
+        // const values = { password, confirmPassword }
+        console.log("ENTERED ResetPassword FUNCTION");
+
         try {
-            await validationSchema.validate(values, { abortEarly: false })
+            // await validationSchema.validate(values, { abortEarly: false })
 
             const payload = {
-                emailOtpCode: Number(otpCode),
+                EmailOtpCode: Number(otpCode),
                 id: id,
                 password: password
             }
+            console.log("Final payload about to send:", payload);
+
             const resetRes = await ResetPasswordApi(payload)
+            console.log(resetRes, "reset")
+            Alert.alert("success")
 
-            if (resetRes.status == 200) {
-                showToast()
-                setTimeout(() => {
-                    props?.naviagtion?.navigate?.(Routes.LoginScreen)
+            // if (resetRes) {
+            //     showToast()
+            //     setTimeout(() => {
+            //         props?.navigation?.navigate?.(Routes.LoginScreen)
 
-                }, 1500)
-            }
+            //     }, 1500)
+            // }
         }
         catch (error) {
             console.log("Error RESETTING Password -- ", error?.response)

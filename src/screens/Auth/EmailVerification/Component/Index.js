@@ -12,7 +12,7 @@ import Line from '../../../../components/Liner'
 import { GorhomBottomSheet } from '../../../../components/GorhumBottomSheetComponent';
 
 
-export const EmailVerificationForm = ({ submit, setOtpCode, errorMessage, resendOtp, previousScreenName }) => {
+export const EmailVerificationForm = ({ submit, setOtpCode, errorMessage, resendOtp }) => {
     return (
         <View style={styles.mainBox}>
             <Image source={images.splashLogoImage} resizeMode="contain" style={styles.logoImage} />
@@ -42,7 +42,7 @@ export const EmailVerificationForm = ({ submit, setOtpCode, errorMessage, resend
                 )}
             <ResponsiveText onPress={resendOtp} style={styles.resendCode}>Resend Code</ResponsiveText>
             <Spacer />
-            <SimpleButton onPress={submit} text={previousScreenName == "forgotPassword" ? "Continue" : "Submit"} textColor={colors.black} backgroundColor={colors.mainColor} buttonWidth={wp(80)} />
+            <SimpleButton onPress={submit} text={"Submit"} textColor={colors.black} backgroundColor={colors.mainColor} buttonWidth={wp(80)} />
         </View>
     )
 }
