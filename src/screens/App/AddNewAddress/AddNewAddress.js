@@ -24,34 +24,39 @@ const AddNewAddress = (props) => {
     } = useAddNewAddress()
     return (
         <AuthMainContainer>
-            <ScrollView
-                contentContainerStyle={{
-                    flexGrow: 1,
-                    justifyContent: 'space-between',
-                }}
-                keyboardShouldPersistTaps="handled">
-                <View style={styles.containerMain}>
-                    <MainHeader leftImage={images.backArrow} title='ADD NEW ADDRESS' onBackPress={() => props?.navigation.goBack()} />
-                    <Spacer height={hp(3)} />
+            <View style={{ flex: 1 }}>
+                <ScrollView
+                    contentContainerStyle={{
+                        // flexGrow: 1,
+                        // justifyContent: 'space-between',
+                        // borderWidth: 1
+                    }}
+                    keyboardShouldPersistTaps="handled"
+                >
+                    <View style={[styles.containerMain]}>
+                        <MainHeader leftImage={images.backArrow} title='ADD NEW ADDRESS' onBackPress={() => props?.navigation.goBack()} />
+                        <Spacer height={hp(3)} />
 
-                    <DropDowns
-                        coinList={coinList} networkList={networkList}
-                        coin={coin} setCoin={setCoin}
-                        network={network} setNetwork={setNetwork}
-                        isCoinListOpen={isCoinListOpen} setIsCoinListOpen={setIsCoinListOpen}
-                        isNetworkOpen={isNetworkOpen} setIsNetworkOpen={setIsNetworkOpen}
-                    />
+                        <DropDowns
+                            coinList={coinList} networkList={networkList}
+                            coin={coin} setCoin={setCoin}
+                            network={network} setNetwork={setNetwork}
+                            isCoinListOpen={isCoinListOpen} setIsCoinListOpen={setIsCoinListOpen}
+                            isNetworkOpen={isNetworkOpen} setIsNetworkOpen={setIsNetworkOpen}
+                        />
 
-                    <Spacer />
+                        <Spacer />
 
-                    <InputFieldGroup />
-                </View>
+                        <InputFieldGroup />
+                    </View>
+                </ScrollView>
 
-                <View style={[appStyles.row, styles.buttonRow]}>
+
+                <View style={[appStyles.row, styles.buttonRow,]}>
                     <SimpleButton text="Cancel" textColor={colors.white} styleView={styles.cancelBtn} onPress={() => props?.navigation.goBack()} />
                     <SimpleButton text="Save" textColor={colors.black} styleView={styles.saveBtn} />
                 </View>
-            </ScrollView>
+            </View>
         </AuthMainContainer>
     )
 }

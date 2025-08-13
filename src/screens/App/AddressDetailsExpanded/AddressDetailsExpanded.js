@@ -16,24 +16,28 @@ const AddressDetailsExpanded = (props) => {
     const { isEditable, setIsEditable } = useAddressDetailsExpanded()
     return (
         <AuthMainContainer>
-            <ScrollView
-                contentContainerStyle={{
-                    flexGrow: 1,
-                    justifyContent: 'space-between',
-                }}
-                keyboardShouldPersistTaps="handled">
-                <View style={styles.containerMain}>
-                    <MainHeader leftImage={images.backArrow} title='ETH-METAMASK' onBackPress={() => props?.navigation.goBack()} />
-                    <Spacer height={hp(3)} />
+            <View style={{ flex: 1 }}>
 
-                    <InputForm isEditable={isEditable} />
-                </View>
+                <ScrollView
+                    contentContainerStyle={{
+                        flexGrow: 1,
+                        // justifyContent: 'space-between',
+                    }}
+                    keyboardShouldPersistTaps="handled">
+                    <View style={styles.containerMain}>
+                        <MainHeader leftImage={images.backArrow} title='ETH-METAMASK' onBackPress={() => props?.navigation.goBack()} />
+                        <Spacer height={hp(3)} />
+
+                        <InputForm isEditable={isEditable} />
+                    </View>
+                </ScrollView>
+
 
                 <View style={[appStyles.row, styles.buttonRow]}>
                     <SimpleButton text="Delete" textColor={colors.white} styleView={styles.deleteBtn} />
                     <SimpleButton text={isEditable ? "Save" : "Edit"} textColor={colors.white} styleView={styles.editBtn} onPress={() => setIsEditable(!isEditable)} />
                 </View>
-            </ScrollView>
+            </View>
         </AuthMainContainer>
     )
 }
