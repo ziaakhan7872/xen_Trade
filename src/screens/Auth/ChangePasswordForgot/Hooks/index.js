@@ -45,12 +45,13 @@ export const useChangePasswordForgot = (props) => {
                 id: id,
                 password: password
             }
+            console.log(payload,"forget")
             const resetRes = await ResetPasswordApi(payload)
 
             if (resetRes.status == 200) {
                 showToast()
                 setTimeout(() => {
-                    props?.naviagtion?.navigate?.(Routes.LoginScreen)
+                    props?.naviagtion?.navigate(Routes.LoginScreen)
 
                 }, 1500)
             }
