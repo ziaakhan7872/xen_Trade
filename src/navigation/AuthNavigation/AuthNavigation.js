@@ -25,6 +25,7 @@ const AuthNavigation = (props) => {
             <Screen name={Routes.LoginVerificationScreen} component={Auth.LoginVerification} />
             <Screen name={Routes.ForgotPassword} component={Auth.ForgotPassword} />
             <Screen name={Routes.ChangePasswordForgot} component={Auth.ChangePasswordForgot} />
+            <Screen name={Routes.EmailVerForgotPass} component={Auth.EmailVerForgotPass} />
         </Navigator>
     );
 };

@@ -21,26 +21,26 @@ const UseSignUp = (props) => {
     props?.navigation.navigate(Routes.LoginScreen)
   }
   const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .trim()
-    .email('Invalid email address')
-    .required('Email is required'),
+    email: Yup.string()
+      .trim()
+      .email('Invalid email address')
+      .required('Email is required'),
 
-  password: Yup.string()
-    .min(6, 'Password must be at least 6 characters')
-    .matches(/[a-z]/, 'Password must include at least one lowercase letter')
-    .matches(/[A-Z]/, 'Password must include at least one uppercase letter')
-    .matches(/\d/, 'Password must include at least one number')
-    .matches(/[^A-Za-z0-9]/, 'Password must include at least one special character')
-    .required('Password is required'),
+    password: Yup.string()
+      .min(6, 'Password must be at least 6 characters')
+      .matches(/[a-z]/, 'Password must include at least one lowercase letter')
+      .matches(/[A-Z]/, 'Password must include at least one uppercase letter')
+      .matches(/\d/, 'Password must include at least one number')
+      .matches(/[^A-Za-z0-9]/, 'Password must include at least one special character')
+      .required('Password is required'),
 
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Passwords must match')
-    .required('Confirm password is required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password')], 'Passwords must match')
+      .required('Confirm password is required'),
 
-  referralCode: Yup.string().trim().notRequired(),
-  isChecked: Yup.boolean().oneOf([true], 'You must accept the terms and conditions'),
-});
+    referralCode: Yup.string().trim().notRequired(),
+    isChecked: Yup.boolean().oneOf([true], 'You must accept the terms and conditions'),
+  });
 
   const handleEmailVerification = async () => {
     const values = { email, password, confirmPassword, referralCode, isChecked };
@@ -56,7 +56,12 @@ const UseSignUp = (props) => {
       }
       const SignUp = await SignUpApi(payload)
       console.log("Navigating to EmailVerificationScreen with userData:", SignUp);
-      props?.navigation.navigate(Routes.EmailVerificationScreen, { userData: SignUp?.data,email:email })
+      if (SignUp?.status == 201) {
+        console.log("Navigating to EmailVerificationScreen with userData:", SignUp);
+
+        props?.navigation?.navigate(Routes.EmailVerificationScreen, { userData: SignUp?.data, email: email })
+      }
+
       setErrorMessage('');
       setEmail('');
       setPassword('');
@@ -71,7 +76,7 @@ const UseSignUp = (props) => {
       } else if (error?.response) {
         const status = error?.response?.status
         const message = error?.response?.data?.message || "Signup failed"
-        if (status === 409 || status===400) {
+        if (status === 409 || status === 400) {
           setErrorMessage(message)
         }
         else {

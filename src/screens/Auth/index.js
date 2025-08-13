@@ -6,9 +6,9 @@ import EmailVerificationScreen from "./EmailVerification/EmailVerificationScreen
 import LoginVerification from "./LoginVerification/LoginVerification";
 import ForgotPassword from "./ForgotPassword/ForgotPassword";
 import ChangePasswordForgot from "./ChangePasswordForgot/ChangePasswordForgot";
-
+import EmailVerForgotPass from "./EmailVerForgotPass/EmailVerForgotPass";
 
 export {
      splashScreen, IntroductionMain, LoginScreen, SignupScreen, EmailVerificationScreen, LoginVerification,
-     ForgotPassword, ChangePasswordForgot
+     ForgotPassword, ChangePasswordForgot, EmailVerForgotPass,
 }

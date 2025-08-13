@@ -64,7 +64,7 @@ const SignUpForm = ({
                             </>
                         )}
                         <SimpleButton
-                            disabled={!email || !password || !confirmPassword || !isChecked}
+                            // disabled={!email || !password || !confirmPassword || !isChecked}
                             onPress={handleEmailVerification}
                             textFontSize={14} text={"Sign Up"}
                             textColor={colors.buttonSigninColor}

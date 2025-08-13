@@ -32,8 +32,8 @@ export const useForgotPassword = (props) => {
         try {
             await validationSchema.validate({ email })
             console.log("USER EMAIL ", email);
-            const payload={
-                email:email
+            const payload = {
+                email: email
             }
 
             const passResponse = await ForgotPasswordApi(payload)
@@ -42,7 +42,7 @@ export const useForgotPassword = (props) => {
             if (passResponse?.status == 200) {
                 showToast()
                 setTimeout(() => {
-                    props?.navigation?.navigate?.(Routes.EmailVerificationScreen, { screenName: "forgotPassword", userData: passResponse?.data, email: email })
+                    props?.navigation?.navigate?.(Routes.EmailVerForgotPass, { userData: passResponse?.data, email: email })
                 }, 1500);
             }
         } catch (error) {
