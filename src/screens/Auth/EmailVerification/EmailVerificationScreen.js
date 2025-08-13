@@ -9,13 +9,16 @@ import { EmailVerificationBottomSheet, EmailVerificationForm } from './Component
 import { Portal } from 'react-native-portalize'
 
 const EmailVerificationScreen = (props) => {
-    const { emailVerificationBottomSheetRef, handleOpenVerification, handleCloseVerification, handeGoBack, otpCode, setOtpCode, verifyEmail, errorMessage, setErrorMessage, resendOtp, previousScreenName } = useEmalVerification(props)
+    const { emailVerificationBottomSheetRef, 
+        otpCode, setOtpCode, verifyEmail, 
+        errorMessage, setErrorMessage, 
+        resendOtp, previousScreenName } = useEmalVerification(props)
     return (
         <AuthMainContainer>
             <View style={style.container}>
                 <Spacer />
                 <View style={style.outerMainBox}>
-                    <TouchableOpacity onPress={handeGoBack}>
+                    <TouchableOpacity onPress={()=>props?.navigation?.goBack()}>
                         <Image style={style.leftImage} resizeMode='contain' source={images.backArrow} />
                     </TouchableOpacity>
                     <Spacer />
@@ -28,7 +31,7 @@ const EmailVerificationScreen = (props) => {
                     />
                 </View>
                 <Portal>
-                    <EmailVerificationBottomSheet closeBottomSheet={handleCloseVerification} bottomSheetRef={emailVerificationBottomSheetRef} />
+                    <EmailVerificationBottomSheet closeBottomSheet={()=>emailVerificationBottomSheetRef?.current?.close()} bottomSheetRef={emailVerificationBottomSheetRef} />
                 </Portal>
             </View>
 

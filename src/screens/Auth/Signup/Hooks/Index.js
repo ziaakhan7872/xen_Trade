@@ -56,7 +56,7 @@ const UseSignUp = (props) => {
       }
       const SignUp = await SignUpApi(payload)
       console.log("Navigating to EmailVerificationScreen with userData:", SignUp);
-      props?.navigation.navigate(Routes.EmailVerificationScreen, { userData: SignUp?.data })
+      props?.navigation.navigate(Routes.EmailVerificationScreen, { userData: SignUp?.data,email:email })
       setErrorMessage('');
       setEmail('');
       setPassword('');

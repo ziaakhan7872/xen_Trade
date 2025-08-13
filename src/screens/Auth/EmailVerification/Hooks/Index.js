@@ -4,6 +4,7 @@ import { EmailVerificationApi, ResendOtpApi } from '../../../../constants/Api/In
 import { Routes } from '../../../../constants'
 import * as Yup from 'yup'
 import { useSelector } from 'react-redux'
+import Toast from 'react-native-toast-message'
 // import { useSelector } from 'react-redux'
 
 const useEmalVerification = (props) => {
@@ -16,7 +17,18 @@ const useEmalVerification = (props) => {
 
   const id = userData?.id
 
-  console.log("User data in EmailVerificationScreen::::::previousUserData", id, "||||", email);
+  console.log("User data in EmailVerificationScreen::::::previousUserData", userData, "||||", email);
+
+   const showToast = () => {
+          Toast.show({
+              type: 'verificationAlert',
+              text1: 'VERIFICATION EMAIL SENT',
+              text2: 'Verification code sent to',
+              visibilityTime: 2000,
+              autoHide: true,
+              props: email
+          })
+      }
 
   
 
@@ -55,7 +67,6 @@ const useEmalVerification = (props) => {
 
   const resendOtp = async () => {
     try {
-      const validatedEmail = await validationSchema.validate({ email })
 
       const payload = {
         email: email,
@@ -63,16 +74,10 @@ const useEmalVerification = (props) => {
       }
 
       const otpResponse = await ResendOtpApi(payload)
-
-      if (otpResponse?.status == 200) {
-        props?.navigation?.navigate?.(Routes.ChangePasswordForgot)
-      }
+      console.log(otpResponse)
+      showToast()
     }
     catch (error) {
-      if (error.name === 'ValidationError') {
-        console.log("Validation Error:", error.message);
-        setApiError(error?.message)
-      }
       const status = error?.response?.status
       const message = error?.response?.data?.message
       console.log(error)
@@ -81,24 +86,10 @@ const useEmalVerification = (props) => {
       }
     }
   }
-
-
-  const handleOpenVerification = () => {
-    console.log("open")
-  }
-  const handleCloseVerification = () => {
-    console.log("open")
-    emailVerificationBottomSheetRef?.current?.close()
-  }
-  const handeGoBack = () => {
-    props?.navigation?.goBack()
-  }
+ 
 
   return {
     emailVerificationBottomSheetRef,
-    handleOpenVerification,
-    handleCloseVerification,
-    handeGoBack,
     setOtpCode, otpCode,
     verifyEmail,
     errorMessage, setErrorMessage,
