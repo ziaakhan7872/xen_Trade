@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Platform } from "react-native"
+import { View } from "react-native"
 import { AuthMainContainer } from "../../../components/authMainContainer"
 import { hp } from "../../../components/ResponsiveComponent"
 import { DepositWalletShowDetails, TokenList, PortfolioHeader, TextInputSearch, ChartBottomSheet } from "./components"
@@ -11,16 +11,13 @@ import { appStyles } from "../../../utilities"
 import { useHomeScreen } from "./Hooks"
 import { Portal } from "react-native-portalize"
 import SkeletionLoader from "../../../components/SkeletonLoader"
-import TextInputField from "../../../components/TextInputField"
 
 const WalletHome = (props) => {
   const {
     isChecked, handleCheckboxToggle,
-    input, setInput,
     assetSheetRef, handleAssetOpen, handleAssetClose,
     cryptoList, searchCoin, setSearchCoin,
-    loading, isVisible, handleWalletData
-    // totalUsdt
+    loading, handleWalletData
   } = useHomeScreen(props)
 
   return (

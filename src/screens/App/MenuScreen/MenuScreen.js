@@ -10,8 +10,15 @@ import Spacer, { HorizontalSpacer } from '../../../components/Spacer'
 import { ResponsiveText } from '../../../components/ResponsiveText'
 import Line from '../../../components/Liner'
 import { appStyles } from '../../../utilities'
+import { navigate } from '../../../navigation/NavigationService/NavigationService'
+import { LogoutUser } from '../../../constants/Api/Index'
+import { getRefreshToken } from '../../../redux/store'
+import { useDispatch } from 'react-redux'
+import { UseMenuScreen } from './Hooks/Index'
 
 const MenuScreen = (props) => {
+    const {logout} = UseMenuScreen(props)
+   
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: colors.black, paddingTop: Platform.OS === 'android' ? hp(2.5) : 0 }} >
             <View style={style.container}>
@@ -93,7 +100,7 @@ const MenuScreen = (props) => {
                         <ResponsiveText style={style.label}>Contact Support</ResponsiveText>
                     </TouchableOpacity>
                     <Spacer />
-                    <TouchableOpacity style={{ flexDirection: "row", alignItems: "center" }}>
+                    <TouchableOpacity onPress={logout} style={{ flexDirection: "row", alignItems: "center" }}>
                         <Image style={style.imageStyling} source={images.Logout} resizeMode='contain' />
                         <HorizontalSpacer width={wp(3)} />
                         <ResponsiveText style={style.label}>Log Out</ResponsiveText>

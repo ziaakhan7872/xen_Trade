@@ -22,12 +22,25 @@ export const LoginApi = async (payload) => {
     return axios.post(`${AUTH_BASE_URL}/auth/login`, payload)
 }
 
-export const ForgotPasswordApi = async (email) => {
-    console.log("EMAIL---", email);
+export const ForgotPasswordApi = async (payload) => {
+    console.log("EMAIL---", payload);
 
-    return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, { email })
+    return axios.post(`${AUTH_BASE_URL}/auth/forgot-password`, payload)
 }
 
+export const LogoutUser = async (payload) => {
+     try {
+        return apiRequest({
+            method: "DELETE",
+            url: `${AUTH_BASE_URL}/auth/logout`,
+            data: payload,
+            isAuth: true,
+        });
+
+    } catch (error) {
+        console.log(error, "reset password error")
+    }
+}
 export const ResendOtpApi = async (payload) => {
     console.log("Resend OTP API--", payload);
 
@@ -172,6 +185,9 @@ export const GetAccountBalanceMyMarket = async (userId, marketId) => {
 }
 
 export const getAccountDetail = async (page, limit, userId) => {
+    console.log(page)
+    console.log(limit)
+    console.log(userId)
 
 
     try {

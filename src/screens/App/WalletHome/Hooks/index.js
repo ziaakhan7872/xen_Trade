@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 export const useHomeScreen = (props) => {
   const { user } = useSelector((state) => state.user);
-  const assetSheetRef = useState(null);
+  const assetSheetRef = useRef(null);
 
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
@@ -14,11 +14,9 @@ export const useHomeScreen = (props) => {
   const [totalUsdt, setTotalUsdt] = useState("")
   const [filteredCryptoList, setFilteredCryptoList] = useState([]);
   const [loading, setLoading] = useState(false)
-  const [isVisible, setIsVisible] = useState(false);
   const [Page, setPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
 
-  console.log(isVisible, "bottomsheet");
 
   useEffect(() => {
     getCryptoData()
@@ -77,11 +75,7 @@ export const useHomeScreen = (props) => {
     setFilteredCryptoList(filtered);
   }, [cryptoList, searchCoin, isChecked]);
 
-  // const handleAssetOpen = () => { // gorhom sheet
-  //   setTimeout(() => {
-  //     assetSheetRef.current?.expand();
-  //   }, 100)
-  // }
+
   const handleAssetOpen = () => {
     setTimeout(() => {
       assetSheetRef.current?.open()

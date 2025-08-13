@@ -7,17 +7,14 @@ import { useSelector } from 'react-redux'
 // import { useSelector } from 'react-redux'
 
 const useEmalVerification = (props) => {
-  const userData = useSelector((state) => state.user)
   const previousScreenName = props?.route?.params?.screenName
   const emailVerificationBottomSheetRef = useRef(null)
-  // const previousUserData = props?.route?.params?.userData || ''
-  // const id = props?.route?.params?.id
-  const email = props?.route?.params?.email
+  const { userData, email } = props?.route?.params
   const [otpCode, setOtpCode] = useState("")
   const [errorMessage, setErrorMessage] = useState("");
   const [apiError, setApiError] = useState("")
 
-  const id = userData?.user?.id
+  const id = userData?.id
 
   console.log("User data in EmailVerificationScreen::::::previousUserData", id, "||||", email);
 
