@@ -20,7 +20,7 @@ const DropDown = ({ items, value, setValue, placeholder, zIndex, setIsOpen }) =>
             setValue={setValue}
             // setItems={() => { }} //For future use if we want to manage items dynamically
             style={[styles.dropdown, { zIndex: zIndex }]}  // dynamic zIndex 
-            dropDownDirection="BOTTOM"
+            // dropDownDirection="BOTTOM"
             dropDownContainerStyle={[styles.dropdownContainer, {
                 // marginTop: 0,
                 // top: hp(6.5),
