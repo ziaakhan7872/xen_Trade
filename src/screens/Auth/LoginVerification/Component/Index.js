@@ -10,7 +10,7 @@ import { SimpleButton } from '../../../../components/SimpleButton'
 import { appStyles } from '../../../../utilities'
 
 
-export const LoginVerificationForm = ({ submit, setOtpCode, errorMessage, code, setCode, showToast, userEmail }) => {
+export const LoginVerificationForm = ({ submit, setOtpCode, errorMessage, code, setCode, resendOtp, userEmail, loading }) => {
     return (
         <View style={styles.mainBox}>
             <Spacer height={hp(0.5)} />
@@ -23,7 +23,7 @@ export const LoginVerificationForm = ({ submit, setOtpCode, errorMessage, code, 
 
             <View style={styles.containerInner}>
                 <TextInput value={code} keyboardType='number-pad' inputMode='numeric' maxLength={6} onChangeText={setCode} style={styles.input} placeholder="Enter Code" placeholderTextColor={colors.placeHolderTextColor} />
-                <TouchableOpacity onPress={showToast}>
+                <TouchableOpacity onPress={resendOtp}>
                     <ResponsiveText style={[styles.blueText, { alignItems: 'flex-end' }]}>Get Code</ResponsiveText>
                 </TouchableOpacity>
             </View>
@@ -36,8 +36,15 @@ export const LoginVerificationForm = ({ submit, setOtpCode, errorMessage, code, 
                     </>
                 )}
             <Spacer />
-            <SimpleButton onPress={submit} text={"Submit"} textColor={code == '' ? colors.disableColor2 : colors.black} backgroundColor={code != '' ? colors.mainColor : colors.disableColor} buttonWidth={wp(84.2)} height={hp(6.5)}
+            <SimpleButton o
+                nPress={submit}
+                text={"Submit"}
+                textColor={code == '' ? colors.disableColor2 : colors.black}
+                backgroundColor={code != '' ? colors.mainColor : colors.disableColor} 
+                buttonWidth={wp(84.2)} 
+                height={hp(6.5)}
                 disabled={code == '' ? true : false}
+                loading={loading}
             />
 
         </View>

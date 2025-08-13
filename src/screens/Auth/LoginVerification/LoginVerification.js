@@ -9,7 +9,11 @@ import UseLoginVerification from './Hooks/Index'
 import { hp } from '../../../components/ResponsiveComponent'
 
 const LoginVerification = (props) => {
-    const { handeGoBack, otpCode, setOtpCode, verifyEmail, errorMessage, setErrorMessage, code, setCode, showToast, userEmail } = UseLoginVerification(props)
+    const {
+        handeGoBack,
+        verifyEmail, errorMessage,
+        code, setCode, showToast, userEmail, resendOtp, loading
+    } = UseLoginVerification(props)
     return (
         <AuthMainContainer>
             <View style={style.container}>
@@ -18,7 +22,15 @@ const LoginVerification = (props) => {
                 </TouchableOpacity>
                 <Spacer height={hp(1.2)} />
                 <Spacer />
-                <LoginVerificationForm errorMessage={errorMessage} code={code} setCode={setCode} submit={verifyEmail} showToast={showToast} userEmail={userEmail} />
+                <LoginVerificationForm
+                    errorMessage={errorMessage}
+                    code={code}
+                    setCode={setCode}
+                    submit={verifyEmail}
+                    resendOtp={resendOtp}
+                    userEmail={userEmail}
+                    loading={loading}
+                />
             </View>
         </AuthMainContainer>
     )

@@ -13,7 +13,6 @@ export const useChangePasswordForgot = (props) => {
     const [passwordVisible, setPasswordVisible] = useState(false)
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false)
 
-    console.log("User data in ResetPassword::::::previousUserData", id, "||||", otpCode, "||||", password);
 
 
     const showToast = () => {

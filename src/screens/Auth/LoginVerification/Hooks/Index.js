@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LoginVerificationApi } from '../../../../constants/Api/Index'
+import { LoginVerificationApi, ResendOtpApi } from '../../../../constants/Api/Index'
 import { Routes } from '../../../../constants'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../../../../redux/slices/userSlice'
@@ -13,6 +13,7 @@ const UseLoginVerification = (props) => {
   const [otpCode, setOtpCode] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
   const [code, setCode] = useState("")
+  const [loading,setLoading] = useState(false)
 
   const showToast = () => {
     Toast.show({
@@ -27,6 +28,7 @@ const UseLoginVerification = (props) => {
 
   const verifyEmail = async () => {
     try {
+      setLoading(true)
       if (!code) {
         console.error("OTP code is required");
         return;
@@ -50,6 +52,7 @@ const UseLoginVerification = (props) => {
       }
 
     } catch (error) {
+      setLoading(false)
       if (error?.response) {
         const status = error?.response?.status
         const message = error?.response?.data?.message
@@ -64,6 +67,32 @@ const UseLoginVerification = (props) => {
 
 
     }
+    finally{
+      setLoading(false)
+    }
+  }
+
+  const resendOtp = async () => {
+    try {
+
+      const payload = {
+        email: userEmail,
+        userId: userData?.id
+      }
+
+      console.log(payload)
+      const otpResponse = await ResendOtpApi(payload)
+      console.log(otpResponse)
+      showToast()
+    }
+    catch (error) {
+      const status = error?.response?.status
+      const message = error?.response?.data?.message
+      console.log(error?.response)
+      if (status === 400) {
+        setApiError(message)
+      }
+    }
   }
 
   const handeGoBack = () => {
@@ -75,9 +104,8 @@ const UseLoginVerification = (props) => {
     setOtpCode, otpCode,
     verifyEmail,
     errorMessage, setErrorMessage,
-    showToast,
     code, setCode,
-    userEmail
+    userEmail,resendOtp,loading
   }
 }
 
