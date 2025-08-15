@@ -134,6 +134,11 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet, listData })
     color: generateShade(index * 20 - 40),
     symbol: item?.account?.market?.symbol
   }))
+  const validateValue =
+    Array.isArray(pieData) &&
+    pieData.length > 0 &&
+    pieData.some(item => item.value > 0);
+  const chartData = validateValue ? pieData.slice(0, 3) : [{ value: 1, color: "#05BADA" }]
 
   console.log(pieData, "pie data")
   // const pieData = [
@@ -155,28 +160,33 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet, listData })
         <Line height={hp(0.1)} />
         <View style={{ alignItems: 'center', marginTop: 20, backgroundColor: "transparent" }}>
           <PieChart
-            data={pieData.slice(0, 3)}
+            data={chartData}
             showText={false}
             radius={90}
             innerRadius={68}
             innerCircleColor={colors.bottomSheetBackgroundColor}
-            centerLabelComponent={() => (
-              <View style={{ alignItems: 'center' }}>
-                <ResponsiveText style={styles.pieCenterText}>APY</ResponsiveText>
-                <ResponsiveText style={styles.pieCenterText2}>127%</ResponsiveText>
-              </View>
-            )}
+            centerLabelComponent={() =>
+              validateValue ? (
+                <View style={{ alignItems: 'center' }}>
+                  <ResponsiveText style={styles.pieCenterText}>APY</ResponsiveText>
+                  <ResponsiveText style={styles.pieCenterText2}>127%</ResponsiveText>
+                </View>
+              ) : null
+            }
           />
         </View>
-        <View style={[appStyles.row, styles.legendRow]}>
-          {pieData?.slice(0,3)?.map((slice, i) => (
-            <View key={i} style={styles.legendItem}>
-              <View style={[styles.legendMarker, { backgroundColor: slice.color }]} />
-              <ResponsiveText style={styles.legendText}>{slice.symbol || ""}</ResponsiveText>
-            </View>
-          ))}
+        {validateValue && (
+          <View style={[appStyles.row, styles.legendRow]}>
+            {chartData?.map((slice, i) => (
+              <View key={i} style={styles.legendItem}>
+                <View style={[styles.legendMarker, { backgroundColor: slice.color }]} />
+                <ResponsiveText style={styles.legendText}>{slice.symbol || ""}</ResponsiveText>
+              </View>
+            ))}
 
-        </View>
+          </View>
+        )}
+
         <TouchableOpacity style={styles.okBtn} onPress={closeBottomSheet}>
           <ResponsiveText style={styles.okText}>Ok</ResponsiveText>
         </TouchableOpacity>
@@ -364,7 +374,7 @@ const styles = StyleSheet.create({
   legendItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:"center"
+    justifyContent: "center"
     // marginRight: wp(4),
     // marginBottom: hp(1),
   },
