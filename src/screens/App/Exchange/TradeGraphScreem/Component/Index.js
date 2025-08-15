@@ -192,21 +192,17 @@ export const ExchangeInnerHeader = () => {
 }
 
 export const TradeGraph = ({ data }) => {
-    // const barCart = [{ value: 50 }, { value: 80 }, { value: 90 }, { value: 70 }]
-    // console.log(data,"data")
 
     const lastCandle = data[data.length - 1];
     const currentPrice = lastCandle.close;
     const maxPrice = Math.max(...data.map(c => c.high));
     const minPrice = Math.min(...data.map(c => c.low));
     const CANDLE_W = wp(3.1);
-    const GAP = wp(1);                  // visual gap between candles
-    const SIDE_PAD = GAP * 4;           // left/right padding for ScrollView
+    const GAP = wp(1);                
+    const SIDE_PAD = GAP * 4;           
 
-    // Chart width must be >= data.length * (candle width + gap)
     const CHART_W = Math.max(width, data.length * (CANDLE_W + GAP));
 
-    // Ensure candle width never exceeds each step
     const step = CHART_W / Math.max(1, data.length);
     const SAFE_CANDLE_W = Math.max(1, Math.min(CANDLE_W, step - GAP));
     return (
@@ -219,7 +215,7 @@ export const TradeGraph = ({ data }) => {
                     <View >
                     <View style={{ paddingHorizontal:wp(5)}}>
                             <CandlestickChart.Provider data={data}>
-                                <CandlestickChart width={CHART_W} height={hp(30)} aria-live="assertive">
+                                <CandlestickChart width={CHART_W} height={hp(30)} >
                                     <CandlestickChart.Candles
                                         positiveColor={colors.green}
                                         negativeColor={colors.red}
@@ -230,7 +226,6 @@ export const TradeGraph = ({ data }) => {
                         </View>
 
 
-                        {/* volume / labels under the chart */}
                         <View style={{ flexDirection: 'row' ,paddingHorizontal:wp(5)}}>
                             <ResponsiveText style={[styles.text6, { fontWeight: '400' }]}>Volume SMA 9 </ResponsiveText>
                             <ResponsiveText style={[styles.text6, { fontWeight: '400', color: colors.green }]}>$223K</ResponsiveText>

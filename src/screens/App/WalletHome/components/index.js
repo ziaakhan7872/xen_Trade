@@ -127,7 +127,6 @@ const generateShade = (variation) => {
 };
 
 export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet, listData }) => {
-  console.log(listData, "account")
 
   const pieData = listData?.map((item, index) => ({
     value: Number(item?.account?.amount || 0),
@@ -138,9 +137,8 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet, listData })
     Array.isArray(pieData) &&
     pieData.length > 0 &&
     pieData.some(item => item.value > 0);
-  const chartData = validateValue ? pieData.slice(0, 3) : [{ value: 1, color: "#05BADA" }]
+    const chartData = validateValue ? pieData.slice(0, 3) : [{ value: 1, color: "#05BADA" }]
 
-  console.log(pieData, "pie data")
   // const pieData = [
   //   { value: 30, color: '#05BADA' },
   //   { value: 35, color: '#0B8DA4' },

@@ -64,19 +64,27 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
             <Spacer height={hp(1)} />
             <View style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3) }]}>
 
-                <TouchableOpacity onPress={() => setCurrentCoinPrice(currentCoinPrice - 1)}>
+                <TouchableOpacity onPress={() => {
+                    const newValue = new BigNumber(currentCoinPrice || 0)
+                        .minus(0.1).decimalPlaces(1);
+                    if (newValue.isGreaterThanOrEqualTo(0)) {
+                        setCurrentCoinPrice(newValue.toNumber());
+                    } else {
+                        setCurrentCoinPrice(0);
+                    }
+                }}>
                     <ResponsiveText style={styles.minuePlusText}>-</ResponsiveText>
                 </TouchableOpacity>
 
                 <TextInput
                     style={{ textAlign: 'center', minWidth: wp(10), maxWidth: wp(30), color: colors.white }}
-                    value={currentCoinPrice ? currentCoinPrice.toString() : ""}
+                    value={currentCoinPrice ? currentCoinPrice.toString() : "0"}
                     onChangeText={setCurrentCoinPrice}
                     keyboardType="numeric"
                     placeholderTextColor={colors.placeHolderTextColor}
                 />
 
-                <TouchableOpacity onPress={() => setCurrentCoinPrice(currentCoinPrice + 1)}>
+                <TouchableOpacity onPress={() => setCurrentCoinPrice(BigNumber(currentCoinPrice).plus(0.1).decimalPlaces(1).toNumber())}>
                     <ResponsiveText style={styles.minuePlusText}>+</ResponsiveText>
                 </TouchableOpacity>
             </View>
@@ -91,7 +99,7 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
                     style={{ textAlign: 'center', minWidth: wp(10), maxWidth: wp(30), color: colors.white }}
                     value={quantity.toString()}
                     onChangeText={handleBuyQuantityChange}
-                    placeholder={marketData?.base?`Amount ${marketData?.base}`:`Amount`}
+                    placeholder={marketData?.base ? `Amount ${marketData?.base}` : `Amount`}
                     keyboardType="numeric"
                     placeholderTextColor={colors.placeHolderTextColor}
                 />
@@ -130,9 +138,9 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
             </View>
             <Spacer height={hp(1)} />
             <TextInput
-                value={Price ? Price.toString() : ""}
+                value={Price ? Price.toString() : "0"}
                 onChangeText={handleBuyPriceChange}
-                placeholder={marketData?.quote?`Amount ${marketData?.quote}`:`Amount`}
+                placeholder={marketData?.quote ? `Amount ${marketData?.quote}` : `Amount`}
                 placeholderTextColor={colors.placeHolderTextColor}
                 style={styles.inputTextStyling}
                 keyboardType='numeric'
