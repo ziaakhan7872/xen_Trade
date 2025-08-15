@@ -17,7 +17,6 @@ const AddressDetailsExpanded = (props) => {
     return (
         <AuthMainContainer>
             <View style={{ flex: 1 }}>
-
                 <ScrollView
                     contentContainerStyle={{
                         flexGrow: 1,
@@ -31,7 +30,6 @@ const AddressDetailsExpanded = (props) => {
                         <InputForm isEditable={isEditable} />
                     </View>
                 </ScrollView>
-
 
                 <View style={[appStyles.row, styles.buttonRow]}>
                     <SimpleButton text="Delete" textColor={colors.white} styleView={styles.deleteBtn} />

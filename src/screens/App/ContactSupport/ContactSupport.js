@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { MainHeader } from '../../../components/MainHeader'
@@ -18,14 +18,21 @@ const ContactSupport = (props) => {
     return (
         <AuthMainContainer>
             <View style={styles.containerMain} >
-                <MainHeader leftImage={images.backArrow} title={"CONTACT SUPPORT"} onBackPress={() => props?.navigation?.goBack()} />
-                <Spacer height={hp(3.5)} />
-                <TextInputGroup message={message} setMessage={setMessage} />
-                <Portal>
-                    <SubmitBottomSheet SubmitBottomSheetRef={SubmitBottomSheetRef} closeBottomSheet={handleCloseSubmit} />
-                </Portal>
+                <ScrollView
+                    contentContainerStyle={{
+                        flexGrow: 1,
+                        // justifyContent: 'space-between',
+                    }}
+                    keyboardShouldPersistTaps="handled">
+                    <MainHeader leftImage={images.backArrow} title={"CONTACT SUPPORT"} onBackPress={() => props?.navigation?.goBack()} />
+                    <Spacer height={hp(3.5)} />
+                    <TextInputGroup message={message} setMessage={setMessage} />
+                    <Portal>
+                        <SubmitBottomSheet SubmitBottomSheetRef={SubmitBottomSheetRef} closeBottomSheet={handleCloseSubmit} />
+                    </Portal>
+                </ScrollView>
+                <SimpleButton text="Submit" onPress={handleOpenSubmit} textColor={colors.black} styleView={styles.btnSaveChanges} />
             </View>
-            <SimpleButton text="Submit" onPress={handleOpenSubmit} textColor={colors.black} styleView={styles.btnSaveChanges} />
         </AuthMainContainer>
     )
 }

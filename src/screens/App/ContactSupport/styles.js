@@ -1,6 +1,6 @@
 import { Platform, StyleSheet } from 'react-native'
 import { colors } from '../../../constants'
-import { wp } from '../../../components/ResponsiveComponent'
+import { hp, wp } from '../../../components/ResponsiveComponent'
 
 
 export const styles = StyleSheet.create({
@@ -11,10 +11,10 @@ export const styles = StyleSheet.create({
     },
     btnSaveChanges: {
         width: wp(92),
-        alignSelf: 'center',
         padding: wp(5),
+        marginTop: hp(2),
         borderRadius: wp(10),
         backgroundColor: colors.withdrawBtn,
-        marginBottom: Platform.OS === 'android' ? wp(8) : wp(5)
+        marginBottom: Platform.OS === 'android' ? hp(4) : hp(2)
     },
 })
