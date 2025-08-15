@@ -147,7 +147,8 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet, listData })
   // ];
 
   return (
-    <BottomSheet height={hp(46)} ref={bottomSheetRef}  >
+    // <BottomSheet height={hp(46)} ref={bottomSheetRef}  >
+    <GorhomBottomSheet sheetRef={bottomSheetRef}  >
       <View style={styles.sheetContainer}>
         <View style={[appStyles.row, styles.headerRow]}>
           <ResponsiveText style={styles.sheetTitle}>ASSETS ALLOCATION</ResponsiveText>
@@ -189,7 +190,7 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet, listData })
           <ResponsiveText style={styles.okText}>Ok</ResponsiveText>
         </TouchableOpacity>
       </View>
-    </BottomSheet>
+    </GorhomBottomSheet>
   );
 };
 

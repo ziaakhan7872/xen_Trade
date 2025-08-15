@@ -15,7 +15,7 @@ export const useHomeScreen = (props) => {
   const [filteredCryptoList, setFilteredCryptoList] = useState([]);
   const [loading, setLoading] = useState(false)
   const [Page, setPage] = useState(1)
-  
+
 
 
   useEffect(() => {
@@ -23,32 +23,32 @@ export const useHomeScreen = (props) => {
   }, [])
 
   const getCryptoData = async (newPage) => {
-      try {
-        setLoading(true)
-        const getCryptoData = await GetCryptoListApi(newPage, 10)
-        console.log("Crypto Data:", getCryptoData?.data?.data)
+    try {
+      setLoading(true)
+      const getCryptoData = await GetCryptoListApi(newPage, 10)
+      console.log("Crypto Data:", getCryptoData?.data?.data)
 
-        const GetAccountDetail = await getAccountDetail(newPage, 10, user?.id);
-        console.log("Account Details:", GetAccountDetail);
+      const GetAccountDetail = await getAccountDetail(newPage, 10, user?.id);
+      console.log("Account Details:", GetAccountDetail);
 
-        const mergeData = getCryptoData?.data?.data?.map((item) => {
-          const matchAccount = GetAccountDetail?.data?.data?.find((acount) => acount?.market?.symbol === item?.symbol);
-          return {
-            ...item,
-            account: matchAccount || null,
-          };
-        });
-        setPage(newPage)
-        if (mergeData.length > 0) {
-          setCryptoList(prevFavorites => [...prevFavorites, ...mergeData]);
-        }
-      } catch (error) {
-        console.log("Error fetching crypto data:", error?.response);
-        setLoading(false)
-      } finally {
-        setLoading(false)
+      const mergeData = getCryptoData?.data?.data?.map((item) => {
+        const matchAccount = GetAccountDetail?.data?.data?.find((acount) => acount?.market?.symbol === item?.symbol);
+        return {
+          ...item,
+          account: matchAccount || null,
+        };
+      });
+      setPage(newPage)
+      if (mergeData.length > 0) {
+        setCryptoList(prevFavorites => [...prevFavorites, ...mergeData]);
       }
+    } catch (error) {
+      console.log("Error fetching crypto data:", error?.response);
+      setLoading(false)
+    } finally {
+      setLoading(false)
     }
+  }
 
 
   const handleWalletData = () => {
@@ -76,7 +76,7 @@ export const useHomeScreen = (props) => {
 
   const handleAssetOpen = () => {
     setTimeout(() => {
-      assetSheetRef.current?.open()
+      assetSheetRef.current?.expand()
     }, 100)
   }
 
