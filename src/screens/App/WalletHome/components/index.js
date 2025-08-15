@@ -119,13 +119,29 @@ export const TokenList = ({ props, cryptoData, handleWalletData }) => {
   )
 }
 
-export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
-  const pieData = [
-    { value: 30, color: '#05BADA' },
-    { value: 35, color: '#0B8DA4' },
-    { value: 10, color: '#006B7E' },
-    { value: 40, color: '#004B58' },
-  ];
+const baseColor = { r: 0, g: 139, b: 164 };
+
+const generateShade = (variation) => {
+  const adjust = (c) => Math.min(255, Math.max(0, c + variation));
+  return `rgb(${adjust(baseColor.r)}, ${adjust(baseColor.g)}, ${adjust(baseColor.b)})`;
+};
+
+export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet, listData }) => {
+  console.log(listData, "account")
+
+  const pieData = listData?.map((item, index) => ({
+    value: Number(item?.account?.amount || 0),
+    color: generateShade(index * 20 - 40),
+    symbol: item?.account?.market?.symbol
+  }))
+
+  console.log(pieData, "pie data")
+  // const pieData = [
+  //   { value: 30, color: '#05BADA' },
+  //   { value: 35, color: '#0B8DA4' },
+  //   { value: 10, color: '#006B7E' },
+  //   { value: 40, color: '#004B58' },
+  // ];
 
   return (
     <BottomSheet height={hp(46)} ref={bottomSheetRef}  >
@@ -139,7 +155,7 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
         <Line height={hp(0.1)} />
         <View style={{ alignItems: 'center', marginTop: 20, backgroundColor: "transparent" }}>
           <PieChart
-            data={pieData}
+            data={pieData.slice(0, 3)}
             showText={false}
             radius={90}
             innerRadius={68}
@@ -153,14 +169,13 @@ export const ChartBottomSheet = ({ bottomSheetRef, closeBottomSheet }) => {
           />
         </View>
         <View style={[appStyles.row, styles.legendRow]}>
-          <View style={styles.legendMarker} />
-          <ResponsiveText style={styles.legendText}>BTC</ResponsiveText>
-          <View style={[styles.legendMarker, { backgroundColor: '#0B8DA4' }]} />
-          <ResponsiveText style={styles.legendText}>ETH</ResponsiveText>
-          <View style={[styles.legendMarker, { backgroundColor: '#006B7E' }]} />
-          <ResponsiveText style={styles.legendText}>BTC</ResponsiveText>
-          <View style={[styles.legendMarker, { backgroundColor: '#004B58' }]} />
-          <ResponsiveText style={styles.legendText}>RTH</ResponsiveText>
+          {pieData?.slice(0,3)?.map((slice, i) => (
+            <View key={i} style={styles.legendItem}>
+              <View style={[styles.legendMarker, { backgroundColor: slice.color }]} />
+              <ResponsiveText style={styles.legendText}>{slice.symbol || ""}</ResponsiveText>
+            </View>
+          ))}
+
         </View>
         <TouchableOpacity style={styles.okBtn} onPress={closeBottomSheet}>
           <ResponsiveText style={styles.okText}>Ok</ResponsiveText>
@@ -345,5 +360,12 @@ const styles = StyleSheet.create({
     // width: '100%', 
     alignItems: "center",
     flex: 1
+  },
+  legendItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:"center"
+    // marginRight: wp(4),
+    // marginBottom: hp(1),
   },
 });

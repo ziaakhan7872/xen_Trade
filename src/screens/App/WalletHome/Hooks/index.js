@@ -15,7 +15,7 @@ export const useHomeScreen = (props) => {
   const [filteredCryptoList, setFilteredCryptoList] = useState([]);
   const [loading, setLoading] = useState(false)
   const [Page, setPage] = useState(1)
-  const [hasMore, setHasMore] = useState(true)
+  
 
 
   useEffect(() => {
@@ -23,7 +23,6 @@ export const useHomeScreen = (props) => {
   }, [])
 
   const getCryptoData = async (newPage) => {
-    if (hasMore) {
       try {
         setLoading(true)
         const getCryptoData = await GetCryptoListApi(newPage, 10)
@@ -40,7 +39,6 @@ export const useHomeScreen = (props) => {
           };
         });
         setPage(newPage)
-        setHasMore(mergeData?.length === 20)
         if (mergeData.length > 0) {
           setCryptoList(prevFavorites => [...prevFavorites, ...mergeData]);
         }
@@ -51,7 +49,7 @@ export const useHomeScreen = (props) => {
         setLoading(false)
       }
     }
-  }
+
 
   const handleWalletData = () => {
     if (Page) {
@@ -97,7 +95,7 @@ export const useHomeScreen = (props) => {
     assetSheetRef,
     cryptoList: filteredCryptoList,
     setSearchCoin, searchCoin,
-    totalUsdt, loading, handleAssetClose, handleAssetOpen, handleWalletData
+    totalUsdt, loading, handleAssetClose, handleAssetOpen, handleWalletData,
   }
 }
 

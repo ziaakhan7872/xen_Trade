@@ -17,7 +17,7 @@ const WithDraw = (props) => {
     address, setAddress,
     amount, setAmount,
     fee, setFee,
-    error, setError,
+    error, setError,setErrorText,errorText,
     walletAddressError, setWalletAddressError,
     amountReceived, setAmountReceived,
     cryptoData, network,
@@ -41,6 +41,7 @@ const WithDraw = (props) => {
         address={address} setAddress={setAddress}
         amount={amount} setAmount={setAmount}
         error={error} setError={setError}
+        errorText={errorText} setErrorText={setErrorText}
       />
 
       <View style={styles.spacer} />

@@ -23,6 +23,7 @@ export const UseWidthDraw = (props) => {
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState('');
   const [error, setError] = useState(false);
+  const [errorText,setErrorText] = useState("")
   const [fee, setFee] = useState('');
   const [amountReceived, setAmountReceived] = useState('');
   const [walletAddressError, setWalletAddressError] = useState(false)
@@ -126,7 +127,7 @@ export const UseWidthDraw = (props) => {
     WithdrawConfirmationRef,
     address, setAddress,
     amount, setAmount,
-    error, setError,
+    error, setError, setErrorText,errorText,
     apiError, setApiError,
     walletAddressError, setWalletAddressError,
     fee, setFee,

@@ -36,15 +36,27 @@ export const WithdrawHeader = ({ BackPress, HistoryPress, NetworkImage }) => {
   );
 };
 
-export const AddressInput = ({ walletAddressError, setWalletAddressError, validateAddress, amount, setAmount, address, setAddress, Network, cryptoData, onCopy, onScan, onMax, error, setError }) => {
+export const AddressInput = ({
+  walletAddressError,
+  setWalletAddressError, validateAddress,
+  amount, setAmount,
+  address, setAddress,
+  Network, cryptoData,
+  onCopy, onScan, onMax,
+  error, setError,
+  errorText, setErrorText
+
+}) => {
+
+
   return (
+
     <View style={{ alignItems: "center" }}>
       <View style={styles.inputContainer}>
         <ResponsiveText style={styles.label}>Address</ResponsiveText>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Image source={{ uri: Network?.logo }} style={styles.networkIconTop} />
           <ResponsiveText style={styles.networkTextTop}>{Network?.name} ({Network?.standard})</ResponsiveText>
-          {/* <Image source={images.depositFilter} style={styles.arrowDownIconTop} /> */}
         </View>
       </View>
       <Spacer height={hp(1)} />
@@ -53,26 +65,26 @@ export const AddressInput = ({ walletAddressError, setWalletAddressError, valida
           value={address}
           onChangeText={(text) => {
             setAddress(text);
-            setWalletAddressError(false); // clear error on typing
+            setWalletAddressError(false);
           }}
-           style={{
-              borderWidth: walletAddressError ? 1 : 0,
-              borderColor: walletAddressError ? colors.red : 'transparent',
-              borderRadius: wp(3),
+          style={{
+            borderWidth: walletAddressError ? 1 : 0,
+            borderColor: walletAddressError ? colors.red : 'transparent',
+            borderRadius: wp(3),
 
-            }}
+          }}
           paddingLeft={wp(3)} placeholder={"Scan or enter address"}
           placeholderTextColor={colors.placeHolderTextColor}
           width={wp(95)}
           onBlur={() => {
-            if(address?.trim()?.length>0){
-            if (validateAddress(address)) {
-              setWalletAddressError(false);
-            } else {
-              setWalletAddressError(true);
+            if (address?.trim()?.length > 0) {
+              if (validateAddress(address)) {
+                setWalletAddressError(false);
+              } else {
+                setWalletAddressError(true);
+              }
             }
-          }
-          
+
           }}
         />
         <TouchableOpacity onPress={onScan} style={styles.iconButton}>
@@ -80,8 +92,9 @@ export const AddressInput = ({ walletAddressError, setWalletAddressError, valida
         </TouchableOpacity>
       </View>
       {walletAddressError && (
-        <ResponsiveText style={[styles.errorText,]}>Invalid Wallet Address </ResponsiveText>)}
+        <ResponsiveText style={[styles.errorText, { alignSelf: 'flex-start', paddingHorizontal: wp(3) }]}>Invalid Wallet Address </ResponsiveText>)}
       <View>
+
         <ResponsiveText style={styles.label}>Withdrawal Amount</ResponsiveText>
         <Spacer height={hp(1)} />
         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -97,16 +110,49 @@ export const AddressInput = ({ walletAddressError, setWalletAddressError, valida
 
             }}
             value={amount}
-            onChangeText={setAmount}
-            paddingLeft={wp(4)}
-            keyboardType="numeric"
-            onBlur={() => {
-              if (Number(amount) > Number(cryptoData?.account?.amount)) {
+            onChangeText={(text) => {
+              setAmount(text);
+              if (!/^\d*\.?\d*$/.test(text)) {
                 setError(true);
-                console.log(error)
+                setErrorText('Enter a valid number');
               } else {
                 setError(false);
               }
+            }}
+            paddingLeft={wp(4)}
+            keyboardType="numeric"
+            onBlur={() => {
+              const bal = Number(cryptoData?.account?.amount) || 0;
+              const minW = Number(Network?.networks?.[0]?.minWithdraw) || 0;
+              const maxW = Number(Network?.networks?.[0]?.maxWithdraw) || 0; 
+              const n = Number(amount);
+
+              if (Number.isNaN(n)) {
+                setError(true);
+                setErrorText('Enter a valid number');
+                return;
+              }
+
+              if (n < minW) {
+                setError(true);
+                setErrorText(`Minimum withdraw is ${minW} ${cryptoData?.symbol}`);
+                return;
+              }
+
+              if (maxW > 0 && n > maxW) {
+                setError(true);
+                setErrorText(`Maximum withdraw is ${maxW} ${cryptoData?.symbol}`);
+                return;
+              }
+
+              if (n > bal) {
+                setError(true);
+                setErrorText('Insufficient balance');
+                return;
+              }
+
+              setError(false);
+              setErrorText('');
             }}
           />
           <View style={[styles.iconButton, { flexDirection: "row", alignItems: "center", bottom: wp(2) }]}>
@@ -119,7 +165,7 @@ export const AddressInput = ({ walletAddressError, setWalletAddressError, valida
         </View>
         <Spacer height={hp(1)} />
         {error && (
-          <ResponsiveText style={[styles.errorText,]}   > insufficent Balance </ResponsiveText>)}
+          <ResponsiveText style={[styles.errorText,]}> {errorText} </ResponsiveText>)}
         <View style={styles.availableTextContainer}>
           <ResponsiveText style={styles.availableText}>Available </ResponsiveText>
           <HorizontalSpacer />
@@ -364,7 +410,8 @@ const styles = StyleSheet.create({
     color: colors.red,
     fontWeight: '400',
     fontSize: 12,
-    fontFamily: fontFamily.appTextRegular
+    fontFamily: fontFamily.appTextRegular,
+    textAlign: "left"
   },
   availableText: {
     color: colors.placeHolderTextColor,

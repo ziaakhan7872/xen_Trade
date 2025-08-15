@@ -68,7 +68,7 @@ const WalletHome = (props) => {
       </View>
 
       <Portal>
-        <ChartBottomSheet bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
+        <ChartBottomSheet listData={cryptoList}  bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
       </Portal>
 
     </AuthMainContainer>
