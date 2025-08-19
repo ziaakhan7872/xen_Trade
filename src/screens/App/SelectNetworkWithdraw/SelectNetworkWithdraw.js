@@ -9,7 +9,7 @@ import { MainHeader } from '../../../components/MainHeader';
 import { NetworkList } from './Component/Index';
 import { styles } from './Style';
 import { UseSelectNetworkWithdraw } from './Hooks/Index';
-import SkeletionLoader from '../../../components/SkeletonLoader';
+import {SkeletionLoader} from '../../../components/SkeletonLoader';
 
 const SelectNetworkWithdraw = (props) => {
   const {networkList,setNetworkList,handleNetworkPress,loading} = UseSelectNetworkWithdraw(props)

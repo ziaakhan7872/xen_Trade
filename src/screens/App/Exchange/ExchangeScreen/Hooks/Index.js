@@ -28,17 +28,16 @@ export const UseExchange = (props) => {
   const [cureentCoinPrice, setCurrentCoinPrice] = useState(22976.27)
   const [stage, setStage] = useState(0);
 
-  useEffect(() => {
-    let t1, t2;
-    const task = InteractionManager.runAfterInteractions(() => {
+ useEffect(() => {
+    const unsub = props?.navigation.addListener('transitionEnd', () => {
+      // stage 1 immediately after transition, then stagger small chunks
       setStage(1);
-      requestAnimationFrame(() => {
-        t1 = setTimeout(() => setStage(2), 16);
-        t2 = setTimeout(() => setStage(3), 32);
-      });
+      const t1 = setTimeout(() => setStage(2), 30);  // small, non-blocking chunks
+      const t2 = setTimeout(() => setStage(3), 60);
+      return () => { clearTimeout(t1); clearTimeout(t2); };
     });
-    return () => { task.cancel(); clearTimeout(t1); clearTimeout(t2); };
-  }, []);
+    return unsub;
+  }, [props?.navigation]);
 
 
 

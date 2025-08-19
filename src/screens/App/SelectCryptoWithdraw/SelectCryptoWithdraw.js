@@ -8,7 +8,7 @@ import { PopularCrypto, SelectCryptoHeader, SelectCryptoRowButton, SelectCryptoS
 import { styles } from './Style';
 import { hp } from '../../../components/ResponsiveComponent';
 import { UseSelectCryptoWithdraw } from './Hooks/Index';
-import SkeletionLoader from '../../../components/SkeletonLoader';
+import {SkeletionLoader} from '../../../components/SkeletonLoader';
 
 
 const SelectCryptoWithdraw = (props) => {

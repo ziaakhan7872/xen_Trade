@@ -8,7 +8,7 @@ import { ScrollView, View } from 'react-native';
 import { styles } from './styles';
 import Spacer from '../../../components/Spacer';
 import { useSelectNetwork } from './Hooks';
-import SkeletionLoader from '../../../components/SkeletonLoader';
+import {SkeletionLoader} from '../../../components/SkeletonLoader';
 
 const SelectNetwork = (props) => {
   const { handleNetworkNavigation, networkList,loading } = useSelectNetwork(props)

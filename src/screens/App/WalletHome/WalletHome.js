@@ -10,7 +10,7 @@ import { colors, fontFamily, Routes } from "../../../constants"
 import { appStyles } from "../../../utilities"
 import { useHomeScreen } from "./Hooks"
 import { Portal } from "react-native-portalize"
-import SkeletionLoader from "../../../components/SkeletonLoader"
+import {SkeletionLoader} from "../../../components/SkeletonLoader"
 
 const WalletHome = (props) => {
   const {

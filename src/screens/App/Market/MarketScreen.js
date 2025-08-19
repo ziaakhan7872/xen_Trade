@@ -12,7 +12,7 @@ import Line from '../../../components/Liner'
 import { hp, wp } from '../../../components/ResponsiveComponent'
 import InputText from '../../../components/InputText'
 import { UseMarket } from './Hooks/Index'
-import SkeletionLoader from '../../../components/SkeletonLoader'
+import { SkeletionLoader } from '../../../components/SkeletonLoader'
 
 const MarketScreen = (props) => {
   const { marketList, setMarketList, MarketPress, searchText, setSearchText, loading , handleMarketData} = UseMarket(props)
