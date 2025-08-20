@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { use, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { GetCryptoListApi, GetDepositHistoryApi, getWithdrawlsHistory } from '../../../../constants/Api/Index';
+import { GetCryptoListApi, GetDepositHistoryApi, getWithdrawlsHistory } from '../../../../Backend/Api/Index';
 
 export const Usewithdrawhistory = () => {
     const { user } = useSelector((state) => state.user);

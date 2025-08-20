@@ -1,15 +1,20 @@
 import { useEffect, useRef, useState } from "react"
-import { GetAccountBalanceMyMarket, getPairApi } from "../../../../../constants/Api/Index"
+import { GetAccountBalanceMyMarket, getPairApi, PlaceOrder } from "../../../../../Backend/Api/Index"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useSelector } from "react-redux"
 import BigNumber from 'bignumber.js';
 import { InteractionManager } from "react-native";
+import { useSocket } from "../../../../../Backend/SocketContextProvider/Socket";
+
 
 
 export const UseExchange = (props) => {
   const tradngBottomSheetRef = useRef(null)
   const favouriteBottomSheetRef = useRef(null)
+  const socketRef = useRef(null)
   const { user } = useSelector((state) => state.user);
+  const { centrifugueBuild } = useSocket()
+
   const userId = user?.id
 
   const [buySellButton, setBuySellButton] = useState(props?.route?.params?.buySellButtonProps || "buy")
@@ -27,17 +32,63 @@ export const UseExchange = (props) => {
   const [price, setPrice] = useState(0);
   const [cureentCoinPrice, setCurrentCoinPrice] = useState(22976.27)
   const [stage, setStage] = useState(0);
+  const [currentSubscription, setCurrectSubscription] = useState(null)
 
- useEffect(() => {
-    const unsub = props?.navigation.addListener('transitionEnd', () => {
-      // stage 1 immediately after transition, then stagger small chunks
-      setStage(1);
-      const t1 = setTimeout(() => setStage(2), 30);  // small, non-blocking chunks
-      const t2 = setTimeout(() => setStage(3), 60);
-      return () => { clearTimeout(t1); clearTimeout(t2); };
+
+
+  useEffect(() => {
+    const channelName = `${selectedData?.symbol}@depth`;
+
+    if (socketRef?.current) {
+      try {
+        socketRef.current.off("publication");
+        socketRef.current.off("subscribed");
+        socketRef.current.off("error");
+        socketRef.current.off("unsubscribed");
+        socketRef.current.unsubscribe();
+      } catch { }
+      socketRef.current = null;
+    }
+    let sub = centrifugueBuild.getSubscription(channelName)
+
+    if (!sub) {
+      sub = centrifugueBuild.newSubscription(channelName);
+    }
+    sub.on("subscribed", (ctx) => {
+      console.log(`Subscribed to ${channelName}`, ctx);
     });
-    return unsub;
-  }, [props?.navigation]);
+
+    sub.on("publication", (ctx) => {
+      console.log("publication", channelName, ctx?.data);
+      // setOrders(ctx?.data);
+    });
+
+    sub.on("error", (err) => {
+      console.error(`Subscription error on ${channelName}:`, err);
+    });
+
+    sub.on("unsubscribed", () => {
+      // optional
+    });
+
+    if (sub.state !== "subscribed" && sub.state !== "subscribing") {
+      sub.subscribe();
+    }
+
+    socketRef.current = sub;
+
+    return () => {
+      if (!socketRef.current) return;
+      try {
+        socketRef.current.off("publication");
+        socketRef.current.off("subscribed");
+        socketRef.current.off("error");
+        socketRef.current.off("unsubscribed");
+        socketRef.current.unsubscribe();
+      } catch { }
+      socketRef.current = null;
+    };
+  }, [centrifugueBuild, selectedData?.symbol]);
 
 
 
@@ -172,6 +223,23 @@ export const UseExchange = (props) => {
     getAvailableBalanceBase()
   }, [selectedData])
 
+
+  const buyOrder = async () => {
+    try {
+      const payload = {
+        price: price,
+        quantity: quantity,
+        side: "buy",
+        symbol: selectedData?.symbol,
+        type: tradingType
+      }
+      const response = await PlaceOrder(payload)
+      console.log(response, "place order")
+    } catch (error) {
+      console.log(error?.response, "error of place order")
+    }
+  }
+
   return {
     stage, setStage,
     buySellButton, setBuySellButton,
@@ -186,7 +254,8 @@ export const UseExchange = (props) => {
     quantity, setQuantity, discreaseQuantity, addQuantity,
     price, setPrice,
     cureentCoinPrice, setCurrentCoinPrice,
-    handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange
+    handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange,
+    buyOrder
   }
 }
 

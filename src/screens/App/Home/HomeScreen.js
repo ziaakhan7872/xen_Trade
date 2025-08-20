@@ -12,6 +12,7 @@ import { colors, Routes } from '../../../constants'
 import images from '../../../images'
 import { ResponsiveText } from '../../../components/ResponsiveText'
 import Entypo from "react-native-vector-icons/Entypo"
+import { useSocket } from '../../../Backend/SocketContextProvider/Socket'
 
 const HomeScreen = (props) => {
   const {
@@ -21,6 +22,7 @@ const HomeScreen = (props) => {
     showNewsView, setShowNewsView,
     marketList, MarketPress,handleMarketData
   } = useHome(props)
+
   return (
     <AuthMainContainer>
       <HomeHeader onpress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.MenuScreen })} headerTitle={"DASHBOARD"} />

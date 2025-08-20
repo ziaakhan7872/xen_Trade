@@ -1,5 +1,5 @@
 import { Routes } from "../../../../constants"
-import { GetNetworkListApi } from "../../../../constants/Api/Index"
+import { GetNetworkListApi } from "../../../../Backend/Api/Index"
 import { useEffect, useState } from "react"
 
 export const useSelectNetwork = (props) => {

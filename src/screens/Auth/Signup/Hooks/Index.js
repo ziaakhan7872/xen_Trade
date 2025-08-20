@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Routes } from '../../../../constants';
-import { SignUpApi } from '../../../../constants/Api/Index';
+import { SignUpApi } from '../../../../Backend/Api/Index';
 import * as Yup from 'yup';
 
 const UseSignUp = (props) => {

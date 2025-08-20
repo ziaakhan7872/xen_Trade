@@ -14,10 +14,8 @@ import { ExchangeMainContainer } from '../../../../components/ExchangeMainContai
 import { Routes } from '../../../../constants';
 import { BuySellSkeleton, OrderBookSkeleton, OrdersSkeleton } from '../../../../components/SkeletonLoader';
 
-// ---- keep LIGHT components eager (small) ----
 import { BuySellRowButton, CurrentOrderHistoryHeader, ExchangeHeader, FlatlistValues, PriceUSDT } from './Component/Index';
 
-// ✅ Lazy-load named exports from ./Component/Index
 const BuyForm = React.lazy(() =>
   import('./Component/Index').then(m => ({ default: m.BuyForm }))
 );
@@ -41,7 +39,6 @@ const FavoutiteBottomSheetComponnet = React.lazy(() =>
 
 const Exchangescreen = (props) => {
   const {
-    stage, setStage,
     buySellButton, setBuySellButton,
     buyerSlider, setBuyerSlider, sellSlider, setSelSlider,
     currentOrderHistoryPress, setCurrentOrderHistoryPress,
@@ -54,7 +51,8 @@ const Exchangescreen = (props) => {
     price, setPrice,
     quantity, setQuantity, discreaseQuantity, addQuantity,
     cureentCoinPrice, setCurrentCoinPrice,
-    handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange
+    handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange,
+    buyOrder
   } = UseExchange(props)
 
 
@@ -71,7 +69,6 @@ const Exchangescreen = (props) => {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={style.formandOrderBookView}>
             <View style={{ flex: 1, marginRight: wp(2), justifyContent: 'space-between' }}>
-              {stage >= 1 ? (
                 <>
                   <Suspense fallback={<BuySellSkeleton />}>
 
@@ -99,6 +96,7 @@ const Exchangescreen = (props) => {
                         onPressTradingType={() => tradngBottomSheetRef?.current?.open()}
                         value={buyerSlider}
                         setValue={setBuyerSlider}
+                        buyOrder={buyOrder}
                       />
 
                     ) : (
@@ -112,13 +110,10 @@ const Exchangescreen = (props) => {
                     )}
                   </Suspense>
                 </>
-              ) : (
-                <BuySellSkeleton />
-              )}
+             
             </View>
 
             <View style={{ flex: 1, marginLeft: wp(2), justifyContent: 'space-between' }}>
-              {stage >= 2 ? (
                 <>
                   <Suspense fallback={<OrderBookSkeleton />}>
 
@@ -138,14 +133,11 @@ const Exchangescreen = (props) => {
                     <FlatlistValues data={Amount} />
                   </Suspense>
                 </>
-              ) : (
-                <OrderBookSkeleton />
-              )}
+              
 
             </View>
           </View>
           <Spacer />
-          {stage >= 3 ? (
             <>
               <Suspense fallback={<OrdersSkeleton />}>
 
@@ -171,11 +163,7 @@ const Exchangescreen = (props) => {
                 )}
               </Suspense>
             </>
-          ) : (
-            // <View style={{ height: hp(28) }} />
-            <OrdersSkeleton />
-
-          )}
+         
 
         </ScrollView>
         <Portal>

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getPairApi } from '../../../../constants/Api/Index';
+import { getPairApi } from '../../../../Backend/Api/Index';
 import { Routes } from '../../../../constants';
 
 const useHome = (props) => {

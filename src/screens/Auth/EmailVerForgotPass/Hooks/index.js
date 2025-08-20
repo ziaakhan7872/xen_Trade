@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ForgotPasswordOtpApi, ResendOtpApi } from '../../../../constants/Api/Index'
+import { ForgotPasswordOtpApi, ResendOtpApi } from '../../../../Backend/Api/Index'
 import { Routes } from '../../../../constants'
 import Toast from 'react-native-toast-message'
 

@@ -16,6 +16,7 @@ import { store, persistor } from './src/redux/store';
 import Toast from 'react-native-toast-message';
 import { ToastConfig } from './src/components/ToastConfig';
 import { Camera } from 'react-native-vision-camera';
+import { SocketProvider } from './src/Backend/SocketContextProvider/Socket';
 
 enableScreens(false);
 
@@ -44,10 +45,13 @@ const App = () => {
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: colors.black }}>
       <Host>
         <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Navigation />
-            <Toast config={ToastConfig} />
-          </PersistGate>
+          <SocketProvider>
+            <PersistGate loading={null} persistor={persistor}>
+              <Navigation />
+              <Toast config={ToastConfig} />
+            </PersistGate>
+          </SocketProvider>
+
         </Provider>
       </Host>
     </GestureHandlerRootView>

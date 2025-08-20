@@ -52,7 +52,7 @@ export const BuySellRowButton = ({ buySellButton, setBuySellButton }) => {
     )
 }
 
-export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuyQuantityChange, currentCoinPrice, setCurrentCoinPrice, addQuantity, dicreaseQuantity, quantity, setQuantity, Price, setPrice, QuoteBalance, setValue, value, onPressTradingType, tradingType, marketData }) => {
+export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuyQuantityChange, currentCoinPrice, setCurrentCoinPrice, addQuantity, dicreaseQuantity, quantity, setQuantity, Price, setPrice, QuoteBalance, setValue, value, onPressTradingType, tradingType, marketData ,buyOrder}) => {
     const marks = [0, 25, 50, 75, 100];
 
     return (
@@ -137,14 +137,24 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
                 </View>
             </View>
             <Spacer height={hp(1)} />
-            <TextInput
-                value={Price ? Price.toString() : "0"}
-                onChangeText={handleBuyPriceChange}
-                placeholder={marketData?.quote ? `Amount ${marketData?.quote}` : `Amount`}
-                placeholderTextColor={colors.placeHolderTextColor}
-                style={styles.inputTextStyling}
-                keyboardType='numeric'
-            />
+            <View style={{ width: wp(43), alignItems: 'center',backgroundColor:colors.cardsBgColor,borderRadius:wp(3) }}>
+                <TextInput
+                    value={Price ? Price.toString() : ""}
+                    onChangeText={handleBuyPriceChange}
+                    placeholder={marketData?.quote ? `Amount ${marketData?.quote}` : "Amount"}
+                    placeholderTextColor={colors.placeHolderTextColor}
+                    style={{
+                        textAlign: 'center',
+                        color: colors.white,
+                        fontSize: 14,
+                        // minWidth: wp(5),
+                        maxWidth: wp(43),
+                    }}
+                    keyboardType="decimal-pad"
+                />
+            </View>
+
+
             <Spacer height={hp(1)} />
             <View style={{ width: wp(43), flexDirection: "row", justifyContent: "space-between" }}>
                 <View>
@@ -172,6 +182,7 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
                 height={hp(4.5)}
                 textColor={colors.white}
                 text={marketData?.base ? `Buy ${marketData.base}` : 'Buy'}
+                onPress={buyOrder}
             />
 
         </>
@@ -598,12 +609,11 @@ const styles = StyleSheet.create({
         color: colors.white,
     },
     inputTextStyling: {
-        width: wp(43),
-        // height: hp(4.5),
-        borderRadius: wp(3),
-        backgroundColor: colors.cardsBgColor,
-        color: colors.white,
         textAlign: 'center',
+        width: wp(43),
+        color: colors.white,
+        backgroundColor: colors.cardsBgColor,
+        borderRadius: wp(3),
         fontSize: 14,
         fontFamily: fontFamily.appTextRegular,
 

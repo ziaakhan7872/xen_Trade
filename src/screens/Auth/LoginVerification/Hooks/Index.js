@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LoginVerificationApi, ResendOtpApi } from '../../../../constants/Api/Index'
+import { LoginVerificationApi, ResendOtpApi } from '../../../../Backend/Api/Index'
 import { Routes } from '../../../../constants'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../../../../redux/slices/userSlice'

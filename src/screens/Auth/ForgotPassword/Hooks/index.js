@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Toast from "react-native-toast-message"
-import { ForgotPasswordApi } from "../../../../constants/Api/Index"
+import { ForgotPasswordApi } from "../../../../Backend/Api/Index"
 import * as Yup from 'yup'
 import { Routes } from "../../../../constants"
 

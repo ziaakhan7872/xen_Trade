@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { getAccountDetail, GetCryptoListApi } from '../../../../constants/Api/Index';
+import { getAccountDetail, GetCryptoListApi } from '../../../../Backend/Api/Index';
 import { useSelector } from 'react-redux';
 
 export const useHomeScreen = (props) => {
   const { user } = useSelector((state) => state.user);
   const assetSheetRef = useRef(null);
+
+  
 
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
@@ -19,11 +21,15 @@ export const useHomeScreen = (props) => {
 
 
   useEffect(() => {
-    getCryptoData()
-  }, [])
+    // only start when we have a user id (prevents 401 + wasted work)
+    if (user?.id) {
+      getCryptoData(1);
+    }
+  }, [user?.id]);
 
   const getCryptoData = async (newPage) => {
     try {
+      
       setLoading(true)
       const getCryptoData = await GetCryptoListApi(newPage, 10)
       console.log("Crypto Data:", getCryptoData?.data?.data)
@@ -40,7 +46,7 @@ export const useHomeScreen = (props) => {
       });
       setPage(newPage)
       if (mergeData.length > 0) {
-        setCryptoList(prevFavorites => [...prevFavorites, ...mergeData]);
+        setCryptoList(prev => (newPage === 1 ? mergeData : [...prev, ...merged]));
       }
     } catch (error) {
       console.log("Error fetching crypto data:", error?.response);
@@ -76,7 +82,7 @@ export const useHomeScreen = (props) => {
 
   const handleAssetOpen = () => {
     setTimeout(() => {
-      assetSheetRef.current?.expand()
+      assetSheetRef.current?.open()
     }, 100)
   }
 

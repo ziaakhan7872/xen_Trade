@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { colors, Routes } from "../../../../constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getPairApi } from "../../../../constants/Api/Index";
+import { getPairApi } from "../../../../Backend/Api/Index";
 import { Keyboard } from "react-native";
 import { hp } from "../../../../components/ResponsiveComponent";
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { GetNetworkListApi } from "../../../../constants/Api/Index"
+import { GetNetworkListApi } from "../../../../Backend/Api/Index"
 import { Routes } from "../../../../constants";
 
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { GetDepositDetailsApi } from "../../../../constants/Api/Index"
+import { GetDepositDetailsApi } from "../../../../Backend/Api/Index"
 import { useSelector } from "react-redux"
 
 const useBarcode = (props) => {

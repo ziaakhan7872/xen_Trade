@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ACCOUNTS_SERVICE_BASE_URL, ASSETS_MANAGER_BASE_URL, ASSETS_MANAGER_BASE_URL2, AUTH_BASE_URL, getHeaders } from "../../Configs/ApiBaseUrl"
+import { ACCOUNTS_SERVICE_BASE_URL, ASSETS_MANAGER_BASE_URL, ASSETS_MANAGER_BASE_URL2, AUTH_BASE_URL, getHeaders, TRADING_SERVICE_BASE_URL } from "../../Configs/ApiBaseUrl"
 import { apiRequest } from "./mainService";
 
 
@@ -189,9 +189,7 @@ export const GetAccountBalanceMyMarket = async (userId, marketId) => {
 }
 
 export const getAccountDetail = async (page, limit, userId) => {
-    console.log(page)
-    console.log(limit)
-    console.log(userId)
+   
 
 
     try {
@@ -240,5 +238,20 @@ export const getWithdrawlsHistory = async (payload) => {
 
     } catch (error) {
         console.log(error, "getWithdrawlsHistory Api  error")
+    }
+}
+
+export const PlaceOrder = async (payload) => {
+    console.log(payload,"place order payload")
+    try {
+        return apiRequest({
+            method: "POST",
+            url: `${TRADING_SERVICE_BASE_URL}/orders`,
+            data: payload,
+            isAuth: true,
+        });
+
+    } catch (error) {
+        console.log(error, "Get Post Order Api  error")
     }
 }

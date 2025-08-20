@@ -2,7 +2,7 @@
 import axios from "axios";
 import { getAuthToken, getRefreshToken, setUser } from "../../redux/store";
 import { AUTH_BASE_URL, getHeaders } from "../../Configs/ApiBaseUrl";
-import { Routes } from "../routes";
+import { Routes } from "../../constants/routes";
 import { navigate } from "../../navigation/NavigationService/NavigationService";
 
 
@@ -41,6 +41,7 @@ export const apiRequest = async ({
         return response;
     } catch (error) {
         if (error.response?.status === 401) {
+            console.log("error unahoried")
             const newToken = await refreshToken(dispatch);
 
             if (!newToken || !newToken.accessToken) {

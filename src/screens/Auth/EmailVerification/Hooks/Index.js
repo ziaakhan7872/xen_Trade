@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { EmailVerificationApi, ResendOtpApi } from '../../../../constants/Api/Index'
+import { EmailVerificationApi, ResendOtpApi } from '../../../../Backend/Api/Index'
 import { Routes } from '../../../../constants'
 import Toast from 'react-native-toast-message'
 

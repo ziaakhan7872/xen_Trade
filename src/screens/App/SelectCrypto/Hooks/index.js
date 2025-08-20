@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GetCryptoListApi, } from '../../../../constants/Api/Index';
+import { GetCryptoListApi, } from '../../../../Backend/Api/Index';
 import { Routes } from '../../../../constants';
 
 export const useSelectCrypto = (props) => {
