@@ -32,7 +32,8 @@ export const ForgotPasswordOtpApi = async (payload) => {
     return axios.post(`${AUTH_BASE_URL}/verifications/forgot-password-otp`, payload)
 }
 
-export const LogoutUser = async (payload) => {
+export const LogoutTheUser = async (payload) => {
+    console.log(payload)
     try {
         return apiRequest({
             method: "DELETE",
@@ -232,6 +233,20 @@ export const getWithdrawlsHistory = async (payload) => {
         return apiRequest({
             method: "GET",
             url: `${ACCOUNTS_SERVICE_BASE_URL}/withdrawals/`,
+            params: payload,
+            isAuth: true,
+        });
+
+    } catch (error) {
+        console.log(error, "getWithdrawlsHistory Api  error")
+    }
+}
+
+export const getOrderBook = async (payload) => {
+    try {
+        return apiRequest({
+            method: "GET",
+            url: `${TRADING_SERVICE_BASE_URL}/orderbook/`,
             params: payload,
             isAuth: true,
         });
