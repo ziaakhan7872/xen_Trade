@@ -52,7 +52,7 @@ export const BuySellRowButton = ({ buySellButton, setBuySellButton }) => {
     )
 }
 
-export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuyQuantityChange, currentCoinPrice, setCurrentCoinPrice, addQuantity, dicreaseQuantity, quantity, setQuantity, Price, setPrice, QuoteBalance, setValue, value, onPressTradingType, tradingType, marketData ,buyOrder}) => {
+export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuyQuantityChange, currentCoinPrice, setCurrentCoinPrice, addQuantity, dicreaseQuantity, quantity, setQuantity, Price, setPrice, QuoteBalance, setValue, value, onPressTradingType, tradingType, marketData, buyOrder }) => {
     const marks = [0, 25, 50, 75, 100];
 
     return (
@@ -137,7 +137,7 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
                 </View>
             </View>
             <Spacer height={hp(1)} />
-            <View style={{ width: wp(43), alignItems: 'center',backgroundColor:colors.cardsBgColor,borderRadius:wp(3) }}>
+            <View style={{ width: wp(43), alignItems: 'center', backgroundColor: colors.cardsBgColor, borderRadius: wp(3) }}>
                 <TextInput
                     value={Price ? Price.toString() : ""}
                     onChangeText={handleBuyPriceChange}
@@ -303,10 +303,10 @@ export const SellForm = ({
     )
 }
 
-export const FlatlistValues = ({ data = [], textColor }) => {
+export const BuyOrder = ({ data, textColor }) => {
     return (
         <FlatList
-            data={data}
+            data={data?.buy_orders}
             scrollEnabled={false}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
@@ -315,7 +315,27 @@ export const FlatlistValues = ({ data = [], textColor }) => {
                         {item.price}
                     </ResponsiveText>
                     <ResponsiveText style={styles.textFlatList1}>
-                        {item.amount}
+                        {item.quantity}
+                    </ResponsiveText>
+                </View>
+            )}
+        />
+    );
+};
+
+export const SellOrder = ({ data = [], textColor }) => {
+    return (
+        <FlatList
+            data={data?.sell_orders}
+            scrollEnabled={false}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+                <View style={{ ...appStyles.row, paddingVertical: 2 }}>
+                    <ResponsiveText style={{ ...styles.textFlatList, color: textColor ?? colors.red }}>
+                        {item.price}
+                    </ResponsiveText>
+                    <ResponsiveText style={styles.textFlatList1}>
+                        {item.quantity}
                     </ResponsiveText>
                 </View>
             )}
@@ -560,10 +580,15 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
     )
 }
 
-export const FavoutiteBottomSheetComponnet = ({ ref }) => {
+export const FavoutiteBottomSheetComponnet = ({ ref, marketData, value, onchangeText,onPress }) => {
     return (
-        <BottomSheet ref={ref}>
-            <RenderFavouriteCoinList />
+        <BottomSheet height={hp(70)} ref={ref}>
+            <RenderFavouriteCoinList
+                value={value}
+                onchangeText={onchangeText}
+                marketData={marketData}
+                onPress={onPress}
+            />
         </BottomSheet>
     )
 

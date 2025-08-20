@@ -11,12 +11,12 @@ import EvilIcons from "react-native-vector-icons/EvilIcons"
 import InputText from '../../../../components/InputText'
 
 
-export const RenderFavouriteCoinList = ({ marketData = MarketData }) => {
+export const RenderFavouriteCoinList = ({ marketData, value, onchangeText,onPress }) => {
     return (
         <View style={style.MarketView}>
-            <Spacer/>
-            <RenderSearchHeader/>
-            <Spacer/>
+            <Spacer />
+            <RenderSearchHeader value={value} onchangeText={onchangeText} />
+            <Spacer />
             {/* jskms */}
             <RenderFavourteHeader />
             <FlatList
@@ -24,27 +24,28 @@ export const RenderFavouriteCoinList = ({ marketData = MarketData }) => {
                 keyExtractor={(item, index) => item.id.toString() || index.toString()}
                 renderItem={({ item }) => (
                     <>
-                        <View style={style.MarketDataView}>
+                        <TouchableOpacity onPress={()=>onPress(item)} style={style.MarketDataView}>
                             <View style={{ flexDirection: "row", alignItems: "center", width: wp(37) }}>
                                 <TouchableOpacity>
-                                    <Image source={item.favourite ? images.starFill : images.starUnFill} style={style.StarImage} />
+                                    <Image source={images.starUnFill} style={style.StarImage} />
                                 </TouchableOpacity>
                                 <HorizontalSpacer />
                                 <View>
-                                    <ResponsiveText style={style.textHeader}>{item.name}</ResponsiveText>
-                                    <ResponsiveText style={style.volText}>Vol {item.Vol}</ResponsiveText>
+                                    <ResponsiveText style={style.textHeader}>{item.symbol}</ResponsiveText>
+                                    <ResponsiveText style={style.volText}>Vol {item.Vol || "42.35M"}</ResponsiveText>
                                 </View>
                             </View>
                             <View style={{ alignItems: "flex-start", justifyContent: "flex-start", width: wp(25) }}>
-                                <ResponsiveText style={[style.textHeader]}>{item.previousPrice}</ResponsiveText>
-                                <ResponsiveText style={style.volText}>{item.InUSdt}</ResponsiveText>
+                                <ResponsiveText style={[style.textHeader]}>{item.previousPrice || "1.25"}</ResponsiveText>
+                                <ResponsiveText style={style.volText}>${item.InUSdt || "2,254.00"}</ResponsiveText>
                             </View>
                             <View style={{ flex: 1, alignItems: "flex-end", width: wp(25) }}>
-                                <ResponsiveText style={[style.textHeader, { color: item.Market.startsWith("+") ? colors.green : colors.red }]}>{item.Market}</ResponsiveText>
+                                <ResponsiveText style={[style.textHeader, { color: colors.green }]}>{item.Market || "0.01%"}</ResponsiveText>
+                                {/* {color:item.Market.startsWith("+")?colors.green:colors.red} */}
                             </View>
                             <Spacer />
 
-                        </View>
+                        </TouchableOpacity>
                         <Line height={hp(0.1)} />
                     </>
 
@@ -56,15 +57,17 @@ export const RenderFavouriteCoinList = ({ marketData = MarketData }) => {
     )
 }
 
-const RenderSearchHeader = () => {
+const RenderSearchHeader = ({ value, onchangeText }) => {
     return (
-        // <TouchableOpacity style={style.searchButton}>
-        //     <HorizontalSpacer />
-        //     <EvilIcons name="search" color={colors.mainColor} size={25} />
-        //     <HorizontalSpacer />
-        //     <ResponsiveText style={style.searchText}>Search...</ResponsiveText>
-        // </TouchableOpacity>
-        <InputText style={style.inputText} rightIcon={true} placeholderTextColor={colors.iconColor}  placeholder={"Search.."}/>
+
+        <InputText
+            value={value}
+            onChangeText={onchangeText}
+            style={style.inputText}
+            rightIcon={true}
+            placeholderTextColor={colors.iconColor}
+            placeholder={"Search.."}
+        />
 
 
     )
@@ -119,33 +122,33 @@ const style = StyleSheet.create({
         fontSize: 16,
         fontWeight: "500",
         color: colors.white,
-        fontFamily:fontFamily.mainTextMedium
+        fontFamily: fontFamily.mainTextMedium
     },
     volText: {
         fontSize: 14,
         fontWeight: "400",
         color: colors.iconColor,
-        fontFamily:fontFamily.appTextRegular
+        fontFamily: fontFamily.appTextRegular
     },
     filterImage: {
         width: wp(4),
         height: wp(4),
         resizeMode: "contain"
     },
-      searchButton:{
-        width:wp(90),
-        backgroundColor:colors.searchBar,
-        paddingVertical:hp(1.7),
-        borderRadius:wp(3),
-        flexDirection:"row",
-        alignItems:"center"
-    // justifyContent:"space-between"
+    searchButton: {
+        width: wp(90),
+        backgroundColor: colors.searchBar,
+        paddingVertical: hp(1.7),
+        borderRadius: wp(3),
+        flexDirection: "row",
+        alignItems: "center"
+        // justifyContent:"space-between"
 
     },
-    searchText:{
-        fontSize:14,
-        fontWeight:"400",
-        color:colors.iconColor
+    searchText: {
+        fontSize: 14,
+        fontWeight: "400",
+        color: colors.iconColor
     },
     filterHeader: {
         width: wp(90),
@@ -158,16 +161,16 @@ const style = StyleSheet.create({
         width: wp(25),
         alignItems: "center"
     },
-     filterText: {
+    filterText: {
         fontSize: 16,
         fontWeight: "400",
         color: colors.white,
-        fontFamily:fontFamily.mainTextRegular
+        fontFamily: fontFamily.mainTextRegular
     },
-    inputText:{
-        width:wp(90),
+    inputText: {
+        width: wp(90),
         // paddingVertical:hp(1),
-        backgroundColor:colors.inputBgColor,
-        borderRadius:wp(3)
+        backgroundColor: colors.inputBgColor,
+        borderRadius: wp(3)
     }
 })

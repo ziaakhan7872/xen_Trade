@@ -32,27 +32,26 @@ export const UseExchange = (props) => {
   const [price, setPrice] = useState(0);
   const [cureentCoinPrice, setCurrentCoinPrice] = useState(22976.27)
   const [stage, setStage] = useState(0);
-  const [currentSubscription, setCurrectSubscription] = useState(null)
+  const [orderBook, setOrderBook] = useState({})
+  const [Page, setPage] = useState(1)
+  const [searchText, setSearchText] = useState("")
+  const [currentSubscription, setCurrentSubscription] = useState(null)
 
 
 
   useEffect(() => {
+    console.log("centrifugueBuild", centrifugueBuild)
     const channelName = `${selectedData?.symbol}@depth`;
 
-    if (socketRef?.current) {
-      try {
-        socketRef.current.off("publication");
-        socketRef.current.off("subscribed");
-        socketRef.current.off("error");
-        socketRef.current.off("unsubscribed");
-        socketRef.current.unsubscribe();
-      } catch { }
-      socketRef.current = null;
-    }
+
     let sub = centrifugueBuild.getSubscription(channelName)
 
     if (!sub) {
       sub = centrifugueBuild.newSubscription(channelName);
+    }
+    if (currentSubscription) {
+      currentSubscription?.unsubscribe();
+      setCurrentSubscription(null); 
     }
     sub.on("subscribed", (ctx) => {
       console.log(`Subscribed to ${channelName}`, ctx);
@@ -60,7 +59,7 @@ export const UseExchange = (props) => {
 
     sub.on("publication", (ctx) => {
       console.log("publication", channelName, ctx?.data);
-      // setOrders(ctx?.data);
+      setOrderBook(ctx?.data)
     });
 
     sub.on("error", (err) => {
@@ -72,20 +71,15 @@ export const UseExchange = (props) => {
     });
 
     if (sub.state !== "subscribed" && sub.state !== "subscribing") {
+      console.log(sub, "subscribing")
       sub.subscribe();
+      setCurrentSubscription(sub)
     }
 
     socketRef.current = sub;
 
     return () => {
-      if (!socketRef.current) return;
-      try {
-        socketRef.current.off("publication");
-        socketRef.current.off("subscribed");
-        socketRef.current.off("error");
-        socketRef.current.off("unsubscribed");
-        socketRef.current.unsubscribe();
-      } catch { }
+
       socketRef.current = null;
     };
   }, [centrifugueBuild, selectedData?.symbol]);
@@ -156,14 +150,11 @@ export const UseExchange = (props) => {
 
 
 
-
-
-
-
-  const getPair = async () => {
+  const getPair = async (newPage) => {
     try {
-      const response = await getPairApi(1, 20)
+      const response = await getPairApi(newPage, 20)
       setPairs(response?.data?.data)
+      setPage(newPage)
       const asyncData = await AsyncStorage.getItem("selectedData")
       if (asyncData) {
         setSelectedData(JSON.parse(asyncData));
@@ -177,6 +168,17 @@ export const UseExchange = (props) => {
       console.error("Error fetching pairs:", error)
     }
   }
+
+  const handleMarketData = () => {
+    if (Page) {
+      getPair(Page + 1);
+    }
+  };
+
+  const filteredPair = pairs.filter((item) =>
+    item?.name?.toLowerCase().includes(searchText.toLowerCase()) ||
+    item?.symbol?.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   const getAvailableBalanceQuote = async () => {
     try {
@@ -240,6 +242,7 @@ export const UseExchange = (props) => {
     }
   }
 
+
   return {
     stage, setStage,
     buySellButton, setBuySellButton,
@@ -255,7 +258,9 @@ export const UseExchange = (props) => {
     price, setPrice,
     cureentCoinPrice, setCurrentCoinPrice,
     handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange,
-    buyOrder
+    buyOrder, orderBook,
+    pairs: filteredPair, searchText, setSearchText,
+    setSelectedData
   }
 }
 
