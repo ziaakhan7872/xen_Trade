@@ -1,15 +1,25 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native'
+import React, { Suspense } from 'react'
 import { ExchangeMainContainer } from '../../../../components/ExchangeMainContainer'
 import UseTradeGraphScreen from './Hooks/Index'
 import Line from '../../../../components/Liner'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import Spacer from '../../../../components/Spacer'
-import { BuySellButton, CoinPriceDetail, ExchangeInnerHeader, FavoutiteBottomSheetComponnet, FlatlistValues, OrderBookHeader, PriceUSDT, TradeGraph, TradeGraphBelowHeader, TradeGraphHeader, TradeHeader } from './Component/Index'
+import { BuySellButton, CoinPriceDetail, ExchangeInnerHeader, FavoutiteBottomSheetComponnet, OrderBookHeader, PriceUSDT, TradeGraphBelowHeader, TradeGraphHeader, TradeHeader } from './Component/Index'
 import { Amount } from '../../../../utilities/dummyData'
 import { colors } from '../../../../constants'
 import RowButton from '../../../../components/RowButton'
 import { Portal } from 'react-native-portalize'
+import { OrderBookSkeleton } from '../../../../components/SkeletonLoader'
+
+
+const TradeGraph = React.lazy(() =>
+    import('./Component/Index').then(m => ({ default: m.TradeGraph }))
+);
+
+const FlatlistValues = React.lazy(() =>
+    import('./Component/Index').then(m => ({ default: m.FlatlistValues }))
+);
 
 const TradeGraphScreen = (props) => {
     const {
@@ -17,7 +27,8 @@ const TradeGraphScreen = (props) => {
         candleChartData, setCandleChartData,
         orderBookHeaderPress, setOrderBookHeaderPress,
         favouriteBottomSheetRef, selectedData,
-        BuyPress, SellPress
+        BuyPress, SellPress, pair, searchText, setSearchText, setSelectedData,
+        currentCoinPrice, timeInterval, setTimeInterval
     } = UseTradeGraphScreen(props)
 
 
@@ -27,26 +38,35 @@ const TradeGraphScreen = (props) => {
             <ScrollView Dat contentContainerStyle={{ paddingBottom: hp(6) }}>
                 <Spacer />
                 <Line height={hp(0.1)} />
-                <CoinPriceDetail />
+                <CoinPriceDetail
+                    coinPrice={currentCoinPrice} />
                 <Spacer />
-                <TradeGraphHeader />
+                <TradeGraphHeader timeInterval={timeInterval} setTimeInterval={setTimeInterval} />
                 <Spacer />
                 <Line height={hp(0.1)} />
                 <Spacer />
-                <ExchangeInnerHeader/>
-                <TradeGraph data={candleChartData} />
+                <ExchangeInnerHeader
+                    marketData={selectedData} />
+                <Suspense fallback={<ActivityIndicator size="large" color={colors.white} style={{ marginTop: wp(4) }} />}>
+                    <TradeGraph data={candleChartData} />
+                </Suspense>
                 <Spacer />
                 <TradeGraphBelowHeader />
                 <Spacer />
                 <Line width={wp(100)} height={hp(0.1)} />
                 <Spacer />
-                <OrderBookHeader buttonPress={orderBookHeaderPress} setButtonPress={setOrderBookHeaderPress} />
+                <OrderBookHeader
+                    buttonPress={orderBookHeaderPress}
+                    setButtonPress={setOrderBookHeaderPress} />
                 <Line width={wp(100)} height={hp(0.1)} />
                 <Spacer />
                 <PriceUSDT title1={'Price'} title2={`(${'USDT'})`} title3={'Amount'} title4={`(${'ETH'})`} />
                 <Spacer />
                 <Line width={wp(100)} height={hp(0.1)} />
-                <FlatlistValues data={Amount} textColor={colors.green} />
+                <Suspense fallback={<OrderBookSkeleton />}>
+
+                    <FlatlistValues data={Amount} textColor={colors.green} />
+                </Suspense>
                 {/* <Spacer height={hp(5)}/> */}
             </ScrollView>
             <View style={{
@@ -61,7 +81,17 @@ const TradeGraphScreen = (props) => {
             </View>
             <Portal>
 
-                <FavoutiteBottomSheetComponnet ref={favouriteBottomSheetRef} />
+                <FavoutiteBottomSheetComponnet
+                    value={searchText}
+                    onchangeText={setSearchText}
+                    marketData={pair}
+                    ref={favouriteBottomSheetRef}
+                    onPress={(item) => {
+                        console.log(item)
+                        setSelectedData(item)
+                        favouriteBottomSheetRef?.current?.close()
+                    }}
+                />
             </Portal>
 
 

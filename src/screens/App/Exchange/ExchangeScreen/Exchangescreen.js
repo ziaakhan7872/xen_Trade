@@ -14,7 +14,7 @@ import { ExchangeMainContainer } from '../../../../components/ExchangeMainContai
 import { Routes } from '../../../../constants';
 import { BuySellSkeleton, OrderBookSkeleton, OrdersSkeleton } from '../../../../components/SkeletonLoader';
 
-import { BuyOrder, BuySellRowButton, CurrentOrderHistoryHeader, ExchangeHeader, FlatlistValues, PriceUSDT, SellOrder } from './Component/Index';
+import {TradingTypeComponent, BuyOrder, BuySellRowButton, CurrentOderComponentHeader, CurrentOrderHistoryHeader, ExchangeHeader, FlatlistValues, PriceUSDT, SellOrder } from './Component/Index';
 
 const BuyForm = React.lazy(() =>
   import('./Component/Index').then(m => ({ default: m.BuyForm }))
@@ -28,9 +28,6 @@ const CurrentOrderComponent = React.lazy(() =>
 const AssetsComponent = React.lazy(() =>
   import('./Component/Index').then(m => ({ default: m.AssetsComponent }))
 );
-const TradingTypeComponent = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.TradingTypeComponent }))
-);
 const FavoutiteBottomSheetComponnet = React.lazy(() =>
   import('./Component/Index').then(m => ({ default: m.FavoutiteBottomSheetComponnet }))
 );
@@ -40,7 +37,7 @@ const FavoutiteBottomSheetComponnet = React.lazy(() =>
 const Exchangescreen = (props) => {
   const {
     buySellButton, setBuySellButton,
-    buyerSlider, setBuyerSlider, sellSlider, setSelSlider,
+    buyerSlider, sellSlider,
     currentOrderHistoryPress, setCurrentOrderHistoryPress,
     currentOrder,
     isCurrentSymbol, setIsCurrentSymbol,
@@ -48,11 +45,15 @@ const Exchangescreen = (props) => {
     tradingType, setTradingType,
     favouriteBottomSheetRef, selectedData,
     availableBaseBalance, availableQuoteBalance,
-    price, setPrice,
-    quantity, setQuantity, discreaseQuantity, addQuantity,
+    price, sellPrice,
+    quantity, discreaseQuantity, addQuantity,
+    sellQuantity, discreaseSellQuantity, addSellQuantity,
+    handleSellPriceChange, handleSellQuantityChange, handleSellSliderChange,
     cureentCoinPrice, setCurrentCoinPrice,
     handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange,
-    buyOrder, orderBook, pairs, searchText, setSearchText,setSelectedData
+    buyOrder, orderBook, pairs, searchText, setSearchText, setSelectedData,
+    errorMessage, loading, newCurrentCoinPrice,setNewCurrentCoinPrice,
+    sellOrder,DeleteOrder
   } = UseExchange(props)
 
 
@@ -61,7 +62,7 @@ const Exchangescreen = (props) => {
       <View style={style.container}>
         <ExchangeHeader
           marketData={selectedData}
-          onPressTradeGraph={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen })}
+          onPressTradeGraph={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen,params: { selectedData: selectedData } })}
           onpress={() => favouriteBottomSheetRef?.current?.open()}
         />
 
@@ -83,29 +84,43 @@ const Exchangescreen = (props) => {
                       handleBuyQuantityChange={handleBuyQuantityChange}
                       handleBuySliderChange={handleBuySliderChange}
                       Price={price}
-                      setPrice={setPrice}
-                      currentCoinPrice={cureentCoinPrice}
-                      setCurrentCoinPrice={setCurrentCoinPrice}
+                      currentCoinPrice={newCurrentCoinPrice}
+                      setCurrentCoinPrice={setNewCurrentCoinPrice}
                       addQuantity={addQuantity}
                       dicreaseQuantity={discreaseQuantity}
                       quantity={quantity}
-                      setQuantity={setQuantity}
                       QuoteBalance={availableQuoteBalance}
                       marketData={selectedData}
                       tradingType={tradingType}
                       onPressTradingType={() => tradngBottomSheetRef?.current?.open()}
                       value={buyerSlider}
-                      setValue={setBuyerSlider}
                       buyOrder={buyOrder}
+                      errorMessage={errorMessage}
+                      loading={loading}
                     />
 
                   ) : (
                     <SellForm
+                      handleSellPriceChange={handleSellPriceChange}
+                      handleSellQuantityChange={handleSellQuantityChange}
+                      handleSellSliderChange={handleSellSliderChange}
+                      currentCoinPrice={newCurrentCoinPrice}
+                      setCurrentCoinPrice={setNewCurrentCoinPrice}
                       marketData={selectedData}
                       tradingType={tradingType}
                       onPressTradingType={() => tradngBottomSheetRef?.current?.open()}
                       value={sellSlider}
-                      setValue={setSelSlider}
+                      BaseBalance={availableBaseBalance}
+                      quantity={sellQuantity}
+                      addQuantity={addSellQuantity}
+                      dicreaseQuantity={discreaseSellQuantity}
+                      Price={sellPrice}
+                      onPress={sellOrder}
+                      errorMessage={errorMessage}
+                      loading={loading}
+
+
+
                     />
                   )}
                 </Suspense>
@@ -117,20 +132,20 @@ const Exchangescreen = (props) => {
               <>
                 <Suspense fallback={<OrderBookSkeleton />}>
 
-                  <PriceUSDT title1={'Price'} title2={`(${'USDT'})`} title3={'Amount'} title4={`(${'ETH'})`} />
+                  <PriceUSDT title1={'Price'} title2={`(${selectedData?.quote?.toUpperCase()})`} title3={'Amount'} title4={selectedData?.base.toUpperCase()} />
                   <Spacer height={hp(0.5)} />
-                  <BuyOrder data={orderBook} textColor={colors.green} />
+                  <BuyOrder marketData={selectedData} data={orderBook} textColor={colors.green} />
                   <Spacer height={hp(1)} />
                   <Line height={hp(0.1)} />
                   <Spacer height={hp(1)} />
                   <View style={appStyles.row}>
-                    <ResponsiveText style={style.priceText}>2,048.15</ResponsiveText>
-                    <ResponsiveText style={style.priceText2}>≈$2,048.15</ResponsiveText>
+                    <ResponsiveText style={style.priceText}>{cureentCoinPrice}</ResponsiveText>
+                    <ResponsiveText style={style.priceText2}>≈${cureentCoinPrice}</ResponsiveText>
                   </View>
                   <Spacer height={hp(1)} />
                   <Line height={hp(0.1)} />
                   <Spacer height={hp(1)} />
-                  <SellOrder data={orderBook} />
+                  <SellOrder marketData={selectedData} data={orderBook} />
                 </Suspense>
               </>
 
@@ -143,7 +158,7 @@ const Exchangescreen = (props) => {
 
               <CurrentOrderHistoryHeader
                 props={props}
-                currentOrders={currentOrder}
+                currentOrders={currentOrder?.items?.filter((order)=>order?.status === "new" || order?.status ==="partially_filled")}
                 buttonPress={currentOrderHistoryPress}
                 setButtonPress={setCurrentOrderHistoryPress}
               />
@@ -151,9 +166,18 @@ const Exchangescreen = (props) => {
               {currentOrderHistoryPress === "currentOrder" ? (
                 <>
                   <Spacer />
-                  <CurrentOrderComponent
+                  <CurrentOderComponentHeader
                     setIsCurrentSymbol={setIsCurrentSymbol}
                     isCurrentSymbol={isCurrentSymbol}
+                    CancelAllPress={DeleteOrder}
+                  />
+                  <CurrentOrderComponent
+                    orders={
+                      isCurrentSymbol && selectedData?.symbol
+                        ? currentOrder?.items?.filter((order) => order.symbol === selectedData.symbol && order?.status ==="new" || order?.status ==="partially_filled") 
+                        : currentOrder?.items?.filter ((order)=>order?.status==="new" ||  order?.status==="partially_filled")
+                    }
+                    OnpressDelete={DeleteOrder}
                   />
                 </>
 
@@ -177,13 +201,13 @@ const Exchangescreen = (props) => {
             value={searchText}
             onchangeText={setSearchText}
             marketData={pairs}
-            ref={favouriteBottomSheetRef} 
-            onPress={(item)=>{
+            ref={favouriteBottomSheetRef}
+            onPress={(item) => {
               console.log(item)
               setSelectedData(item)
               favouriteBottomSheetRef?.current?.close()
             }}
-            />
+          />
         </Portal>
         <View >
 

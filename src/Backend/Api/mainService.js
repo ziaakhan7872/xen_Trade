@@ -44,11 +44,11 @@ export const apiRequest = async ({
         if (error.response?.status === 401) {
             console.log("error unahoried")
             const newToken = await refreshToken(dispatch);
-            console.log(newToken,"new refresh token")
+            console.log(newToken, "new refresh token")
 
             if (!newToken || !newToken.accessToken) {
                 console.error("Both access and refresh tokens are expired or invalid");
-                navigate(Routes.LoginScreen);
+                navigate(Routes.AuthNavigator, { screen: Routes.LoginScreen });
                 return;
             }
 
