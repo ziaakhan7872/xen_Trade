@@ -14,7 +14,7 @@ import { ExchangeMainContainer } from '../../../../components/ExchangeMainContai
 import { Routes } from '../../../../constants';
 import { BuySellSkeleton, OrderBookSkeleton, OrdersSkeleton } from '../../../../components/SkeletonLoader';
 
-import {TradingTypeComponent, BuyOrder, BuySellRowButton, CurrentOderComponentHeader, CurrentOrderHistoryHeader, ExchangeHeader, FlatlistValues, PriceUSDT, SellOrder } from './Component/Index';
+import { TradingTypeComponent, BuyOrder, BuySellRowButton, CurrentOderComponentHeader, CurrentOrderHistoryHeader, ExchangeHeader, FlatlistValues, PriceUSDT, SellOrder } from './Component/Index';
 
 const BuyForm = React.lazy(() =>
   import('./Component/Index').then(m => ({ default: m.BuyForm }))
@@ -52,8 +52,8 @@ const Exchangescreen = (props) => {
     cureentCoinPrice, setCurrentCoinPrice,
     handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange,
     buyOrder, orderBook, pairs, searchText, setSearchText, setSelectedData,
-    errorMessage, loading, newCurrentCoinPrice,setNewCurrentCoinPrice,
-    sellOrder,DeleteOrder
+    errorMessage, loading, newCurrentCoinPrice, setNewCurrentCoinPrice,
+    sellOrder, DeleteOrder
   } = UseExchange(props)
 
 
@@ -62,7 +62,7 @@ const Exchangescreen = (props) => {
       <View style={style.container}>
         <ExchangeHeader
           marketData={selectedData}
-          onPressTradeGraph={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen,params: { selectedData: selectedData } })}
+          onPressTradeGraph={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen, params: { selectedData: selectedData } })}
           onpress={() => favouriteBottomSheetRef?.current?.open()}
         />
 
@@ -158,7 +158,7 @@ const Exchangescreen = (props) => {
 
               <CurrentOrderHistoryHeader
                 props={props}
-                currentOrders={currentOrder?.items?.filter((order)=>order?.status === "new" || order?.status ==="partially_filled")}
+                currentOrders={currentOrder?.items?.filter((order) => order?.status === "new" || order?.status === "partially_filled")}
                 buttonPress={currentOrderHistoryPress}
                 setButtonPress={setCurrentOrderHistoryPress}
               />
@@ -174,8 +174,8 @@ const Exchangescreen = (props) => {
                   <CurrentOrderComponent
                     orders={
                       isCurrentSymbol && selectedData?.symbol
-                        ? currentOrder?.items?.filter((order) => order.symbol === selectedData.symbol && order?.status ==="new" || order?.status ==="partially_filled") 
-                        : currentOrder?.items?.filter ((order)=>order?.status==="new" ||  order?.status==="partially_filled")
+                        ? currentOrder?.items?.filter((order) => order.symbol === selectedData.symbol && order?.status === "new" || order?.status === "partially_filled")
+                        : currentOrder?.items?.filter((order) => order?.status === "new" || order?.status === "partially_filled")
                     }
                     OnpressDelete={DeleteOrder}
                   />

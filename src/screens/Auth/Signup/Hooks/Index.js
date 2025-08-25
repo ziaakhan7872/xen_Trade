@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Routes } from '../../../../constants';
 import { SignUpApi } from '../../../../Backend/Api/Index';
 import * as Yup from 'yup';
+import { channel } from 'process';
 
 const UseSignUp = (props) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -49,6 +50,7 @@ const UseSignUp = (props) => {
     try {
       await validationSchema.validate(values, { abortEarly: false });
       const payload = {
+        channel: "email",
         email: email,
         password: password,
         phoneNo: phoneNumber,
