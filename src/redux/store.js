@@ -37,7 +37,6 @@ const persistor = persistStore(store);
 
 export { store, persistor };
 
-// Helpers to get tokens
 export const getAuthToken = () => {
   const state = store.getState();
   return state?.user?.token || '';
@@ -49,6 +48,6 @@ export const getRefreshToken = () => {
 };
 
 export const performLogout = async () => {
-  store.dispatch(logoutUser());   // clear redux state
-  await persistor.purge();        // clear persisted storage
+  store.dispatch(logoutUser());   
+  await persistor.purge();        
 };
