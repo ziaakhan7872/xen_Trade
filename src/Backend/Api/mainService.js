@@ -1,9 +1,10 @@
 // apiRequest.js
 import axios from "axios";
-import { getAuthToken, getRefreshToken, setUser } from "../../redux/store";
+import { getAuthToken, getRefreshToken, performLogout, setUser, store } from "../../redux/store";
 import { AUTH_BASE_URL, getHeaders } from "../../Configs/ApiBaseUrl";
 import { Routes } from "../../constants/routes";
 import { navigate } from "../../navigation/NavigationService/NavigationService";
+import { logoutUser } from "../../redux/slices/userSlice";
 
 
 export const apiRequest = async ({
@@ -48,13 +49,12 @@ export const apiRequest = async ({
 
             if (!newToken || !newToken.accessToken) {
                 console.error("Both access and refresh tokens are expired or invalid");
+                await performLogout();
                 navigate(Routes.AuthNavigator, { screen: Routes.LoginScreen });
                 return;
             }
 
-            dispatch(setUser({
-                token: newToken.accessToken,
-            }));
+            store.dispatch(setUser({ token: newToken.accessToken }));
 
             config.headers["Authorization"] = `Bearer ${newToken.accessToken}`;
             const retryResponse = await axios(config);
