@@ -11,7 +11,8 @@ import { FilterBottomSheet, FilterTextInput, OrderHistoryList } from './Componen
 import { Portal } from 'react-native-portalize'
 
 const OrderHistory = (props) => {
-    const { FilterBottomSheetRef, handleOpenFilter, handleCloseFilter, input, setInput, selected, setSelected } = useOrderHistory()
+    const { FilterBottomSheetRef, handleOpenFilter, handleCloseFilter,
+        input, setInput, selected, setSelected, orderHistory } = useOrderHistory()
 
     return (
         <AuthMainContainer>
@@ -20,7 +21,7 @@ const OrderHistory = (props) => {
                 <Spacer height={hp(3)} />
 
                 <FilterTextInput value={input} onChangeText={(text) => setInput(text)} openBottomSheet={handleOpenFilter} />
-                <OrderHistoryList />
+                <OrderHistoryList orderHistory={orderHistory} />
 
                 <Portal>
                     <FilterBottomSheet

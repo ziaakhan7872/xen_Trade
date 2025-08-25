@@ -1,19 +1,16 @@
 import { Dimensions, ScrollView, View } from 'react-native';
-import React, { Suspense, useCallback } from 'react';
-import { colors } from '../../../../constants/colors';
+import React, { Suspense } from 'react';
 import { style } from './Style';
-import { ResponsiveText } from '../../../../components/ResponsiveText';
 import { UseExchange } from './Hooks/Index';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { Amount } from '../../../../utilities/dummyData';
-import { appStyles } from '../../../../utilities/appStyles';
 import { Portal } from 'react-native-portalize';
 import Spacer from '../../../../components/Spacer';
 import Line from '../../../../components/Liner';
 import { ExchangeMainContainer } from '../../../../components/ExchangeMainContainer';
 import { Routes } from '../../../../constants';
 import { BuySellSkeleton, OrderBookSkeleton, OrdersSkeleton } from '../../../../components/SkeletonLoader';
-import { BuyOrder, BuySellRowButton, CurrentOrderHistoryHeader, ExchangeHeader, FlatlistValues, SellOrder, TradingTypeComponent } from './Component/Index';
+import { BuySellRowButton, CurrentOrderHistoryHeader, ExchangeHeader, FlatlistValues, TradingTypeComponent } from './Component/Index';
 
 const BuyForm = React.lazy(() =>
   import('./Component/Index').then(m => ({ default: m.BuyForm }))
@@ -139,8 +136,9 @@ const Exchangescreen = (props) => {
                 <>
                   <Spacer />
                   <CurrentOrderComponent
-                    setIsCurrentSymbol={setIsCurrentSymbol}
-                    isCurrentSymbol={isCurrentSymbol}
+                    currentOrder={currentOrder}
+                  // setIsCurrentSymbol={setIsCurrentSymbol}
+                  // isCurrentSymbol={isCurrentSymbol}
                   />
                 </>
               ) : (

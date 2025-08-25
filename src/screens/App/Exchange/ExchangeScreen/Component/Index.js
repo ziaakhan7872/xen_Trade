@@ -474,15 +474,15 @@ export const CurrentOderComponentHeader = ({ isCurrentSymbol, setIsCurrentSymbol
 
     )
 }
-export const CurrentOrderComponent = ({ orders, OnpressDelete }) => {
+
+export const CurrentOrderComponent = ({ orders, OnpressDelete, currentOrder }) => {
     return (
         <>
-
             <View style={{ alignSelf: "center" }}>
                 <Spacer />
                 <FlatList
-                    data={orders}
-                    keyExtractor={(item, index) => item.id}
+                    data={currentOrder}
+                    keyExtractor={(item, index) => item?.id}
                     scrollEnabled
                     nestedScrollEnabled
                     ItemSeparatorComponent={(
@@ -512,8 +512,12 @@ export const CurrentOrderComponent = ({ orders, OnpressDelete }) => {
                                         <HorizontalSpacer />
                                         <ResponsiveText style={[styles.text1, { color: item.side === "buy" ? colors.green : colors.red }]}>{item.type}</ResponsiveText>
                                         <HorizontalSpacer />
-                                        <ResponsiveText style={[styles.text5]}>{moment(item?.updatedAt).format("MM/DD, HH:mm:ss")}</ResponsiveText>
-
+                                        <ResponsiveText style={[styles.text5]}>
+                                            {moment(item?.updatedAt && item.updatedAt !== '0001-01-01T00:00:00Z'
+                                                ? item.updatedAt
+                                                : item?.createdAt
+                                            ).format('MM/DD, HH:mm:ss')}
+                                        </ResponsiveText>
                                     </View>
                                 </View>
                                 <View style={{ flexDirection: "row", alignItems: "center" }}>

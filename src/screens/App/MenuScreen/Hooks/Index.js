@@ -6,29 +6,30 @@ import { logoutUser } from "../../../../redux/slices/userSlice"
 
 
 export const UseMenuScreen = (props) => {
-     const refreshToken = getRefreshToken()
+    const refreshToken = getRefreshToken()
     const dispatch = useDispatch()
-    const logout = async ()=>{
+
+    const logout = async () => {
         try {
             const payload = {
-                refreshToken:refreshToken
+                refreshToken: refreshToken
             }
             const response = await LogoutTheUser(payload)
-            if(response?.data){
-                props?.navigation?.navigate(Routes?.AuthNavigator,{screen:Routes.LoginScreen})
+            if (response?.data) {
+                props?.navigation?.navigate(Routes?.AuthNavigator, { screen: Routes.LoginScreen })
                 dispatch(logoutUser())
             }
         } catch (error) {
-            console.log(error,"login error")
-             props?.navigation?.navigate(Routes?.AuthNavigator,{screen:Routes.LoginScreen})
-                dispatch(logoutUser())
-            
+            console.log(error, "login error")
+            props?.navigation?.navigate(Routes?.AuthNavigator, { screen: Routes.LoginScreen })
+            dispatch(logoutUser())
+
         }
     }
-  return {
-    logout
 
-  }
+    return {
+        logout
+    }
 }
 
 

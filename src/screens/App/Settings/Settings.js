@@ -15,12 +15,12 @@ import { UseSetting } from './Hooks/Index'
 
 
 const Settings = (props) => {
-    const {showBotomTab} = UseSetting(props)
+    const { Logout } = UseSetting(props)
     return (
         <AuthMainContainer>
             {/* <Spacer height={hp(1)} /> */}
             <View style={styles.containerMain}>
-                <MainHeader onBackPress={()=>props?.navigation?.goBack()} leftImage={images.backArrow} title={'SETTINGS'} />
+                <MainHeader onBackPress={() => props?.navigation?.goBack()} leftImage={images.backArrow} title={'SETTINGS'} />
                 <Spacer height={hp(4)} />
                 <View style={styles.profileCard}>
                     <View style={appStyles.rowBasic}>
@@ -44,7 +44,7 @@ const Settings = (props) => {
             </View>
             {/* <Spacer height={hp(6)} /> */}
             <View style={styles.btnView}>
-                <SimpleButton text={'Log Out'} styleView={styles.btnContainer} onPress={() => { }} />
+                <SimpleButton text={'Log Out'} styleView={styles.btnContainer} onPress={Logout} />
             </View>
         </AuthMainContainer>
     )
