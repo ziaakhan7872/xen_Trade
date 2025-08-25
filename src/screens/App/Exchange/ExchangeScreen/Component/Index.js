@@ -369,6 +369,27 @@ export const BuyOrder = ({ data, textColor, marketData }) => {
     );
 };
 
+export const OrderBookForm = ({ orderBook, cureentCoinPrice }) => {
+    return (
+        <>
+            <PriceUSDT title1={'Price'} title2={`(${'USDT'})`} title3={'Amount'} title4={`(${'ETH'})`} />
+            <Spacer height={hp(0.5)} />
+            <BuyOrder data={orderBook} textColor={colors.green} />
+            <Spacer height={hp(1)} />
+            <Line height={hp(0.1)} />
+            <Spacer height={hp(1)} />
+            <View style={appStyles.row}>
+                <ResponsiveText style={styles.priceText}>{cureentCoinPrice}</ResponsiveText>
+                <ResponsiveText style={styles.priceText2}>≈{cureentCoinPrice}</ResponsiveText>
+            </View>
+            <Spacer height={hp(1)} />
+            <Line height={hp(0.1)} />
+            <Spacer height={hp(1)} />
+            <SellOrder data={orderBook} />
+        </>
+    )
+}
+
 export const SellOrder = ({ data = [], textColor, marketData }) => {
     return (
         <FlatList
@@ -390,7 +411,7 @@ export const SellOrder = ({ data = [], textColor, marketData }) => {
 };
 
 
-export const PriceUSDT = ({ title1, title2, title3, title4 }) => {
+const PriceUSDT = ({ title1, title2, title3, title4 }) => {
     return (
         <View style={appStyles.row}>
             <View>
@@ -586,6 +607,7 @@ export const AssetsComponent = (data = coinData) => {
 
     )
 }
+
 export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, setTradingTypePress }) => {
     return (
         <BottomSheet height={hp(40)} ref={ref} >
@@ -651,9 +673,7 @@ export const FavoutiteBottomSheetComponnet = ({ ref, marketData, value, onchange
             />
         </BottomSheet>
     )
-
 }
-
 
 const styles = StyleSheet.create({
     header: {
@@ -777,9 +797,6 @@ const styles = StyleSheet.create({
         textAlign: "right",
         fontFamily: fontFamily.appTextMedium
     },
-
-
-
     orderBookView2: {
         width: wp(43),
         flexDirection: "row",
@@ -908,8 +925,15 @@ const styles = StyleSheet.create({
         borderRadius: wp(3),
         borderWidth: 1,
         borderColor: colors.cardBorderColor,
-    }
-
-
-
+    },
+    priceText: {
+        fontSize: 20,
+        fontFamily: fontFamily.appTextBold,
+        color: colors.red,
+    },
+    priceText2: {
+        fontSize: 13,
+        fontFamily: fontFamily.appTextMedium,
+        color: colors.iconColor,
+    },
 })

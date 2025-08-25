@@ -20,8 +20,8 @@ export const style = StyleSheet.create({
         width: wp(90),
         // borderWidth: 1,
         // borderColor: "white",
-        height:hp(55),
-        alignSelf:"center"
+        height: hp(55),
+        alignSelf: "center"
     },
 
     formContainer: {
@@ -32,8 +32,6 @@ export const style = StyleSheet.create({
         // flex: 1,
         // marginLeft: 5,
     },
-
-
     widthView: {
         width: wp(37)
     },
