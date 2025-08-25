@@ -8,7 +8,6 @@ import Spacer, { HorizontalSpacer } from '../../../../components/Spacer'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import { colors, fontFamily } from '../../../../constants'
 import { SimpleButton } from '../../../../components/SimpleButton'
-import { OrderHistoryData } from '../../../../utilities/dummyData'
 import Entypo from "react-native-vector-icons/FontAwesome6"
 import Feather from 'react-native-vector-icons/Feather';
 import moment from 'moment'

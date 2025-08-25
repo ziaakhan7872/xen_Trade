@@ -380,23 +380,6 @@ export const UseExchange = (props) => {
     getAvailableBalanceBase()
   }, [selectedData])
 
-
-
-  // const getOrder = async () => {
-  //   try {
-  //     const payload = {
-  //       page: 1,
-  //       size: 20,
-  //       orderDir: "desc"
-  //     }
-  //     const history = await getCurrentOrder(payload)
-  //     setCurrentOrder(history?.data?.Orders)
-  //     console.log(history, "history of current order")
-  //   } catch (error) {
-  //     console.log(error, "error in history of orders")
-  //   }
-  // }
-
   const getOrder = async () => {
     try {
       const payload = { page: 1, size: 20, orderDir: 'desc' };

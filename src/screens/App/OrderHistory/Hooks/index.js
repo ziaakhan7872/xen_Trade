@@ -38,7 +38,7 @@ export const useOrderHistory = () => {
             console.log('orders count:', items.length);
         } catch (error) {
             console.log('error in history of orders', error);
-            setOrderHistory([]); // if API gives error so it will show empty
+            setOrderHistory([]); // if API gives error then it will show empty
         }
     }
 
