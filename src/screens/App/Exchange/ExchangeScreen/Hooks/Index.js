@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react"
-import { GetAccountBalanceMyMarket, getPairApi, PlaceOrder } from "../../../../../Backend/Api/Index"
+import { use, useEffect, useRef, useState } from "react"
+import { DeleteCurrentOrder, GetAccountBalanceMyMarket, getCurrentCoinPrice, getCurrentOrder, getOrderBookApi, getPairApi, PlaceOrder } from "../../../../../Backend/Api/Index"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useSelector } from "react-redux"
 import BigNumber from 'bignumber.js';
@@ -21,7 +21,7 @@ export const UseExchange = (props) => {
   const [buyerSlider, setBuyerSlider] = useState(0);
   const [sellSlider, setSelSlider] = useState(0);
   const [currentOrderHistoryPress, setCurrentOrderHistoryPress] = useState("currentOrder");
-  const [currentOrder, setCurrentOrder] = useState(0)
+  const [currentOrder, setCurrentOrder] = useState([])
   const [isCurrentSymbol, setIsCurrentSymbol] = useState(false)
   const [tradingType, setTradingType] = useState("limit")
   const [pairs, setPairs] = useState([])
@@ -30,12 +30,18 @@ export const UseExchange = (props) => {
   const [availableBaseBalance, setAvailableBaseBalance] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(0);
+  const [sellPrice, setSellPrice] = useState(0)
+  const [sellQuantity, setSellQuantity] = useState(1);
   const [cureentCoinPrice, setCurrentCoinPrice] = useState(22976.27)
   const [stage, setStage] = useState(0);
   const [orderBook, setOrderBook] = useState({})
   const [Page, setPage] = useState(1)
   const [searchText, setSearchText] = useState("")
   const [currentSubscription, setCurrentSubscription] = useState(null)
+  const [errorMessage, setErrorMessage] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [newCurrentCoinPrice, setNewCurrentCoinPrice] = useState(0)
+  // const [current]
 
 
 
@@ -51,7 +57,7 @@ export const UseExchange = (props) => {
     }
     if (currentSubscription) {
       currentSubscription?.unsubscribe();
-      setCurrentSubscription(null); 
+      setCurrentSubscription(null);
     }
     sub.on("subscribed", (ctx) => {
       console.log(`Subscribed to ${channelName}`, ctx);
@@ -82,13 +88,91 @@ export const UseExchange = (props) => {
 
       socketRef.current = null;
     };
-  }, [centrifugueBuild, selectedData?.symbol]);
+  }, [centrifugueBuild, selectedData]);
 
 
 
   useEffect(() => {
-    setPrice(quantity * cureentCoinPrice);
-  }, []);
+    console.log("centrifugueBuild", centrifugueBuild)
+    const channelName = `${selectedData?.symbol}@trade`;
+
+
+    let sub = centrifugueBuild.getSubscription(channelName)
+
+    if (!sub) {
+      sub = centrifugueBuild.newSubscription(channelName);
+    }
+    if (currentSubscription) {
+      currentSubscription?.unsubscribe();
+      setCurrentSubscription(null);
+    }
+    sub.on("subscribed", (ctx) => {
+      console.log(`Subscribed to ${channelName}`, ctx);
+    });
+
+    sub.on("publication", (ctx) => {
+      console.log("publication to trade ", channelName, ctx?.data);
+      setCurrentCoinPrice(ctx?.data?.p)
+    });
+
+    sub.on("error", (err) => {
+      console.error(`Subscription error on ${channelName}:`, err);
+    });
+
+    sub.on("unsubscribed", () => {
+      // optional
+    });
+
+    if (sub.state !== "subscribed" && sub.state !== "subscribing") {
+      console.log(sub, "subscribing")
+      sub.subscribe();
+      setCurrentSubscription(sub)
+    }
+
+    socketRef.current = sub;
+
+    return () => {
+
+      socketRef.current = null;
+    };
+  }, [centrifugueBuild, selectedData]);
+
+  const getCurrentCinPriceFunction = async () => {
+    try {
+      const pair = selectedData?.symbol
+      const price = await getCurrentCoinPrice({ pair })
+      console.log(price, "current Price")
+      setCurrentCoinPrice(price?.data?.price)
+      setNewCurrentCoinPrice(price?.data?.price)
+
+    } catch (error) {
+      console.log("error in orderBook", error)
+    }
+  }
+
+  const getOrderBook = async () => {
+    try {
+      const pair = selectedData?.symbol
+      const OrderBook = await getOrderBookApi(pair)
+      console.log(OrderBook, "orderBook")
+      setOrderBook(OrderBook?.data?.orderBook)
+
+    } catch (error) {
+      console.log("error in orderBook", error)
+    }
+  }
+
+  useEffect(() => {
+    getCurrentCinPriceFunction()
+    getOrderBook()
+  }, [selectedData])
+
+
+
+  useEffect(() => {
+    setPrice(quantity * newCurrentCoinPrice);
+    setSellPrice(sellQuantity * newCurrentCoinPrice)
+  }, [newCurrentCoinPrice]);
 
 
   const handleBuyPriceChange = (value) => {
@@ -102,12 +186,33 @@ export const UseExchange = (props) => {
     setPrice(value);
 
     const priceBN = new BigNumber(value);
-    const coinPriceBN = new BigNumber(cureentCoinPrice || 0);
+    const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
 
     if (!coinPriceBN.isZero() && !priceBN.isNaN()) {
       const newQuantity = priceBN.dividedBy(coinPriceBN).toString();
       const newQ = new BigNumber(newQuantity).toFormat(6)
       setQuantity(newQ);
+      console.log("New Quantity:", newQuantity);
+    }
+  };
+
+  const handleSellPriceChange = (value) => {
+    if (value === "") {
+      setSellPrice("");
+      setSellQuantity("");
+      return;
+    }
+
+
+    setSellPrice(value);
+
+    const priceBN = new BigNumber(value);
+    const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
+
+    if (!coinPriceBN.isZero() && !priceBN.isNaN()) {
+      const newQuantity = priceBN.dividedBy(coinPriceBN).toString();
+      const newQ = new BigNumber(newQuantity).toFormat(6)
+      setSellQuantity(newQ);
       console.log("New Quantity:", newQuantity);
     }
   };
@@ -125,11 +230,31 @@ export const UseExchange = (props) => {
     if (!regex.test(value)) return;
     setQuantity(value);
     const qtyBN = new BigNumber(value);
-    const coinPriceBN = new BigNumber(cureentCoinPrice || 0);
+    const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
 
     if (!qtyBN.isNaN() && !coinPriceBN.isZero()) {
       const newPrice = qtyBN.multipliedBy(coinPriceBN).toString();
       setPrice(newPrice);
+    }
+  };
+
+
+  const handleSellQuantityChange = (value) => {
+    if (value === "") {
+      setSellQuantity("");
+      setSellPrice("");
+      return;
+    }
+
+    const regex = /^\d*\.?\d{0,6}$/;
+    if (!regex.test(value)) return;
+    setSellQuantity(value);
+    const qtyBN = new BigNumber(value);
+    const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
+
+    if (!qtyBN.isNaN() && !coinPriceBN.isZero()) {
+      const newPrice = qtyBN.multipliedBy(coinPriceBN).toString();
+      setSellPrice(newPrice);
     }
   };
 
@@ -138,7 +263,7 @@ export const UseExchange = (props) => {
     const sliderValue = new BigNumber(value).dividedBy(100);
     const newPrice = availableBalance.multipliedBy(sliderValue).toString();
     setPrice(newPrice);
-    const coinPriceBN = new BigNumber(cureentCoinPrice || 0);
+    const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
     if (!coinPriceBN.isZero() && !new BigNumber(newPrice).isNaN()) {
       const newQuantity = new BigNumber(newPrice).dividedBy(coinPriceBN).toString();
       const formattedQuantity = new BigNumber(newQuantity).toFormat(6);
@@ -148,9 +273,24 @@ export const UseExchange = (props) => {
 
   }
 
+  const handleSellSliderChange = (value) => {
+    const availableBalance = new BigNumber(availableBaseBalance || 0);
+    const sliderValue = new BigNumber(value).dividedBy(100);
+    const newPrice = availableBalance.multipliedBy(sliderValue).toString();
+    setSellPrice(newPrice);
+    const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
+    if (!coinPriceBN.isZero() && !new BigNumber(newPrice).isNaN()) {
+      const newQuantity = new BigNumber(newPrice).dividedBy(coinPriceBN).toString();
+      const formattedQuantity = new BigNumber(newQuantity).toFormat(6);
+      setSellQuantity(formattedQuantity);
+    }
+    setSelSlider(value);
+
+  }
 
 
-  const getPair = async (newPage) => {
+
+  const getPair = async (newPage=1) => {
     try {
       const response = await getPairApi(newPage, 20)
       setPairs(response?.data?.data)
@@ -208,6 +348,13 @@ export const UseExchange = (props) => {
     setQuantity(newValue.toString());
     handleBuyQuantityChange(newValue.toString());
   };
+  const discreaseSellQuantity = () => {
+    const currentQty = new BigNumber(sellQuantity || 0); // Ensure numeric
+    const newValue = currentQty.minus(1);
+    if (newValue.isNegative()) return; // prevent negative
+    setSellQuantity(newValue.toString());
+    handleSellQuantityChange(newValue.toString());
+  };
 
   const addQuantity = () => {
     const currentQty = new BigNumber(quantity || 0);
@@ -215,9 +362,17 @@ export const UseExchange = (props) => {
     setQuantity(newValue.toString());
     handleBuyQuantityChange(newValue.toString());
   };
+  const addSellQuantity = () => {
+    const currentQty = new BigNumber(sellQuantity || 0);
+    const newValue = currentQty.plus(1);
+    setSellQuantity(newValue.toString());
+    handleSellQuantityChange(newValue.toString());
+  };
 
   useEffect(() => {
     getPair()
+    getOrder()
+
   }, [])
 
   useEffect(() => {
@@ -226,21 +381,102 @@ export const UseExchange = (props) => {
   }, [selectedData])
 
 
-  const buyOrder = async () => {
+
+  const getOrder = async () => {
     try {
       const payload = {
-        price: price,
-        quantity: quantity,
+        page: 1,
+        size: 20,
+        orderDir: "desc"
+      }
+      const history = await getCurrentOrder(payload)
+      setCurrentOrder(history?.data?.Orders)
+      console.log(history, "history of current order")
+    } catch (error) {
+      console.log(error, "error in history of orders")
+    }
+  }
+
+
+  const buyOrder = async () => {
+    try {
+      setLoading(true)
+
+      const payload = {
+        price: price.toString(),
+        quantity: quantity.toString(),
         side: "buy",
         symbol: selectedData?.symbol,
         type: tradingType
       }
       const response = await PlaceOrder(payload)
       console.log(response, "place order")
+      if (response?.status == 201) {
+        await getOrder()
+      }
+      setErrorMessage("")
     } catch (error) {
       console.log(error?.response, "error of place order")
+      setErrorMessage(error?.response?.data?.message)
+      setLoading(false)
+    } finally {
+      setLoading(false)
     }
   }
+
+  const sellOrder = async () => {
+    try {
+      setLoading(true)
+
+      const payload = {
+        price: sellPrice.toString(),
+        quantity: sellQuantity.toString(),
+        side: "sell",
+        symbol: selectedData?.symbol,
+        type: tradingType
+      }
+      const response = await PlaceOrder(payload)
+      console.log(response, "place order")
+      if (response?.status === 201) {
+        await getOrder()
+      }
+      setErrorMessage("")
+    } catch (error) {
+      console.log(error?.response, "error of place order")
+      setErrorMessage(error?.response?.data?.message)
+      setLoading(false)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const DeleteOrder = async (item) => {
+    try {
+
+      const ids = item
+        ? [item.id]
+        : currentOrder?.items?.map((i) => i.id) || [];
+
+      console.log("ids to delete:", ids);
+
+      if (!ids.length) {
+        console.log("No order IDs to delete");
+        return;
+      }
+
+      const payload = { orderIds: ids };
+
+      const response = await DeleteCurrentOrder(payload);
+      console.log("Order(s) deleted", response);
+
+      if (response?.status === 200) {
+        await getOrder(); // refresh orders after delete
+      }
+    } catch (error) {
+      console.log(error?.response, "error in delete order api");
+    }
+  };
+
 
 
   return {
@@ -255,12 +491,15 @@ export const UseExchange = (props) => {
     tradingType, setTradingType,
     selectedData, availableBaseBalance, availableQuoteBalance,
     quantity, setQuantity, discreaseQuantity, addQuantity,
-    price, setPrice,
+    sellQuantity, setSellQuantity, discreaseSellQuantity, addSellQuantity,
+    handleSellPriceChange, handleSellQuantityChange, handleSellSliderChange,
+    price, sellPrice,
     cureentCoinPrice, setCurrentCoinPrice,
     handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange,
-    buyOrder, orderBook,
+    buyOrder, orderBook, sellOrder,
     pairs: filteredPair, searchText, setSearchText,
-    setSelectedData
+    setSelectedData, DeleteOrder,
+    errorMessage, loading, newCurrentCoinPrice, setNewCurrentCoinPrice
   }
 }
 

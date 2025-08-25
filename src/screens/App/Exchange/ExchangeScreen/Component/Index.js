@@ -24,7 +24,7 @@ export const ExchangeHeader = ({ onpress, onPressTradeGraph, marketData }) => {
     return (
         <View style={styles.header}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <ResponsiveText style={styles.headerText}>{marketData?.symbol}</ResponsiveText>
+                <ResponsiveText style={styles.headerText}>{marketData?.symbol.toUpperCase()}</ResponsiveText>
                 <HorizontalSpacer />
                 <TouchableOpacity onPress={onpress}>
                     <Entypo name="chevron-down" size={15} color={colors.white} />
@@ -52,7 +52,18 @@ export const BuySellRowButton = ({ buySellButton, setBuySellButton }) => {
     )
 }
 
-export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuyQuantityChange, currentCoinPrice, setCurrentCoinPrice, addQuantity, dicreaseQuantity, quantity, setQuantity, Price, setPrice, QuoteBalance, setValue, value, onPressTradingType, tradingType, marketData, buyOrder }) => {
+export const BuyForm = ({
+    handleBuySliderChange, handleBuyPriceChange, handleBuyQuantityChange,
+    currentCoinPrice, setCurrentCoinPrice,
+    addQuantity, dicreaseQuantity, quantity,
+    Price,
+    QuoteBalance, value,
+    onPressTradingType, tradingType,
+    marketData, buyOrder,
+    errorMessage, loading
+}) => {
+
+
     const marks = [0, 25, 50, 75, 100];
 
     return (
@@ -78,7 +89,7 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
 
                 <TextInput
                     style={{ textAlign: 'center', minWidth: wp(10), maxWidth: wp(30), color: colors.white }}
-                    value={currentCoinPrice ? currentCoinPrice.toString() : "0"}
+                    value={currentCoinPrice ? currentCoinPrice.toString() : ""}
                     onChangeText={setCurrentCoinPrice}
                     keyboardType="numeric"
                     placeholderTextColor={colors.placeHolderTextColor}
@@ -153,8 +164,8 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
                     keyboardType="decimal-pad"
                 />
             </View>
-
-
+            {errorMessage &&
+                <ResponsiveText style={styles.error}>{errorMessage}</ResponsiveText>}
             <Spacer height={hp(1)} />
             <View style={{ width: wp(43), flexDirection: "row", justifyContent: "space-between" }}>
                 <View>
@@ -163,7 +174,7 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
                     {/* <ResponsiveText style={styles.label2}>Fee</ResponsiveText> */}
                 </View>
                 <View>
-                    <ResponsiveText style={[styles.label3, { color: colors.white }]}>{Number(QuoteBalance).toFixed(3)} {marketData?.quote}</ResponsiveText>
+                    <ResponsiveText style={[styles.label3, { color: colors.white }]}>{Number(QuoteBalance).toFixed(3)} {marketData?.quote?.toUpperCase()}</ResponsiveText>
                     <Spacer height={hp(1)} />
                     {/* <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.000342 USDT</ResponsiveText> */}
                 </View>
@@ -173,7 +184,7 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
             <Spacer height={hp(1)} />
             <View style={{ width: wp(43), flexDirection: "row", justifyContent: "space-between" }}>
                 <ResponsiveText style={styles.label2}>Total</ResponsiveText>
-                <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.000342 USDT</ResponsiveText>
+                <ResponsiveText style={[styles.label3, { color: colors.white }]}>{quantity.toString()} {marketData?.base.toUpperCase()}</ResponsiveText>
             </View>
             <Spacer />
             <SimpleButton
@@ -181,8 +192,9 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
                 backgroundColor={colors.green}
                 height={hp(4.5)}
                 textColor={colors.white}
-                text={marketData?.base ? `Buy ${marketData.base}` : 'Buy'}
+                text={marketData?.base ? `Buy ${marketData.base.toUpperCase()}` : 'Buy'}
                 onPress={buyOrder}
+                loading={loading}
             />
 
         </>
@@ -190,12 +202,13 @@ export const BuyForm = ({ handleBuySliderChange, handleBuyPriceChange, handleBuy
     )
 }
 export const SellForm = ({
-    setValue, value,
+    value,
     onPressTradingtype, tradingType,
     marketData,
     currentCoinPrice, setCurrentCoinPrice,
-    dicreaseQuantity, handleBuyQuantityChange, quantity, addQuantity,
-    Price, handleBuyPriceChange
+    dicreaseQuantity, handleSellQuantityChange, quantity, addQuantity,
+    Price, handleSellPriceChange, BaseBalance,
+    handleSellSliderChange, loading, onPress, errorMessage
 }) => {
     const marks = [0, 25, 50, 75, 100];
 
@@ -208,7 +221,15 @@ export const SellForm = ({
             <Spacer height={hp(1)} />
             <View style={[styles.buySellRowView, { paddingHorizontal: wp(3), borderRadius: wp(3) }]}>
 
-                <TouchableOpacity onPress={() => setCurrentCoinPrice(currentCoinPrice - 1)}>
+                <TouchableOpacity onPress={() => {
+                    const newValue = new BigNumber(currentCoinPrice || 0)
+                        .minus(0.1).decimalPlaces(1);
+                    if (newValue.isGreaterThanOrEqualTo(0)) {
+                        setCurrentCoinPrice(newValue.toNumber());
+                    } else {
+                        setCurrentCoinPrice(0);
+                    }
+                }}>
                     <ResponsiveText style={styles.minuePlusText}>-</ResponsiveText>
                 </TouchableOpacity>
 
@@ -220,7 +241,7 @@ export const SellForm = ({
                     placeholderTextColor={colors.placeHolderTextColor}
                 />
 
-                <TouchableOpacity onPress={() => setCurrentCoinPrice(currentCoinPrice + 1)}>
+                <TouchableOpacity onPress={() => setCurrentCoinPrice(BigNumber(currentCoinPrice).plus(0.1).decimalPlaces(1).toNumber())}>
                     <ResponsiveText style={styles.minuePlusText}>+</ResponsiveText>
                 </TouchableOpacity>
             </View>
@@ -234,7 +255,7 @@ export const SellForm = ({
                 <TextInput
                     style={{ textAlign: 'center', minWidth: wp(10), maxWidth: wp(30), color: colors.white }}
                     value={quantity ? quantity.toString() : ""}
-                    onChangeText={handleBuyQuantityChange}
+                    onChangeText={handleSellQuantityChange}
                     placeholder={`Amount ${marketData?.base}`}
                     keyboardType="numeric"
                     placeholderTextColor={colors.placeHolderTextColor}
@@ -251,12 +272,12 @@ export const SellForm = ({
                     style={{ width: wp(45), height: 40 }}
                     minimumValue={0}
                     maximumValue={100}
-                    step={25}
+                    step={1}
                     value={value}
                     minimumTrackTintColor={colors.white}
                     maximumTrackTintColor={colors.cardBorderColor}
                     thumbTintColor={colors.white}
-                    onValueChange={(val) => setValue(val)}
+                    onValueChange={handleSellSliderChange}
                 />
 
                 <View style={styles.tickContainer}>
@@ -273,19 +294,36 @@ export const SellForm = ({
                 </View>
             </View>
             <Spacer height={hp(1)} />
-            <TextInput value={Price ? Price.toString() : ""} onChangeText={handleBuyPriceChange} placeholder={`Amount ${marketData?.quote}`} placeholderTextColor={colors.placeHolderTextColor} style={styles.inputTextStyling} keyboardType='numeric' />
+            <View style={{ width: wp(43), alignItems: 'center', backgroundColor: colors.cardsBgColor, borderRadius: wp(3) }}>
 
+                <TextInput
+                    value={Price ? Price.toString() : ""}
+                    onChangeText={handleSellPriceChange}
+                    placeholder={`Amount ${marketData?.quote}`}
+                    placeholderTextColor={colors.placeHolderTextColor}
+                    style={{
+                        textAlign: 'center',
+                        color: colors.white,
+                        fontSize: 14,
+                        // minWidth: wp(5),
+                        maxWidth: wp(43),
+                    }}
+                    keyboardType="decimal-pad"
+                />
+            </View>
+            {errorMessage &&
+                <ResponsiveText style={styles.error}>{errorMessage}</ResponsiveText>}
             <Spacer height={hp(1)} />
             <View style={{ width: wp(43), flexDirection: "row", justifyContent: "space-between" }}>
                 <View>
                     <ResponsiveText style={styles.label2}>Balance</ResponsiveText>
                     <Spacer height={hp(1)} />
-                    <ResponsiveText style={styles.label2}>Fee</ResponsiveText>
+                    {/* <ResponsiveText style={styles.label2}>Fee</ResponsiveText> */}
                 </View>
                 <View>
-                    <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.0342 USDT</ResponsiveText>
+                    <ResponsiveText style={[styles.label3, { color: colors.white }]}>{Number(BaseBalance).toFixed(3)} {marketData?.base.toUpperCase()}</ResponsiveText>
                     <Spacer height={hp(1)} />
-                    <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.000342 USDT</ResponsiveText>
+                    {/* <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.000342 USDT</ResponsiveText> */}
                 </View>
             </View>
             <Spacer height={hp(1)} />
@@ -296,23 +334,31 @@ export const SellForm = ({
                 <ResponsiveText style={[styles.label3, { color: colors.white }]}>0.000342 USDT</ResponsiveText>
             </View>
             <Spacer />
-            <SimpleButton buttonWidth={wp(43)} backgroundColor={colors.red} height={hp(4.5)} textColor={colors.white} text={`Sell ${marketData?.base}`} />
+            <SimpleButton
+                buttonWidth={wp(43)}
+                backgroundColor={colors.red}
+                height={hp(4.5)}
+                textColor={colors.white}
+                text={`Sell ${marketData?.base.toUpperCase()}`}
+                loading={loading}
+                onPress={onPress}
+            />
 
         </>
 
     )
 }
 
-export const BuyOrder = ({ data, textColor }) => {
+export const BuyOrder = ({ data, textColor, marketData }) => {
     return (
         <FlatList
-            data={data?.buy_orders}
+            data={data?.buy_orders || data?.buyOrders}
             scrollEnabled={false}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
                 <View style={{ ...appStyles.row, paddingVertical: 2 }}>
                     <ResponsiveText style={{ ...styles.textFlatList, color: textColor ?? colors.red }}>
-                        {item.price}
+                        {BigNumber(item?.price ?? 0).toFormat(marketData?.pricePrecision ?? 2)}
                     </ResponsiveText>
                     <ResponsiveText style={styles.textFlatList1}>
                         {item.quantity}
@@ -323,16 +369,16 @@ export const BuyOrder = ({ data, textColor }) => {
     );
 };
 
-export const SellOrder = ({ data = [], textColor }) => {
+export const SellOrder = ({ data = [], textColor, marketData }) => {
     return (
         <FlatList
-            data={data?.sell_orders}
+            data={data?.sell_orders || data?.sellOrders}
             scrollEnabled={false}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
                 <View style={{ ...appStyles.row, paddingVertical: 2 }}>
                     <ResponsiveText style={{ ...styles.textFlatList, color: textColor ?? colors.red }}>
-                        {item.price}
+                        {BigNumber(item?.price ?? 0).toFormat(marketData?.pricePrecision ?? 2)}
                     </ResponsiveText>
                     <ResponsiveText style={styles.textFlatList1}>
                         {item.quantity}
@@ -361,10 +407,10 @@ export const PriceUSDT = ({ title1, title2, title3, title4 }) => {
 
 export const CurrentOrderHistoryHeader = ({ props, buttonPress, setButtonPress, currentOrders }) => {
     return (
-        <View style={[appStyles.row, { width: wp(90), alignSelf: "center" }]}>
+        <View style={[appStyles.row, { width: wp(90), alignSelf: "center", alignItems: "center" }]}>
             <View style={{ flexDirection: "row" }}>
                 <View style={{ alignItems: "center" }}>
-                    <ResponsiveText onPress={() => setButtonPress("currentOrder")} style={[styles.text2, { color: buttonPress === "currentOrder" ? colors.withdrawBtn : colors.iconColor }]} >Current Order ({currentOrders})</ResponsiveText>
+                    <ResponsiveText onPress={() => setButtonPress("currentOrder")} style={[styles.text2, { color: buttonPress === "currentOrder" ? colors.withdrawBtn : colors.iconColor }]} >Current Order ({currentOrders?.length ? currentOrders?.length : "0"})</ResponsiveText>
                     <Spacer customHeight={hp(0.5)} />
                     {buttonPress === "currentOrder" && (
                         <View style={{ height: 2, width: '80%', backgroundColor: colors.withdrawBtn, borderRadius: 1 }} />)}
@@ -383,100 +429,108 @@ export const CurrentOrderHistoryHeader = ({ props, buttonPress, setButtonPress, 
         </View>
     );
 };
-export const CurrentOrderComponent = ({ isCurrentSymbol, setIsCurrentSymbol }) => {
+
+export const CurrentOderComponentHeader = ({ isCurrentSymbol, setIsCurrentSymbol, CancelAllPress }) => {
     return (
-        <>
-            <View style={[appStyles.row, { width: wp(90), alignSelf: "center" }]}>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <TouchableOpacity onPress={() => setIsCurrentSymbol(!isCurrentSymbol)} >
-                        {isCurrentSymbol ? (
-                            <Image source={images.checkBox} style={[styles.images, { width: wp(6), height: wp(6) }]} />
-                        ) : (
-                            <Icon name="square" size={25} color={colors.white} />
-                        )}
-                    </TouchableOpacity>
-                    <HorizontalSpacer />
-                    <ResponsiveText style={styles.text4}>Current Symbol</ResponsiveText>
-                </View>
+        <View style={[appStyles.row, { width: wp(90), alignSelf: "center" }]}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <TouchableOpacity onPress={() => setIsCurrentSymbol(!isCurrentSymbol)} >
+                    {isCurrentSymbol ? (
+                        <Image source={images.checkBox} style={[styles.images, { width: wp(6), height: wp(6) }]} />
+                    ) : (
+                        <Icon name="square" size={25} color={colors.white} />
+                    )}
+                </TouchableOpacity>
+                <HorizontalSpacer />
+                <ResponsiveText style={styles.text4}>Current Symbol</ResponsiveText>
+            </View>
+            <TouchableOpacity onPress={() => CancelAllPress()}>
                 <ResponsiveText style={styles.text5}>Cancel all</ResponsiveText>
 
-            </View>
+            </TouchableOpacity>
+
+        </View>
+
+    )
+}
+export const CurrentOrderComponent = ({ orders, OnpressDelete }) => {
+    return (
+        <>
+
             <View style={{ alignSelf: "center" }}>
                 <Spacer />
-                {(DummyCurrentSymbol && DummyCurrentSymbol.length > 0 ? (
-                    <FlatList
-                        data={DummyCurrentSymbol}
-                        keyExtractor={(item, index) => item.id}
-                        scrollEnabled
-                        nestedScrollEnabled
-                        ItemSeparatorComponent={(
-                            <Spacer height={hp(1)} />
-                        )}
-                        renderItem={({ item }) => (
-                            <View style={styles.OrderMainView}>
-                                <View style={styles.orderMainSubView} >
-                                    <View>
-                                        <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                            <ResponsiveText style={styles.text6}>{item.name}</ResponsiveText>
-                                            <HorizontalSpacer />
-                                            <TouchableOpacity>
-                                                <Entypo name="chevron-right" size={20} color={colors.white} />
-
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                            <ResponsiveText style={[styles.text1, { color: item.type === "Buy" ? colors.green : colors.red }]}>{item.marketType}</ResponsiveText>
-                                            <HorizontalSpacer />
-                                            <ResponsiveText style={[styles.text1, { color: item.type === "Buy" ? colors.green : colors.red }]}>{item.type}</ResponsiveText>
-                                            <HorizontalSpacer />
-                                            <ResponsiveText style={[styles.text5]}>{moment(item.time, "MM/DD, HH:mm:ss").format("MM/DD, HH:mm:ss")}</ResponsiveText>
-
-                                        </View>
-                                    </View>
-                                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                        <TouchableOpacity>
-                                            <Feather name="edit" size={20} color={colors.white} />
-                                        </TouchableOpacity>
-                                        <HorizontalSpacer />
-                                        <Line height={hp(2)} width={wp(1)} />
-                                        <HorizontalSpacer />
-                                        <ResponsiveText style={styles.buySellButtonText}>Cancel</ResponsiveText>
-                                    </View>
-
-                                </View>
-                                <View style={styles.orderMainSubView}>
-                                    <View>
-                                        <ResponsiveText style={[styles.text5, { fontFamily: fontFamily.appTextMedium }]}>Order Amount {item.symbol}</ResponsiveText>
-                                        <Spacer height={hp(0.5)} />
-                                        <ResponsiveText style={styles.text7}>{item.OrderAmount}</ResponsiveText>
-
-                                    </View>
-                                    <View>
-                                        <ResponsiveText style={[styles.text5, { fontFamily: fontFamily.appTextMedium }]}>Filled {item.symbol}</ResponsiveText>
-                                        <Spacer height={hp(0.5)} />
-                                        <ResponsiveText style={styles.text7}>{item.Filled}</ResponsiveText>
-                                    </View>
-                                    <View>
-                                        <ResponsiveText style={[styles.text5, { fontFamily: fontFamily.appTextMedium }]}>Order Price</ResponsiveText>
-                                        <Spacer height={hp(0.5)} />
-                                        <ResponsiveText style={styles.text7}>{item.OrderPrice}</ResponsiveText>
-                                    </View>
-                                </View>
-                            </View>
-
-                        )}
-                    />
-                ) : (
-                    <>
-                        <Spacer />
-                        <View style={{ alignItems: "center" }}>
+                <FlatList
+                    data={orders}
+                    keyExtractor={(item, index) => item.id}
+                    scrollEnabled
+                    nestedScrollEnabled
+                    ItemSeparatorComponent={(
+                        <Spacer height={hp(1)} />
+                    )}
+                    ListEmptyComponent={
+                        <View style={{ alignItems: "center", marginTop: hp(4) }}>
                             <Image source={images.openOrder} style={styles.images} />
                             <Spacer height={hp(1)} />
                             <ResponsiveText style={styles.text4}>No open orders</ResponsiveText>
                         </View>
+                    }
+                    renderItem={({ item }) => (
+                        <View style={styles.OrderMainView}>
+                            <View style={styles.orderMainSubView} >
+                                <View>
+                                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                        <ResponsiveText style={styles.text6}>{item?.pair?.toUpperCase()}</ResponsiveText>
+                                        <HorizontalSpacer />
+                                        <TouchableOpacity>
+                                            <Entypo name="chevron-right" size={20} color={colors.white} />
 
-                    </>
-                ))}
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                        <ResponsiveText style={[styles.text1, { color: item.side === "buy" ? colors.green : colors.red }]}>{item?.side?.toUpperCase()}</ResponsiveText>
+                                        <HorizontalSpacer />
+                                        <ResponsiveText style={[styles.text1, { color: item.side === "buy" ? colors.green : colors.red }]}>{item.type}</ResponsiveText>
+                                        <HorizontalSpacer />
+                                        <ResponsiveText style={[styles.text5]}>{moment(item?.updatedAt).format("MM/DD, HH:mm:ss")}</ResponsiveText>
+
+                                    </View>
+                                </View>
+                                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                    <TouchableOpacity>
+                                        <Feather name="edit" size={20} color={colors.white} />
+                                    </TouchableOpacity>
+                                    <HorizontalSpacer />
+                                    <Line height={hp(2)} width={wp(1)} />
+                                    <HorizontalSpacer />
+                                    <TouchableOpacity onPress={() => OnpressDelete(item)}>
+                                        <ResponsiveText style={styles.buySellButtonText}>Cancel</ResponsiveText>
+                                    </TouchableOpacity>
+                                </View>
+
+                            </View>
+                            <View style={styles.orderMainSubView}>
+                                <View>
+                                    <ResponsiveText style={[styles.text5, { fontFamily: fontFamily.appTextMedium }]}>Order Amount {item?.base?.toUpperCase()}</ResponsiveText>
+                                    <Spacer height={hp(0.5)} />
+                                    <ResponsiveText style={styles.text7}>{item?.quantity}</ResponsiveText>
+
+                                </View>
+                                <View>
+                                    <ResponsiveText style={[styles.text5, { fontFamily: fontFamily.appTextMedium }]}>Filled {item?.base?.toUpperCase()}</ResponsiveText>
+                                    <Spacer height={hp(0.5)} />
+                                    <ResponsiveText style={styles.text7}>{item?.executedQty || "0"}</ResponsiveText>
+                                </View>
+                                <View>
+                                    <ResponsiveText style={[styles.text5, { fontFamily: fontFamily.appTextMedium }]}>Order Price</ResponsiveText>
+                                    <Spacer height={hp(0.5)} />
+                                    <ResponsiveText style={styles.text7}>{item?.price}</ResponsiveText>
+                                </View>
+                            </View>
+                        </View>
+
+                    )}
+                />
+
 
             </View>
         </>
@@ -545,7 +599,10 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
                 <Line height={hp(0.1)} />
                 <Spacer />
                 <View style={{ paddingHorizontal: wp(5) }}>
-                    <TouchableOpacity onPress={() => setTradingTypePress("limit")} style={styles.bottomSheetButtonView}>
+                    <TouchableOpacity onPress={() => {
+                        setTradingTypePress("limit")
+                        ref?.current?.close();
+                    }} style={styles.bottomSheetButtonView}>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Image source={images.marketOrder} style={styles.Images3} />
                             <HorizontalSpacer width={wp(2)} />
@@ -560,7 +617,10 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
                         )}
                     </TouchableOpacity>
                     <Spacer />
-                    <TouchableOpacity onPress={() => setTradingTypePress("market")} style={styles.bottomSheetButtonView}>
+                    <TouchableOpacity onPress={() => {
+                        setTradingTypePress("market")
+                        ref?.current?.close();
+                    }} style={styles.bottomSheetButtonView}>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Image source={images.Limit} style={styles.Images3} />
                             <HorizontalSpacer width={wp(3)} />
@@ -702,6 +762,12 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: "500",
         color: colors.iconColor,
+        fontFamily: fontFamily.appTextMedium
+    },
+    error: {
+        fontSize: 12,
+        fontWeight: "500",
+        color: colors.red,
         fontFamily: fontFamily.appTextMedium
     },
     label3: {

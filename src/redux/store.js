@@ -1,7 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persistReducer, persistStore } from "redux-persist";
-import userReducer from "./slices/userSlice";
+import userReducer, { logoutUser } from "./slices/userSlice";
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -46,4 +46,9 @@ export const getAuthToken = () => {
 export const getRefreshToken = () => {
   const state = store.getState();
   return state?.user?.refreshToken || '';
+};
+
+export const performLogout = async () => {
+  store.dispatch(logoutUser());   // clear redux state
+  await persistor.purge();        // clear persisted storage
 };

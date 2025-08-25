@@ -34,7 +34,7 @@ export const TradeHeader = ({ onpress, onPressTradeGraph, X = 10, starPress, set
                     <Entypo name="chevron-left" size={15} color={colors.white} />
                 </TouchableOpacity>
                 <HorizontalSpacer />
-                <ResponsiveText style={styles.headerText}>{marketData?.symbol}</ResponsiveText>
+                <ResponsiveText style={styles.headerText}>{marketData?.symbol?.toUpperCase()}</ResponsiveText>
                 <HorizontalSpacer />
                 <View style={styles.XView}>
                     <ResponsiveText style={styles.text1}>{X}x</ResponsiveText>
@@ -65,7 +65,7 @@ export const TradeHeader = ({ onpress, onPressTradeGraph, X = 10, starPress, set
     )
 }
 
-export const CoinPriceDetail = ({ coinPrice = "91,759.22", coinUp = "+0.28%", No = "1", position = "Top", HLow = "89,355.57", HHigh = "92,630.87", coinName = "BTC", Volum = "27,709.81", HChange = "+0.02%" }) => {
+export const CoinPriceDetail = ({ coinPrice, coinUp = "+0.28%", No = "1", position = "Top", HLow = "89,355.57", HHigh = "92,630.87", coinName = "BTC", Volum = "27,709.81", HChange = "+0.02%" }) => {
     return (
         <View style={styles.coinPriceDetailView}>
             <View style={styles.coinPriceDetailFirstView}>
@@ -120,14 +120,20 @@ export const CoinPriceDetail = ({ coinPrice = "91,759.22", coinUp = "+0.28%", No
     )
 }
 
-export const TradeGraphHeader = ({ onPressTradeGraph }) => {
+export const TradeGraphHeader = ({ onPressTradeGraph, timeInterval, setTimeInterval }) => {
     return (
         <View style={styles.header}>
             <View style={{ width: wp(55), flexDirection: "row", justifyContent: "space-between" }}>
-                <ResponsiveText style={styles.text8}>5m</ResponsiveText>
-                <ResponsiveText style={styles.text8}>1h</ResponsiveText>
-                <ResponsiveText style={styles.text8}>30m</ResponsiveText>
-                <ResponsiveText style={styles.text8}>1h</ResponsiveText>
+                <TouchableOpacity onPress={() => setTimeInterval("5m")}>
+                    <ResponsiveText style={[styles.text8, { color: timeInterval === "5m" ? colors.mainColor : colors.iconColor }]}>5m</ResponsiveText>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setTimeInterval("1h")}>
+                    <ResponsiveText style={[styles.text8, { color: timeInterval === "1h" ? colors.mainColor : colors.iconColor }]}>1h</ResponsiveText>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setTimeInterval("30m")}>
+                    <ResponsiveText style={[styles.text8, { color: timeInterval === "30m" ? colors.mainColor : colors.iconColor }]}>30m</ResponsiveText>
+                </TouchableOpacity>
+
                 <TouchableOpacity style={{ flexDirection: "row", alignItems: "center" }}>
                     <ResponsiveText style={styles.text8}>More</ResponsiveText>
                     <HorizontalSpacer />
@@ -154,7 +160,7 @@ const calculateYPosition = (price, minPrice, maxPrice) => {
     return hp(30) * (1 - normalizedPrice);
 };
 
-export const ExchangeInnerHeader = () => {
+export const ExchangeInnerHeader = ({ marketData }) => {
     return (
         <View style={styles.tradingHeader}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -163,7 +169,7 @@ export const ExchangeInnerHeader = () => {
                 <View style={{ width: wp(1), height: wp(1), borderRadius: wp(0.5), backgroundColor: colors.iconColor }} />
                 <HorizontalSpacer />
 
-                <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>BTC/USDT</ResponsiveText>
+                <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>{marketData?.symbol?.toUpperCase()}</ResponsiveText>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <HorizontalSpacer />
                     <ResponsiveText style={[styles.text6, { fontWeight: "400" }]}>O</ResponsiveText>
@@ -198,8 +204,8 @@ export const TradeGraph = ({ data }) => {
     const maxPrice = Math.max(...data.map(c => c.high));
     const minPrice = Math.min(...data.map(c => c.low));
     const CANDLE_W = wp(3.1);
-    const GAP = wp(1);                
-    const SIDE_PAD = GAP * 4;           
+    const GAP = wp(1);
+    const SIDE_PAD = GAP * 4;
 
     const CHART_W = Math.max(width, data.length * (CANDLE_W + GAP));
 
@@ -213,7 +219,7 @@ export const TradeGraph = ({ data }) => {
                     showsHorizontalScrollIndicator={false}
                 >
                     <View >
-                    <View style={{ paddingHorizontal:wp(5)}}>
+                        <View style={{ paddingHorizontal: wp(5) }}>
                             <CandlestickChart.Provider data={data}>
                                 <CandlestickChart width={CHART_W} height={hp(30)} >
                                     <CandlestickChart.Candles
@@ -226,12 +232,12 @@ export const TradeGraph = ({ data }) => {
                         </View>
 
 
-                        <View style={{ flexDirection: 'row' ,paddingHorizontal:wp(5)}}>
+                        <View style={{ flexDirection: 'row', paddingHorizontal: wp(5) }}>
                             <ResponsiveText style={[styles.text6, { fontWeight: '400' }]}>Volume SMA 9 </ResponsiveText>
                             <ResponsiveText style={[styles.text6, { fontWeight: '400', color: colors.green }]}>$223K</ResponsiveText>
                         </View>
 
-                        <View style={{ marginTop: hp(1), width: CHART_W,paddingHorizontal:wp(2) }}>
+                        <View style={{ marginTop: hp(1), width: CHART_W, paddingHorizontal: wp(2) }}>
                             <BarChart
                                 data={data.map(d => ({
                                     value: d.volume,
@@ -440,10 +446,15 @@ export const BuySellButton = ({ onBuyPress, onSellPress }) => {
     )
 }
 
-export const FavoutiteBottomSheetComponnet = ({ ref }) => {
+export const FavoutiteBottomSheetComponnet = ({ ref, marketData, value, onchangeText, onPress }) => {
     return (
-        <BottomSheet ref={ref}>
-            <RenderFavouriteCoinList />
+        <BottomSheet height={hp(70)} ref={ref}>
+            <RenderFavouriteCoinList
+                value={value}
+                onchangeText={onchangeText}
+                marketData={marketData}
+                onPress={onPress}
+            />
         </BottomSheet>
     )
 

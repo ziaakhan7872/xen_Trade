@@ -27,7 +27,7 @@ const UseSignUp = (props) => {
       .required('Email is required'),
 
     password: Yup.string()
-      .min(8, 'Password must be at least 6 characters')
+      .min(8, 'Password must be at least 8 characters')
       .matches(/[a-z]/, 'Password must include at least one lowercase letter')
       .matches(/[A-Z]/, 'Password must include at least one uppercase letter')
       .matches(/\d/, 'Password must include at least one number')

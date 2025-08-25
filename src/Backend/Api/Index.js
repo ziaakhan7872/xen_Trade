@@ -3,6 +3,8 @@ import { ACCOUNTS_SERVICE_BASE_URL, ASSETS_MANAGER_BASE_URL, ASSETS_MANAGER_BASE
 import { apiRequest } from "./mainService";
 
 
+
+
 export const SignUpApi = async (payload) => {
     return axios.post(`${AUTH_BASE_URL}/auth/signup`, payload)
 }
@@ -242,17 +244,73 @@ export const getWithdrawlsHistory = async (payload) => {
     }
 }
 
-export const getOrderBook = async (payload) => {
+export const getOrderBookApi = async (payload) => {
     try {
         return apiRequest({
             method: "GET",
-            url: `${TRADING_SERVICE_BASE_URL}/orderbook/`,
+            url: `${TRADING_SERVICE_BASE_URL}/orderbook/${payload}`,
+            // params: payload,
+            isAuth: true,
+        });
+
+    } catch (error) {
+        console.log(error, "orderBook  Api  error")
+    }
+}
+export const getCurrentOrder = async (payload) => {
+    try {
+        return apiRequest({
+            method: "GET",
+            url: `${TRADING_SERVICE_BASE_URL}/orders`,
             params: payload,
             isAuth: true,
         });
 
     } catch (error) {
-        console.log(error, "getWithdrawlsHistory Api  error")
+        console.log(error, "orderBook  Api  error")
+    }
+}
+
+export const getCurrentCoinPrice = async (payload) => {
+    try {
+        return apiRequest({
+            method: "GET",
+            url: `${TRADING_SERVICE_BASE_URL}/trades/latest`,
+            params: payload,
+            isAuth: true,
+        });
+
+    } catch (error) {
+        console.log(error, "currentCOin Price  Api  error")
+    }
+}
+
+export const getGraphChartApi = async (payload) => {
+    try {
+        return apiRequest({
+            method: "GET",
+            url: `${TRADING_SERVICE_BASE_URL}/klines`,
+            params: payload,
+            isAuth: true,
+        });
+
+    } catch (error) {
+        console.log(error, "graphchart  Api  error")
+    }
+}
+
+export const DeleteCurrentOrder = async (payload) => {
+    console.log(payload)
+    try {
+        return apiRequest({
+            method: "DELETE",
+            url: `${TRADING_SERVICE_BASE_URL}/orders`,
+            data: payload,
+            isAuth: true,
+        });
+
+    } catch (error) {
+        console.log(error, "orderBook  Api  error")
     }
 }
 
