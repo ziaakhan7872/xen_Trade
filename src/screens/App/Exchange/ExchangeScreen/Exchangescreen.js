@@ -16,24 +16,7 @@ import { BuySellSkeleton, OrderBookSkeleton, OrdersSkeleton } from '../../../../
 
 import { BuyOrder, BuySellRowButton, CurrentOrderHistoryHeader, ExchangeHeader, FlatlistValues, PriceUSDT, SellOrder } from './Component/Index';
 
-const BuyForm = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.BuyForm }))
-);
-const SellForm = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.SellForm }))
-);
-const CurrentOrderComponent = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.CurrentOrderComponent }))
-);
-const AssetsComponent = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.AssetsComponent }))
-);
-const TradingTypeComponent = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.TradingTypeComponent }))
-);
-const FavoutiteBottomSheetComponnet = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.FavoutiteBottomSheetComponnet }))
-);
+import { BuyForm, SellForm, CurrentOrderComponent, AssetsComponent, TradingTypeComponent, FavoutiteBottomSheetComponnet } from './Component/Index';
 
 
 
@@ -52,7 +35,7 @@ const Exchangescreen = (props) => {
     quantity, setQuantity, discreaseQuantity, addQuantity,
     cureentCoinPrice, setCurrentCoinPrice,
     handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange,
-    buyOrder, orderBook, pairs, searchText, setSearchText,setSelectedData
+    buyOrder, orderBook, pairs, searchText, setSearchText, setSelectedData
   } = UseExchange(props)
 
 
@@ -85,7 +68,8 @@ const Exchangescreen = (props) => {
                       Price={price}
                       setPrice={setPrice}
                       currentCoinPrice={cureentCoinPrice}
-                      setCurrentCoinPrice={setCurrentCoinPrice}
+                      // setCurrentCoinPrice={setCurrentCoinPrice}
+                      setCurrentCoinPrice={''}
                       addQuantity={addQuantity}
                       dicreaseQuantity={discreaseQuantity}
                       quantity={quantity}
@@ -177,13 +161,13 @@ const Exchangescreen = (props) => {
             value={searchText}
             onchangeText={setSearchText}
             marketData={pairs}
-            ref={favouriteBottomSheetRef} 
-            onPress={(item)=>{
+            ref={favouriteBottomSheetRef}
+            onPress={(item) => {
               console.log(item)
               setSelectedData(item)
               favouriteBottomSheetRef?.current?.close()
             }}
-            />
+          />
         </Portal>
         <View >
 

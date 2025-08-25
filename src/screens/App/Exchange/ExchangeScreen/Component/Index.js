@@ -580,7 +580,7 @@ export const TradingTypeComponent = ({ ref, closeBottomSheet, tradingTypePress, 
     )
 }
 
-export const FavoutiteBottomSheetComponnet = ({ ref, marketData, value, onchangeText,onPress }) => {
+export const FavoutiteBottomSheetComponnet = ({ ref, marketData, value, onchangeText, onPress }) => {
     return (
         <BottomSheet height={hp(70)} ref={ref}>
             <RenderFavouriteCoinList
