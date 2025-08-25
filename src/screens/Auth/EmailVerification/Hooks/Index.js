@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react'
-import { EmailVerificationApi, ResendOtpApi } from '../../../../Backend/Api/Index'
+import { EmailVerificationApi, ResendOtpApi, VerificationApi } from '../../../../Backend/Api/Index'
 import { Routes } from '../../../../constants'
 import Toast from 'react-native-toast-message'
+import { channel } from 'diagnostics_channel'
 
 const useEmalVerification = (props) => {
   const previousScreenName = props?.route?.params?.screenName
@@ -33,10 +34,12 @@ const useEmalVerification = (props) => {
         return;
       }
       const payload = {
-        emailOtpCode: Number(otpCode),
+        channel: "email",
+        operation: "signup",
+        otpCode: Number(otpCode),
         userId: userData?.id
       }
-      const response = await EmailVerificationApi(payload);
+      const response = await VerificationApi(payload);
       console.log("Email verification response:", response);
       if (response?.status == 200) {
         emailVerificationBottomSheetRef?.current?.expand()
@@ -60,7 +63,9 @@ const useEmalVerification = (props) => {
     try {
 
       const payload = {
+        channel: "email",
         email: email,
+        operation: "signup",
         userId: userData?.id
       }
 

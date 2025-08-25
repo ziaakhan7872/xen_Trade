@@ -9,14 +9,14 @@ export const SignUpApi = async (payload) => {
     return axios.post(`${AUTH_BASE_URL}/auth/signup`, payload)
 }
 
-export const EmailVerificationApi = async (payload) => {
-    console.log("email ver function", payload)
+export const VerificationApi = async (payload) => {
+    console.log("--VerificationApi function--", payload)
     return axios.post(`${AUTH_BASE_URL}/verifications/otp-code`, payload)
 }
 
-export const LoginVerificationApi = async (payload) => {
-    return axios.post(`${AUTH_BASE_URL}/verifications/login-otp`, payload)
-}
+// export const LoginVerificationApi = async (payload) => {
+//     return axios.post(`${AUTH_BASE_URL}/verifications/login-otp`, payload)
+// }
 
 
 export const LoginApi = async (payload) => {
@@ -192,7 +192,7 @@ export const GetAccountBalanceMyMarket = async (userId, marketId) => {
 }
 
 export const getAccountDetail = async (page, limit, userId) => {
-   
+
 
 
     try {
@@ -315,7 +315,7 @@ export const DeleteCurrentOrder = async (payload) => {
 }
 
 export const PlaceOrder = async (payload) => {
-    console.log(payload,"place order payload")
+    console.log(payload, "place order payload")
     try {
         return apiRequest({
             method: "POST",

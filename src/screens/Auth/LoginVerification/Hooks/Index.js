@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LoginVerificationApi, ResendOtpApi } from '../../../../Backend/Api/Index'
+import { ResendOtpApi, VerificationApi } from '../../../../Backend/Api/Index'
 import { Routes } from '../../../../constants'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../../../../redux/slices/userSlice'
@@ -34,11 +34,13 @@ const UseLoginVerification = (props) => {
         return;
       }
       const payload = {
-        emailOtpCode: Number(code),
+        channel: "email",
+        operation: "login",
+        otpCode: Number(code),
         rememberMe: true,
         userId: userData?.id
       }
-      const response = await LoginVerificationApi(payload);
+      const response = await VerificationApi(payload);
       console.log("Login verification response:", response);
       dispatch(setUser({
         user: response?.data,
@@ -76,7 +78,9 @@ const UseLoginVerification = (props) => {
     try {
 
       const payload = {
+        channel: "email",
         email: userEmail,
+        operation: "login",
         userId: userData?.id
       }
 
