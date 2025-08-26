@@ -57,56 +57,62 @@ export const SkeletionLoader = ({ rows = 5 }) => {
   );
 };
 
-
 export const BuySellSkeleton = () => {
   return (
-    <SkeletonPlaceholder borderRadius={8} highlightColor="#2a2d34" backgroundColor="#1a1d23">
-      <View style={styles.container}>
-        {/* Buy/Sell Tabs */}
-        <View style={{flexDirection:"row",justifyContent:"space-between",alignItems:"center",marginBottom:hp(2)}}>
-          <View style={styles.tab} />
-          <View style={styles.tab} />
+    <SkeletonPlaceholder
+      borderRadius={8}
+      backgroundColor={colors.bottomTabColor}
+      highlightColor={colors.iconColor + '30'}
+    >
+      <View style={styles.bsContainer}>
+        {/* Buy / Sell segmented */}
+        <View style={styles.bsHeaderRow}>
+          <View style={styles.bsSegmentLeft} />
+          <View style={styles.bsSegmentRight} />
         </View>
 
-        {/* Dropdown */}
-        <View style={styles.dropdown} />
+        {/* Order type dropdown (Limit/Market) */}
+        <View style={styles.bsDropdown} />
 
-        {/* Price input with +/- */}
-        <View style={{flexDirection:"row",justifyContent:"space-between",alignItems:"center",marginBottom:hp(2)}}>
-          <View style={styles.squareBtn} />
-          <View style={styles.input} />
-          <View style={styles.squareBtn} />
+        {/* Price row: [-] [input] [+] */}
+        <View style={styles.bsThreeColRow}>
+          <View style={styles.bsSquareBtn} />
+          <View style={styles.bsInput} />
+          <View style={styles.bsSquareBtn} />
         </View>
 
-        {/* Quantity input with +/- */}
-        <View style={{flexDirection:"row",justifyContent:"space-between",alignItems:"center",marginBottom:hp(2),marginTop:hp(1.5)}}>
-          <View style={styles.squareBtn} />
-          <View style={styles.input} />
-          <View style={styles.squareBtn} />
+        {/* Qty row: [-] [input] [+]  */}
+        <View style={[styles.bsThreeColRow, { marginTop: hp(1.2) }]}>
+          <View style={styles.bsSquareBtn} />
+          <View style={styles.bsInput} />
+          <View style={styles.bsSquareBtn} />
         </View>
 
-        {/* Slider */}
-        <View style={[styles.slider, { marginTop: hp(2) }]} />
+        {/* Slider (thin) */}
+        <View style={styles.bsSlider} />
 
-        {/* Balance */}
-        <View style={styles.smallText} />
+        {/* Price preview (full width, single line) */}
+        <View style={styles.bsPricePreview} />
 
-        {/* Total */}
-        <View style={styles.smallText} />
+        {/* Balance / Fees / Total rows */}
+        <View style={styles.bsMetaRow} />
+        <View style={styles.bsMetaRow} />
+        <View style={styles.bsMetaRow} />
 
-        {/* Buy Button */}
-        <View style={styles.bigButton} />
+        {/* CTA button */}
+        <View style={styles.bsCta} />
       </View>
     </SkeletonPlaceholder>
   );
 };
 
+
 export const OrderBookSkeleton = () => {
-  const rows = Array.from({ length: 10 });
+  const rows = Array.from({ length: 5 });
 
   return (
-    <SkeletonPlaceholder borderRadius={4} highlightColor="#2a2d34" backgroundColor="#1a1d23">
-      <View style={{paddingHorizontal: wp(3), paddingVertical: hp(1.5), height:hp(55),}}>
+    <SkeletonPlaceholder borderRadius={4} highlightColor={colors.iconColor + '30'} backgroundColor={colors.bottomTabColor}>
+      <View style={{ paddingHorizontal: wp(3), paddingVertical: hp(1.5), height: hp(55), }}>
         {/* Header */}
         <View style={styles.row}>
           <View style={styles.headerCell} />
@@ -143,8 +149,8 @@ export const OrdersSkeleton = () => {
   const cards = Array.from({ length: 4 }); // how many order boxes you want
 
   return (
-    <SkeletonPlaceholder borderRadius={8} highlightColor="#2a2d34" backgroundColor="#1a1d23">
-      <View style={{paddingHorizontal: wp(3), paddingVertical: hp(1.5)}}>
+    <SkeletonPlaceholder borderRadius={8} highlightColor={colors.iconColor + '30'} backgroundColor={colors.bottomTabColor}>
+      <View style={{ paddingHorizontal: wp(3), paddingVertical: hp(1.5) }}>
         {cards.map((_, i) => (
           <View key={i} style={styles.card} />
         ))}
@@ -156,7 +162,7 @@ export const OrdersSkeleton = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: wp(4),
+    padding: wp(3),
   },
   row: {
     flexDirection: "row",
@@ -165,7 +171,7 @@ const styles = StyleSheet.create({
     marginBottom: hp(2),
   },
   tab: {
-    width: wp(40),
+    width: wp(20),
     height: hp(5),
     borderRadius: 20,
   },
@@ -218,5 +224,75 @@ const styles = StyleSheet.create({
     height: hp(10),   // box height (adjust to match your card size)
     borderRadius: 8,
     marginBottom: hp(1.5),
+  },
+  bsContainer: {
+    paddingHorizontal: wp(2),
+    paddingTop: hp(1.5),
+    paddingBottom: hp(2),
+    borderRadius: 12,
+  },
+  bsHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: hp(1.2),
+  },
+  bsSegmentLeft: {
+    width: wp(22),
+    height: hp(4.8),
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+  },
+  bsSegmentRight: {
+    width: wp(22),
+    height: hp(4.8),
+    marginLeft: wp(2),
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+  bsDropdown: {
+    width: '100%',
+    height: hp(4.6),
+    borderRadius: 10,
+    marginTop: hp(1.2),
+  },
+  bsThreeColRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: hp(1.6),
+  },
+  bsSquareBtn: {
+    width: wp(10),
+    height: hp(4.8),
+    borderRadius: 10,
+  },
+  bsInput: {
+    flex: 1,
+    height: hp(4.8),
+    marginHorizontal: wp(2),
+    borderRadius: 10,
+  },
+  bsSlider: {
+    width: '100%',
+    height: hp(1.6),
+    borderRadius: 10,
+    marginTop: hp(2),
+  },
+  bsPricePreview: {
+    width: '100%',
+    height: hp(3),
+    borderRadius: 8,
+    marginTop: hp(1.4),
+  },
+  bsMetaRow: {
+    width: '65%',
+    height: hp(2.2),
+    borderRadius: 6,
+    marginTop: hp(0.9),
+  },
+  bsCta: {
+    width: '100%',
+    height: hp(5.6),
+    borderRadius: 28,
+    marginTop: hp(2),
   },
 });

@@ -8,7 +8,6 @@ import Spacer, { HorizontalSpacer } from '../../../../components/Spacer'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import { colors, fontFamily } from '../../../../constants'
 import { SimpleButton } from '../../../../components/SimpleButton'
-import { OrderHistoryData } from '../../../../utilities/dummyData'
 import Entypo from "react-native-vector-icons/FontAwesome6"
 import Feather from 'react-native-vector-icons/Feather';
 import moment from 'moment'
@@ -105,12 +104,13 @@ export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, 
     )
 }
 
-export const OrderHistoryList = () => {
+export const OrderHistoryList = ({ orderHistory }) => {
     return (
         <View style={{ alignSelf: "center" }}>
             <Spacer />
             <FlatList
-                data={OrderHistoryData}
+                // data={OrderHistoryData}
+                data={orderHistory}
                 keyExtractor={(item, index) => item.id}
                 ItemSeparatorComponent={(
                     <Spacer height={hp(1)} />
@@ -123,7 +123,7 @@ export const OrderHistoryList = () => {
                         <View style={styles.orderMainSubView} >
                             <View>
                                 <View style={appStyles.rowBasic}>
-                                    <ResponsiveText style={styles.text6}>{item.name}</ResponsiveText>
+                                    <ResponsiveText style={styles.text6}>{item?.pair?.toUpperCase()}</ResponsiveText>
                                     <HorizontalSpacer />
                                     <TouchableOpacity>
                                         <Entypo name="chevron-right" size={20} color={colors.white} />
@@ -131,11 +131,16 @@ export const OrderHistoryList = () => {
                                     </TouchableOpacity>
                                 </View>
                                 <View style={appStyles.rowBasic}>
-                                    <ResponsiveText style={[styles.text1, { color: item.type === "Buy" ? colors.green : colors.red }]}>{item.marketType}</ResponsiveText>
+                                    <ResponsiveText style={[styles.text1, { color: item.side === "buy" ? colors.green : colors.red }]}>{item?.side?.toUpperCase()}</ResponsiveText>
                                     <HorizontalSpacer />
-                                    <ResponsiveText style={[styles.text1, { color: item.type === "Buy" ? colors.green : colors.red }]}>{item.type}</ResponsiveText>
+                                    <ResponsiveText style={[styles.text1, { color: item.side === "buy" ? colors.green : colors.red }]}>{item.type}</ResponsiveText>
                                     <HorizontalSpacer />
-                                    <ResponsiveText style={[styles.text5]}>{moment(item.time, "MM/DD, HH:mm:ss").format("MM/DD, HH:mm:ss")}</ResponsiveText>
+                                    <ResponsiveText style={[styles.text5]}>
+                                        {moment(item?.updatedAt && item.updatedAt !== '0001-01-01T00:00:00Z'
+                                            ? item.updatedAt
+                                            : item?.createdAt
+                                        ).format('MM/DD, HH:mm:ss')}
+                                    </ResponsiveText>
 
                                 </View>
                             </View>
@@ -152,20 +157,20 @@ export const OrderHistoryList = () => {
                         </View>
                         <View style={styles.orderMainSubView}>
                             <View>
-                                <ResponsiveText style={[styles.text5]}>Order Amount {item.symbol}</ResponsiveText>
+                                <ResponsiveText style={[styles.text5]}>Order Amount {item?.base?.toUpperCase()}</ResponsiveText>
                                 <Spacer height={hp(0.5)} />
-                                <ResponsiveText style={styles.text7}>{item.OrderAmount}</ResponsiveText>
+                                <ResponsiveText style={styles.text7}>{item.quantity}</ResponsiveText>
 
                             </View>
                             <View>
-                                <ResponsiveText style={[styles.text5]}>Filled {item.symbol}</ResponsiveText>
+                                <ResponsiveText style={[styles.text5]}>Filled {item?.base?.toUpperCase()}</ResponsiveText>
                                 <Spacer height={hp(0.5)} />
-                                <ResponsiveText style={styles.text7}>{item.Filled}</ResponsiveText>
+                                <ResponsiveText style={styles.text7}>{item?.executedQty || "0"}</ResponsiveText>
                             </View>
                             <View>
                                 <ResponsiveText style={[styles.text5]}>Order Price</ResponsiveText>
                                 <Spacer height={hp(0.5)} />
-                                <ResponsiveText style={styles.text7}>{item.OrderPrice}</ResponsiveText>
+                                <ResponsiveText style={styles.text7}>{item?.price}</ResponsiveText>
                             </View>
                         </View>
                     </View>

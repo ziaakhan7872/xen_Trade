@@ -9,7 +9,7 @@ export const UseLogin = (props) => {
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("")
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
 
   const validationSchema = Yup.object().shape({
@@ -22,7 +22,7 @@ export const UseLogin = (props) => {
       type: 'verificationAlert',
       text1: 'VERIFICATION EMAIL SENT',
       text2: 'Verification code sent to',
-      visibilityTime: 2000,
+      visibilityTime: 1800,
       autoHide: true,
       props: email
     })
@@ -49,7 +49,7 @@ export const UseLogin = (props) => {
 
         setTimeout(() => {
           props?.navigation.navigate(Routes.LoginVerificationScreen, { userData: Login?.data, userEmail: payload?.email })
-        }, 1500)
+        }, 1200)
       }
 
       setEmail("")
@@ -75,7 +75,7 @@ export const UseLogin = (props) => {
         setErrorMessage("Network error, please try again later");
       }
     }
-    finally{
+    finally {
       setLoading(false)
     }
   }

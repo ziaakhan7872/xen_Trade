@@ -290,7 +290,7 @@ export const UseExchange = (props) => {
 
 
 
-  const getPair = async (newPage=1) => {
+  const getPair = async (newPage = 1) => {
     try {
       const response = await getPairApi(newPage, 20)
       setPairs(response?.data?.data)
@@ -380,22 +380,25 @@ export const UseExchange = (props) => {
     getAvailableBalanceBase()
   }, [selectedData])
 
-
-
   const getOrder = async () => {
     try {
-      const payload = {
-        page: 1,
-        size: 20,
-        orderDir: "desc"
-      }
-      const history = await getCurrentOrder(payload)
-      setCurrentOrder(history?.data?.Orders)
-      console.log(history, "history of current order")
+      const payload = { page: 1, size: 20, orderDir: 'desc' };
+      const res = await getCurrentOrder(payload);
+
+      // normalize both cases just in case the backend changes casing
+      const items =
+        res?.data?.Orders?.items ??
+        res?.data?.orders?.items ??
+        []; // fallback to empty
+
+      setCurrentOrder(items);
+      console.log('orders count:', items.length);
     } catch (error) {
-      console.log(error, "error in history of orders")
+      console.log('error in history of orders', error);
+      setCurrentOrder([]); // if API gives error so it will show empty
     }
-  }
+  };
+
 
 
   const buyOrder = async () => {
