@@ -31,40 +31,40 @@ const UseTradeGraphScreen = (props) => {
     },
   ]);
 
-  const selectRandomData = useCallback(() => {
-    setCandleChartData((prevData) => {
-      const lastCandle = prevData[prevData.length - 1];
-      const basePrice = lastCandle.close;
+  // const selectRandomData = useCallback(() => {
+  //   setCandleChartData((prevData) => {
+  //     const lastCandle = prevData[prevData.length - 1];
+  //     const basePrice = lastCandle.close;
 
-      const randomHigh = basePrice + Math.floor(Math.random() * 500);
-      const randomLow = basePrice - Math.floor(Math.random() * 500);
-      const randomOpen = basePrice + Math.floor(Math.random() * 200 - 100);
-      const randomClose = basePrice + Math.floor(Math.random() * 200 - 100);
-      const randomVolume = Math.floor(Math.random() * 200000) + 50000;
+  //     const randomHigh = basePrice + Math.floor(Math.random() * 500);
+  //     const randomLow = basePrice - Math.floor(Math.random() * 500);
+  //     const randomOpen = basePrice + Math.floor(Math.random() * 200 - 100);
+  //     const randomClose = basePrice + Math.floor(Math.random() * 200 - 100);
+  //     const randomVolume = Math.floor(Math.random() * 200000) + 50000;
 
-      const newTimestamp = lastCandle.timestamp + 60 * 1000;
+  //     const newTimestamp = lastCandle.timestamp + 60 * 1000;
 
-      const newCandle = {
-        timestamp: newTimestamp,
-        open: randomOpen,
-        high: randomHigh,
-        low: randomLow,
-        close: randomClose,
-        volume: randomVolume,
-      };
+  //     const newCandle = {
+  //       timestamp: newTimestamp,
+  //       open: randomOpen,
+  //       high: randomHigh,
+  //       low: randomLow,
+  //       close: randomClose,
+  //       volume: randomVolume,
+  //     };
 
-      return [...prevData, newCandle];
-    });
-  }, []);
+  //     return [...prevData, newCandle];
+  //   });
+  // }, []);
 
   // Auto min/max calculation
   const minPrice = useMemo(() => Math.min(...candleChartData.map(c => c.low)), [candleChartData]);
   const maxPrice = useMemo(() => Math.max(...candleChartData.map(c => c.high)), [candleChartData]);
 
-  useEffect(() => {
-    const interval = setInterval(selectRandomData, 10000);
-    return () => clearInterval(interval);
-  }, [selectRandomData]);
+  // useEffect(() => {
+  //   const interval = setInterval(selectRandomData, 10000);
+  //   return () => clearInterval(interval);
+  // }, [selectRandomData]);
 
   const BuyPress = () => {
     props?.navigation?.navigate(Routes.BottomNavigator, { screen: Routes.ExchangeScreen, params: { selectedData, buySellButtonProps: "buy" } });
@@ -84,7 +84,7 @@ const UseTradeGraphScreen = (props) => {
   }, [selectedData])
   useEffect(() => {
     getGraphChartFunction()
-  }, [selectedData,timeInterval])
+  }, [selectedData, timeInterval])
 
   useEffect(() => {
     console.log("centrifugueBuild", centrifugueBuild)
@@ -171,12 +171,25 @@ const UseTradeGraphScreen = (props) => {
         interval: timeInterval
       }
       const response = await getGraphChartApi(payload)
-      console.log(response,"graph response")
+      console.log(response, "graph response")
+      const chartData = formatGraphData(response?.data)
+      setCandleChartData(prev => [...prev, ...chartData]);
     } catch (error) {
-      console.log(error?.response,"error in graph chart function")
+      console.log(error?.response, "error in graph chart function")
     }
   }
 
+  const formatGraphData = (rawData) => {
+    return rawData?.map(item => ({
+      time: Math.floor(item[0]),
+      open: parseFloat(item[1]),
+      high: parseFloat(item[2]),
+      low: parseFloat(item[3]),
+      close: parseFloat(item[4]),
+      volume: parseFloat(item[5]),
+      volumequte: parseFloat(item[7])
+    }))
+  }
 
   return {
     starPress, setStarPress,
