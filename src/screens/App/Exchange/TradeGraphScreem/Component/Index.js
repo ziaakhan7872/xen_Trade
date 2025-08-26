@@ -20,6 +20,7 @@ import { BarChart } from "react-native-gifted-charts";
 import { GorhomBottomSheet } from '../../../../../components/GorhumBottomSheetComponent'
 import { RenderFavouriteCoinList } from '../../Component/Index'
 import BottomSheet from '../../../../../components/BottomSheet'
+import moment from 'moment'
 
 
 
@@ -65,14 +66,15 @@ export const TradeHeader = ({ onpress, onPressTradeGraph, X = 10, starPress, set
     )
 }
 
-export const CoinPriceDetail = ({ coinPrice, coinUp = "+0.28%", No = "1", position = "Top", HLow = "89,355.57", HHigh = "92,630.87", coinName = "BTC", Volum = "27,709.81", HChange = "+0.02%" }) => {
+export const CoinPriceDetail = ({ coinPrice, bullishState, coinUp = "+0.28%", No = "1", position = "Top", HLow = "89,355.57", HHigh = "92,630.87", coinName = "BTC", Volum = "27,709.81", HChange = "+0.02%" }) => {
+    console.log(bullishState, "bullishState in coin price detail")
     return (
         <View style={styles.coinPriceDetailView}>
             <View style={styles.coinPriceDetailFirstView}>
-                <ResponsiveText style={styles.text2}>{coinPrice}</ResponsiveText>
+                <ResponsiveText style={[styles.text2, { color: bullishState ? colors.green : colors.red }]}>{coinPrice}</ResponsiveText>
                 <Spacer height={hp(0.5)} />
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <ResponsiveText style={[styles.text3]}>${coinPrice}</ResponsiveText>
+                    <ResponsiveText style={[styles.text3, { color: bullishState ? colors.green : colors.red }]}>${coinPrice}</ResponsiveText>
                     <HorizontalSpacer />
                     <ResponsiveText style={styles.text4}>{coinUp}</ResponsiveText>
                 </View>
@@ -199,8 +201,6 @@ export const ExchangeInnerHeader = ({ marketData }) => {
 
 export const TradeGraph = ({ data }) => {
 
-    const lastCandle = data[data.length - 1];
-    const currentPrice = lastCandle.close;
     const maxPrice = Math.max(...data.map(c => c.high));
     const minPrice = Math.min(...data.map(c => c.low));
     const CANDLE_W = wp(3.1);
@@ -218,10 +218,11 @@ export const TradeGraph = ({ data }) => {
                     horizontal
                     showsHorizontalScrollIndicator={false}
                 >
-                    <View >
+                    <View>
+                        {/* --- Candle chart --- */}
                         <View style={{ paddingHorizontal: wp(5) }}>
                             <CandlestickChart.Provider data={data}>
-                                <CandlestickChart width={CHART_W} height={hp(30)} >
+                                <CandlestickChart width={CHART_W} height={hp(30)}>
                                     <CandlestickChart.Candles
                                         positiveColor={colors.green}
                                         negativeColor={colors.red}
@@ -231,12 +232,13 @@ export const TradeGraph = ({ data }) => {
                             </CandlestickChart.Provider>
                         </View>
 
-
+                        {/* --- Volume label --- */}
                         <View style={{ flexDirection: 'row', paddingHorizontal: wp(5) }}>
                             <ResponsiveText style={[styles.text6, { fontWeight: '400' }]}>Volume SMA 9 </ResponsiveText>
                             <ResponsiveText style={[styles.text6, { fontWeight: '400', color: colors.green }]}>$223K</ResponsiveText>
                         </View>
 
+                        {/* --- Bar chart --- */}
                         <View style={{ marginTop: hp(1), width: CHART_W, paddingHorizontal: wp(2) }}>
                             <BarChart
                                 data={data.map(d => ({
@@ -252,11 +254,27 @@ export const TradeGraph = ({ data }) => {
                                 xAxisThickness={0}
                             />
                         </View>
+
+                        {/* --- X-axis labels (inside scroll now) --- */}
+                        <View
+                            style={[
+                                appStyles.row,
+                                { width: CHART_W, justifyContent: "space-between", paddingHorizontal: SIDE_PAD },
+                            ]}
+                        >
+                            {data.map((item, index) =>
+                                index % 5 === 0 ? (
+                                    <ResponsiveText key={index} style={styles.xAxisText}>
+                                        {moment(item.timestamp).format("H:mm")}
+                                        {/* example: 9:00, 14:05 */}
+                                    </ResponsiveText>
+                                ) : null
+                            )}
+                        </View>
                     </View>
                 </ScrollView>
 
-                <View style={{ ...styles.lineView1, top: calculateYPosition(currentPrice, minPrice, maxPrice) }} />
-
+                {/* --- Y-axis labels remain fixed --- */}
                 <View style={[styles.yAxisView, { height: hp(30), justifyContent: 'space-between' }]}>
                     {[maxPrice, (maxPrice + minPrice) / 2, minPrice].map((p, i) => (
                         <ResponsiveText key={i} style={styles.yAxisText}>
@@ -266,16 +284,7 @@ export const TradeGraph = ({ data }) => {
                 </View>
             </GestureHandlerRootView>
 
-            {/* X-axis labels must match CHART_W as well */}
-            <View style={[appStyles.row, { width: CHART_W, justifyContent: 'space-between', paddingHorizontal: SIDE_PAD }]}>
-                {data.map((item, index) =>
-                    index % 5 === 0 ? (
-                        <ResponsiveText key={index} style={styles.xAxisText}>
-                            {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                        </ResponsiveText>
-                    ) : null
-                )}
-            </View>
+
 
 
 
@@ -285,6 +294,9 @@ export const TradeGraph = ({ data }) => {
 
     )
 }
+
+
+
 
 export const TradeGraphBelowHeader = ({ onPressTradeGraph }) => {
     return (
@@ -359,52 +371,65 @@ export const PriceUSDT = ({ title1, title2, title3, title4, onpress }) => {
     );
 };
 
-export const FlatlistValues = ({ data = [], textColor }) => {
-    const maxAmount = Math.max(...data.map(item => item.amount));
+
+
+export const BuyOrderBook = ({ data }) => {
+    console.log(data,"data in buy order book")
+const maxAmount = data?.length
+  ? Math.max(...data.map(item => Number(item?.quantity) || 0))
+  : 0;
 
     return (
-        <View style={[appStyles.row, { width: wp(100), paddingHorizontal: wp(4) }]}>
-            <FlatList
+        <FlatList
+            data={data}
+            scrollEnabled={false}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => {
+                const barWidth = (item.quantity / maxAmount) * 100;
+                return (
+                        <View style={{ ...appStyles.row, paddingHorizontal: wp(1), position: "relative", height: hp(4)}}>
+                        <View
+                            style={{
+                                position: 'absolute',
+                                height: '100%',
+                                width: `${barWidth}%`, // dynamic width
+                                backgroundColor: colors.green, // or red based on side
+                                opacity: 0.3,
+                                borderRadius: 0,
+                                alignItems: "flex-end",
+                                right: 0
+                            }}
+                        />
+                        <ResponsiveText style={styles.textFlatList1}>
+                            {item.quantity}
+                        </ResponsiveText>
+                        <ResponsiveText style={{ ...styles.textFlatList, color: colors.green }}>
+                            {item.price}
+                        </ResponsiveText>
+
+                    </View>
+                )
+            }}
+        />
+    )
+}
+
+export const SellOrderBook = ({ data = [], textColor })=>{
+const maxAmount = data?.length
+  ? Math.max(...data.map(item => Number(item?.quantity) || 0))
+  : 0;
+
+    return(
+         <FlatList
                 data={data}
                 scrollEnabled={false}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => {
-                    const barWidth = (item.amount / maxAmount) * 100;
-                    return (
-                        <View style={{ ...appStyles.row, paddingVertical: 0, paddingHorizontal: wp(1), position: "relative", height: 32 }}>
-                            <View
-                                style={{
-                                    position: 'absolute',
-                                    height: '100%',
-                                    width: `${barWidth}%`, // dynamic width
-                                    backgroundColor: colors.green, // or red based on side
-                                    opacity: 0.3,
-                                    borderRadius: 0,
-                                    alignItems: "flex-end",
-                                    right: 0
-                                }}
-                            />
-                            <ResponsiveText style={styles.textFlatList1}>
-                                {item.amount}
-                            </ResponsiveText>
-                            <ResponsiveText style={{ ...styles.textFlatList, color: colors.green }}>
-                                {item.price}
-                            </ResponsiveText>
-
-                        </View>
-                    )
-                }}
-            />
-            <FlatList
-                data={data}
-                scrollEnabled={false}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => {
-                    const barWidth = (item.amount / maxAmount) * 100;
+                    const barWidth = (item.quantity / maxAmount) * 100;
 
                     return (
 
-                        <View style={{ ...appStyles.row, paddingVertical: 0, paddingHorizontal: wp(1), position: "relative", height: 32 }}>
+                        <View style={{ ...appStyles.row, paddingHorizontal: wp(1), position: "relative", height: hp(4)}}>
                             <View
                                 style={{
                                     position: 'absolute',
@@ -421,16 +446,14 @@ export const FlatlistValues = ({ data = [], textColor }) => {
                                 {item.price}
                             </ResponsiveText>
                             <ResponsiveText style={styles.textFlatList1}>
-                                {item.amount}
+                                {item.quantity}
                             </ResponsiveText>
                         </View>
                     )
                 }}
             />
-        </View>
-
-    );
-};
+    )
+}
 
 export const BuySellButton = ({ onBuyPress, onSellPress }) => {
     return (

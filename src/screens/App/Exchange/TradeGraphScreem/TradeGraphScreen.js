@@ -11,16 +11,19 @@ import { colors } from '../../../../constants'
 import RowButton from '../../../../components/RowButton'
 import { Portal } from 'react-native-portalize'
 import { OrderBookSkeleton } from '../../../../components/SkeletonLoader'
+import { appStyles } from '../../../../utilities'
 
 
 const TradeGraph = React.lazy(() =>
     import('./Component/Index').then(m => ({ default: m.TradeGraph }))
 );
 
-const FlatlistValues = React.lazy(() =>
-    import('./Component/Index').then(m => ({ default: m.FlatlistValues }))
+const BuyOrderBook = React.lazy(() =>
+    import('./Component/Index').then(m => ({ default: m.BuyOrderBook }))
 );
-
+const SellOrderBook = React.lazy(() =>
+    import('./Component/Index').then(m => ({ default: m.SellOrderBook }))
+);
 const TradeGraphScreen = (props) => {
     const {
         starPress, setStarPress,
@@ -28,7 +31,7 @@ const TradeGraphScreen = (props) => {
         orderBookHeaderPress, setOrderBookHeaderPress,
         favouriteBottomSheetRef, selectedData,
         BuyPress, SellPress, pair, searchText, setSearchText, setSelectedData,
-        currentCoinPrice, timeInterval, setTimeInterval
+        currentCoinPrice, timeInterval, setTimeInterval, bullishState, orderBook
     } = UseTradeGraphScreen(props)
 
 
@@ -39,7 +42,9 @@ const TradeGraphScreen = (props) => {
                 <Spacer />
                 <Line height={hp(0.1)} />
                 <CoinPriceDetail
-                    coinPrice={currentCoinPrice} />
+                    coinPrice={currentCoinPrice}
+                    bullishState={bullishState}
+                />
                 <Spacer />
                 <TradeGraphHeader timeInterval={timeInterval} setTimeInterval={setTimeInterval} />
                 <Spacer />
@@ -65,9 +70,14 @@ const TradeGraphScreen = (props) => {
                 <Line width={wp(100)} height={hp(0.1)} />
                 <Suspense fallback={<OrderBookSkeleton />}>
 
-                    <FlatlistValues data={Amount} textColor={colors.green} />
+                    <View style={[appStyles.row, { alignItems: "flex-start" }]}>
+                        <BuyOrderBook data={orderBook?.buyOrders} />
+                        <SellOrderBook data={orderBook?.sellOrders} />
+                        <Spacer height={hp(10)} />
+                    </View>
+
+
                 </Suspense>
-                {/* <Spacer height={hp(5)}/> */}
             </ScrollView>
             <View style={{
                 position: "absolute",

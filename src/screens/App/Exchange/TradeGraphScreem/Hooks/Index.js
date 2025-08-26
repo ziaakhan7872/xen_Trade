@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { Routes } from "../../../../../constants";
-import { getCurrentCoinPrice, getGraphChartApi, getPairApi } from "../../../../../Backend/Api/Index";
+import { getCurrentCoinPrice, getGraphChartApi, getOrderBookApi, getPairApi } from "../../../../../Backend/Api/Index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSocket } from "../../../../../Backend/SocketContextProvider/Socket";
 
@@ -18,18 +18,10 @@ const UseTradeGraphScreen = (props) => {
   const [currentCoinPrice, setCurrentCoinPrice] = useState(0)
   const [currentSubscription, setCurrentSubscription] = useState(null)
   const [timeInterval, setTimeInterval] = useState("5m")
+  const [bullishState, setBullishState] = useState(false)
+  const [candleChartData, setCandleChartData] = useState([]);
+  const [orderBook,setOrderBook] = useState([])
 
-
-  const [candleChartData, setCandleChartData] = useState([
-    {
-      timestamp: new Date('2024-01-08T00:08:00').getTime(),
-      open: 32000,
-      high: 32500,
-      low: 31800,
-      close: 32200,
-      volume: 150000,
-    },
-  ]);
 
   // const selectRandomData = useCallback(() => {
   //   setCandleChartData((prevData) => {
@@ -57,9 +49,7 @@ const UseTradeGraphScreen = (props) => {
   //   });
   // }, []);
 
-  // Auto min/max calculation
-  const minPrice = useMemo(() => Math.min(...candleChartData.map(c => c.low)), [candleChartData]);
-  const maxPrice = useMemo(() => Math.max(...candleChartData.map(c => c.high)), [candleChartData]);
+ 
 
   // useEffect(() => {
   //   const interval = setInterval(selectRandomData, 10000);
@@ -81,10 +71,13 @@ const UseTradeGraphScreen = (props) => {
 
   useEffect(() => {
     getCurrentCinPriceFunction()
+    getOrderBook()
   }, [selectedData])
   useEffect(() => {
     getGraphChartFunction()
   }, [selectedData, timeInterval])
+
+  //Current Coin Price Socket
 
   useEffect(() => {
     console.log("centrifugueBuild", centrifugueBuild)
@@ -131,6 +124,117 @@ const UseTradeGraphScreen = (props) => {
     };
   }, [centrifugueBuild, selectedData]);
 
+  //Graph Chart Socket
+
+  useEffect(() => {
+    console.log("centrifugueBuild", centrifugueBuild)
+    const channelName = `${selectedData?.symbol}@kline_${timeInterval}`;
+
+    let sub = centrifugueBuild.getSubscription(channelName)
+
+    if (!sub) {
+      sub = centrifugueBuild.newSubscription(channelName);
+    }
+    if (currentSubscription) {
+      currentSubscription?.unsubscribe();
+      setCurrentSubscription(null);
+    }
+    sub.on("subscribed", (ctx) => {
+      console.log(`Subscribed to ${channelName}`, ctx);
+    });
+
+    sub.on("publication", (ctx) => {
+      console.log("publication to trade ", channelName, ctx?.data);
+      const chartData = formatGraphData(ctx?.data)
+      setCandleChartData(prev => [...prev, ...chartData]);
+      const updatedCandel = [...candleChartData, ...chartData];
+      const last = updatedCandel[updatedCandel.length -1];
+      if (last) {
+        setBullishState(last?.close >= last?.open)
+      }
+    });
+
+    sub.on("error", (err) => {
+      console.error(`Subscription error on ${channelName}:`, err);
+    });
+
+    sub.on("unsubscribed", () => {
+      // optional
+    });
+
+    if (sub.state !== "subscribed" && sub.state !== "subscribing") {
+      console.log(sub, "subscribing")
+      sub.subscribe();
+      setCurrentSubscription(sub)
+    }
+
+    socketRef.current = sub;
+
+    return () => {
+
+      socketRef.current = null;
+    };
+  }, [centrifugueBuild, selectedData]);
+
+  //Order Book Socket
+
+   useEffect(() => {
+    console.log("centrifugueBuild", centrifugueBuild)
+    const channelName = `${selectedData?.symbol}@depth`;
+
+
+    let sub = centrifugueBuild.getSubscription(channelName)
+
+    if (!sub) {
+      sub = centrifugueBuild.newSubscription(channelName);
+    }
+    if (currentSubscription) {
+      currentSubscription?.unsubscribe();
+      setCurrentSubscription(null);
+    }
+    sub.on("subscribed", (ctx) => {
+      console.log(`Subscribed to ${channelName}`, ctx);
+    });
+
+    sub.on("publication", (ctx) => {
+      console.log("publication", channelName, ctx?.data);
+      setOrderBook(ctx?.data)
+    });
+
+    sub.on("error", (err) => {
+      console.error(`Subscription error on ${channelName}:`, err);
+    });
+
+    sub.on("unsubscribed", () => {
+      // optional
+    });
+
+    if (sub.state !== "subscribed" && sub.state !== "subscribing") {
+      console.log(sub, "subscribing")
+      sub.subscribe();
+      setCurrentSubscription(sub)
+    }
+
+    socketRef.current = sub;
+
+    return () => {
+
+      socketRef.current = null;
+    };
+  }, [centrifugueBuild, selectedData]);
+
+  const getOrderBook = async () => {
+      try {
+        const pair = selectedData?.symbol
+        const OrderBook = await getOrderBookApi(pair)
+        console.log(OrderBook, "orderBook")
+        setOrderBook(OrderBook?.data?.orderBook)
+  
+      } catch (error) {
+        console.log("error in orderBook", error)
+      }
+    }
+
 
   const getPair = async (newPage = 1) => {
     try {
@@ -173,15 +277,22 @@ const UseTradeGraphScreen = (props) => {
       const response = await getGraphChartApi(payload)
       console.log(response, "graph response")
       const chartData = formatGraphData(response?.data)
-      setCandleChartData(prev => [...prev, ...chartData]);
+      if (!chartData?.length) return;
+
+    setCandleChartData(chartData);
+
+    const lastCandle = chartData[chartData.length - 1];
+    setBullishState(lastCandle.close >= lastCandle.open);
+    console.log(bullishState, "bullishState");
     } catch (error) {
       console.log(error?.response, "error in graph chart function")
     }
   }
 
+
   const formatGraphData = (rawData) => {
     return rawData?.map(item => ({
-      time: Math.floor(item[0]),
+      timestamp: item[0] * 1000,
       open: parseFloat(item[1]),
       high: parseFloat(item[2]),
       low: parseFloat(item[3]),
@@ -191,16 +302,16 @@ const UseTradeGraphScreen = (props) => {
     }))
   }
 
+
   return {
     starPress, setStarPress,
     candleChartData, setCandleChartData,
-    minPrice, maxPrice,
     BuyPress, SellPress,
     orderBookHeaderPress, setOrderBookHeaderPress,
     favouriteBottomSheetRef,
     selectedData, pair,
     searchText, setSearchText, setSelectedData, currentCoinPrice,
-    timeInterval, setTimeInterval
+    timeInterval, setTimeInterval,bullishState,orderBook
   };
 };
 
