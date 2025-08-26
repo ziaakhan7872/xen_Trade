@@ -44,12 +44,12 @@ export const UseMarket = (props) => {
     }
 
     const handleMarketData = () => {
-    if (Page) {
-      getMarketData(Page+1);
-    }
-  };
+        if (Page) {
+            getMarketData(Page + 1);
+        }
+    };
 
-    const filteredMarketList = marketList.filter((item) =>
+    const filteredMarketList = marketList?.filter((item) =>
         item?.name?.toLowerCase().includes(searchText.toLowerCase()) ||
         item?.symbol?.toLowerCase().includes(searchText.toLowerCase())
     );
@@ -57,7 +57,7 @@ export const UseMarket = (props) => {
         marketList: filteredMarketList, setMarketList,
         MarketPress,
         searchText, setSearchText,
-        loading , handleMarketData
+        loading, handleMarketData
 
     }
 }

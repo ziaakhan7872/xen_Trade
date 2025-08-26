@@ -50,7 +50,7 @@ export const RenderMarketList = ({ marketData, props, MarketScreen, handleMarket
                                 </TouchableOpacity>
                                 <HorizontalSpacer />
                                 <View>
-                                    <ResponsiveText style={style.textHeader}>{item.symbol}</ResponsiveText>
+                                    <ResponsiveText style={style.textHeader}>{item?.symbol}</ResponsiveText>
                                     <ResponsiveText style={style.volText}>Vol {item.Vol || "42.35M"}</ResponsiveText>
                                 </View>
                             </View>

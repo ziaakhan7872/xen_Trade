@@ -1,24 +1,29 @@
-import { FlatList, Image, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import images from '../../../../images'
-import { appStyles } from '../../../../utilities'
-import { ResponsiveText } from '../../../../components/ResponsiveText'
-import Line from '../../../../components/Liner'
-import Spacer, { HorizontalSpacer } from '../../../../components/Spacer'
-import { hp, wp } from '../../../../components/ResponsiveComponent'
-import { colors, fontFamily } from '../../../../constants'
-import { SimpleButton } from '../../../../components/SimpleButton'
-import Entypo from "react-native-vector-icons/FontAwesome6"
+import { FlatList, Image, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import images from '../../../../images';
+import { appStyles } from '../../../../utilities';
+import { ResponsiveText } from '../../../../components/ResponsiveText';
+import Line from '../../../../components/Liner';
+import Spacer, { HorizontalSpacer } from '../../../../components/Spacer';
+import { hp, wp } from '../../../../components/ResponsiveComponent';
+import { colors, fontFamily } from '../../../../constants';
+import { SimpleButton } from '../../../../components/SimpleButton';
+import Entypo from 'react-native-vector-icons/FontAwesome6';
 import Feather from 'react-native-vector-icons/Feather';
-import moment from 'moment'
-import BottomSheet from '../../../../components/BottomSheet'
-
+import moment from 'moment';
+import BottomSheet from '../../../../components/BottomSheet';
 
 export const FilterTextInput = ({ openBottomSheet, onChangeText, value }) => {
     return (
         <View style={styles.containerMain}>
             <View style={styles.containerInner}>
-                <TextInput value={value} onChangeText={onChangeText} style={styles.input} placeholder="Search..." placeholderTextColor={colors.lightTextColor} />
+                <TextInput
+                    value={value}
+                    onChangeText={onChangeText}
+                    style={styles.input}
+                    placeholder="Search..."
+                    placeholderTextColor={colors.lightTextColor}
+                />
                 <TouchableOpacity style={styles.rightIconWrapper}>
                     <Image source={images.searchSign} style={styles.iconRight} />
                 </TouchableOpacity>
@@ -28,8 +33,8 @@ export const FilterTextInput = ({ openBottomSheet, onChangeText, value }) => {
                 <Image source={images.filter2} style={styles.iconLeft} />
             </TouchableOpacity>
         </View>
-    )
-}
+    );
+};
 
 export const History = () => {
     return (
@@ -40,17 +45,24 @@ export const History = () => {
                 <ResponsiveText style={styles.noRecordText}>No Open Orders</ResponsiveText>
             </View>
         </>
-    )
-}
+    );
+};
 
-export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, selected, setSelected }) => {
-
+export const FilterBottomSheet = ({
+    groupKey,              // unused, safe to keep
+    bottomSheetRef,
+    closeBottomSheet,
+    selected,
+    setSelected,
+    onApply,               // from hook
+    onReset,               // from hook
+}) => {
     const resetFilters = () => {
-        setSelected(selected[groupKey] == 0)
-    }
+        onReset && onReset();
+    };
 
     return (
-        <BottomSheet ref={bottomSheetRef} height={hp(70)} >
+        <BottomSheet ref={bottomSheetRef} height={hp(70)}>
             <View style={[appStyles.row, { ...styles.containerSpacer }]}>
                 <ResponsiveText style={styles.bottomSheetTitle}>FILTER</ResponsiveText>
                 <TouchableOpacity onPress={closeBottomSheet}>
@@ -59,7 +71,6 @@ export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, 
             </View>
 
             <Line height={1} backgroundColor={colors.lineColor} />
-
             <Spacer height={hp(1.5)} />
 
             <View style={styles.filterContainer}>
@@ -71,17 +82,19 @@ export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, 
                     setSelected={setSelected}
                 />
             </View>
+
             <Spacer height={hp(1.5)} />
 
             <View style={styles.filterContainer}>
                 <ResponsiveText style={styles.filterTitles}>Order Type</ResponsiveText>
                 <FilterGroup
-                    options={['Market', 'Limit']}
+                    options={['All', 'Market', 'Limit']} // ← All added back
                     groupKey="orderType"
                     selected={selected}
                     setSelected={setSelected}
                 />
             </View>
+
             <Spacer height={hp(1.5)} />
 
             <View style={styles.filterContainer}>
@@ -93,55 +106,55 @@ export const FilterBottomSheet = ({ groupKey, bottomSheetRef, closeBottomSheet, 
                     setSelected={setSelected}
                 />
             </View>
+
             <Spacer height={hp(2.5)} />
             <View style={[appStyles.row, styles.buttonRow]}>
-                <SimpleButton onPress={() => resetFilters()} text="Reset" textColor={colors.white} styleView={styles.resetBtn} />
-                <SimpleButton text="Show Results" textColor={colors.black} styleView={styles.showBtn} />
+                <SimpleButton onPress={resetFilters} text="Reset" textColor={colors.white} styleView={styles.resetBtn} />
+                <SimpleButton onPress={onApply} text="Show Results" textColor={colors.black} styleView={styles.showBtn} />
             </View>
             <Spacer height={hp(2.5)} />
         </BottomSheet>
-
-    )
-}
+    );
+};
 
 export const OrderHistoryList = ({ orderHistory }) => {
     return (
-        <View style={{ alignSelf: "center" }}>
+        <View style={{ alignSelf: 'center' }}>
             <Spacer />
             <FlatList
-                // data={OrderHistoryData}
                 data={orderHistory}
-                keyExtractor={(item, index) => item.id}
-                ItemSeparatorComponent={(
-                    <Spacer height={hp(1)} />
-                )}
-                ListEmptyComponent={() => (
-                    <History />
-                )}
+                keyExtractor={(item) => item.id}
+                ItemSeparatorComponent={<Spacer height={hp(1)} />}
+                ListEmptyComponent={() => <History />}
                 renderItem={({ item }) => (
                     <View style={styles.OrderMainView}>
-                        <View style={styles.orderMainSubView} >
+                        <View style={styles.orderMainSubView}>
                             <View>
                                 <View style={appStyles.rowBasic}>
                                     <ResponsiveText style={styles.text6}>{item?.pair?.toUpperCase()}</ResponsiveText>
                                     <HorizontalSpacer />
                                     <TouchableOpacity>
                                         <Entypo name="chevron-right" size={20} color={colors.white} />
-
                                     </TouchableOpacity>
                                 </View>
                                 <View style={appStyles.rowBasic}>
-                                    <ResponsiveText style={[styles.text1, { color: item.side === "buy" ? colors.green : colors.red }]}>{item?.side?.toUpperCase()}</ResponsiveText>
+                                    <ResponsiveText
+                                        style={[styles.text1, { color: item.side === 'buy' ? colors.green : colors.red }]}
+                                    >
+                                        {item?.side?.toUpperCase()}
+                                    </ResponsiveText>
                                     <HorizontalSpacer />
-                                    <ResponsiveText style={[styles.text1, { color: item.side === "buy" ? colors.green : colors.red }]}>{item.type}</ResponsiveText>
+                                    <ResponsiveText
+                                        style={[styles.text1, { color: item.side === 'buy' ? colors.green : colors.red }]}
+                                    >
+                                        {item.type}
+                                    </ResponsiveText>
                                     <HorizontalSpacer />
                                     <ResponsiveText style={[styles.text5]}>
-                                        {moment(item?.updatedAt && item.updatedAt !== '0001-01-01T00:00:00Z'
-                                            ? item.updatedAt
-                                            : item?.createdAt
+                                        {moment(
+                                            item?.updatedAt && item.updatedAt !== '0001-01-01T00:00:00Z' ? item.updatedAt : item?.createdAt
                                         ).format('MM/DD, HH:mm:ss')}
                                     </ResponsiveText>
-
                                 </View>
                             </View>
                             <View style={appStyles.rowBasic}>
@@ -153,19 +166,18 @@ export const OrderHistoryList = ({ orderHistory }) => {
                                 <HorizontalSpacer />
                                 <ResponsiveText style={styles.buySellButtonText}>Cancel</ResponsiveText>
                             </View>
-
                         </View>
+
                         <View style={styles.orderMainSubView}>
                             <View>
                                 <ResponsiveText style={[styles.text5]}>Order Amount {item?.base?.toUpperCase()}</ResponsiveText>
                                 <Spacer height={hp(0.5)} />
                                 <ResponsiveText style={styles.text7}>{item.quantity}</ResponsiveText>
-
                             </View>
                             <View>
                                 <ResponsiveText style={[styles.text5]}>Filled {item?.base?.toUpperCase()}</ResponsiveText>
                                 <Spacer height={hp(0.5)} />
-                                <ResponsiveText style={styles.text7}>{item?.executedQty || "0"}</ResponsiveText>
+                                <ResponsiveText style={styles.text7}>{item?.executedQty || '0'}</ResponsiveText>
                             </View>
                             <View>
                                 <ResponsiveText style={[styles.text5]}>Order Price</ResponsiveText>
@@ -174,15 +186,15 @@ export const OrderHistoryList = ({ orderHistory }) => {
                             </View>
                         </View>
                     </View>
-
                 )}
             />
         </View>
-    )
-}
+    );
+};
 
+// FilterGroup: default to first option ('All') if none selected
 const FilterGroup = ({ options = [], groupKey, selected, setSelected }) => {
-    const currentValue = selected[groupKey] || options[0];
+    const currentValue = selected[groupKey] ?? options[0];
 
     const handleSelect = (option) => {
         setSelected((prev) => ({ ...prev, [groupKey]: option }));
@@ -199,20 +211,12 @@ const FilterGroup = ({ options = [], groupKey, selected, setSelected }) => {
                         activeOpacity={0.6}
                         style={[
                             styles.filterSelectionContainer,
-                            {
-                                ...appStyles.rowBasic,
-                                backgroundColor: colors.transparentBtn,
-                            },
+                            { ...appStyles.rowBasic, backgroundColor: colors.transparentBtn },
                         ]}
                     >
-                        {isSelected && (
-                            <Image source={images.blueTick} style={styles.tickSelectIcon} />
-                        )}
+                        {isSelected && <Image source={images.blueTick} style={styles.tickSelectIcon} />}
                         <ResponsiveText
-                            style={[
-                                styles.filterSelection,
-                                { color: isSelected ? colors.white : colors.lightTextColor },
-                            ]}
+                            style={[styles.filterSelection, { color: isSelected ? colors.white : colors.lightTextColor }]}
                         >
                             {item}
                         </ResponsiveText>
@@ -221,12 +225,12 @@ const FilterGroup = ({ options = [], groupKey, selected, setSelected }) => {
             })}
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     containerMain: {
         ...appStyles.rowBasic,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     containerInner: {
         ...appStyles.rowBasic,
@@ -309,7 +313,6 @@ const styles = StyleSheet.create({
         paddingTop: hp(1),
     },
     filterContainer: {
-        // flex: 1,
         paddingHorizontal: wp(4),
         paddingVertical: hp(1),
         paddingBottom: hp(2),
@@ -326,6 +329,7 @@ const styles = StyleSheet.create({
     filterWrapContainer: {
         flexDirection: 'row',
         gap: wp(2.5),
+        flexWrap: 'wrap',
         marginTop: hp(1.5),
     },
     filterSelection: {
@@ -335,7 +339,6 @@ const styles = StyleSheet.create({
     },
     buttonRow: {
         paddingHorizontal: wp(3.5),
-        // paddingBottom: Platform.OS === 'android' ? hp(5.5) : hp(1.5), // More space on Android
     },
     resetBtn: {
         paddingHorizontal: wp(17),
@@ -347,7 +350,7 @@ const styles = StyleSheet.create({
     showBtn: {
         paddingHorizontal: wp(11.5),
         backgroundColor: colors.mainColor,
-        marginLeft: wp(3), // space between buttons
+        marginLeft: wp(3),
         paddingVertical: hp(2),
         borderRadius: wp(10),
         marginRight: wp(1),
@@ -356,57 +359,34 @@ const styles = StyleSheet.create({
         backgroundColor: colors.cardsBgColor,
         paddingHorizontal: wp(3),
         paddingVertical: hp(1),
-        borderRadius: wp(3)
+        borderRadius: wp(3),
     },
     orderMainSubView: {
         width: wp(90),
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignSelf: "center",
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignSelf: 'center',
         paddingHorizontal: wp(5),
-        paddingVertical: wp(2)
+        paddingVertical: wp(2),
     },
     text1: {
         fontSize: 14,
         color: colors.white,
-        fontFamily: fontFamily.appTextRegular
+        fontFamily: fontFamily.appTextRegular,
     },
     text5: {
         fontSize: 14,
         fontFamily: fontFamily.appTextRegular,
-        color: colors.iconColor
+        color: colors.iconColor,
     },
     text6: {
         fontSize: 20,
         fontFamily: fontFamily.mainTextMedium,
-        color: colors.white
+        color: colors.white,
     },
     text7: {
         fontSize: 12,
         color: colors.white,
-        fontFamily: fontFamily.appTextMedium
-    },
-    tickSelectIcon: {
-        width: wp(4.5),
-        height: wp(4.5),
-        resizeMode: 'contain',
-        marginRight: wp(2),
-    },
-    filterSelectionContainer: {
-        paddingHorizontal: wp(5),
-        paddingVertical: hp(1.2),
-        backgroundColor: colors.transparentBtn,
-        borderRadius: wp(10),
-    },
-    filterSelection: {
         fontFamily: fontFamily.appTextMedium,
-        fontSize: 14,
-        color: colors.white,
     },
-    filterWrapContainer: {
-        flexDirection: 'row',
-        gap: wp(2.5),
-        flexWrap: 'wrap',
-        marginTop: hp(1.5),
-    },
-})
+});
