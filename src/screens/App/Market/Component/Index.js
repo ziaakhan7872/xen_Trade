@@ -51,7 +51,7 @@ export const RenderMarketList = ({ marketData, props, MarketScreen, handleMarket
                                 <HorizontalSpacer />
                                 <View>
                                     <ResponsiveText style={style.textHeader}>{item?.symbol}</ResponsiveText>
-                                    <ResponsiveText style={style.volText}>Vol {item?.Vol || "42.35M"}</ResponsiveText>
+                                    <ResponsiveText style={style.volText}>Vol {item.Vol || "42.35M"}</ResponsiveText>
                                 </View>
                             </View>
                             <View style={{ alignItems: "flex-start", justifyContent: "flex-start", width: wp(25) }}>

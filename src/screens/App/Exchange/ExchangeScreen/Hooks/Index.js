@@ -315,7 +315,7 @@ export const UseExchange = (props) => {
     }
   };
 
-  const filteredPair = pairs.filter((item) =>
+  const filteredPair = pairs?.filter((item) =>
     item?.name?.toLowerCase().includes(searchText.toLowerCase()) ||
     item?.symbol?.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -419,7 +419,7 @@ export const UseExchange = (props) => {
       }
       setErrorMessage("")
     } catch (error) {
-      console.log(error?.response, "error of place order")
+      console.log(error, "error of place order")
       setErrorMessage(error?.response?.data?.message)
       setLoading(false)
     } finally {

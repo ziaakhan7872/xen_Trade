@@ -48,6 +48,6 @@ export const getRefreshToken = () => {
 };
 
 export const performLogout = async () => {
-  store.dispatch(logoutUser());   
-  await persistor.purge();        
+  store.dispatch(logoutUser());
+  await persistor.purge();
 };
