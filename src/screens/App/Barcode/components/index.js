@@ -82,7 +82,7 @@ export const AddressSection = ({ walletAddress }) => {
       </View>
       <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: wp(4), justifyContent: "space-between" }}>
         <ResponsiveText style={styles.addressText}>{WalletAddress}</ResponsiveText>
-        <TouchableOpacity onPress={()=>copyPaste.copy(WalletAddress)} style={styles.copyButton}>
+        <TouchableOpacity onPress={() => copyPaste.copy(WalletAddress)} style={styles.copyButton}>
           <ResponsiveText style={styles.copyText}>Copy</ResponsiveText>
         </TouchableOpacity>
       </View>

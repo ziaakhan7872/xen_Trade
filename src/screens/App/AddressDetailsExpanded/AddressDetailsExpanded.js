@@ -18,15 +18,11 @@ const AddressDetailsExpanded = (props) => {
         <AuthMainContainer>
             <View style={{ flex: 1 }}>
                 <ScrollView
-                    contentContainerStyle={{
-                        flexGrow: 1,
-                        // justifyContent: 'space-between',
-                    }}
+                    contentContainerStyle={{ flexGrow: 1 }}
                     keyboardShouldPersistTaps="handled">
                     <View style={styles.containerMain}>
                         <MainHeader leftImage={images.backArrow} title='ETH-METAMASK' onBackPress={() => props?.navigation.goBack()} />
                         <Spacer height={hp(3)} />
-
                         <InputForm isEditable={isEditable} />
                     </View>
                 </ScrollView>

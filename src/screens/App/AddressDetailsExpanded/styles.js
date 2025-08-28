@@ -1,4 +1,4 @@
-import { Platform, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { colors } from '../../../constants'
 import { hp, wp } from '../../../components/ResponsiveComponent'
 
@@ -10,8 +10,7 @@ export const styles = StyleSheet.create({
     },
     buttonRow: {
         paddingHorizontal: wp(3.5),
-        paddingBottom: Platform.OS === 'android' ? hp(3.5) : hp(0.5), // More space on Android
-
+        paddingBottom: hp(3.3),
     },
     deleteBtn: {
         width: wp(44),

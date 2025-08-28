@@ -1,17 +1,20 @@
 
 import Clipboard from '@react-native-clipboard/clipboard';
-import { ToastAndroid } from 'react-native';
-
-
+import { Platform, ToastAndroid } from 'react-native';
 
 const copyToClipboard = async text => {
+  console.log("texttexttext", text)
   try {
     await Clipboard.setString(text);
     // Toast.show('Copied.', Toast.SHORT);
+    if (Platform.OS === "android") {
+      console.log("android")
+      ToastAndroid.show('Copied to clipboard', ToastAndroid.TOP);
 
-    ToastAndroid.show('Copied to clipboard', ToastAndroid.SHORT);
+    }
   } catch (error) { }
 };
+
 const copyToClipboardNotoast = async text => {
   try {
     await Clipboard.setString(text);

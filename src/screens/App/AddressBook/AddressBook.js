@@ -1,26 +1,27 @@
-import { ScrollView, View } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { MainHeader } from '../../../components/MainHeader'
-import { hp, wp } from '../../../components/ResponsiveComponent'
+import { hp } from '../../../components/ResponsiveComponent'
 import { colors, Routes } from '../../../constants'
 import images from '../../../images'
 import Spacer from '../../../components/Spacer'
 import { SimpleButton } from '../../../components/SimpleButton'
-import RowTabs from './Components/RowTabs'
-import AddressCard from './Components/AddressCard'
+import { AddressCard, RowTabs } from './Components'
 import { styles } from './styles'
+import { useAddressBook } from './Hooks'
 
 const AddressBook = (props) => {
+    const { selected, setSelected } = useAddressBook();
+
     return (
         <AuthMainContainer>
             <View style={styles.containerMain}>
-                <MainHeader leftImage={images.backArrow} title='ADDRESS BOOK' onBackPress={() => props?.navigation.goBack()} />
+                <MainHeader leftImage={images.backArrow} title='ADDRESS BOOK' onBackPress={() => props?.navigation?.goBack()} />
                 <Spacer height={hp(3)} />
-                <RowTabs />
+                <RowTabs selected={selected} setSelected={setSelected} />
                 <Spacer />
-                {/* Have to pass navigation props for the child component to use */}
-                <AddressCard navigation={props.navigation} />
+                <AddressCard props={props} />
                 <Spacer height={hp(3)} />
 
                 <View style={styles.buttonRow}>
