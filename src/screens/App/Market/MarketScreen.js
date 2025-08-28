@@ -1,11 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import HomeHeader from '../../../components/HomeHeader'
 import { colors, Routes } from '../../../constants'
 import { style } from './Style'
 import Spacer, { HorizontalSpacer } from '../../../components/Spacer'
-import { ResponsiveText } from '../../../components/ResponsiveText'
 import EvilIcons from "react-native-vector-icons/EvilIcons"
 import { RenderMarketHeader, RenderMarketList } from './Component/Index'
 import Line from '../../../components/Liner'
@@ -15,7 +14,7 @@ import { UseMarket } from './Hooks/Index'
 import { SkeletionLoader } from '../../../components/SkeletonLoader'
 
 const MarketScreen = (props) => {
-  const { marketList, setMarketList, MarketPress, searchText, setSearchText, loading , handleMarketData} = UseMarket(props)
+  const { marketList, setMarketList, MarketPress, searchText, setSearchText, loading, handleMarketData } = UseMarket(props)
 
   return (
     <AuthMainContainer>
@@ -25,6 +24,7 @@ const MarketScreen = (props) => {
         <InputText
           rightIcon={true}
           paddingLeft={wp(18)}
+          paddingRight={wp(5)}
           placeholderTextColor={colors.iconColor}
           placeholder={"Search.."}
           value={searchText}

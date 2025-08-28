@@ -54,7 +54,8 @@ export const styles = StyleSheet.create({
     },
     btnView: {
         paddingHorizontal: wp(4),
-        paddingBottom: Platform.OS === 'android' ? hp(4) : hp(2), // More space on Android
+        // paddingBottom: Platform.OS === 'android' ? hp(4) : hp(2), // More space on Android
+        paddingBottom: hp(3.5),
     },
     btnContainer: {
         width: wp(88),
