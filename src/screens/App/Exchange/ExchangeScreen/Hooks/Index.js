@@ -176,6 +176,7 @@ export const UseExchange = (props) => {
 
 
   const handleBuyPriceChange = (value) => {
+    console.log("handleBuyPriceChange called with value:", value);
     if (value === "") {
       setPrice("");
       setQuantity("");
@@ -220,6 +221,7 @@ export const UseExchange = (props) => {
 
 
   const handleBuyQuantityChange = (value) => {
+
     if (value === "") {
       setQuantity("");
       setPrice("");
@@ -228,8 +230,10 @@ export const UseExchange = (props) => {
 
     const regex = /^\d*\.?\d{0,6}$/;
     if (!regex.test(value)) return;
-    setQuantity(value);
     const qtyBN = new BigNumber(value);
+
+    if (qtyBN.isLessThanOrEqualTo(1)) return;
+    setQuantity(value);
     const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
 
     if (!qtyBN.isNaN() && !coinPriceBN.isZero()) {
@@ -344,14 +348,14 @@ export const UseExchange = (props) => {
   const discreaseQuantity = () => {
     const currentQty = new BigNumber(quantity || 0); // Ensure numeric
     const newValue = currentQty.minus(1);
-    if (newValue.isNegative()) return; // prevent negative
+    if (newValue.isNegative() || newValue.isLessThan(1)) return; // prevent negative
     setQuantity(newValue.toString());
     handleBuyQuantityChange(newValue.toString());
   };
   const discreaseSellQuantity = () => {
     const currentQty = new BigNumber(sellQuantity || 0); // Ensure numeric
     const newValue = currentQty.minus(1);
-    if (newValue.isNegative()) return; // prevent negative
+    if (newValue.isNegative() || newValue.isLessThan(1)) return; // prevent negative
     setSellQuantity(newValue.toString());
     handleSellQuantityChange(newValue.toString());
   };
@@ -406,7 +410,7 @@ export const UseExchange = (props) => {
       setLoading(true)
 
       const payload = {
-        price: price.toString(),
+        price: cureentCoinPrice.toString(),
         quantity: quantity.toString(),
         side: "buy",
         symbol: selectedData?.symbol,

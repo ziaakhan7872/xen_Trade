@@ -78,8 +78,9 @@ export const BuyForm = ({
                 <TouchableOpacity onPress={() => {
                     const newValue = new BigNumber(currentCoinPrice || 0)
                         .minus(0.1).decimalPlaces(1);
-                    if (newValue.isGreaterThanOrEqualTo(0)) {
+                    if (newValue.isGreaterThanOrEqualTo(1)) {
                         setCurrentCoinPrice(newValue.toNumber());
+
                     } else {
                         setCurrentCoinPrice(0);
                     }
