@@ -392,7 +392,7 @@ export const UseExchange = (props) => {
         []; // fallback to empty
 
       setCurrentOrder(items);
-      console.log('orders count:', items.length);
+      console.log('orders count:', items);
     } catch (error) {
       console.log('error in history of orders', error);
       setCurrentOrder([]); // if API gives error so it will show empty
@@ -438,6 +438,7 @@ export const UseExchange = (props) => {
         symbol: selectedData?.symbol,
         type: tradingType
       }
+      console.log(payload, "sell order payload")
       const response = await PlaceOrder(payload)
       console.log(response, "place order")
       if (response?.status === 201) {
@@ -458,7 +459,7 @@ export const UseExchange = (props) => {
 
       const ids = item
         ? [item.id]
-        : currentOrder?.items?.map((i) => i.id) || [];
+        : currentOrder?.map((i) => i.id) || [];
 
       console.log("ids to delete:", ids);
 
