@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
         borderWidth: 1.5,
         borderRadius: wp(3),
         paddingVertical: hp(2),
-        // position: 'relative',
     },
     dropdownContainer: {
         backgroundColor: colors.inputBgColor,
@@ -50,9 +49,6 @@ const styles = StyleSheet.create({
         borderWidth: 1.5,
         borderRadius: wp(3),
         zIndex: -10,
-        // top: hp(6.5),
-        // marginTop: 0,
-        // position: 'absolute',
     },
     dropdownText: {
         color: colors.white,

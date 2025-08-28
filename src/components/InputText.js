@@ -8,19 +8,19 @@ import EvilIcons from "react-native-vector-icons/EvilIcons"
 
 const InputText = ({
     onFocus, onBlur,
-     handleRightIconPress, 
-     paddingLeft = 0, rightIcon, 
-     label, value, onChangeText, 
-     placeholder, secureTextEntry, 
-     style, placeholderTextColor, 
-     handleIconPress, 
-     isPasswordVisible, 
-     icon, 
-     width = wp(80),
-     leftChildren=<EvilIcons name="search" color={colors.mainColor} size={25} />  ,
-     iconChildren=<Feather name={isPasswordVisible ? 'eye-off' : 'eye'} size={20} color={colors.iconColor} />,
-     paddingRight=paddingRight
-    }) => {
+    handleRightIconPress,
+    paddingLeft = 0, rightIcon,
+    label, value, onChangeText,
+    placeholder, secureTextEntry,
+    style, placeholderTextColor,
+    handleIconPress,
+    isPasswordVisible,
+    icon,
+    width = wp(80),
+    leftChildren = <EvilIcons name="search" color={colors.mainColor} size={25} />,
+    iconChildren = <Feather name={isPasswordVisible ? 'eye-off' : 'eye'} size={20} color={colors.iconColor} />,
+    paddingRight = paddingRight
+}) => {
     return (
         <View style={[styles.container, style]}>
             {label && <Text style={styles.label}>{label}</Text>}
@@ -41,7 +41,7 @@ const InputText = ({
                     secureTextEntry={secureTextEntry}
                     style={[
                         styles.input,
-                        { paddingLeft: rightIcon ? wp(8) : paddingLeft, width: width ,paddingRight:icon?wp(10):paddingRight}
+                        { paddingLeft: rightIcon ? wp(8) : paddingLeft, width: width, paddingRight: icon ? wp(10) : paddingRight }
                     ]}
                     placeholderTextColor={placeholderTextColor}
                     onBlur={onBlur}
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     iconContainer: {
         position: "absolute",
-        right: wp(5),
+        right: wp(1),
         bottom: hp(2)
     },
     rightIconContainer: {
@@ -103,7 +103,8 @@ const styles = StyleSheet.create({
     },
     leftIcon: {
         position: "absolute",
-        left: 5,
+        left: wp(2.3),
+        paddingBottom: hp(0.5),
         zIndex: 1,
     },
 })

@@ -18,11 +18,9 @@ export const MainHeader = ({ leftImage, rightImage, title, onBackPress, onRightP
       <TouchableOpacity onPress={onRightPress} style={styles.rightIconWrapper}>
         <Image source={rightImage} style={styles.rightImage} />
       </TouchableOpacity>
-      {/* <View style={styles.rightSpacer} /> */}
     </View>
   )
 }
-
 
 const styles = StyleSheet.create({
   headerMainContainer: {
@@ -48,9 +46,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  // rightSpacer: {
-  //   width: wp(10),
-  // },
   leftIconWrapper: {
     width: wp(10),
     alignItems: 'flex-start',

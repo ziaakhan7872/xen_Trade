@@ -11,14 +11,14 @@ import images from '../../../../images'
 import Line from '../../../../components/Liner'
 import { SimpleButton } from '../../../../components/SimpleButton'
 
-export const TextInputGroup = ({ message, setMessage }) => {
+export const TextInputGroup = ({ name, setName, email, setEmail, message, setMessage }) => {
     return (
         <>
             <ResponsiveText style={styles.inputLabel}>Name</ResponsiveText>
-            <TextInputField placeholder={'Enter your name'} placeholderTextColor={colors.placeHolderTextColor} />
+            <TextInputField value={name} onChangeText={(text) => setName(text)} placeholder={'Enter your name'} placeholderTextColor={colors.placeHolderTextColor} />
             <Spacer />
             <ResponsiveText style={styles.inputLabel}>Email</ResponsiveText>
-            <TextInputField placeholder={'Enter your email'} placeholderTextColor={colors.placeHolderTextColor} />
+            <TextInputField value={email} onChangeText={(text) => setEmail(text)} placeholder={'Enter your email'} placeholderTextColor={colors.placeHolderTextColor} />
             <Spacer />
             <ResponsiveText style={styles.inputLabel}>Message</ResponsiveText>
             <TextInputField value={message || ''} onChangeText={(text) => setMessage(text)} multiline={true} textAlignVertical="top" height={hp(12)} borderColor={message.trim() === '' ? colors.borderColor : colors.mainColor} placeholder={'Enter your message'} placeholderTextColor={colors.placeHolderTextColor} />
@@ -48,7 +48,6 @@ export const SubmitBottomSheet = ({ SubmitBottomSheetRef, closeBottomSheet }) =>
             <Spacer height={hp(3)} />
 
             <SimpleButton text="Ok" onPress={closeBottomSheet} textColor={colors.black} styleView={styles.btnOk} />
-
         </GorhomBottomSheet>
     )
 }
