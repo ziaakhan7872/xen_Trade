@@ -1,16 +1,15 @@
-import { StyleSheet, View, ToastAndroid, Platform, Alert, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Platform, Alert, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import Clipboard from '@react-native-clipboard/clipboard'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import images from '../../../../images'
 import TextInputField from '../../../../components/TextInputField'
 import { colors, fontFamily } from '../../../../constants'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
 import Spacer from '../../../../components/Spacer'
+import { copyPaste } from '../../../../CommonHelperFunction/Util'
 
 export const InputForm = ({ isEditable }) => {
     return (
-
         <View>
             <ResponsiveText style={styles.inputLabel}>Name</ResponsiveText>
             <TextInputField placeholder={'ETH-Metamask'} placeholderTextColor={colors.white} editable={isEditable} />
@@ -18,9 +17,8 @@ export const InputForm = ({ isEditable }) => {
             <ResponsiveText style={styles.inputLabel}>Address</ResponsiveText>
             <TextInputField placeholder={'0x8R209h462hks83518t0jm709UYTO'} placeholderTextColor={colors.white} editable={isEditable} />
             <TouchableOpacity onPress={() => {
-                Clipboard.setString('0x8R2330...9UYT5665O')
                 if (Platform.OS === 'android') {
-                    ToastAndroid.show('Address copied!', ToastAndroid.SHORT)
+                    copyPaste.copy('0x8R2330...9UYT5665O')
                 } else {
                     Alert.alert('Copied!', 'Address copied to clipboard')
                 }
@@ -37,7 +35,6 @@ export const InputForm = ({ isEditable }) => {
             <ResponsiveText style={styles.inputLabel}>Tag</ResponsiveText>
             <TextInputField placeholder={'Default'} placeholderTextColor={colors.white} editable={isEditable} />
             <Spacer />
-
         </View>
     )
 }

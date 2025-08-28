@@ -1,13 +1,27 @@
-import { View, TouchableOpacity, Image, StyleSheet, Platform, ToastAndroid, Alert } from 'react-native'
+import { View, TouchableOpacity, Image, StyleSheet, Platform, Alert } from 'react-native'
 import React from 'react'
 import images from '../../../../images'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
 import { wp } from '../../../../components/ResponsiveComponent'
 import { colors, fontFamily, Routes } from '../../../../constants'
 import { appStyles } from '../../../../utilities'
-import Clipboard from '@react-native-clipboard/clipboard'
+import { copyPaste } from '../../../../CommonHelperFunction/Util'
 
-const AddressCard = (props) => {
+export const RowTabs = ({ selected, setSelected }) => {
+
+    return (
+        <View style={styles.row}>
+            <TouchableOpacity onPress={() => setSelected('Crypto')}>
+                <ResponsiveText style={[styles.tabText, selected === 'Crypto' && styles.activeTab]}>Crypto</ResponsiveText>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setSelected('Fiat')}>
+                <ResponsiveText style={[styles.tabText, selected === 'Fiat' && styles.activeTab]}>Fiat</ResponsiveText>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+export const AddressCard = ({ props }) => {
     return (
         <TouchableOpacity style={styles.card} activeOpacity={0.7} onPress={() => { props?.navigation?.navigate?.(Routes.addressDetailsExpanded) }}>
             <View style={appStyles.row}>
@@ -19,9 +33,8 @@ const AddressCard = (props) => {
                     <ResponsiveText style={styles.address}>0x8R2330...9UYT5665O</ResponsiveText>
                     <TouchableOpacity
                         onPress={() => {
-                            Clipboard.setString('0x8R2330...9UYT5665O')
                             if (Platform.OS === 'android') {
-                                ToastAndroid.show('Address copied!', ToastAndroid.SHORT)
+                                copyPaste.copy('0x8R2330...9UYT5665O');
                             } else {
                                 Alert.alert('Copied!', 'Address copied to clipboard')
                             }
@@ -33,9 +46,26 @@ const AddressCard = (props) => {
         </TouchableOpacity>
     )
 }
-export default AddressCard
+
 
 const styles = StyleSheet.create({
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        gap: wp(5)
+    },
+    tabText: {
+        fontSize: 16,
+        color: colors.lightTextColor,
+        fontFamily: fontFamily.appTextRegular,
+    },
+    activeTab: {
+        color: colors.mainColor,
+        borderBottomWidth: 2.5,
+        fontFamily: fontFamily.appTextMedium,
+        borderColor: colors.mainColor,
+        paddingBottom: wp(3.8)
+    },
     card: {
         backgroundColor: colors.cardsBgColor,
         borderRadius: 12,
@@ -66,6 +96,6 @@ const styles = StyleSheet.create({
         height: wp(6),
         marginRight: wp(2),
         marginTop: wp(0.8)
-    }
+    },
 })
 

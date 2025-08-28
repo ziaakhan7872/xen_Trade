@@ -2,7 +2,6 @@ import { ScrollView, View } from 'react-native'
 import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { MainHeader } from '../../../components/MainHeader'
-import { ResponsiveText } from '../../../components/ResponsiveText'
 import Spacer from '../../../components/Spacer'
 import DropDowns, { InputFieldGroup } from './Components'
 import { appStyles } from '../../../utilities'
@@ -11,7 +10,6 @@ import { SimpleButton } from '../../../components/SimpleButton'
 import { hp } from '../../../components/ResponsiveComponent'
 import { colors } from '../../../constants'
 import images from '../../../images'
-import TextInputField from '../../../components/TextInputField'
 import { useAddNewAddress } from './Hooks'
 
 const AddNewAddress = (props) => {
@@ -26,11 +24,7 @@ const AddNewAddress = (props) => {
         <AuthMainContainer>
             <View style={{ flex: 1 }}>
                 <ScrollView
-                    contentContainerStyle={{
-                        // flexGrow: 1,
-                        // justifyContent: 'space-between',
-                        // borderWidth: 1
-                    }}
+                    contentContainerStyle={{ flexGrow: 1 }}
                     keyboardShouldPersistTaps="handled"
                 >
                     <View style={[styles.containerMain]}>
@@ -44,13 +38,10 @@ const AddNewAddress = (props) => {
                             isCoinListOpen={isCoinListOpen} setIsCoinListOpen={setIsCoinListOpen}
                             isNetworkOpen={isNetworkOpen} setIsNetworkOpen={setIsNetworkOpen}
                         />
-
                         <Spacer />
-
                         <InputFieldGroup />
                     </View>
                 </ScrollView>
-
 
                 <View style={[appStyles.row, styles.buttonRow,]}>
                     <SimpleButton text="Cancel" textColor={colors.white} styleView={styles.cancelBtn} onPress={() => props?.navigation.goBack()} />

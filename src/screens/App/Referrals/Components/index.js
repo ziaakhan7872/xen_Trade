@@ -1,13 +1,13 @@
-import { Alert, Image, Platform, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, Platform, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { appStyles } from '../../../../utilities'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
-import { colors, fontFamily, fontSize } from '../../../../constants'
+import { colors, fontFamily } from '../../../../constants'
 import { hp, wp } from '../../../../components/ResponsiveComponent'
 import { SimpleButton } from '../../../../components/SimpleButton'
 import images from '../../../../images'
 import Spacer from '../../../../components/Spacer'
-import Clipboard from '@react-native-clipboard/clipboard'
+import { copyPaste } from '../../../../CommonHelperFunction/Util'
 
 export const ReferText = () => {
     return (
@@ -28,14 +28,13 @@ export const ShareInvite = () => {
             <ResponsiveText style={styles.inviteLink}>https://www.exchange/code2354...</ResponsiveText>
             <TouchableOpacity
                 onPress={() => {
-                    Clipboard.setString('https://www.exchange/code2354')
                     if (Platform.OS === 'android') {
-                        ToastAndroid.show('Address copied!', ToastAndroid.SHORT)
+                        copyPaste.copy('https://www.exchange/code2354...')
                     } else {
                         Alert.alert('Copied!', 'Address copied to clipboard')
                     }
                 }}>
-                <Image source={images.copyIcon} style={styles.copyIcon} ></Image>
+                <Image source={images.copyIcon} style={styles.copyIcon} />
             </TouchableOpacity>
             <SimpleButton text={'Share Invite'} textColor={colors.black} btnStyles={{ fontSize: 12 }} styleView={styles.shareBtn}></SimpleButton>
         </View>

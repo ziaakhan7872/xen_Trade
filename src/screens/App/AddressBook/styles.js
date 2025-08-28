@@ -15,6 +15,6 @@ export const styles = StyleSheet.create({
         borderRadius: 66
     },
     buttonRow: {
-        alignItems: 'center'
+        alignItems: 'center',
     },
 })
