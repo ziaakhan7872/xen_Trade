@@ -58,11 +58,11 @@ export const useHomeScreen = (props) => {
 
   const handleWalletData = () => {
     console.log("handleWalletData called");
-    if(!searchCoin) {
-      if (Page) {
-        getCryptoData(Page + 1);
-      }
-    }
+    // if(!searchCoin) {
+    //   if (Page) {
+    //     getCryptoData(Page + 1);
+    //   }
+    // }
   };
 
  const filteredCoinList = useMemo(() => {

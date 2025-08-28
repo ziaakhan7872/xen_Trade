@@ -42,14 +42,14 @@ const Exchangescreen = (props) => {
     tradingType, setTradingType,
     favouriteBottomSheetRef, selectedData,
     availableQuoteBalance,
-    price, setPrice,
+    price,
     quantity, setQuantity, discreaseQuantity, addQuantity,
     cureentCoinPrice, setCurrentCoinPrice,
     handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange,
     buyOrder, orderBook, pairs, searchText, setSearchText,
     DeleteOrder,isCurrentSymbol,setIsCurrentSymbol,setSelectedData,
     sellOrder,sellPrice,sellQuantity,handleSellPriceChange,handleSellQuantityChange,handleSellSliderChange,
-    discreaseSellQuantity,addSellQuantity,availableBaseBalance,setSellQuantity,newCurrentCoinPrice
+    discreaseSellQuantity,addSellQuantity,availableBaseBalance,setSellQuantity,newCurrentCoinPrice,setsel
   } = UseExchange(props)
 
   return (
@@ -79,7 +79,6 @@ const Exchangescreen = (props) => {
                       handleBuyQuantityChange={handleBuyQuantityChange}
                       handleBuySliderChange={handleBuySliderChange}
                       Price={price}
-                      setPrice={setPrice}
                       currentCoinPrice={cureentCoinPrice}
                       setCurrentCoinPrice={setCurrentCoinPrice}
                       addQuantity={addQuantity}
@@ -105,7 +104,6 @@ const Exchangescreen = (props) => {
                       currentCoinPrice={cureentCoinPrice}
                       setCurrentCoinPrice={setCurrentCoinPrice}
                       Price={sellPrice}
-                      setPrice={setPrice}
                       quantity={sellQuantity}
                       setQuantity={setSellQuantity}
                       addQuantity={addSellQuantity}

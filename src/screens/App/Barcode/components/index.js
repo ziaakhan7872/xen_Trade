@@ -7,6 +7,7 @@ import { hp, wp } from '../../../../components/ResponsiveComponent';
 import { fontFamily } from '../../../../constants/fonts';
 import Spacer, { HorizontalSpacer } from '../../../../components/Spacer';
 import QRCodeStyled from 'react-native-qrcode-styled';
+import { copyPaste } from '../../../../CommonHelperFunction/Util';
 
 export const BarcodeHeader = ({ BackPress, HistoryPress, previousCrypto }) => {
   return (
@@ -81,7 +82,7 @@ export const AddressSection = ({ walletAddress }) => {
       </View>
       <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: wp(4), justifyContent: "space-between" }}>
         <ResponsiveText style={styles.addressText}>{WalletAddress}</ResponsiveText>
-        <TouchableOpacity style={styles.copyButton}>
+        <TouchableOpacity onPress={()=>copyPaste.copy(WalletAddress)} style={styles.copyButton}>
           <ResponsiveText style={styles.copyText}>Copy</ResponsiveText>
         </TouchableOpacity>
       </View>
