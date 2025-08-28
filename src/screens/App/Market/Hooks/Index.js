@@ -49,7 +49,7 @@ export const UseMarket = (props) => {
     }
   };
 
-    const filteredMarketList = marketList.filter((item) =>
+    const filteredMarketList = marketList?.filter((item) =>
         item?.name?.toLowerCase().includes(searchText.toLowerCase()) ||
         item?.symbol?.toLowerCase().includes(searchText.toLowerCase())
     );

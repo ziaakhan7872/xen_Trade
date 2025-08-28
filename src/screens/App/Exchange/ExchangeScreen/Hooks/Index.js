@@ -50,10 +50,10 @@ export const UseExchange = (props) => {
     const channelName = `${selectedData?.symbol}@depth`;
 
 
-    let sub = centrifugueBuild.getSubscription(channelName)
+    let sub = centrifugueBuild?.getSubscription(channelName)
 
     if (!sub) {
-      sub = centrifugueBuild.newSubscription(channelName);
+      sub = centrifugueBuild?.newSubscription(channelName);
     }
     if (currentSubscription) {
       currentSubscription?.unsubscribe();
@@ -78,7 +78,7 @@ export const UseExchange = (props) => {
 
     if (sub.state !== "subscribed" && sub.state !== "subscribing") {
       console.log(sub, "subscribing")
-      sub.subscribe();
+      sub?.subscribe();
       setCurrentSubscription(sub)
     }
 
@@ -97,10 +97,10 @@ export const UseExchange = (props) => {
     const channelName = `${selectedData?.symbol}@trade`;
 
 
-    let sub = centrifugueBuild.getSubscription(channelName)
+    let sub = centrifugueBuild?.getSubscription(channelName)
 
     if (!sub) {
-      sub = centrifugueBuild.newSubscription(channelName);
+      sub = centrifugueBuild?.newSubscription(channelName);
     }
     if (currentSubscription) {
       currentSubscription?.unsubscribe();
@@ -125,7 +125,7 @@ export const UseExchange = (props) => {
 
     if (sub.state !== "subscribed" && sub.state !== "subscribing") {
       console.log(sub, "subscribing")
-      sub.subscribe();
+      sub?.subscribe();
       setCurrentSubscription(sub)
     }
 
@@ -158,7 +158,7 @@ export const UseExchange = (props) => {
       setOrderBook(OrderBook?.data?.orderBook)
 
     } catch (error) {
-      console.log("error in orderBook", error)
+      console.log("error in orderBook", error.response)
     }
   }
 
@@ -189,7 +189,7 @@ export const UseExchange = (props) => {
     const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
 
     if (!coinPriceBN.isZero() && !priceBN.isNaN()) {
-      const newQuantity = priceBN.dividedBy(coinPriceBN).toString();
+      const newQuantity = priceBN?.dividedBy(coinPriceBN).toString();
       const newQ = new BigNumber(newQuantity).toFormat(6)
       setQuantity(newQ);
       console.log("New Quantity:", newQuantity);

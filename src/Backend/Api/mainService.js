@@ -1,10 +1,10 @@
 // apiRequest.js
 import axios from "axios";
-import { getAuthToken, getRefreshToken, performLogout, setUser, store } from "../../redux/store";
+import { getAuthToken, getRefreshToken, performLogout, store } from "../../redux/store";
 import { AUTH_BASE_URL, getHeaders } from "../../Configs/ApiBaseUrl";
 import { Routes } from "../../constants/routes";
 import { navigate } from "../../navigation/NavigationService/NavigationService";
-import { logoutUser } from "../../redux/slices/userSlice";
+import { logoutUser, setUser } from "../../redux/slices/userSlice";  // ✅ FIX
 
 
 export const apiRequest = async ({

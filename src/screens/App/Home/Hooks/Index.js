@@ -23,7 +23,7 @@ const useHome = (props) => {
 
   const MarketPress = async (item) => {
     await AsyncStorage.setItem("selectedData", JSON.stringify(item))
-    props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen, params: { selectedData: item } })
+    props?.navigation?.navigate(Routes.AppNavigator, { screen: Routes.TradeGraphScreen, params: { selectedData: item } })
   }
 
   const getMarketData = async (newPage) => {
