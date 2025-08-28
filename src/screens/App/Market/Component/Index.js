@@ -55,8 +55,8 @@ export const RenderMarketList = ({ marketData, props, MarketScreen, handleMarket
                                 </View>
                             </View>
                             <View style={{ alignItems: "flex-start", justifyContent: "flex-start", width: wp(25) }}>
-                                <ResponsiveText style={[style.textHeader]}>{item.previousPrice || "1.25"}</ResponsiveText>
-                                <ResponsiveText style={style.volText}>${item.InUSdt || "2,254.00"}</ResponsiveText>
+                                <ResponsiveText style={[style.textHeader]}>{item?.previousPrice || "1.25"}</ResponsiveText>
+                                <ResponsiveText style={style.volText}>${item?.InUSdt || "2,254.00"}</ResponsiveText>
                             </View>
                             <View style={{ flex: 1, alignItems: "flex-end", width: wp(25) }}>
                                 <ResponsiveText style={[style.textHeader, { color: colors.green }]}>{item.Market || "0.01%"}</ResponsiveText>

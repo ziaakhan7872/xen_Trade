@@ -85,6 +85,7 @@ export const TokenList = ({ props, cryptoData, handleWalletData }) => {
       data={cryptoData}
       showsVerticalScrollIndicator={false}
       onEndReached={handleWalletData}
+      onEndReachedThreshold={0.9}
       keyExtractor={(item) => item.id}
       ItemSeparatorComponent={() => <Line height={hp(0.1)} />}
       renderItem={({ item, index }) => {
