@@ -62,7 +62,7 @@ export const Usewithdrawhistory = () => {
             console.log(payload, "payload")
             const withdrawalsResponse = await getWithdrawlsHistory(payload)
             const withdrawlsData = withdrawalsResponse?.data?.withdrawals?.data;
-            console.log("withdraw history response", withdrawlsData)
+            console.log("withdraw history response", withdrawalsResponse)
             setWithdrawHistory(withdrawlsData)
         } catch (error) {
             console.log("error in getWithdraw", error?.response)

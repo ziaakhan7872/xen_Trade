@@ -51,7 +51,7 @@ const WithdrawHistory = (props) => {
         statusPress={() => {
           allCryptoFilterRef?.current?.close()
           setTimeout(() => {
-            StatusRef?.current?.expand()
+            StatusRef?.current?.open()
           }, 300);
         }}
         closeBottomSheet={() => allCryptoFilterRef?.current?.close()}
@@ -67,7 +67,7 @@ const WithdrawHistory = (props) => {
           AllCryptoPress={() => {
             StatusRef?.current?.close()
             setTimeout(() => {
-              allCryptoFilterRef?.current?.expand()
+              allCryptoFilterRef?.current?.open()
             }, 300);
           }}
           closeBottomSheet={() => StatusRef?.current?.close()}
