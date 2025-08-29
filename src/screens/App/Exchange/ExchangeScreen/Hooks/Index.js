@@ -2,9 +2,9 @@ import { use, useEffect, useRef, useState } from "react"
 import { DeleteCurrentOrder, GetAccountBalanceMyMarket, getCurrentCoinPrice, getCurrentOrder, getOrderBookApi, getPairApi, PlaceOrder } from "../../../../../Backend/Api/Index"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useSelector } from "react-redux"
-import BigNumber from 'bignumber.js';
-import { InteractionManager } from "react-native";
 import { useSocket } from "../../../../../Backend/SocketContextProvider/Socket";
+import { changeQuantity, HandlePriceChange, HandleQuantityChange, HandleSliderChange } from "../../../../../TradeHelper/Index";
+import { SubscribeToSocketChannel } from "../../../../../Backend/Socket/SocketSubscription";
 
 
 
@@ -48,93 +48,34 @@ export const UseExchange = (props) => {
   useEffect(() => {
     console.log("centrifugueBuild", centrifugueBuild)
     const channelName = `${selectedData?.symbol}@depth`;
-
-
-    let sub = centrifugueBuild?.getSubscription(channelName)
-
-    if (!sub) {
-      sub = centrifugueBuild?.newSubscription(channelName);
-    }
-    if (currentSubscription) {
-      currentSubscription?.unsubscribe();
-      setCurrentSubscription(null);
-    }
-    sub.on("subscribed", (ctx) => {
-      console.log(`Subscribed to ${channelName}`, ctx);
+    let sub = SubscribeToSocketChannel(centrifugueBuild, channelName, {
+      onPublication: (ctx) => { setOrderBook(ctx?.data)},
+      onSubscribed: (ctx) => {console.log(`Subscribed to ${channelName}`, ctx);},
     });
-
-    sub.on("publication", (ctx) => {
-      console.log("publication", channelName, ctx?.data);
-      setOrderBook(ctx?.data)
-    });
-
-    sub.on("error", (err) => {
-      console.error(`Subscription error on ${channelName}:`, err);
-    });
-
-    sub.on("unsubscribed", () => {
-      // optional
-    });
-
-    if (sub.state !== "subscribed" && sub.state !== "subscribing") {
-      console.log(sub, "subscribing")
-      sub?.subscribe();
-      setCurrentSubscription(sub)
-    }
-
     socketRef.current = sub;
 
     return () => {
-
+      sub?.unsubscribe();
       socketRef.current = null;
     };
   }, [centrifugueBuild, selectedData]);
 
 
-
   useEffect(() => {
+
     console.log("centrifugueBuild", centrifugueBuild)
     const channelName = `${selectedData?.symbol}@trade`;
-
-
-    let sub = centrifugueBuild?.getSubscription(channelName)
-
-    if (!sub) {
-      sub = centrifugueBuild?.newSubscription(channelName);
-    }
-    if (currentSubscription) {
-      currentSubscription?.unsubscribe();
-      setCurrentSubscription(null);
-    }
-    sub.on("subscribed", (ctx) => {
-      console.log(`Subscribed to ${channelName}`, ctx);
+    let sub = SubscribeToSocketChannel(centrifugueBuild, channelName, {
+      onPublication: (ctx) => { setCurrentCoinPrice(ctx?.data?.p)},
+      onSubscribed: (ctx) => { console.log(`Subscribed to ${channelName}`, ctx);},
     });
-
-    sub.on("publication", (ctx) => {
-      console.log("publication to trade ", channelName, ctx?.data);
-      setCurrentCoinPrice(ctx?.data?.p)
-    });
-
-    sub.on("error", (err) => {
-      console.error(`Subscription error on ${channelName}:`, err);
-    });
-
-    sub.on("unsubscribed", () => {
-      // optional
-    });
-
-    if (sub.state !== "subscribed" && sub.state !== "subscribing") {
-      console.log(sub, "subscribing")
-      sub?.subscribe();
-      setCurrentSubscription(sub)
-    }
-
     socketRef.current = sub;
 
     return () => {
-
+      sub?.unsubscribe();
       socketRef.current = null;
     };
+
   }, [centrifugueBuild, selectedData]);
 
   const getCurrentCinPriceFunction = async () => {
@@ -176,121 +117,44 @@ export const UseExchange = (props) => {
 
 
   const handleBuyPriceChange = (value) => {
-    console.log("handleBuyPriceChange called with value:", value);
-    if (value === "") {
-      setPrice("");
-      setQuantity("");
-      return;
-    }
-
-
-    setPrice(value);
-
-    const priceBN = new BigNumber(value);
-    const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
-
-    if (!coinPriceBN.isZero() && !priceBN.isNaN()) {
-      const newQuantity = priceBN?.dividedBy(coinPriceBN).toString();
-      const newQ = new BigNumber(newQuantity).toFormat(6)
-      setQuantity(newQ);
-      console.log("New Quantity:", newQuantity);
-    }
+    HandlePriceChange(value, newCurrentCoinPrice, setQuantity, setPrice)
   };
-
-  const handleSellPriceChange = (value) => {
-    if (value === "") {
-      setSellPrice("");
-      setSellQuantity("");
-      return;
-    }
-
-
-    setSellPrice(value);
-
-    const priceBN = new BigNumber(value);
-    const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
-
-    if (!coinPriceBN.isZero() && !priceBN.isNaN()) {
-      const newQuantity = priceBN.dividedBy(coinPriceBN).toString();
-      const newQ = new BigNumber(newQuantity).toFormat(6)
-      setSellQuantity(newQ);
-      console.log("New Quantity:", newQuantity);
-    }
-  };
-
-
 
   const handleBuyQuantityChange = (value) => {
-
-    if (value === "") {
-      setQuantity("");
-      setPrice("");
-      return;
-    }
-
-    const regex = /^\d*\.?\d{0,6}$/;
-    if (!regex.test(value)) return;
-    const qtyBN = new BigNumber(value);
-
-    if (qtyBN.isLessThanOrEqualTo(1)) return;
-    setQuantity(value);
-    const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
-
-    if (!qtyBN.isNaN() && !coinPriceBN.isZero()) {
-      const newPrice = qtyBN.multipliedBy(coinPriceBN).toString();
-      setPrice(newPrice);
-    }
-  };
-
-
-  const handleSellQuantityChange = (value) => {
-    if (value === "") {
-      setSellQuantity("");
-      setSellPrice("");
-      return;
-    }
-
-    const regex = /^\d*\.?\d{0,6}$/;
-    if (!regex.test(value)) return;
-    setSellQuantity(value);
-    const qtyBN = new BigNumber(value);
-    const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
-
-    if (!qtyBN.isNaN() && !coinPriceBN.isZero()) {
-      const newPrice = qtyBN.multipliedBy(coinPriceBN).toString();
-      setSellPrice(newPrice);
-    }
+    HandleQuantityChange(value, newCurrentCoinPrice, setQuantity, setPrice)
   };
 
   const handleBuySliderChange = (value) => {
-    const availableBalance = new BigNumber(availableQuoteBalance || 0);
-    const sliderValue = new BigNumber(value).dividedBy(100);
-    const newPrice = availableBalance.multipliedBy(sliderValue).toString();
-    setPrice(newPrice);
-    const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
-    if (!coinPriceBN.isZero() && !new BigNumber(newPrice).isNaN()) {
-      const newQuantity = new BigNumber(newPrice).dividedBy(coinPriceBN).toString();
-      const formattedQuantity = new BigNumber(newQuantity).toFormat(6);
-      setQuantity(formattedQuantity);
-    }
-    setBuyerSlider(value);
-
+    HandleSliderChange(value, availableQuoteBalance, setPrice, setQuantity, setBuyerSlider, newCurrentCoinPrice)
   }
 
+  const discreaseQuantity = () => {
+    changeQuantity(-1, quantity, newCurrentCoinPrice, setQuantity, setPrice)
+  };
+
+  const addQuantity = () => {
+    changeQuantity(1, quantity, newCurrentCoinPrice, setQuantity, setPrice)
+  };
+
+  const handleSellPriceChange = (value) => {
+    HandlePriceChange(value, newCurrentCoinPrice, setSellQuantity, setSellPrice)
+  };
+
+  const handleSellQuantityChange = (value) => {
+    HandleQuantityChange(value, newCurrentCoinPrice, setSellQuantity, setSellPrice)
+  };
   const handleSellSliderChange = (value) => {
-    const availableBalance = new BigNumber(availableBaseBalance || 0);
-    const sliderValue = new BigNumber(value).dividedBy(100);
-    const newPrice = availableBalance.multipliedBy(sliderValue).toString();
-    setSellPrice(newPrice);
-    const coinPriceBN = new BigNumber(newCurrentCoinPrice || 0);
-    if (!coinPriceBN.isZero() && !new BigNumber(newPrice).isNaN()) {
-      const newQuantity = new BigNumber(newPrice).dividedBy(coinPriceBN).toString();
-      const formattedQuantity = new BigNumber(newQuantity).toFormat(6);
-      setSellQuantity(formattedQuantity);
-    }
-    setSelSlider(value);
-
+    HandleSliderChange(value, availableBaseBalance, setSellPrice, setSellQuantity, setSelSlider, newCurrentCoinPrice)
   }
+
+  const discreaseSellQuantity = () => {
+    changeQuantity(-1, sellQuantity, newCurrentCoinPrice, setSellQuantity, setSellPrice)
+  };
+
+
+  const addSellQuantity = () => {
+    changeQuantity(1, sellQuantity, newCurrentCoinPrice, setSellQuantity, setSellPrice)
+  };
 
 
 
@@ -345,33 +209,7 @@ export const UseExchange = (props) => {
     }
   }
 
-  const discreaseQuantity = () => {
-    const currentQty = new BigNumber(quantity || 0); // Ensure numeric
-    const newValue = currentQty.minus(1);
-    if (newValue.isNegative() || newValue.isLessThan(1)) return; // prevent negative
-    setQuantity(newValue.toString());
-    handleBuyQuantityChange(newValue.toString());
-  };
-  const discreaseSellQuantity = () => {
-    const currentQty = new BigNumber(sellQuantity || 0); // Ensure numeric
-    const newValue = currentQty.minus(1);
-    if (newValue.isNegative() || newValue.isLessThan(1)) return; // prevent negative
-    setSellQuantity(newValue.toString());
-    handleSellQuantityChange(newValue.toString());
-  };
 
-  const addQuantity = () => {
-    const currentQty = new BigNumber(quantity || 0);
-    const newValue = currentQty.plus(1);
-    setQuantity(newValue.toString());
-    handleBuyQuantityChange(newValue.toString());
-  };
-  const addSellQuantity = () => {
-    const currentQty = new BigNumber(sellQuantity || 0);
-    const newValue = currentQty.plus(1);
-    setSellQuantity(newValue.toString());
-    handleSellQuantityChange(newValue.toString());
-  };
 
   useEffect(() => {
     getPair()
