@@ -5,7 +5,6 @@ import { hp, wp } from './ResponsiveComponent'
 import Feather from 'react-native-vector-icons/Feather';
 import EvilIcons from "react-native-vector-icons/EvilIcons"
 
-
 const InputText = ({
     onFocus, onBlur,
     handleRightIconPress,
