@@ -3,7 +3,6 @@ import React, { Suspense } from 'react';
 import { style } from './Style';
 import { UseExchange } from './Hooks/Index';
 import { hp, wp } from '../../../../components/ResponsiveComponent';
-import { Amount } from '../../../../utilities/dummyData';
 import { Portal } from 'react-native-portalize';
 import Spacer from '../../../../components/Spacer';
 import Line from '../../../../components/Liner';
@@ -44,12 +43,13 @@ const Exchangescreen = (props) => {
     availableQuoteBalance,
     price,
     quantity, setQuantity, discreaseQuantity, addQuantity,
-    cureentCoinPrice, setCurrentCoinPrice,
-    handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange,
+    cureentCoinPrice,
+    HandlePriceChange, HandleQuantityChangeWrapper, HandleSliderChange,
     buyOrder, orderBook, pairs, searchText, setSearchText,
     DeleteOrder,isCurrentSymbol,setIsCurrentSymbol,setSelectedData,
-    sellOrder,sellPrice,sellQuantity,handleSellPriceChange,handleSellQuantityChange,handleSellSliderChange,
-    discreaseSellQuantity,addSellQuantity,availableBaseBalance,setSellQuantity,newCurrentCoinPrice,setsel
+    sellOrder,sellPrice,sellQuantity,
+    availableBaseBalance,setSellQuantity,newCurrentCoinPrice,
+    HandleCoinPriceChange,addCoinPrice,dicreaseCoinPrice
   } = UseExchange(props)
 
   return (
@@ -75,12 +75,11 @@ const Exchangescreen = (props) => {
                   <Spacer height={hp(1)} />
                   {buySellButton === "buy" ? (
                     <BuyForm
-                      handleBuyPriceChange={handleBuyPriceChange}
-                      handleBuyQuantityChange={handleBuyQuantityChange}
-                      handleBuySliderChange={handleBuySliderChange}
+                      handleBuyPriceChange={HandlePriceChange}
+                      handleBuyQuantityChange={HandleQuantityChangeWrapper}
+                      handleBuySliderChange={HandleSliderChange}
                       Price={price}
                       currentCoinPrice={cureentCoinPrice}
-                      setCurrentCoinPrice={setCurrentCoinPrice}
                       addQuantity={addQuantity}
                       dicreaseQuantity={discreaseQuantity}
                       quantity={quantity}
@@ -92,6 +91,9 @@ const Exchangescreen = (props) => {
                       value={buyerSlider}
                       setValue={setBuyerSlider}
                       buyOrder={buyOrder}
+                      handleBuyCoinPriceChange={HandleCoinPriceChange}
+                      addCoinPrice={addCoinPrice}
+                      dicreaseCoinPrice={dicreaseCoinPrice}
                     />
 
                   ) : (
@@ -102,16 +104,18 @@ const Exchangescreen = (props) => {
                       value={sellSlider}
                       setValue={setSelSlider}
                       currentCoinPrice={cureentCoinPrice}
-                      setCurrentCoinPrice={setCurrentCoinPrice}
+                      HandleCoinPriceChange={HandleCoinPriceChange}
                       Price={sellPrice}
                       quantity={sellQuantity}
                       setQuantity={setSellQuantity}
-                      addQuantity={addSellQuantity}
-                      dicreaseQuantity={discreaseSellQuantity}
+                      addQuantity={addQuantity}
+                      dicreaseQuantity={discreaseQuantity}
                       BaseBalance={availableBaseBalance}
-                      handleSellPriceChange={handleSellPriceChange}
-                      handleSellQuantityChange={handleSellQuantityChange}
-                      handleSellSliderChange={handleSellSliderChange}
+                      handleSellPriceChange={HandlePriceChange}
+                      handleSellQuantityChange={HandleQuantityChangeWrapper}
+                      handleSellSliderChange={HandleSliderChange}
+                      addCoinPrice={addCoinPrice}
+                      dicreaseCoinPrice={dicreaseCoinPrice}
                       onPress={sellOrder}
                     />
                   )}

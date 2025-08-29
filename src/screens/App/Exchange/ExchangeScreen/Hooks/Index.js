@@ -3,7 +3,7 @@ import { DeleteCurrentOrder, GetAccountBalanceMyMarket, getCurrentCoinPrice, get
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useSelector } from "react-redux"
 import { useSocket } from "../../../../../Backend/SocketContextProvider/Socket";
-import { changeQuantity, HandlePriceChange, HandleQuantityChange, HandleSliderChange } from "../../../../../TradeHelper/Index";
+import { ChangeCoinPrice, changeQuantity, HandleChangeCoinPrice, HandlePriceChange as HandlePriceChangeUtil, HandleQuantityChange as HandleQuantityChangeUtil, HandleSliderChange as HandleSliderChangeUtill } from "../../../../../TradeHelper/Index";
 import { SubscribeToSocketChannel } from "../../../../../Backend/Socket/SocketSubscription";
 
 
@@ -37,7 +37,6 @@ export const UseExchange = (props) => {
   const [orderBook, setOrderBook] = useState({})
   const [Page, setPage] = useState(1)
   const [searchText, setSearchText] = useState("")
-  const [currentSubscription, setCurrentSubscription] = useState(null)
   const [errorMessage, setErrorMessage] = useState("")
   const [loading, setLoading] = useState(false)
   const [newCurrentCoinPrice, setNewCurrentCoinPrice] = useState(0)
@@ -49,8 +48,8 @@ export const UseExchange = (props) => {
     console.log("centrifugueBuild", centrifugueBuild)
     const channelName = `${selectedData?.symbol}@depth`;
     let sub = SubscribeToSocketChannel(centrifugueBuild, channelName, {
-      onPublication: (ctx) => { setOrderBook(ctx?.data)},
-      onSubscribed: (ctx) => {console.log(`Subscribed to ${channelName}`, ctx);},
+      onPublication: (ctx) => { setOrderBook(ctx?.data) },
+      onSubscribed: (ctx) => { console.log(`Subscribed to ${channelName}`, ctx); },
     });
     socketRef.current = sub;
 
@@ -66,8 +65,8 @@ export const UseExchange = (props) => {
     console.log("centrifugueBuild", centrifugueBuild)
     const channelName = `${selectedData?.symbol}@trade`;
     let sub = SubscribeToSocketChannel(centrifugueBuild, channelName, {
-      onPublication: (ctx) => { setCurrentCoinPrice(ctx?.data?.p)},
-      onSubscribed: (ctx) => { console.log(`Subscribed to ${channelName}`, ctx);},
+      onPublication: (ctx) => { setCurrentCoinPrice(ctx?.data?.p) },
+      onSubscribed: (ctx) => { console.log(`Subscribed to ${channelName}`, ctx); },
     });
     socketRef.current = sub;
 
@@ -77,6 +76,23 @@ export const UseExchange = (props) => {
     };
 
   }, [centrifugueBuild, selectedData]);
+
+   useEffect(() => {
+    getCurrentCinPriceFunction()
+    getOrderBook()
+    fetchBalances()
+  }, [selectedData])
+
+  useEffect(() => {
+    setPrice(quantity * newCurrentCoinPrice);
+    setSellPrice(sellQuantity * newCurrentCoinPrice)
+  }, [newCurrentCoinPrice]);
+
+  useEffect(() => {
+    getPair()
+    getOrder()
+
+  }, [])
 
   const getCurrentCinPriceFunction = async () => {
     try {
@@ -102,62 +118,27 @@ export const UseExchange = (props) => {
       console.log("error in orderBook", error.response)
     }
   }
+  const getAvailableBalance = async (marketId, setBalance, label = "") => {
+    try {
+      const response = await GetAccountBalanceMyMarket(userId, marketId);
+      const amount = response?.data?.data?.amount || "0";
 
-  useEffect(() => {
-    getCurrentCinPriceFunction()
-    getOrderBook()
-  }, [selectedData])
+      setBalance(amount);
 
-
-
-  useEffect(() => {
-    setPrice(quantity * newCurrentCoinPrice);
-    setSellPrice(sellQuantity * newCurrentCoinPrice)
-  }, [newCurrentCoinPrice]);
-
-
-  const handleBuyPriceChange = (value) => {
-    HandlePriceChange(value, newCurrentCoinPrice, setQuantity, setPrice)
+      if (label) {
+        console.log(`Available ${label} balance:`, response);
+        console.log(`Available ${label} amount:`, amount);
+      }
+    } catch (error) {
+      console.error(`Error fetching ${label} balance:`, error);
+    }
   };
 
-  const handleBuyQuantityChange = (value) => {
-    HandleQuantityChange(value, newCurrentCoinPrice, setQuantity, setPrice)
+  // Usage
+  const fetchBalances = () => {
+    getAvailableBalance(selectedData?.quoteMarketId, setAvailableQuoteBalance, "Quote");
+    getAvailableBalance(selectedData?.baseMarketId, setAvailableBaseBalance, "Base");
   };
-
-  const handleBuySliderChange = (value) => {
-    HandleSliderChange(value, availableQuoteBalance, setPrice, setQuantity, setBuyerSlider, newCurrentCoinPrice)
-  }
-
-  const discreaseQuantity = () => {
-    changeQuantity(-1, quantity, newCurrentCoinPrice, setQuantity, setPrice)
-  };
-
-  const addQuantity = () => {
-    changeQuantity(1, quantity, newCurrentCoinPrice, setQuantity, setPrice)
-  };
-
-  const handleSellPriceChange = (value) => {
-    HandlePriceChange(value, newCurrentCoinPrice, setSellQuantity, setSellPrice)
-  };
-
-  const handleSellQuantityChange = (value) => {
-    HandleQuantityChange(value, newCurrentCoinPrice, setSellQuantity, setSellPrice)
-  };
-  const handleSellSliderChange = (value) => {
-    HandleSliderChange(value, availableBaseBalance, setSellPrice, setSellQuantity, setSelSlider, newCurrentCoinPrice)
-  }
-
-  const discreaseSellQuantity = () => {
-    changeQuantity(-1, sellQuantity, newCurrentCoinPrice, setSellQuantity, setSellPrice)
-  };
-
-
-  const addSellQuantity = () => {
-    changeQuantity(1, sellQuantity, newCurrentCoinPrice, setSellQuantity, setSellPrice)
-  };
-
-
-
   const getPair = async (newPage = 1) => {
     try {
       const response = await getPairApi(newPage, 20)
@@ -177,70 +158,101 @@ export const UseExchange = (props) => {
     }
   }
 
-  const handleMarketData = () => {
-    if (Page) {
-      getPair(Page + 1);
-    }
-  };
-
-  const filteredPair = pairs?.filter((item) =>
-    item?.name?.toLowerCase().includes(searchText.toLowerCase()) ||
-    item?.symbol?.toLowerCase().includes(searchText.toLowerCase())
-  );
-
-  const getAvailableBalanceQuote = async () => {
-    try {
-      const availableQuoteBalance = await GetAccountBalanceMyMarket(userId, selectedData?.quoteMarketId)
-      console.log("Available Quote balance:", availableQuoteBalance)
-      setAvailableQuoteBalance(availableQuoteBalance?.data?.data?.amount || "0")
-      console.log("Available Quote amount:", availableQuoteBalance?.data?.data?.amount)
-    } catch (error) {
-      console.error("Error fetching available quote balance:", error)
-    }
-  }
-
-  const getAvailableBalanceBase = async () => {
-    try {
-      const availableBaseBalance = await GetAccountBalanceMyMarket(userId, selectedData?.baseMarketId)
-      console.log("Available Base balance:", availableBaseBalance)
-      setAvailableBaseBalance(availableBaseBalance?.data?.data?.amount || "0")
-    } catch (error) {
-      console.error("Error fetching available base balance:", error)
-    }
-  }
-
-
-
-  useEffect(() => {
-    getPair()
-    getOrder()
-
-  }, [])
-
-  useEffect(() => {
-    getAvailableBalanceQuote()
-    getAvailableBalanceBase()
-  }, [selectedData])
-
-  const getOrder = async () => {
+   const getOrder = async () => {
     try {
       const payload = { page: 1, size: 20, orderDir: 'desc' };
       const res = await getCurrentOrder(payload);
-
-      // normalize both cases just in case the backend changes casing
       const items =
         res?.data?.Orders?.items ??
         res?.data?.orders?.items ??
-        []; // fallback to empty
+        []; 
 
       setCurrentOrder(items);
       console.log('orders count:', items);
     } catch (error) {
       console.log('error in history of orders', error);
-      setCurrentOrder([]); // if API gives error so it will show empty
+      setCurrentOrder([]); 
     }
   };
 
+   const filteredPair = pairs?.filter((item) =>
+    item?.name?.toLowerCase().includes(searchText.toLowerCase()) ||
+    item?.symbol?.toLowerCase().includes(searchText.toLowerCase())
+  );
+  const HandlePriceChange = (value) => {
+    if (buySellButton === "buy") {
+      HandlePriceChangeUtil(value, newCurrentCoinPrice, setQuantity, setPrice)
+    } else {
+      HandlePriceChangeUtil(value, newCurrentCoinPrice, setSellQuantity, setSellPrice)
+    }
+  };
+
+  const HandleQuantityChangeWrapper = (value) => {
+    if (buySellButton === "buy") {
+      HandleQuantityChangeUtil(value, newCurrentCoinPrice, setQuantity, setPrice)
+    } else {
+      HandleQuantityChangeUtil(value, newCurrentCoinPrice, setSellQuantity, setSellPrice)
+    }
+  };
+
+  const HandleSliderChange = (value) => {
+    if (buySellButton === "buy") {
+      HandleSliderChangeUtill(value, availableQuoteBalance, setPrice, setQuantity, setBuyerSlider, newCurrentCoinPrice)
+    } else {
+      HandleSliderChangeUtill(value, availableBaseBalance, setSellPrice, setSellQuantity, setSelSlider, newCurrentCoinPrice)
+    }
+  }
+
+  const discreaseQuantity = () => {
+    if (buySellButton === "buy") {
+      changeQuantity(-1, quantity, newCurrentCoinPrice, setQuantity, setPrice)
+    } else {
+      changeQuantity(-1, sellQuantity, newCurrentCoinPrice, setSellQuantity, setSellPrice)
+    }
+  };
+
+  const addQuantity = () => {
+    if (buySellButton === "buy") {
+      changeQuantity(1, quantity, newCurrentCoinPrice, setQuantity, setPrice)
+    }
+    else {
+      changeQuantity(1, sellQuantity, newCurrentCoinPrice, setSellQuantity, setSellPrice)
+    }
+  };
+
+  const HandleCoinPriceChange = (value) => {
+    if (buySellButton === "buy") {
+      HandleChangeCoinPrice(value, quantity, setPrice, setCurrentCoinPrice);
+    } else {
+      HandleChangeCoinPrice(value, sellQuantity, setSellPrice, setCurrentCoinPrice);
+    }
+  }
+
+  const addCoinPrice = () => {
+    if (buySellButton === "buy") {
+      ChangeCoinPrice(cureentCoinPrice, 1, setPrice, setCurrentCoinPrice, quantity)
+    }
+    else {
+      ChangeCoinPrice(cureentCoinPrice, 1, setSellPrice, setCurrentCoinPrice, sellQuantity)
+    }
+  }
+
+  const dicreaseCoinPrice = () => {
+    if (buySellButton === "buy") {
+      ChangeCoinPrice(cureentCoinPrice, -1, setPrice, setCurrentCoinPrice, quantity)
+    }
+    else {
+      ChangeCoinPrice(cureentCoinPrice, -1, setSellPrice, setCurrentCoinPrice, sellQuantity)
+    }
+  }
+
+  
+
+  const handleMarketData = () => {
+    if (Page) {
+      getPair(Page + 1);
+    }
+  };
 
 
   const buyOrder = async () => {
@@ -337,15 +349,15 @@ export const UseExchange = (props) => {
     tradingType, setTradingType,
     selectedData, availableBaseBalance, availableQuoteBalance,
     quantity, setQuantity, discreaseQuantity, addQuantity,
-    sellQuantity, setSellQuantity, discreaseSellQuantity, addSellQuantity,
-    handleSellPriceChange, handleSellQuantityChange, handleSellSliderChange,
+    sellQuantity, setSellQuantity,
     price, sellPrice,
     cureentCoinPrice, setCurrentCoinPrice,
-    handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange,
+    HandlePriceChange, HandleQuantityChangeWrapper, HandleSliderChange,
     buyOrder, orderBook, sellOrder,
     pairs: filteredPair, searchText, setSearchText,
     setSelectedData, DeleteOrder,
-    errorMessage, loading, newCurrentCoinPrice, setNewCurrentCoinPrice
+    errorMessage, loading, newCurrentCoinPrice, setNewCurrentCoinPrice,
+    HandleCoinPriceChange, addCoinPrice, dicreaseCoinPrice
   }
 }
 
