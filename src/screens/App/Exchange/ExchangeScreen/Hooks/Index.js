@@ -1,12 +1,10 @@
-import { use, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { DeleteCurrentOrder, GetAccountBalanceMyMarket, getCurrentCoinPrice, getCurrentOrder, getOrderBookApi, getPairApi, PlaceOrder } from "../../../../../Backend/Api/Index"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useSelector } from "react-redux"
 import { useSocket } from "../../../../../Backend/SocketContextProvider/Socket";
 import { changeQuantity, HandlePriceChange, HandleQuantityChange, HandleSliderChange } from "../../../../../TradeHelper/Index";
 import { SubscribeToSocketChannel } from "../../../../../Backend/Socket/SocketSubscription";
-
-
 
 export const UseExchange = (props) => {
   const tradngBottomSheetRef = useRef(null)
@@ -41,16 +39,13 @@ export const UseExchange = (props) => {
   const [errorMessage, setErrorMessage] = useState("")
   const [loading, setLoading] = useState(false)
   const [newCurrentCoinPrice, setNewCurrentCoinPrice] = useState(0)
-  // const [current]
-
-
 
   useEffect(() => {
     console.log("centrifugueBuild", centrifugueBuild)
     const channelName = `${selectedData?.symbol}@depth`;
     let sub = SubscribeToSocketChannel(centrifugueBuild, channelName, {
-      onPublication: (ctx) => { setOrderBook(ctx?.data)},
-      onSubscribed: (ctx) => {console.log(`Subscribed to ${channelName}`, ctx);},
+      onPublication: (ctx) => { setOrderBook(ctx?.data) },
+      onSubscribed: (ctx) => { console.log(`Subscribed to ${channelName}`, ctx); },
     });
     socketRef.current = sub;
 
@@ -60,14 +55,13 @@ export const UseExchange = (props) => {
     };
   }, [centrifugueBuild, selectedData]);
 
-
   useEffect(() => {
 
     console.log("centrifugueBuild", centrifugueBuild)
     const channelName = `${selectedData?.symbol}@trade`;
     let sub = SubscribeToSocketChannel(centrifugueBuild, channelName, {
-      onPublication: (ctx) => { setCurrentCoinPrice(ctx?.data?.p)},
-      onSubscribed: (ctx) => { console.log(`Subscribed to ${channelName}`, ctx);},
+      onPublication: (ctx) => { setCurrentCoinPrice(ctx?.data?.p) },
+      onSubscribed: (ctx) => { console.log(`Subscribed to ${channelName}`, ctx); },
     });
     socketRef.current = sub;
 
@@ -107,8 +101,6 @@ export const UseExchange = (props) => {
     getCurrentCinPriceFunction()
     getOrderBook()
   }, [selectedData])
-
-
 
   useEffect(() => {
     setPrice(quantity * newCurrentCoinPrice);
@@ -151,12 +143,9 @@ export const UseExchange = (props) => {
     changeQuantity(-1, sellQuantity, newCurrentCoinPrice, setSellQuantity, setSellPrice)
   };
 
-
   const addSellQuantity = () => {
     changeQuantity(1, sellQuantity, newCurrentCoinPrice, setSellQuantity, setSellPrice)
   };
-
-
 
   const getPair = async (newPage = 1) => {
     try {
@@ -209,8 +198,6 @@ export const UseExchange = (props) => {
     }
   }
 
-
-
   useEffect(() => {
     getPair()
     getOrder()
@@ -240,7 +227,6 @@ export const UseExchange = (props) => {
       setCurrentOrder([]); // if API gives error so it will show empty
     }
   };
-
 
 
   const buyOrder = async () => {
@@ -323,8 +309,6 @@ export const UseExchange = (props) => {
     }
   };
 
-
-
   return {
     stage, setStage,
     buySellButton, setBuySellButton,
@@ -348,5 +332,3 @@ export const UseExchange = (props) => {
     errorMessage, loading, newCurrentCoinPrice, setNewCurrentCoinPrice
   }
 }
-
-

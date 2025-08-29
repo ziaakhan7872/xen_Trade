@@ -47,9 +47,9 @@ const Exchangescreen = (props) => {
     cureentCoinPrice, setCurrentCoinPrice,
     handleBuyPriceChange, handleBuyQuantityChange, handleBuySliderChange,
     buyOrder, orderBook, pairs, searchText, setSearchText,
-    DeleteOrder,isCurrentSymbol,setIsCurrentSymbol,setSelectedData,
-    sellOrder,sellPrice,sellQuantity,handleSellPriceChange,handleSellQuantityChange,handleSellSliderChange,
-    discreaseSellQuantity,addSellQuantity,availableBaseBalance,setSellQuantity,newCurrentCoinPrice,setsel
+    DeleteOrder, isCurrentSymbol, setIsCurrentSymbol, setSelectedData,
+    sellOrder, sellPrice, sellQuantity, handleSellPriceChange, handleSellQuantityChange, handleSellSliderChange,
+    discreaseSellQuantity, addSellQuantity, availableBaseBalance, setSellQuantity, newCurrentCoinPrice, setsel
   } = UseExchange(props)
 
   return (
@@ -117,7 +117,6 @@ const Exchangescreen = (props) => {
                   )}
                 </Suspense>
               </>
-
             </View>
 
             <View style={{ flex: 1, marginLeft: wp(2), justifyContent: 'space-between' }}>
@@ -139,9 +138,9 @@ const Exchangescreen = (props) => {
 
               <CurrentOrderHistoryHeader
                 props={props}
-               currentOrder={currentOrder?.filter((Order) =>
-                      (Order?.status === "new" || Order?.status === "partially_filled")
-                    )}
+                currentOrder={currentOrder?.filter((Order) =>
+                  (Order?.status === "new" || Order?.status === "partially_filled")
+                )}
                 buttonPress={currentOrderHistoryPress}
                 setButtonPress={setCurrentOrderHistoryPress}
               />
@@ -151,7 +150,7 @@ const Exchangescreen = (props) => {
                 isCurrentSymbol={isCurrentSymbol}
                 setIsCurrentSymbol={setIsCurrentSymbol}
                 CancelAllPress={DeleteOrder}
-                
+
               />
               {currentOrderHistoryPress === "currentOrder" ? (
                 <>
@@ -170,7 +169,6 @@ const Exchangescreen = (props) => {
               )}
             </Suspense>
           </>
-
 
         </ScrollView>
         <Portal>
