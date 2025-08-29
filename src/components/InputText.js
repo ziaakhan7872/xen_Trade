@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     rightIconContainer: {
         position: "absolute",
         right: wp(5),
-        bottom: hp(2)
+        bottom: hp(4)
 
     },
     leftIcon: {

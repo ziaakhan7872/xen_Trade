@@ -12,7 +12,7 @@ import { UseWithdrawDetail } from './Hooks'
 
 
 const WithdrawDetails = (props) => {
-  const {CryptoData,network,response} = UseWithdrawDetail(props)
+  const { CryptoData, network, response } = UseWithdrawDetail(props)
   return (
     <AuthMainContainer>
       <View style={styles.containerMain}>
@@ -24,7 +24,6 @@ const WithdrawDetails = (props) => {
 
         <WithdrawDetailsContainer response={response} network={network} cryptoData={CryptoData} />
         <Spacer height={hp(3)} />
-
       </View>
       <WithDrawBtn />
     </AuthMainContainer>

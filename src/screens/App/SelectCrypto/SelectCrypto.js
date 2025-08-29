@@ -8,7 +8,7 @@ import { ResponsiveText } from '../../../components/ResponsiveText';
 import { Routes } from '../../../constants';
 import { useSelectCrypto } from './Hooks';
 import { hp } from '../../../components/ResponsiveComponent';
-import {SkeletionLoader} from '../../../components/SkeletonLoader';
+import { SkeletionLoader } from '../../../components/SkeletonLoader';
 
 const SelectCrypto = (props) => {
   const {
@@ -55,12 +55,8 @@ const SelectCrypto = (props) => {
               </>
             )
           )}
-
-
         </View>
       </ScrollView>
-
-
     </AuthMainContainer>
   );
 };

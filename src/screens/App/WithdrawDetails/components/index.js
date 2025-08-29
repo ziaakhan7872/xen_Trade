@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, TouchableOpacity, Platform, ToastAndroid, Alert } from 'react-native'
+import { StyleSheet, View, Image, TouchableOpacity, Platform, Alert } from 'react-native'
 import React from 'react'
 import { ResponsiveText } from '../../../../components/ResponsiveText';
 import images from '../../../../images';
@@ -9,7 +9,7 @@ import { appStyles } from '../../../../utilities';
 import { SimpleButton } from '../../../../components/SimpleButton';
 import Line from '../../../../components/Liner';
 import moment from 'moment';
-import Clipboard from '@react-native-clipboard/clipboard';
+import { copyPaste } from '../../../../CommonHelperFunction/Util';
 
 
 const getStatusStyles = (status, step) => {
@@ -109,10 +109,7 @@ const shouldShowVerticalLine = (status, step) => {
     return stepIndex < currentStatusIndex ? "active" : "inactive";
   }
   return stepIndex < currentStatusIndex ? "active" : "inactive";
-};
-
-
-
+}
 
 export const ProgressWithdraw = ({ response }) => {
   return (
@@ -149,10 +146,6 @@ export const ProgressWithdraw = ({ response }) => {
                   />
                 );
               })()}
-
-
-
-
             </View>
 
             <View>
@@ -182,7 +175,6 @@ const normalizeStatus = (status) => {
 };
 
 
-
 export const WithdrawDetailsContainer = ({ cryptoData, network, response }) => {
   return (
     <View >
@@ -199,9 +191,8 @@ export const WithdrawDetailsContainer = ({ cryptoData, network, response }) => {
               {response?.recipientAddress}
             </ResponsiveText>
             <TouchableOpacity onPress={() => {
-              Clipboard.setString('https://www.exchange/code2354')
               if (Platform.OS === 'android') {
-                ToastAndroid.show('Address copied!', ToastAndroid.SHORT)
+                copyPaste.copy('https://www.exchange/code2354')
               } else {
                 Alert.alert('Copied!', 'Address copied to clipboard')
               }
@@ -231,7 +222,6 @@ export const WithdrawDetailsContainer = ({ cryptoData, network, response }) => {
         </View>
       </View>
     </View>
-
   );
 };
 
