@@ -11,7 +11,6 @@ export const MainHeader = ({ leftImage, rightImage, title, onBackPress, onRightP
       <TouchableOpacity onPress={onBackPress} style={styles.leftIconWrapper}>
         <Image source={leftImage} style={styles.leftImage} />
       </TouchableOpacity>
-
       <View style={styles.titleWrapper}>
         <ResponsiveText style={styles.title}>{title}</ResponsiveText>
       </View>

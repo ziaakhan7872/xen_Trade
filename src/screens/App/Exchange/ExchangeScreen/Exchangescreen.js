@@ -121,7 +121,6 @@ const Exchangescreen = (props) => {
                   )}
                 </Suspense>
               </>
-
             </View>
 
             <View style={{ flex: 1, marginLeft: wp(2), justifyContent: 'space-between' }}>
@@ -143,9 +142,9 @@ const Exchangescreen = (props) => {
 
               <CurrentOrderHistoryHeader
                 props={props}
-               currentOrder={currentOrder?.filter((Order) =>
-                      (Order?.status === "new" || Order?.status === "partially_filled")
-                    )}
+                currentOrder={currentOrder?.filter((Order) =>
+                  (Order?.status === "new" || Order?.status === "partially_filled")
+                )}
                 buttonPress={currentOrderHistoryPress}
                 setButtonPress={setCurrentOrderHistoryPress}
               />
@@ -155,7 +154,7 @@ const Exchangescreen = (props) => {
                 isCurrentSymbol={isCurrentSymbol}
                 setIsCurrentSymbol={setIsCurrentSymbol}
                 CancelAllPress={DeleteOrder}
-                
+
               />
               {currentOrderHistoryPress === "currentOrder" ? (
                 <>
@@ -174,7 +173,6 @@ const Exchangescreen = (props) => {
               )}
             </Suspense>
           </>
-
 
         </ScrollView>
         <Portal>

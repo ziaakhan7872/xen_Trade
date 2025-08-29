@@ -1,12 +1,10 @@
-import { use, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { DeleteCurrentOrder, GetAccountBalanceMyMarket, getCurrentCoinPrice, getCurrentOrder, getOrderBookApi, getPairApi, PlaceOrder } from "../../../../../Backend/Api/Index"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useSelector } from "react-redux"
 import { useSocket } from "../../../../../Backend/SocketContextProvider/Socket";
 import { ChangeCoinPrice, changeQuantity, HandleChangeCoinPrice, HandlePriceChange as HandlePriceChangeUtil, HandleQuantityChange as HandleQuantityChangeUtil, HandleSliderChange as HandleSliderChangeUtill } from "../../../../../TradeHelper/Index";
 import { SubscribeToSocketChannel } from "../../../../../Backend/Socket/SocketSubscription";
-
-
 
 export const UseExchange = (props) => {
   const tradngBottomSheetRef = useRef(null)
@@ -40,9 +38,6 @@ export const UseExchange = (props) => {
   const [errorMessage, setErrorMessage] = useState("")
   const [loading, setLoading] = useState(false)
   const [newCurrentCoinPrice, setNewCurrentCoinPrice] = useState(0)
-  // const [current]
-
-
 
   useEffect(() => {
     console.log("centrifugueBuild", centrifugueBuild)
@@ -58,7 +53,6 @@ export const UseExchange = (props) => {
       socketRef.current = null;
     };
   }, [centrifugueBuild, selectedData]);
-
 
   useEffect(() => {
 
@@ -254,7 +248,6 @@ export const UseExchange = (props) => {
     }
   };
 
-
   const buyOrder = async () => {
     try {
       setLoading(true)
@@ -335,8 +328,6 @@ export const UseExchange = (props) => {
     }
   };
 
-
-
   return {
     stage, setStage,
     buySellButton, setBuySellButton,
@@ -360,5 +351,3 @@ export const UseExchange = (props) => {
     HandleCoinPriceChange, addCoinPrice, dicreaseCoinPrice
   }
 }
-
-

@@ -10,8 +10,6 @@ import Spacer, { HorizontalSpacer } from '../../../components/Spacer'
 import { ResponsiveText } from '../../../components/ResponsiveText'
 import Line from '../../../components/Liner'
 import { appStyles } from '../../../utilities'
-import { LogoutUser } from '../../../constants/Api/Index'
-import { getRefreshToken } from '../../../redux/store'
 import { UseMenuScreen } from './Hooks/Index'
 
 const MenuScreen = (props) => {
