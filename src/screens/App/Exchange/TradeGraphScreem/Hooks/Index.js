@@ -3,6 +3,7 @@ import { Routes } from "../../../../../constants";
 import { getCurrentCoinPrice, getGraphChartApi, getOrderBookApi, getPairApi } from "../../../../../Backend/Api/Index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSocket } from "../../../../../Backend/SocketContextProvider/Socket";
+import { SubscribeToSocketChannel } from "../../../../../Backend/Socket/SocketSubscription";
 
 const UseTradeGraphScreen = (props) => {
   const [selectedData, setSelectedData] = useState(props?.route?.params?.selectedData || null)
@@ -20,7 +21,7 @@ const UseTradeGraphScreen = (props) => {
   const [timeInterval, setTimeInterval] = useState("5m")
   const [bullishState, setBullishState] = useState(false)
   const [candleChartData, setCandleChartData] = useState([]);
-  const [orderBook,setOrderBook] = useState([])
+  const [orderBook, setOrderBook] = useState([])
 
 
   // const selectRandomData = useCallback(() => {
@@ -49,7 +50,7 @@ const UseTradeGraphScreen = (props) => {
   //   });
   // }, []);
 
- 
+
 
   // useEffect(() => {
   //   const interval = setInterval(selectRandomData, 10000);
@@ -77,163 +78,89 @@ const UseTradeGraphScreen = (props) => {
     getGraphChartFunction()
   }, [selectedData, timeInterval])
 
-  //Current Coin Price Socket
+  //OrerBook Socket
 
   useEffect(() => {
-    console.log("centrifugueBuild", centrifugueBuild)
-    const channelName = `${selectedData?.symbol}@trade`;
-
-
-    let sub = centrifugueBuild.getSubscription(channelName)
-
-    if (!sub) {
-      sub = centrifugueBuild.newSubscription(channelName);
-    }
-    if (currentSubscription) {
-      currentSubscription?.unsubscribe();
-      setCurrentSubscription(null);
-    }
-    sub.on("subscribed", (ctx) => {
-      console.log(`Subscribed to ${channelName}`, ctx);
-    });
-
-    sub.on("publication", (ctx) => {
-      console.log("publication to trade ", channelName, ctx?.data);
-      setCurrentCoinPrice(ctx?.data?.p)
-    });
-
-    sub.on("error", (err) => {
-      console.error(`Subscription error on ${channelName}:`, err);
-    });
-
-    sub.on("unsubscribed", () => {
-      // optional
-    });
-
-    if (sub.state !== "subscribed" && sub.state !== "subscribing") {
-      console.log(sub, "subscribing")
-      sub.subscribe();
-      setCurrentSubscription(sub)
-    }
-
-    socketRef.current = sub;
-
-    return () => {
-
-      socketRef.current = null;
-    };
-  }, [centrifugueBuild, selectedData]);
-
-  //Graph Chart Socket
-
-  useEffect(() => {
-    console.log("centrifugueBuild", centrifugueBuild)
-    const channelName = `${selectedData?.symbol}@kline_${timeInterval}`;
-
-    let sub = centrifugueBuild.getSubscription(channelName)
-
-    if (!sub) {
-      sub = centrifugueBuild.newSubscription(channelName);
-    }
-    if (currentSubscription) {
-      currentSubscription?.unsubscribe();
-      setCurrentSubscription(null);
-    }
-    sub.on("subscribed", (ctx) => {
-      console.log(`Subscribed to ${channelName}`, ctx);
-    });
-
-    sub.on("publication", (ctx) => {
-      console.log("publication to trade ", channelName, ctx?.data);
-      const chartData = formatGraphData(ctx?.data)
-      setCandleChartData(prev => [...prev, ...chartData]);
-      const updatedCandel = [...candleChartData, ...chartData];
-      const last = updatedCandel[updatedCandel.length -1];
-      if (last) {
-        setBullishState(last?.close >= last?.open)
-      }
-    });
-
-    sub.on("error", (err) => {
-      console.error(`Subscription error on ${channelName}:`, err);
-    });
-
-    sub.on("unsubscribed", () => {
-      // optional
-    });
-
-    if (sub.state !== "subscribed" && sub.state !== "subscribing") {
-      console.log(sub, "subscribing")
-      sub.subscribe();
-      setCurrentSubscription(sub)
-    }
-
-    socketRef.current = sub;
-
-    return () => {
-
-      socketRef.current = null;
-    };
-  }, [centrifugueBuild, selectedData]);
-
-  //Order Book Socket
-
-   useEffect(() => {
     console.log("centrifugueBuild", centrifugueBuild)
     const channelName = `${selectedData?.symbol}@depth`;
-
-
-    let sub = centrifugueBuild.getSubscription(channelName)
-
-    if (!sub) {
-      sub = centrifugueBuild.newSubscription(channelName);
-    }
-    if (currentSubscription) {
-      currentSubscription?.unsubscribe();
-      setCurrentSubscription(null);
-    }
-    sub.on("subscribed", (ctx) => {
-      console.log(`Subscribed to ${channelName}`, ctx);
+    let sub = SubscribeToSocketChannel(centrifugueBuild, channelName, {
+      onPublication: (ctx) => { setOrderBook(ctx?.data) },
+      onSubscribed: (ctx) => { console.log(`Subscribed to ${channelName}`, ctx); },
     });
-
-    sub.on("publication", (ctx) => {
-      console.log("publication", channelName, ctx?.data);
-      setOrderBook(ctx?.data)
-    });
-
-    sub.on("error", (err) => {
-      console.error(`Subscription error on ${channelName}:`, err);
-    });
-
-    sub.on("unsubscribed", () => {
-      // optional
-    });
-
-    if (sub.state !== "subscribed" && sub.state !== "subscribing") {
-      console.log(sub, "subscribing")
-      sub.subscribe();
-      setCurrentSubscription(sub)
-    }
-
     socketRef.current = sub;
 
     return () => {
-
+      sub?.unsubscribe();
       socketRef.current = null;
     };
   }, [centrifugueBuild, selectedData]);
 
+    //CurrentCoin Price Socket
+
+
+  useEffect(() => {
+
+    console.log("centrifugueBuild", centrifugueBuild)
+    const channelName = `${selectedData?.symbol}@trade`;
+    let sub = SubscribeToSocketChannel(centrifugueBuild, channelName, {
+      onPublication: (ctx) => { setCurrentCoinPrice(ctx?.data?.p) },
+      onSubscribed: (ctx) => { console.log(`Subscribed to ${channelName}`, ctx); },
+    });
+    socketRef.current = sub;
+
+    return () => {
+      sub?.unsubscribe();
+      socketRef.current = null;
+    };
+
+  }, [centrifugueBuild, selectedData]);
+
+  //Trade Graph socke Socket
+
+
+  useEffect(() => {
+    if (!centrifugueBuild || !selectedData) return;
+
+    console.log("centrifugueBuild", centrifugueBuild);
+    const channelName = `${selectedData?.symbol}@kline_${timeInterval}`;
+
+    let sub = SubscribeToSocketChannel(centrifugueBuild, channelName, {
+      onPublication: (ctx) => {
+        const chartData = formatGraphData(ctx?.data);
+
+        setCandleChartData((prev) => {
+          const updated = [...prev, ...chartData];
+          const last = updated[updated.length - 1];
+          if (last) setBullishState(last?.close >= last?.open);
+          return updated;
+        });
+      },
+      onSubscribed: (ctx) => {
+        console.log(`Subscribed to ${channelName}`, ctx);
+      },
+    });
+
+    socketRef.current = sub;
+
+    return () => {
+      sub?.unsubscribe();
+      socketRef.current = null;
+    };
+  }, [centrifugueBuild, selectedData]);
+
+
+
   const getOrderBook = async () => {
-      try {
-        const pair = selectedData?.symbol
-        const OrderBook = await getOrderBookApi(pair)
-        console.log(OrderBook, "orderBook")
-        setOrderBook(OrderBook?.data?.orderBook)
-  
-      } catch (error) {
-        console.log("error in orderBook", error)
-      }
+    try {
+      const pair = selectedData?.symbol
+      const OrderBook = await getOrderBookApi(pair)
+      console.log(OrderBook, "orderBook")
+      setOrderBook(OrderBook?.data?.orderBook)
+
+    } catch (error) {
+      console.log("error in orderBook", error)
     }
+  }
 
 
   const getPair = async (newPage = 1) => {
@@ -279,11 +206,11 @@ const UseTradeGraphScreen = (props) => {
       const chartData = formatGraphData(response?.data)
       if (!chartData?.length) return;
 
-    setCandleChartData(chartData);
+      setCandleChartData(chartData);
 
-    const lastCandle = chartData[chartData.length - 1];
-    setBullishState(lastCandle.close >= lastCandle.open);
-    console.log(bullishState, "bullishState");
+      const lastCandle = chartData[chartData.length - 1];
+      setBullishState(lastCandle.close >= lastCandle.open);
+      console.log(bullishState, "bullishState");
     } catch (error) {
       console.log(error?.response, "error in graph chart function")
     }
@@ -311,7 +238,7 @@ const UseTradeGraphScreen = (props) => {
     favouriteBottomSheetRef,
     selectedData, pair,
     searchText, setSearchText, setSelectedData, currentCoinPrice,
-    timeInterval, setTimeInterval,bullishState,orderBook
+    timeInterval, setTimeInterval, bullishState, orderBook
   };
 };
 

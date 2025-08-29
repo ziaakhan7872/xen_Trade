@@ -129,6 +129,7 @@ const Exchangescreen = (props) => {
                   <OrderBookForm
                     orderBook={orderBook}
                     cureentCoinPrice={newCurrentCoinPrice}
+                    marketData={selectedData}
                   />
                 </Suspense>
               </>
