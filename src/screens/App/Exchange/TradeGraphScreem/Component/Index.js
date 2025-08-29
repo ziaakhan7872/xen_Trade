@@ -252,6 +252,7 @@ export const TradeGraph = ({ data }) => {
                                 hideYAxisText
                                 yAxisThickness={0}
                                 xAxisThickness={0}
+                                activeOpacity={1}
                             />
                         </View>
 
