@@ -110,5 +110,5 @@ const TradeGraphScreen = (props) => {
     )
 }
 
-export default TradeGraphScreen
+export default React.memo(TradeGraphScreen)
 

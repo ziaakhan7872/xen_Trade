@@ -356,10 +356,10 @@ export const BuyOrder = ({ data, textColor, marketData }) => {
     );
 };
 
-export const OrderBookForm = ({ orderBook, cureentCoinPrice }) => {
+export const OrderBookForm = ({ orderBook, cureentCoinPrice ,marketData}) => {
     return (
         <>
-            <PriceUSDT title1={'Price'} title2={`(${'USDT'})`} title3={'Amount'} title4={`(${'ETH'})`} />
+            <PriceUSDT title1={'Price'} title2={`(${marketData?.quote.toUpperCase()})`} title3={'Amount'} title4={`(${marketData?.base.toUpperCase()})`} />
             <Spacer height={hp(0.5)} />
             <BuyOrder data={orderBook} textColor={colors.green} />
             <Spacer height={hp(1)} />
