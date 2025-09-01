@@ -2,7 +2,6 @@
 import BigNumber from "bignumber.js";
 
 const DECIMALS = 6;
-const MIN_QUANTITY = 1;
 
 export const ValidateInput = (value) => {
     if (value === "") {

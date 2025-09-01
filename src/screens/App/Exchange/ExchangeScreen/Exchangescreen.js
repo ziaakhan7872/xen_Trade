@@ -10,25 +10,17 @@ import { ExchangeMainContainer } from '../../../../components/ExchangeMainContai
 import { Routes } from '../../../../constants';
 import { BuySellSkeleton, OrderBookSkeleton, OrdersSkeleton } from '../../../../components/SkeletonLoader';
 import { BuySellRowButton, CurrentOderComponentHeader, CurrentOrderHistoryHeader, ExchangeHeader, FlatlistValues, TradingTypeComponent } from './Component/Index';
+import { preloadableLazy } from '../../../../CommonHelperFunction/PreloadableLazy';
+import {
+  BuyForm,
+  SellForm,
+  CurrentOrderComponent,
+  AssetsComponent,
+  FavoutiteBottomSheetComponnet,
+  OrderBookForm
+} from './Component/LazyComponnet';
 
-const BuyForm = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.BuyForm }))
-);
-const SellForm = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.SellForm }))
-);
-const CurrentOrderComponent = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.CurrentOrderComponent }))
-);
-const AssetsComponent = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.AssetsComponent }))
-);
-const FavoutiteBottomSheetComponnet = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.FavoutiteBottomSheetComponnet }))
-);
-const OrderBookForm = React.lazy(() =>
-  import('./Component/Index').then(m => ({ default: m.OrderBookForm }))
-);
+
 
 
 const Exchangescreen = (props) => {

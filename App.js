@@ -17,10 +17,21 @@ import Toast from 'react-native-toast-message';
 import { ToastConfig } from './src/components/ToastConfig';
 import { Camera } from 'react-native-vision-camera';
 import { SocketProvider } from './src/Backend/SocketContextProvider/Socket';
+import { AssetsComponent, BuyForm, CurrentOrderComponent, FavoutiteBottomSheetComponnet, OrderBookForm, SellForm } from './src/screens/App/Exchange/ExchangeScreen/Component/LazyComponnet';
 
 enableScreens(false);
 
 const App = () => {
+
+   useEffect(() => {
+    // preload chunks when app starts
+    BuyForm.preload();
+    SellForm.preload();
+    CurrentOrderComponent.preload();
+    AssetsComponent.preload();
+    FavoutiteBottomSheetComponnet.preload();
+    OrderBookForm.preload();
+  }, []);
 
   useEffect(() => {
     LogBox.ignoreAllLogs();
