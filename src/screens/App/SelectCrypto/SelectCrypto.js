@@ -14,7 +14,6 @@ const SelectCrypto = (props) => {
   const {
     cryptoList, loading, error, handleCryptoNavigation,
     searchCoin, setSearchCoin, papulaistrCryptoL,
-
   } = useSelectCrypto(props)
 
   return (

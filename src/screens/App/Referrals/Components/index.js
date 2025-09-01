@@ -1,4 +1,4 @@
-import { Alert, Image, Platform, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, Platform, StyleSheet, TouchableOpacity, View, Share } from 'react-native'
 import React from 'react'
 import { appStyles } from '../../../../utilities'
 import { ResponsiveText } from '../../../../components/ResponsiveText'
@@ -23,6 +23,25 @@ export const ReferText = () => {
 }
 
 export const ShareInvite = () => {
+    const onShare = async () => {
+        try {
+            const result = await Share.share({
+                message:
+                    'Share this link - https://www.exchange/code2354...',
+            });
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            Alert.alert(error.message);
+        }
+    };
     return (
         <View style={[appStyles.row, styles.cardContainer]}>
             <ResponsiveText style={styles.inviteLink}>https://www.exchange/code2354...</ResponsiveText>
@@ -36,7 +55,7 @@ export const ShareInvite = () => {
                 }}>
                 <Image source={images.copyIcon} style={styles.copyIcon} />
             </TouchableOpacity>
-            <SimpleButton text={'Share Invite'} textColor={colors.black} btnStyles={{ fontSize: 12 }} styleView={styles.shareBtn}></SimpleButton>
+            <SimpleButton text={'Share Invite'} onPress={onShare} textColor={colors.black} btnStyles={{ fontSize: 12 }} styleView={styles.shareBtn}></SimpleButton>
         </View>
     )
 }

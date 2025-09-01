@@ -1,6 +1,5 @@
 import HomeScreen from "./Home/HomeScreen";
 import MarketScreen from "./Market/MarketScreen";
-import WalletScreen from "./Wallet/WalletScreen";
 import WalletHome from "./WalletHome/WalletHome";
 import DepositHistory from "./DepositHistory/DepositHistory";
 import SettingSecurity from "./SettingSecurity/SettingSecurity";
@@ -35,7 +34,7 @@ import WithdrawHistory from "./WithdrawHistory/WithdrawHistory";
 
 export {
      HomeScreen, Settings, TwoFactorAuth, SettingSecurity, SettingProfile, WalletHome, DepositHistory, MarketScreen,
-     Exchangescreen, WalletScreen, ChangePassword, AntiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
+     Exchangescreen, ChangePassword, AntiPhishingCode, SettingSystem, AddressBook, AddressDetailsExpanded,
      SelectNetwork, Barcode, AddNewAddress, SettingEmailNotification, SelectCrypto, AssetAllocation, MenuScreen,
      Referrals, ReferralHistory, OrderHistory, TradeGraphScreen, WithDraw, WithdrawDetails, SelectCryptoWithdraw,
      SelectNetworkWithdraw, DepositDetails, ContactSupport, WithdrawHistory
