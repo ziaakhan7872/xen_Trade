@@ -1,5 +1,5 @@
-import { View, Image, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { View } from 'react-native'
+import React from 'react'
 import { AuthMainContainer } from '../../../components/authMainContainer'
 import { hp, wp } from "../../../components/ResponsiveComponent"
 import images from '../../../images'
@@ -7,41 +7,42 @@ import { MainHeader } from '../../../components/MainHeader'
 import Spacer from '../../../components/Spacer'
 import { Portal } from 'react-native-portalize'
 import { AllCryptoFilterBotomSheet, DepositFilterHeader, DepositHistoryComponent, StatusFilterBottomSheet } from './components'
-import { UseDepositHstory } from './Hooks/Index'
+import { UseDepositHistory } from './Hooks/Index'
 
 const WithdrawHistory = (props) => {
-  const { 
-    allCryptoFilterRef, StatusRef, 
-    cryptoData,  statusData, 
-    SetSelectedSymbol, selectedSymbol, 
-    selectedStatus, SetSelectedStatus ,
+  const {
+    allCryptoFilterRef, StatusRef,
+    cryptoData, statusData,
+    SetSelectedSymbol, selectedSymbol,
+    selectedStatus, SetSelectedStatus,
     withdrawHistory,
-    selectedHeaderButton,setSelectedHeaderButton,
-    searchCoin,setSearchCoin
-} = UseDepositHstory()
+    selectedHeaderButton, setSelectedHeaderButton,
+    searchCoin, setSearchCoin
+  } = UseDepositHistory()
   return (
     <AuthMainContainer  >
       <View style={{ paddingHorizontal: wp(5) }}>
-        <MainHeader onBackPress={() => props?.navigation?.goBack()} title={"Deposit HISTORY"} leftImage={images.backArrow} rightImage={images.infoIcon} />
+        <MainHeader onBackPress={() => props?.navigation?.goBack()} title={"DEPOSIT HISTORY"} leftImage={images.backArrow} rightImage={images.infoIcon} />
       </View>
       <Spacer height={hp(4)} />
       <DepositFilterHeader
         SelectedStatus={selectedStatus}
         statusPress={() => {
-            StatusRef?.current?.open()
-            setSelectedHeaderButton("status")
+          StatusRef?.current?.open()
+          setSelectedHeaderButton("status")
         }}
         SelectedSymbol={selectedSymbol}
         AllCryptoPress={() => {
-            setSelectedHeaderButton("crypto")
-            allCryptoFilterRef?.current?.open()}}
+          setSelectedHeaderButton("crypto")
+          allCryptoFilterRef?.current?.open()
+        }}
 
       />
       <Spacer height={hp(4)} />
 
-      <DepositHistoryComponent  HistoryData={withdrawHistory} props={props} />
+      <DepositHistoryComponent HistoryData={withdrawHistory} props={props} />
       <AllCryptoFilterBotomSheet
-      searchCoin={searchCoin} setSearchCoin={setSearchCoin}
+        searchCoin={searchCoin} setSearchCoin={setSearchCoin}
         selectedStatus={selectedStatus}
         setSelectedSymbol={SetSelectedSymbol}
         SelectedSymbol={selectedSymbol}
