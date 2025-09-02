@@ -25,7 +25,8 @@ const ReferralHistory = (props) => {
                     selected={selected}
                     setSelected={setSelected}
                     bottomSheetRef={FilterBottomSheetRef}
-                    closeBottomSheet={handleCloseFilter} />
+                    closeBottomSheet={handleCloseFilter}
+                />
             </View>
         </AuthMainContainer>
     )

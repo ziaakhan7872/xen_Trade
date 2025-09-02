@@ -15,12 +15,10 @@ const SettingEmailNotification = (props) => {
         setToggles
     } = toggleStates()
 
-
-
     return (
         <AuthMainContainer>
             <View style={styles.containerMain}>
-                <MainHeader leftImage={images.backArrow} title='EMAIL NOTIFICATION' onBackPress={() => props?.navigation.goBack()} />
+                <MainHeader leftImage={images.backArrow} title='EMAIL NOTIFICATION' onBackPress={() => props?.navigation?.goBack()} />
                 <FlatListCustom props={props} toggles={toggles} setToggles={setToggles} disableAllNotificationsEnabled={disableAllNotificationsEnabled} setDisableAllNotificationsEnabled={setDisableAllNotificationsEnabled} />
             </View>
         </AuthMainContainer>

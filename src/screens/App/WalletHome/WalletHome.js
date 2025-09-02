@@ -10,7 +10,7 @@ import { colors, fontFamily, Routes } from "../../../constants"
 import { appStyles } from "../../../utilities"
 import { useHomeScreen } from "./Hooks"
 import { Portal } from "react-native-portalize"
-import {SkeletionLoader} from "../../../components/SkeletonLoader"
+import { SkeletionLoader } from "../../../components/SkeletonLoader"
 
 const WalletHome = (props) => {
   const {
@@ -30,7 +30,7 @@ const WalletHome = (props) => {
 
         <View style={appStyles.row}>
           <SimpleButton
-            onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCrypto })}
+            onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.SelectCrypto })}
             // onPress={DisplayCryptoList}
             btnStyles={{ fontFamily: fontFamily.appTextRegular }}
             text="Deposit"
@@ -38,7 +38,7 @@ const WalletHome = (props) => {
             styleView={styles.depositBtn}
           />
           <SimpleButton
-            onPress={() => props?.navigation.navigate(Routes.AppNavigator, { screen: Routes.SelectCryptoWithDraw })}
+            onPress={() => props?.navigation?.navigate?.(Routes.AppNavigator, { screen: Routes.SelectCryptoWithDraw })}
             btnStyles={{ fontFamily: fontFamily.appTextRegular }}
             text="Withdraw"
             textColor={colors.black}
@@ -68,7 +68,7 @@ const WalletHome = (props) => {
       </View>
 
       <Portal>
-        <ChartBottomSheet listData={cryptoList}  bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
+        <ChartBottomSheet listData={cryptoList} bottomSheetRef={assetSheetRef} closeBottomSheet={handleAssetClose} />
       </Portal>
 
     </AuthMainContainer>
